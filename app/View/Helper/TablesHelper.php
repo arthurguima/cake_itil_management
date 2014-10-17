@@ -16,7 +16,7 @@
     return  "
             <script>
               $(document).ready(function() {
-                  $('#" . $id . "').editable('http://bsad225968/demandas/CakeVersion/indisponibilidades/ajax_edit_status',{
+                  $('#" . $id . "').editable('" . Router::url('/', true). "/indisponibilidades/ajax_edit_status',{
                      name: 'status',
                      data   : \"{0:'Fechado'}\",
                      type   : 'select',
@@ -30,9 +30,9 @@
     return  '
             <script>
               $(document).ready(function() {
-                  $("#status-' . $id . '").editable("http://bsad225968/demandas/CakeVersion/demandas/ajax_edit_status",{
+                  $("#status-' . $id . '").editable("' . Router::url('/', true). '/demandas/ajax_edit_status",{
                      name: "status_id",
-                     loadurl : "http://bsad225968/demandas/CakeVersion/status/json?tipo=1",
+                     loadurl : "' . Router::url('/', true). '/status/json?tipo=1",
                      type   : "select",
                      submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
                   });
@@ -44,7 +44,7 @@
     return  "
             <script>
               $(document).ready(function() {
-                  $('#" . $id . "').editable('http://bsad225968/demandas/CakeVersion/demandas/ajax_edit_prioridade',{
+                  $('#" . $id . "').editable('" . Router::url('/', true). "/demandas/ajax_edit_prioridade',{
                      name: 'prioridade',
                      width:($('#" . $id . "').width() + 20) + 'px',
                      height:($('#" . $id . "').height() + 6) + 'px',
