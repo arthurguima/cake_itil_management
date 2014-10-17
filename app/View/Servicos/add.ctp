@@ -1,0 +1,81 @@
+<?php
+  $this->Html->addCrumb('Serviços', '/servicos');
+  $this->Html->addCrumb("Novo", array('controller' => 'servicos', 'action' => 'add'));
+?>
+<div class="row">
+  <div class="col-lg-12"><h3 class="page-header">Novo Serviço</h3></div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <?php
+      echo $this->BootstrapForm->create('Servico');
+
+      echo $this->BootstrapForm->input('nome', array(
+                  'label' => array('text' => 'Nome:')));
+
+       echo $this->BootstrapForm->input('sigla', array(
+                  'label' => array('text' => 'Sigla:')));
+
+      echo $this->BootstrapForm->input('url', array(
+                  'label' => array('text' => 'URL: ')));
+
+       echo $this->BootstrapForm->input('tecnologia', array(
+                  'label' => array('text' => 'Tecnologia:')));
+
+       echo $this->BootstrapForm->input('Area', array(
+                  'label' => array('text' => 'Área(s):'),
+                  'input' => 'text',
+                  'multiple' => "true",
+                  'options' => $areas));
+
+       echo $this->BootstrapForm->input('Dependencia', array(
+                   'label' => array('text' => 'Dependência(s):'),
+                   'input' => 'text',
+                   'multiple' => "true",
+                   'options' => $dependencias));
+
+       echo $this->BootstrapForm->input('status', array(
+                                           'checked' => 'checked',
+                                           'class' => 'col-sm-3 pull-left col-sm-offset-3',
+                                           'label' => array(
+                                             'text' => 'Status?',
+                                             'class' => 'control-label col-sm-2')));
+
+
+    ?>
+    <div class="form-footer col-lg-10 pull-right">
+      <?php
+        echo $this->BootstrapForm->submit('Salvar');
+        echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-3'));
+        echo $this->Form->end();
+      ?>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("[id*='dp']").datetimepicker({
+      format: "yyyy-mm-dd",
+      autoclose: true,
+      todayBtn: true,
+      language: 'pt'
+    });
+
+    $('#AreaArea').select2();
+    $('#DependenciaDependencia').select2();
+  });
+</script>
+
+<?php
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //Select2
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->css('plugins/select2-bootstrap');
+?>
