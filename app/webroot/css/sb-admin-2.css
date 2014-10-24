@@ -658,6 +658,7 @@ div.sub-20 {
 
 .demanda-indis {
   height: inherit;
+  min-height: 156px;
 }
 svg.peity {
   margin-top: 10px;

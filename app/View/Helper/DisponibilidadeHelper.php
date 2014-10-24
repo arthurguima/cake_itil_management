@@ -67,7 +67,7 @@
     else: $percent = 0;
     endif;
 
-    return "<div class='col-sm-4 well indis'>
+    return "<div class='col-sm-12 col-lg-4  col-md-4 well indis'>
       <div class='col-lg-6 col-xs-6 col-md-6'>
         <a class='servico col-lg-12'><b>" . $servico['Servico']['sigla'] . "</b></a>
         <div class='semicircle'>

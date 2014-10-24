@@ -21,7 +21,7 @@
      }
    endforeach;
 
-   return "<div class='col-sm-4 well indis demanda-indis'>
+   return "<div class='col-sm-12 col-lg-4  col-md-4 well indis demanda-indis'>
      <div class='col-lg-6 col-xs-6 col-md-6'>
        <a class='servico col-lg-12'><b>" . $Servico . "</b></a>
        <span class='pie-" . $Servico ."'>" . $values . "</span>

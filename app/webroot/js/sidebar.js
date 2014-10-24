@@ -1,6 +1,7 @@
 var up = 1;
 function sidebarHide(){
  $('#side-menu').toggle();
+ $('.notes').toggle();
 
  if(up == 1){
    $('.fa-caret-left').addClass('fa-caret-right');
