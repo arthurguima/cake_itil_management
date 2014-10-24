@@ -45,15 +45,54 @@ class PagesController extends AppController {
 		/* Lista de Servicos */
 		$this->loadModel('Servico');
 		$this->Servico->Behaviors->attach('Containable');
-		$this->set('servicos', $this->Servico->find('all', array(
-			'contain' => array(
-        'Indisponibilidade' => array(
-					'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 )) ||
-																 ((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 ))')
+		if(date("d") < 20){
+			$this->set('servicos', $this->Servico->find('all', array(
+				'contain' => array(
+					'Indisponibilidade' => array(
+						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 )) ||
+																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 ))')
+					)
 				)
-			)
-    )));
+			)));
+		}
+		else{
+			$this->set('servicos', $this->Servico->find('all', array(
+				'contain' => array(
+					'Indisponibilidade' => array(
+						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 )) ||
+																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("+1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 ))')
+					)
+				)
+			)));
+		}
 		$this->Servico->recursive = 1;
+
+		/*Lista de Demandas*/
+		$this->loadModel('Demanda');
+		$this->set('demandas', $this->demandasPorServico($this->Demanda->find('all'/*,
+			array(
+				'fields' => 'Demanda.id, Servico.sigla, Status.nome',
+				'conditions' => array('((DATE_FORMAT(Demanda.data_cadastro,"%m") = "'.date("m").'") && (DATE_FORMAT(Demanda.data_cadastro,"%d") <= 20 )) ||
+															((DATE_FORMAT(Demanda.data_cadastro,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Demanda.data_cadastro,"%d") > 20 ))'),
+
+			)*/))
+		);
+	}
+
+	private function demandasPorServico($demandas){
+		$demandasAUX = array();
+
+		foreach ($demandas as $dem){
+			//utilizar isset: http://siliconstation.com/how-fix-php-notice-undefined-index/
+			if(!isset($demandasAUX[$dem['Servico']['sigla']][$dem['Status']['nome']])){
+				$demandasAUX[$dem['Servico']['sigla']][$dem['Status']['nome']] = 1;
+			}
+			else{
+				$demandasAUX[$dem['Servico']['sigla']][$dem['Status']['nome']] += 1;
+			}
+		}
+
+		return $demandasAUX;
 	}
 
 /**

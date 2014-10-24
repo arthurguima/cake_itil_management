@@ -46,7 +46,8 @@
       /**
       * 'Hack' para HABTM
       */
-      if(sizeof($this->Filter->getConditions()[0]) > 0):  //Conditions 0 corresponde ao serviço
+      $cond = sizeof($this->Filter->getConditions());
+      if($cond[0] > 0):  //Conditions 0 corresponde ao serviço
         $this->Indisponibilidade->bindModel(array(
                'hasOne' => array(
                   '_IndisponibilidadesServico' => array(

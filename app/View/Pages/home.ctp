@@ -4,7 +4,7 @@
 
 <div class="row">
 
-	<div class="col-md-3 pull-right">
+	<div class="col-lg-3 col-md-12 pull-right col-sm-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<p>
@@ -23,46 +23,63 @@
 	</div>
 
 	<div class="col-lg-9 pull-left">
-		<h3><?php echo __d('cake_dev', 'Notas:'); ?></h3>
-		<div class="well">
-			Esse é um novo mundo de gestão da DITE!<br/><br/> Agora você pode:<br/><br/>
-			<ul>
-				<li>Registrar Indisponibilidades dos Sistemas.</li>
-				<li>Controlar os contratos de cada cliente, seus itens e aditivos.</li>
-				<li>Controlar as áreas de cada cliente e seus serviços.</li>
-				<li>Registrar as demandas de cada serviço.</li>
-				<li>Registrar todo o conhecimento para as operações diárias no DITE.</li>
-			</ul>
-		</div>
-
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">
-				<p><h3 class="panel-title">Disponibilidade Mensal - <b>20/<?php echo date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y'); ?></b></p>
+				<p><h3 class="panel-title"><b>Indisponibilidades - Período
+					<?php
+						if(date("d") < 20){
+							echo "20/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');
+						}
+						else{
+							echo "20/" . date('m/Y') . " a 20/" . date("m/Y",strtotime("+1 month"));
+						}
+					?>
+				</b></p>
 			</div>
 			<div class="panel-body">
-				<?php foreach ($servicos as $servico): ?>
-					<?php echo $this->Disponibilidade->indisponibilidades($servico)?>
+				<div class="tab-content">
+						<?php foreach ($servicos as $servico): ?>
+							<?php echo $this->Disponibilidade->indisponibilidades($servico)?>
+						<?php endforeach; ?>
+						<?php unset($servico);?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-9 pull-left">
+		<div class="panel panel-default ">
+			<div class="panel-heading">
+				<p><h3 class="panel-title"><b>Demandas</b></p>
+			</div>
+			<div class="panel-body">
+				<?php foreach ($demandas as $key => $value): ?>
+					<?php echo $this->Demanda->demandas($demandas[$key], $key)?>
 				<?php endforeach; ?>
-				<?php unset($servico);?>
+				<?php unset($demanda);?>
 			</div>
 		</div>
 	</div>
 </div>
 
 <?php
+ // Circliful
  echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
  echo $this->Html->css('plugins/jquery.circliful.css');
+
+ // Piety
+  echo $this->Html->script('plugins/peity/jquery.peity.min.js');
 ?>
 
 <script>
 	function refreshCode(){
 		$.ajax({
-						url: "servicos/ajax",
-						cache: false,
-						success: function(html){
-							$("#refresh").html(html);
-						}
-					})
+			url: "servicos/ajax",
+			cache: false,
+			success: function(html){
+				$("#refresh").html(html);
+			}
+		})
 	}
 
 	$(document).ready(function() {

@@ -383,6 +383,16 @@ table.dataTable thead .sorting:after {
   min-height: 82px;
 }
 
+.nav-tabs-black{
+  margin-bottom: 20px;
+}
+.nav-tabs-black > li > a{
+  color: black !important;
+}
+.nav-tabs-black > li > a:hover{
+  background-color: #eee !important;
+}
+
 /* Sidebar */
   .sidebar ul li {
     border-top: 1px solid #2A3234;
@@ -628,4 +638,36 @@ div.sub-20 {
   max-width: 170px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+.notes{
+  font-weight: bold;
+  font-size: 11px;
+  color: #fff;
+  position: fixed;
+  top: 97%;
+  transform: translateY(-97%);
+  padding-left: 15px;
+}
+.notes a{
+  color: #E7E7E8;
+  text-decoration: underline;
+  padding-left: 50px;
+}
+
+.demanda-indis {
+  height: inherit;
+}
+svg.peity {
+  margin-top: 10px;
+}
+
+span.color-legend {
+  padding: 0px 14px 1px 8px;
+  margin-right: 5px;
+}
+
+p.legend{
+  font-size: 12px;
 }

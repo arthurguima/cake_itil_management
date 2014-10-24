@@ -183,7 +183,9 @@
     $this->autoRender = false;
 
     if ($this->request->data) {
-        $demanda = explode('-', $this->request->data('id'))[1];
+
+        $demanda = explode('-', $this->request->data('id'));
+        $demanda = $demanda[1];
         $this->Demanda->id = $demanda;
         $this->Demanda->saveField('status_id', $this->request->data('status_id'));
 

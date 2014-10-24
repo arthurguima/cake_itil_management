@@ -6,6 +6,10 @@
     'Dependencia' => array('classname' => 'Dependencia')
   );
 
+  public $hasMany = array(
+    'Demanda' => array('className' => 'Demanda')
+  );
+
   public $validate = array(
     'nome' => array(
       'NotEmpty' => array(

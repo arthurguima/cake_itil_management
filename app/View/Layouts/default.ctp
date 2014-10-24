@@ -121,6 +121,7 @@
 								</ul>
 								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarHide();"></i>
 					</div>
+					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.0 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
 			</div>
 			<!-- Fim sidebar -->
 		</nav>
@@ -130,9 +131,9 @@
 			<div class='row'><?php echo $this->Session->flash(); ?></div>
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<div id="footer">
+		<!--div id="footer">
 		</div>
 	</div>
-	<!-- hr style="margin-top:50px;" /--><?php //echo $this->element('sql_dump'); ?>
+	<hr style="margin-top:50px;" /--><?php //echo $this->element('sql_dump'); ?>
 </body>
 </html>
