@@ -46,8 +46,8 @@
       /**
       * 'Hack' para HABTM
       */
-      $cond = sizeof($this->Filter->getConditions());
-      if($cond[0] > 0):  //Conditions 0 corresponde ao serviço
+      $cond = $this->Filter->getConditions();
+      if(sizeof($cond[0]) > 0):  //Conditions 0 corresponde ao serviço
         $this->Indisponibilidade->bindModel(array(
                'hasOne' => array(
                   '_IndisponibilidadesServico' => array(
@@ -64,6 +64,7 @@
         ));
       endif;
     endif;
+
 
     $this->Indisponibilidade->recursive = 1;
     $this->set('Indisponibilidades', $this->paginate());
