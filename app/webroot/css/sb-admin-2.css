@@ -672,3 +672,7 @@ span.color-legend {
 p.legend{
   font-size: 12px;
 }
+
+#viewClarity i.fa.fa-expand {
+  color: #252D2F;
+}

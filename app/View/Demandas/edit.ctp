@@ -25,7 +25,7 @@
               <?php echo ("'" . $this->data['Demanda']['clarity_id'] . "'>"); ?>
               <span class='input-group-addon'>
                 <a id='viewClarity' data-toggle='modal' data-target='#myModal'>
-                  <img src='/demandas/CakeVersion/img/ca.jpg' style='cursor:pointer;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></img>
+                  <i class='fa-expand fa' style='cursor:pointer;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></i>
                 </a>
               </span>
             </div>

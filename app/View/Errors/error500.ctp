@@ -16,8 +16,8 @@
 ?>
 <h2><?php echo $message; ?></h2>
 <p class="error">
-	<strong><?php echo __d('cake', 'Error'); ?>: </strong>
-	<?php echo __d('cake', 'An Internal Error Has Occurred.'); ?>
+	<strong><?php echo __d('cake', 'Erro'); ?>: </strong>
+	<?php echo __d('cake', 'Um erro interno ocorreu. Entre em contato com os administradores do Sistema.'); ?>
 </p>
 <?php
 if (Configure::read('debug') > 0):

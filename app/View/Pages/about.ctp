@@ -1,4 +1,6 @@
 <h3><?php echo __d('cake_dev', 'Notas:'); ?></h3>
+
+<p><b>Versão 1.0</b></p>
 <div class="well">
   Esse é um novo mundo de gestão da DITE!<br/><br/> Agora você pode:<br/><br/>
   <ul>

@@ -62,6 +62,7 @@
 	</div>
 </div>
 
+
 <?php
  // Circliful
  echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
