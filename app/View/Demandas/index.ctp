@@ -169,7 +169,7 @@
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
-          responsive: true,
+        //  responsive: true,
           "dom": 'T<"clear">lfrtip',
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",

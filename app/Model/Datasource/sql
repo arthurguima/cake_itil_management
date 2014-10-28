@@ -1,0 +1,339 @@
+-- phpMyAdmin SQL Dump
+-- version 2.10.3
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tempo de Geração: Out 28, 2014 as 10:28 AM
+-- Versão do Servidor: 5.0.51
+-- Versão do PHP: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Banco de Dados: `sgd_mte`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `aditivos`
+--
+
+CREATE TABLE `aditivos` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `dt_inicio` date default NULL,
+  `dt_fim` date default NULL,
+  `contrato_id` int(11) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `areas`
+--
+
+CREATE TABLE `areas` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `cliente_id` varchar(11) NOT NULL,
+  `nome` varchar(100) default NULL,
+  `sigla` varchar(50) default NULL,
+  `status` tinyint(1) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  `cliente` varchar(45) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `areas_servicos`
+--
+
+CREATE TABLE `areas_servicos` (
+  `area_id` int(11) NOT NULL,
+  `servico_id` int(11) NOT NULL,
+  PRIMARY KEY  (`area_id`,`servico_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `chamados`
+--
+
+CREATE TABLE `chamados` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `numero` varchar(50) default NULL,
+  `nome` varchar(50) default NULL,
+  `demanda_id` int(11) NOT NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `clientes`
+--
+
+CREATE TABLE `clientes` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(80) default NULL,
+  `sigla` varchar(20) NOT NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `contratos`
+--
+
+CREATE TABLE `contratos` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `numero` varchar(45) NOT NULL,
+  `data_ini` date NOT NULL,
+  `data_fim` date default NULL,
+  `status` tinyint(1) default '0',
+  `cliente_id` int(11) NOT NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `demandas`
+--
+
+CREATE TABLE `demandas` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `clarity_id` int(20) NOT NULL,
+  `clarity_dm_id` varchar(20) default NULL,
+  `mantis_id` int(11) default NULL,
+  `descricao` varchar(250) default NULL,
+  `data_cadastro` date default NULL,
+  `dt_prevista` date default NULL,
+  `criador` varchar(45) default NULL,
+  `executor` varchar(45) NOT NULL,
+  `data_homologacao` date default NULL,
+  `servico_id` int(11) default NULL,
+  `status_id` int(11) NOT NULL,
+  `demanda_tipo_id` int(11) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  `prioridade` int(11) NOT NULL default '999',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `demanda_tipos`
+--
+
+CREATE TABLE `demanda_tipos` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(60) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `dependencias`
+--
+
+CREATE TABLE `dependencias` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(100) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `dependencias_servicos`
+--
+
+CREATE TABLE `dependencias_servicos` (
+  `dependencia_id` int(11) default NULL,
+  `servico_id` int(11) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `historicos`
+--
+
+CREATE TABLE `historicos` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `data` date default NULL,
+  `descricao` text,
+  `analista` varchar(50) default NULL,
+  `demanda_id` int(11) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `indisponibilidades`
+--
+
+CREATE TABLE `indisponibilidades` (
+  `num_evento` int(11) default NULL,
+  `observacao` varchar(250) default NULL,
+  `motivo_id` int(11) default NULL,
+  `anexo` blob,
+  `dt_fim` datetime default NULL,
+  `dt_inicio` datetime default NULL,
+  `num_incidente` int(11) default NULL,
+  `id` int(11) NOT NULL auto_increment,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `indisponibilidades_servicos`
+--
+
+CREATE TABLE `indisponibilidades_servicos` (
+  `servico_id` int(11) NOT NULL,
+  `indisponibilidade_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `internos`
+--
+
+CREATE TABLE `internos` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(70) default NULL,
+  `descricao` varchar(300) default NULL,
+  `url` varchar(70) default NULL,
+  `instrucoes` varchar(300) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `items`
+--
+
+CREATE TABLE `items` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(50) default NULL,
+  `metrica` varchar(25) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  `contrato_id` int(11) default NULL,
+  `aditivo_id` int(11) default NULL,
+  `volume` int(20) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `motivos`
+--
+
+CREATE TABLE `motivos` (
+  `id` int(11) NOT NULL auto_increment,
+  `nome` varchar(45) NOT NULL,
+  `created` date default NULL,
+  `modified` date default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `procedimentos`
+--
+
+CREATE TABLE `procedimentos` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(70) default NULL,
+  `url` varchar(100) default NULL,
+  `responsavel` varchar(70) default NULL,
+  `dt_alteracao` date default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `responsabilidades`
+--
+
+CREATE TABLE `responsabilidades` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `processo` varchar(80) default NULL,
+  `responsavel` varchar(80) default NULL,
+  `area` varchar(80) default NULL,
+  `ramal` int(11) default NULL,
+  `email` varchar(40) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `servicos`
+--
+
+CREATE TABLE `servicos` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `url` varchar(150) NOT NULL,
+  `tecnologia` varchar(45) NOT NULL,
+  `sigla` varchar(20) default NULL,
+  `nome` varchar(80) default NULL,
+  `status` tinyint(1) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `statuses`
+--
+
+CREATE TABLE `statuses` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(50) default NULL,
+  `tipo` int(4) default NULL,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

@@ -7,16 +7,16 @@
     "sInfoFiltered": "(Filtrados de _MAX_ registros)",
     "sInfoPostFix": "",
     "sInfoThousands": ".",
-    "sLengthMenu": "Exibir _MENU_ resultados por página.",
+    "sLengthMenu": "Exibir _MENU_ resultados por p&aacute;gina.",
     "sLoadingRecords": "Carregando...",
     "sProcessing": "Processando...",
     "sZeroRecords": "Nenhum registro encontrado!",
     "sSearch": "Pesquisar: ",
     "oPaginate": {
-        "sNext": "Próximo",
+        "sNext": "Pr&oacute;ximo",
         "sPrevious": "Anterior",
         "sFirst": "Primeiro",
-        "sLast": "Último"
+        "sLast": "&Uacute;ltimo"
     },
     "oAria": {
         "sSortAscending": ": Ordenar colunas de forma ascendente.",

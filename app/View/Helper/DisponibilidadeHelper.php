@@ -10,20 +10,20 @@
       if($headers == false ){
         $end = microtime(true); //Final do tempo de resposta
         $tempo = $end - $begin;
-        return "<i class='fa fa-exclamation-circle yellow'></i> Host desconhecido!";
+        return "<td><i class='fa fa-exclamation-circle yellow'></i></td><td> Host desconhecido!</td>";
       }
 
       if(intval($x[1]) >= 400):
         $end = microtime(true); //Final do tempo de resposta
         $tempo = $end - $begin;
-        return "<i class='fa fa-times-circle red'></i> " . $x[1] ." (" . $headers['Date'] . ") ";
+        return "<td><i title='" . $x[1] ."' class='fa fa-times-circle red'></i></td> (" . $headers['Date'] . ") ";
       endif;
 
       $end = microtime(true); //Final do tempo de resposta
       $tempo = $end - $begin;
-      return "<i class='fa fa-check-circle green'></i> " . $x[1] . " - " . number_format($tempo,3,",","") . " ms";
+      return "<td><i title='" . $x[1] . "' class='fa fa-check-circle green'></i></td><td>" . number_format($tempo,3,",","") . " ms</td>";
     endif;
-      return "<i class='fa fa-exclamation-triangle yellow'></i> A URL não foi cadastrada!";
+      return "<td><i class='fa fa-exclamation-triangle yellow'></i></td><td> A URL não foi cadastrada!</td>";
   }
 
   public function online2($url, $method){ // Utilizada na tabela de servicos
@@ -67,7 +67,7 @@
     else: $percent = 0;
     endif;
 
-    return "<div class='col-sm-12 col-lg-4  col-md-4 well indis'>
+    return "<div class='col-sm-12 col-lg-4  col-md-6 well indis'>
       <div class='col-lg-6 col-xs-6 col-md-6'>
         <a class='servico col-lg-12'><b>" . $servico['Servico']['sigla'] . "</b></a>
         <div class='semicircle'>

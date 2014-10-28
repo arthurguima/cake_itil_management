@@ -609,7 +609,8 @@ a.servico:hover{
 
 .indis {
   font-size: 14px;
-  height: 130px;
+  max-height: 150px;
+  height: inherit;
 }
 .indis a{
   color: #252D2F;
@@ -659,6 +660,7 @@ div.sub-20 {
 .demanda-indis {
   height: inherit;
   min-height: 156px;
+  min-height: 250px;
 }
 svg.peity {
   margin-top: 10px;

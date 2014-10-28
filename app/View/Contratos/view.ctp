@@ -97,7 +97,7 @@
               <tr>
                 <th>Data Início</th>
                 <th>Data Fim</th>
-                <th>Itens de Contrato</th>
+
                 <th></th>
               </tr>
             </thead>
@@ -106,7 +106,7 @@
                 <tr>
                   <td><?php echo $this->Time->format('d/m/Y', $aditivo['dt_inicio']); ?></td>
                   <td><?php echo $this->Times->pastDate($aditivo['dt_fim']); ?></td>
-                  <td><b><?php echo count($contrato['Aditivo']) ?></b> itens</td>
+                
                   <td>
                      <?php
                         echo $this->Html->link("<i class='fa fa-pencil'></i>",

@@ -61,7 +61,8 @@
 										  <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Dashboard',
 																							Router::url('/', true) . "index.php", array('escape' => false)); ?>
 									</li>
-									 <li> <!-- SS -->
+									<li><a href="#"><i class="fa fa-calendar fa-fw"></i> Calendário (em breve)<span class="fa arrow"></span></a></li>
+									<li> <!-- SS -->
 											<a href="#"><i class="fa fa-comments-o fa-fw"></i> SS (em breve)<span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 													<li><a href="#"><i class="fa fa-angle-double-right"></i> Incluir</a></li>

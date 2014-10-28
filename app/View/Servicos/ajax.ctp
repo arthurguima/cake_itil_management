@@ -3,14 +3,15 @@
     <thead>
       <tr>
         <th>Serviço</th>
-        <th>Status - Tempo de resposta</th>
+        <th>Status</th>
+        <th>Tempo de resposta</th>
       </tr>
     </thead>
     <tbody>
       <?php foreach ($servicos as $servico): ?>
         <tr>
           <td><b><?php echo $servico['Servico']['sigla']; ?></b></td>
-          <td><?php echo $this->Disponibilidade->online($servico['Servico']['url'], 'GET'); ?></td>
+          <?php echo $this->Disponibilidade->online($servico['Servico']['url'], 'GET'); ?>
         </tr>
       <?php endforeach; ?>
       <?php unset($servico); ?>

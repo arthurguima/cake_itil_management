@@ -22,7 +22,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-9 pull-left">
+	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">
 				<p><h3 class="panel-title"><b>Indisponibilidades - Período
@@ -47,7 +47,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-9 pull-left">
+	<div class="col-lg-9  col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default ">
 			<div class="panel-heading">
 				<p><h3 class="panel-title"><b>Demandas</b></p>
