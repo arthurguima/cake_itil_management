@@ -101,7 +101,7 @@
                   <td class="hidden-xs hidden-sm"><?php echo $demanda['Demanda']['criador']; ?></td>
                   <td>
                    <?php
-                      echo $this->Html->link("<i class='fa fa-eye' style='margin-right: 5px;' title='Visualizar detalhes da demanda.'></i>",
+                      echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes da demanda.'></i>",
                         array('controller' => 'demandas', 'action' => 'view', $demanda['Demanda']['id']),
                         array('escape' => false));
                       echo $this->Html->link("<i class='fa fa-pencil' title='Editar demanda.'></i>",

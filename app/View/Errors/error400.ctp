@@ -14,14 +14,33 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<h2><?php echo $message; ?></h2>
-<p class="error">
-	<strong><?php echo __d('cake', 'Erro'); ?>: </strong>
-	<?php printf(
-		__d('cake', 'O endereço especificado %s não foi encontrado no servidor.'),
-		"<strong>'{$url}'</strong>"
-	); ?>
-</p>
+<div class="error">
+	<div class="well">
+		<h3 class="page-header"><i class="fa fa-sitemap"></i> 404 Página Não Encontrada</h3>
+		<h4><?php printf(__d('cake', 'Nós procuramos em todos os lugares e não encontramos o endereço %s no servidor.'),	"<strong>'{$url}'</strong>"); ?></h4>
+
+		<br />
+		<b>Tente um dos seguintes procedimentos:</b>
+		<div class="well">
+			<ul class="list-unstyled spaced">
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Verifique se não existem erros de digitação na url
+				</li>
+
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Verifique se a página que deseja acessar não foi excluida
+				</li>
+
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Entre em contato com os administradores do SGD
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
 <?php
 if (Configure::read('debug') > 0):
 	echo $this->element('exception_stack_trace');

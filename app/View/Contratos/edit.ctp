@@ -46,7 +46,8 @@
       ?>
     </div>
   </div>
-  <div class="col-lg-4">
+  
+  <div class="col-lg-12">
     <div class="panel panel-default panel-success">
       <div class="panel-heading">
         <p>

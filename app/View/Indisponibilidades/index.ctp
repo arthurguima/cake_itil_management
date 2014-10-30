@@ -106,7 +106,7 @@
                               array('controller' => 'Indisponibilidades', 'action' => 'edit', $Indisponibilidade['Indisponibilidade']['id']),
                               array('escape' => false));
 
-                        echo $this->Html->link("<i class='fa fa-eye' style='margin-left: 5px;''></i>",
+                        echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-left: 5px;''></i>",
                               array('controller' => 'indisponibilidades', 'action' => 'view', $Indisponibilidade['Indisponibilidade']['id']),
                               array('escape' => false));
 

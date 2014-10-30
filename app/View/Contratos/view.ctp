@@ -31,7 +31,61 @@
     </div>
   </div>
 
-  <div class="col-lg-4">
+  <div class="col-lg-8">
+    <div class="panel panel-default panel-default">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title">Aditivos
+          <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+            array('controller' => 'aditivos', 'action' => 'add','?' => array('contrato' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
+            array('escape' => false)); ?></h3>
+        </p>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-aditivo">
+            <thead>
+              <tr>
+                <th>Data Início</th>
+                <th>Data Fim</th>
+
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($contrato['Aditivo'] as $aditivo): ?>
+                <tr>
+                  <td><?php echo $this->Time->format('d/m/Y', $aditivo['dt_inicio']); ?></td>
+                  <td><?php echo $this->Times->pastDate($aditivo['dt_fim']); ?></td>
+
+                  <td>
+                     <?php
+                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                              array('controller' => 'aditivos', 'action' => 'edit', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
+                              array('escape' => false));
+
+                        echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-left: 5px;''></i>",
+                              array('controller' => 'aditivos', 'action' => 'view', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
+                              array('escape' => false));
+
+                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                              array('controller' => 'aditivos', 'action' => 'delete', $aditivo['id']),
+                              array('escape' => false), "Você tem certeza");
+                     ?>
+                   </td>
+                </tr>
+              <?php endforeach; ?>
+              <?php unset($aditivo); ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
     <div class="panel panel-default panel-danger">
       <div class="panel-heading">
         <p>
@@ -70,61 +124,7 @@
                    </td>
                 </tr>
               <?php endforeach; ?>
-            <?php unset($item); ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default panel-default">
-      <div class="panel-heading">
-        <p>
-          <h3 class="panel-title">Aditivos
-          <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-            array('controller' => 'aditivos', 'action' => 'add','?' => array('contrato' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
-            array('escape' => false)); ?></h3>
-        </p>
-      </div>
-      <div class="panel-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-aditivo">
-            <thead>
-              <tr>
-                <th>Data Início</th>
-                <th>Data Fim</th>
-
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($contrato['Aditivo'] as $aditivo): ?>
-                <tr>
-                  <td><?php echo $this->Time->format('d/m/Y', $aditivo['dt_inicio']); ?></td>
-                  <td><?php echo $this->Times->pastDate($aditivo['dt_fim']); ?></td>
-                
-                  <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                              array('controller' => 'aditivos', 'action' => 'edit', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
-                              array('escape' => false));
-
-                        echo $this->Html->link("<i class='fa fa-eye' style='margin-left: 5px;''></i>",
-                              array('controller' => 'aditivos', 'action' => 'view', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
-                              array('escape' => false));
-
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                              array('controller' => 'aditivos', 'action' => 'delete', $aditivo['id']),
-                              array('escape' => false), "Você tem certeza");
-                     ?>
-                   </td>
-                </tr>
-              <?php endforeach; ?>
-              <?php unset($aditivo); ?>
+              <?php unset($item); ?>
             </tbody>
           </table>
         </div>

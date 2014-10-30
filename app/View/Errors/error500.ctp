@@ -14,11 +14,33 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<h2><?php echo $message; ?></h2>
-<p class="error">
-	<strong><?php echo __d('cake', 'Erro'); ?>: </strong>
-	<?php echo __d('cake', 'Um erro interno ocorreu. Entre em contato com os administradores do Sistema.'); ?>
-</p>
+<div class="error">
+	<div class="well">
+		<h3 class="page-header"><i class="fa fa-random"></i> 500 Um erro interno ocorreu</h3>
+		<h4><?php echo __d('cake', 'Um erro interno ocorreu. Entre em contato com os administradores do Sistema.'); ?></h4>
+
+		<br />
+		<b>Tente um dos seguintes procedimentos:</b>
+		<div class="well">
+			<ul class="list-unstyled spaced">
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Verifique se não existem erros de digitação na url
+				</li>
+
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Tente recarregar a página novamente após alguns minutos
+				</li>
+
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Entre em contato com os administradores do SGD
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
 <?php
 if (Configure::read('debug') > 0):
 	echo $this->element('exception_stack_trace');

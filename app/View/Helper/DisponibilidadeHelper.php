@@ -67,14 +67,14 @@
     else: $percent = 0;
     endif;
 
-    return "<div class='col-sm-12 col-lg-4  col-md-6 well indis'>
+    return "<div class='col-sm-12 col-lg-3  col-md-6 well indis'>
       <div class='col-lg-6 col-xs-6 col-md-6'>
         <a class='servico col-lg-12'><b>" . $servico['Servico']['sigla'] . "</b></a>
         <div class='semicircle'>
-          <div id='" . $servico['Servico']['id'] . "' data-dimension='100' data-text='" . round((100 - $percent),2) . "%' data-total='330' data-percent='" . $percent . "' data-part='" . $total . "' data-type='half' data-fontsize='10px'  data-fgcolor='#5CB85C' data-bgcolor='#eee' data-fill='#ddd'></div>
+          <div id='" . $servico['Servico']['id'] . "' data-dimension='80' data-text='" . round((100 - $percent),2) . "%' data-total='330' data-percent='" . $percent . "' data-part='" . $total . "' data-type='half' data-fontsize='10px'  data-fgcolor='#5CB85C' data-bgcolor='#eee' data-fill='#ddd'></div>
         </div>
       </div>
-      <div class='col-lg-6 col-xs-6 col-md-6 pull-right'>
+      <div class='col-lg-6 col-xs-6 col-md-6 pull-right indis-text'>
         <b style='color:#D9534F;'>" . count($servico['Indisponibilidade']) . "</b> indisponibilidade(s)
         <p>" . round($total,2) . " hora(s)</p>" . $ativas . " ativa(s)
       </div>

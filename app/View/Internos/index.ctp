@@ -41,7 +41,7 @@
                              array('controller' => 'internos', 'action' => 'edit', $interno['Interno']['id']),
                              array('escape' => false));
 
-                       echo $this->Html->link("<i class='fa fa-eye' style='margin-left: 5px;''></i>",
+                       echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-left: 5px;''></i>",
                              array('controller' => 'internos', 'action' => 'view', $interno['Interno']['id']),
                              array('escape' => false));
 
@@ -66,7 +66,7 @@
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
   echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
   echo $this->Html->css('plugins/dataTables.bootstrap.css');
-  
+
   //-- DataTables --> TableTools
 echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
 echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');

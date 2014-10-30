@@ -15,13 +15,29 @@
  */
 ?>
 
-<p class="error">
-<h2>	<strong><?php echo __d('cake', 'Error'); ?>: </strong>
-	<?php echo __d('cake', 'Wooohhh....Aparentemente perdemos contato com o banco de dados!!'); ?><h2>
-</p>
-<br/><h3>Por favor, procure os responsaveis pelo sistema!!</h3><br/><br/>
-<h4>Mensagem:<?php echo $message; ?></h4>
-<br/><br/>
+<div class="error">
+	<div class="well">
+		<h3 class="page-header"><i class="fa fa-plug"></i> Conexão perdida com o banco de dados</h3>
+		<h4><?php echo __d('cake', 'Wooohhh....Aparentemente perdemos contato com o banco de dados!!'); ?></h4>
+
+		<br />
+		<b>Tente um dos seguintes procedimentos:</b>
+		<div class="well">
+			<ul class="list-unstyled spaced">
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Tente recarregar a página novamente após alguns minutos
+				</li>
+
+				<li>
+					<i class="ace-icon fa fa-hand-o-right blue"></i>
+					Entre em contato com os administradores do SGD
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
 <?php
 
 if (Configure::read('debug') > 0):

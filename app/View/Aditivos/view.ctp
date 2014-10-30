@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="col-lg-4">
+  <div class="col-lg-10">
     <div class="panel panel-default panel-danger">
       <div class="panel-heading">
         <p>
