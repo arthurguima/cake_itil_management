@@ -49,7 +49,7 @@
 <script>
   $(document).ready(function() {
     $("[id*='dp']").datetimepicker({
-      format: "yyyy-mm-dd",
+      format: "dd/mm/yyyy",
         minView: 2,
         autoclose: true,
         todayBtn: true,

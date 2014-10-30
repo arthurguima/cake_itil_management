@@ -56,7 +56,7 @@
 <script>
   $(document).ready(function() {
     $("[id*='dp']").datetimepicker({
-      format: "yyyy-mm-dd hh:ii",
+      format: "dd/mm/yyyy hh:ii",
       autoclose: true,
       todayBtn: true,
       language: 'pt-BR'

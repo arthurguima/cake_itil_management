@@ -12,7 +12,7 @@
       'dependent' => true
     )
   );
-  
+
   public $belongsTo = array(
     'Cliente' => array(
       'className' => 'Cliente',
@@ -46,4 +46,14 @@
       )
     )
   );
+
+  public function beforeValidate($options = array()){
+    if(!empty($this->data['Contrato']['data_ini'])) {
+        $this->data['Contrato']['data_ini'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Contrato']['data_ini'])));
+    }
+    if(!empty($this->data['Contrato']['data_fim'])) {
+        $this->data['Contrato']['data_fim'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Contrato']['data_fim'])));
+    }
+    return true;
+  }
 }?>

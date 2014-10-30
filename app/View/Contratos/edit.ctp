@@ -46,7 +46,7 @@
       ?>
     </div>
   </div>
-  
+
   <div class="col-lg-12">
     <div class="panel panel-default panel-success">
       <div class="panel-heading">
@@ -97,7 +97,7 @@
 <script>
   $(document).ready(function() {
     $("[id*='dp']").datetimepicker({
-      format: "yyyy-mm-dd",
+      format: "dd/mm/yyyy",
         minView: 2,
         autoclose: true,
         todayBtn: true,

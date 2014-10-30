@@ -55,4 +55,17 @@
 			)
 		)
 	);
+
+	public function beforeValidate($options = array()){
+		if(!empty($this->data['Demanda']['data_homologacao'])) {
+				$this->data['Demanda']['data_homologacao'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Demanda']['data_homologacao'])));
+		}
+		if(!empty($this->data['Demanda']['data_cadastro'])) {
+				$this->data['Demanda']['data_cadastro'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Demanda']['data_cadastro'])));
+		}
+		if(!empty($this->data['Demanda']['dt_prevista'])) {
+				$this->data['Demanda']['dt_prevista'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Demanda']['dt_prevista'])));
+		}
+		return true;
+	}
 }?>
