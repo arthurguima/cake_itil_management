@@ -13,10 +13,12 @@
       echo $this->BootstrapForm->create('Indisponibilidade');
 
       echo $this->BootstrapForm->input('num_evento', array(
-                  'label' => array('text' => 'Nº Evento: ')));
+                  'label' => array('text' => 'Nº Evento: '),
+                  'type' => 'text'));
 
       echo $this->BootstrapForm->input('num_incidente', array(
-                  'label' => array('text' => 'Nº Incidente: ')));
+                  'label' => array('text' => 'Nº Incidente: '),
+                  'type' => 'text'));
 
 
       echo $this->BootstrapForm->input('Servico', array(

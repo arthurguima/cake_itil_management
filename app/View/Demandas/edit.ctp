@@ -40,6 +40,10 @@
                   'label' => array('text' => 'Nº Mantis: '),
                   'type' => 'text'));
 
+       echo $this->BootstrapForm->input('nome', array(
+                 'label' => array('text' => 'Nome: '),
+                 'type' => 'text'));
+
        echo $this->BootstrapForm->input('data_cadastro', array(
                   'label' => array('text' => 'Data de Cadastro: '),
                   'type' => 'text',
@@ -114,7 +118,7 @@
     });
 
     $('#myModal').on('shown.bs.modal', function (e) {
-      getIDOnEdit(<?php $this->data['Demanda']['clarity_id'] ?>);
+      getIDOnEdit(<?php echo $this->data['Demanda']['clarity_id'] ?>);
 
       document.getElementById('modal-body').appendChild(
           document.getElementById('demandaFrame')

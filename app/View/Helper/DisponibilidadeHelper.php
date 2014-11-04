@@ -67,16 +67,23 @@
     else: $percent = 0;
     endif;
 
-    return "<div class='col-sm-12 col-lg-3  col-md-6 well indis'>
-      <div class='col-lg-6 col-xs-6 col-md-6'>
-        <a class='servico col-lg-12'><b>" . $servico['Servico']['sigla'] . "</b></a>
-        <div class='semicircle'>
-          <div id='" . $servico['Servico']['id'] . "' data-dimension='80' data-text='" . round((100 - $percent),2) . "%' data-total='330' data-percent='" . $percent . "' data-part='" . $total . "' data-type='half' data-fontsize='10px'  data-fgcolor='#5CB85C' data-bgcolor='#eee' data-fill='#ddd'></div>
+    return "
+    <div class='col-sm-12 col-lg-3  col-md-6 well indis'>
+      <div class='indis-tittle col-lg-12'>
+        <p><a class='servico'><b>" . $servico['Servico']['sigla'] . "</b></a></py>
+      </div>
+      <div class='indis-body col-lg-12'>
+        <div class='col-lg-6 col-xs-6 col-md-6'>
+          <div class='semicircle'>
+            <div id='" . $servico['Servico']['id'] . "' data-dimension='60' data-width='4'  data-text='" . round((100 - $percent),2) . "%' data-total='330' data-percent='" . $percent . "' data-part='" . $total . "' data-fontsize='9px'  data-fgcolor='#5CB85C' data-bgcolor='#eee' data-fill='#ddd'></div>
+            </div>
+        </div>
+        <div class='col-lg-6 col-xs-6 col-md-6 indis-text'>
+          <p>" . round($total,2) . " hora(s)</p>" . $ativas . " ativa(s)
         </div>
       </div>
-      <div class='col-lg-6 col-xs-6 col-md-6 pull-right indis-text'>
+      <div class='indis-footer col-lg-12'>
         <b style='color:#D9534F;'>" . count($servico['Indisponibilidade']) . "</b> indisponibilidade(s)
-        <p>" . round($total,2) . " hora(s)</p>" . $ativas . " ativa(s)
       </div>
       <script>
         $(document).ready(function() {

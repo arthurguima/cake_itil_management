@@ -34,6 +34,10 @@
                  'label' => array('text' => 'Nº Mantis: '),
                  'type' => 'text'));
 
+      echo $this->BootstrapForm->input('nome', array(
+                 'label' => array('text' => 'Nome: '),
+                 'type' => 'text'));
+
       echo $this->BootstrapForm->input('data_cadastro', array(
                  'label' => array('text' => 'Data de Cadastro: '),
                  'type' => 'text',

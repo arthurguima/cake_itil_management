@@ -607,16 +607,19 @@ td form {
   color: black;
 }
 
+a.servico {
+  font-size: 14px;
+}
 a.servico:hover{
   text-decoration: none;
 }
 
 .indis {
   font-size: 13px;
-  max-height: 118px;
-  min-height: 85px;
-  height: inherit;
+  min-height: 142px;
   padding: 0;
+  border-top-width: 2px;
+  border-color: #cfdbe2;
 }
 .indis a{
   color: #252D2F;
@@ -630,32 +633,38 @@ a.servico:hover{
   text-overflow: ellipsis;
 }
 
+.indis-footer {
+  padding-bottom: 2px;
+  background-color: #EBF1F2;
+  border: 1px solid #DAE5E8;
+  padding-top: 5px;
+}
+
 .indis:hover {
   background-color: #DAE5E8;
 }
-
-a.servico {
-  margin-top: 29px;
-  font-size: 14px;
+.indis-body {
+  min-height: 100px;
 }
-
-
 
 @media(min-width:1231px){
   .semicircle{
-    margin-top: 76px;
+    //margin-top: 76px;
   }
 }
 
 .demanda-indis {
   height: inherit;
-  min-height: 250px;
-  padding: 15px;
+  min-height: 290px;
+  /*padding: 15px;*/
 }
 svg.peity {
   margin-top: 10px;
 }
 
+.demanda-indis .indis-body {
+  min-height: inherit;
+}
 
 .editable{
   border-bottom: 2px dotted #3e8da7;
@@ -672,11 +681,24 @@ svg.peity {
 }
 
 
-div.sub-20 {
+div.sub-20{
   white-space: nowrap;
-  max-width: 170px;
+  max-width: 220px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+td .sub-17 {
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td .tipo-demanda {
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: auto;
 }
 
 
@@ -698,6 +720,7 @@ div.sub-20 {
 span.color-legend {
   padding: 0px 14px 1px 8px;
   margin-right: 5px;
+  border: 1px solid #252D2F;
 }
 
 p.legend{
@@ -715,4 +738,8 @@ table#dataTables-Servico{
 .spaced>li {
   margin-top: 9px;
   margin-bottom: 9px;
+}
+
+.personal-info {
+  margin-left: 21px;
 }

@@ -1,14 +1,14 @@
 <?php class TablesHelper extends AppHelper {
-
+  public $helpers = array('Html');
   /*
   * Exibe um texto em popup
   */
-  public function popupBox($string) {
+  public function popupBox($string, $description=null) {
     return "<a type='button' data-container='body' data-toggle='popover'
             data-placement='top'
-            data-content='" . $string ."'
+            data-content='" . (($description != null) ? "<b>". $string  ."</b><br />" : $string) . " " . $description . "'
             data-original-title='' title='Descrição'>
-              <div class='sub-20'>" .  $string . "</div>
+              <div class='sub-20'>" . $string . "</div>
             </a>";
   }
 

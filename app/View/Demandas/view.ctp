@@ -22,6 +22,7 @@
       </div>
       <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
+          <li><a><b>Nome: </b><?php echo $demanda['Demanda']['nome']; ?></a></li>
           <li><a><b>Clarity DM: </b><?php echo $demanda['Demanda']['clarity_dm_id']; ?></a></li>
           <li><a><b>Mantis: </b><?php echo $demanda['Demanda']['mantis_id']; ?></a></li>
           <li><a>

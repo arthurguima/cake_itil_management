@@ -83,12 +83,28 @@ class PagesController extends AppController {
 		$demandasAUX = array();
 
 		foreach ($demandas as $dem){
-			//utilizar isset: http://siliconstation.com/how-fix-php-notice-undefined-index/
-			if(!isset($demandasAUX[$dem['Servico']['sigla']][$dem['Status']['nome']])){
-				$demandasAUX[$dem['Servico']['sigla']][$dem['Status']['nome']] = 1;
+			/* Contador de Demandas */
+			if(isset($demandasAUX[$dem['Servico']['sigla']]['Status']['total'])){
+				$demandasAUX[$dem['Servico']['sigla']]['Status']['total'] += 1;
+			}else{
+				$demandasAUX[$dem['Servico']['sigla']]['Status']['total'] = 1;
+			}
+
+			/* Separa as demanads por Status */
+			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']])){
+				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome'] ] = 1;
 			}
 			else{
-				$demandasAUX[$dem['Servico']['sigla']][$dem['Status']['nome']] += 1;
+				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']] += 1;
+			}
+
+			/* Separa as demanads por Tipo */
+
+			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']])){
+				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']] = 1;
+			}
+			else{
+				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']] += 1;
 			}
 		}
 

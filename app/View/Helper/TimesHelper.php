@@ -7,8 +7,8 @@
     public function timeLeftTo($time1, $time2, $string, $active) {
         if ($active):
           if($time2 == null):
-            return "<i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
-                    <b>Sem previsão de Término </b><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
+            return "<div style='font-size: 12px;'><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
+                    Previsão Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
           endif;
 
           if(strtotime($time2) < time()):

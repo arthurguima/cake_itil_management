@@ -53,10 +53,25 @@
 				<p><h3 class="panel-title"><b>Demandas</b></p>
 			</div>
 			<div class="panel-body">
-				<?php foreach ($demandas as $key => $value): ?>
-					<?php echo $this->Demanda->demandas($demandas[$key], $key)?>
-				<?php endforeach; ?>
-				<?php unset($demanda);?>
+				<ul class="nav nav-tabs nav-tabs-black" role="tablist">
+				  <li role="presentation" class="active"><a href="#status" role="tab" data-toggle="tab">Status</a></li>
+				  <li role="presentation"><a href="#tipos" role="tab" data-toggle="tab">Tipos</a></li>
+				</ul>
+
+				<div class="tab-content">
+				  <div role="tabpanel" class="tab-pane active" id="status">
+						<?php foreach ($demandas as $key => $value): ?>
+							<?php echo $this->Demanda->demandasStatus($demandas[$key], $key)?>
+						<?php endforeach; ?>
+						<?php unset($demanda);?>
+					</div>
+				  <div role="tabpanel" class="tab-pane" id="tipos">
+						<?php foreach ($demandas as $key => $value): ?>
+							<?php echo $this->Demanda->demandasTipos($demandas[$key], $key)?>
+						<?php endforeach; ?>
+						<?php unset($demanda);?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

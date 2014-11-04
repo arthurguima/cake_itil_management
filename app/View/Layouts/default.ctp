@@ -127,7 +127,7 @@
 			<!-- Fim sidebar -->
 		</nav>
 		<div id="page-wrapper">
-			<span class="breadcrumb pull-right"><b><?php echo $this->Html->getCrumbs(' > ', 'Home'); ?></b></span>
+			<span class="breadcrumb pull-right"><b><?php echo $this->Html->getCrumbs(' > ', array('text' => 'Home', 'url' => Router::url('/', true) . "index.php")); ?></b></span>
 			<div style='clear:both'></div>
 			<div class='row'><?php echo $this->Session->flash(); ?></div>
 			<?php echo $this->fetch('content'); ?>

@@ -64,7 +64,8 @@
                 <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
                 <th class="hidden-xs hidden-sm">Clarity DM</th>
                 <th class="hidden-xs hidden-sm">Mantis</th>
-                <th>Descrição</th>
+                <th>Título</th>
+
 				        <th>Tipo da Demanda</th>
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
@@ -86,8 +87,8 @@
                   <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">
                     <?php echo $this->Html->link($demanda['Demanda']['mantis_id'],"http://www-testes/view.php?id=" . $demanda['Demanda']['mantis_id'], array('target' => '_blank')); ?>
                   </td>
-                  <td><?php echo $this->Tables->popupBox($demanda['Demanda']['descricao']) ?></td>
-				          <td><?php echo $demanda['DemandaTipo']['nome']; ?></td>
+                  <td><?php echo $this->Tables->popupBox($demanda['Demanda']['nome'], $demanda['Demanda']['descricao']) ?></td>
+				          <td style="max-width: 110px;"><div class="tipo-demanda"><?php echo $demanda['DemandaTipo']['nome']; ?></div></td>
                   <td class="text-center">
                     <?php echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
                             $this->Time->format('d/m/Y', $demanda['Demanda']['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $demanda['Demanda']['dt_prevista']),
@@ -98,7 +99,7 @@
                     <span class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>"><?php echo $demanda['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
-                  <td class="hidden-xs hidden-sm"><?php echo $demanda['Demanda']['criador']; ?></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['Demanda']['criador']; ?></div></td>
                   <td>
                    <?php
                       echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes da demanda.'></i>",
@@ -194,7 +195,7 @@
           }
       });
 
-      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'top'});
+      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'top', html: 'true'});
 
       $("[id*='filterDt']").datetimepicker({
         format: "yyyy-mm-dd",
