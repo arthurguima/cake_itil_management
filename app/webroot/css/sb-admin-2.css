@@ -214,6 +214,10 @@ i.hide-sidebar{
     margin-right: 5px;
 }
 
+.panel-title{
+  font-size: 19px;
+}
+
 .chat-panel .panel-body {
     height: 350px;
     overflow-y: scroll;

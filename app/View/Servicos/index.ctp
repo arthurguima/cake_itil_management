@@ -20,7 +20,7 @@
       <div class="panel-heading"><b> Lista de Serviços </b></div>
       <div class="panel-body">
         <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-Servico">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-Servicos">
             <thead>
               <tr>
                 <th>Sigla</th>
@@ -49,16 +49,7 @@
                   </td>
                   <td><?php echo $this->Times->active($servico['Servico']['status'])?></td>
                   <td><?php echo $this->Disponibilidade->online2($servico['Servico']['url'], 'GET'); ?></td>
-                 <td>
-                   <?php
-                      echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                            array('controller' => 'Servicos', 'action' => 'edit', $servico['Servico']['id']),
-                            array('escape' => false));
-                      echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                            array('action' => 'delete', $servico['Servico']['id']),
-                            array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                   ?>
-                 </td>
+                 <td><?php echo $this->Tables->getMenu('Servicos', $servico['Servico']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($servico); ?>
@@ -88,7 +79,7 @@
 
 <script>
   $(document).ready(function() {
-      $('#dataTables-Servico').dataTable({
+      $('#dataTables-Servicos').dataTable({
         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'

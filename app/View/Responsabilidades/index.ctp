@@ -39,17 +39,7 @@
                   <td><?php echo $responsabilidade['Responsabilidade']['area']; ?></td>
                   <td><?php echo $responsabilidade['Responsabilidade']['ramal']; ?></td>
                   <td><?php echo $responsabilidade['Responsabilidade']['email']; ?></td>
-                  <td>
-                    <?php
-                       echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                             array('controller' => 'responsabilidades', 'action' => 'edit', $responsabilidade['Responsabilidade']['id']),
-                             array('escape' => false));
-
-                       echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                             array('action' => 'delete', $responsabilidade['Responsabilidade']['id']),
-                             array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                    ?>
-                  </td>
+                  <td><?php echo $this->Tables->getMenu('responsabilidades', $responsabilidade['Responsabilidade']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($responsabilidade); ?>
@@ -65,7 +55,7 @@
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
   echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
   echo $this->Html->css('plugins/dataTables.bootstrap.css');
-  
+
 //-- DataTables --> TableTools
 echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
 echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');

@@ -38,17 +38,7 @@
                   <td><?php echo $this->Times->pastDate($contrato['Contrato']['data_fim']) ?></td>
                   <td><?php echo $contrato['Cliente']['sigla'] ?></td>
                   <td><?php echo $this->Times->active($contrato['Contrato']['status'])?></td>
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                          array('controller' => 'contratos', 'action' => 'edit', $contrato['Contrato']['id']),
-                          array('escape' => false));
-
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                          array('action' => 'delete', $contrato['Contrato']['id']),
-                          array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                  <td><?php echo $this->Tables->getMenu('contratos', $contrato['Contrato']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($contrato); ?>

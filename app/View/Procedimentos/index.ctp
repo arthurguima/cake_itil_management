@@ -35,17 +35,7 @@
                   <td><?php echo $this->Html->link($procedimento['Procedimento']['nome'],$procedimento['Procedimento']['url'], array('target' => '_blank')); ?></td>
                   <td><?php echo $procedimento['Procedimento']['dt_alteracao']; ?></td>
                   <td><?php echo $procedimento['Procedimento']['responsavel']; ?></td>
-                  <td>
-                    <?php
-                       echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                             array('controller' => 'procedimentos', 'action' => 'edit', $procedimento['Procedimento']['id']),
-                             array('escape' => false));
-
-                       echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                             array('action' => 'delete', $procedimento['Procedimento']['id']),
-                             array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                    ?>
-                  </td>
+                  <td><?php echo $this->Tables->getMenu('procedimentos', $procedimento['Procedimento']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($procedimento); ?>
@@ -61,11 +51,11 @@
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
   echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
   echo $this->Html->css('plugins/dataTables.bootstrap.css');
-  
+
 //-- DataTables --> TableTools
 echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');  
-  
+echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+
 ?>
 
 <script>
@@ -98,6 +88,6 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
               ]
           }
   })
-  
+
  });
 </script>

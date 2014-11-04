@@ -31,16 +31,7 @@
               <?php foreach ($motivos as $motivo): ?>
                 <tr>
                   <td><?php echo $motivo['Motivo']['nome']; ?></td>
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                          array('controller' => 'motivos', 'action' => 'edit', $motivo['Motivo']['id']),
-                          array('escape' => false));
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                          array('action' => 'delete', $motivo['Motivo']['id']),
-                          array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                  <td><?php echo $this->Tables->getMenu('motivos', $motivo['Motivo']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($motivo); ?>

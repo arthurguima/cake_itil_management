@@ -30,16 +30,7 @@
               <?php foreach ($dependencias as $dependencia): ?>
                 <tr>
                   <td><?php echo $dependencia['Dependencia']['nome']; ?></td>
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                              array('controller' => 'Dependencias', 'action' => 'edit', $dependencia['Dependencia']['id']),
-                              array('escape' => false));
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                              array('action' => 'delete', $dependencia['Dependencia']['id']),
-                              array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                  <td><?php echo $this->Tables->getMenu('dependencias', $dependencia['Dependencia']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($dependencia); ?>

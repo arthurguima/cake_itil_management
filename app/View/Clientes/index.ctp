@@ -33,20 +33,10 @@
                 <tr>
                   <td><?php echo $clie['Cliente']['sigla']; ?></td>
                   <td><?php echo $clie['Cliente']['nome']; ?></td>
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                          array('controller' => 'clientes', 'action' => 'edit', $clie['Cliente']['id']),
-                          array('escape' => false));
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                          array('action' => 'delete', $clie['Cliente']['id']),
-                          array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                  <td><?php echo $this->Tables->getMenu('clientes', $clie['Cliente']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($clie); ?>
-
             </tbody>
           </table>
         </div>
@@ -65,8 +55,8 @@
 
 //-- DataTables --> TableTools
 echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');  
-  
+echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+
 ?>
 
 <script>

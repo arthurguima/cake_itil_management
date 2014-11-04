@@ -99,22 +99,7 @@
                       endif;
                     ?>
                   </td>
-
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                              array('controller' => 'Indisponibilidades', 'action' => 'edit', $Indisponibilidade['Indisponibilidade']['id']),
-                              array('escape' => false));
-
-                        echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-left: 5px;''></i>",
-                              array('controller' => 'indisponibilidades', 'action' => 'view', $Indisponibilidade['Indisponibilidade']['id']),
-                              array('escape' => false));
-
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                              array('action' => 'delete', $Indisponibilidade['Indisponibilidade']['id']),
-                              array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                  <td><?php echo $this->Tables->getMenu('Indisponibilidades', $Indisponibilidade['Indisponibilidade']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($Indisponibilidade); ?>

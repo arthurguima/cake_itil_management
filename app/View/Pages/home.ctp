@@ -25,7 +25,7 @@
 	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">
-				<p><h3 class="panel-title"><b>Indisponibilidades - Período
+				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Indisponibilidades - Período
 					<?php
 						if(date("d") < 20){
 							echo "20/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');
@@ -33,10 +33,11 @@
 						else{
 							echo "20/" . date('m/Y') . " a 20/" . date("m/Y",strtotime("+1 month"));
 						}
-					?>
-				</b></p>
+					?></span>
+					<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.indisponibilidades-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+				</b></h3></p>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body indisponibilidades-body">
 				<div class="tab-content">
 						<?php foreach ($servicos as $servico): ?>
 							<?php echo $this->Disponibilidade->indisponibilidades($servico)?>
@@ -50,9 +51,15 @@
 	<div class="col-lg-9  col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default ">
 			<div class="panel-heading">
-				<p><h3 class="panel-title"><b>Demandas</b></p>
+				<p>
+					<h3 class="panel-title">
+						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Demandas
+							<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+						</b>
+					</h3>
+				</p>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body demandas-body">
 				<ul class="nav nav-tabs nav-tabs-black" role="tablist">
 				  <li role="presentation" class="active"><a href="#status" role="tab" data-toggle="tab">Status</a></li>
 				  <li role="presentation"><a href="#tipos" role="tab" data-toggle="tab">Tipos</a></li>

@@ -100,19 +100,7 @@
                   </td>
                   <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['Demanda']['criador']; ?></div></td>
-                  <td>
-                   <?php
-                      echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes da demanda.'></i>",
-                        array('controller' => 'demandas', 'action' => 'view', $demanda['Demanda']['id']),
-                        array('escape' => false));
-                      echo $this->Html->link("<i class='fa fa-pencil' title='Editar demanda.'></i>",
-                        array('controller' => 'demandas', 'action' => 'edit', $demanda['Demanda']['id']),
-                        array('escape' => false));
-                      echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;' title='Excluir demanda.'></i>",
-                        array('action' => 'delete', $demanda['Demanda']['id']),
-                        array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                   ?>
-                  </td>
+                  <td><?php echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($demanda); ?>
@@ -170,7 +158,7 @@
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
-        //  responsive: true,
+          // 'sAjaxSource': src="<?php// $this->base;?>/controller/action/<?php //$dataId;?>",
           "dom": 'T<"clear">lfrtip',
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",

@@ -17,10 +17,11 @@
                 array('controller' => 'demandas', 'action' => 'edit', $demanda['Demanda']['id']),
                 array('escape' => false));
             ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.info-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
       </div>
-      <div class="panel-body">
+      <div class="panel-body info-body">
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Nome: </b><?php echo $demanda['Demanda']['nome']; ?></a></li>
           <li><a><b>Clarity DM: </b><?php echo $demanda['Demanda']['clarity_dm_id']; ?></a></li>
@@ -63,12 +64,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>
-          <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-            array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
-            array('escape' => false)); ?></h3>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
         </p>
       </div>
-      <div class="panel-body">
+      <div class="panel-body historico-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
             <thead>
@@ -110,12 +113,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Chamados</b>
-          <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-            array('controller' => 'chamados', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
-            array('escape' => false)); ?></h3>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'chamados', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.chamados-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
         </p>
       </div>
-      <div class="panel-body">
+      <div class="panel-body chamados-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
             <thead>

@@ -35,21 +35,7 @@
                   <td><?php echo $this->Html->link($interno['Interno']['nome'], $interno['Interno']['url'], array('target' => '_blacnk')); ?></td>
                   <td><?php echo $this->Tables->popupBox($interno['Interno']['descricao']); ?></td>
                   <td><?php echo $this->Tables->popupBox($interno['Interno']['instrucoes']); ?></td>
-                  <td>
-                    <?php
-                       echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                             array('controller' => 'internos', 'action' => 'edit', $interno['Interno']['id']),
-                             array('escape' => false));
-
-                       echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-left: 5px;''></i>",
-                             array('controller' => 'internos', 'action' => 'view', $interno['Interno']['id']),
-                             array('escape' => false));
-
-                       echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                             array('action' => 'delete', $interno['Interno']['id']),
-                             array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                    ?>
-                  </td>
+                  <td><?php echo $this->Tables->getMenu('internos', $interno['Interno']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($interno); ?>

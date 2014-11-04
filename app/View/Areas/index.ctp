@@ -37,16 +37,7 @@
                   <td><?php echo $area['Area']['nome']; ?></td>
                   <td><?php echo $area['Cliente']['sigla']; ?></td>
                   <td><?php echo $this->Times->active($area['Area']['status']); ?></td>
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                              array('controller' => 'Areas', 'action' => 'edit', $area['Area']['id']),
-                              array('escape' => false));
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                              array('action' => 'delete', $area['Area']['id']),
-                              array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                  <td><?php echo $this->Tables->getMenu('areas', $area['Area']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($area); ?>

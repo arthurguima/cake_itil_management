@@ -31,20 +31,10 @@
               <?php foreach ($demandaTipos as $tipo): ?>
                 <tr>
                    <td><?php echo $tipo['DemandaTipo']['nome']; ?></td>
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                          array('controller' => 'demandatipos', 'action' => 'edit', $tipo['DemandaTipo']['id']),
-                          array('escape' => false));
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                          array('action' => 'delete', $tipo['DemandaTipo']['id']),
-                          array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                   <td><?php echo $this->Tables->getMenu('demandatipos', $tipo['DemandaTipo']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($tipo); ?>
-
             </tbody>
           </table>
         </div>

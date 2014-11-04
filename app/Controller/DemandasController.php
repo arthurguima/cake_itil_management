@@ -58,6 +58,7 @@
 
     // Define conditions
     $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
+    $this->Filter->setPaginate('limit', 3000);
 
     $statuses = $this->Demanda->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 

@@ -33,16 +33,7 @@
                 <tr>
                    <td><?php echo $stat['Status']['nome']; ?></td>
                    <td><?php echo $this->Status->tipo($stat['Status']['tipo']); ?></td>
-                   <td>
-                     <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                          array('controller' => 'status', 'action' => 'edit', $stat['Status']['id']),
-                          array('escape' => false));
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                          array('action' => 'delete', $stat['Status']['id']),
-                          array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
-                     ?>
-                   </td>
+                   <td><?php echo $this->Tables->getMenu('status',  $stat['Status']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($tipo); ?>
@@ -60,7 +51,7 @@
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
   echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
   echo $this->Html->css('plugins/dataTables.bootstrap.css');
-  
+
 //-- DataTables --> TableTools
 echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
 echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
@@ -88,11 +79,7 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
                 {
                     "sExtends": "csv",
                     "sButtonText": "CSV"
-                },
-                {
-                    "sExtends": "pdf",
-                    "sButtonText": "PDF"
-                },
+                }
               ]
           }
       });

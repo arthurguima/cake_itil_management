@@ -36,12 +36,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Aditivos
-          <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-            array('controller' => 'aditivos', 'action' => 'add','?' => array('contrato' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
-            array('escape' => false)); ?></h3>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'aditivos', 'action' => 'add','?' => array('contrato' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.aditivos-body').toggle();"><i style="font-size: 20px;" class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
         </p>
       </div>
-      <div class="panel-body">
+      <div class="panel-body aditivos-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-aditivo">
             <thead>
@@ -90,12 +92,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Itens de Contrato
-          <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-            array('controller' => 'items', 'action' => 'add','?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
-            array('escape' => false)); ?></h3>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'items', 'action' => 'add','?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
+              array('escape' => false)); ?>
+            <a style="cursor:pointer;" onclick="javascript:$('div.panel-body.itens-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></a>
+          </h3>
         </p>
       </div>
-      <div class="panel-body">
+      <div class="panel-body itens-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
             <thead>

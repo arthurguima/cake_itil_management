@@ -122,7 +122,7 @@
 								</ul>
 								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarHide();"></i>
 					</div>
-					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.0 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
+					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.2 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
 			</div>
 			<!-- Fim sidebar -->
 		</nav>
