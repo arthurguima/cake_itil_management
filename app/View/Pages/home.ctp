@@ -25,7 +25,7 @@
 	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">
-				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Indisponibilidades - Período
+				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Disponibilidade</b> - Período
 					<?php
 						if(date("d") < 20){
 							echo "20/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');
@@ -35,7 +35,7 @@
 						}
 					?></span>
 					<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.indisponibilidades-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-				</b></h3></p>
+				</h3></p>
 			</div>
 			<div class="panel-body indisponibilidades-body">
 				<div class="tab-content">
@@ -53,7 +53,7 @@
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
-						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Demandas
+						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Demandas Internas
 							<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
 						</b>
 					</h3>

@@ -25,6 +25,13 @@
                   array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome'))))
           )
         ),
+        'status_diferente' => array(
+          'Demanda.status_id' => array(
+            'select' => $this->Filter->select('Status Diferente de', $this->Demanda->Status->find('list',
+                  array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')))),
+            'operator'    => '!='
+          )
+        ),
         'clarity_dm' => array(
           'Demanda.clarity_dm_id' => array('operator' => '='),
         ),
@@ -196,5 +203,19 @@
 
         return $status['Status']['nome'];
     }
+  }
+
+  /**
+  * returns a list of demandas filtered by $servico
+  */
+  public function optionList(){
+    $this->layout = null;
+    //$this->autoRender = false;
+
+    //$this->Demanda->recursive = -1;
+    $this->set('demandas',
+                $this->Demanda->find('list', array(
+                  'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
+                  'conditions' => array('Demanda.servico_id' => $this->params['url']['servico']))));
   }
 }

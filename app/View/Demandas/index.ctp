@@ -39,6 +39,7 @@
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
           </div>
           <?php
 		    echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',

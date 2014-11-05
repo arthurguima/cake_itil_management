@@ -13,11 +13,12 @@
     <?php
       echo $this->BootstrapForm->create('Historico');
 
-      if(!strcmp($this->params['url']['controller'],'demandas')):
+      if(!strcmp($this->params['url']['controller'],'demandas')){
         echo $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-      else:
-        echo "";
-      endif;
+      }
+      if(!strcmp($this->params['url']['controller'],'rdms')){
+        echo $this->BootstrapForm->hidden('rdm_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+      }
 
       echo $this->BootstrapForm->input('data', array(
                               'label' => array('text' => 'Data: '),

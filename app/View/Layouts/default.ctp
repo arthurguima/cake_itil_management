@@ -88,6 +88,7 @@
 											<ul class="nav nav-second-level">
 													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Controle de Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
 													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Internas", '/demandas', array('escape' => false)); ?></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/rdms', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- Relatórios -->

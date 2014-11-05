@@ -4,6 +4,10 @@
     'Demanda' => array(
       'className' => 'Demanda',
       'foreignKey' => 'demanda_id'
+    ),
+    'Rdm' => array(
+      'className' => 'Rdm',
+      'foreignKey' => 'rdm_id'
     )
   );
 

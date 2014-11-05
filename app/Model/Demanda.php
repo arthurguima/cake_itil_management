@@ -14,6 +14,15 @@
 		)
 	);
 
+	public $hasAndBelongsToMany = array(
+		'Demanda' => array(
+			'className' => 'Demanda',
+			'joinTable' => 'demandas_rdms',
+			'foreignKey' => 'rdm_id',
+			'associationForeignKey' => 'demanda_id',
+		)
+	);
+
 	public $hasMany = array(
 		'Chamado' => array(
 			'className' => 'Chamado',
