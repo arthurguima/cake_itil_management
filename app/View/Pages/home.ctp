@@ -1,5 +1,5 @@
 <div class="row">
-		<div class="col-lg-12"><h3 class="page-header">Bem Vindo ao SGD!</h3></div>
+		<div class="col-lg-12"><h3 class="page-header">Bem Vindo ao SGD! - <?php echo $this->Ldap->nomeUsuario(); ?></h3></div>
 </div>
 
 <div class="row">

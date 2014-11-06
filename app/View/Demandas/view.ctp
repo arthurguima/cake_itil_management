@@ -154,6 +154,41 @@
       </div>
     </div>
   </div>
+
+  <div class="col-lg-12">
+    <div class="panel panel-default panel-default">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title">Rdms
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.rdm-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body rdm-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-demandas">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Número</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($demanda['Rdm'] as $dem): ?>
+                <tr>
+                  <td><?php echo $dem['nome']; ?></td>
+                  <td><?php echo $dem['numero']; ?></td>
+                  <td><?php echo $this->Tables->getMenu('rdms', $dem['id'], 2); ?></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php unset($dem); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
