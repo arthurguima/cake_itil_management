@@ -3,35 +3,88 @@
 class LdapHelper extends AppHelper {
 
   public function nomeUsuario(){
-    return $_SESSION['nome'];
+    if(isset($_SESSION['nome'])){
+      return $_SESSION['nome'];
+    }
+    else{
+      return "";
+    }
   }
 
   public function emailUsuario(){
-    return $_SESSION['email'];
+    if(isset($_SESSION['email'])){
+      return $_SESSION['email'];
+    }
+    else{
+      return "";
+    }
   }
 
   public function matriculaUsuario(){
-    return $_SESSION['cdUsuario'];
+    if(isset($_SESSION['cdUsuario'])){
+      return $_SESSION['cdUsuario'];
+    }
+    else{
+      return "";
+    }
   }
 
   public function idUsuario(){
-    return $_SESSION['idFuncionario'];
+    if(isset($_SESSION['idFuncionario'])){
+      return $_SESSION['idFuncionario'];
+    }
+    else{
+      return "";
+    }
   }
 
   public function unidadeUsuario(){
-    return $_SESSION['estUser'];
+    if(isset($_SESSION['estUser'])){
+      return $_SESSION['estUser'];
+    }
+    else{
+      return "";
+    }
   }
 
   public function nomeUnidadeUsuario(){
-    return $_SESSION['nmUsuario'];
+    if(isset($_SESSION['nmUsuario'])){
+      return $_SESSION['nmUsuario'];
+    }
+    else{
+      return "";
+    }
   }
 
   public function telefoneUsuario(){
-    return $_SESSION['nome'];
+    if(isset($_SESSION['nome'])){
+      return $_SESSION['nome'];
+    }
+    else{
+      return "";
+    }
   }
 
   public function redeUsuario(){
-    return $_SESSION['auth_user'];
+    if(isset($_SESSION['auth_user'])){
+      return $_SESSION['auth_user'];
+    }
+    else{
+      return "";
+    }
+  }
+
+  public function autorizado(){
+    if(isset($_SESSION['email'])){
+      if($_SESSION['email']==='arthur.doliveira@dataprev.gov.br' || $_SESSION['email']==='lucas.lmendonca@dataprev.gov.br' ||
+        $_SESSION['email']==='humbertho.mattar@dataprev.gov.br' || $_SESSION['email']==='ynga.povoa@dataprev.gov.br' ||
+        $_SESSION['email']==='rodrigo.vieira@dataprev.gov.br' ){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
   }
 
 }?>

@@ -54,7 +54,8 @@
                  'id' => 'dp '));
 
       echo $this->BootstrapForm->input('criador', array(
-                 'label' => array('text' => 'Solicitante: ')));
+                 'label' => array('text' => 'Solicitante: '),
+                 'value' => $this->Ldap->nomeUsuario()));
 
       echo $this->BootstrapForm->input('executor', array(
                  'label' => array('text' => 'Responsável: ')));

@@ -14,6 +14,13 @@
       echo $this->BootstrapForm->input('nome', array(
                 'label' => array('text' => 'Nome')));
 
+      echo $this->BootstrapForm->input('contavel', array(
+                               'checked' => 'checked',
+                               'class' => 'col-sm-3 pull-left col-sm-offset-3',
+                               'label' => array(
+                                 'text' => 'Entra no cálculo de horas?',
+                                 'class' => 'control-label col-sm-2')));
+
     ?>
     <div class="form-footer col-lg-10 pull-right">
       <?php

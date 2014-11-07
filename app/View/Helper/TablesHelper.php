@@ -1,5 +1,5 @@
 <?php class TablesHelper extends AppHelper {
-  public $helpers = array('Html', 'Form');
+  public $helpers = array('Html', 'Form', 'Ldap');
   /*
   * Exibe um texto em popup
   */
@@ -63,7 +63,7 @@
   */
   public function getMenu($controller, $id, $actions=14){
 
-    return ( (($actions == 2) || ($actions == 6) || ($actions == 10) || ($actions == 14)) ?
+    $menu = ( (($actions == 2) || ($actions == 6) || ($actions == 10) || ($actions == 14)) ?
             $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes da demanda.'></i>",
             array('controller' => $controller, 'action' => 'view', $id),
             array('escape' => false)) : "") .
@@ -71,11 +71,19 @@
            ( (($actions == 4) || ($actions == 6) || ($actions == 12) || ($actions == 14)) ?
             $this->Html->link("<i class='fa fa-pencil' title='Editar demanda.'></i>",
             array('controller' => $controller, 'action' => 'edit', $id),
-            array('escape' => false)) : "") .
+            array('escape' => false)) : "");
 
-           ( (($actions == 8) || ($actions == 10) || ($actions == 12) || ($actions == 14)) ?
-            $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;' title='Excluir " . $controller . ".'></i>",
-            array('controller'=> $controller, 'action' => 'delete', $id),
-            array('escape' => false), "O registro será excluído, você tem certeza dessa ação?") : "");
+    if($this->Ldap->autorizado()){
+        if (($actions == 8) || ($actions == 10) || ($actions == 12) || ($actions == 14)){
+            $menu =  $menu . $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;' title='Excluir " . $controller . ".'></i>",
+                    array('controller'=> $controller, 'action' => 'delete', $id),
+                    array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
+        }
+        else{
+          $menu =  $menu . "";
+        }
+    }
+
+    return $menu;
   }
 }?>

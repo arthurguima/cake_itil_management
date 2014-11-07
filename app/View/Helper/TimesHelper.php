@@ -72,6 +72,17 @@
         endif;
     }
 
+    /*
+    * Destaca a se o item está ativo ou não
+    */
+    public function yesOrNo($bol, $class="") {
+        if ($bol):
+          return "<span class='label label-success' id='" . $class . "'>Sim</span>";
+        else:
+          return "<span class='label label-default' id='" . $class . "'>Não</span>";
+        endif;
+    }
+
 
     /*
     * Quanto tempo se passou entre duas datas

@@ -82,7 +82,8 @@
     if (!$this->Indisponibilidade->exists($id)) {
       throw new NotFoundException(__('Indisponibilidade Inválida.'));
     }
-    $this->set('Indisponibilidade', $this->Indisponibilidade->find('first'));
+    $options = array('conditions' => array('Indisponibilidade.' . $this->Indisponibilidade->primaryKey => $id));
+    $this->set('Indisponibilidade', $this->Indisponibilidade->find('first', $options));
   }
 
 /**

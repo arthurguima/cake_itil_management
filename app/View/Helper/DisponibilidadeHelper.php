@@ -57,8 +57,10 @@
     $ativas = 0;
 
     foreach ($servico['Indisponibilidade'] as $ind):
-      $aux = date_diff(date_create($ind['dt_inicio']),date_create($ind['dt_fim']));
-      $total += (($aux->y * 365.25 + $aux->m * 30 + $aux->d) * 24 + $aux->h + $aux->i/60);
+
+        $aux = date_diff(date_create($ind['dt_inicio']),date_create($ind['dt_fim']));
+        $total += (($aux->y * 365.25 + $aux->m * 30 + $aux->d) * 24 + $aux->h + $aux->i/60);
+    
       if($ind['dt_fim'] == null): $ativas++; endif;
     endforeach;
     unset($ind);

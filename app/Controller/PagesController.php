@@ -50,7 +50,8 @@ class PagesController extends AppController {
 				'contain' => array(
 					'Indisponibilidade' => array(
 						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 )) ||
-																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 ))')
+																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 )) ')
+
 					)
 				)
 			)));
@@ -65,7 +66,7 @@ class PagesController extends AppController {
 				)
 			)));
 		}
-		$this->Servico->recursive = 1;
+		$this->Servico->recursive = 2;
 
 		/*Lista de Demandas*/
 		$this->loadModel('Demanda');
