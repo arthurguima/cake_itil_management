@@ -3,7 +3,7 @@
   $this->Html->addCrumb($demanda['Demanda']['id'], array('controller' => 'demandas', 'action' => 'view', $demanda['Demanda']['id']));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Demanda: <?php echo "DM: " . $demanda['Demanda']['clarity_dm_id'] ." - " . $demanda['Servico']['sigla'] ?></h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Demanda: <?php echo $demanda['Demanda']['clarity_dm_id'] ." - " . $demanda['Servico']['sigla'] ?></h3></div>
 </div>
 
 <div class="row">
@@ -24,7 +24,11 @@
       <div class="panel-body info-body">
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Nome: </b><?php echo $demanda['Demanda']['nome']; ?></a></li>
-          <li><a><b>Clarity DM: </b><?php echo $demanda['Demanda']['clarity_dm_id']; ?></a></li>
+          <li>
+            <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                     $demanda['Demanda']['clarity_id'] .")'><b>Clarity DM: </b>" . $demanda['Demanda']['clarity_dm_id']  .
+                     "<i class='fa-expand fa' style='cursor:pointer; float:right;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></i></a></span>" ?>
+          </li>
           <li><a><b>Mantis: </b><?php echo $demanda['Demanda']['mantis_id']; ?></a></li>
           <li><a>
             <b>Prazo: </b>
@@ -192,3 +196,35 @@
 </div>
 
 <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+<iframe id="demandaFrame" style="display:none;" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+
+
+<?php
+  //-- ClarityID
+  echo $this->Html->script('getIdClarity.js');
+?>
+
+<script>
+  $(document).ready(function() {
+    $('#myModal').on('shown.bs.modal', function (e) {
+      document.getElementById('modal-body').appendChild(
+          document.getElementById('demandaFrame')
+      );
+      document.getElementById('demandaFrame').style.display = "block";
+      //document.getElementById('demandaFrame').style.height = "720px";
+    });
+  });
+</script>

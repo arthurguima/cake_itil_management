@@ -19,6 +19,9 @@
       if(!strcmp($this->params['url']['controller'],'rdms')){
         echo $this->BootstrapForm->hidden('rdm_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
       }
+      if(!strcmp($this->params['url']['controller'],'sses')){
+        echo $this->BootstrapForm->hidden('ss_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+      }
 
       echo $this->BootstrapForm->input('data', array(
                               'label' => array('text' => 'Data: '),
@@ -46,7 +49,7 @@
 <script>
   $(document).ready(function() {
     $("[id*='dp']").datetimepicker({
-      format: "yyyy-mm-dd",
+      format: "dd/mm/yyyy",
       minView: 2,
       autoclose: true,
       todayBtn: true,

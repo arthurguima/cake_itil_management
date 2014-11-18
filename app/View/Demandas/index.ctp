@@ -151,7 +151,6 @@
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 ?>
 
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
   $(document).ready(function() {
       oTable = $('#dataTables-demanda').dataTable({

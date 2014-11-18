@@ -388,6 +388,14 @@ table.dataTable thead .sorting:after {
   font-weight: bolder;
   color: #0F0F0F;
 }
+
+.fa-undone {
+  color: #777 !important;
+}
+
+.fa-done {
+  color: #69aa46 !important;
+}
 /* Botão branco em view */
 .panel-primary > .panel-heading >  p > a > i.fa{
   color: white;
@@ -595,6 +603,10 @@ body{
   border-top: 1px solid #f4f4f4;
   padding: 10px;
 }
+.form-group {
+  margin-bottom: 15px;
+  min-height: 30px;
+}
 
 /* Filtros de Busca*/
 form#form-filter-results .submit {
@@ -649,6 +661,11 @@ span.filter-show.col-lg-2 {
 }
 td form {
   color: black;
+}
+
+td.checklist a{
+  color: black;
+  text-decoration: none;
 }
 
 a.servico {

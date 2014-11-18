@@ -19,4 +19,11 @@
         'message' => 'Campo deve ser preenchido!')
     ),
   );
+
+  public function beforeValidate($options = array()){
+    if(!empty($this->data['Historico']['data'])) {
+        $this->data['Historico']['data'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Historico']['data'])));
+    }
+    return true;
+  }
 }?>

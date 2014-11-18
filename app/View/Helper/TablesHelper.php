@@ -40,11 +40,25 @@
             </script>';
   }
 
+  public function SsStatusEditable($id){
+    return  '
+            <script>
+              $(document).ready(function() {
+                  $("#status-' . $id . '").editable("' . Router::url('/', true). '/sses/ajax_edit_status",{
+                     name: "status_id",
+                     loadurl : "' . Router::url('/', true). '/status/json?tipo=2",
+                     type   : "select",
+                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                  });
+              });
+            </script>';
+  }
+
   public function PrioridadeEditable($id, $controller){
     return  "
             <script>
               $(document).ready(function() {
-                  $('#" . $id . "').editable('" . Router::url('/', true). "/demandas/ajax_edit_prioridade',{
+                  $('#" . $id . "').editable('" . Router::url('/', true). $controller . "/ajax_edit_prioridade',{
                      name: 'prioridade',
                      width:($('#" . $id . "').width() + 20) + 'px',
                      height:($('#" . $id . "').height() + 6) + 'px',
@@ -64,12 +78,12 @@
   public function getMenu($controller, $id, $actions=14){
 
     $menu = ( (($actions == 2) || ($actions == 6) || ($actions == 10) || ($actions == 14)) ?
-            $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes da demanda.'></i>",
+            $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
             array('controller' => $controller, 'action' => 'view', $id),
             array('escape' => false)) : "") .
 
            ( (($actions == 4) || ($actions == 6) || ($actions == 12) || ($actions == 14)) ?
-            $this->Html->link("<i class='fa fa-pencil' title='Editar demanda.'></i>",
+            $this->Html->link("<i class='fa fa-pencil' title='Editar'></i>",
             array('controller' => $controller, 'action' => 'edit', $id),
             array('escape' => false)) : "");
 

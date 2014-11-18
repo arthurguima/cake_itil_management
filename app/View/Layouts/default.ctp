@@ -63,10 +63,10 @@
 									</li>
 									<li><a href="#"><i class="fa fa-calendar fa-fw"></i> Calendário (em breve)<span class="fa arrow"></span></a></li>
 									<li> <!-- SS -->
-											<a href="#"><i class="fa fa-comments-o fa-fw"></i> SS (em breve)<span class="fa arrow"></span></a>
+											<a href="#"><i class="fa fa-comments-o fa-fw"></i> SS <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><a href="#"><i class="fa fa-angle-double-right"></i> Incluir</a></li>
-													<li><a href="#"><i class="fa fa-angle-double-right"></i> Consultar</a></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consultar", '/sses', array('escape' => false)); ?></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Incluir", '/sses/add', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- PE -->

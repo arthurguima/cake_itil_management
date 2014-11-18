@@ -18,7 +18,8 @@
                   'label' => array('text' => 'Número: ')));
 
       echo $this->BootstrapForm->input('servico_id', array(
-                  'label' => array('text' => 'Serviço: ')));
+                  'label' => array('text' => 'Serviço: '),
+                  'empty'=>'Serviço'));
 
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão do serviço: ')));

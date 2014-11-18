@@ -7,7 +7,9 @@
   );
 
   public $hasMany = array(
-    'Demanda' => array('className' => 'Demanda')
+    'Demanda' => array('className' => 'Demanda'),
+    'Rdm' => array('className' => 'Rdm'),
+    'Ss' => array('className' => 'Ss')
   );
 
   public $validate = array(

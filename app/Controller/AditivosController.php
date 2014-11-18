@@ -88,4 +88,18 @@
     }
     return $this->redirect(array('controller' => 'contratos', 'action' => 'view', $this->request->data['Aditivo']['contrato_id'] ));
   }
+
+  /**
+  * returns a list of itens filtered by contrato/aditivo
+  */
+  public function optionList(){
+    $this->layout = null;
+    //$this->autoRender = false;
+
+    //$this->Demanda->recursive = -1;
+    $this->set('aditivos',
+                $this->Aditivo->find('list', array(
+                  'fields' => array('Aditivo.id', 'Aditivo.dt_inicio'),
+                  'conditions' => array('Aditivo.contrato_id' => $this->params['url']['contrato']))));
+  }
 }

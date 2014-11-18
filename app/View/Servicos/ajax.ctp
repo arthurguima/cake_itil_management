@@ -10,7 +10,7 @@
     <tbody>
       <?php foreach ($servicos as $servico): ?>
         <tr>
-          <td><b><?php echo $servico['Servico']['sigla']; ?></b></td>
+          <td><b><a style="color: black; text-decoration:none;"  id="<?php echo $servico['Servico']['sigla']; ?>"><?php echo $servico['Servico']['sigla']; ?></a></b></td>
           <?php echo $this->Disponibilidade->online($servico['Servico']['url'], 'GET'); ?>
         </tr>
       <?php endforeach; ?>

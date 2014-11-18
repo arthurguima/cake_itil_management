@@ -1,12 +1,12 @@
-function getID() {
+function getID(Id) {
 
-  var url = document.getElementById('DemandaClarityUrl').value;
+  var url = document.getElementById(Id+'Url').value;
   var clarity = url.indexOf("www-dtpprojetos");
   var positionIni = url.indexOf("Properties&id=");
 
   if (url=="" || clarity==-1 || positionIni==-1 ){
     alert("Por favor, insira a URL da demanda do sistema CLARITY!");
-    document.getElementById('DemandaClarityId').value= "";
+    document.getElementById(Id).value= "";
     clearViewClarity();
   }
   else{
@@ -15,11 +15,11 @@ function getID() {
 
     if(isNaN(idClarity)==true){
   		alert("Por favor, insira a URL da demanda do sistema CLARITY!\n\n - N�o foi poss�vel obter o ID da demanda. [ID IS NUMERIC]");
-  		document.getElementById('DemandaClarityId').value= "";
+  		document.getElementById(Id+'Id').value= "";
   		clearViewClarity();
   	}
     else{
-    	document.getElementById('DemandaClarityId').value = idClarity;
+    	document.getElementById(Id+'Id').value = idClarity;
       //document.getElementsByClassName('idclarity').value = idClarity;
     	showViewClarity(idClarity);
   	}

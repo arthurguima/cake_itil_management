@@ -18,14 +18,12 @@
     'dt_inicio' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
-        'maxLength' => 45,
         'message' => 'Campo deve ser preenchido'
       ),
     ),
 	'motivo_id' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
-        'maxLength' => 45,
         'message' => 'Campo deve ser preenchido'
       ),
     )

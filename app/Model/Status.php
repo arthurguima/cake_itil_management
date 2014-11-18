@@ -3,6 +3,9 @@
   public $hasMany = array(
     'Demanda' => array(
       'className' => 'Demanda'
+    ),
+    'Ss' => array(
+      'className' => 'Ss'
     )
   );
 

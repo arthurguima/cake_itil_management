@@ -20,6 +20,12 @@
 			'joinTable' => 'demandas_rdms',
 			'foreignKey' => 'demanda_id',
 			'associationForeignKey' => 'rdm_id',
+		),
+		'Ss' => array(
+			'className' => 'Ss',
+			'joinTable' => 'demandas_sses',
+			'foreignKey' => 'demanda_id',
+			'associationForeignKey' => 'ss_id',
 		)
 	);
 

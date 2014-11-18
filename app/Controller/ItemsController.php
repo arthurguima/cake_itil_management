@@ -92,4 +92,26 @@
 		}
 		return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
 	}
+
+	/**
+	* returns a list of itens filtered by contrato/aditivo
+	*/
+	public function optionList(){
+		$this->layout = null;
+		//$this->autoRender = false;
+
+		//$this->Demanda->recursive = -1;
+		if($this->params['url']['tipo'] == 'Contrato'){
+			$this->set('items',
+									$this->Item->find('list', array(
+										'fields' => array('Item.id', 'Item.nome'),
+										'conditions' => array('Item.contrato_id' => $this->params['url']['id']))));
+		}
+		else{
+			$this->set('items',
+									$this->Item->find('list', array(
+										'fields' => array('Item.id', 'Item.nome'),
+										'conditions' => array('Item.aditivo_id' => $this->params['url']['id']))));
+		}
+	}
 }

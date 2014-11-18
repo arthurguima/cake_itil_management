@@ -8,76 +8,87 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <?php
-      echo $this->BootstrapForm->create('Demanda');
+    <div class='col-lg-6'>
+      <?php
+        echo $this->BootstrapForm->create('Demanda');
 
-     echo $this->BootstrapForm->input('clarity_url', array(
-                'label' => array('text' => 'URL do Clarity: '),
-                'type' => 'text',
-                'onblur' =>'getID();')); ?>
+        echo $this->BootstrapForm->input('clarity_url', array(
+                  'label' => array('text' => 'URL do Clarity: '),
+                  'type' => 'text',
+                  'onblur' =>"getID('DemandaClarity');"));
+      ?>
 
-      <div class="form-group">
-        <label for="DemandaClarityId" class="control-label col-sm-2">Clarity ID: </label>
-        <div class="col-sm-10">
-           <div class='input-group'>
-             <input name="data[Demanda][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="DemandaClarityId">
-             <span class='input-group-addon'><a id='viewClarity' data-toggle='modal' data-target='#myModal'></a></span>
-           </div>
-        </div>
-     </div>
+        <div class="form-group">
+          <label for="DemandaClarityId" class="control-label col-sm-2">Clarity ID: </label>
+          <div class="col-sm-10">
+             <div class='input-group'>
+               <input name="data[Demanda][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="DemandaClarityId">
+               <span class='input-group-addon'><a id='viewClarity' data-toggle='modal' data-target='#myModal'></a></span>
+             </div>
+          </div>
+       </div>
 
-     <?php echo $this->BootstrapForm->input('clarity_dm_id', array(
-                 'label' => array('text' => 'DM Clarity: '),
-                 'type' => 'text'));
+       <?php
+        echo $this->BootstrapForm->input('clarity_dm_id', array(
+                   'label' => array('text' => 'DM Clarity: '),
+                   'type' => 'text'));
 
-      echo $this->BootstrapForm->input('mantis_id', array(
-                 'label' => array('text' => 'Nº Mantis: '),
-                 'type' => 'text'));
+        echo $this->BootstrapForm->input('mantis_id', array(
+                   'label' => array('text' => 'Nº Mantis: '),
+                   'type' => 'text'));
 
-      echo $this->BootstrapForm->input('nome', array(
-                 'label' => array('text' => 'Nome: '),
-                 'type' => 'text'));
+        echo $this->BootstrapForm->input('nome', array(
+                   'label' => array('text' => 'Nome: '),
+                   'type' => 'text'));
 
-      echo $this->BootstrapForm->input('data_cadastro', array(
-                 'label' => array('text' => 'Data de Cadastro: '),
-                 'type' => 'text',
-                 'id' => 'dp '));
 
-      echo $this->BootstrapForm->input('dt_prevista', array(
-                 'label' => array('text' => 'Data Prevista de Término: '),
-                 'type' => 'text',
-                 'id' => 'dp '));
+        echo $this->BootstrapForm->input('criador', array(
+                   'label' => array('text' => 'Solicitante: '),
+                   'value' => $this->Ldap->nomeUsuario()));
 
-      echo $this->BootstrapForm->input('data_homologacao', array(
-                 'label' => array('text' => 'Data de Homologação: '),
-                 'type' => 'text',
-                 'id' => 'dp '));
+        echo $this->BootstrapForm->input('executor', array(
+                   'label' => array('text' => 'Responsável: ')));
 
-      echo $this->BootstrapForm->input('criador', array(
-                 'label' => array('text' => 'Solicitante: '),
-                 'value' => $this->Ldap->nomeUsuario()));
+        echo $this->BootstrapForm->input('prioridade', array(
+                   'label' => array('text' => 'Prioridade: ')));
 
-      echo $this->BootstrapForm->input('executor', array(
-                 'label' => array('text' => 'Responsável: ')));
 
-      echo $this->BootstrapForm->input('prioridade', array(
-                 'label' => array('text' => 'Prioridade: ')));
+        echo $this->BootstrapForm->input('descricao', array(
+                    'label' => array('text' => 'Descrição: '),
+                    'type' => 'textarea'));
 
-      echo $this->BootstrapForm->input('demanda_tipo_id', array(
-                  'label' => array('text' => 'Tipo da Demanda: ')));
+        ?>
+    </div>
+    <div class='col-lg-6'>
+      <?php
+        echo $this->BootstrapForm->input('data_cadastro', array(
+                   'label' => array('text' => 'Data de Cadastro: '),
+                   'type' => 'text',
+                   'id' => 'dp '));
 
-      echo $this->BootstrapForm->input('servico_id', array(
-                  'label' => array('text' => 'Serviço: ')));
+        echo $this->BootstrapForm->input('dt_prevista', array(
+                   'label' => array('text' => 'Data Prevista de Término: '),
+                   'type' => 'text',
+                   'id' => 'dp '));
 
-      echo $this->BootstrapForm->input('status_id', array(
-                  'label' => array('text' => 'Status: ')));
+        echo $this->BootstrapForm->input('data_homologacao', array(
+                   'label' => array('text' => 'Data de Homologação: '),
+                   'type' => 'text',
+                   'id' => 'dp '));
 
-      echo $this->BootstrapForm->input('descricao', array(
-                  'label' => array('text' => 'Descrição: '),
-                  'type' => 'textarea'));
+        echo $this->BootstrapForm->input('demanda_tipo_id', array(
+                    'label' => array('text' => 'Tipo da Demanda: ')));
 
-    ?>
-    <div class="form-footer col-lg-10 pull-right">
+        echo $this->BootstrapForm->input('servico_id', array(
+                    'label' => array('text' => 'Serviço: ')));
+
+        echo $this->BootstrapForm->input('status_id', array(
+                    'label' => array('text' => 'Status: ')));
+      ?>
+    </div>
+
+
+    <div class="form-footer col-lg-12 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');
         echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-3'));
