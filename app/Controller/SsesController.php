@@ -37,7 +37,15 @@
 					)
 				),
 				'dtrecebimento' => array(
-					'Ss.data_recebimento' => array(
+					'Ss.dt_recebimento' => array(
+						'operator' => 'BETWEEN',
+						'between' => array(
+							'text' => ' a ',
+						)
+					)
+				),
+				'dtprazo' => array(
+					'Ss.dt_prazo' => array(
 						'operator' => 'BETWEEN',
 						'between' => array(
 							'text' => ' a ',

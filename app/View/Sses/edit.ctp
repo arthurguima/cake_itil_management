@@ -47,8 +47,7 @@
                    'id' => 'dpdecade'));
 
         echo $this->BootstrapForm->input('responsavel', array(
-                    'label' => array('text' => 'Responsável: '),
-                    'value' => $this->Ldap->nomeUsuario()));
+                    'label' => array('text' => 'Responsável: ')));
 
         echo $this->BootstrapForm->input('cvs_url', array(
                     'label' => array('text' => 'Url CVS: ')));
@@ -74,6 +73,11 @@
 
         echo $this->BootstrapForm->input('dt_prazo', array(
                     'label' => array('text' => 'Prazo final contratual: '),
+                    'type' => 'text',
+                    'id' => 'dp '));
+
+        echo $this->BootstrapForm->input('dt_finalizada', array(
+                    'label' => array('text' => 'Data de finalização: '),
                     'type' => 'text',
                     'id' => 'dp '));
 

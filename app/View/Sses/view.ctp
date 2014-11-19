@@ -132,6 +132,56 @@
       </div>
     </div>
   </div>
+
+  <div class="col-lg-8">
+    <div class="panel panel-default panel-info">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>PEs</b>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'pes', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.pe-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body pe-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Número</th>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Responsável</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($ss['Pe'] as $pe): ?>
+                  <tr>
+                    <td><?php echo $pe['numero']; ?></td>
+                    <td><?php echo $pe['nome']; ?></td>
+                    <td><?php echo $pe['Status']['nome']; ?></td>
+                    <td><?php echo $pe['responsavel']; ?></td>
+                    <td>
+                       <?php
+                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
+                                array('controller' => 'pes', 'action' => 'view', $pe['id']), array('escape' => false));
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'pes', 'action' => 'edit', $pe['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($pe); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>

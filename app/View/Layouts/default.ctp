@@ -65,15 +65,14 @@
 									<li> <!-- SS -->
 											<a href="#"><i class="fa fa-comments-o fa-fw"></i> SS <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consultar", '/sses', array('escape' => false)); ?></li>
 													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Incluir", '/sses/add', array('escape' => false)); ?></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consultar", '/sses', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- PE -->
-											<a href="#"><i class="fa fa-briefcase fa-fw"></i> PE (em breve)<span class="fa arrow"></span></a>
+											<a href="#"><i class="fa fa-briefcase fa-fw"></i> PE <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><a href="#"><i class="fa fa-angle-double-right"></i> Incluir</a></li>
-													<li><a href="#"><i class="fa fa-angle-double-right"></i> Consultar</a></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consultar", '/pes', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- OS -->

@@ -22,6 +22,7 @@
           <option value="1">Demanda</option>
           <option value="2">SS</option>
           <option value="3">OS</option>
+          <option value="4">PE</option>
         </select>
       </div>
     </div>
