@@ -28,7 +28,7 @@
                 <th>Tecnologia</th>
                 <th>Áreas</th>
                 <th>Status</th>
-                <th>Online?</th>
+                <!--th>Online?</th-->
                 <th>Ações</th>
               </tr>
             </thead>
@@ -48,7 +48,7 @@
                     ?>
                   </td>
                   <td><?php echo $this->Times->active($servico['Servico']['status'])?></td>
-                  <td><?php echo $this->Disponibilidade->online2($servico['Servico']['url'], 'GET'); ?></td>
+                  <!--td><?php //echo $this->Disponibilidade->online2($servico['Servico']['url'], 'GET'); ?></td-->
                  <td><?php echo $this->Tables->getMenu('Servicos', $servico['Servico']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>
@@ -60,9 +60,6 @@
     </div>
   </div>
 </div>
-
-<?php //debug($servicos); ?>
-
 
 <?php
   //-- DataTables JavaScript

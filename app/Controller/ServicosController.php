@@ -11,8 +11,10 @@
 
 
   public function index(){
-    $this->set('servicos', $this->Servico->find('all'));
-    $this->Servico->recursive = 1;
+    $this->Servico->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a área (otimização)
+    $this->Servico->contain('Area');//Carrega apenas o Relacionamento com a área (otimização)
+
+    $this->set('servicos', $this->Servico->find('all', array('contain' => false)));
   }
 
   public function view($id = null){

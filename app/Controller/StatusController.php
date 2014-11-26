@@ -6,7 +6,7 @@
  * @return void
  */
   public function index() {
-    $this->set('status', $this->Status->find('all'));
+    $this->set('status', $this->Status->find('all', array('order' => array('Status.tipo'))));
   }
 
   /**

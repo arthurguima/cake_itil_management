@@ -64,6 +64,7 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
+          "order": [[ 1, "asc" ]],
           "dom": 'T<"clear">lfrtip',
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",

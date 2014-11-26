@@ -60,7 +60,7 @@
 
         $aux = date_diff(date_create($ind['dt_inicio']),date_create($ind['dt_fim']));
         $total += (($aux->y * 365.25 + $aux->m * 30 + $aux->d) * 24 + $aux->h + $aux->i/60);
-    
+
       if($ind['dt_fim'] == null): $ativas++; endif;
     endforeach;
     unset($ind);
@@ -72,7 +72,7 @@
     return "
     <div class='col-sm-12 col-lg-3  col-md-6 well indis'>
       <div class='indis-tittle col-lg-12'>
-        <p><a class='servico'><b>" . $servico['Servico']['sigla'] . "</b></a></py>
+        <a class='servico'><b>" . $servico['Servico']['sigla'] . "</b></a>
       </div>
       <div class='indis-body col-lg-12'>
         <div class='col-lg-6 col-xs-6 col-md-6'>

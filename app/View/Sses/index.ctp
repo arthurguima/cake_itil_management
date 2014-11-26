@@ -35,7 +35,7 @@
               ?>
             </div>
             <div class="form-group">
-              <b>Prazo de entrega:: </b>
+              <b>Prazo de entrega: </b>
               <?php echo $this->Search->input('dtprazo',
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
@@ -52,11 +52,11 @@
             <div class="form-group"><?php echo $this->Search->input('prioridade_', array('class' => 'form-control', 'placeholder' => "Prioridade Maior que")); ?></div>
           </div>
           <?php
-        echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
+            echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
                       'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
-      echo $this->Search->end();
+            echo $this->Search->end();
           ?>
-        </div>
+      </div>
     </div>
   </div>
 </div>

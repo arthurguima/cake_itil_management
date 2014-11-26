@@ -5,7 +5,7 @@
     $this->Filter->addFilters(
       array(
         'responsavel_' => array(
-          'Pe.criador' => array('operator' => 'LIKE')
+          'Pe.responsavel' => array('operator' => 'LIKE')
         ),
         'status' => array(
           'Pe.status_id' => array(
@@ -20,24 +20,27 @@
             'operator'    => '!='
           )
         ),
-        'dtprevisao' => array(
-          'Pe.dt_prevista' => array(
+        'dtinicio' => array(
+          'Pe.dt_inicio' => array(
             'operator' => 'BETWEEN',
             'between' => array(
               'text' => ' a ',
             )
           )
         ),
-        'dtrecebimento' => array(
-          'Pe.data_recebimento' => array(
+        'dtemissao' => array(
+          'Pe.dt_emissao' => array(
             'operator' => 'BETWEEN',
             'between' => array(
               'text' => ' a ',
             )
           )
         ),
-        'prioridade_' => array(
-          'Pe.prioridade' => array('operator' => '>=')
+        'num_ce_' => array(
+          'Pe.num_ce' => array('operator' => 'LIKE')
+        ),
+        'numero_' => array(
+          'Pe.numero' => array('operator' => 'LIKE')
         ),
         'nome_' => array(
           'Pe.nome' => array('operator' => 'LIKE')
@@ -52,7 +55,7 @@
     //  $statuses = $this->Pe->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 
     $this->Pe->recursive = 0;
-    $this->set('sses', $this->paginate());
+    $this->set('pes', $this->paginate());
   }
 
   public function view($id = null) {

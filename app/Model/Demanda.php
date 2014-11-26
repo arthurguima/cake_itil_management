@@ -51,6 +51,11 @@
 				'rule'   => 'notempty',
 				'message' => 'Campo deve ser preenchido!')
 		),
+		'prioridade' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!')
+		),
 		'descricao' => array(
 			'NotEmpty' => array(
 				'rule'   => 'notempty',

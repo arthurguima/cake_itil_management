@@ -12,7 +12,7 @@
     'nome' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
-        'maxLength' => 80,
+        'maxLength' => 200,
         'message' => 'Campo deve ser preenchido!')
     ),
     'sigla' => array(

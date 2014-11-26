@@ -63,6 +63,7 @@
 				<ul class="nav nav-tabs nav-tabs-black" role="tablist">
 				  <li role="presentation" class="active"><a href="#status" role="tab" data-toggle="tab">Status</a></li>
 				  <li role="presentation"><a href="#tipos" role="tab" data-toggle="tab">Tipos</a></li>
+					<li role="presentation"><a href="#tipos_status" role="tab" data-toggle="tab">TiposXStatus</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -75,6 +76,12 @@
 				  <div role="tabpanel" class="tab-pane" id="tipos">
 						<?php foreach ($demandas as $key => $value): ?>
 							<?php echo $this->Demanda->demandasTipos($demandas[$key], $key)?>
+						<?php endforeach; ?>
+						<?php unset($demanda);?>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tipos_status">
+						<?php foreach ($demandas as $key => $value): ?>
+							<?php echo $this->Demanda->demandasStatusTipos($demandas[$key], $key)?>
 						<?php endforeach; ?>
 						<?php unset($demanda);?>
 					</div>

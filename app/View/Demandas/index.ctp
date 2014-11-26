@@ -78,12 +78,15 @@
               <?php foreach ($demandas as $demanda): ?>
                 <tr>
                   <td><?php echo $this->Html->link($demanda['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $demanda['Servico']['id'])); ?></td>
-                  <td>
-                    <span class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $demanda['Demanda']['id']?>"><?php echo $demanda['Demanda']['prioridade']; ?></span>
+                  <td class="hidden-xs hidden-sm">
+                    <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $demanda['Demanda']['id']?>"><?php echo $demanda['Demanda']['prioridade']; ?></span>
                   </td>
                   <?php echo $this->Tables->PrioridadeEditable($demanda['Demanda']['id'], "demandas") ?>
-                  <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!"><?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
-                                  $demanda['Demanda']['clarity_id'] .")'>" . $demanda['Demanda']['clarity_dm_id'] ."</a></span>" ?>
+                  <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
+                    <?php
+                      echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                            $demanda['Demanda']['clarity_id'] .")'>" . $demanda['Demanda']['clarity_dm_id'] ."</a></span>"
+                    ?>
                   </td>
                   <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">
                     <?php echo $this->Html->link($demanda['Demanda']['mantis_id'],"http://www-testes/view.php?id=" . $demanda['Demanda']['mantis_id'], array('target' => '_blank')); ?>
@@ -97,7 +100,7 @@
                     ?>
                   </td>
                   <td>
-                    <span class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>"><?php echo $demanda['Status']['nome']; ?></span>
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>"><?php echo $demanda['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['Demanda']['criador']; ?></div></td>

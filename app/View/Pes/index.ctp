@@ -16,30 +16,36 @@
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
             <div class="form-group">
-              <b>Data Prevista: </b>
-              <?php echo $this->Search->input('dtprevisao',
+              <b>Data de Início: </b>
+              <?php echo $this->Search->input('dtinicio',
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
               ?>
+
             </div>
             <div class="form-group">
-              <b>Data de Execução: </b>
-              <?php echo $this->Search->input('dtrecebimento',
+              <b>Data de Emissão: </b>
+              <?php echo $this->Search->input('dtemissao',
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
               ?>
             </div>
           </div>
-          <div class="col-lg-12">
+          <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('num_ce_', array('class' => 'form-control', 'placeholder' => "Número da CE de envio:")); ?></div>
+          </div>
+          <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
           </div>
+
           <?php
-        echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
-                      'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
-      echo $this->Search->end();
+            echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
+                              'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+            echo $this->Search->end();
           ?>
         </div>
     </div>
@@ -58,21 +64,26 @@
                 <th>Número</th>
                 <th>Número da CE</th>
                 <th>Nome</th>
+                <th>Status</th>
                 <th class="hidden-xs hidden-sm">Responsável:</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($sses as $ss): ?>
+              <?php foreach ($pes as $pe): ?>
                 <tr>
-                  <td><?php echo $ss['Pe']['numero']; ?></td>
-                  <td><?php echo $ss['Pe']['num_ce']; ?></td>
-                  <td><?php echo $this->Html->link($ss['Pe']['nome'], array('controller' => 'sses', 'action' => 'view', $ss['Pe']['id'])); ?></td>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ss['Pe']['responsavel']; ?></div></td>
-                  <td><?php echo $this->Tables->getMenu('pes', $ss['Pe']['id'], 14); ?></td>
+                  <td><?php echo $pe['Pe']['numero']; ?></td>
+                  <td><?php echo $pe['Pe']['num_ce']; ?></td>
+                  <td><?php echo $this->Html->link($pe['Pe']['nome'], array('controller' => 'sses', 'action' => 'view', $pe['Pe']['id'])); ?></td>
+                  <td>
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $pe['Ss']['id'] ?>">
+                    <?php echo $pe['Status']['nome']; ?></span>
+                  </td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $pe['Pe']['responsavel']; ?></div></td>
+                  <td><?php echo $this->Tables->getMenu('pes', $pe['Pe']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
-              <?php unset($ss); ?>
+              <?php unset($pe); ?>
 
             </tbody>
           </table>

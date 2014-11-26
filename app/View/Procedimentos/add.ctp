@@ -23,7 +23,8 @@
                   'id' => 'dp'));
 
       echo $this->BootstrapForm->input('responsavel', array(
-                 'label' => array('text' => 'Responsável: ')));
+                 'label' => array('text' => 'Responsável: '),
+                 'value' => $this->Ldap->nomeUsuario()));
     ?>
     <div class="form-footer col-lg-10 pull-right">
       <?php

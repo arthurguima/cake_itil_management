@@ -2,6 +2,9 @@
   public $helpers = array('Html', 'Form', 'Times');
 
   public function index(){
+    $this->Contrato->Behaviors->load('Containable');// (otimização)
+    $this->Contrato->contain('Cliente');// (otimização)
+
     $this->set('contratos', $this->Contrato->find('all'));
   }
 
@@ -23,8 +26,8 @@
         $this->Contrato->id = $id;
         if ($this->Contrato->save($this->request->data)) {
             $this->Session->setFlash('Contrato atualizado com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-            if ($this->params['url']['controller'] == NULL):
-              return $this->redirect(array('action' => 'index'));
+            if (!isset($this->params['url']['controller'])):
+              return $this->redirect(array('controller' => 'contratos','action' => 'index'));
             else:
               return $this->redirect(array('controller' => $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
             endif;
@@ -46,7 +49,7 @@
       $this->Contrato->create();
       if ($this->Contrato->save($this->request->data)) {
         $this->Session->setFlash('Contrato Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-          return $this->redirect(array('action' => 'index'));
+          return $this->redirect(array('controller' => 'contratos', 'action' => 'index'));
       }
       $this->Session->setFlash('Não foi possível criar o novo contrato.', 'alert-box', array ('class' => 'alert alert-danger'));
     }

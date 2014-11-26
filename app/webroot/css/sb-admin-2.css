@@ -637,6 +637,10 @@ span.filter-show.col-lg-2 {
   padding-bottom: 5px;
 }
 
+.filters-item .form-group {
+  padding: 5px;
+}
+
 .dataTable input {
   min-width: 20px;
   min-height: 20px;
@@ -708,6 +712,13 @@ a.servico:hover{
   min-height: 100px;
 }
 
+.indis-tittle {
+  background-color: #EBF1F2;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
 @media(min-width:1231px){
   .semicircle{
     //margin-top: 76px;
@@ -726,6 +737,31 @@ svg.peity {
 .demanda-indis .indis-body {
   min-height: inherit;
 }
+
+.indis-body th:first-child {
+  width: 30%;
+}
+
+.indis-body tr {
+  border: 1px solid #eee;
+}
+
+.indis-body ul {
+  list-style-type: circle;
+}
+
+
+
+.indis-body table{
+  /*margin-left: 25px;*/
+}
+.indis-body table,
+.indis-body tbody{
+  width: 100%;
+ display: table;
+}
+
+
 
 .editable{
   border-bottom: 2px dotted #3e8da7;

@@ -92,20 +92,29 @@ class PagesController extends AppController {
 			}
 
 			/* Separa as demanads por Status */
-			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']])){
-				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome'] ] = 1;
+			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']]['total'])){
+				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome'] ]['total'] = 1;
 			}
 			else{
-				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']] += 1;
+				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']]['total'] += 1;
 			}
 
 			/* Separa as demanads por Tipo */
 
-			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']])){
-				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']] = 1;
+			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'])){
+				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'] = 1;
 			}
 			else{
-				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']] += 1;
+				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'] += 1;
+			}
+
+
+			/* Status de cada tipo de Demanda */
+			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']])){
+				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']] = 1;
+			}
+			else{
+				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']] += 1;
 			}
 		}
 
