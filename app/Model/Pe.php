@@ -18,6 +18,12 @@
     )
   );
 
+  public $hasMany = array(
+    'Historico' => array(
+      'className' => 'Historico'
+    )
+  );
+
   public $validate = array(
     'nome' => array(
       'NotEmpty' => array(

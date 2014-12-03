@@ -98,11 +98,17 @@
       $this->Demanda->create();
       if ($this->Demanda->save($this->request->data)) {
         $this->Session->setFlash('Nova Demanda Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-        return $this->redirect(array('action' => 'index'));
+        if($this->params['url']['controller'] == null){
+          return $this->redirect(array('action' => 'index'));
+        }
+        else{
+          return $this->redirect(array('controller' => $this->params['url']['controller'], 'action' => 'view', $this->params['url']['id']));
+        }
       } else {
         $this->Session->setFlash('Não foi possível criar a nova demanda.', 'alert-box', array ('class' => 'alert alert-danger'));
       }
     }
+
     /* Relacionamentos */
       $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
       $this->set(compact('servicos'));

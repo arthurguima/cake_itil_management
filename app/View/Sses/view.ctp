@@ -37,8 +37,12 @@
           <li><a><b>Data de Recebimento da SS: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_recebimento']); ?></a></li>
           <li><a><b>Prazo de entrega: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_prazo']); ?></a></li>
           <li><a><b>Data Prevista: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_prevista']); ?></a></li>
+          <li><a><b>Prazo: </b><?php echo $this->Times->timeLeftTo($ss['Ss']['dt_recebimento'], $ss['Ss']['dt_prevista'],
+                  $this->Time->format('d/m/Y', $ss['Ss']['dt_recebimento']) . " - " . $this->Time->format('d/m/Y', $ss['Ss']['dt_prevista']),
+                  ($ss['Ss']['dt_finalizada'] == null)); ?></a></li>
           <li><a><b>Responsável: </b><?php echo $ss['Ss']['responsavel']; ?></a></li>
           <li><a><b>CVS: </b><?php echo $ss['Ss']['cvs_url']; ?></a></li>
+          <li><a><b>Observação: </b><?php echo $ss['Ss']['observacao']; ?></a></li>
           <li class="checklist"><a><b>Checklist: </b><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></a></td>
       </div>
     </div>
@@ -49,6 +53,9 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Demandas Internas
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'demandas', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+              array('escape' => false)); ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>

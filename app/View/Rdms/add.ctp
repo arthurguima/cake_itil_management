@@ -14,6 +14,10 @@
       echo $this->BootstrapForm->input('nome', array(
                   'label' => array('text' => 'Nome: ')));
 
+      echo $this->BootstrapForm->input('responsavel', array(
+                 'label' => array('text' => 'Responsável: '),
+                 'value' => $this->Ldap->nomeUsuario()));
+
       echo $this->BootstrapForm->input('numero', array(
                   'label' => array('text' => 'Número: ')));
 
@@ -24,6 +28,19 @@
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão do serviço: ')));
 
+      ?>
+
+      <div class="form-group">
+        <label for="RdmAmbiente" class="col-lg-2 control-label">Ambiente: </label>
+        <div class="col-lg-10">
+          <select name="data[Rdm][ambiente]" class="form-control" id="filterambiente">
+            <option value="1">Homologação</option>
+            <option value="2">Produção</option>
+          </select>
+        </div>
+      </div>
+
+      <?php
       echo $this->BootstrapForm->input('dt_prevista', array(
                   'label' => array('text' => 'Data prevista: '),
                   'type' => 'text',

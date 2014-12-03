@@ -52,6 +52,9 @@
     $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
     $this->Filter->setPaginate('limit', 3000);
 
+    $this->Pe->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+    $this->Pe->contain('Status', 'Ss');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+
     //  $statuses = $this->Pe->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 
     $this->Pe->recursive = 0;
@@ -60,11 +63,11 @@
 
   public function view($id = null) {
     if (!$this->Pe->exists($id)) {
-      throw new NotFoundException(__('SS Inválida'));
+      throw new NotFoundException(__('Pe Inválida'));
     }
     $options = array('conditions' => array('Pe.' . $this->Pe->primaryKey => $id));
-    $this->Pe->recursive = 2;
-    $this->set('ss', $this->Pe->find('first', $options));
+    $this->Pe->recursive = 1;
+    $this->set('pe', $this->Pe->find('first', $options));
   }
 
   public function add() {

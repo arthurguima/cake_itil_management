@@ -3,9 +3,10 @@
     /*
     * Recebe 2 stings de data e gera a barra mostrando quanto tempo falta para a data.
     * 3º argumento é a sting mostrada ao lado da Barra
+    * data de finalização
     */
-    public function timeLeftTo($time1, $time2, $string, $active) {
-        if ($active):
+    public function timeLeftTo($time1, $time2, $string, $time3) {
+        if ($time3 == null):
           if($time2 == null):
             return "<div style='font-size: 12px;'><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
                     Previsão Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
@@ -36,7 +37,7 @@
                   </div>";
         else:
           return "<div class=''><span class='label label-default'>" . $this->Time->format('d/m/Y', $time1) . " - " .
-                   $this->Time->format('d/m/Y', $time2) . "</span></div>";
+                   $this->Time->format('d/m/Y', $time3) . "</span></div>";
         endif;
     }
       private function color($value){

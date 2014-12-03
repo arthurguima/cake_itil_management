@@ -4,12 +4,11 @@
   * Exibe um texto em popup
   */
   public function popupBox($string, $description=null) {
-    return "<a type='button' data-container='body' data-toggle='popover'
-            data-placement='top'
-            data-content='" . (($description != null) ? "<b>". $string  ."</b><br />" : $string) . " " . $description . "'
-            data-original-title='' title='Descrição'>
-              <div class='sub-20'>" . $string . "</div>
-            </a>";
+    $value = h(((($description != null) ? "<b>". ($string)  ."</b><br />" : $string) . " " . $description));
+
+    return '<div type="button" data-container="body" data-toggle="popover" data-original-title="Descrição" data-placement="right" data-content="' . $value .
+            '"<div class="sub-20">' . $string . '</div>
+            </div>';
   }
 
   public function StatusEditable($id, $controller){

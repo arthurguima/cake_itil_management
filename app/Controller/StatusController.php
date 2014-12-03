@@ -6,6 +6,9 @@
  * @return void
  */
   public function index() {
+    $this->Status->Behaviors->load('Containable');
+    $this->Status->contain();
+
     $this->set('status', $this->Status->find('all', array('order' => array('Status.tipo'))));
   }
 

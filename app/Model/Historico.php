@@ -8,6 +8,10 @@
     'Rdm' => array(
       'className' => 'Rdm',
       'foreignKey' => 'rdm_id'
+    ),
+    'Pe' => array(
+      'className' => 'Pe',
+      'foreignKey' => 'pe_id'
     )
   );
 

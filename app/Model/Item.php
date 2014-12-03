@@ -11,6 +11,14 @@
 		)
 	);
 
+	public $hasMany = array(
+		'Pe' => array(
+			'className' => 'Pe',
+			'foreignKey' => 'item_id',
+			'dependent' => false,
+		)
+	);
+
 	public $validate = array(
 		'nome' => array(
 			'NotEmpty' => array(

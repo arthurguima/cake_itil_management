@@ -24,14 +24,16 @@
     <div class="well">
       <ul class="list-unstyled spaced">
         <li>
-          <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.2</h4>
+          <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4</h4>
             <div class="personal-info">
-              Agora você pode:<br/><br/>
+              Veja o que mudou:<br/><br/>
               <ul>
                 <li>Registrar RDMs dos diversos serviços.</li>
                 <li>Controlar quem pode remover registros do banco.</li>
                 <li>Registrar SSs de cada serviço e relacioná-los com as demandas e itens de contrato.</li>
                 <li>Registrar Pes de cada SS.</li>
+                <li>Nova visualização de Demandas Internas na Dashboard (TipoXStatus).</li>
+                <li>Correção de Bugs.</li>
               </ul>
             </div>
         </li>

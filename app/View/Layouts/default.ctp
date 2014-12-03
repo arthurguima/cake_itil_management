@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<title> SGD - <?php echo $title_for_layout; ?> </title>
+	<title><?php echo $title_for_layout; ?> </title>
 	<?php
 		echo $this->Html->meta('icon');
 		/* JS */
@@ -62,24 +62,12 @@
 																							Router::url('/', true) . "index.php", array('escape' => false)); ?>
 									</li>
 									<li><a href="#"><i class="fa fa-calendar fa-fw"></i> Calendário (em breve)<span class="fa arrow"></span></a></li>
-									<li> <!-- SS -->
-											<a href="#"><i class="fa fa-comments-o fa-fw"></i> SS <span class="fa arrow"></span></a>
+									<li> <!-- Sustentação -->
+											<a href="#"><i class="fa fa-briefcase fa-fw"></i> Negócios <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Incluir", '/sses/add', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consultar", '/sses', array('escape' => false)); ?></li>
-											</ul>
-									</li>
-									<li> <!-- PE -->
-											<a href="#"><i class="fa fa-briefcase fa-fw"></i> PE <span class="fa arrow"></span></a>
-											<ul class="nav nav-second-level">
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consultar", '/pes', array('escape' => false)); ?></li>
-											</ul>
-									</li>
-									<li> <!-- OS -->
-											<a href="#"><i class="fa fa-bell fa-fw"></i> OS (em breve)<span class="fa arrow"></span></a>
-											<ul class="nav nav-second-level">
-													<li><a href="#"><i class="fa fa-angle-double-right"></i> Incluir</a></li>
-													<li><a href="#"><i class="fa fa-angle-double-right"></i> Consultar</a></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PE", '/pes', array('escape' => false)); ?></li>
+													<li><a href="#"><i class="fa fa-angle-double-right"></i> OS (em breve)</a></li>
 											</ul>
 									</li>
 									<li> <!-- Sustentação -->
@@ -122,7 +110,7 @@
 								</ul>
 								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarHide();"></i>
 					</div>
-					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.2 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
+					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.4 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
 			</div>
 			<!-- Fim sidebar -->
 		</nav>

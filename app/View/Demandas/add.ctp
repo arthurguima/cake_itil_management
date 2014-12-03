@@ -87,6 +87,16 @@
       ?>
     </div>
 
+    <?php
+      if(!strcmp($this->params['url']['controller'],'sses')){
+        echo
+        " <input type='hidden' name='data[Ss][Ss]' value='' id='SsSs_'>
+          <select name='data[Ss][Ss][]' seperator='</div>' class='form-control hidden' input='text' multiple='multiple' id='DemandaDemanda'>
+            <option selected='selected' value='" . $this->params['url']['id'] . "'>Ss</option>
+          </select>
+        ";
+      }
+    ?>
 
     <div class="form-footer col-lg-12 pull-right">
       <?php

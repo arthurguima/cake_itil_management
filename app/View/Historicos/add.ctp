@@ -1,11 +1,11 @@
 <?php
   $this->Html->addCrumb('Demandas', '/demandas');
   $this->Html->addCrumb("id:" . $this->params['url']['id'], array('controller' => 'demandas', 'action' => 'view', $this->params['url']['id']));
-  $this->Html->addCrumb('Histórico de Demanda', '');
+  $this->Html->addCrumb('Histórico', '');
   $this->Html->addCrumb("Novo", array('controller' => 'historicos', 'action' => 'add'));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Novo Historico de Demanda</h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Novo Historico</h3></div>
 </div>
 
 <div class="row">
@@ -22,6 +22,9 @@
       if(!strcmp($this->params['url']['controller'],'sses')){
         echo $this->BootstrapForm->hidden('ss_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
       }
+      if(!strcmp($this->params['url']['controller'],'pes')){
+        echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+      }
 
       echo $this->BootstrapForm->input('data', array(
                               'label' => array('text' => 'Data: '),
@@ -29,7 +32,8 @@
                               'id' => 'dp '));
 
       echo $this->BootstrapForm->input('analista', array(
-                  'label' => array('text' => 'Analista: ')));
+                  'label' => array('text' => 'Analista: '),
+                  'value' => $this->Ldap->nomeUsuario()));
 
       echo $this->BootstrapForm->input('descricao', array(
                   'label' => array('text' => 'Descrição: '),

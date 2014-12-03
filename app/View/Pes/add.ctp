@@ -23,6 +23,12 @@
         echo $this->BootstrapForm->input('numero', array(
                     'label' => array('text' => 'Número: ')));
 
+        echo $this->BootstrapForm->input('ano', array(
+                   'label' => array('text' => 'Ano: '),
+                   'type' => 'text',
+                   'id' => 'dpdecade',
+                   'value' => date('Y')));
+
         echo $this->BootstrapForm->input('num_ce', array(
                     'label' => array('text' => 'Número da CE de envio: ')));
 
@@ -40,7 +46,11 @@
                     'label' => array('text' => 'Tempo estimado em dias: ')));
 
         echo $this->BootstrapForm->input('cvs_url', array(
-                    'label' => array('text' => 'Url CVS: ')));
+                    'label' => array('text' => 'Url: ')));
+
+        echo $this->BootstrapForm->input('observacao', array(
+                    'label' => array('text' => 'Observação: '),
+                    'type' => 'textarea'));
       ?>
     </div>
     <div class="col-lg-6">
@@ -48,6 +58,7 @@
         echo $this->BootstrapForm->input('responsavel', array(
                   'label' => array('text' => 'Responsável: '),
                   'value' => $this->Ldap->nomeUsuario()));
+
 
         echo $this->BootstrapForm->input('status_id', array(
                     'label' => array('text' => 'Status: ')));
@@ -79,7 +90,7 @@
   /* Lista de Itens */
     function getItens(tipo, id){
       $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "items/optionlist?controller=Ss&tipo=" + tipo + "&id=" + id,
+        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "items/optionlist?controller=Pe&tipo=" + tipo + "&id=" + id,
         cache: false,
         success: function(html){
           $("#itemList").html(html);
@@ -90,7 +101,7 @@
   /* Lista de Aditivos */
     function getAditivos(contrato){
       $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "aditivos/optionlist?controller=Ss&contrato=" + contrato,
+        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "aditivos/optionlist?controller=Pe&contrato=" + contrato,
         cache: false,
         success: function(html){
           $("#aditivoList").html(html);
@@ -124,6 +135,16 @@
           getItens("Aditivo", $(this).val());
          }
       })
+    });
+
+    $("[id*='dpdecade']").datetimepicker({
+      format: "yyyy",
+        startView: "decade",
+        minView: "decade",
+        maxView: "decade",
+        viewSelect: "decade",
+        autoclose: true,
+        language: 'pt-BR'
     });
 
     $("[id*='dp']").datetimepicker({

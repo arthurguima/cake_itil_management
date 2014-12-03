@@ -40,7 +40,8 @@
           echo $this->BootstrapForm->input('ano', array(
                      'label' => array('text' => 'Ano: '),
                      'type' => 'text',
-                     'id' => 'dpdecade'));
+                     'id' => 'dpdecade',
+                     'value' => date('Y')));
 
           echo $this->BootstrapForm->input('responsavel', array(
                       'label' => array('text' => 'Responsável: '),
@@ -52,6 +53,10 @@
 
           echo $this->BootstrapForm->input('cvs_url', array(
                       'label' => array('text' => 'Url CVS: ')));
+
+          echo $this->BootstrapForm->input('observacao', array(
+                      'label' => array('text' => 'Observação: '),
+                      'type' => 'textarea'));
         ?>
       </div>
       <div class="col-lg-6">

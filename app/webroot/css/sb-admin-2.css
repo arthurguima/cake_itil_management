@@ -743,7 +743,8 @@ svg.peity {
 }
 
 .indis-body tr {
-  border: 1px solid #eee;
+  border: 3px solid #eee;
+  border-right: 0;
 }
 
 .indis-body ul {
@@ -826,6 +827,10 @@ p.legend{
 
 #viewClarity i.fa.fa-expand {
   color: #252D2F;
+}
+
+i.checklist span {
+  display: none;
 }
 
 table#dataTables-Servico{

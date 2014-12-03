@@ -63,17 +63,19 @@
               <tr>
                 <th>Número</th>
                 <th>Número da CE</th>
+                <th>SS</th>
                 <th>Nome</th>
                 <th>Status</th>
-                <th class="hidden-xs hidden-sm">Responsável:</th>
+                <th class="hidden-xs hidden-sm">Responsável</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($pes as $pe): ?>
                 <tr>
-                  <td><?php echo $pe['Pe']['numero']; ?></td>
+                  <td><?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano']; ?></td>
                   <td><?php echo $pe['Pe']['num_ce']; ?></td>
+                  <td><?php echo $pe['Ss']['nome']; ?></td>
                   <td><?php echo $this->Html->link($pe['Pe']['nome'], array('controller' => 'sses', 'action' => 'view', $pe['Pe']['id'])); ?></td>
                   <td>
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $pe['Ss']['id'] ?>">
@@ -92,12 +94,6 @@
     </div>
   </div>
 </div>
-Número da PE:   xxx
-Data da PE: xx/xx/xxxx
-Quantidade de Ponto de Função: xxx
-Número da CE de envio: xx/xxxx
-Tempo estimado para execução da demanda : xxxx dias utéis
-Previsão para ínicio de atendimento da demanda : xx/xx/xxxx.
 
 <?php
   //-- DataTables JavaScript -->
@@ -119,14 +115,6 @@ Previsão para ínicio de atendimento da demanda : xx/xx/xxxx.
 
 <script>
   $(document).ready(function() {
-    $('#myModal').on('shown.bs.modal', function (e) {
-      document.getElementById('modal-body').appendChild(
-          document.getElementById('demandaFrame')
-      );
-      document.getElementById('demandaFrame').style.display = "block";
-      //document.getElementById('demandaFrame').style.height = "720px";
-    });
-
     $('#dataTables-ss').dataTable({
       "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
         language: {
@@ -138,7 +126,9 @@ Previsão para ínicio de atendimento da demanda : xx/xx/xxxx.
             "aButtons": [
               {
                   "sExtends": "copy",
-                  "sButtonText": "Copiar"
+                  "sButtonText": "Copiar",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,2,3,4,5 ]
               },
               {
                   "sExtends": "print",
@@ -146,11 +136,20 @@ Previsão para ínicio de atendimento da demanda : xx/xx/xxxx.
               },
               {
                   "sExtends": "csv",
-                  "sButtonText": "CSV"
+                  "sButtonText": "CSV",
+                  "sFileName": "Propostas de Execução.csv",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,2,3,4,5 ]
               },
               {
                   "sExtends": "pdf",
-                  "sButtonText": "PDF"
+                  "sButtonText": "PDF",
+                  "sFileName": "Propostas de Execução.pdf",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "sPdfOrientation": "landscape",
+                  "mColumns": [ 0,1,2,3,4,5 ],
+                  "sTitle": "Listagem de Propostas de Execução",
+                  "sPdfMessage": "<?php echo date('d/m/y')?>",
               },
             ]
         }

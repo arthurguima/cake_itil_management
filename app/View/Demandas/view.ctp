@@ -42,6 +42,7 @@
               endif;
             ?></a>
           </li>
+          <li><a><b>Data Prevista: </b> <?php echo $this->Times->pastdate($demanda['Demanda']['dt_prevista']); ?></a></li>
           <li>
             <a>
               <b>Data de homologação: </b>
@@ -193,9 +194,9 @@
       </div>
     </div>
   </div>
+  <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
 </div>
 
-<?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -65,7 +65,8 @@
                 <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
                 <th class="hidden-xs hidden-sm">Clarity DM</th>
                 <th class="hidden-xs hidden-sm">Mantis</th>
-                <th>Título</th>
+                <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                <th>Nome</th>
 
 				        <th>Tipo da Demanda</th>
                 <th>Prazo</th>
@@ -92,11 +93,12 @@
                     <?php echo $this->Html->link($demanda['Demanda']['mantis_id'],"http://www-testes/view.php?id=" . $demanda['Demanda']['mantis_id'], array('target' => '_blank')); ?>
                   </td>
                   <td><?php echo $this->Tables->popupBox($demanda['Demanda']['nome'], $demanda['Demanda']['descricao']) ?></td>
+                  <td><?php echo $demanda['Demanda']['nome']; ?></td>
 				          <td style="max-width: 110px;"><div class="tipo-demanda"><?php echo $demanda['DemandaTipo']['nome']; ?></div></td>
                   <td class="text-center">
                     <?php echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
                             $this->Time->format('d/m/Y', $demanda['Demanda']['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $demanda['Demanda']['dt_prevista']),
-                            ($demanda['Demanda']['data_homologacao'] == null));
+                            ($demanda['Demanda']['data_homologacao']));
                     ?>
                   </td>
                   <td>
@@ -161,6 +163,7 @@
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
+          "columnDefs": [  { "visible": false, "targets": 5 } ],
           // 'sAjaxSource': src="<?php// $this->base;?>/controller/action/<?php //$dataId;?>",
           "dom": 'T<"clear">lfrtip',
           "tableTools": {
@@ -168,25 +171,38 @@
               "aButtons": [
                 {
                     "sExtends": "copy",
-                    "sButtonText": "Copiar"
+                    "sButtonText": "Copiar",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,5,6,7,8,9 ]
                 },
                 {
                     "sExtends": "print",
-                    "sButtonText": "Imprimir"
+                    "sButtonText": "Imprimir",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,5,6,7,8,9 ]
                 },
                 {
                     "sExtends": "csv",
-                    "sButtonText": "CSV"
+                    "sButtonText": "CSV",
+                    "sFileName": "Demandas.csv",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,5,6,7,8,9 ]
                 },
                 {
                     "sExtends": "pdf",
-                    "sButtonText": "PDF"
+                    "sButtonText": "PDF",
+                    "sFileName": "Demandas.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "sPdfOrientation": "landscape",
+                    "mColumns": [ 0,1,2,3,6,7,8,9 ],
+                    "sTitle": "Listagem de Demandas Internas",
+                    "sPdfMessage": "<?php echo date('d/m/y')?>"
                 },
               ]
           }
       });
 
-      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'top', html: 'true'});
+      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
 
       $("[id*='filterDt']").datetimepicker({
         format: "yyyy-mm-dd",

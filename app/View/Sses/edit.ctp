@@ -51,6 +51,10 @@
 
         echo $this->BootstrapForm->input('cvs_url', array(
                     'label' => array('text' => 'Url CVS: ')));
+
+        echo $this->BootstrapForm->input('observacao', array(
+                    'label' => array('text' => 'Observação: '),
+                    'type' => 'textarea'));
       ?>
     </div>
     <div class="col-lg-6">

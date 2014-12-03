@@ -6,6 +6,9 @@
  * @return void
  */
 	public function index() {
+		$this->DemandaTipo->Behaviors->load('Containable');
+		$this->DemandaTipo->contain();
+
 		$this->set('demandaTipos', $this->DemandaTipo->find('all'));
 	}
 

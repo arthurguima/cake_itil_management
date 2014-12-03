@@ -146,19 +146,32 @@
               "aButtons": [
                 {
                     "sExtends": "copy",
-                    "sButtonText": "Copiar"
+                    "sButtonText": "Copiar",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "print",
-                    "sButtonText": "Imprimir"
+                    "sButtonText": "Imprimir",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "csv",
-                    "sButtonText": "CSV"
+                    "sButtonText": "CSV",
+                    "sFileName": "Indisponibilidades.csv",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "pdf",
-                    "sButtonText": "PDF"
+                    "sButtonText": "PDF",
+                    "sFileName": "Indisponibilidades.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ],
+                    "sPdfOrientation": "landscape",
+                    "sTitle": "Controle de Disponibilidade",
+                    "sPdfMessage": "<?php echo date('d/m/y')?>",
                 },
               ]
           }

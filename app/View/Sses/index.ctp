@@ -12,7 +12,7 @@
          </div>
       </h3>
     </div>
-    <div class="col-lg-12 pull-left filters">
+    <div class="col-lg-12 filters">
       <div class="">
         <div class="row">
           <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span>
@@ -20,36 +20,42 @@
         <div class="row inner" style="display: none;">
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
-            <div class="form-group">
-              <b>Data Prevista: </b>
-              <?php echo $this->Search->input('dtprevisao',
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-              ?>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <b>Prazo de entrega: </b>
+                <?php echo $this->Search->input('dtprazo',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+              </div>
+              <div class="form-group">
+                <b>Data de Recebimento: </b>
+                <?php echo $this->Search->input('dtrecebimento',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+              </div>
             </div>
-            <div class="form-group">
-              <b>Data de Recebimento: </b>
-              <?php echo $this->Search->input('dtrecebimento',
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-              ?>
-            </div>
-            <div class="form-group">
-              <b>Prazo de entrega: </b>
-              <?php echo $this->Search->input('dtprazo',
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-              ?>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <b>Data Prevista: </b>
+                <?php echo $this->Search->input('dtprevisao',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+              </div>
             </div>
           </div>
-          <div class="col-lg-12">
+          <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('prioridade_', array('class' => 'form-control', 'placeholder' => "Prioridade Maior que")); ?></div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
           </div>
           <?php
             echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -72,13 +78,14 @@
               <tr>
                 <th>Servico</th>
                 <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
-                <th>Clarity DM</th>
+                <th class="hidden-xs hidden-sm">Clarity DM</th>
                 <th>Número</th>
+                <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></th>
                 <th>Nome</th>
                 <th>Prazo</th>
-                <th><span class="editable">Status</span></th>
+                <th class="hidden-xs hidden-sm"><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável:</th>
-                <th>CheckList</th>
+                <th class="hidden-xs hidden-sm">CheckList</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -86,8 +93,8 @@
               <?php foreach ($sses as $ss): ?>
                 <tr>
                   <td><?php echo $this->Html->link($ss['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $ss['Servico']['id'])); ?></td>
-                  <td>
-                    <span class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $ss['Ss']['id'];?>"><?php echo $ss['Ss']['prioridade']; ?></span>
+                  <td class="hidden-xs hidden-sm">
+                    <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $ss['Ss']['id'];?>"><?php echo $ss['Ss']['prioridade']; ?></span>
                   </td>
                   <?php echo $this->Tables->PrioridadeEditable($ss['Ss']['id'], "sses") ?>
 
@@ -96,24 +103,25 @@
                                  $ss['Ss']['clarity_id'] .")'>" . $ss['Ss']['clarity_dm_id'] ."</a></span>" ?>
                   </td>
 
-                  <td><?php echo $ss['Ss']['numero']; ?></td>
-                  <td><?php echo $this->Html->link($ss['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $ss['Ss']['id'])); ?></td>
+                  <td><?php echo $ss['Ss']['numero'] . "/" . $ss['Ss']['ano'] ; ?></td>
+                  <td><?php echo $this->Tables->popupBox($ss['Ss']['nome'], $ss['Ss']['observacao']) ?></td>
+                  <td><?php echo $ss['Ss']['nome']; ?></td>
 
                   <td class="text-center">
                     <?php echo $this->Times->timeLeftTo($ss['Ss']['dt_recebimento'], $ss['Ss']['dt_prevista'],
                             $this->Time->format('d/m/Y', $ss['Ss']['dt_recebimento']) . " - " . $this->Time->format('d/m/Y', $ss['Ss']['dt_prevista']),
-                            ($ss['Ss']['dt_finalizada'] == null));
+                            ($ss['Ss']['dt_finalizada']));
                     ?>
                   </td>
 
-                  <td>
-                    <span class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $ss['Ss']['id'] ?>">
+                  <td class="hidden-xs hidden-sm">
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $ss['Ss']['id'] ?>">
                     <?php echo $ss['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->SsStatusEditable($ss['Ss']['id']) ?>
 
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ss['Ss']['responsavel']; ?></div></td>
-                  <td class="checklist"><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></td>
+                  <td class="checklist hidden-xs hidden-sm"><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></td>
                   <td><?php echo $this->Tables->getMenu('sses', $ss['Ss']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
@@ -126,13 +134,6 @@
     </div>
   </div>
 </div>
-
-  <td class="text-center">
-    <?php // echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
-          //  $this->Time->format('d/m/Y', $demanda['Demanda']['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $demanda['Demanda']['dt_prevista']),
-        //    ($demanda['Demanda']['data_homologacao'] == null));
-    ?>
-  </td>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -179,30 +180,46 @@
       //document.getElementById('demandaFrame').style.height = "720px";
     });
 
+    $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+
     $('#dataTables-ss').dataTable({
       "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
         language: {
           url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
         },
+        "columnDefs": [  { "visible": false, "targets": 5 } ],
         "dom": 'T<"clear">lfrtip',
         "tableTools": {
             "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
             "aButtons": [
               {
                   "sExtends": "copy",
-                  "sButtonText": "Copiar"
+                  "sButtonText": "Copiar",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,2,3,5,6,7,8,9 ]
               },
               {
                   "sExtends": "print",
-                  "sButtonText": "Imprimir"
+                  "sButtonText": "Imprimir",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,2,3,5,6,7,8,9 ]
               },
               {
                   "sExtends": "csv",
-                  "sButtonText": "CSV"
+                  "sButtonText": "CSV",
+                  "sFileName": "SS.csv",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,2,3,5,6,7,8,9 ]
               },
               {
                   "sExtends": "pdf",
-                  "sButtonText": "PDF"
+                  "sButtonText": "PDF",
+                  "sFileName": "SS.pdf",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "sPdfOrientation": "landscape",
+                  "mColumns": [ 0,1,2,3,6,7,8,9 ],
+                  "sTitle": "Listagem de Solicitações de Serviço",
+                  "sPdfMessage": "<?php echo date('d/m/y')?>",
               },
             ]
         }

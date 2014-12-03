@@ -60,10 +60,13 @@
             <thead>
               <tr>
                 <th>Servico</th>
+                <th>Versão</th>
+                <th>Ambiente</th>
                 <th>Nome</th>
                 <th>Número</th>
                 <th>Data Prevista</th>
                 <th>Data de Execução</th>
+                <th>Responsável</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -71,10 +74,13 @@
               <?php foreach ($rdms as $rdm): ?>
                 <tr>
                   <td><?php echo $this->Html->link($rdm['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $rdm['Servico']['id'])); ?></td>
+                  <td><?php echo $rdm['Rdm']['versao']; ?></td>
+                  <td><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></td>
                   <td><?php echo $this->Html->link($rdm['Rdm']['nome'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id'])); ?></td>
                   <td><?php echo $rdm['Rdm']['numero']; ?></td>
                   <td><?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?></td>
                   <td><?php echo (($rdm['Rdm']['dt_executada'] == null) ? "" : $this->Time->format('d/m/Y', $rdm['Rdm']['dt_executada'])); ?></td>
+                  <td><?php echo $rdm['Rdm']['responsavel']; ?></td>
                   <td><?php echo $this->Tables->getMenu('rdms', $rdm['Rdm']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
@@ -98,9 +104,9 @@
   echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
 
 //-- TimePicker --
-echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
-echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
-echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 ?>
 
 <script>
@@ -116,19 +122,32 @@ echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
               "aButtons": [
                 {
                     "sExtends": "copy",
-                    "sButtonText": "Copiar"
+                    "sButtonText": "Copiar",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "print",
-                    "sButtonText": "Imprimir"
+                    "sButtonText": "Imprimir",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "csv",
-                    "sButtonText": "CSV"
+                    "sButtonText": "CSV",
+                    "sFileName": "RDM.csv",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "pdf",
-                    "sButtonText": "PDF"
+                    "sButtonText": "PDF",
+                    "sFileName": "RDM.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ],
+                    "sPdfOrientation": "landscape",
+                    "sTitle": "Requisições de Mudança",
+                    "sPdfMessage": "<?php echo date('d/m/y')?>",
                 },
               ]
           }
