@@ -76,6 +76,31 @@
 		)
 	);
 
+	public function afterFind($results, $primary = false) {
+    foreach ($results as $key => $val) {
+        if (isset($val['Demanda']['data_homologacao'])) {
+            $results[$key]['Demanda']['data_homologacao'] = $this->dateFormatAfterFind(
+                $val['Demanda']['data_homologacao']
+            );
+        }
+				if (isset($val['Demanda']['data_cadastro'])) {
+						$results[$key]['Demanda']['data_cadastro'] = $this->dateFormatAfterFind(
+								$val['Demanda']['data_cadastro']
+						);
+				}
+				if (isset($val['Demanda']['dt_prevista'])) {
+						$results[$key]['Demanda']['dt_prevista'] = $this->dateFormatAfterFind(
+								$val['Demanda']['dt_prevista']
+						);
+				}
+    }
+    return $results;
+	}
+
+	public function dateFormatAfterFind($dateString) {
+	    return date('d/m/Y', strtotime($dateString));
+	}
+
 	public function beforeValidate($options = array()){
 		if(!empty($this->data['Demanda']['data_homologacao'])) {
 				$this->data['Demanda']['data_homologacao'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Demanda']['data_homologacao'])));

@@ -30,4 +30,19 @@
     }
     return true;
   }
+
+  public function afterFind($results, $primary = false) {
+    foreach ($results as $key => $val) {
+        if (isset($val['Historico']['data'])) {
+            $results[$key]['Historico']['data'] = $this->dateFormatAfterFind(
+                $val['Historico']['data']
+            );
+        }
+    }
+    return $results;
+  }
+
+  public function dateFormatAfterFind($dateString) {
+      return date('d/m/Y', strtotime($dateString));
+  }
 }?>

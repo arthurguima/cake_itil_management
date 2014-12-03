@@ -38,4 +38,24 @@
 		}
 		return true;
 	}
+
+	public function afterFind($results, $primary = false) {
+		foreach ($results as $key => $val) {
+				if (isset($val['Indisponibilidade']['dt_inicio'])) {
+						$results[$key]['Indisponibilidade']['dt_inicio'] = $this->dateFormatAfterFind(
+								$val['Indisponibilidade']['dt_inicio']
+						);
+				}
+				if (isset($val['Indisponibilidade']['dt_fim'])) {
+						$results[$key]['Indisponibilidade']['dt_fim'] = $this->dateFormatAfterFind(
+								$val['Indisponibilidade']['dt_fim']
+						);
+				}
+		}
+		return $results;
+	}
+
+	public function dateFormatAfterFind($dateString) {
+			return date('d/m/Y', strtotime($dateString));
+	}
 }?>

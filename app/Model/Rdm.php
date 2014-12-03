@@ -32,13 +32,33 @@
     )),
   );
 
-public function beforeValidate($options = array()){
-  if(!empty($this->data['Rdm']['dt_prevista'])) {
-      $this->data['Rdm']['dt_prevista'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Rdm']['dt_prevista'])));
+  public function beforeValidate($options = array()){
+    if(!empty($this->data['Rdm']['dt_prevista'])) {
+        $this->data['Rdm']['dt_prevista'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Rdm']['dt_prevista'])));
+    }
+    if(!empty($this->data['Rdm']['dt_executada'])) {
+        $this->data['Rdm']['dt_executada'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Rdm']['dt_executada'])));
+    }
+    return true;
   }
-  if(!empty($this->data['Rdm']['dt_executada'])) {
-      $this->data['Rdm']['dt_executada'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Rdm']['dt_executada'])));
+
+  public function afterFind($results, $primary = false) {
+    foreach ($results as $key => $val) {
+        if (isset($val['Rdm']['dt_prevista'])) {
+            $results[$key]['Rdm']['dt_prevista'] = $this->dateFormatAfterFind(
+                $val['Rdm']['dt_prevista']
+            );
+        }
+        if (isset($val['Rdm']['dt_executada'])) {
+            $results[$key]['Rdm']['dt_executada'] = $this->dateFormatAfterFind(
+                $val['Rdm']['dt_executada']
+            );
+        }
+    }
+    return $results;
   }
-  return true;
-}
+
+  public function dateFormatAfterFind($dateString) {
+      return date('d/m/Y', strtotime($dateString));
+  }
 }?>

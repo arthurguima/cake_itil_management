@@ -60,6 +60,39 @@
 		if(!empty($this->data['Ss']['dt_prazo'])) {
 				$this->data['Ss']['dt_prazo'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ss']['dt_prazo'])));
 		}
+		if(!empty($this->data['Ss']['dt_finalizada'])) {
+				$this->data['Ss']['dt_finalizada'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ss']['dt_finalizada'])));
+		}
 		return true;
+	}
+
+	public function afterFind($results, $primary = false) {
+		foreach ($results as $key => $val) {
+				if (isset($val['Ss']['dt_recebimento'])) {
+						$results[$key]['Ss']['dt_recebimento'] = $this->dateFormatAfterFind(
+								$val['Ss']['dt_recebimento']
+						);
+				}
+				if (isset($val['Ss']['dt_prevista'])) {
+						$results[$key]['Ss']['dt_prevista'] = $this->dateFormatAfterFind(
+								$val['Ss']['dt_prevista']
+						);
+				}
+				if (isset($val['Ss']['dt_prazo'])) {
+						$results[$key]['Ss']['dt_prazo'] = $this->dateFormatAfterFind(
+								$val['Ss']['dt_prazo']
+						);
+				}
+				if (isset($val['Ss']['dt_finalizada'])) {
+						$results[$key]['Ss']['dt_finalizada'] = $this->dateFormatAfterFind(
+								$val['Ss']['dt_finalizada']
+						);
+				}
+		}
+		return $results;
+	}
+
+	public function dateFormatAfterFind($dateString) {
+			return date('d/m/Y', strtotime($dateString));
 	}
 }
