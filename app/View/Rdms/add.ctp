@@ -50,6 +50,12 @@
                   'label' => array('text' => 'Data de execução: '),
                   'type' => 'text',
                   'id' => 'dp '));
+
+      echo $this->BootstrapForm->input('sucesso', array(
+                 'class' => 'col-sm-3 pull-left col-sm-offset-3',
+                 'label' => array(
+                   'text' => 'Executada com sucesso?',
+                   'class' => 'control-label col-sm-2')));
     ?>
 
     <div id="demandaList"></div>

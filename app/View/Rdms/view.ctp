@@ -25,6 +25,7 @@
           <li><a><b>Número: </b><?php echo $rdm['Rdm']['numero']; ?></a></li>
           <li><a><b>Data Prevista: </b><?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?></a></li>
           <li><a><b>Data de Execução: </b><?php echo $rdm['Rdm']['dt_executada']; ?></a></li>
+          <li><a><b>Executada com Sucesso?: </b><?php echo $this->Rdm->sucesso($rdm['Rdm']['dt_executada'], $rdm['Rdm']['dt_executada']); ?></a></li>
         <ul>
       </div>
     </div>

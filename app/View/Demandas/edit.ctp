@@ -49,11 +49,10 @@
 
 
          echo $this->BootstrapForm->input('criador', array(
-                    'label' => array('text' => 'Solicitante: '),
-                    'value' => $this->Ldap->nomeUsuario()));
+                      'label' => array('text' => 'Solicitante: ')));
 
          echo $this->BootstrapForm->input('executor', array(
-                    'label' => array('text' => 'Responsável: ')));
+                     'label' => array('text' => 'Responsável: ')));
 
          echo $this->BootstrapForm->input('prioridade', array(
                     'label' => array('text' => 'Prioridade: ')));

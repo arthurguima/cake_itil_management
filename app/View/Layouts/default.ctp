@@ -108,7 +108,7 @@
 											</ul>
 									</li>
 								</ul>
-								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarHide();"></i>
+								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 					</div>
 					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.4 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
 			</div>

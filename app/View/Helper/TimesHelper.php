@@ -1,23 +1,27 @@
 <?php class TimesHelper extends AppHelper {
   public $helpers = array('Time');
     /*
-    * Recebe 2 stings de data e gera a barra mostrando quanto tempo falta para a data.
-    * 3º argumento é a sting mostrada ao lado da Barra
-    * data de finalização
+    * Data de Início
+    * Data prevista
+    * Texto mostrado
+    * Data de finalização
     */
     public function timeLeftTo($time1, $time2, $string, $time3) {
-        /* Coloca as datas no formato americano */
-        if($time1 != null){$time1 = date("Y-m-d", strtotime(str_replace('/', '-', $time1)));}
-        if($time2 != null){$time2 = date("Y-m-d", strtotime(str_replace('/', '-', $time2)));}
-        if($time3 != null){$time3 = date("Y-m-d", strtotime(str_replace('/', '-', $time3)));}
+        $time1 = $this->AmericanDate($time1);
+        $time2 = $this->AmericanDate($time2);
+        $time3 = $this->AmericanDate($time3);
 
-        if ($time3 == null): /* Se ainda não foi homologado*/
-          if($time2 == null): /* Caso ainda não haja uma previsão*/
+        /* Se ainda não foi homologado*/
+        if ($time3 == null){
+
+          /* Se ainda não haja uma previsão*/
+          if($time2 == null){
             return "<div style='font-size: 12px;'><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
                     Previsão Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
-          endif;
+          }
 
-          if(strtotime($time2) < time()):
+          /* Se não foi Homologado e está atrasado */
+          if(strtotime($time2) < time()){
             return  " <span class='small'>" . $string . "</span>
                       <div class='progress active'>
                             <div class='progress-bar progress-bar-danger 'role='progressbar' aria-valuenow='100' aria-valuemin='0'
@@ -25,27 +29,32 @@
                             <i class='fa fa-exclamation-circle' style='color:white;'></i>
                             <b>Atrasado </b><i class='fa fa-exclamation-circle' style='color:white;'></i></div>
                       </div>";
-          endif;
+          }
 
-          $t1 = date_create($time1); $t2 = date_create($time2);
-          $total = date_diff($t1,$t2);
+          /* Coloca as datas no formato para o calculo de tempo */
+            $t1 = date_create($time1); $t2 = date_create($time2);
+            $total = date_diff($t1,$t2); // Tempo total entre a data de Início e a prevista
 
-          $left = date_diff(date_create(date('Y-m-d', time())),$t2);
-          $per = 100 - (($left->days / $total->days) * 100);
+            $left = date_diff(date_create(date('Y-m-d', time())),$t2); // Tempo entre a data de Hoje e data prevista
+            $per = 100 - (($left->days / $total->days) * 100); // Quanto o $left representa do Tempo total
 
-          $color = $this->color($per);
+            $color = $this->color($per);
 
           return "<span class='small'>" . $string . "</span>
                   <div class='progress progress-striped active'>
                     <div class='progress-bar progress-bar-" . $color . "' role='progressbar' aria-valuenow='"
                     . $per . "' aria-valuemin='0' aria-valuemax='100' style='width: " . $per . "%'></div>
                   </div>";
-        else: /* Se já foi homologado */
+        }
+        /* Se já foi homologado */
+        else{
           return "<div class=''><span class='label label-default'>" . $this->Time->format('d/m/Y', $time1) . " - " .
                    $this->Time->format('d/m/Y', $time3) . "</span></div>";
-        endif;
+        }
     }
-
+      /*
+      * Seleciona a classe utilizada na Barra de Prazo de acordo com a porcentagem
+      */
       private function color($value){
           if ( $value < 50):
             $color = "success";
@@ -55,6 +64,18 @@
             $color = "danger";
           endif;
           return $color;
+      }
+
+      /*
+      * Coloca as datas no formato americano
+      */
+      private function AmericanDate($time){
+        if($time != null){
+          return date("Y-m-d", strtotime(str_replace('/', '-', $time)));
+        }
+        else{
+          return $time;
+        }
       }
 
     /*

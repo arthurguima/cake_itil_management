@@ -69,7 +69,7 @@
     </div>
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-lg-5">
     <div class="panel panel-danger panel-info">
       <div class="panel-heading">
         <p>
@@ -118,7 +118,7 @@
     </div>
   </div>
 
-  <div class="col-lg-3">
+  <div class="col-lg-4">
     <div class="panel panel-default panel-info">
       <div class="panel-heading">
         <p>
@@ -165,7 +165,7 @@
     </div>
   </div>
 
-  <div class="col-lg-12">
+  <div class="col-lg-4 pull-right">
     <div class="panel panel-default panel-default">
       <div class="panel-heading">
         <p>
@@ -181,24 +181,29 @@
               <tr>
                 <th>Nome</th>
                 <th>Número</th>
+                <th>Sucesso?</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach($demanda['Rdm'] as $dem): ?>
+              <?php foreach($demanda['Rdm'] as $rdm): ?>
                 <tr>
-                  <td><?php echo $dem['nome']; ?></td>
-                  <td><?php echo $dem['numero']; ?></td>
-                  <td><?php echo $this->Tables->getMenu('rdms', $dem['id'], 2); ?></td>
+                  <td><?php echo $rdm['nome']; ?></td>
+                  <td><?php echo $rdm['numero']; ?></td>
+                  <td><?php echo $this->Rdm->sucesso($rdm['sucesso'], $rdm['dt_executada']); ?></a></td>
+                  <td><?php echo $this->Tables->getMenu('rdms', $rdm['id'], 6); ?></td>
                 </tr>
               <?php endforeach; ?>
-            <?php unset($dem); ?>
+            <?php unset($rdm); ?>
           </tbody>
         </table>
       </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="row">
   <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
 </div>
 
