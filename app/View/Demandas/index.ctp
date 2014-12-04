@@ -95,12 +95,14 @@
                   <td><?php echo $this->Tables->popupBox($demanda['Demanda']['nome'], $demanda['Demanda']['descricao']) ?></td>
                   <td><?php echo $demanda['Demanda']['nome']; ?></td>
 				          <td style="max-width: 110px;"><div class="tipo-demanda"><?php echo $demanda['DemandaTipo']['nome']; ?></div></td>
+
                   <td class="text-center">
                     <?php echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
                             $this->Time->format('d/m/Y', $demanda['Demanda']['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $demanda['Demanda']['dt_prevista']),
                             ($demanda['Demanda']['data_homologacao']));
                     ?>
                   </td>
+                  
                   <td>
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>"><?php echo $demanda['Status']['nome']; ?></span>
                   </td>

@@ -6,8 +6,13 @@
     * data de finalização
     */
     public function timeLeftTo($time1, $time2, $string, $time3) {
-        if ($time3 == null):
-          if($time2 == null):
+        /* Coloca as datas no formato americano */
+        if($time1 != null){$time1 = date("Y-m-d", strtotime(str_replace('/', '-', $time1)));}
+        if($time2 != null){$time2 = date("Y-m-d", strtotime(str_replace('/', '-', $time2)));}
+        if($time3 != null){$time3 = date("Y-m-d", strtotime(str_replace('/', '-', $time3)));}
+
+        if ($time3 == null): /* Se ainda não foi homologado*/
+          if($time2 == null): /* Caso ainda não haja uma previsão*/
             return "<div style='font-size: 12px;'><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
                     Previsão Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
           endif;
@@ -35,11 +40,12 @@
                     <div class='progress-bar progress-bar-" . $color . "' role='progressbar' aria-valuenow='"
                     . $per . "' aria-valuemin='0' aria-valuemax='100' style='width: " . $per . "%'></div>
                   </div>";
-        else:
+        else: /* Se já foi homologado */
           return "<div class=''><span class='label label-default'>" . $this->Time->format('d/m/Y', $time1) . " - " .
                    $this->Time->format('d/m/Y', $time3) . "</span></div>";
         endif;
     }
+
       private function color($value){
           if ( $value < 50):
             $color = "success";
@@ -90,7 +96,8 @@
     * considerando o dia de trabalho da dataprev 07:00 até 22:00
     */
     public function totalTime($time1, $time2) {
-      $t1 = date_create($time1); $t2 = date_create($time2);
+      $t1 = date_create($time1);
+      $t2 = date_create($time2);
       $total = date_diff($t1,$t2);
 
       return (($total->y * 365.25 + $total->m * 30 + $total->d) * 24 + $total->h). "h " . $total->i . "min" ;

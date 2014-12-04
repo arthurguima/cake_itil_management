@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-12 col-md-6">
     <div class='col-lg-6'>
       <?php
         echo $this->BootstrapForm->create('Demanda');
@@ -57,17 +57,27 @@
                     'label' => array('text' => 'Descrição: '),
                     'type' => 'textarea'));
 
+        echo $this->BootstrapForm->input('demanda_tipo_id', array(
+                    'label' => array('text' => 'Tipo da Demanda: ')));
+
         ?>
     </div>
     <div class='col-lg-6'>
       <?php
+
+        echo $this->BootstrapForm->input('servico_id', array(
+                    'label' => array('text' => 'Serviço: ')));
+
+        echo $this->BootstrapForm->input('status_id', array(
+                    'label' => array('text' => 'Status: ')));
+
         echo $this->BootstrapForm->input('data_cadastro', array(
                    'label' => array('text' => 'Data de Cadastro: '),
                    'type' => 'text',
                    'id' => 'dp '));
 
         echo $this->BootstrapForm->input('dt_prevista', array(
-                   'label' => array('text' => 'Data Prevista de Término: '),
+                   'label' => array('text' => 'Data de Término: '),
                    'type' => 'text',
                    'id' => 'dp '));
 
@@ -75,15 +85,6 @@
                    'label' => array('text' => 'Data de Homologação: '),
                    'type' => 'text',
                    'id' => 'dp '));
-
-        echo $this->BootstrapForm->input('demanda_tipo_id', array(
-                    'label' => array('text' => 'Tipo da Demanda: ')));
-
-        echo $this->BootstrapForm->input('servico_id', array(
-                    'label' => array('text' => 'Serviço: ')));
-
-        echo $this->BootstrapForm->input('status_id', array(
-                    'label' => array('text' => 'Status: ')));
       ?>
     </div>
 

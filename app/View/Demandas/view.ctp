@@ -30,25 +30,30 @@
                      "<i class='fa-expand fa' style='cursor:pointer; float:right;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></i></a></span>" ?>
           </li>
           <li><a><b>Mantis: </b><?php echo $demanda['Demanda']['mantis_id']; ?></a></li>
-          <li><a>
-            <b>Prazo: </b>
-            <?php
-              if($demanda['Demanda']['dt_prevista'] != null):
-                echo $this->Times->timeLeftTo(
-                  $demanda['Demanda']['data_cadastro'],
-                  $demanda['Demanda']['dt_prevista'],
-                  $this->Time->format('d/m/Y', $demanda['Demanda']['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $demanda['Demanda']['dt_prevista']),
-                  ($demanda['Demanda']['data_homologacao'] == null));
-              endif;
-            ?></a>
+          <li>
+            <a>
+              <b>Prazo: </b>
+              <?php echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
+                      $this->Time->format('d/m/Y', $demanda['Demanda']['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $demanda['Demanda']['dt_prevista']),
+                      ($demanda['Demanda']['data_homologacao']));
+              ?>
+            </a>
           </li>
-          <li><a><b>Data Prevista: </b> <?php echo $this->Times->pastdate($demanda['Demanda']['dt_prevista']); ?></a></li>
+          <li>
+            <a><b>Data Prevista: </b>
+              <?php
+                  if($demanda['Demanda']['dt_prevista'] != null){
+                    echo $this->Times->pastdate($demanda['Demanda']['dt_prevista']);
+                  }
+              ?>
+            </a>
+          </li>
           <li>
             <a>
               <b>Data de homologação: </b>
               <?php
                 if ($demanda['Demanda']['data_homologacao'] != null):
-                  echo $demanda['Demanda']['data_homologacao'];
+                  echo $this->Times->pastdate($demanda['Demanda']['data_homologacao']);
                 endif;
               ?>
             </a>
