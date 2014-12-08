@@ -10,7 +10,12 @@
     <tbody>
       <?php foreach ($servicos as $servico): ?>
         <tr>
-          <td><b><a style="color: black; text-decoration:none;"  id="<?php echo $servico['Servico']['sigla']; ?>"><?php echo $servico['Servico']['sigla']; ?></a></b></td>
+          <td>
+            <b>
+              <?php echo $this->Html->link($servico['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $servico['Servico']['id']),
+                    array('style' => "color: black; text-decoration:none;", 'id' => $servico['Servico']['sigla'])); ?>
+            </b>
+          </td>
           <?php echo $this->Disponibilidade->online($servico['Servico']['url'], 'GET'); ?>
         </tr>
       <?php endforeach; ?>
