@@ -48,7 +48,6 @@
 
 <!-- DataTables JavaScript -->
 <?php
-debug($status);
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
   echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
   echo $this->Html->css('plugins/dataTables.bootstrap.css');

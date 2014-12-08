@@ -102,7 +102,7 @@
                             ($demanda['Demanda']['data_homologacao']));
                     ?>
                   </td>
-                  
+
                   <td>
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>"><?php echo $demanda['Status']['nome']; ?></span>
                   </td>
@@ -166,7 +166,6 @@
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
           "columnDefs": [  { "visible": false, "targets": 5 } ],
-          // 'sAjaxSource': src="<?php// $this->base;?>/controller/action/<?php //$dataId;?>",
           "dom": 'T<"clear">lfrtip',
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",

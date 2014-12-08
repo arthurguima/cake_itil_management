@@ -17,8 +17,8 @@
                    'onblur' =>"getID('SsClarity');")); ?>
 
          <div class="form-group">
-           <label for="SsClarityId" class="control-label col-sm-2">Clarity ID: </label>
-           <div class="col-sm-10">
+           <label for="SsClarityId" class="control-label col-lg-3">Clarity ID: </label>
+           <div class="col-lg-9">
               <div class='input-group'>
                 <input name="data[Ss][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="SsClarityId">
                 <span class='input-group-addon'><a id='viewClarity' data-toggle='modal' data-target='#myModal'></a></span>
@@ -92,10 +92,10 @@
       ?>
     </div>
   </div>
-  <div class="form-footer col-lg-12 pull-right">
+  <div class="form-footer col-lg-12 col-md-6 pull-right">
     <?php
       echo $this->BootstrapForm->submit('Salvar');
-      echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-3'));
+      echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-lg-3 col-md-6'));
       echo $this->Form->end();
     ?>
   </div>

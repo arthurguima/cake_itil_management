@@ -15,10 +15,10 @@
                 'label' => array('text' => 'Nome: ')));
 
     ?>
-    <div class="form-footer col-lg-10 pull-right">
+    <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');
-        echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-3'));
+        echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-lg-3 col-md-6'));
         echo $this->Form->end();
       ?>
     </div>

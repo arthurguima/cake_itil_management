@@ -25,9 +25,9 @@ class BootstrapFormHelper extends FormHelper {
                 	'class' => 'form-group'
                 ),
                 'label' => array(
-                	'class' => 'col-lg-2 control-label'
+                	'class' => 'col-lg-3 control-label'
                 ),
-                'between' => '<div class="col-lg-10">',
+                'between' => '<div class="col-lg-9">',
                 'seperator' => '</div>',
                 'error' => array('attributes' => array('class' => 'error-message col-lg-10 col-lg-offset-2')),
                 'after' => '</div>',
@@ -53,7 +53,7 @@ class BootstrapFormHelper extends FormHelper {
 
     public function submit($caption = null, $options = array()) {
 	    $defaultOptions = array(
-	    	'class' => 'btn btn-success pull-right col-md-3 col-md-offset-6',
+	    	'class' => 'btn btn-success pull-right col-lg-3 col-md-6 col-md-offset-6',
 	    	//'div' =>  'form-group',
 	    	//'before' => '<div class="">',
 	    	//'after' => '</div>',

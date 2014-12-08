@@ -18,8 +18,8 @@
                    'value' => "http://www-dtpprojetos/niku/nu#action:pma.ideaProperties&id=" . $this->data['Demanda']['clarity_id'])); ?>
 
          <div class="form-group">
-           <label for="DemandaClarityId" class="control-label col-sm-2">Clarity ID: </label>
-           <div class="col-sm-10">
+           <label for="DemandaClarityId" class="control-label col-lg-3">Clarity ID: </label>
+           <div class="col-lg-9">
               <div class='input-group'>
                 <input name="data[Demanda][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="DemandaClarityId"
                 value=
@@ -92,10 +92,10 @@
     </div>
       <?php echo $this->BootstrapForm->input('id'); ?>
 
-    <div class="form-footer col-lg-12 pull-right">
+    <div class="form-footer col-lg-12 col-md-6 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');
-        echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-3'));
+        echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-lg-3 col-md-6'));
         echo $this->Form->end();
       ?>
     </div>
