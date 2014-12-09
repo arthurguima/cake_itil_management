@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">
-         PEs - Propostas de Execução
+         PE - Propostas de Execução
       </h3>
     </div>
     <div class="col-lg-12 pull-left filters">
@@ -55,7 +55,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de PEs </b></div>
+      <div class="panel-heading"><b> Lista de PE </b></div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-ss">

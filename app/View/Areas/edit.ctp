@@ -27,7 +27,7 @@
                                'class' => 'col-sm-3 pull-left col-sm-offset-3',
                                'label' => array(
                                  'text' => 'Status?',
-                                 'class' => 'control-label col-sm-2')));
+                                 'class' => 'control-label col-sm-3')));
 
         echo $this->BootstrapForm->input('id');
 

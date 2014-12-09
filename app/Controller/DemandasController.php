@@ -134,7 +134,7 @@
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Demanda->save($this->request->data)) {
         $this->Session->setFlash('Demanda atualizada com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(array('action' => 'view', $id));
       } else {
         $this->Session->setFlash('A demanda não pode ser atualizada!', 'alert-box', array ('class' => 'alert alert-danger'));
       }

@@ -203,7 +203,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="col-md-12">
   <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
 </div>
 

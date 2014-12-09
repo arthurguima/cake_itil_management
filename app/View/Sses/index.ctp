@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">
-         SSs - Solicitações de Serviço
+         SS - Solicitações de Serviço
          <div class="col-lg-2 pull-right">
            <?php echo $this->Html->link("<i class='fa fa-plus'></i> Nova",
               array('controller' => 'sses', 'action' => 'add'),
@@ -70,7 +70,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de SSs </b></div>
+      <div class="panel-heading"><b> Lista de SS </b></div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-ss">
