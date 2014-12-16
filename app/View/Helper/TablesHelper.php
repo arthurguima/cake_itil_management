@@ -53,6 +53,34 @@
             </script>';
   }
 
+  public function PeStatusEditable($id){
+    return  '
+            <script>
+              $(document).ready(function() {
+                  $("#status-' . $id . '").editable("' . Router::url('/', true). '/pes/ajax_edit_status",{
+                     name: "status_id",
+                     loadurl : "' . Router::url('/', true). '/status/json?tipo=4",
+                     type   : "select",
+                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                  });
+              });
+            </script>';
+  }
+
+  public function OrdStatusEditable($id){
+    return  '
+            <script>
+              $(document).ready(function() {
+                  $("#status-' . $id . '").editable("' . Router::url('/', true). '/ords/ajax_edit_status",{
+                     name: "status_id",
+                     loadurl : "' . Router::url('/', true). '/status/json?tipo=3",
+                     type   : "select",
+                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                  });
+              });
+            </script>';
+  }
+
   public function PrioridadeEditable($id, $controller){
     return  "
             <script>

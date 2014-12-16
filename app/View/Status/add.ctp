@@ -16,8 +16,8 @@
 
     ?>
     <div class="form-group">
-      <label for="StatusTipo" class="col-lg-2 control-label">Tipo: </label>
-      <div class="col-lg-10">
+      <label for="StatusTipo" class="col-lg-3 control-label">Tipo: </label>
+      <div class="col-lg-9">
         <select name="data[Status][tipo]" class="form-control" id="filterTipo">
           <option value="1">Demanda</option>
           <option value="2">SS</option>

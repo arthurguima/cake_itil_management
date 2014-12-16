@@ -103,7 +103,7 @@
           return $this->redirect(array('action' => 'index'));
         }
       } else {
-        $this->Session->setFlash('Não foi possível atualizar o contrato.', 'alert-box', array ('class' => 'alert alert-danger'));
+        $this->Session->setFlash('Não foi possível atualizar a PE.', 'alert-box', array ('class' => 'alert alert-danger'));
       }
     } else {
       $options = array('conditions' => array('Pe.' . $this->Pe->primaryKey => $id));
@@ -139,5 +139,26 @@
         $this->Session->setFlash('A PE não pode ser removida!', 'alert-box', array ('class' => 'alert alert-danger'));
       }
       return $this->redirect(array('action' => 'index'));
+    }
+
+    /**
+    * Form inline
+    */
+    public function ajax_edit_status(){
+      $this->autoRender = false;
+
+      if ($this->request->data) {
+
+          $pe = explode('-', $this->request->data('id'));
+          $pe = $pe[1];
+          $this->Pe->id = $pe;
+          $this->Pe->saveField('status_id', $this->request->data('status_id'));
+
+          $this->loadModel('Status');
+          $status =  $this->Status->find('first', array('conditions' => array(
+                'Status.id' => $this->request->data('status_id')), 'fields' => array('Status.nome')));
+
+          return $status['Status']['nome'];
+      }
     }
 }

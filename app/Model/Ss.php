@@ -13,6 +13,12 @@
 			'foreignKey' => 'ss_id',
 			'dependent' => false,
 			'conditions' => '',
+		),
+		'Ord' => array(
+			'className' => 'Ord',
+			'foreignKey' => 'ss_id',
+			'dependent' => false,
+			'conditions' => '',
 		)
 	);
 

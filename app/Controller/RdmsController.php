@@ -8,9 +8,17 @@
         'nome_' => array(
           'Rdm.nome' => array('operator' => 'LIKE')
         ),
+        'versao_' => array(
+          'Rdm.versao' => array('operator' => 'LIKE')
+        ),
         'servico' => array(
           'Rdm.servico_id' => array(
             'select' => $this->Filter->select('Serviço', $this->Rdm->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+          )
+        ),
+        'ambiente_' => array(
+          'Rdm.ambiente' => array(
+            'select' => $this->Filter->select('Ambiente', array(1 => 'Homologação', 2 => 'Produção') )
           )
         ),
         'numero_' => array(

@@ -48,50 +48,7 @@
     </div>
   </div>
 
-  <div class="col-lg-8">
-    <div class="panel panel-default panel-default">
-      <div class="panel-heading">
-        <p>
-          <h3 class="panel-title">Demandas Internas
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'demandas', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-          </h3>
-        </p>
-      </div>
-      <div class="panel-body demandas-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-demandas">
-            <thead>
-              <tr>
-                <th>Tipo</th>
-                <th>Nome</th>
-                <th>Clarity ID:</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($ss['Demanda'] as $dem): ?>
-                <tr>
-                  <td><?php echo($dem['DemandaTipo']['nome']); ?></td>
-                  <td><?php echo $dem['nome']; ?></td>
-                  <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
-                      <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
-                                 $dem['clarity_id'] .")'>" . $dem['clarity_dm_id'] ."</a></span>" ?>
-                  </td>
-                  <td><?php echo $this->Tables->getMenu('demandas', $dem['id'], 2); ?></td>
-                </tr>
-              <?php endforeach; ?>
-            <?php unset($area); ?>
-          </tbody>
-        </table>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-8">
+  <div class="col-lg-4">
     <div class="panel panel-danger panel-info">
       <div class="panel-heading">
         <p>
@@ -140,11 +97,54 @@
     </div>
   </div>
 
-  <div class="col-lg-8">
-    <div class="panel panel-default panel-info">
+  <div class="col-lg-4">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <p>
-          <h3 class="panel-title"><b>PEs</b>
+          <h3 class="panel-title">Demandas Internas
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'demandas', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body demandas-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-demandas">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Nome</th>
+                <th>Clarity ID:</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($ss['Demanda'] as $dem): ?>
+                <tr>
+                  <td><?php echo($dem['DemandaTipo']['nome']); ?></td>
+                  <td><?php echo $dem['nome']; ?></td>
+                  <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
+                      <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                                 $dem['clarity_id'] .")'>" . $dem['clarity_dm_id'] ."</a></span>" ?>
+                  </td>
+                  <td><?php echo $this->Tables->getMenu('demandas', $dem['id'], 2); ?></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php unset($area); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>PE</b>
             <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
               array('controller' => 'pes', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
               array('escape' => false)); ?>
@@ -154,7 +154,7 @@
       </div>
       <div class="panel-body pe-body">
         <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-pe">
             <thead>
               <tr>
                 <th>Número</th>
@@ -168,7 +168,7 @@
               <?php foreach($ss['Pe'] as $pe): ?>
                   <tr>
                     <td><?php echo $pe['numero']; ?></td>
-                    <td><?php echo $pe['nome']; ?></td>
+                    <td><?php echo $this->Html->link($pe['nome'], $pe['cvs_url']); ?></td>
                     <td><?php echo $pe['Status']['nome']; ?></td>
                     <td><?php echo $pe['responsavel']; ?></td>
                     <td>
@@ -189,6 +189,59 @@
       </div>
     </div>
   </div>
+
+  <div class="col-lg-4">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>OS</b>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'ords', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.os-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body os-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-os">
+            <thead>
+              <tr>
+                <th>Número</th>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>PE</th>
+                <th>Responsável</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($ss['Ord'] as $os): ?>
+                  <tr>
+                    <td><?php echo $os['numero']; ?></td>
+                    <td><?php echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td>
+                    <td><?php echo $os['Status']['nome']; ?></td>
+                    <td><?php echo $os['Pe']['nome']; ?></td>
+                    <td><?php echo $os['responsavel']; ?></td>
+                    <td>
+                       <?php
+                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
+                                array('controller' => 'ords', 'action' => 'view', $os['id']), array('escape' => false));
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'ords', 'action' => 'edit', $os['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($os); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
   <div class="col-md-12">
     <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
   </dvi>

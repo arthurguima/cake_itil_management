@@ -6,6 +6,12 @@
     ),
     'Ss' => array(
       'className' => 'Ss'
+    ),
+    'Ord' => array(
+      'className' => 'Ord'
+    ),
+    'Pe' => array(
+      'className' => 'Pe'
     )
   );
 

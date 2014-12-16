@@ -30,8 +30,8 @@
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido!'),
       'between' => array(
-                'rule'    => array('between', 3, 110),
-                'message' => 'O campo deve conter de 3 a 110 caracteres!'
+                'rule'    => array('between', 3, 120),
+                'message' => 'O campo deve conter de 3 a 120 caracteres!'
     )),
   );
 

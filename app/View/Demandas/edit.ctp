@@ -61,30 +61,30 @@
          echo $this->BootstrapForm->input('descricao', array(
                      'label' => array('text' => 'Descrição: '),
                      'type' => 'textarea'));
-
-         echo $this->BootstrapForm->input('demanda_tipo_id', array(
-                     'label' => array('text' => 'Tipo da Demanda: ')));
       ?>
     </div>
     <div class='col-lg-6'>
       <?php
+        echo $this->BootstrapForm->input('demanda_tipo_id', array(
+                    'label' => array('text' => 'Tipo da Demanda: ')));
+
         echo $this->BootstrapForm->input('servico_id', array(
                    'label' => array('text' => 'Serviço: ')));
 
-       echo $this->BootstrapForm->input('status_id', array(
+        echo $this->BootstrapForm->input('status_id', array(
                    'label' => array('text' => 'Status: ')));
 
-       echo $this->BootstrapForm->input('data_cadastro', array(
+        echo $this->BootstrapForm->input('data_cadastro', array(
                   'label' => array('text' => 'Data de Cadastro: '),
                   'type' => 'text',
                   'id' => 'dp '));
 
-       echo $this->BootstrapForm->input('dt_prevista', array(
+        echo $this->BootstrapForm->input('dt_prevista', array(
                   'label' => array('text' => 'Data de Término: '),
                   'type' => 'text',
                   'id' => 'dp '));
 
-       echo $this->BootstrapForm->input('data_homologacao', array(
+        echo $this->BootstrapForm->input('data_homologacao', array(
                   'label' => array('text' => 'Data de Homologação: '),
                   'type' => 'text',
                   'id' => 'dp '));

@@ -57,13 +57,12 @@
                     'label' => array('text' => 'Descrição: '),
                     'type' => 'textarea'));
 
-        echo $this->BootstrapForm->input('demanda_tipo_id', array(
-                    'label' => array('text' => 'Tipo da Demanda: ')));
-
         ?>
     </div>
     <div class='col-lg-6'>
       <?php
+        echo $this->BootstrapForm->input('demanda_tipo_id', array(
+                    'label' => array('text' => 'Tipo da Demanda: ')));
 
         echo $this->BootstrapForm->input('servico_id', array(
                     'label' => array('text' => 'Serviço: ')));

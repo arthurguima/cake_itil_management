@@ -1,7 +1,7 @@
 <?php //debug($demandas) ?>
 <div class="form-group">
-  <label for="DemandaDemanda" class="col-lg-2 control-label">Demanda(s):</label>
-  <div class="col-lg-10">
+  <label for="DemandaDemanda" class="col-lg-3 control-label">Demanda(s):</label>
+  <div class="col-lg-9">
     <input type="hidden" name="data[Demanda][Demanda]" value="" id="DemandaDemanda_">
     <select name="data[Demanda][Demanda][]" seperator="</div>" class="form-control" input="text" multiple="multiple" id="DemandaDemanda">
       <?php foreach ($demandas as $key => $value):

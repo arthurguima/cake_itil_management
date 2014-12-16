@@ -12,6 +12,10 @@
     'Pe' => array(
       'className' => 'Pe',
       'foreignKey' => 'pe_id'
+    ),
+    'Ord' => array(
+      'className' => 'Ord',
+      'foreignKey' => 'ord_id'
     )
   );
 

@@ -13,9 +13,8 @@
       <?php
         if(!strcmp($this->params['url']['controller'],'sses')){
           echo $this->BootstrapForm->hidden('ss_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          echo $this->BootstrapForm->hidden('servico_id', array('value' => $this->params['url']['servico'], 'type'=> "hidden"));
         }
-
-        echo $this->BootstrapForm->hidden('servico_id', array('value' => $this->params['url']['servico'], 'type'=> "hidden"));
 
         echo $this->BootstrapForm->input('nome', array(
                     'label' => array('text' => 'Nome: ')));

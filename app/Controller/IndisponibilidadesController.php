@@ -42,11 +42,13 @@
 
     // Define conditions
     $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
+    $this->Filter->setPaginate('limit', 3000);
     if(sizeof($this->Filter->getConditions()) > 0):
       /**
       * 'Hack' para HABTM
       */
       $cond = $this->Filter->getConditions();
+      debug($cond);
       if(sizeof($cond[0]) > 0):  //Conditions 0 corresponde ao serviço
         $this->Indisponibilidade->bindModel(array(
                'hasOne' => array(

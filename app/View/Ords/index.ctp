@@ -1,10 +1,10 @@
 <?php
-  $this->Html->addCrumb('Pe', '/pes');
+  $this->Html->addCrumb('Ord', '/pes');
 ?>
 <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">
-         PE - Propostas de Execução
+         OS - Ordens de Serviço
       </h3>
     </div>
     <div class="col-lg-12 pull-left filters">
@@ -15,29 +15,55 @@
         <div class="row inner" style="display: none;">
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
-            <div class="form-group">
-              <b>Data de Início: </b>
-              <?php echo $this->Search->input('dtinicio',
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-              ?>
-
+            <div class="col-lg-6">
+              <div class="form-group">
+                <b>Data de Recebimento: </b>
+                <?php echo $this->Search->input('dtrecebimento',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+              </div>
+              <div class="form-group">
+                <b>Data de Emissão: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                <?php echo $this->Search->input('dtemissao',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+              </div>
             </div>
-            <div class="form-group">
-              <b>Data de Emissão: </b>
-              <?php echo $this->Search->input('dtemissao',
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-              ?>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <b>Data de Deploy Homologação: </b>
+                <?php echo $this->Search->input('dtdhomologacao',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+
+              </div>
+              <div class="form-group">
+                <b>Data de Deploy Produção: </b>
+                <?php echo $this->Search->input('dtdproducao',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <b>Data de Homologação: </b>
+                <?php echo $this->Search->input('dthomologacao',
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+                ?>
+
+              </div>
             </div>
           </div>
           <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('num_ce_', array('class' => 'form-control', 'placeholder' => "Número da CE de envio:")); ?></div>
-          </div>
-          <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
           </div>
@@ -55,14 +81,13 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de PE </b></div>
+      <div class="panel-heading"><b> Lista de OS </b></div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-ss">
             <thead>
               <tr>
                 <th>Número</th>
-                <th>Número da CE</th>
                 <th>SS</th>
                 <th>Nome</th>
                 <th><span class="editable">Status</span></th>
@@ -71,22 +96,23 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($pes as $pe): ?>
+              <?php foreach ($ords as $ord): ?>
                 <tr>
-                  <td><?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano']; ?></td>
-                  <td><?php echo $pe['Pe']['num_ce']; ?></td>
-                  <td><?php echo $this->Html->link($pe['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $pe['Ss']['id'])); ?></td>
-                  <td><?php echo $this->Html->link($pe['Pe']['nome'], $pe['Pe']['cvs_url']); ?></td>
+                  <td><?php echo $ord['Ord']['numero'] . "/" . $ord['Ord']['ano']; ?></td>
+                  <td><?php echo $this->Html->link($ord['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id'])); ?></td>
+                  <td><?php echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td>
+
                   <td>
-                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $pe['Pe']['id'] ?>">
-                    <?php echo $pe['Status']['nome']; ?></span>
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $ord['Ord']['id'] ?>">
+                    <?php echo $ord['Status']['nome']; ?></span>
                   </td>
-                  <?php echo $this->Tables->PeStatusEditable($pe['Pe']['id']) ?>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $pe['Pe']['responsavel']; ?></div></td>
-                  <td><?php echo $this->Tables->getMenu('pes', $pe['Pe']['id'], 14); ?></td>
+                  <?php echo $this->Tables->OrdStatusEditable($ord['Ord']['id']) ?>
+
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ord['Ord']['responsavel']; ?></div></td>
+                  <td><?php echo $this->Tables->getMenu('ords', $ord['Ord']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
-              <?php unset($pe); ?>
+              <?php unset($ord); ?>
 
             </tbody>
           </table>
