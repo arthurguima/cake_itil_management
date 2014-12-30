@@ -9,7 +9,9 @@
   public $hasMany = array(
     'Demanda' => array('className' => 'Demanda'),
     'Rdm' => array('className' => 'Rdm'),
-    'Ss' => array('className' => 'Ss')
+    'Ss' => array('className' => 'Ss'),
+    'Chamado' => array('className' => 'Chamado'),
+    'ChamadoTipo' => array('className' => 'ChamadoTipo'),
   );
 
   public $validate = array(

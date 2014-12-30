@@ -124,7 +124,8 @@
         <p>
           <h3 class="panel-title"><b>Chamados</b>
             <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'chamados', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+              array('controller' => 'chamados', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view',
+                                                                               'servico' => $demanda['Demanda']['servico_id'] )),
               array('escape' => false)); ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.chamados-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>

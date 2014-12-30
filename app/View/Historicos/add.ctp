@@ -30,6 +30,10 @@
         echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
       }
 
+      if(!strcmp($this->params['url']['controller'],'chamados')){
+        echo $this->BootstrapForm->hidden('chamado_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+      }
+
       echo $this->BootstrapForm->input('data', array(
                               'label' => array('text' => 'Data: '),
                               'type' => 'text',

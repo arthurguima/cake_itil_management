@@ -16,6 +16,10 @@
     'Ord' => array(
       'className' => 'Ord',
       'foreignKey' => 'ord_id'
+    ),
+    'Chamado' => array(
+      'className' => 'Chamado',
+      'foreignKey' => 'chamado_id'
     )
   );
 

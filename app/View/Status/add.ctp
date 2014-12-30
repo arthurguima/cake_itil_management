@@ -23,6 +23,7 @@
           <option value="2">SS</option>
           <option value="3">OS</option>
           <option value="4">PE</option>
+          <option value="5">Chamado</option>
         </select>
       </div>
     </div>

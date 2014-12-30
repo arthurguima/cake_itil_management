@@ -12,6 +12,9 @@
     ),
     'Pe' => array(
       'className' => 'Pe'
+    ),
+    'Chamado' => array(
+      'className' => 'Chamado'
     )
   );
 

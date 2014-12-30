@@ -31,6 +31,7 @@
                 <li>Melhorias na gestão das RDMs.</li>
                 <li>Pequenas melhorias no Dashboard.</li>
                 <li>Registrar OS de cada SS.</li>
+                <li>Pesquisa avançada por chamados.</li>
                 <li>Correção de Bugs.</li>
               </ul>
             </div>

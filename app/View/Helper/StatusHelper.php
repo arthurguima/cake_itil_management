@@ -9,6 +9,7 @@
       case 2: return "SS";
       case 3: return "OS";
       case 4: return "PE";
+      case 5: return "Chamado";
     endswitch;
     return "Demanda";
   }

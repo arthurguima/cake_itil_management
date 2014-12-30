@@ -164,6 +164,11 @@
   }
 
   /**
+  * Relatório detalhado de indisponibilidade por serviço
+  */
+  public function details(){}
+
+  /**
   * Form inline
   */
   public function ajax_edit_status(){

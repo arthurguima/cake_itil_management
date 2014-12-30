@@ -1,5 +1,5 @@
 <?php
-  $this->Html->addCrumb('Ord', '/pes');
+  $this->Html->addCrumb('OS', '/ords');
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -155,7 +155,7 @@
                   "sExtends": "copy",
                   "sButtonText": "Copiar",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3,4,5 ]
+                  "mColumns": [ 0,1,2,3]
               },
               {
                   "sExtends": "print",
@@ -164,18 +164,18 @@
               {
                   "sExtends": "csv",
                   "sButtonText": "CSV",
-                  "sFileName": "Propostas de Execução.csv",
+                  "sFileName": "Ordens de Serviço.csv",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3,4,5 ]
+                  "mColumns": [ 0,1,2,3]
               },
               {
                   "sExtends": "pdf",
                   "sButtonText": "PDF",
-                  "sFileName": "Propostas de Execução.pdf",
+                  "sFileName": "Ordens de Serviço.pdf",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
                   "sPdfOrientation": "landscape",
-                  "mColumns": [ 0,1,2,3,4,5 ],
-                  "sTitle": "Listagem de Propostas de Execução",
+                  "mColumns": [ 0,1,2,3],
+                  "sTitle": "Listagem de Ordens de Serviço",
                   "sPdfMessage": "<?php echo date('d/m/y')?>",
               },
             ]
