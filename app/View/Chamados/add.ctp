@@ -103,7 +103,6 @@
          getChamadoTipos($(this).val());
       })
     }).change();
-
   });
 </script>
 

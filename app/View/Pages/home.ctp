@@ -64,6 +64,48 @@
 		</div>
 	</div>
 
+	<div class="col-lg-9  col-md-12 col-sm-12 pull-left">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<p>
+					<h3 class="panel-title">
+						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Chamados
+							<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.chamados-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+						</b>
+					</h3>
+				</p>
+			</div>
+			<div class="panel-body chamados-body">
+				<ul class="nav nav-tabs nav-tabs-black" role="tablist">
+					<li role="presentation" class="active"><a href="#cham_status" role="tab" data-toggle="tab">Status</a></li>
+					<li role="presentation"><a href="#cham_tipos" role="tab" data-toggle="tab">Tipos</a></li>
+					<li role="presentation"><a href="#cham_tipos_status" role="tab" data-toggle="tab">TiposXStatus</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="cham_status">
+						<?php foreach ($chamados as $key => $value): ?>
+							<?php echo $this->Chamado->chamadosStatus($chamados[$key], $key)?>
+						<?php endforeach; ?>
+						<?php unset($chamado);?>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="cham_tipos">
+						<?php foreach ($chamados as $key => $value): ?>
+							<?php echo $this->Chamado->chamadosTipos($chamados[$key], $key)?>
+						<?php endforeach; ?>
+						<?php unset($chamado);?>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="cham_tipos_status">
+						<?php foreach ($chamados as $key => $value): ?>
+							<?php echo $this->Chamado->chamadosStatusTipos($chamados[$key], $key)?>
+						<?php endforeach; ?>
+						<?php unset($chamado);?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">

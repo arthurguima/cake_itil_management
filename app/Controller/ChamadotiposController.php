@@ -106,6 +106,9 @@
 	* returns a list of itens filtered by servico
 	*/
 	public function optionList(){
+		if ($this->request->is('ajax')) {
+    	$this->disableCache();
+		}
 		$this->layout = null;
 		//$this->autoRender = false;
 

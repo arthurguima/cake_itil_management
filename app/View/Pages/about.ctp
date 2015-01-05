@@ -24,6 +24,21 @@
     <div class="well">
       <ul class="list-unstyled spaced">
         <li>
+          <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.5</h4>
+            <div class="personal-info">
+              Veja o que mudou:<br/><br/>
+              <ul>
+                <li>Melhorias na gestão dos Chamados.</li>
+                <li>Visão dos chamados no Dashboard</li>
+                <li>Correção de Bugs.</li>
+              </ul>
+            </div>
+        </li>
+      </ul>
+    </div>
+    <div class="well">
+      <ul class="list-unstyled spaced">
+        <li>
           <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4.2</h4>
             <div class="personal-info">
               Veja o que mudou:<br/><br/>

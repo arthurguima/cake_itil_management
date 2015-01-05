@@ -1,9 +1,9 @@
 <?php
-  $this->Html->addCrumb('Pes', '');
-  $this->Html->addCrumb($chamado['Chamado']['id'], array('controller' => 'items', 'action' => 'edit', $chamado['Chamado']['id']));
+  $this->Html->addCrumb('Chamados', '');
+  $this->Html->addCrumb($chamado['Chamado']['id'], array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id']));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Pe: <?php echo $chamado['Chamado']['nome'] . " - " . $chamado['Servico']['nome']; ?></h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Chamado: <?php echo $chamado['Chamado']['nome'] . " - " . $chamado['Servico']['nome']; ?></h3></div>
 </div>
 
 <div class="row">
@@ -15,7 +15,7 @@
             <b>Informações</b>
             <?php
               echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-                array('controller' => 'Pes', 'action' => 'edit', $chamado['Chamado']['id']),
+                array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
                 array('escape' => false));
             ?>
           </h3>
@@ -25,6 +25,7 @@
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Nome: </b><?php echo $chamado['Chamado']['nome']; ?></a></li>
           <li><a><b>Número: </b><?php echo $chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano']; ?></a></li>
+          <li><a><b>Tipo: </b><?php echo $chamado['ChamadoTipo']['nome']; ?></a></li>
           <li><a><b>Status: </b><?php echo $chamado['Status']['nome']; ?></a></li>
           <li><a><b>Responsável: </b><?php echo $chamado['Chamado']['responsavel']; ?></a></li>
           <li><a><b>Serviço: </b><?php echo $chamado['Servico']['nome']; ?></a></li>
@@ -68,10 +69,10 @@
                     <td>
                        <?php
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'pes', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
+                                array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                                array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'pes', 'id' => $chamado['Chamado']['id'], 'action' => 'view' )),
+                                array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'chamados', 'id' => $chamado['Chamado']['id'], 'action' => 'view' )),
                                 array('escape' => false), "Você tem certeza");
                        ?>
                      </td>

@@ -29,6 +29,7 @@
           <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
           </div>
           <?php
             echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -52,6 +53,7 @@
                 <th>Número</th>
                 <th>Nome</th>
                 <th>Tipo</th>
+                <th>Serviço</th>
                 <th>Aberto?</th>
                 <th>Pai?</th>
                 <th><span class="editable">Status</span></th>
@@ -65,6 +67,7 @@
                   <td><?php echo $chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano']; ?></td>
                   <td><?php echo $chamado['Chamado']['nome']; ?></td>
                   <td><?php echo $chamado['ChamadoTipo']['nome']; ?></td>
+                  <td><?php echo $chamado['Servico']['nome']; ?></td>
                   <td><?php echo $this->Times->yesOrNo($chamado['Chamado']['aberto'])?></td>
                   <td><?php echo $this->Times->yesOrNo($chamado['Chamado']['pai'])?></td>
                   <td>
@@ -119,20 +122,20 @@
                     "sExtends": "copy",
                     "sButtonText": "Copiar",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6 ]
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "print",
                     "sButtonText": "Imprimir",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6 ]
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "csv",
                     "sButtonText": "CSV",
                     "sFileName": "Chamados.csv",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6 ]
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
                 },
                 {
                     "sExtends": "pdf",
@@ -140,7 +143,7 @@
                     "sFileName": "Chamados.pdf",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
                     "sPdfOrientation": "landscape",
-                    "mColumns": [ 0,1,2,3,4,5,6 ],
+                    "mColumns": [ 0,1,2,3,4,5,6,7 ],
                     "sTitle": "Listagem de Chamados",
                     "sPdfMessage": "<?php echo date('d/m/y')?>"
                 },

@@ -57,6 +57,12 @@
 									array('conditions' => array('Status.tipo' => 5), 'fields' => array('Status.id', 'Status.nome')))),
 						'operator'    => '!='
 					)
+				),
+				'tipo' => array(
+					'Chamado.chamado_tipo_id' => array(
+						'select' => $this->Filter->select('Tipo de Chamado', $this->Chamado->ChamadoTipo->find('list',
+									array('conditions' => array(), 'fields' => array('ChamadoTipo.id', 'ChamadoTipo.nome', 'ChamadoTipo.servico_id'))))
+					)
 				)
 			)
 		);
@@ -78,13 +84,7 @@
 	public function demandas() {
 		$this->Filter->addFilters(
 			array(
-			/*	'status' => array(
-					'Chamado.status_id' => array(
-						'select' => $this->Filter->select('Status da Demanda', $this->Ord->Status->find('list',
-									array('conditions' => array('Status.tipo' => 3), 'fields' => array('Status.id', 'Status.nome'))))
-					)
-				),*/
-				'numero_' => array(
+			'numero_' => array(
 					'OR' => array(
 						'Chamado.numero' => array(
 							'operator' => 'LIKE',
