@@ -23,6 +23,7 @@
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Número do Evento: </b><?php echo $Indisponibilidade['Indisponibilidade']['num_evento']; ?></a></p>
           <li><a><b>Número do Incidente: </b><?php echo $Indisponibilidade['Indisponibilidade']['num_incidente']; ?></a></p>
+          <li><a><b>Motivo: </b><?php echo $Indisponibilidade['Motivo']['nome']; ?></a></p>
           <li><a><b>Início: </b><?php echo $Indisponibilidade['Indisponibilidade']['dt_inicio']; ?></a></p>
           <li><a><b>Duração: </b>
               <?php if($Indisponibilidade['Indisponibilidade']['dt_fim'] != null):

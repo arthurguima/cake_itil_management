@@ -76,7 +76,7 @@ class LdapHelper extends AppHelper {
 
   public function autorizado(){
     if(isset($_SESSION['email'])){
-      if($_SESSION['email']==='arthur.doliveira@dataprev.gov.br' || $_SESSION['email']==='lucas.lmendonca@dataprev.gov.br' ||
+      if($_SESSION['email']==='arthur.doliveira@dataprev.gov.br' || //$_SESSION['email']==='lucas.lmendonca@dataprev.gov.br' ||
         $_SESSION['email']==='humbertho.mattar@dataprev.gov.br' || $_SESSION['email']==='ynga.povoa@dataprev.gov.br' ||
         $_SESSION['email']==='rodrigo.vieira@dataprev.gov.br' ){
         return true;

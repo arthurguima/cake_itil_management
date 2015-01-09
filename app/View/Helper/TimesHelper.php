@@ -69,7 +69,7 @@
       /*
       * Coloca as datas no formato americano
       */
-      private function AmericanDate($time){
+      public function AmericanDate($time){
         if($time != null){
           return date("Y-m-d", strtotime(str_replace('/', '-', $time)));
         }
@@ -122,5 +122,24 @@
       $total = date_diff($t1,$t2);
 
       return (($total->y * 365.25 + $total->m * 30 + $total->d) * 24 + $total->h). "h " . $total->i . "min" ;
+    }
+
+    /*
+    * Quanto tempo se passou entre duas datas em segundos
+    * considerando o dia de trabalho da dataprev 07:00 até 22:00
+    */
+    public function diffInSec($time1, $time2) {
+      $t1 = date_create($time1);
+      $t2 = date_create($time2);
+      $total = date_diff($t1,$t2);
+
+      return ((($total->y * 365.25 + $total->m * 30 + $total->d) * 24 + $total->h) * 60 + $total->i)*60 + $total->s; ;
+    }
+
+    /*
+    * Recebe um total de tempo em segundos e retorna uma string em Horas
+    */
+    public function SecToString($time) {
+      return floor(($time/3600)) . "h " . ($time%3600)/60 . "min";
     }
 }?>

@@ -65,49 +65,47 @@
 									<li> <!-- Sustentação -->
 											<a href="#"><i class="fa fa-briefcase fa-fw"></i> Demandas <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PE", '/pes', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PE", '/pes', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- Sustentação -->
 											<a href="#"><i class="fa fa-wrench fa-fw"></i> Sustentação<span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Controle de Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Internas", '/demandas', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/rdms', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados com Demandas", '/chamados/demandas', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados", '/chamados', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Controle de Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Internas", '/demandas', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/rdms', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados com Demandas", '/chamados/demandas', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados", '/chamados', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- Relatórios -->
-											<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios (em breve)<span class="fa arrow"></span></a>
+											<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><a href="#">1</a></li>
-													<li><a href="#">2</a></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- Base de Conhecimenton -->
 											<a href="#"><i class="fa fa-institution fa-fw"></i> Base de Conhecimento<span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Sistemas Internos", '/internos', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Procedimentos", '/procedimentos', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mapeamento DTP", '/responsabilidades', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Sistemas Internos", '/internos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Procedimentos", '/procedimentos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mapeamento DTP", '/responsabilidades', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- Admin -->
 											<a href="#"><i class="fa fa-gears fa-fw"></i> Admin<span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Áreas", '/areas', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Clientes", '/clientes', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contratos", '/contratos', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços", '/servicos', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dependências", '/dependencias', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Motivos para Indisponibilidade", '/motivos', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Chamados", '/chamadotipos', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Demandas", '/demandatipos', array('escape' => false)); ?></li>
-													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Status", '/status', array('escape' => false)); ?></li>
-													<!--li><a href="#">Termos</a></li -->
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Áreas", '/areas', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Clientes", '/clientes', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contratos", '/contratos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços", '/servicos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dependências", '/dependencias', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Motivos para Indisponibilidade", '/motivos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Chamados", '/chamadotipos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Demandas", '/demandatipos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Status", '/status', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 								</ul>
@@ -123,7 +121,7 @@
 			<div class='row'><?php echo $this->Session->flash(); ?></div>
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<!--div id="footer">
+		<!-- div id="footer">
 		</div>
 	</div>
 	<hr style="margin-top:50px;" /--><?php //echo $this->element('sql_dump'); ?>
