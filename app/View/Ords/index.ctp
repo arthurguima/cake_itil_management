@@ -89,7 +89,7 @@
               <tr>
                 <th>Número</th>
                 <th>SS</th>
-                <th>PE</th>
+                <th>PA</th>
                 <th>Nome</th>
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>

@@ -63,7 +63,7 @@
 
   public function view($id = null) {
     if (!$this->Pe->exists($id)) {
-      throw new NotFoundException(__('Pe Inválida'));
+      throw new NotFoundException(__('PA Inválida'));
     }
     $options = array('conditions' => array('Pe.' . $this->Pe->primaryKey => $id));
     $this->Pe->recursive = 1;
@@ -75,10 +75,10 @@
 
       $this->Pe->create();
       if ($this->Pe->save($this->request->data)) {
-        $this->Session->setFlash('PE criada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+        $this->Session->setFlash('PA criada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
         return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
       }
-      $this->Session->setFlash('Não foi possível criar a nova PE.', 'alert-box', array ('class' => 'alert alert-danger'));
+      $this->Session->setFlash('Não foi possível criar a nova PA.', 'alert-box', array ('class' => 'alert alert-danger'));
     }
 
     /* Relacionamentos */
@@ -91,11 +91,11 @@
   }
 
   public function edit($id = null) {
-    if (!$id) { throw new NotFoundException(__('PE  Inválida'));}
+    if (!$id) { throw new NotFoundException(__('PA  Inválida'));}
 
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Pe->save($this->request->data)) {
-        $this->Session->setFlash('PE  atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+        $this->Session->setFlash('PA  atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
         if ($this->params['url']['controller'] != null){
           return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
         }
@@ -103,7 +103,7 @@
           return $this->redirect(array('action' => 'index'));
         }
       } else {
-        $this->Session->setFlash('Não foi possível atualizar a PE.', 'alert-box', array ('class' => 'alert alert-danger'));
+        $this->Session->setFlash('Não foi possível atualizar a PA.', 'alert-box', array ('class' => 'alert alert-danger'));
       }
     } else {
       $options = array('conditions' => array('Pe.' . $this->Pe->primaryKey => $id));
@@ -134,9 +134,9 @@
       }
       $this->request->onlyAllow('post', 'delete');
       if ($this->Pe->delete()) {
-        $this->Session->setFlash('A PE foi removida com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+        $this->Session->setFlash('A PA foi removida com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
       } else {
-        $this->Session->setFlash('A PE não pode ser removida!', 'alert-box', array ('class' => 'alert alert-danger'));
+        $this->Session->setFlash('A PA não pode ser removida!', 'alert-box', array ('class' => 'alert alert-danger'));
       }
       return $this->redirect(array('action' => 'index'));
     }

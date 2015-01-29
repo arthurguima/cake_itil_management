@@ -1,9 +1,9 @@
 <?php
-  $this->Html->addCrumb('Pes', '');
+  $this->Html->addCrumb('PAs', '');
   $this->Html->addCrumb($pe['Pe']['id'], array('controller' => 'items', 'action' => 'edit', $pe['Pe']['id']));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Pe: <?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] . " - " . $pe['Servico']['nome']; ?></h3></div>
+  <div class="col-lg-12"><h3 class="page-header">PA: <?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] . " - " . $pe['Servico']['nome']; ?></h3></div>
 </div>
 
 <div class="row">

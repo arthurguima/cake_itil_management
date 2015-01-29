@@ -42,7 +42,7 @@
                               'label' => array('text' => 'Responsável: ')));
 
         echo $this->BootstrapForm->input('pe_id', array(
-                    'label' => array('text' => 'PE: ')));
+                    'label' => array('text' => 'PA: ')));
       ?>
     </div>
     <div class="col-lg-6">

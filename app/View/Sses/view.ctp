@@ -144,7 +144,7 @@
     <div class="panel panel-info">
       <div class="panel-heading">
         <p>
-          <h3 class="panel-title"><b>PE</b>
+          <h3 class="panel-title"><b>PA</b>
             <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
               array('controller' => 'pes', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
               array('escape' => false)); ?>
@@ -210,7 +210,7 @@
                 <th>Número</th>
                 <th>Nome</th>
                 <th>Status</th>
-                <th>PE</th>
+                <th>PA</th>
                 <th>Responsável</th>
                 <th></th>
               </tr>

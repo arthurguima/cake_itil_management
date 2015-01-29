@@ -1,6 +1,6 @@
 <?php
-  $this->Html->addCrumb('PEs', '/Pees');
-  $this->Html->addCrumb("Editar PE", "");
+  $this->Html->addCrumb('PAs', '/Pees');
+  $this->Html->addCrumb("Editar PA", "");
 ?>
 <div class="row">
   <div class="col-lg-12">

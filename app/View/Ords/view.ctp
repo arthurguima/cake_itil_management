@@ -32,7 +32,7 @@
           <li><a><b>Data de Homologação: </b><?php echo $this->Times->pastDate($ord['Ord']['dt_emissao']); ?></a></li>
           <li><a><b>Status: </b><?php echo $ord['Status']['nome']; ?></a></li>
           <li><a href='/sgd/sses/view/<?php echo $ord['Ss']['id']; ?>'><b>SS: </b><?php echo $ord['Ss']['nome']; ?></a></li>
-          <li><a href='/sgd/pes/view/<?php echo $ord['Pe']['id']; ?>'><b>Pe: </b><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></a></li>
+          <li><a href='/sgd/pes/view/<?php echo $ord['Pe']['id']; ?>'><b>PA: </b><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></a></li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $ord['Ord']['cvs_url']; ?></a></li>
           <li><a><b>Observação: </b><?php echo $ord['Ord']['observacao']; ?></a></li>
         </ul>

@@ -1,10 +1,10 @@
 <?php
-  $this->Html->addCrumb('Pe', '/pes');
+  $this->Html->addCrumb('PA', '/pes');
 ?>
 <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">
-         PE - Propostas de Execução
+         PA - Propostas de Atendimento
       </h3>
     </div>
     <div class="col-lg-12 pull-left filters">
@@ -55,7 +55,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de PE </b></div>
+      <div class="panel-heading"><b> Lista de PA </b></div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-ss">
@@ -138,18 +138,18 @@
               {
                   "sExtends": "csv",
                   "sButtonText": "CSV",
-                  "sFileName": "Propostas de Execução.csv",
+                  "sFileName": "Propostas de Atendimento.csv",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
                   "mColumns": [ 0,1,2,3,4,5 ]
               },
               {
                   "sExtends": "pdf",
                   "sButtonText": "PDF",
-                  "sFileName": "Propostas de Execução.pdf",
+                  "sFileName": "Propostas de Atendimento.pdf",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
                   "sPdfOrientation": "landscape",
                   "mColumns": [ 0,1,2,3,4,5 ],
-                  "sTitle": "Listagem de Propostas de Execução",
+                  "sTitle": "Listagem de Propostas de Atendimento",
                   "sPdfMessage": "<?php echo date('d/m/y')?>",
               },
             ]

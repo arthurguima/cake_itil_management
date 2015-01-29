@@ -1,9 +1,9 @@
 <?php
-  $this->Html->addCrumb('PEs', '/Pees');
-  $this->Html->addCrumb("Nova PE", "");
+  $this->Html->addCrumb('PAs', '/Pees');
+  $this->Html->addCrumb("Nova PA", "");
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Nova PE</h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Nova PA</h3></div>
 </div>
 
 <div class="row">
