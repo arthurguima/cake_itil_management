@@ -158,7 +158,7 @@
             <thead>
               <tr>
                 <th>Número</th>
-                <th>Nome</th>
+                <!--th>Nome</th-->
                 <th>Status</th>
                 <th>Responsável</th>
                 <th></th>
@@ -167,8 +167,8 @@
             <tbody>
               <?php foreach($ss['Pe'] as $pe): ?>
                   <tr>
-                    <td><?php echo $pe['numero']; ?></td>
-                    <td><?php echo $this->Html->link($pe['nome'], $pe['cvs_url']); ?></td>
+                    <td><?php echo $this->Html->link($pe['numero'] . "/" . $pe['ano'], $pe['cvs_url']); ?></td>
+                    <!--td><?php //echo $this->Html->link($pe['nome'], $pe['cvs_url']); ?></td-->
                     <td><?php echo $pe['Status']['nome']; ?></td>
                     <td><?php echo $pe['responsavel']; ?></td>
                     <td>
@@ -221,7 +221,7 @@
                     <td><?php echo $os['numero']; ?></td>
                     <td><?php echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td>
                     <td><?php echo $os['Status']['nome']; ?></td>
-                    <td><?php echo $os['Pe']['nome']; ?></td>
+                    <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
                     <td><?php echo $os['responsavel']; ?></td>
                     <td>
                        <?php

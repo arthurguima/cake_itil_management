@@ -94,7 +94,7 @@
 		$this->Filter->setPaginate('limit', 3000);
 
 		$this->Ord->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
-		$this->Ord->contain('Status', 'Ss');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+		$this->Ord->contain('Status', 'Ss', 'Pe');//Carrega apenas o Relacionamento com a Status e SS (otimização)
 
 		$this->set('ords', $this->paginate());
 	}
@@ -121,7 +121,7 @@
 
 		/* Relacionamentos */
 		$this->set('pes',
-								$this->Ord->Pe->find('list', array('conditions' => array('Pe.ss_id' => $this->params['url']['id']), 'fields' => array('Pe.id', 'Pe.nome'))));
+								$this->Ord->Pe->find('list', array('conditions' => array('Pe.ss_id' => $this->params['url']['id']), 'fields' => array('Pe.id', 'Pe.numero'))));
 
 		/* Relacionamentos */
 		$this->set('statuses',
@@ -151,7 +151,7 @@
 
 		/* Relacionamentos */
 		$this->set('pes',
-								$this->Ord->Pe->find('list', array('conditions' => array('Pe.ss_id' => $this->data['Ord']['ss_id']), 'fields' => array('Pe.id', 'Pe.nome'))));
+								$this->Ord->Pe->find('list', array('conditions' => array('Pe.ss_id' => $this->data['Ord']['ss_id']), 'fields' => array('Pe.id', 'Pe.numero'))));
 
 		/* Relacionamentos */
 		$this->set('statuses',

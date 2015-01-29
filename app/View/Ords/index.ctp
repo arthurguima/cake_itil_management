@@ -89,6 +89,7 @@
               <tr>
                 <th>Número</th>
                 <th>SS</th>
+                <th>PE</th>
                 <th>Nome</th>
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
@@ -100,6 +101,7 @@
                 <tr>
                   <td><?php echo $ord['Ord']['numero'] . "/" . $ord['Ord']['ano']; ?></td>
                   <td><?php echo $this->Html->link($ord['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id'])); ?></td>
+                  <td><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></td>
                   <td><?php echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td>
 
                   <td>

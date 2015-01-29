@@ -33,7 +33,7 @@
           </div>
           <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
+            <!--div class="form-group"><?php //echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div -->
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('num_ce_', array('class' => 'form-control', 'placeholder' => "Número da CE de envio:")); ?></div>
           </div>
@@ -64,7 +64,7 @@
                 <th>Número</th>
                 <th>Número da CE</th>
                 <th>SS</th>
-                <th>Nome</th>
+                <!--th>Nome</th-->
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
                 <th>Ações</th>
@@ -73,10 +73,10 @@
             <tbody>
               <?php foreach ($pes as $pe): ?>
                 <tr>
-                  <td><?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano']; ?></td>
+                  <td><?php echo $this->Html->link(($pe['Pe']['numero'] . "/" . $pe['Pe']['ano']), $pe['Pe']['cvs_url']); ?></td>
                   <td><?php echo $pe['Pe']['num_ce']; ?></td>
                   <td><?php echo $this->Html->link($pe['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $pe['Ss']['id'])); ?></td>
-                  <td><?php echo $this->Html->link($pe['Pe']['nome'], $pe['Pe']['cvs_url']); ?></td>
+                  <!--td><?php echo $this->Html->link($pe['Pe']['nome'], $pe['Pe']['cvs_url']); ?></td-->
                   <td>
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $pe['Pe']['id'] ?>">
                     <?php echo $pe['Status']['nome']; ?></span>

@@ -3,7 +3,7 @@
   $this->Html->addCrumb($pe['Pe']['id'], array('controller' => 'items', 'action' => 'edit', $pe['Pe']['id']));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Pe: <?php echo $pe['Pe']['nome'] . " - " . $pe['Servico']['nome']; ?></h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Pe: <?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] . " - " . $pe['Servico']['nome']; ?></h3></div>
 </div>
 
 <div class="row">
@@ -23,14 +23,14 @@
       </div>
       <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
-          <li><a><b>Nome: </b><?php echo $pe['Pe']['nome']; ?></a></li>
+          <!--li><a><b>Nome: </b><?php //echo $pe['Pe']['nome']; ?></a></li-->
+          <li><a><b>Número: </b><?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] ; ?></a></li>
           <li>
             <a>
              <b><?php echo $pe['Item']['nome']; ?>:</b>
              <?php echo $pe['Pe']['valor_item'] . '/' . $pe['Item']['metrica'];?>
             </a>
           </li>
-          <li><a><b>Número: </b><?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] ; ?></a></li>
           <li><a><b>Número da CE de envio: </b><?php echo $pe['Pe']['num_ce']; ?></a></li>
           <li><a><b>Data de emissão: </b><?php echo $pe['Pe']['dt_emissao']; ?></a></li>
           <li><a><b>Data de início: </b><?php echo $pe['Pe']['dt_inicio']; ?></a></li>

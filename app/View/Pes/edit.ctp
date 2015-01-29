@@ -20,8 +20,8 @@
     <?php echo $this->BootstrapForm->create('Pe'); ?>
     <div class="col-lg-6">
       <?php
-        echo $this->BootstrapForm->input('nome', array(
-                    'label' => array('text' => 'Nome: ')));
+        /*echo $this->BootstrapForm->input('nome', array(
+                    'label' => array('text' => 'Nome: ')));*/
 
         echo $this->BootstrapForm->input('numero', array(
                     'label' => array('text' => 'Número: ')));
