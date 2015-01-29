@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h3 class="page-header">
-      Editar: <?php echo $this->data['Pe']['nome']?>
+      Editar: <?php echo "PA " . $this->data['Pe']['numero'] . "/" . $this->data['Pe']['ano'] ?>
       <?php
           echo $this->Html->link("<i class='fa fa-search-plus'></i>",
           array('controller' => 'Pes', 'action' => 'view', $this->data['Pe']['id']),

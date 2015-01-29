@@ -34,10 +34,9 @@
           </li>
           <li><a><b>Status: </b><?php echo $ss['Status']['nome']; ?></a></li>
           <li><a><b>Data de Recebimento da SS: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_recebimento']); ?></a></li>
-          <li><a><b>Prazo de entrega: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_prazo']); ?></a></li>
           <li><a><b>Data Prevista: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_prevista']); ?></a></li>
-          <li><a><b>Prazo: </b><?php echo $this->Times->timeLeftTo($ss['Ss']['dt_recebimento'], $ss['Ss']['dt_prevista'],
-                  $this->Time->format('d/m/Y', $ss['Ss']['dt_recebimento']) . " - " . $this->Time->format('d/m/Y', $ss['Ss']['dt_prevista']),
+          <li><a><b>Prazo: </b><?php echo $this->Times->timeLeftTo($ss['Ss']['dt_recebimento'], $ss['Ss']['dt_prazo'],
+                  $this->Time->format('d/m/Y', $ss['Ss']['dt_recebimento']) . " - " . $this->Time->format('d/m/Y', $ss['Ss']['dt_prazo']),
                   ($ss['Ss']['dt_finalizada'])); ?></a></li>
           <li><a><b>Responsável: </b><?php echo $ss['Ss']['responsavel']; ?></a></li>
           <li><a style="overflow: auto;"><b>CVS: </b><?php echo $ss['Ss']['cvs_url']; ?></a></li>

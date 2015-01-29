@@ -79,10 +79,10 @@
                     'type' => 'text',
                     'id' => 'dp '));
 
-        echo $this->BootstrapForm->input('dt_prevista', array(
+        /*echo $this->BootstrapForm->input('dt_prevista', array(
                     'label' => array('text' => 'Prazo de entrega pela UD: '),
                     'type' => 'text',
-                    'id' => 'dp '));
+                    'id' => 'dp '));*/
 
         echo $this->BootstrapForm->input('dt_prazo', array(
                     'label' => array('text' => 'Prazo final contratual: '),
