@@ -60,8 +60,7 @@
     <div class="col-lg-6">
       <?php
         echo $this->BootstrapForm->input('responsavel', array(
-                    'label' => array('text' => 'Responsável: '),
-                    'value' => $this->Ldap->nomeUsuario()));
+                    'label' => array('text' => 'Responsável: ')));
 
         echo $this->BootstrapForm->input('status_id', array(
                   'label' => array('text' => 'Status: ')));

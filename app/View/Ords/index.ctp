@@ -90,7 +90,7 @@
                 <th>Número</th>
                 <th>SS</th>
                 <th>PA</th>
-                <th>Nome</th>
+                <!--th>Nome</th-->
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
                 <th>Ações</th>
@@ -99,10 +99,10 @@
             <tbody>
               <?php foreach ($ords as $ord): ?>
                 <tr>
-                  <td><?php echo $ord['Ord']['numero'] . "/" . $ord['Ord']['ano']; ?></td>
+                  <td><?php echo $this->Html->link($ord['Ord']['numero'] . "/" . $ord['Ord']['ano'], $ord['Ord']['cvs_url']); ?></td>
                   <td><?php echo $this->Html->link($ord['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id'])); ?></td>
                   <td><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></td>
-                  <td><?php echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td>
+                  <!--td><?php //echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td-->
 
                   <td>
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $ord['Ord']['id'] ?>">

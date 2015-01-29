@@ -3,7 +3,7 @@
   $this->Html->addCrumb($ord['Ord']['id'], array('controller' => 'items', 'action' => 'edit', $ord['Ord']['id']));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">OS: <?php echo $ord['Ord']['nome'] . " - " . $ord['Servico']['nome']; ?></h3></div>
+  <div class="col-lg-12"><h3 class="page-header">OS: <?php echo $ord['Ord']['numero'] . "/" . $ord['Ord']['ano'] . " - " . $ord['Servico']['nome']; ?></h3></div>
 </div>
 
 <div class="row">
@@ -23,13 +23,41 @@
       </div>
       <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
-          <li><a><b>Nome: </b><?php echo $ord['Ord']['nome']; ?></a></li>
+          <!--li><a><b>Nome: </b><?php //echo $ord['Ord']['nome']; ?></a></li-->
           <li><a><b>Número: </b><?php echo $ord['Ord']['numero'] . "/" . $ord['Ord']['ano'] ; ?></a></li>
           <li><a><b>Data de emissão: </b><?php echo $this->Times->pastDate($ord['Ord']['dt_emissao']); ?></a></li>
           <li><a><b>Data de recebimento: </b><?php echo $this->Times->pastDate($ord['Ord']['dt_recebimento']); ?></a></li>
-          <li><a><b>Deploy Homologação: </b><?php echo $this->Times->pastDate($ord['Ord']['dt_deploy_homologacao']); ?></a></li>
-          <li><a><b>Deploy Produção: </b><?php echo $this->Times->pastDate($ord['Ord']['dt_deploy_producao']); ?></a></li>
-          <li><a><b>Data de Homologação: </b><?php echo $this->Times->pastDate($ord['Ord']['dt_emissao']); ?></a></li>
+          <li>
+            <a>
+              <b>Deploy Homologação: </b>
+              <?php
+                if($ord['Ord']['dt_deploy_homologacao'] != null){
+                  echo $this->Times->pastDate($ord['Ord']['dt_deploy_homologacao']);
+                }
+               ?>
+            </a>
+          </li>
+          <li>
+            <a>
+              <b>Deploy Produção: </b>
+              <?php
+                if($ord['Ord']['dt_deploy_producao'] != null){
+                  echo $this->Times->pastDate($ord['Ord']['dt_deploy_producao']);
+                }
+              ?>
+            </a>
+          </li>
+          <li>
+            <a>
+              <b>Data de Homologação: </b>
+              <?php
+                if($ord['Ord']['dt_emissao'] != null){
+                  echo $this->Times->pastDate($ord['Ord']['dt_homologacao']);
+                }
+              ?>
+            </a>
+          </li>
+          <li><a><b>Volume Final: </b><?php echo $ord['Ord']['pf']; ?></a></li>
           <li><a><b>Status: </b><?php echo $ord['Status']['nome']; ?></a></li>
           <li><a href='/sgd/sses/view/<?php echo $ord['Ss']['id']; ?>'><b>SS: </b><?php echo $ord['Ss']['nome']; ?></a></li>
           <li><a href='/sgd/pes/view/<?php echo $ord['Pe']['id']; ?>'><b>PA: </b><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></a></li>

@@ -16,8 +16,8 @@
 					echo $this->BootstrapForm->hidden('servico_id', array('value' => $this->params['url']['servico'], 'type'=> "hidden"));
 				}
 
-				echo $this->BootstrapForm->input('nome', array(
-										'label' => array('text' => 'Nome: ')));
+				/*echo $this->BootstrapForm->input('nome', array(
+										'label' => array('text' => 'Nome: ')));*/
 
 				echo $this->BootstrapForm->input('numero', array(
 										'label' => array('text' => 'Número: ')));
@@ -32,7 +32,7 @@
 										'label' => array('text' => 'Url: ')));
 
 				echo $this->BootstrapForm->input('pf', array(
-										'label' => array('text' => 'Quantidade de pontos de função: ')));
+										'label' => array('text' => 'Volume Final: ')));
 
 				echo $this->BootstrapForm->input('responsavel', array(
 															'label' => array('text' => 'Responsável: '),

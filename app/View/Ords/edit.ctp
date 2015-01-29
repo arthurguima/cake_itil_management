@@ -20,8 +20,8 @@
     <?php echo $this->BootstrapForm->create('Ord'); ?>
     <div class="col-lg-6">
       <?php
-        echo $this->BootstrapForm->input('nome', array(
-                    'label' => array('text' => 'Nome: ')));
+        /*echo $this->BootstrapForm->input('nome', array(
+                    'label' => array('text' => 'Nome: ')));*/
 
         echo $this->BootstrapForm->input('numero', array(
                     'label' => array('text' => 'Número: ')));
@@ -29,14 +29,13 @@
         echo $this->BootstrapForm->input('ano', array(
                   'label' => array('text' => 'Ano: '),
                   'type' => 'text',
-                  'id' => 'dpdecade',
-                  'value' => date('Y')));
+                  'id' => 'dpdecade'));
 
         echo $this->BootstrapForm->input('cvs_url', array(
                     'label' => array('text' => 'Url: ')));
 
         echo $this->BootstrapForm->input('pf', array(
-                    'label' => array('text' => 'Quantidade de pontos de função: ')));
+                    'label' => array('text' => 'Volume Final: ')));
 
         echo $this->BootstrapForm->input('responsavel', array(
                               'label' => array('text' => 'Responsável: ')));

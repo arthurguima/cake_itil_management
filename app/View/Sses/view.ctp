@@ -25,14 +25,13 @@
       <div class="panel-body info-body">
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Nome: </b><?php echo $ss['Ss']['nome']; ?></a></li>
-          <li><a><b>Número: </b><?php echo $ss['Ss']['numero']; ?></a></li>
+          <li><a><b>Número: </b><?php echo $ss['Ss']['numero'] . "/" .  $ss['Ss']['ano']; ?></a></li>
           <li><a><b>Prioridade: </b><?php echo $ss['Ss']['prioridade']; ?></a></li>
           <li>
             <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
                      $ss['Ss']['clarity_id'] .")'><b>Clarity DM: </b>" . $ss['Ss']['clarity_dm_id']  .
                      "<i class='fa-expand fa' style='cursor:pointer; float:right;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></i></a></span>" ?>
           </li>
-          <li><a><b>Ano: </b><?php echo $ss['Ss']['ano']; ?></a></li>
           <li><a><b>Status: </b><?php echo $ss['Status']['nome']; ?></a></li>
           <li><a><b>Data de Recebimento da SS: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_recebimento']); ?></a></li>
           <li><a><b>Prazo de entrega: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_prazo']); ?></a></li>
@@ -41,14 +40,14 @@
                   $this->Time->format('d/m/Y', $ss['Ss']['dt_recebimento']) . " - " . $this->Time->format('d/m/Y', $ss['Ss']['dt_prevista']),
                   ($ss['Ss']['dt_finalizada'])); ?></a></li>
           <li><a><b>Responsável: </b><?php echo $ss['Ss']['responsavel']; ?></a></li>
-          <li><a><b>CVS: </b><?php echo $ss['Ss']['cvs_url']; ?></a></li>
+          <li><a style="overflow: auto;"><b>CVS: </b><?php echo $ss['Ss']['cvs_url']; ?></a></li>
           <li><a><b>Observação: </b><?php echo $ss['Ss']['observacao']; ?></a></li>
           <li class="checklist"><a><b>Checklist: </b><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></a></td>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-4">
+  <div class="col-lg-8">
     <div class="panel panel-danger panel-info">
       <div class="panel-heading">
         <p>
@@ -97,7 +96,109 @@
     </div>
   </div>
 
-  <div class="col-lg-4">
+  <div class="col-lg-8">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>PA</b>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'pes', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.pe-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body pe-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-pe">
+            <thead>
+              <tr>
+                <th>Número</th>
+                <!--th>Nome</th-->
+                <th>Status</th>
+                <th>Responsável</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($ss['Pe'] as $pe): ?>
+                  <tr>
+                    <td><?php echo $this->Html->link($pe['numero'] . "/" . $pe['ano'], $pe['cvs_url'], array('target' => '_blank')); ?></td>
+                    <!--td><?php //echo $this->Html->link($pe['nome'], $pe['cvs_url']); ?></td-->
+                    <td><?php echo $pe['Status']['nome']; ?></td>
+                    <td><?php echo $pe['responsavel']; ?></td>
+                    <td>
+                       <?php
+                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
+                                array('controller' => 'pes', 'action' => 'view', $pe['id']), array('escape' => false));
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'pes', 'action' => 'edit', $pe['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($pe); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>OS</b>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'ords', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.os-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body os-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-os">
+            <thead>
+              <tr>
+                <th>Número</th>
+                <!--th>Nome</th-->
+                <th>Status</th>
+                <th>PA</th>
+                <th>Responsável</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($ss['Ord'] as $os): ?>
+                  <tr>
+                    <td><?php echo $this->Html->link($os['numero'] . "/" . $os['ano'], $os['cvs_url'], array('target' => '_blank')); ?></td>
+                    <!--td><?php //echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td-->
+                    <td><?php echo $os['Status']['nome']; ?></td>
+                    <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
+                    <td><?php echo $os['responsavel']; ?></td>
+                    <td>
+                       <?php
+                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
+                                array('controller' => 'ords', 'action' => 'view', $os['id']), array('escape' => false));
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'ords', 'action' => 'edit', $os['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($os); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
     <div class="panel panel-default">
       <div class="panel-heading">
         <p>
@@ -133,108 +234,6 @@
                 </tr>
               <?php endforeach; ?>
             <?php unset($area); ?>
-          </tbody>
-        </table>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <p>
-          <h3 class="panel-title"><b>PA</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'pes', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
-              array('escape' => false)); ?>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.pe-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-          </h3>
-        </p>
-      </div>
-      <div class="panel-body pe-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-pe">
-            <thead>
-              <tr>
-                <th>Número</th>
-                <!--th>Nome</th-->
-                <th>Status</th>
-                <th>Responsável</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($ss['Pe'] as $pe): ?>
-                  <tr>
-                    <td><?php echo $this->Html->link($pe['numero'] . "/" . $pe['ano'], $pe['cvs_url']); ?></td>
-                    <!--td><?php //echo $this->Html->link($pe['nome'], $pe['cvs_url']); ?></td-->
-                    <td><?php echo $pe['Status']['nome']; ?></td>
-                    <td><?php echo $pe['responsavel']; ?></td>
-                    <td>
-                       <?php
-                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
-                                array('controller' => 'pes', 'action' => 'view', $pe['id']), array('escape' => false));
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'pes', 'action' => 'edit', $pe['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-                                array('escape' => false));
-                       ?>
-                     </td>
-                  </tr>
-                <?php endforeach; ?>
-              <?php unset($pe); ?>
-          </tbody>
-        </table>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4">
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <p>
-          <h3 class="panel-title"><b>OS</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'ords', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
-              array('escape' => false)); ?>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.os-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-          </h3>
-        </p>
-      </div>
-      <div class="panel-body os-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-os">
-            <thead>
-              <tr>
-                <th>Número</th>
-                <th>Nome</th>
-                <th>Status</th>
-                <th>PA</th>
-                <th>Responsável</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($ss['Ord'] as $os): ?>
-                  <tr>
-                    <td><?php echo $os['numero']; ?></td>
-                    <td><?php echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td>
-                    <td><?php echo $os['Status']['nome']; ?></td>
-                    <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
-                    <td><?php echo $os['responsavel']; ?></td>
-                    <td>
-                       <?php
-                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
-                                array('controller' => 'ords', 'action' => 'view', $os['id']), array('escape' => false));
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'ords', 'action' => 'edit', $os['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-                                array('escape' => false));
-                       ?>
-                     </td>
-                  </tr>
-                <?php endforeach; ?>
-              <?php unset($os); ?>
           </tbody>
         </table>
       </div>

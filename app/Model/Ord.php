@@ -84,7 +84,7 @@
         }
 
         if (isset($val['Ord']['dt_homologacao'])) {
-            $results[$key]['Ord']['d_homologacao'] = $this->dateFormatAfterFind(
+            $results[$key]['Ord']['dt_homologacao'] = $this->dateFormatAfterFind(
                 $val['Ord']['dt_homologacao']
             );
         }

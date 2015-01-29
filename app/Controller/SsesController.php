@@ -5,7 +5,7 @@
 		$this->Filter->addFilters(
 			array(
 				'responsavel_' => array(
-					'Ss.criador' => array('operator' => 'LIKE')
+					'Ss.responsavel' => array('operator' => 'LIKE')
 				),
 				'servico' => array(
 					'Ss.servico_id' => array(
