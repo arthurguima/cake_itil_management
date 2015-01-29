@@ -3,7 +3,16 @@
   $this->Html->addCrumb("Nova", array('controller' => 'indisponibilidades', 'action' => 'add'));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Editar Indisponibilidade</h3></div>
+  <div class="col-lg-12">
+    <h3 class="page-header">
+      Editar Indisponibilidade
+      <?php
+          echo $this->Html->link("<i class='fa fa-search-plus'></i>",
+          array('controller' => 'indisponibilidades', 'action' => 'view', $this->data['Indisponibilidade']['id']),
+          array('escape' => false));
+      ?>
+    </h3>
+  </div>
 </div>
 
 <div class="row">

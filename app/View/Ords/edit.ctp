@@ -3,7 +3,16 @@
   $this->Html->addCrumb("Editar OS", "");
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Editar OS</h3></div>
+  <div class="col-lg-12">
+    <h3 class="page-header">
+      Editar OS
+      <?php
+          echo $this->Html->link("<i class='fa fa-search-plus'></i>",
+          array('controller' => 'Ords', 'action' => 'view', $this->data['Ord']['id']),
+          array('escape' => false));
+      ?>
+    </h3>
+  </div>
 </div>
 
 <div class="row">

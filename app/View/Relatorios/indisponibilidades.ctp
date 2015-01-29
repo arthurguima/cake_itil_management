@@ -137,7 +137,7 @@
                 <a><b>Tempo Total: </b><?php echo $this->Times->totalTime(
                         $this->Times->AmericanDate($this->request->data['dt_inicio']), $this->Times->AmericanDate($this->request->data['dt_fim'])); ?></a>
               </li>
-              <li><a><b>Tempo Indispoível: </b><?php echo   $this->Times->SecToString($totaltime); ?></a></li>
+              <li><a><b>Tempo Indisponível: </b><?php echo   $this->Times->SecToString($totaltime); ?></a></li>
             </ul>
             <div class='semicircle col-md-6 col-md-offset-3'>
               <?php

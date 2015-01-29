@@ -27,7 +27,7 @@
     </div>
     <div class='indis-body'>
       <div class='col-lg-4 col-xs-4 col-md-4'>
-        <span class='pie-" . $Servico ."'>" . $values . "</span>
+        <span class='pie-chamado-" . $Servico ."'>" . $values . "</span>
       </div>
       <div class='col-lg-8 col-xs-8 col-md-8'>
         ". $legenda ."
@@ -38,7 +38,7 @@
     </div>
       <script>
         $(document).ready(function() {
-         $('.pie-" . $Servico ."').peity('pie', {
+         $('.pie-chamado-" . $Servico ."').peity('pie', {
             fill: " . $this->colorAsArray($colors) .",
             radius: 35
           });

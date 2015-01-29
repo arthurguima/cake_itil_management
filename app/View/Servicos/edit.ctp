@@ -3,7 +3,16 @@
   $this->Html->addCrumb($this->data['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'edit', $this->data['Servico']['id']));
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Editar Serviço <?php //echo ": " . $this->data['Servico']['sigla']; ?></h3></div>
+  <div class="col-lg-12">
+    <h3 class="page-header">
+      Editar Serviço <?php //echo ": " . $this->data['Servico']['sigla']; ?>
+      <?php
+          echo $this->Html->link("<i class='fa fa-search-plus'></i>",
+          array('controller' => 'Servicos', 'action' => 'view', $this->data['Servico']['id']),
+          array('escape' => false));
+      ?>
+    </h3>
+  </div>
 </div>
 
 <div class="row">

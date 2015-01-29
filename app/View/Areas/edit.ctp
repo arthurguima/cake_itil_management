@@ -4,7 +4,16 @@
 ?>
 
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Editar Área Cliente <?php //echo $thisto['Cliente']['id']; ?></h3></div>
+  <div class="col-lg-12">
+    <h3 class="page-header">
+      Editar Área Cliente
+      <?php
+          echo $this->Html->link("<i class='fa fa-search-plus'></i>",
+          array('controller' => 'areas', 'action' => 'view', $this->data['Area']['id']),
+          array('escape' => false));
+      ?>
+    </h3>
+  </div>
 </div>
 
 <div class="row">

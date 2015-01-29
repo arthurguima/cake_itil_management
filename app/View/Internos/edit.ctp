@@ -3,7 +3,16 @@
   $this->Html->addCrumb("Editar" , "");
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Editar Sistema Interno</h3></div>
+  <div class="col-lg-12">
+    <h3 class="page-header">
+      Editar Sistema Interno
+      <?php
+          echo $this->Html->link("<i class='fa fa-search-plus'></i>",
+          array('controller' => 'internos', 'action' => 'view', $this->data['Interno']['id']),
+          array('escape' => false));
+      ?>
+    </h3>
+  </div>
 </div>
 
 <div class="row">

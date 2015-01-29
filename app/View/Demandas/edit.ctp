@@ -3,7 +3,16 @@
   $this->Html->addCrumb('Atualizar', '');
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Atualizar Demanda</h3></div>
+  <div class="col-lg-12">
+    <h3 class="page-header">
+      Atualizar Demanda
+      <?php
+          echo $this->Html->link("<i class='fa fa-search-plus'></i>",
+          array('controller' => 'Demandas', 'action' => 'view', $this->data['Demanda']['id']),
+          array('escape' => false));
+      ?>
+    </h3>
+  </div>
 </div>
 
 <div class="row">

@@ -84,6 +84,7 @@
 											<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li>
 											</ul>
 									</li>
 									<li> <!-- Base de Conhecimenton -->
