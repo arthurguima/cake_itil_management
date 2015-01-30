@@ -109,7 +109,7 @@
 
                   <td class="text-center">
                     <?php echo $this->Times->timeLeftTo($ss['Ss']['dt_recebimento'], $ss['Ss']['dt_prazo'],
-                            $this->Time->format('d/m/Y', $ss['Ss']['dt_recebimento']) . " - " . $this->Time->format('d/m/Y', $ss['Ss']['dt_prazo']),
+                             $ss['Ss']['dt_recebimento'] . " - " . $ss['Ss']['dt_prazo'],
                             ($ss['Ss']['dt_finalizada']));
                     ?>
                   </td>

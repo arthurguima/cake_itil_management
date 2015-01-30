@@ -82,10 +82,10 @@
     * Destaca a data mostrando se está no passado ou não
     */
     public function pastDate($time) {
-        if (strtotime($time) > time()):
-           return "<span class='label label-success'>" .  $this->Time->format('d/m/Y', $time) . "</span>";
+        if (strtotime($this->AmericanDate($time)) > time()):
+           return "<span class='label label-success'>" . $time . "</span>";
         else:
-           return "<span class='label label-default'>" . $this->Time->format('d/m/Y', $time) . "</span>";
+           return "<span class='label label-default'>" . $time . "</span>";
         endif;
     }
 

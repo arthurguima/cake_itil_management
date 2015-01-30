@@ -52,7 +52,7 @@
                       'empty'=>'Serviço'));
 
           echo $this->BootstrapForm->input('cvs_url', array(
-                      'label' => array('text' => 'Url CVS: ')));
+                      'label' => array('text' => 'Url: ')));
 
           echo $this->BootstrapForm->input('observacao', array(
                       'label' => array('text' => 'Observação: '),

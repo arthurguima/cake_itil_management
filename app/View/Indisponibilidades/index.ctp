@@ -78,7 +78,7 @@
                   </td>
                   <td><?php echo $Indisponibilidade['Indisponibilidade']['num_evento']; ?></td>
                   <td><?php echo $Indisponibilidade['Indisponibilidade']['num_incidente']; ?></td>
-        				  <td><?php echo $Indisponibilidade['Indisponibilidade']['dt_inicio']; ?></td>
+        				  <td><?php echo $this->Time->format('d/m/Y h:i:s', $Indisponibilidade['Indisponibilidade']['dt_inicio']); ?></td>
                   <td>
                     <?php if($Indisponibilidade['Indisponibilidade']['dt_fim'] != null):
                             echo $this->Times->totalTime($Indisponibilidade['Indisponibilidade']['dt_inicio'],
