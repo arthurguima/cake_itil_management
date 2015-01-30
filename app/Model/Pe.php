@@ -42,6 +42,9 @@
     if(!empty($this->data['Pe']['dt_inicio'])) {
         $this->data['Pe']['dt_inicio'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Pe']['dt_inicio'])));
     }
+    if(!empty($this->data['Pe']['validade_pdd'])) {
+        $this->data['Pe']['validade_pdd'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Pe']['validade_pdd'])));
+    }
     return true;
   }
 
@@ -55,6 +58,11 @@
         if (isset($val['Pe']['dt_inicio'])) {
             $results[$key]['Pe']['dt_inicio'] = $this->dateFormatAfterFind(
                 $val['Pe']['dt_inicio']
+            );
+        }
+        if (isset($val['Pe']['validade_pdd'])) {
+            $results[$key]['Pe']['validade_pdd'] = $this->dateFormatAfterFind(
+                $val['Pe']['validade_pdd']
             );
         }
     }

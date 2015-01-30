@@ -51,7 +51,7 @@
             <a>
               <b>Data de Homologação: </b>
               <?php
-                if($ord['Ord']['dt_emissao'] != null){
+                if($ord['Ord']['dt_homologacao'] != null){
                   echo $this->Times->pastDate($ord['Ord']['dt_homologacao']);
                 }
               ?>

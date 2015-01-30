@@ -64,6 +64,7 @@
                 <th>Número</th>
                 <th>Número da CE</th>
                 <th>SS</th>
+                <th>Validade do PDD</th>
                 <!--th>Nome</th-->
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
@@ -76,6 +77,13 @@
                   <td><?php echo $this->Html->link(($pe['Pe']['numero'] . "/" . $pe['Pe']['ano']), $pe['Pe']['cvs_url']); ?></td>
                   <td><?php echo $pe['Pe']['num_ce']; ?></td>
                   <td><?php echo $this->Html->link($pe['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $pe['Ss']['id'])); ?></td>
+                  <td>
+                    <?php
+                      if($pe['Pe']['validade_pdd'] != null){
+                        echo $this->Times->pastDate($pe['Pe']['validade_pdd']);
+                      }
+                    ?>
+                  </td>
                   <!--td><?php echo $this->Html->link($pe['Pe']['nome'], $pe['Pe']['cvs_url']); ?></td-->
                   <td>
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $pe['Pe']['id'] ?>">

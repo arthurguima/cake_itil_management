@@ -35,6 +35,15 @@
           <li><a><b>Data de emissão: </b><?php echo $pe['Pe']['dt_emissao']; ?></a></li>
           <li><a><b>Data de início: </b><?php echo $pe['Pe']['dt_inicio']; ?></a></li>
           <li><a><b>Tempo estimado: </b><?php echo $pe['Pe']['temp_estimado']; ?></a></li>
+          <li>
+            <a><b>Validade do PDD: </b>
+              <?php
+                if($pe['Pe']['validade_pdd'] != null){
+                  echo $this->Times->pastDate($pe['Pe']['validade_pdd']);
+                }
+              ?>
+            </a>
+          </li>
           <li><a><b>Status: </b><?php echo $pe['Status']['nome']; ?></a></li>
           <li><a href='/sgd/sses/view/<?php echo $pe['Ss']['id']; ?>'><b>SS: </b><?php echo $pe['Ss']['nome']; ?></a></li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $pe['Pe']['cvs_url']; ?></a></li>

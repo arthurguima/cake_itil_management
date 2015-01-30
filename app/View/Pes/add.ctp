@@ -44,6 +44,11 @@
         echo $this->BootstrapForm->input('temp_estimado', array(
                     'label' => array('text' => 'Tempo estimado em dias: ')));
 
+        echo $this->BootstrapForm->input('validade_pdd', array(
+                    'label' => array('text' => 'Fim da Validade do PDD: '),
+                    'type' => 'text',
+                    'id' => 'dp'));
+
         echo $this->BootstrapForm->input('cvs_url', array(
                     'label' => array('text' => 'Url: ')));
 

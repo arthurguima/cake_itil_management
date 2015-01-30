@@ -114,6 +114,7 @@
               <tr>
                 <th>Número</th>
                 <!--th>Nome</th-->
+                <th>Validade do PDD</th>
                 <th>Status</th>
                 <th>Responsável</th>
                 <th></th>
@@ -124,6 +125,13 @@
                   <tr>
                     <td><?php echo $this->Html->link($pe['numero'] . "/" . $pe['ano'], $pe['cvs_url'], array('target' => '_blank')); ?></td>
                     <!--td><?php //echo $this->Html->link($pe['nome'], $pe['cvs_url']); ?></td-->
+                    <td>
+                      <?php
+                        if($pe['validade_pdd'] != null){
+                          echo $this->Times->pastDate($pe['validade_pdd']);
+                        }
+                      ?>
+                    </td>
                     <td><?php echo $pe['Status']['nome']; ?></td>
                     <td><?php echo $pe['responsavel']; ?></td>
                     <td>
