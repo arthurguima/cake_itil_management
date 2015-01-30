@@ -21,12 +21,19 @@
         'message' => 'Campo deve ser preenchido'
       ),
     ),
-	'motivo_id' => array(
+		'motivo_id' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido'
       ),
-    )
+    ),
+		'num_incidente' => array(
+			'unique' => array(
+				'rule' => 'isUnique',
+				'required' => 'create',
+				'message' => 'Já existe outra indisponibilidade com esse número de incidente!'
+			)
+		)
   );
 
 	public function beforeValidate($options = array()){

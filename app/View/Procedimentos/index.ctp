@@ -32,7 +32,7 @@
             <tbody>
               <?php foreach ($procedimentos as $procedimento): ?>
                 <tr>
-                  <td><?php echo $this->Html->link($procedimento['Procedimento']['nome'],$procedimento['Procedimento']['url'], array('target' => '_blank')); ?></td>
+                  <td><?php echo $this->Tables->popupBox($this->Html->link($procedimento['Procedimento']['nome'],$procedimento['Procedimento']['url'], array('target' => '_blank')), $procedimento['Procedimento']['descricao']); ?></td>
                   <td><?php echo $procedimento['Procedimento']['dt_alteracao']; ?></td>
                   <td><?php echo $procedimento['Procedimento']['responsavel']; ?></td>
                   <td><?php echo $this->Tables->getMenu('procedimentos', $procedimento['Procedimento']['id'], 12); ?></td>
@@ -89,5 +89,13 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
           }
   })
 
+  $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+
  });
 </script>
+
+<style>
+div.sub-20 {
+  overflow:  inherit !important;
+}
+</style>

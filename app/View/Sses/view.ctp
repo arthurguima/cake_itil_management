@@ -26,6 +26,7 @@
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Nome: </b><?php echo $ss['Ss']['nome']; ?></a></li>
           <li><a><b>Número: </b><?php echo $ss['Ss']['numero'] . "/" .  $ss['Ss']['ano']; ?></a></li>
+          <li><a><b>Serviço: </b><?php echo $ss['Servico']['nome']; ?></a></li>
           <li><a><b>Prioridade: </b><?php echo $ss['Ss']['prioridade']; ?></a></li>
           <li>
             <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
@@ -34,7 +35,8 @@
           </li>
           <li><a><b>Status: </b><?php echo $ss['Status']['nome']; ?></a></li>
           <li><a><b>Data de Recebimento da SS: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_recebimento']); ?></a></li>
-          <li><a><b>Data de finalização: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_prazo']);  ?></a></li>
+          <li><a><b>Prazo final contratual: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_prazo']); ?></a></li>
+          <li><a><b>Data de finalização: </b><?php echo $this->Times->pastDate($ss['Ss']['dt_finalizada']);  ?></a></li>
           <li><a><b>Prazo: </b><?php echo $this->Times->timeLeftTo($ss['Ss']['dt_recebimento'], $ss['Ss']['dt_prazo'],
                    $ss['Ss']['dt_recebimento'] . " - " . $ss['Ss']['dt_prazo'],
                   ($ss['Ss']['dt_finalizada'])); ?></a></li>
@@ -42,55 +44,6 @@
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $ss['Ss']['cvs_url']; ?></a></li>
           <li><a><b>Observação: </b><?php echo $ss['Ss']['observacao']; ?></a></li>
           <li class="checklist"><a><b>Checklist: </b><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></a></td>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-8">
-    <div class="panel panel-danger panel-info">
-      <div class="panel-heading">
-        <p>
-          <h3 class="panel-title"><b>Histórico</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-          </h3>
-        </p>
-      </div>
-      <div class="panel-body historico-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Descrição</th>
-                <th>Analista</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($ss['Historico'] as $hist): ?>
-                  <tr>
-                    <td><?php echo $hist['data']; ?></td>
-                    <td><?php echo $hist['descricao']; ?></td>
-                    <td><?php echo $hist['analista']; ?></td>
-                    <td>
-                       <?php
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-                                array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                                array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'sses', 'id' => $ss['Ss']['id'], 'action' => 'view' )),
-                                array('escape' => false), "Você tem certeza");
-                       ?>
-                     </td>
-                  </tr>
-                <?php endforeach; ?>
-              <?php unset($hist); ?>
-          </tbody>
-        </table>
-      </div>
       </div>
     </div>
   </div>
@@ -174,6 +127,7 @@
                 <!--th>Nome</th-->
                 <th>Status</th>
                 <th>PA</th>
+                <th>Prazo</th>
                 <th>Responsável</th>
                 <th></th>
               </tr>
@@ -185,6 +139,15 @@
                     <!--td><?php //echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td-->
                     <td><?php echo $os['Status']['nome']; ?></td>
                     <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
+                    <td class="text-center">
+                      <?php
+                        if($os['dt_ini_pdd'] != null){
+                          echo $this->Times->timeLeftTo($os['dt_ini_pdd'], $os['dt_fim_pdd'],
+                                $os['dt_ini_pdd'] . " - " . $os['dt_fim_pdd'],
+                                ($os['dt_homologacao']));
+                        }
+                      ?>
+                    </td>
                     <td><?php echo $os['responsavel']; ?></td>
                     <td>
                        <?php
@@ -223,8 +186,9 @@
             <thead>
               <tr>
                 <th>Tipo</th>
-                <th>Nome</th>
-                <th>Clarity ID:</th>
+                <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                <th>DM Clarity <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
+                <th>Prazo</th>
                 <th></th>
               </tr>
             </thead>
@@ -232,15 +196,70 @@
               <?php foreach($ss['Demanda'] as $dem): ?>
                 <tr>
                   <td><?php echo($dem['DemandaTipo']['nome']); ?></td>
-                  <td><?php echo $dem['nome']; ?></td>
+                  <td><?php echo $this->Tables->popupBox($dem['nome'], $dem['descricao']) ?></td>
                   <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
                                  $dem['clarity_id'] .")'>" . $dem['clarity_dm_id'] ."</a></span>" ?>
+                  </td>
+                  <td>
+                    <?php echo $this->Times->timeLeftTo($dem['data_cadastro'], $dem['dt_prevista'],
+                          $this->Time->format('d/m/Y', $dem['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $dem['dt_prevista']),
+                          ($dem['data_homologacao']));
+                    ?>
                   </td>
                   <td><?php echo $this->Tables->getMenu('demandas', $dem['id'], 2); ?></td>
                 </tr>
               <?php endforeach; ?>
             <?php unset($area); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="panel panel-danger panel-info">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Histórico</b>
+            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+              array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+              array('escape' => false)); ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body historico-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Analista</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($ss['Historico'] as $hist): ?>
+                  <tr>
+                    <td><?php echo $hist['data']; ?></td>
+                    <td><?php echo $hist['descricao']; ?></td>
+                    <td><?php echo $hist['analista']; ?></td>
+                    <td>
+                       <?php
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'sses', 'id' => $ss['Ss']['id'], 'action' => 'view' )),
+                                array('escape' => false), "Você tem certeza");
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($hist); ?>
           </tbody>
         </table>
       </div>
@@ -282,5 +301,7 @@
       document.getElementById('demandaFrame').style.display = "block";
       //document.getElementById('demandaFrame').style.height = "720px";
     });
+
+    $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
 </script>

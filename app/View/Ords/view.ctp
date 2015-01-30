@@ -57,6 +57,18 @@
               ?>
             </a>
           </li>
+          <li>
+            <a>
+              <b>Prazo: </b>
+              <?php
+                if($ord['Ord']['dt_ini_pdd'] != null){
+                  echo $this->Times->timeLeftTo($ord['Ord']['dt_ini_pdd'], $ord['Ord']['dt_fim_pdd'],
+                        $ord['Ord']['dt_ini_pdd'] . " - " . $ord['Ord']['dt_fim_pdd'],
+                        ($ord['Ord']['dt_homologacao']));
+                }
+              ?>
+            </a>
+          </li>
           <li><a><b>Volume Final: </b><?php echo $ord['Ord']['pf']; ?></a></li>
           <li><a><b>Status: </b><?php echo $ord['Status']['nome']; ?></a></li>
           <li><a href='/sgd/sses/view/<?php echo $ord['Ss']['id']; ?>'><b>SS: </b><?php echo $ord['Ss']['nome']; ?></a></li>

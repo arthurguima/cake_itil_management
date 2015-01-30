@@ -74,6 +74,16 @@
         echo $this->BootstrapForm->input('status_id', array(
                     'label' => array('text' => 'Status: ')));
 
+        echo $this->BootstrapForm->input('dt_ini_pdd', array(
+                            'label' => array('text' => 'Data de Início da OS: '),
+                            'type' => 'text',
+                            'id' => 'dp'));
+
+        echo $this->BootstrapForm->input('dt_fim_pdd', array(
+                  'label' => array('text' => 'Data de prevista para a Homologação: '),
+                  'type' => 'text',
+                  'id' => 'dp'));
+
         echo $this->BootstrapForm->input('id');
       ?>
     </div>

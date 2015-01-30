@@ -37,7 +37,7 @@
                    'id' => 'dp'));
 
         echo $this->BootstrapForm->input('dt_inicio', array(
-                   'label' => array('text' => 'Data de Início: '),
+                   'label' => array('text' => 'Data Prevista de Início da OS: '),
                    'type' => 'text',
                    'id' => 'dp'));
 

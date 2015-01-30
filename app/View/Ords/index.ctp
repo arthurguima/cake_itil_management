@@ -91,6 +91,7 @@
                 <th>SS</th>
                 <th>PA</th>
                 <!--th>Nome</th-->
+                <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
                 <th>Ações</th>
@@ -103,6 +104,16 @@
                   <td><?php echo $this->Html->link($ord['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id'])); ?></td>
                   <td><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></td>
                   <!--td><?php //echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td-->
+
+                  <td class="text-center">
+                    <?php
+                      if($ord['Ord']['dt_ini_pdd'] != null){
+                        echo $this->Times->timeLeftTo($ord['Ord']['dt_ini_pdd'], $ord['Ord']['dt_fim_pdd'],
+                              $ord['Ord']['dt_ini_pdd'] . " - " . $ord['Ord']['dt_fim_pdd'],
+                              ($ord['Ord']['dt_homologacao']));
+                      }
+                    ?>
+                  </td>
 
                   <td>
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $ord['Ord']['id'] ?>">

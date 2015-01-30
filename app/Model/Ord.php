@@ -88,6 +88,18 @@
                 $val['Ord']['dt_homologacao']
             );
         }
+
+        if (isset($val['Ord']['dt_ini_pdd'])) {
+            $results[$key]['Ord']['dt_ini_pdd'] = $this->dateFormatAfterFind(
+                $val['Ord']['dt_ini_pdd']
+            );
+        }
+
+        if (isset($val['Ord']['dt_fim_pdd'])) {
+            $results[$key]['Ord']['dt_fim_pdd'] = $this->dateFormatAfterFind(
+                $val['Ord']['dt_fim_pdd']
+            );
+        }
     }
     return $results;
   }
@@ -111,6 +123,12 @@
     }
     if(!empty($this->data['Ord']['dt_homologacao'])) {
         $this->data['Ord']['dt_homologacao'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_homologacao'])));
+    }
+    if(!empty($this->data['Ord']['dt_ini_pdd'])) {
+        $this->data['Ord']['dt_ini_pdd'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_ini_pdd'])));
+    }
+    if(!empty($this->data['Ord']['dt_fim_pdd'])) {
+        $this->data['Ord']['dt_fim_pdd'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_fim_pdd'])));
     }
     return true;
   }

@@ -78,7 +78,7 @@
               <tr>
                 <th>Servico</th>
                 <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
-                <th class="hidden-xs hidden-sm">Clarity DM</th>
+                <th class="hidden-xs hidden-sm">DM Clarity <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
                 <th>Número</th>
                 <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></th>
                 <th>Nome</th>

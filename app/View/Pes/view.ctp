@@ -33,7 +33,7 @@
           </li>
           <li><a><b>Número da CE de envio: </b><?php echo $pe['Pe']['num_ce']; ?></a></li>
           <li><a><b>Data de emissão: </b><?php echo $pe['Pe']['dt_emissao']; ?></a></li>
-          <li><a><b>Data de início: </b><?php echo $pe['Pe']['dt_inicio']; ?></a></li>
+          <li><a><b>Data Prevista de Início da OS: </b><?php echo $pe['Pe']['dt_inicio']; ?></a></li>
           <li><a><b>Tempo estimado: </b><?php echo $pe['Pe']['temp_estimado']; ?></a></li>
           <li>
             <a><b>Validade do PDD: </b>

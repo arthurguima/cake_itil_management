@@ -25,6 +25,10 @@
       echo $this->BootstrapForm->input('responsavel', array(
                  'label' => array('text' => 'Responsável: '),
                  'value' => $this->Ldap->nomeUsuario()));
+
+      echo $this->BootstrapForm->input('descricao', array(
+                  'label' => array('text' => 'Descrição: '),
+                  'type' => "textarea"));
     ?>
     <div class="form-footer col-lg-10 pull-right">
       <?php

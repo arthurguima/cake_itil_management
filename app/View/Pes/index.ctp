@@ -16,7 +16,7 @@
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
             <div class="form-group">
-              <b>Data de Início: </b>
+              <b>Data Prevista de Início da OS: </b>
               <?php echo $this->Search->input('dtinicio',
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
                           array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));

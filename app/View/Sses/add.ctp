@@ -81,6 +81,11 @@
                       'label' => array('text' => 'Prazo final contratual: '),
                       'type' => 'text',
                       'id' => 'dp '));
+                      
+          echo $this->BootstrapForm->input('dt_finalizada', array(
+                      'label' => array('text' => 'Data de finalização: '),
+                      'type' => 'text',
+                      'id' => 'dp '));
       ?>
       <div id="demandaList"></div>
 
