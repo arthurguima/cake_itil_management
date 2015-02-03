@@ -98,7 +98,7 @@
 
                   <td class="text-center">
                     <?php echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
-                            $this->Time->format('d/m/Y', $demanda['Demanda']['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $demanda['Demanda']['dt_prevista']),
+                             $demanda['Demanda']['data_cadastro'] . " - " . $demanda['Demanda']['dt_prevista'],
                             ($demanda['Demanda']['data_homologacao']));
                     ?>
                   </td>

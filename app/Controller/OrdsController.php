@@ -94,7 +94,7 @@
 		$this->Filter->setPaginate('limit', 3000);
 
 		$this->Ord->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
-		$this->Ord->contain('Status', 'Ss', 'Pe');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+		$this->Ord->contain('Status', 'Ss', 'Pe', 'Servico');//Carrega apenas o Relacionamento com a Status e SS (otimização)
 
 		$this->set('ords', $this->paginate());
 	}

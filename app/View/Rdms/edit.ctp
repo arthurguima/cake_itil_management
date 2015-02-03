@@ -45,32 +45,34 @@
       </div>
 
       <?php
+        echo $this->BootstrapForm->input('rdm_tipo_id', array(
+                    'label' => array('text' => 'Tipo da RDM: ')));
 
-      echo $this->BootstrapForm->input('dt_prevista', array(
-                  'label' => array('text' => 'Data prevista: '),
-                  'type' => 'text',
-                  'id' => 'dp '));
+        echo $this->BootstrapForm->input('dt_prevista', array(
+                    'label' => array('text' => 'Data prevista: '),
+                    'type' => 'text',
+                    'id' => 'dp '));
 
-      echo $this->BootstrapForm->input('dt_executada', array(
-                  'label' => array('text' => 'Data de execução: '),
-                  'type' => 'text',
-                  'id' => 'dp '));
+        echo $this->BootstrapForm->input('dt_executada', array(
+                    'label' => array('text' => 'Data de execução: '),
+                    'type' => 'text',
+                    'id' => 'dp '));
 
-      echo $this->BootstrapForm->input('sucesso', array(
-                 'class' => 'col-sm-3 pull-left col-sm-offset-3',
-                 'label' => array(
-                   'text' => 'Executada com sucesso?',
-                   'class' => 'control-label col-sm-2')));
+        echo $this->BootstrapForm->input('sucesso', array(
+                   'class' => 'col-sm-3 pull-left col-sm-offset-3',
+                   'label' => array(
+                     'text' => 'Executada com sucesso?',
+                     'class' => 'control-label col-sm-2')));
 
-      echo $this->BootstrapForm->input('Demanda', array(
-                  'label' => array('text' => 'Demanda(s): '),
-                  'input' => 'text',
-                  'multiple' => "true",
-                  'options' => $demandas));
+        echo $this->BootstrapForm->input('Demanda', array(
+                    'label' => array('text' => 'Demanda(s): '),
+                    'input' => 'text',
+                    'multiple' => "true",
+                    'options' => $demandas));
 
 
-      echo $this->BootstrapForm->input('id');
-    ?>
+        echo $this->BootstrapForm->input('id');
+      ?>
 
     <div id="demandaList"></div>
 

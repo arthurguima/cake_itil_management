@@ -21,6 +21,11 @@
             'select' => $this->Filter->select('Ambiente', array(1 => 'Homologação', 2 => 'Produção') )
           )
         ),
+        'tipo' => array(
+          'Rdm.rdm_tipo_id' => array(
+            'select' => $this->Filter->select('Tipo de RDM', $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome'))))
+          )
+        ),
         'numero_' => array(
           'Rdm.numero' => array('operator' => '='),
         ),
@@ -84,6 +89,9 @@
                 $this->Rdm->Demanda->find('list', array(
                   'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
                   'conditions' => array('Demanda.servico_id' => $this->data['Rdm']['servico_id']))));
+
+    $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));
+    $this->set(compact('rdmTipos'));
   }
 
   public function add() {
@@ -101,6 +109,9 @@
     /* Relacionamentos */
     $servicos = $this->Rdm->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
     $this->set(compact('servicos'));
+
+    $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));
+    $this->set(compact('rdmTipos'));
   }
 
   public function delete($id) {

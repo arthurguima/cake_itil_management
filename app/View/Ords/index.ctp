@@ -87,9 +87,10 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-ss">
             <thead>
               <tr>
+                <th>Serviço</th>
                 <th>Número</th>
                 <th>SS</th>
-                <th>PA</th>
+                <!--th>PA</th-->
                 <!--th>Nome</th-->
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
@@ -100,9 +101,10 @@
             <tbody>
               <?php foreach ($ords as $ord): ?>
                 <tr>
+                  <td><?php echo $ord['Servico']['sigla']; ?></td>
                   <td><?php echo $this->Html->link($ord['Ord']['numero'] . "/" . $ord['Ord']['ano'], $ord['Ord']['cvs_url']); ?></td>
                   <td><?php echo $this->Html->link($ord['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id'])); ?></td>
-                  <td><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></td>
+                  <!--td><?php //echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></td-->
                   <!--td><?php //echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td-->
 
                   <td class="text-center">

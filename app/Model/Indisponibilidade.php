@@ -30,8 +30,17 @@
 		'num_incidente' => array(
 			'unique' => array(
 				'rule' => 'isUnique',
+				'allowEmpty' => true,
 				'required' => 'create',
 				'message' => 'Já existe outra indisponibilidade com esse número de incidente!'
+			)
+		),
+		'num_evento' => array(
+			'unique' => array(
+				'rule' => 'isUnique',
+				'allowEmpty' => true,
+				'required' => 'create',
+				'message' => 'Já existe outra indisponibilidade com esse número de evento!'
 			)
 		)
   );

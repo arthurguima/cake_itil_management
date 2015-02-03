@@ -76,7 +76,7 @@
                    'id' => 'dp '));
 
         echo $this->BootstrapForm->input('dt_prevista', array(
-                   'label' => array('text' => 'Data de Término: '),
+                   'label' => array('text' => 'Previsão de Término: '),
                    'type' => 'text',
                    'id' => 'dp '));
 

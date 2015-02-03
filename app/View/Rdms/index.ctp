@@ -41,6 +41,7 @@
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('ambiente_', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
           </div>
           <?php
         echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -64,6 +65,7 @@
                 <th>Servico</th>
                 <th>Versão</th>
                 <th>Ambiente</th>
+                <th>Tipo</th>
                 <th>Sucesso?</th>
                 <th>Nome</th>
                 <th>Número</th>
@@ -79,6 +81,7 @@
                   <td><?php echo $this->Html->link($rdm['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $rdm['Servico']['id'])); ?></td>
                   <td><?php echo $rdm['Rdm']['versao']; ?></td>
                   <td><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></td>
+                  <td><?php echo $rdm['RdmTipo']['nome']; ?></td>
                   <td><?php echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']); ?></a></td>
                   <td><?php echo $this->Html->link($rdm['Rdm']['nome'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id'])); ?></td>
                   <td><?php echo $rdm['Rdm']['numero']; ?></td>

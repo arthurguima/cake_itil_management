@@ -203,7 +203,7 @@
                   </td>
                   <td>
                     <?php echo $this->Times->timeLeftTo($dem['data_cadastro'], $dem['dt_prevista'],
-                          $this->Time->format('d/m/Y', $dem['data_cadastro']) . " - " . $this->Time->format('d/m/Y', $dem['dt_prevista']),
+                           $dem['data_cadastro'] . " - " . $dem['dt_prevista'],
                           ($dem['data_homologacao']));
                     ?>
                   </td>

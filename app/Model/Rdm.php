@@ -12,7 +12,13 @@
   public $belongsTo = array(
     'Servico' => array(
       'className' => 'Servico',
-      'foreignKey' => 'servico_id')
+      'foreignKey' => 'servico_id'
+    ),
+    'RdmTipo' => array(
+      'className' => 'RdmTipo',
+      'foreignKey' => 'rdm_tipo_id'
+    )
+
   );
 
   public $hasMany = array(

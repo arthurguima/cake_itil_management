@@ -53,6 +53,11 @@
 			'NotEmpty' => array(
 				'rule'   => 'notempty',
 				'message' => 'Campo deve ser preenchido!')
+		),
+		'clarity_id' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!')
 		)
 	);
 
