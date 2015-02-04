@@ -124,7 +124,7 @@
                   </td>
 
                   <td>
-                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $ord['Ord']['id'] ?>">
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-os-" . $ord['Ord']['id'] ?>">
                     <?php echo $ord['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->OrdStatusEditable($ord['Ord']['id']) ?>

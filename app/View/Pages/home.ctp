@@ -109,7 +109,7 @@
 	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">
-				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Disponibilidade</b> - Período
+				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Estimativa de Disponibilidade</b> - Período
 					<?php
 						if(date("d") < 20){
 							echo "20/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');

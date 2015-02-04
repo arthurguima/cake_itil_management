@@ -57,7 +57,7 @@
     return  '
             <script>
               $(document).ready(function() {
-                  $("#status-' . $id . '").editable("' . Router::url('/', true). '/pes/ajax_edit_status",{
+                  $("#status-pe-' . $id . '").editable("' . Router::url('/', true). '/pes/ajax_edit_status",{
                      name: "status_id",
                      loadurl : "' . Router::url('/', true). '/status/json?tipo=4",
                      type   : "select",
@@ -71,7 +71,7 @@
     return  '
             <script>
               $(document).ready(function() {
-                  $("#status-' . $id . '").editable("' . Router::url('/', true). '/ords/ajax_edit_status",{
+                  $("#status-os-' . $id . '").editable("' . Router::url('/', true). '/ords/ajax_edit_status",{
                      name: "status_id",
                      loadurl : "' . Router::url('/', true). '/status/json?tipo=3",
                      type   : "select",

@@ -93,7 +93,7 @@
                   </td>
                   <!--td><?php echo $this->Html->link($pe['Pe']['nome'], $pe['Pe']['cvs_url']); ?></td-->
                   <td>
-                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $pe['Pe']['id'] ?>">
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-pe-" . $pe['Pe']['id'] ?>">
                     <?php echo $pe['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->PeStatusEditable($pe['Pe']['id']) ?>

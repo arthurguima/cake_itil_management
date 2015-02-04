@@ -65,18 +65,23 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-pe">
             <thead>
               <tr>
-                <th>Número</th>
+                <th>Número <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
                 <!--th>Nome</th-->
                 <th>Validade do PDD</th>
                 <th>Responsável</th>
-                <th>Status</th>
+                <th><span class="editable">Status</span></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <?php foreach($ss['Pe'] as $pe): ?>
                   <tr>
-                    <td><?php echo $this->Html->link($pe['numero'] . "/" . $pe['ano'], $pe['cvs_url'], array('target' => '_blank')); ?></td>
+                    <td>
+                      <?php
+                        echo $this->Tables->popupBox($this->Html->link($pe['numero'] . "/" . $pe['ano'], $pe['cvs_url'], array('target' => '_blank')),
+                                                     $pe['observacao']);
+                      ?>
+                    </td>
                     <!--td><?php //echo $this->Html->link($pe['nome'], $pe['cvs_url']); ?></td-->
                     <td>
                       <?php
@@ -86,7 +91,11 @@
                       ?>
                     </td>
                     <td><?php echo $pe['responsavel']; ?></td>
-                    <td><?php echo $pe['Status']['nome']; ?></td>
+                    <td>
+                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-pe-" . $pe['id'] ?>">
+                      <?php echo $pe['Status']['nome']; ?></span>
+                    </td>
+                    <?php echo $this->Tables->PeStatusEditable($pe['id']) ?>
                     <td>
                        <?php
                           echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
@@ -128,7 +137,7 @@
                 <th>PA</th>
                 <th>Responsável</th>
                 <th>Prazo</th>
-                <th>Status</th>
+                <th><span class="editable">Status</span></th>
                 <th></th>
               </tr>
             </thead>
@@ -148,7 +157,13 @@
                         }
                       ?>
                     </td>
-                    <td><?php echo $os['Status']['nome']; ?></td>
+
+                    <td>
+                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-os-" . $os['id'] ?>">
+                      <?php echo $os['Status']['nome']; ?></span>
+                    </td>
+                    <?php echo $this->Tables->OrdStatusEditable($os['id']) ?>
+
                     <td>
                        <?php
                           echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
@@ -189,7 +204,7 @@
                 <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
                 <th>DM Clarity <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
                 <th>Prazo</th>
-                <th>Status</th>
+                <th><span class="editable">Status</span></th>
                 <th></th>
               </tr>
             </thead>
@@ -198,7 +213,7 @@
                 <tr>
                   <td><?php echo($dem['DemandaTipo']['nome']); ?></td>
                   <td><?php echo $this->Tables->popupBox($dem['nome'], $dem['descricao']) ?></td>
-                  <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
+                  <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
                                  $dem['clarity_id'] .")'>" . $dem['clarity_dm_id'] ."</a></span>" ?>
                   </td>
@@ -208,7 +223,10 @@
                           ($dem['data_homologacao']));
                     ?>
                   </td>
-                  <td><?php echo($dem['Status']['nome']); ?></td>
+                  <td>
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $dem['id'] ?>"><?php echo $dem['Status']['nome']; ?></span>
+                  </td>
+                  <?php echo $this->Tables->DemandaStatusEditable($dem['id'], "demandas") ?>
                   <td><?php echo $this->Tables->getMenu('demandas', $dem['id'], 6); ?></td>
                 </tr>
               <?php endforeach; ?>
@@ -292,6 +310,9 @@
 <?php
   //-- ClarityID
   echo $this->Html->script('getIdClarity.js');
+
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
 ?>
 
 <script>
