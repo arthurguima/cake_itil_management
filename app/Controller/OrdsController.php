@@ -12,6 +12,11 @@
 									array('conditions' => array('Status.tipo' => 3), 'fields' => array('Status.id', 'Status.nome'))))
 					)
 				),
+				'servico' => array(
+					'Ord.servico_id' => array(
+						'select' => $this->Filter->select('Serviço', $this->Ord->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+					)
+				),
 				'status_diferente' => array(
 					'Ord.status_id' => array(
 						'select' => $this->Filter->select('Status Diferente de', $this->Ord->Status->find('list',

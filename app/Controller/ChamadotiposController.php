@@ -106,13 +106,12 @@
 	* returns a list of itens filtered by servico
 	*/
 	public function optionList(){
-		if ($this->request->is('ajax')) {
+		/*if ($this->request->is('ajax')) {
     	$this->disableCache();
-		}
+		}*/
 		$this->layout = null;
 		//$this->autoRender = false;
 
-		//$this->Demanda->recursive = -1;
 		$this->set('chamadotipos',
 								$this->ChamadoTipo->find('list', array(
 									'fields' => array('ChamadoTipo.id', 'ChamadoTipo.nome'),

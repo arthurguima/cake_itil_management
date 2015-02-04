@@ -47,7 +47,7 @@
                   'label' => array('text' => 'Status: ')));
     ?>
 
-      <div id="chamadoTipodemandaList"></div>
+      <div id="chamadoTipoList"></div>
 
     <?php
 
@@ -94,14 +94,14 @@
         url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "chamadotipos/optionlist?servico=" + servico,
         cache: false,
         success: function(html){
-          $("#chamadoTipodemandaList").html(html);
+          $("#chamadoTipoList").html(html);
         }
       })
     }
 
     $( "select#ChamadoServicoId" ).change(function () {
       var str = "";
-      $( "select option:selected" ).each(function() {
+      $( "select#ChamadoServicoId option:selected" ).each(function() {
          getChamadoTipos($(this).val());
       })
     }).change();

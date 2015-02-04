@@ -38,6 +38,7 @@
             <div class="form-group"><?php echo $this->Search->input('num_ce_', array('class' => 'form-control', 'placeholder' => "Número da CE de envio:")); ?></div>
           </div>
           <div class="col-lg-12">
+            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
           </div>
@@ -61,9 +62,10 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-ss">
             <thead>
               <tr>
-                <th>Número</th>
+                <th>Serviço</th>
+                <th>Número da PA</th>
                 <th>Número da CE</th>
-                <th>SS</th>
+                <th>Nome da SS <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
                 <th>Validade do PDD</th>
                 <!--th>Nome</th-->
                 <th><span class="editable">Status</span></th>
@@ -74,9 +76,14 @@
             <tbody>
               <?php foreach ($pes as $pe): ?>
                 <tr>
+                  <td><?php echo $pe['Servico']['sigla']; ?></td>
                   <td><?php echo $this->Html->link(($pe['Pe']['numero'] . "/" . $pe['Pe']['ano']), $pe['Pe']['cvs_url']); ?></td>
                   <td><?php echo $pe['Pe']['num_ce']; ?></td>
-                  <td><?php echo $this->Html->link($pe['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $pe['Ss']['id'])); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Html->link($this->Tables->popupBox($pe['Ss']['nome'],$pe['Ss']['observacao']),
+                           array('controller' => 'sses', 'action' => 'view', $pe['Ss']['id']), array('escape' => false)); ?>
+                  </td>
                   <td>
                     <?php
                       if($pe['Pe']['validade_pdd'] != null){
@@ -171,5 +178,7 @@
       todayBtn: true,
       language: 'pt-BR'
     });
+
+    $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
 </script>

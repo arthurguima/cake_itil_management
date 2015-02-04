@@ -68,8 +68,8 @@
                 <th>Número</th>
                 <!--th>Nome</th-->
                 <th>Validade do PDD</th>
-                <th>Status</th>
                 <th>Responsável</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -85,8 +85,8 @@
                         }
                       ?>
                     </td>
-                    <td><?php echo $pe['Status']['nome']; ?></td>
                     <td><?php echo $pe['responsavel']; ?></td>
+                    <td><?php echo $pe['Status']['nome']; ?></td>
                     <td>
                        <?php
                           echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
@@ -125,10 +125,10 @@
               <tr>
                 <th>Número</th>
                 <!--th>Nome</th-->
-                <th>Status</th>
                 <th>PA</th>
-                <th>Prazo</th>
                 <th>Responsável</th>
+                <th>Prazo</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -137,8 +137,8 @@
                   <tr>
                     <td><?php echo $this->Html->link($os['numero'] . "/" . $os['ano'], $os['cvs_url'], array('target' => '_blank')); ?></td>
                     <!--td><?php //echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td-->
-                    <td><?php echo $os['Status']['nome']; ?></td>
                     <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
+                    <td><?php echo $os['responsavel']; ?></td>
                     <td class="text-center">
                       <?php
                         if($os['dt_ini_pdd'] != null){
@@ -148,7 +148,7 @@
                         }
                       ?>
                     </td>
-                    <td><?php echo $os['responsavel']; ?></td>
+                    <td><?php echo $os['Status']['nome']; ?></td>
                     <td>
                        <?php
                           echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
@@ -189,6 +189,7 @@
                 <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
                 <th>DM Clarity <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
                 <th>Prazo</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -207,7 +208,8 @@
                           ($dem['data_homologacao']));
                     ?>
                   </td>
-                  <td><?php echo $this->Tables->getMenu('demandas', $dem['id'], 2); ?></td>
+                  <td><?php echo($dem['Status']['nome']); ?></td>
+                  <td><?php echo $this->Tables->getMenu('demandas', $dem['id'], 6); ?></td>
                 </tr>
               <?php endforeach; ?>
             <?php unset($area); ?>

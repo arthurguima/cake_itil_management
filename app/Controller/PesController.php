@@ -13,6 +13,11 @@
                   array('conditions' => array('Status.tipo' => 4), 'fields' => array('Status.id', 'Status.nome'))))
           )
         ),
+        'servico' => array(
+          'Pe.servico_id' => array(
+            'select' => $this->Filter->select('Serviço', $this->Pe->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+          )
+        ),
         'status_diferente' => array(
           'Pe.status_id' => array(
             'select' => $this->Filter->select('Status Diferente de', $this->Pe->Status->find('list',
@@ -53,7 +58,7 @@
     $this->Filter->setPaginate('limit', 3000);
 
     $this->Pe->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
-    $this->Pe->contain('Status', 'Ss');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+    $this->Pe->contain('Status', 'Ss', 'Servico');//Carrega apenas o Relacionamento com a Status e SS (otimização)
 
     //  $statuses = $this->Pe->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 

@@ -48,7 +48,7 @@
 
     ?>
 
-    <div id="chamadoTipodemandaList"></div>
+    <div id="tipoList"></div>
 
     <?php
       echo $this->BootstrapForm->input('aberto', array(
@@ -92,14 +92,14 @@
         url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "chamadotipos/optionlist?servico=" + servico,
         cache: false,
         success: function(html){
-          $("#chamadoTipodemandaList").html(html);
+          $("#tipoList").html(html);
         }
       })
     }
 
     $( "select#ChamadoServicoId" ).change(function () {
       var str = "";
-      $( "select option:selected" ).each(function() {
+      $( "select#ChamadoServicoId option:selected" ).each(function() {
          getChamadoTipos($(this).val());
       })
     }).change();

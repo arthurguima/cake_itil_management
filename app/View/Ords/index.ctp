@@ -64,6 +64,7 @@
             <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
           </div>
@@ -89,12 +90,13 @@
               <tr>
                 <th>Serviço</th>
                 <th>Número</th>
-                <th>SS</th>
+                <th>Nome da SS <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
                 <!--th>PA</th-->
                 <!--th>Nome</th-->
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
+                <th>Termos</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -103,7 +105,11 @@
                 <tr>
                   <td><?php echo $ord['Servico']['sigla']; ?></td>
                   <td><?php echo $this->Html->link($ord['Ord']['numero'] . "/" . $ord['Ord']['ano'], $ord['Ord']['cvs_url']); ?></td>
-                  <td><?php echo $this->Html->link($ord['Ss']['nome'], array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id'])); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Html->link($this->Tables->popupBox($ord['Ss']['nome'],$ord['Ss']['observacao']),
+                           array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id']), array('escape' => false)); ?>
+                    </td>
                   <!--td><?php //echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></td-->
                   <!--td><?php //echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td-->
 
@@ -124,6 +130,7 @@
                   <?php echo $this->Tables->OrdStatusEditable($ord['Ord']['id']) ?>
 
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ord['Ord']['responsavel']; ?></div></td>
+                  <td class="checklist hidden-xs hidden-sm"><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></td>
                   <td><?php echo $this->Tables->getMenu('ords', $ord['Ord']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
@@ -204,5 +211,7 @@
       todayBtn: true,
       language: 'pt-BR'
     });
+
+    $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
 </script>

@@ -42,6 +42,15 @@
 
         echo $this->BootstrapForm->input('pe_id', array(
                     'label' => array('text' => 'PA: ')));
+
+        echo $this->BootstrapForm->input('ths', array(
+                'label' => array('text' => 'THS (Link): ')));
+
+        echo $this->BootstrapForm->input('trp', array(
+                'label' => array('text' => 'TRP (Link): ')));
+
+        echo $this->BootstrapForm->input('trd', array(
+                'label' => array('text' => 'TRD (Link): ')));
       ?>
     </div>
     <div class="col-lg-6">

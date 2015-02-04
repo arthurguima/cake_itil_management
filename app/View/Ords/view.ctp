@@ -74,6 +74,7 @@
           <li><a href='/sgd/sses/view/<?php echo $ord['Ss']['id']; ?>'><b>SS: </b><?php echo $ord['Ss']['nome']; ?></a></li>
           <li><a href='/sgd/pes/view/<?php echo $ord['Pe']['id']; ?>'><b>PA: </b><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></a></li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $ord['Ord']['cvs_url']; ?></a></li>
+          <li><a><b>Termos: </b><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></li>
           <li><a><b>Observação: </b><?php echo $ord['Ord']['observacao']; ?></a></li>
         </ul>
       </div>

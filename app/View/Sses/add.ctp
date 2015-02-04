@@ -81,7 +81,7 @@
                       'label' => array('text' => 'Prazo final contratual: '),
                       'type' => 'text',
                       'id' => 'dp '));
-                      
+
           echo $this->BootstrapForm->input('dt_finalizada', array(
                       'label' => array('text' => 'Data de finalização: '),
                       'type' => 'text',
@@ -89,7 +89,8 @@
       ?>
       <div id="demandaList"></div>
 
-      <?php echo $this->BootstrapForm->input('dv', array(
+      <?php
+         echo $this->BootstrapForm->input('dv', array(
                  'label' => array('text' => 'Documento de Visão (Link): ')));
 
          echo $this->BootstrapForm->input('contagem', array(
