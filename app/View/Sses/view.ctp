@@ -136,6 +136,7 @@
                 <!--th>Nome</th-->
                 <th>PA</th>
                 <th>Responsável</th>
+                <th>Termos</th>
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
                 <th></th>
@@ -148,6 +149,7 @@
                     <!--td><?php //echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td-->
                     <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
                     <td><?php echo $os['responsavel']; ?></td>
+                    <td class="checklist"><?php echo $this->Ord->getCheckList($os['ths'], $os['trp'], $os['trd']) ?></td>
                     <td class="text-center">
                       <?php
                         if($os['dt_ini_pdd'] != null){

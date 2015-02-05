@@ -24,6 +24,21 @@
     <div class="well">
       <ul class="list-unstyled spaced">
         <li>
+          <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.8.8</h4>
+            <div class="personal-info">
+              Veja o que mudou:<br/><br/>
+              <ul>
+                <li>Calendário</li>
+                <li>Checlist de OS</li>                
+                <li>Correção de Bugs.</li>
+              </ul>
+            </div>
+        </li>
+      </ul>
+    </div>
+    <div class="well">
+      <ul class="list-unstyled spaced">
+        <li>
           <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.6</h4>
             <div class="personal-info">
               Veja o que mudou:<br/><br/>

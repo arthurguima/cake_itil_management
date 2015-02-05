@@ -57,7 +57,12 @@
 		'clarity_id' => array(
 			'NotEmpty' => array(
 				'rule'   => 'notempty',
-				'message' => 'Campo deve ser preenchido!')
+				'message' => 'Campo deve ser preenchido!'),
+			'unique' => array(
+				'rule' => 'isUnique',
+				'required' => 'create',
+				'message' => 'Já existe outra SS com esse Clarity ID'
+			)
 		)
 	);
 

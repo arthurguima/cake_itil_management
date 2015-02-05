@@ -845,3 +845,40 @@ table#dataTables-Servico{
 .personal-info {
   margin-left: 21px;
 }
+
+
+/* Calendário */
+.calendar-demanda{
+  background-color: #428bca !important;
+  border: 1px solid #428bca !important;
+  color: #fff !important;
+  font-weight: bold !important;
+}
+.calendar-rdm{
+  background-color: #f2dede !important;
+  border: 1px solid #ebccd1 !important;
+  color: #a94442 !important;
+  font-weight: bold !important;
+}
+.calendar-ss{
+  background-color: #56CDDF !important;
+  border: 1px solid #bce8f1 !important;
+  color: #fff !important;
+  font-weight: bold !important;
+}
+.calendar-pa{
+  background-color: #C6CFDB !important;
+  border: 1px solid #ddd !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+.calendar-os{
+  background-color: #fcf8e3 !important;
+  border: 1px solid #faebcc !important;
+  color: #8a6d3b !important;
+  font-weight: bold !important;
+}
+
+.fc-unthemed .fc-today {
+  background: #f5f5f5 !important;
+}

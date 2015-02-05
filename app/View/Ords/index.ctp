@@ -130,7 +130,7 @@
                   <?php echo $this->Tables->OrdStatusEditable($ord['Ord']['id']) ?>
 
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ord['Ord']['responsavel']; ?></div></td>
-                  <td class="checklist hidden-xs hidden-sm"><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></td>
+                  <td class="checklist"><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></td>
                   <td><?php echo $this->Tables->getMenu('ords', $ord['Ord']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>

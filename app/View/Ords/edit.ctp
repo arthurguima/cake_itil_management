@@ -44,7 +44,7 @@
                     'label' => array('text' => 'PA: ')));
 
         echo $this->BootstrapForm->input('ths', array(
-                'label' => array('text' => 'THS (Link): ')));
+                'label' => array('text' => 'TH (Link): ')));
 
         echo $this->BootstrapForm->input('trp', array(
                 'label' => array('text' => 'TRP (Link): ')));

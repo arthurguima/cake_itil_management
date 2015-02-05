@@ -61,7 +61,10 @@
 										  <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Dashboard',
 																							Router::url('/', true) . "index.php", array('escape' => false)); ?>
 									</li>
-									<li><a href="#"><i class="fa fa-calendar fa-fw"></i> Calendário (em breve)<span class="fa arrow"></span></a></li>
+									<li>
+											<?php echo $this->Html->link("<i class='fa fa-calendar fa-fw'></i> Calendário", '/calendarios/show', array('escape' => false)); ?>
+											<span class="fa arrow"></span>
+									</li>
 									<li> <!-- Sustentação -->
 											<a href="#"><i class="fa fa-briefcase fa-fw"></i> Demandas <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
@@ -113,7 +116,7 @@
 								</ul>
 								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 					</div>
-					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.5 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
+					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.8.8 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
 			</div>
 			<!-- Fim sidebar -->
 		</nav>

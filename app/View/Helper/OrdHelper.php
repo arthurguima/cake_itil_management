@@ -5,9 +5,9 @@
       $value = "<span>";
 
       if($ths != null){
-          $value = $value . "<a target='_blank' href='" . $ths . "' title='THS' ><b>THS</b> <i class='fa fa-check-square-o fa-done checklist'><span>(OK)</span></i></a>  ";
+          $value = $value . "<a target='_blank' href='" . $ths . "' title='TH' ><b>THS</b> <i class='fa fa-check-square-o fa-done checklist'><span>(OK)</span></i></a>  ";
       }else{
-          $value = $value . "<a title='Documento de Visão'><b>THS</b> <i class='fa fa-square-o fa-undone checklist'><span>(  )</span></i></a>  ";
+          $value = $value . "<a title='Documento de Visão'><b>TH</b> <i class='fa fa-square-o fa-undone checklist'><span>(  )</span></i></a>  ";
       }
 
       if($trp != null){
