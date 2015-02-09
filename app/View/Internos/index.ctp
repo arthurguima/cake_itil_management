@@ -6,9 +6,13 @@
       <h3 class="page-header">
          Sistemas Internos
          <div class="col-lg-2 pull-right">
-           <?php echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
+           <?php
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
               array('controller' => 'internos', 'action' => 'add'),
-              array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false)); ?>
+              array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
+            }
+           ?>
          </div>
       </h3>
     </div>

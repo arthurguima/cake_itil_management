@@ -11,7 +11,7 @@
       /* PE */
       $this->loadModel('Pe');
       $this->Pe->Behaviors->load('Containable');
-      //$this->Ord->contain('Ss');
+      $this->Pe->contain('Servico');
       $pes = $this->Pe->find('all', array('conditions'=>array('Pe.validade_pdd !=' => null)));
 
       foreach($pes as $pe) {
@@ -21,7 +21,7 @@
             'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $pe['Pe']['validade_pdd']))),
             'allDay' => true,
             'url' => Router::url('/') . 'pes/view/'.$pe['Pe']['id'],
-            //'details' => $ord['Ord']['observacao'],
+            'description' => $pe['Servico']['sigla'],
             'className' => 'calendar-pa'
         );
       }
@@ -29,7 +29,7 @@
       /* ORD */
       $this->loadModel('Ord');
       $this->Ord->Behaviors->load('Containable');
-      $this->Ord->contain('Ss');
+      $this->Ord->contain('Ss', 'Servico');
       $ords = $this->Ord->find('all', array('conditions'=>array('Ord.dt_fim_pdd !=' => null)));
 
       foreach($ords as $ord) {
@@ -39,7 +39,7 @@
             'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $ord['Ord']['dt_fim_pdd']))),
             'allDay' => true,
             'url' => Router::url('/') . 'ords/view/'.$ord['Ord']['id'],
-            //'details' => $ord['Ord']['observacao'],
+            'description' => $ord['Servico']['sigla'],
             'className' => 'calendar-os'
         );
       }
@@ -47,6 +47,7 @@
       /* RDM */
       $this->loadModel('Rdm');
       $this->Rdm->Behaviors->load('Containable');
+      $this->Rdm->contain('Servico');
       $rdms = $this->Rdm->find('all', array('conditions'=>array('Rdm.dt_prevista !=' => null)));
 
       foreach($rdms as $rdm) {
@@ -56,7 +57,7 @@
             'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $rdm['Rdm']['dt_prevista']))),
             'allDay' => true,
             'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
-            'description' => $rdm['Rdm']['versao'] . ($rdm['Rdm']['versao'] == 1 ? ' Homologação' : ' Produção'),
+            'description' => $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . ($rdm['Rdm']['versao'] == 1 ? ' Homologação' : ' Produção'),
             'className' => 'calendar-rdm'
         );
       }
@@ -64,7 +65,7 @@
       /* SS */
       $this->loadModel('Ss');
       $this->Ss->Behaviors->load('Containable');
-      $this->Ord->contain('Servico');
+      $this->Ss->contain('Servico');
       $sses = $this->Ss->find('all', array('conditions'=>array('Ss.dt_prazo !=' => null)));
 
       foreach($sses as $ss) {

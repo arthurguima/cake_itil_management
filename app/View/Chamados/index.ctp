@@ -6,9 +6,13 @@
       <h3 class="page-header">
          Chamados
          <div class="col-lg-2 pull-right">
-           <?php echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
-              array('controller' => 'chamados', 'action' => 'add'),
-              array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false)); ?>
+           <?php
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
+                array('controller' => 'chamados', 'action' => 'add'),
+                array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
+            }
+           ?>
          </div>
       </h3>
     </div>
@@ -78,9 +82,11 @@
                   <td>
                     <?php
                       echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 2);
-                      echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'index' )),
-                                array('escape' => false));
+                      if($this->Ldap->autorizado(2)){
+                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                  array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'index' )),
+                                  array('escape' => false));
+                      }
                     ?>
                   </td>
                 </tr>

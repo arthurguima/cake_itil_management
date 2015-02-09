@@ -14,9 +14,11 @@
         <p>
           <h3 class="panel-title">Informações
             <?php
-              echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-                array('controller' => 'sses', 'action' => 'edit', $ss['Ss']['id']),
-                array('escape' => false));
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                  array('controller' => 'sses', 'action' => 'edit', $ss['Ss']['id']),
+                  array('escape' => false));
+              }
             ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.info-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
@@ -53,9 +55,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>PA</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'pes', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'pes', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.pe-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -98,11 +104,13 @@
                     <?php echo $this->Tables->PeStatusEditable($pe['id']) ?>
                     <td>
                        <?php
-                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
+                        echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
                                 array('controller' => 'pes', 'action' => 'view', $pe['id']), array('escape' => false));
+                        if($this->Ldap->autorizado(2)){
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'pes', 'action' => 'edit', $pe['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
                                 array('escape' => false));
+                        }
                        ?>
                      </td>
                   </tr>
@@ -120,9 +128,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>OS</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'ords', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'ords', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view', 'servico' =>  $ss['Ss']['servico_id'] )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.os-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -170,9 +182,11 @@
                        <?php
                           echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
                                 array('controller' => 'ords', 'action' => 'view', $os['id']), array('escape' => false));
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'ords', 'action' => 'edit', $os['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-                                array('escape' => false));
+                          if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                  array('controller' => 'ords', 'action' => 'edit', $os['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                                  array('escape' => false));
+                          }
                        ?>
                      </td>
                   </tr>
@@ -190,9 +204,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Demandas Internas
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'demandas', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+               echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'demandas', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -245,9 +263,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -271,12 +293,14 @@
                     <td><?php echo $hist['analista']; ?></td>
                     <td>
                        <?php
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                          if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'sses', 'id' =>  $ss['Ss']['id'], 'action' => 'view' )),
                                 array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                                array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'sses', 'id' => $ss['Ss']['id'], 'action' => 'view' )),
-                                array('escape' => false), "Você tem certeza");
+                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                  array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'sses', 'id' => $ss['Ss']['id'], 'action' => 'view' )),
+                                  array('escape' => false), "Você tem certeza");
+                          }
                        ?>
                      </td>
                   </tr>

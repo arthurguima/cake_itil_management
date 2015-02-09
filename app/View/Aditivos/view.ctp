@@ -15,9 +15,11 @@
         <p>
           <b>Informações</b>
           <?php
-            echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-              array('controller' => 'Aditivos', 'action' => 'edit', $aditivo['Aditivo']['id']),
-              array('escape' => false));
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                array('controller' => 'Aditivos', 'action' => 'edit', $aditivo['Aditivo']['id']),
+                array('escape' => false));
+            }
           ?>
         </p>
       </div>
@@ -40,9 +42,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Itens de Contrato
-          <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-            array('controller' => 'items', 'action' => 'add','?' => array('controller' =>  'aditivos', 'id' =>  $aditivo['Aditivo']['id'], 'action' => 'view' )),
-            array('escape' => false)); ?></h3>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'items', 'action' => 'add','?' => array('controller' =>  'aditivos', 'id' =>  $aditivo['Aditivo']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+          </h3>
         </p>
       </div>
       <div class="panel-body">
@@ -64,12 +71,14 @@
                   <td><?php echo $item['metrica']; ?></td>
                   <td>
                      <?php
+                      if($this->Ldap->autorizado(2)){
                         echo $this->Html->link("<i class='fa fa-pencil'></i>",
                               array('controller' => 'items', 'action' => 'edit', $item['id'], '?' => array('action' => 'view','controller' => 'aditivos','id' =>  $aditivo['Aditivo']['id'])),
                               array('escape' => false));
                         echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                               array('controller' => 'items', 'action' => 'delete', $item['id'], '?' => array('action' => 'view','controller' => 'aditivos','id' =>  $aditivo['Aditivo']['id'])),
                               array('escape' => false), "Você tem certeza");
+                      }
                      ?>
                    </td>
                 </tr>

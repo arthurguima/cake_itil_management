@@ -12,11 +12,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Informações
-          <?php
-            echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-              array('controller' => 'Rdms', 'action' => 'edit', $rdm['Rdm']['id']),
-              array('escape' => false));
-          ?></h3>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                  array('controller' => 'Rdms', 'action' => 'edit', $rdm['Rdm']['id']),
+                  array('escape' => false));
+              }
+            ?>
+          </h3>
         </p>
       </div>
       <div class="panel-body">
@@ -72,9 +75,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'rdms', 'id' =>  $rdm['Rdm']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'rdms', 'id' =>  $rdm['Rdm']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -98,12 +105,14 @@
                     <td><?php echo $hist['analista']; ?></td>
                     <td>
                        <?php
+                        if($this->Ldap->autorizado(2)){
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>  $rdm['Rdm']['id'], 'action' => 'view' )),
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                 array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'demandas', 'id' => $rdm['Rdm']['id'], 'action' => 'view' )),
                                 array('escape' => false), "Você tem certeza");
+                        }
                        ?>
                      </td>
                   </tr>

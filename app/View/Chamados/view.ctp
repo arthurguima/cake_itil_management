@@ -14,9 +14,11 @@
           <h3 class="panel-title">
             <b>Informações</b>
             <?php
-              echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-                array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
-                array('escape' => false));
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                  array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
+                  array('escape' => false));
+              }
             ?>
           </h3>
         </p>
@@ -42,9 +44,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -68,12 +74,15 @@
                     <td><?php echo $hist['analista']; ?></td>
                     <td>
                        <?php
+                        if($this->Ldap->autorizado(2)){
+
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                 array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'chamados', 'id' => $chamado['Chamado']['id'], 'action' => 'view' )),
                                 array('escape' => false), "Você tem certeza");
+                        }
                        ?>
                      </td>
                   </tr>

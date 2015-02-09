@@ -8,9 +8,13 @@
       <h3 class="page-header">
         Itens de Contrato
         <div class="col-lg-2 pull-right">
-          <?php echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
-             array('controller' => 'Items', 'action' => 'add'),
-             array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false)); ?>
+          <?php
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
+               array('controller' => 'Items', 'action' => 'add'),
+               array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
+            }
+          ?>
         </div>
       </h3>
     </div>
@@ -40,12 +44,16 @@
                   <td><?php echo $item['Item']['metrica']; ?></td>
                   <td>
                      <?php
+                      if($this->Ldap->autorizado(2)){
                         echo $this->Html->link("<i class='fa fa-pencil'></i>",
                               array('controller' => 'Item', 'action' => 'edit', $item['Item']['id']),
                               array('escape' => false));
+                      }
+                      if($this->Ldap->autorizado(1)){
                         echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                               array('action' => 'delete', $item['Item']['id']),
                               array('escape' => false), "Você tem certeza");
+                      }
                      ?>
                    </td>
                 </tr>

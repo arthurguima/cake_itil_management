@@ -6,9 +6,13 @@
       <h3 class="page-header">
         Tipos de Chamados
         <div class="col-lg-2 pull-right">
-          <?php echo $this->Html->link("<i class='fa fa-plus'></i> Nova",
-             array('controller' => 'chamadotipos', 'action' => 'add'),
-             array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false)); ?>
+          <?php
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-plus'></i> Nova",
+               array('controller' => 'chamadotipos', 'action' => 'add'),
+               array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
+            }
+          ?>
         </div>
       </h3>
     </div>

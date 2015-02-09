@@ -24,15 +24,23 @@
 				center: 'title',
 				right: 'month,basicWeek,basicDay'
 			},
+
       events: {
         url: 'json',
         //color: '#DEDEDE',   // an option!
         //textColor: 'black' // an option!
       },
+
       eventRender: function(event, element) {
         if(event.description != null)
           element.find('.fc-title').append("<br/>" + event.description);
+      },
+
+      dayClick: function(date, allDay, jsEvent, view) {
+        $('#calendar').fullCalendar('gotoDate', date);
+        $('#calendar').fullCalendar('changeView', 'basicDay');
       }
+
     })
   });
 </script>

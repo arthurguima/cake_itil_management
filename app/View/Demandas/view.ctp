@@ -13,9 +13,11 @@
         <p>
           <h3 class="panel-title"><b>Informações Gerais</b>
             <?php
-              echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-                array('controller' => 'demandas', 'action' => 'edit', $demanda['Demanda']['id']),
-                array('escape' => false));
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                  array('controller' => 'demandas', 'action' => 'edit', $demanda['Demanda']['id']),
+                  array('escape' => false));
+              }
             ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.info-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
@@ -74,9 +76,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -100,12 +106,14 @@
                     <td><?php echo $hist['analista']; ?></td>
                     <td>
                        <?php
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
-                                array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                                array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
-                                array('escape' => false), "Você tem certeza");
+                         if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                  array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                                  array('escape' => false));
+                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                  array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
+                                  array('escape' => false), "Você tem certeza");
+                         }
                        ?>
                      </td>
                   </tr>
@@ -123,10 +131,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Chamados</b>
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'chamados', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view',
-                                                                               'servico' => $demanda['Demanda']['servico_id'] )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+               echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'chamados', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view',
+                                                                                 'servico' => $demanda['Demanda']['servico_id'] )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.chamados-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -148,12 +160,17 @@
                     <td><?php echo $chamado['numero']; ?></td>
                     <td>
                        <?php
+                          echo $this->Html->link("<i class='fa fa-search-plus'></i>",
+                             array('controller' => 'chamados', 'action' => 'view', $chamado['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                             array('escape' => false));
+                        if($this->Ldap->autorizado(2)){
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'chamados', 'action' => 'edit', $chamado['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                 array('controller' => 'chamados', 'action' => 'delete', $chamado['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
                                 array('escape' => false), "Você tem certeza");
+                        }
                        ?>
                      </td>
                   </tr>

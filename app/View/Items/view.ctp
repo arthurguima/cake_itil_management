@@ -15,9 +15,11 @@
         <p>
           <b>Informações</b>
           <?php
-            echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-              array('controller' => 'Items', 'action' => 'edit', $Item['Item']['id']),
-              array('escape' => false));
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                array('controller' => 'Items', 'action' => 'edit', $Item['Item']['id']),
+                array('escape' => false));
+            }
           ?>
         </p>
       </div>

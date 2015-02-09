@@ -13,9 +13,11 @@
         <p>
           <h3 class="panel-title">Informações Gerais
             <?php
-              echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-                array('controller' => 'contratos', 'action' => 'edit', $contrato['Contrato']['id']),
-                array('escape' => false));
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                  array('controller' => 'contratos', 'action' => 'edit', $contrato['Contrato']['id']),
+                  array('escape' => false));
+              }
             ?>
           </h3>
         </p>
@@ -36,9 +38,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Aditivos
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'aditivos', 'action' => 'add','?' => array('contrato' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'aditivos', 'action' => 'add','?' => array('contrato' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.aditivos-body').toggle();"><i style="font-size: 20px;" class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -62,17 +68,19 @@
 
                   <td>
                      <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                              array('controller' => 'aditivos', 'action' => 'edit', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
-                              array('escape' => false));
+                        if($this->Ldap->autorizado(2)){
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'aditivos', 'action' => 'edit', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
+                                array('escape' => false));
 
-                        echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-left: 5px;''></i>",
-                              array('controller' => 'aditivos', 'action' => 'view', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
-                              array('escape' => false));
+                          echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-left: 5px;''></i>",
+                                array('controller' => 'aditivos', 'action' => 'view', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
+                                array('escape' => false));
 
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                              array('controller' => 'aditivos', 'action' => 'delete', $aditivo['id']),
-                              array('escape' => false), "Você tem certeza");
+                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                array('controller' => 'aditivos', 'action' => 'delete', $aditivo['id']),
+                                array('escape' => false), "Você tem certeza");
+                        }
                      ?>
                    </td>
                 </tr>
@@ -92,9 +100,13 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Itens de Contrato
-            <?php echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-              array('controller' => 'items', 'action' => 'add','?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
-              array('escape' => false)); ?>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'items', 'action' => 'add','?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
             <a style="cursor:pointer;" onclick="javascript:$('div.panel-body.itens-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></a>
           </h3>
         </p>
@@ -118,12 +130,14 @@
                   <td><?php echo $item['metrica']; ?></td>
                   <td>
                      <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                              array('controller' => 'items', 'action' => 'edit', $item['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
-                              array('escape' => false));
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                              array('controller' => 'items', 'action' => 'delete', $item['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
-                              array('escape' => false), "Você tem certeza");
+                        if($this->Ldap->autorizado(2)){
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'items', 'action' => 'edit', $item['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                array('controller' => 'items', 'action' => 'delete', $item['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
+                                array('escape' => false), "Você tem certeza");
+                        }
                      ?>
                    </td>
                 </tr>

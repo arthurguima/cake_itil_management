@@ -55,9 +55,10 @@
 				'message' => 'Campo deve ser preenchido!')
 		),
 		'clarity_id' => array(
-			'NotEmpty' => array(
+			/*'NotEmpty' => array(
 				'rule'   => 'notempty',
-				'message' => 'Campo deve ser preenchido!'),
+				'message' => 'Campo deve ser preenchido!'),*/
+			'allowEmpty' => true,
 			'unique' => array(
 				'rule' => 'isUnique',
 				'required' => 'create',

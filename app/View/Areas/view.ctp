@@ -12,11 +12,14 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Informações
-          <?php
-            echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
-              array('controller' => 'Areas', 'action' => 'edit', $area['Area']['id']),
-              array('escape' => false));
-          ?></h3>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-edit pull-right'></i>",
+                  array('controller' => 'Areas', 'action' => 'edit', $area['Area']['id']),
+                  array('escape' => false));
+              }
+            ?>
+          </h3>
         </p>
       </div>
       <div class="panel-body">
@@ -53,10 +56,12 @@
                   <td><?php echo $ser['nome']; ?></td>
                   <td>
                      <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                              array('controller' => 'servicos', 'action' => 'edit',
-                                     $ser['id'], '?' => array('area' =>  $area['Area']['id'])),
-                              array('escape' => false));
+                        if($this->Ldap->autorizado(2)){
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'servicos', 'action' => 'edit',
+                                       $ser['id'], '?' => array('area' =>  $area['Area']['id'])),
+                                array('escape' => false));
+                        }
                      ?>
                    </td>
                 </tr>
