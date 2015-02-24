@@ -86,7 +86,7 @@
               <?php foreach($pe['Historico'] as $hist): ?>
                   <tr>
                     <td><?php echo $hist['data']; ?></td>
-                    <td><?php echo $hist['descricao']; ?></td>
+                    <td><?php echo $this->Historicos->findLinks( $hist['descricao']); ?></td>
                     <td><?php echo $hist['analista']; ?></td>
                     <td>
                        <?php

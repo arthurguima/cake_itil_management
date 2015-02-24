@@ -62,6 +62,7 @@
       throw new NotFoundException(__('Rdm Inválida'));
     }
     $options = array('conditions' => array('Rdm.' . $this->Rdm->primaryKey => $id));
+    $this->Rdm->recursive = 2;
     $this->set('rdm', $this->Rdm->find('first', $options));
   }
 

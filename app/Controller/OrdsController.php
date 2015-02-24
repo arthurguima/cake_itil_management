@@ -24,6 +24,13 @@
 						'operator'    => '!='
 					)
 				),
+				'status_diferente2' => array(
+					'Ord.status_id' => array(
+						'select' => $this->Filter->select('Status Diferente de', $this->Ord->Status->find('list',
+									array('conditions' => array('Status.tipo' => 3), 'fields' => array('Status.id', 'Status.nome')))),
+						'operator'    => '!='
+					)
+				),
 				'dtemissao' => array(
 					'Ord.dt_emissao' => array(
 						'operator' => 'BETWEEN',

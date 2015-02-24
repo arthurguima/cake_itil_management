@@ -10,7 +10,9 @@
     <div class="col-lg-12 pull-left filters">
       <div class="">
         <div class="row">
-          <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span>
+          <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">
+            Filtros <i class="fa fa-plus-square"></i>
+          </span>
         </div>
         <div class="row inner" style="display: none;">
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
@@ -63,9 +65,10 @@
             <thead>
               <tr>
                 <th>Serviço</th>
-                <th>Número da PA</th>
+                <th>Número da PA <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Número da CE</th>
                 <th>Nome da SS <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                <th>Nome da SS</i></th>
                 <th>Validade do PDD</th>
                 <!--th>Nome</th-->
                 <th><span class="editable">Status</span></th>
@@ -77,14 +80,17 @@
               <?php foreach ($pes as $pe): ?>
                 <tr>
                   <td><?php echo $pe['Servico']['sigla']; ?></td>
-                  <td><?php echo $this->Html->link(($pe['Pe']['numero'] . "/" . $pe['Pe']['ano']), $pe['Pe']['cvs_url']); ?></td>
+                  <td data-order=<?php echo $pe['Pe']['ano'] . $pe['Pe']['numero']; ?>>
+                    <?php echo $this->Html->link(($pe['Pe']['numero'] . "/" . $pe['Pe']['ano']), $pe['Pe']['cvs_url']); ?>
+                  </td>
                   <td><?php echo $pe['Pe']['num_ce']; ?></td>
                   <td>
                     <?php
                       echo $this->Html->link($this->Tables->popupBox($pe['Ss']['nome'],$pe['Ss']['observacao']),
                            array('controller' => 'sses', 'action' => 'view', $pe['Ss']['id']), array('escape' => false)); ?>
                   </td>
-                  <td>
+                  <td><?php echo $pe['Ss']['nome']; ?></td>
+                  <td data-order=<?php echo $this->Times->CleanDate($pe['Pe']['validade_pdd']); ?>>
                     <?php
                       if($pe['Pe']['validade_pdd'] != null){
                         echo $this->Times->pastDate($pe['Pe']['validade_pdd']);
@@ -93,12 +99,18 @@
                   </td>
                   <!--td><?php echo $this->Html->link($pe['Pe']['nome'], $pe['Pe']['cvs_url']); ?></td-->
                   <td>
-                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-pe-" . $pe['Pe']['id'] ?>">
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "statuspa-" . $pe['Pe']['id'] ?>">
                     <?php echo $pe['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->PeStatusEditable($pe['Pe']['id']) ?>
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $pe['Pe']['responsavel']; ?></div></td>
-                  <td><?php echo $this->Tables->getMenu('pes', $pe['Pe']['id'], 14); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Tables->getMenu('pes', $pe['Pe']['id'], 14);
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $pe['Pe']['id'] . ")'>
+                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                    ?>
+                  </td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($pe); ?>
@@ -106,6 +118,19 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
       </div>
     </div>
   </div>
@@ -136,6 +161,7 @@
         language: {
           url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
         },
+        "columnDefs": [  { "visible": false, "targets": 4 } ],
         "dom": 'T<"clear">lfrtip',
         "tableTools": {
             "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
@@ -144,7 +170,7 @@
                   "sExtends": "copy",
                   "sButtonText": "Copiar",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3,4,5 ]
+                  "mColumns": [ 0,1,2,4,5,6 ]
               },
               {
                   "sExtends": "print",
@@ -155,7 +181,7 @@
                   "sButtonText": "CSV",
                   "sFileName": "Propostas de Atendimento.csv",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3,4,5 ]
+                  "mColumns": [ 0,1,2,4,5,6 ]
               },
               {
                   "sExtends": "pdf",
@@ -163,7 +189,7 @@
                   "sFileName": "Propostas de Atendimento.pdf",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
                   "sPdfOrientation": "landscape",
-                  "mColumns": [ 0,1,2,3,4,5 ],
+                  "mColumns": [ 0,1,2,4,5,6 ],
                   "sTitle": "Listagem de Propostas de Atendimento",
                   "sPdfMessage": "<?php echo date('d/m/y')?>",
               },
@@ -181,4 +207,8 @@
 
     $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
+
+  function historico(id){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=pes&id=");?>" + id;
+  }
 </script>

@@ -27,6 +27,9 @@
   }
 
   public function edit($id = null){
+    $this->Servico->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a área (otimização)
+    $this->Servico->contain('Area', 'Dependencia');
+
     if (!$id) { throw new NotFoundException(__('Serviço Inválido'));}
 
     $sistema = $this->Servico->findById($id);

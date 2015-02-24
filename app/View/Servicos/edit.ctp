@@ -9,7 +9,7 @@
       <?php
           echo $this->Html->link("<i class='fa fa-search-plus'></i>",
           array('controller' => 'Servicos', 'action' => 'view', $this->data['Servico']['id']),
-          array('escape' => false));
+          array('escape' => false));          
       ?>
     </h3>
   </div>

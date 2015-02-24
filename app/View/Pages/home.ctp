@@ -22,6 +22,32 @@
 		</div>
 	</div>
 
+	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
+		<div class="panel panel-default panel-info">
+			<div class="panel-heading">
+				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Estimativa de Disponibilidade</b> - Período
+					<?php
+						if(date("d") < 21){
+							echo "21/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');
+						}
+						else{
+							echo "21/" . date('m/Y') . " a 20/" . date("m/Y",strtotime("+1 month"));
+						}
+					?></span>
+					<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.indisponibilidades-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+				</h3></p>
+			</div>
+			<div class="panel-body indisponibilidades-body">
+				<div class="tab-content">
+						<?php foreach ($servicos as $servico): ?>
+							<?php echo $this->Disponibilidade->indisponibilidades($servico)?>
+						<?php endforeach; ?>
+						<?php unset($servico);?>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="col-lg-9  col-md-12 col-sm-12 pull-left">
 		<div class="panel panel-default ">
 			<div class="panel-heading">
@@ -105,34 +131,7 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
-		<div class="panel panel-default panel-info">
-			<div class="panel-heading">
-				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Estimativa de Disponibilidade</b> - Período
-					<?php
-						if(date("d") < 20){
-							echo "20/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');
-						}
-						else{
-							echo "20/" . date('m/Y') . " a 20/" . date("m/Y",strtotime("+1 month"));
-						}
-					?></span>
-					<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.indisponibilidades-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-				</h3></p>
-			</div>
-			<div class="panel-body indisponibilidades-body">
-				<div class="tab-content">
-						<?php foreach ($servicos as $servico): ?>
-							<?php echo $this->Disponibilidade->indisponibilidades($servico)?>
-						<?php endforeach; ?>
-						<?php unset($servico);?>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
-
 
 <?php
  // Circliful

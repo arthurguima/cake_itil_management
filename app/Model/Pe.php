@@ -33,6 +33,25 @@
                 'rule'    => array('between', 3, 120),
                 'message' => 'O campo deve conter de 3 a 120 caracteres!'
     )),
+    'numero' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!'),
+      'unique' => array(
+        'rule' => array('checkUnique', array('numero', 'ano', 'servico_id'), false),
+        'required' => 'create',
+        'message' => 'Já existe outra PA com esse número, nesse ano, para esse serviço'
+       ),
+      'between' => array(
+                'rule'    => array('between', 1, 20),
+                'message' => 'O campo deve conter de 1 a 20 caracteres!'
+      )
+    ),
+    'responsavel' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!')
+    ),
   );
 
   public function beforeValidate($options = array()){

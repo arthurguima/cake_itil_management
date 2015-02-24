@@ -205,6 +205,9 @@
  * @return void
  */
 	public function edit($id = null) {
+		$this->Chamado->Behaviors->load('Containable');
+		$this->Chamado->contain('ChamadoTipo', 'Status', 'Servico');
+
 		if (!$this->Chamado->exists($id)) {
 			throw new NotFoundException(__('Invalid chamado'));
 		}

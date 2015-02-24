@@ -27,7 +27,6 @@
 
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão do serviço: ')));
-
       ?>
 
       <div class="form-group">
@@ -36,6 +35,7 @@
           <select name="data[Rdm][ambiente]" class="form-control" id="filterambiente">
             <option value="1">Homologação</option>
             <option value="2">Produção</option>
+            <option value="3">Treinamento</option>
           </select>
         </div>
       </div>
@@ -54,11 +54,25 @@
                     'type' => 'text',
                     'id' => 'dp '));
 
-        echo $this->BootstrapForm->input('sucesso', array(
-                   'class' => 'col-sm-3 pull-left col-sm-offset-3',
-                   'label' => array(
-                     'text' => 'Executada com sucesso?',
-                     'class' => 'control-label col-sm-2')));
+      ?>
+
+      <div class="form-group">
+        <label for="RdmSucesso" class="col-lg-3 control-label">Concluída?: </label>
+        <div class="col-lg-9">
+          <select name="data[Rdm][sucesso]" class="form-control" id="filtersucesso">
+            <option>Concluída?</option>
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+            <option value="2">Cancelada</option>
+          </select>
+        </div>
+      </div>
+
+      <?php
+
+        echo $this->BootstrapForm->input('observacao', array(
+                    'label' => array('text' => 'Observação: '),
+                    'type' => 'textarea'));
       ?>
 
     <div id="demandaList"></div>

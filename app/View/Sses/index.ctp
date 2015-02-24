@@ -60,6 +60,7 @@
           <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'form-control')); ?></div>
           </div>
           <?php
             echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -89,7 +90,7 @@
                 <th>Prazo</th>
                 <th class="hidden-xs hidden-sm"><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável:</th>
-                <th class="hidden-xs hidden-sm">CheckList</th>
+                <th class="hidden-xs hidden-sm">CheckList <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -107,7 +108,9 @@
                                  $ss['Ss']['clarity_id'] .")'>" . $ss['Ss']['clarity_dm_id'] ."</a></span>" ?>
                   </td>
 
-                  <td><?php echo $ss['Ss']['numero'] . "/" . $ss['Ss']['ano'] ; ?></td>
+                  <td data-order=<?php echo $ss['Ss']['ano'] . $ss['Ss']['numero']; ?>>
+                    <?php echo $ss['Ss']['numero'] . "/" . $ss['Ss']['ano'] ; ?>
+                  </td>
                   <td><?php echo $this->Tables->popupBox($ss['Ss']['nome'], $ss['Ss']['observacao']) ?></td>
                   <td><?php echo $ss['Ss']['nome']; ?></td>
 
@@ -126,7 +129,13 @@
 
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ss['Ss']['responsavel']; ?></div></td>
                   <td class="checklist hidden-xs hidden-sm"><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></td>
-                  <td><?php echo $this->Tables->getMenu('sses', $ss['Ss']['id'], 14); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Tables->getMenu('sses', $ss['Ss']['id'], 14);
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $ss['Ss']['id'] . ")'>
+                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                    ?>
+                  </td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($ss); ?>
@@ -152,6 +161,19 @@
   </div>
 </div>
 <iframe id="demandaFrame" style="display:none;" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php
   //-- ClarityID
@@ -237,4 +259,8 @@
       language: 'pt-BR'
     });
   });
+
+  function historico(id){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=sses&id=");?>" + id;
+  }
 </script>

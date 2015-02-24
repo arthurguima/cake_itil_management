@@ -17,7 +17,7 @@
         $end = microtime(true); //Final do tempo de resposta
         $tempo = $end - $begin;
         return "<td><i title='" . $x[1] ."' class='fa fa-times-circle red'></i></td> (" . $headers['Date'] . ") ";
-      endif;
+      endif; 
 
       $end = microtime(true); //Final do tempo de resposta
       $tempo = $end - $begin;
@@ -55,14 +55,17 @@
   public function indisponibilidades($servico){
     $total = 0;
     $ativas = 0;
+    $contabilizadas = 0;
 
     foreach ($servico['Indisponibilidade'] as $ind):
-
+      if($ind['Motivo']['contavel'] != 0){ //
+        $contabilizadas++;
         $aux = date_diff(date_create($ind['dt_inicio']),date_create($ind['dt_fim']));
         $total += (($aux->y * 365.25 + $aux->m * 30 + $aux->d) * 15 + $aux->h + $aux->i/60);
         //o dia é contando como X para compensar o horário comercial
+      }
 
-      if($ind['dt_fim'] == null): $ativas++; endif;
+      if($ind['dt_fim'] == null){ $ativas++; }
     endforeach;
     unset($ind);
 
@@ -82,11 +85,11 @@
             </div>
         </div>
         <div class='col-lg-6 col-xs-6 col-md-6 indis-text'>
-          <p>" . round($total,2) . " hora(s)</p>" . $ativas . " ativa(s)
+          <p>" . round($total,2) . " hora(s)</p> <span class=". ($ativas ? "red" : "")  .">" . $ativas . " ativa(s)</span>
         </div>
       </div>
       <div class='indis-footer col-lg-12'>
-        <b style='color:#D9534F;'>" . count($servico['Indisponibilidade']) . "</b> indisponibilidade(s)
+        <b style='color:#D9534F;'>" . count($servico['Indisponibilidade']) . "</b> registrada(s) / <b style='color:#D9534F;'>" . $contabilizadas  . "</b> contabilizada(s)
       </div>
       <script>
         $(document).ready(function() {

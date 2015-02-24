@@ -49,6 +49,13 @@
 								'rule'    => array('between', 3, 110),
 								'message' => 'O campo deve conter de 3 a 110 caracteres!'
 		)),
+		'numero' => array(
+			'unique' => array(
+				'rule' => array('checkUnique', array('numero', 'ano', 'servico_id'), false),
+				'required' => 'create',
+				'message' => 'Já existe outra SS com esse número, nesse ano, para esse serviço.'
+			)
+		),
 		'responsavel' => array(
 			'NotEmpty' => array(
 				'rule'   => 'notempty',
@@ -64,6 +71,16 @@
 				'required' => 'create',
 				'message' => 'Já existe outra SS com esse Clarity ID'
 			)
+		),
+		'servico_id' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!')
+		),
+		'dt_recebimento' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!')
 		)
 	);
 

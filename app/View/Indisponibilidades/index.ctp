@@ -59,8 +59,8 @@
             <thead>
               <tr>
                 <th>Serviço</th>
-                <th>Nº Evento</th>
-                <th>Nº Incidente</th>
+                <th>Nº Evento   <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
+                <th>Nº Incidente   <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Início</th>
         				<th>Duração</th>
         				<th>Motivo</th>
@@ -80,9 +80,23 @@
                         endforeach;
                     ?>
                   </td>
-                  <td><?php echo $Indisponibilidade['Indisponibilidade']['num_evento']; ?></td>
-                  <td><?php echo $Indisponibilidade['Indisponibilidade']['num_incidente']; ?></td>
-        				  <td><?php echo $this->Time->format('d/m/Y h:i:s', $Indisponibilidade['Indisponibilidade']['dt_inicio']); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Html->link($Indisponibilidade['Indisponibilidade']['num_evento'],
+                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_evento'] . "%25",
+                            array('target' => '_blank'));
+                    ?>
+                  </td>
+                  <td>
+                    <?php
+                      echo $this->Html->link($Indisponibilidade['Indisponibilidade']['num_incidente'],
+                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_incidente'] . "%25",
+                            array('target' => '_blank'));
+                    ?>
+                  </td>
+        				  <td data-order=<?php echo $this->Time->format('Ymd', $Indisponibilidade['Indisponibilidade']['dt_inicio']); ?>>
+                    <?php echo $this->Time->format('d/m/Y h:i:s', $Indisponibilidade['Indisponibilidade']['dt_inicio']); ?>
+                  </td>
                   <td>
                     <?php if($Indisponibilidade['Indisponibilidade']['dt_fim'] != null):
                             echo $this->Times->totalTime($Indisponibilidade['Indisponibilidade']['dt_inicio'],

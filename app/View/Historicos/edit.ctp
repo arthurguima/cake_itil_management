@@ -1,11 +1,9 @@
 <?php
-  $this->Html->addCrumb('Demandas', '/demandas');
-  $this->Html->addCrumb("id:" . $this->params['url']['id'], array('controller' => 'demandas', 'action' => 'view', $this->params['url']['id']));
-  $this->Html->addCrumb('Histórico de Demanda', '');
-  $this->Html->addCrumb("Editar", array('controller' => ''));
+  $this->Html->addCrumb('Histórico', '');
+  $this->Html->addCrumb("Editar", '');
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Novo Historico de Demanda</h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Editar Historico</h3></div>
 </div>
 
 <div class="row">

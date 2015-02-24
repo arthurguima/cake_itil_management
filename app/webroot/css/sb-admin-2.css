@@ -412,8 +412,8 @@ table.dataTable thead .sorting:after {
 }
 
 .close, .close:hover, .close:focus{
-  color: #fff;
-  text-shadow: 0 3px 0 black;
+/* color: #fff;
+  text-shadow: 0 3px 0 black;*/
   filter: alpha(opacity=100);
   opacity: 1;
 }
@@ -881,4 +881,7 @@ table#dataTables-Servico{
 
 .fc-unthemed .fc-today {
   background: #f5f5f5 !important;
+}
+.fc td{
+  padding: 1px !important;
 }

@@ -78,6 +78,18 @@
         }
       }
 
+      /*
+      * Coloca as datas no formato americano
+      */
+      public function CleanDate($time){
+        if($time != null){
+          return date("Ymd", strtotime(str_replace('/', '-', $time)));
+        }
+        else{
+          return $time;
+        }
+      }
+
     /*
     * Destaca a data mostrando se está no passado ou não
     */

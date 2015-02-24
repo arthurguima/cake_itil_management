@@ -92,13 +92,15 @@ class LdapHelper extends AppHelper {
         || $_SESSION['email']==='jose.espasandin@dataprev.gov.br' || $_SESSION['email']==='lucas.lmendonca@dataprev.gov.br' || $_SESSION['email']==='manuel.romano@dataprev.gov.br' || $_SESSION['email']==='monica.alvariz@dataprev.gov.br'
         || $_SESSION['email']==='ricardo.gomes@dataprev.gov.br' || $_SESSION['email']==='rodrigo.vieira@dataprev.gov.br' || $_SESSION['email']==='ronan.ferreira@dataprev.gov.br' || $_SESSION['email']==='sabrina.ssantos@dataprev.gov.br'
         || $_SESSION['email']==='thais.guimaraes@dataprev.gov.br' || $_SESSION['email']==='thiago.mribeiro@dataprev.gov.br' || $_SESSION['email']==='victor.pbatista@dataprev.gov.br' || $_SESSION['email']==='viviane.cesario@dataprev.gov.br'
-        || $_SESSION['email']==='volney.sousa@dataprev.gov.br' || $_SESSION['email']==='ynga.povoa@dataprev.gov.br' ){
+        || $_SESSION['email']==='volney.sousa@dataprev.gov.br' || $_SESSION['email']==='ynga.povoa@dataprev.gov.br'){
         return true;
       }
       else{
         return false;
       }
     }
+
+    return true;
   }
 
 }?>

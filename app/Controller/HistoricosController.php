@@ -30,11 +30,19 @@
  * @return void
  */
   public function add() {
+    if($this->params['url']['popup'] == 'true'){  $this->layout = false; }
+
     if ($this->request->is('post')) {
       $this->Historico->create();
       if ($this->Historico->save($this->request->data)) {
         $this->Session->setFlash('Historico Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-        return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+        if(isset($this->params['url']['popup']) && $this->params['url']['popup'] == 'true'){
+          return $this->redirect(array('controller' =>  "historicos", 'action' => 'popup',
+           '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id']) ));
+        }
+        else{
+          return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+        }
       } else {
         $this->Session->setFlash('Não foi possível criar o novo historico .', 'alert-box', array ('class' => 'alert alert-danger'));
       }
@@ -87,4 +95,38 @@
     }
     return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
   }
+
+  /**
+   * popup method
+   *
+   * @throws NotFoundException
+   * @param int id
+   * @return void
+   */
+    public function popup($id = null) {
+      $this->Historico->recursive = -1;
+      $this->layout = false;
+
+      /* TODO: Refazer a estrutura abaixo */
+
+      if($this->params['url']['controller'] == 'demandas'){
+        $this->set('historicos', $this->Historico->findAllByDemandaId( $this->params['url']['id']));
+      }
+      if($this->params['url']['controller'] == 'rdms'){
+        $this->set('historicos', $this->Historico->findAllByRdmId( $this->params['url']['id']));
+      }
+      if($this->params['url']['controller'] == 'pes'){
+        $this->set('historicos', $this->Historico->findAllByPeId( $this->params['url']['id']));
+      }
+      if($this->params['url']['controller'] == 'ords'){
+        $this->set('historicos', $this->Historico->findAllByOrdId( $this->params['url']['id']));
+      }
+      if($this->params['url']['controller'] == 'sses'){
+        $this->set('historicos', $this->Historico->findAllBySsId( $this->params['url']['id']));
+      }
+      if($this->params['url']['controller'] == 'chamados'){
+        $this->set('historicos', $this->Historico->findAllByChamadoId( $this->params['url']['id']));
+      }
+
+    }
 }

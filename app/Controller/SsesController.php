@@ -25,6 +25,13 @@
 						'operator'    => '!='
 					)
 				),
+				'status_diferente2' => array(
+					'Ss.status_id' => array(
+						'select' => $this->Filter->select('Status Diferente de', $this->Ss->Status->find('list',
+									array('conditions' => array('Status.tipo' => 2), 'fields' => array('Status.id', 'Status.nome')))),
+						'operator'    => '!='
+					)
+				),
 				'clarity_dm' => array(
 					'Ss.clarity_dm_id' => array('operator' => '='),
 				),
@@ -88,7 +95,7 @@
 				$this->Session->setFlash('SS criada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
 					return $this->redirect(array('action' => 'index'));
 			}
-			$this->Session->setFlash('Não foi possível criar a nova SS.', 'alert-box', array ('class' => 'alert alert-danger'));
+			$this->Session->setFlash('Não foi possível criar a nova SS. Verifique se ela já existe no sistema.', 'alert-box', array ('class' => 'alert alert-danger'));
 		}
 
 		/* Relacionamentos */

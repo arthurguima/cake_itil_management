@@ -45,6 +45,11 @@
       'NotEmpty' => array(
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido!'),
+      'unique' => array(
+        'rule' => array('checkUnique', array('numero', 'ano', 'servico_id'), false),
+        'required' => 'create',
+        'message' => 'Já existe outra OS com esse número, nesse ano, para esse serviço'
+       ),
       'between' => array(
                 'rule'    => array('between', 1, 20),
                 'message' => 'O campo deve conter de 1 a 20 caracteres!'

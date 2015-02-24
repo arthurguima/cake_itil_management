@@ -66,7 +66,10 @@
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
+          </div>
+          <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'form-control')); ?></div>
           </div>
 
           <?php
@@ -89,14 +92,15 @@
             <thead>
               <tr>
                 <th>Serviço</th>
-                <th>Número</th>
+                <th>Número <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Nome da SS <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                <th>Nome da SS</i></th>
                 <!--th>PA</th-->
                 <!--th>Nome</th-->
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
-                <th>Termos</th>
+                <th>Termos <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -104,12 +108,15 @@
               <?php foreach ($ords as $ord): ?>
                 <tr>
                   <td><?php echo $ord['Servico']['sigla']; ?></td>
-                  <td><?php echo $this->Html->link($ord['Ord']['numero'] . "/" . $ord['Ord']['ano'], $ord['Ord']['cvs_url']); ?></td>
+                  <td data-order=<?php echo $ord['Ord']['ano'] . $ord['Ord']['numero']; ?>>
+                    <?php echo $this->Html->link($ord['Ord']['numero'] . "/" . $ord['Ord']['ano'], $ord['Ord']['cvs_url']); ?>
+                  </td>
                   <td>
                     <?php
                       echo $this->Html->link($this->Tables->popupBox($ord['Ss']['nome'],$ord['Ss']['observacao']),
                            array('controller' => 'sses', 'action' => 'view', $ord['Ss']['id']), array('escape' => false)); ?>
-                    </td>
+                  </td>
+                  <td><?php echo $ord['Ss']['nome']; ?></td>
                   <!--td><?php //echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></td-->
                   <!--td><?php //echo $this->Html->link($ord['Ord']['nome'], $ord['Ord']['cvs_url']); ?></td-->
 
@@ -124,14 +131,20 @@
                   </td>
 
                   <td>
-                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-os-" . $ord['Ord']['id'] ?>">
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "statusos-" . $ord['Ord']['id'] ?>">
                     <?php echo $ord['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->OrdStatusEditable($ord['Ord']['id']) ?>
 
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ord['Ord']['responsavel']; ?></div></td>
                   <td class="checklist"><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></td>
-                  <td><?php echo $this->Tables->getMenu('ords', $ord['Ord']['id'], 14); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Tables->getMenu('ords', $ord['Ord']['id'], 14);
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $ord['Ord']['id'] . ")'>
+                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                    ?>
+                  </td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($ord); ?>
@@ -139,6 +152,19 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
       </div>
     </div>
   </div>
@@ -169,6 +195,7 @@
         language: {
           url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
         },
+        "columnDefs": [  { "visible": false, "targets": 3 } ],
         "dom": 'T<"clear">lfrtip',
         "tableTools": {
             "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
@@ -177,7 +204,7 @@
                   "sExtends": "copy",
                   "sButtonText": "Copiar",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3]
+                  "mColumns": [ 0,1,3,4,5,6,7]
               },
               {
                   "sExtends": "print",
@@ -188,7 +215,7 @@
                   "sButtonText": "CSV",
                   "sFileName": "Ordens de Serviço.csv",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3]
+                  "mColumns": [ 0,1,3,4,5,6,7]
               },
               {
                   "sExtends": "pdf",
@@ -196,7 +223,7 @@
                   "sFileName": "Ordens de Serviço.pdf",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
                   "sPdfOrientation": "landscape",
-                  "mColumns": [ 0,1,2,3],
+                  "mColumns": [ 0,1,3,4,5,6,7],
                   "sTitle": "Listagem de Ordens de Serviço",
                   "sPdfMessage": "<?php echo date('d/m/y')?>",
               },
@@ -214,4 +241,8 @@
 
     $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
+
+  function historico(id){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=ords&id=");?>" + id;
+  }
 </script>

@@ -37,18 +37,23 @@
               ?>
             </div>
           </div>
-          <div class="col-lg-12">
+          <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control', 'placeholder' => "Solicitante")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
+          </div>
+          <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente3', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente4', array('class' => 'form-control')); ?></div>
           </div>
           <?php
-		    echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
-                      'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
-			echo $this->Search->end();
+      		  echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
+                            'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+      			echo $this->Search->end();
           ?>
         </div>
     </div>
@@ -68,7 +73,7 @@
                 <th>Serviço</th>
                 <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
                 <th class="hidden-xs hidden-sm">Clarity DM <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
-                <th class="hidden-xs hidden-sm">Mantis</th>
+                <th class="hidden-xs hidden-sm">Mantis <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
                 <th>Nome</th>
 
@@ -108,11 +113,19 @@
                   </td>
 
                   <td>
-                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>"><?php echo $demanda['Status']['nome']; ?></span>
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>">
+                      <?php echo $demanda['Status']['nome']; ?>
+                    </span>
                   </td>
                   <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['Demanda']['criador']; ?></div></td>
-                  <td><?php echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14);
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $demanda['Demanda']['id'] . ")'>
+                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                    ?>
+                  </td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($demanda); ?>
@@ -137,6 +150,19 @@
   </div>
 </div>
 <iframe id="demandaFrame" style="display:none;" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php
   //-- ClarityID
@@ -225,4 +251,8 @@
         //document.getElementById('demandaFrame').style.height = "720px";
       });
   });
+
+  function historico(id){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=demandas&id=");?>" + id;
+  }
 </script>

@@ -71,11 +71,12 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-pe">
             <thead>
               <tr>
-                <th>Número <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                <th>Número <i class="fa fa-comment-o" style="font-size: 15px !important;"><i class='fa-external-link-square fa' style="font-size: 15px !important;"></i></th>
                 <!--th>Nome</th-->
                 <th>Validade do PDD</th>
                 <th>Responsável</th>
                 <th><span class="editable">Status</span></th>
+                <th>Valor/Métrica</th>
                 <th></th>
               </tr>
             </thead>
@@ -98,10 +99,13 @@
                     </td>
                     <td><?php echo $pe['responsavel']; ?></td>
                     <td>
-                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-pe-" . $pe['id'] ?>">
+                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "statuspa-" . $pe['id'] ?>">
                       <?php echo $pe['Status']['nome']; ?></span>
                     </td>
                     <?php echo $this->Tables->PeStatusEditable($pe['id']) ?>
+                    <td>
+                       <?php echo $pe['valor_item'] . '/' . $pe['Item']['metrica'];?>
+                    </td>
                     <td>
                        <?php
                         echo $this->Html->link("<i class='fa fa-search-plus ' style='margin-right: 5px;' title='Visualizar detalhes'></i>",
@@ -144,11 +148,11 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-os">
             <thead>
               <tr>
-                <th>Número</th>
+                <th>Número <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <!--th>Nome</th-->
                 <th>PA</th>
                 <th>Responsável</th>
-                <th>Termos</th>
+                <th>Termos <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
                 <th></th>
@@ -173,8 +177,9 @@
                     </td>
 
                     <td>
-                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-os-" . $os['id'] ?>">
-                      <?php echo $os['Status']['nome']; ?></span>
+                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "statusos-" . $os['id'] ?>">
+                        <?php echo $os['Status']['nome']; ?>
+                      </span>
                     </td>
                     <?php echo $this->Tables->OrdStatusEditable($os['id']) ?>
 
@@ -289,7 +294,7 @@
               <?php foreach($ss['Historico'] as $hist): ?>
                   <tr>
                     <td><?php echo $hist['data']; ?></td>
-                    <td><?php echo $hist['descricao']; ?></td>
+                    <td><?php echo $this->Historicos->findLinks($hist['descricao']); ?></td>
                     <td><?php echo $hist['analista']; ?></td>
                     <td>
                        <?php

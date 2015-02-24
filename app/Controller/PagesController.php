@@ -45,12 +45,14 @@ class PagesController extends AppController {
 		/* Lista de Servicos */
 		$this->loadModel('Servico');
 		$this->Servico->Behaviors->attach('Containable');
-		if(date("d") < 20){
+		if(date("d") < 21){
 			$this->set('servicos', $this->Servico->find('all', array(
 				'contain' => array(
 					'Indisponibilidade' => array(
+						'Motivo' => array(),
 						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 )) ||
-																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 )) ')
+																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 ))')
+
 
 					)
 				)
@@ -60,6 +62,7 @@ class PagesController extends AppController {
 			$this->set('servicos', $this->Servico->find('all', array(
 				'contain' => array(
 					'Indisponibilidade' => array(
+						'Motivo' => array(),
 						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 )) ||
 																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("+1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 ))')
 					)

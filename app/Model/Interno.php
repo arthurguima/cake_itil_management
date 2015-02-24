@@ -22,8 +22,8 @@
     'url' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
-        'maxLength' => 70,
-        'message' => 'Campo deve ser preenchido! (Máximo de 70 caracteres)'
+        'maxLength' => 150,
+        'message' => 'Campo deve ser preenchido! (Máximo de 150 caracteres)'
       )
     )
   );

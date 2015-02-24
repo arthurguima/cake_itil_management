@@ -24,6 +24,7 @@
         'conditions' => array('id' => $this->request->data['servico_id']),
         'contain' => array(
           'Indisponibilidade' => array(
+            'Motivo' => array(),
             'conditions' => array($conditions)
           )
         )

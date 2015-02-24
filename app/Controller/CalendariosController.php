@@ -12,7 +12,8 @@
       $this->loadModel('Pe');
       $this->Pe->Behaviors->load('Containable');
       $this->Pe->contain('Servico');
-      $pes = $this->Pe->find('all', array('conditions'=>array('Pe.validade_pdd !=' => null)));
+      $pes = $this->Pe->find('all', array('conditions'=>
+              array('(Pe.validade_pdd >= "' . $this->params['url']['start'] . '") && (Pe.validade_pdd <= "' . $this->params['url']['end'] .'") ')));
 
       foreach($pes as $pe) {
         $data[] = array(
@@ -30,7 +31,8 @@
       $this->loadModel('Ord');
       $this->Ord->Behaviors->load('Containable');
       $this->Ord->contain('Ss', 'Servico');
-      $ords = $this->Ord->find('all', array('conditions'=>array('Ord.dt_fim_pdd !=' => null)));
+      $ords = $this->Ord->find('all', array('conditions'=>
+                array('Ord.dt_fim_pdd >= "' . $this->params['url']['start'] . '" && Ord.dt_fim_pdd <= "' . $this->params['url']['end'] . '"')));
 
       foreach($ords as $ord) {
         $data[] = array(
@@ -48,16 +50,17 @@
       $this->loadModel('Rdm');
       $this->Rdm->Behaviors->load('Containable');
       $this->Rdm->contain('Servico');
-      $rdms = $this->Rdm->find('all', array('conditions'=>array('Rdm.dt_prevista !=' => null)));
+      $rdms = $this->Rdm->find('all', array('conditions'=>
+                array('Rdm.dt_prevista >= "' . $this->params['url']['start'] . '" && Rdm.dt_prevista <= "' . $this->params['url']['end'] . '"')));
 
       foreach($rdms as $rdm) {
         $data[] = array(
             'id' => $rdm['Rdm']['id'],
-            'title'=> "RDM - " .  $rdm['Rdm']['nome'],
+            'title'=> "RDM " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'],
             'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $rdm['Rdm']['dt_prevista']))),
             'allDay' => true,
             'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
-            'description' => $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . ($rdm['Rdm']['versao'] == 1 ? ' Homologação' : ' Produção'),
+            'description' => $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . ($rdm['Rdm']['ambiente'] == '1' ? ' Homologação' : ($rdm['Rdm']['ambiente'] == '2' ? 'Produção' : 'Treinamento')),
             'className' => 'calendar-rdm'
         );
       }
@@ -66,7 +69,8 @@
       $this->loadModel('Ss');
       $this->Ss->Behaviors->load('Containable');
       $this->Ss->contain('Servico');
-      $sses = $this->Ss->find('all', array('conditions'=>array('Ss.dt_prazo !=' => null)));
+      $sses = $this->Ss->find('all', array('conditions'=>
+                array('Ss.dt_prazo >= "' . $this->params['url']['start'] . '" && Ss.dt_prazo <= "' . $this->params['url']['end'] . '"')));
 
       foreach($sses as $ss) {
         $data[] = array(
@@ -85,7 +89,8 @@
       /* Demandas Internas */
       $this->loadModel('Demanda');
       $this->Demanda->Behaviors->load('Containable');
-      $demandas = $this->Demanda->find('all', array('conditions'=>array('Demanda.dt_prevista !=' => null)));
+      $demandas = $this->Demanda->find('all', array('conditions'=>
+                    array('Demanda.dt_prevista >= "' . $this->params['url']['start'] . '" && Demanda.dt_prevista <= "' . $this->params['url']['end'] .'"')));
 
       foreach($demandas as $demanda) {
         $data[] = array(

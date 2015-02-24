@@ -29,8 +29,9 @@
               Veja o que mudou:<br/><br/>
               <ul>
                 <li>Calendário</li>
-                <li>Checlist de OS</li>                
-                <li>Correção de Bugs.</li>
+                <li>Checklist de OS</li>
+                <li>Correção de Bugs</li>
+                <li>Melhorias de Usabilidade</li>
               </ul>
             </div>
         </li>

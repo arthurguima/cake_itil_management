@@ -54,7 +54,7 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-chamado">
             <thead>
               <tr>
-                <th>Número</th>
+                <th>Número <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Nome</th>
                 <th>Tipo</th>
                 <th>Serviço</th>
@@ -68,7 +68,13 @@
             <tbody>
               <?php foreach ($chamados as $chamado): ?>
                 <tr>
-                  <td><?php echo $chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano']; ?></td>
+                  <td data-order=<?php echo $chamado['Chamado']['ano'] . $chamado['Chamado']['numero']; ?>>
+                    <?php
+                      echo $this->Html->link($chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano'],
+                      "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $chamado['Chamado']['numero'] . "%25",
+                      array('target' => '_blank'));
+                    ?>
+                  </td>
                   <td><?php echo $chamado['Chamado']['nome']; ?></td>
                   <td><?php echo $chamado['ChamadoTipo']['nome']; ?></td>
                   <td><?php echo $chamado['Servico']['nome']; ?></td>
@@ -87,6 +93,8 @@
                                   array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'index' )),
                                   array('escape' => false));
                       }
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $chamado['Chamado']['id'] . ")'>
+                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
                     ?>
                   </td>
                 </tr>
@@ -95,6 +103,19 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
       </div>
     </div>
   </div>
@@ -159,4 +180,8 @@
 
         $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
+
+  function historico(id){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=chamados&id=");?>" + id;
+  }
 </script>

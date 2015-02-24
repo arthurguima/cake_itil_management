@@ -102,7 +102,7 @@
               <?php foreach($demanda['Historico'] as $hist): ?>
                   <tr>
                     <td><?php echo $hist['data']; ?></td>
-                    <td><?php echo $hist['descricao']; ?></td>
+                    <td><?php echo $this->Historicos->findLinks($hist['descricao']); ?></td>
                     <td><?php echo $hist['analista']; ?></td>
                     <td>
                        <?php
@@ -199,7 +199,7 @@
               <tr>
                 <th>Nome</th>
                 <th>Número</th>
-                <th>Sucesso?</th>
+                <th>Concluída?</th>
                 <th></th>
               </tr>
             </thead>

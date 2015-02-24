@@ -44,4 +44,8 @@ class AppModel extends Model {
         }
         return true;
     }
+
+    public function checkUnique($ignoredData, $fields, $or = true) {
+          return $this->isUnique($fields, $or);
+    }
 }

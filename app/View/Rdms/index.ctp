@@ -70,9 +70,10 @@
                 <th>Versão</th>
                 <th>Ambiente</th>
                 <th>Tipo</th>
-                <th>Sucesso?</th>
+                <th>Concluída?</th>
+                <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></th>
                 <th>Nome</th>
-                <th>Número</th>
+                <th>Número  <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Data Prevista</th>
                 <th>Data de Execução</th>
                 <th>Responsável</th>
@@ -87,12 +88,34 @@
                   <td><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></td>
                   <td><?php echo $rdm['RdmTipo']['nome']; ?></td>
                   <td><?php echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']); ?></a></td>
-                  <td><?php echo $this->Html->link($rdm['Rdm']['nome'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id'])); ?></td>
-                  <td><?php echo $rdm['Rdm']['numero']; ?></td>
-                  <td><?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Tables->popupBox(
+                        $this->Html->link($rdm['Rdm']['nome'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id'])),
+                        $rdm['Rdm']['observacao']
+                      );
+                    ?>
+                  </td>
+                  <td><?php echo $rdm['Rdm']['nome']; ?></td>
+                  <td>
+                    <?php
+                      echo $this->Html->link($rdm['Rdm']['numero'],
+                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
+                            array('target' => '_blank'));
+                    ?>
+                  </td>
+                  <td data-order=<?php echo $this->Times->CleanDate($rdm['Rdm']['dt_prevista']); ?>>
+                    <?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?>
+                  </td>
                   <td><?php echo (($rdm['Rdm']['dt_executada'] == null) ? "" : $this->Time->format('d/m/Y', $rdm['Rdm']['dt_executada'])); ?></td>
                   <td><?php echo $rdm['Rdm']['responsavel']; ?></td>
-                  <td><?php echo $this->Tables->getMenu('rdms', $rdm['Rdm']['id'], 14); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Tables->getMenu('rdms', $rdm['Rdm']['id'], 14);
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $rdm['Rdm']['id'] . ")'>
+                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                    ?>
+                  </td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($rdm); ?>
@@ -100,6 +123,19 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
       </div>
     </div>
   </div>
@@ -127,6 +163,7 @@
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
+          "columnDefs": [  { "visible": false, "targets": 5 } ],
           "dom": 'T<"clear">lfrtip',
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
@@ -135,27 +172,27 @@
                     "sExtends": "copy",
                     "sButtonText": "Copiar",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
                 },
                 {
                     "sExtends": "print",
                     "sButtonText": "Imprimir",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
                 },
                 {
                     "sExtends": "csv",
                     "sButtonText": "CSV",
                     "sFileName": "RDM.csv",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
                 },
                 {
                     "sExtends": "pdf",
                     "sButtonText": "PDF",
                     "sFileName": "RDM.pdf",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ],
+                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ],
                     "sPdfOrientation": "landscape",
                     "sTitle": "Requisições de Mudança",
                     "sPdfMessage": "<?php echo date('d/m/y')?>",
@@ -163,6 +200,8 @@
               ]
           }
       });
+
+      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
 
       $("[id*='filterDt']").datetimepicker({
         format: "yyyy-mm-dd",
@@ -172,4 +211,8 @@
         language: 'pt-BR'
       });
   });
+
+  function historico(id){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=rdms&id=");?>" + id;
+  }
 </script>

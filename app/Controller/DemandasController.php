@@ -32,6 +32,27 @@
             'operator'    => '!='
           )
         ),
+        'status_diferente2' => array(
+          'Demanda.status_id' => array(
+            'select' => $this->Filter->select('Status Diferente de', $this->Demanda->Status->find('list',
+                  array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')))),
+            'operator'    => '!='
+          )
+        ),
+        'status_diferente3' => array(
+          'Demanda.status_id' => array(
+            'select' => $this->Filter->select('Status Diferente de', $this->Demanda->Status->find('list',
+                  array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')))),
+            'operator'    => '!='
+          )
+        ),
+        'status_diferente4' => array(
+          'Demanda.status_id' => array(
+            'select' => $this->Filter->select('Status Diferente de', $this->Demanda->Status->find('list',
+                  array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')))),
+            'operator'    => '!='
+          )
+        ),
         'clarity_dm' => array(
           'Demanda.clarity_dm_id' => array('operator' => '='),
         ),
