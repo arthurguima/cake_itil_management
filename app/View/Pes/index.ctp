@@ -144,6 +144,10 @@
     //-- DataTables --> TableTools
       echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
       echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+    //-- DataTables --> ColVis
+      echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
 
   //-- TimePicker --
     echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
@@ -156,13 +160,16 @@
 
 <script>
   $(document).ready(function() {
-    $('#dataTables-ss').dataTable({
+    var  oTable = $('#dataTables-ss').dataTable({
       "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
         language: {
           url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
         },
         "columnDefs": [  { "visible": false, "targets": 4 } ],
-        "dom": 'T<"clear">lfrtip',
+        "dom": 'TC<"clear">lfrtip',
+        "colVis": {
+          "buttonText": "Esconder Colunas"
+        },
         "tableTools": {
             "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
             "aButtons": [
@@ -196,6 +203,7 @@
             ]
         }
     });
+    var colvis = new $.fn.dataTable.ColVis( oTable );
 
     $("[id*='filterDt']").datetimepicker({
       format: "yyyy-mm-dd",

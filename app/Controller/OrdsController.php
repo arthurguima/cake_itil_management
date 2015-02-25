@@ -115,8 +115,22 @@
 		if (!$this->Ord->exists($id)) {
 			throw new NotFoundException(__('OS Inválida!'));
 		}
-		$options = array('conditions' => array('Ord.' . $this->Ord->primaryKey => $id));
-		$this->Ord->recursive = 1;
+		$this->Ord->Behaviors->load('Containable');
+		$this->Ord->contain('Status', 'Ss', 'Pe', 'Servico');
+
+		$options = array(
+			'conditions' => array('Ord.' . $this->Ord->primaryKey => $id),
+			'contain' => array(
+				'Status' => array(),
+				'Ss' => array(),
+				'Servico' => array(),
+				'Pe' => array(
+					'Item' => array()
+				),
+				'Historico' => array()
+			)
+		);
+		$this->Ord->recursive = 3;
 		$this->set('ord', $this->Ord->find('first', $options));
 	}
 

@@ -19,7 +19,8 @@
                      name: 'status',
                      data   : \"{0:'Fechado'}\",
                      type   : 'select',
-                     submit: \"<button class='btn btn-sm btn-default' type='submit' >Salvar</button>\",
+                     submit: \"<button class='btn btn-sm btn-success' type='submit' >Salvar</button>\",
+                     cancel: \"<button class='btn btn-sm btn-danger' type='cancel' >Cancelar</button>\",
                   });
               });
             </script>";
@@ -33,7 +34,8 @@
                      name: "status_id",
                      loadurl : "' . Router::url('/', true). '/status/json?tipo=1",
                      type   : "select",
-                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                     submit: \'<button class="btn btn-sm btn-success" type="submit" >Salvar</button>\',
+                     cancel: \'<button class="btn btn-sm btn-danger" type="cancel" >Cancelar</button>\',
                   });
               });
             </script>';
@@ -47,7 +49,8 @@
                      name: "status_id",
                      loadurl : "' . Router::url('/', true). '/status/json?tipo=2",
                      type   : "select",
-                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                     submit: \'<button class="btn btn-sm btn-success" type="submit" >Salvar</button>\',
+                     cancel: \'<button class="btn btn-sm btn-danger" type="cancel" >Cancelar</button>\',
                   });
               });
             </script>';
@@ -61,7 +64,8 @@
                      name: "status_id",
                      loadurl : "' . Router::url('/', true). '/status/json?tipo=4",
                      type   : "select",
-                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                     submit: \'<button class="btn btn-sm btn-success" type="submit" >Salvar</button>\',
+                     cancel: \'<button class="btn btn-sm btn-danger" type="cancel" >Cancelar</button>\',
                   });
               });
             </script>';
@@ -75,7 +79,8 @@
                      name: "status_id",
                      loadurl : "' . Router::url('/', true). '/status/json?tipo=3",
                      type   : "select",
-                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                     submit: \'<button class="btn btn-sm btn-success" type="submit" >Salvar</button>\',
+                     cancel: \'<button class="btn btn-sm btn-danger" type="cancel" >Cancelar</button>\',
                   });
               });
             </script>';
@@ -89,7 +94,8 @@
                      name: "status_id",
                      loadurl : "' . Router::url('/', true). '/status/json?tipo=5",
                      type   : "select",
-                     submit: \'<button class="btn btn-sm btn-default" type="submit" >Salvar</button>\',
+                     submit: \'<button class="btn btn-sm btn-success" type="submit" >Salvar</button>\',
+                     cancel: \'<button class="btn btn-sm btn-danger" type="cancel" >Cancelar</button>\',
                   });
               });
             </script>';
@@ -103,7 +109,8 @@
                      name: 'prioridade',
                      width:($('#" . $id . "').width() + 20) + 'px',
                      height:($('#" . $id . "').height() + 6) + 'px',
-                     submit: \"<button class='btn btn-sm btn-default' type='submit' >Salvar</button>\",
+                     submit: \"<button class='btn btn-sm btn-success' type='submit' >Salvar</button>\",
+                     cancel: \"<button class='btn btn-sm btn-danger' type='cancel' >Cancelar</button>\",
                   });
               });
             </script>";

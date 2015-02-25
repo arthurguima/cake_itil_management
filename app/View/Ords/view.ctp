@@ -1,6 +1,6 @@
 <?php
-  $this->Html->addCrumb('Ords', '');
-  $this->Html->addCrumb($ord['Ord']['id'], array('controller' => 'items', 'action' => 'edit', $ord['Ord']['id']));
+  $this->Html->addCrumb('OS', '');
+  $this->Html->addCrumb($ord['Ord']['numero'] . "/" . $ord['Ord']['ano'], array('controller' => 'items', 'action' => 'view', $ord['Ord']['id']));
 ?>
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">OS: <?php echo $ord['Ord']['numero'] . "/" . $ord['Ord']['ano'] . " - " . $ord['Servico']['nome']; ?></h3></div>
@@ -73,8 +73,15 @@
           </li>
           <li><a><b>Volume Final: </b><?php echo $ord['Ord']['pf']; ?></a></li>
           <li><a><b>Status: </b><?php echo $ord['Status']['nome']; ?></a></li>
-          <li><a href='/sgd/sses/view/<?php echo $ord['Ss']['id']; ?>'><b>SS: </b><?php echo $ord['Ss']['nome']; ?></a></li>
-          <li><a href='/sgd/pes/view/<?php echo $ord['Pe']['id']; ?>'><b>PA: </b><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?></a></li>
+          <li>
+            <a href=<?php echo Router::url('/', true) . '/sses/view/' . $ord['Ss']['id']; ?>>
+            <b>SS: </b><?php echo $ord['Ss']['nome']; ?></a>
+          </li>
+          <li>
+            <a href=<?php echo Router::url('/', true) . '/pes/view/'. $ord['Pe']['id']; ?>>
+              <b>PA: </b><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?> - <?php echo $ord['Pe']['Item']['nome']; ?>
+            </a>
+          </li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $ord['Ord']['cvs_url']; ?></a></li>
           <li><a><b>Termos: </b><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></li>
           <li><a><b>Observação: </b><?php echo $ord['Ord']['observacao']; ?></a></li>

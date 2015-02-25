@@ -62,21 +62,24 @@
   //-- DataTables --> TableTools
   echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
   echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-  //-- DataTables --> Responsive
-  echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
-  echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
-
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
 ?>
 
 <script>
   $(document).ready(function() {
-      $('#dataTables-area').dataTable({
+    var  oTable =  $('#dataTables-area').dataTable({
         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
           responsive: true,
-          "dom": 'T<"clear">lfrtip',
+          "dom": 'TC<"clear">lfrtip',
+          "colVis": {
+            "buttonText": "Esconder Colunas"
+          },
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
               "aButtons": [
@@ -99,5 +102,6 @@
               ]
           }
       });
+      var colvis = new $.fn.dataTable.ColVis( oTable );
   });
 </script>

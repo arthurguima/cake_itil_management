@@ -3,7 +3,7 @@
 ?>
 
 <div class="row">
-    <div class="col-lg-12"><h3 class="page-header">Calendário de Previsões de Término</h3></div>
+    <div class="col-lg-12"><h3 class="page-header"><i class="fa fa-calendar fa-fw"></i> Calendário de Previsões de Término</h3></div>
 </div>
 
 <div class="row">

@@ -76,9 +76,9 @@
 									<li> <!-- Sustentação -->
 											<a href="#"><i class="fa fa-wrench fa-fw"></i> Sustentação<span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mudança", '/rdms', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Internas", '/demandas', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/rdms', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Controle de Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados", '/chamados', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados com Demandas", '/chamados/demandas', array('escape' => false)); ?></li>
 											</ul>
@@ -125,7 +125,7 @@
 				<b><?php echo $this->Html->getCrumbs(' > ', array('text' => "<i class='fa fa-home'></i> Home", 'url' => Router::url('/', true) . "index.php", 'escape' => false)); ?></b>
 			</span>
 			<div style='clear:both'></div>
-			<div class='row'><?php echo $this->Session->flash(); ?></div>
+			<div class='row'><!--nocache--><?php echo $this->Session->flash(); ?><!--/nocache--></div>
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<!-- div id="footer">

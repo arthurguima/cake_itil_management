@@ -129,6 +129,10 @@
     //-- DataTables --> TableTools
     echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
     echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+    //-- DataTables --> ColVis
+      echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
 
   //-- Jeditable
   echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
@@ -141,7 +145,10 @@
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
-          "dom": 'T<"clear">lfrtip',
+          "dom": 'TC<"clear">lfrtip',
+          "colVis": {
+            "buttonText": "Esconder Colunas"
+          },
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
               "aButtons": [
@@ -177,8 +184,9 @@
               ]
           }
       });
+      var colvis = new $.fn.dataTable.ColVis( oTable );
 
-        $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
 
   function historico(id){
