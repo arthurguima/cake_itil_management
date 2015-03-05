@@ -27,12 +27,6 @@
         <ul class="nav nav-pills nav-stacked">
           <!--li><a><b>Nome: </b><?php //echo $pe['Pe']['nome']; ?></a></li-->
           <li><a><b>Número: </b><?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] ; ?></a></li>
-          <li>
-            <a>
-             <b><?php echo $pe['Item']['nome']; ?>:</b>
-             <?php echo $pe['Pe']['valor_item'] . '/' . $pe['Item']['metrica'];?>
-            </a>
-          </li>
           <li><a><b>Número da CE de envio: </b><?php echo $pe['Pe']['num_ce']; ?></a></li>
           <li><a><b>Data de emissão: </b><?php echo $pe['Pe']['dt_emissao']; ?></a></li>
           <li><a><b>Data Prevista de Início da OS: </b><?php echo $pe['Pe']['dt_inicio']; ?></a></li>
@@ -50,13 +44,19 @@
           <li><a href='/sgd/sses/view/<?php echo $pe['Ss']['id']; ?>'><b>SS: </b><?php echo $pe['Ss']['nome']; ?></a></li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $pe['Pe']['cvs_url']; ?></a></li>
           <li><a><b>Observação: </b><?php echo $pe['Pe']['observacao']; ?></a></li>
+          <li>
+            <a>
+             <b><?php echo $pe['Item']['nome']; ?>:</b>
+             <?php echo $pe['Pe']['valor_item'] . '/' . $pe['Item']['metrica'] . " / " . $pe['Item']['aditivo_id'] ;?>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="col-lg-8">
-    <div class="panel panel-danger panel-info">
+    <div class="panel panel-danger">
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>
@@ -108,6 +108,71 @@
       </div>
       </div>
     </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title">Itens de Contrato
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'itempes', 'action' => 'add','?' => array('controller' => 'pes', 'id' =>  $pe['Pe']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <a style="cursor:pointer;" onclick="javascript:$('div.panel-body.itens-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></a>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body itens-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Contrato</th>
+                <th>Aditivo</th>
+                <th>Volume</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($pe['ItemPe'] as $item): ?>
+                <tr>
+                  <td><?php echo $item['Item']['nome']; ?></td>
+                  <td><?php echo $item['Contrato']['numero']; ?></td>
+                  <td>
+                    <?php
+                      if(isset($item['Aditivo']['dt_inicio'])){
+                          echo date('d/m/Y', strtotime($item['Aditivo']['dt_inicio']));
+                      }
+                      else{ echo " --- ";}
+                    ?>
+                  </td>
+                  <td><?php echo $item['volume'] . " " . $item['Item']['metrica']; ?></td>
+                  <td>
+                     <?php
+                        if($this->Ldap->autorizado(2)){
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'itempes', 'action' => 'edit', $item['id'], '?' => array('controller' => 'pes', 'id' =>  $pe['Pe']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                array('controller' => 'itempes', 'action' => 'delete', $item['id'], '?' => array('controller' => 'pes', 'id' =>  $pe['Pe']['id'], 'action' => 'view' )),
+                                array('escape' => false), "Você tem certeza");
+                        }
+                     ?>
+                   </td>
+                </tr>
+              <?php endforeach; ?>
+              <?php unset($item); ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="col-md-12">

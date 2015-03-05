@@ -16,6 +16,10 @@
 			'className' => 'Pe',
 			'foreignKey' => 'item_id',
 			'dependent' => false,
+		),
+		'ItemPe' => array(
+			'className' => 'ItemPe',
+			'foreignKey' => 'item_id',
 		)
 	);
 

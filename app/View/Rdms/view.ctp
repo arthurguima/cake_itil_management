@@ -34,10 +34,12 @@
           </li>
           <li><a><b>Serviço: </b><?php echo $rdm['Servico']['nome']; ?></a></li>
           <li><a><b>Ambiente: </b><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></a></li>
+          <li><a><b>Versão: </b><?php echo $rdm['Rdm']['versao']; ?></a></li>
           <li><a><b>Data Prevista: </b><?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?></a></li>
           <li><a><b>Data de Execução: </b><?php echo $rdm['Rdm']['dt_executada']; ?></a></li>
           <li><a><b>Tipo: </b><?php echo $rdm['RdmTipo']['nome']; ?></a></li>
           <li><a><b>Concluída?: </b><?php echo $this->Rdm->sucesso($rdm['Rdm']['dt_executada'], $rdm['Rdm']['dt_executada']); ?></a></li>
+          <li><a><b>Observação: </b><?php echo $rdm['Rdm']['observacao']; ?></a></li>
         <ul>
       </div>
     </div>
@@ -94,7 +96,7 @@
   </div>
 
   <div class="col-lg-12">
-    <div class="panel panel-danger panel-info">
+    <div class="panel panel-danger">
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>

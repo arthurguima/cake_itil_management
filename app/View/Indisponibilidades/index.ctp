@@ -95,7 +95,7 @@
                     ?>
                   </td>
         				  <td data-order=<?php echo $this->Time->format('Ymd', $Indisponibilidade['Indisponibilidade']['dt_inicio']); ?>>
-                    <?php echo $this->Time->format('d/m/Y h:i:s', $Indisponibilidade['Indisponibilidade']['dt_inicio']); ?>
+                    <?php echo $this->Time->format('d/m/Y H:i', $Indisponibilidade['Indisponibilidade']['dt_inicio']); ?>
                   </td>
                   <td>
                     <?php if($Indisponibilidade['Indisponibilidade']['dt_fim'] != null):

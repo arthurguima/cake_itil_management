@@ -175,8 +175,8 @@
     $this->layout = 'ajax';
 
     if ($this->request->data) {
-        $this->Indisponibilidade->id = $this->request->data('id');;
-        $this->Indisponibilidade->saveField('dt_fim', date('Y-m-d g:i:s'));
+        $this->Indisponibilidade->id = $this->request->data('id');
+        $this->Indisponibilidade->saveField('dt_fim', date('Y-m-d H:i:s'));
 
         if($this->request->data('dt_fim') != null):
           return "<span class='label label-success'>Aberto</span>";

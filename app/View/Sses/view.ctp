@@ -104,7 +104,14 @@
                     </td>
                     <?php echo $this->Tables->PeStatusEditable($pe['id']) ?>
                     <td>
-                       <?php echo $pe['valor_item'] . '/' . $pe['Item']['metrica'];?>
+                      <ul>
+                        <?php
+                          foreach($pe['ItemPe'] as $item):
+                            echo "<li>" . $item['Item']['nome'] . " - " . $item['volume'] . '/' . $item['Item']['metrica'] . "</li>";
+                          endforeach;
+                          unset($item);
+                        ?>
+                      </ul>
                     </td>
                     <td>
                        <?php
@@ -264,7 +271,7 @@
   </div>
 
   <div class="col-lg-12">
-    <div class="panel panel-danger panel-info">
+    <div class="panel panel-danger">
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>

@@ -12,6 +12,9 @@
       'foreignKey' => 'aditivo_id',
       'dependent' => true
     ),
+    'ItemPe' => array(
+      'className' => 'ItemPe'
+    )
   );
 
   public $validate = array(

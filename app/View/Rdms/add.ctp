@@ -23,7 +23,7 @@
 
       echo $this->BootstrapForm->input('servico_id', array(
                   'label' => array('text' => 'Serviço: '),
-                  'empty'=>'Serviço'));
+                  'empty' => ""));
 
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão do serviço: ')));
@@ -110,7 +110,7 @@
 
     $( "select#RdmServicoId" ).change(function () {
       var str = "";
-      $( "select option:selected" ).each(function() {
+      $( "select#RdmServicoId option:selected" ).each(function() {
          getDemandas($(this).val());
       })
     }).change();

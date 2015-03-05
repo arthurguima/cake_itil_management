@@ -14,7 +14,7 @@
         /* Se ainda não foi homologado*/
         if ($time3 == null){
 
-          /* Se ainda não haja uma previsão*/
+          /* Se ainda não ha uma previsão*/
           if($time2 == null){
             return "<div style='font-size: 12px;'><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
                     Previsão Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;

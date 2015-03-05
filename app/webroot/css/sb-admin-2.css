@@ -7,6 +7,7 @@
 body {
     background-color: #f8f8f8;
     color: #232D2E;
+    font-size: 13px;
 }
 
 .page-header {
@@ -21,7 +22,8 @@ body {
     padding: 0 15px;
     min-height: 568px;
     /*background-color: #fff; -- original*/
-    background-color: #EBF1F2;
+    /*background-color: #EBF1F2;*/
+    background-image: url('../img/bg.jpg');
 }
 
 @media(min-width:768px) {
@@ -221,6 +223,26 @@ i.hide-sidebar{
 
 .panel-title{
   font-size: 19px;
+}
+
+.panel-warning {
+  border: 2px solid #fcf8e3 !important;
+}
+
+.panel-default {
+  border: 2px solid #C6CFDB !important;
+}
+
+.panel-info {
+  border: 2px solid #56CDDF !important;
+}
+
+.panel-primary {
+  border: 2px solid #428bca !important;
+}
+
+.panel-danger {
+  border: 2px solid #f2dede !important;
 }
 
 .chat-panel .panel-body {
@@ -527,7 +549,9 @@ table.dataTable thead .sorting:after {
 .breadcrumb,
 .well{
   background-color: #fff;
-
+}
+span.breadcrumb {
+  font-size: 12px;
 }
 
 .breadcrumb{
@@ -577,7 +601,13 @@ table.dataTable thead .sorting:after {
 /*Panels*/
 .panel{
   border: 0;
+  border-radius: 2px;
 }
+.panel-heading {
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
+}
+
 .panel-default>.panel-heading {
   background-color: #C6CFDB;
 }
@@ -611,6 +641,10 @@ table.dataTable thead .sorting:after {
   min-height: 30px;
 }
 
+.form-control{
+  border-radius: 0px;
+}
+
 /* Filtros de Busca*/
 form#form-filter-results .submit {
   display: inline-block;
@@ -630,6 +664,11 @@ form#form-filter-results .submit {
 #form-filter-results button {
   /*margin-top: 8px;*/
 }
+
+button.ColVis_Button {
+  height: 27px !important;
+}
+
 span.filter-show.col-lg-2 {
   font-weight: bold;
 }
@@ -676,6 +715,11 @@ td.checklist a{
   text-decoration: none;
 }
 
+td.checklist a,
+i.fa.checklist {
+  font-size: 13px;
+}
+
 a.servico {
   font-size: 14px;
 }
@@ -687,7 +731,7 @@ a.servico:hover{
   font-size: 13px;
   min-height: 142px;
   padding: 0;
-  border-top-width: 2px;
+  border-bottom-width: 1px;
   border-color: #cfdbe2;
 }
 .indis a{
@@ -701,10 +745,13 @@ a.servico:hover{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.indis-text .red{
+  font-size: 15px !important;
+}
 
 .indis-footer {
   padding-bottom: 2px;
-  background-color: #EBF1F2;
+  background-color: #fcfcfc;
   border: 1px solid #DAE5E8;
   padding-top: 5px;
 }
@@ -717,10 +764,11 @@ a.servico:hover{
 }
 
 .indis-tittle {
-  background-color: #EBF1F2;
+  background-color: #fcfcfc;
   margin-bottom: 10px;
   text-align: center;
   padding-bottom: 5px;
+  border-bottom: 1px solid #DAE5E8;
 }
 
 @media(min-width:1231px){
@@ -755,8 +803,6 @@ svg.peity {
   list-style-type: circle;
 }
 
-
-
 .indis-body table{
   /*margin-left: 25px;*/
 }
@@ -766,10 +812,26 @@ svg.peity {
  display: table;
 }
 
-
-
 .editable{
   border-bottom: 2px dotted #3e8da7;
+}
+
+/* No radius */
+.pagination>li a {
+  border-radius: 0px !important;
+}
+
+.btn{
+  border-radius: 2px;
+}
+
+.label{
+  border-radius: 0;
+}
+
+.well{
+  border-radius: 2px;
+  margin-bottom: 15px;
 }
 
   /*DATATABLE*/
@@ -816,7 +878,7 @@ td .tipo-demanda {
 .notes a{
   color: #E7E7E8;
   text-decoration: underline;
-  padding-left: 50px;
+  padding-left: 63px;
 }
 
 span.color-legend {
@@ -884,11 +946,18 @@ table#dataTables-Servico{
 }
 
 .fc-unthemed .fc-today {
-  background: #f5f5f5 !important;
+  background: #fff !important;
 }
-td.fc-day-number.fc-tue.fc-today.fc-state-highlight {
-  font-weight: bolder;
+.fc-today {
+  font-weight: bold;
 }
 .fc td{
   padding: 1px !important;
+}
+
+td.fc-widget-header {
+  background-color: #C6CFDB;
+}
+td.fc-day{
+  background-color: #EBF1F2;
 }

@@ -17,13 +17,13 @@
         $end = microtime(true); //Final do tempo de resposta
         $tempo = $end - $begin;
         return "<td><i title='" . $x[1] ."' class='fa fa-times-circle red'></i></td> (" . $headers['Date'] . ") ";
-      endif; 
+      endif;
 
       $end = microtime(true); //Final do tempo de resposta
       $tempo = $end - $begin;
       return "<td><i title='" . $x[1] . "' class='fa fa-check-circle green'></i></td><td>" . number_format($tempo,3,",","") . " ms</td>";
     endif;
-      return "<td><i class='fa fa-exclamation-triangle yellow'></i></td><td> A URL não foi cadastrada!</td>";
+      return "<td><i class='fa fa-exclamation-triangle yellow'></i></td><td> URL não cadastrada!</td>";
   }
 
   public function online2($url, $method){ // Utilizada na tabela de servicos
@@ -49,7 +49,7 @@
       $tempo = $end - $begin;
       return "<i class='fa fa-check-circle green' title='Status code: " . $x[1] . " - Resposta: " . number_format($tempo,3,",","") . " s'></i> ";
     endif;
-      return "<i class='fa fa-exclamation-triangle yellow' title='A URL não foi cadastrada!'></i> ";
+      return "<i class='fa fa-exclamation-triangle yellow' title='URL não cadastrada!'></i> ";
   }
 
   public function indisponibilidades($servico){

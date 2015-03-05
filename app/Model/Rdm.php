@@ -36,6 +36,11 @@
                 'rule'    => array('between', 3, 110),
                 'message' => 'O campo deve conter de 3 a 110 caracteres!'
     )),
+    'servico_id' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!')
+    ),
   );
 
   public function beforeValidate($options = array()){

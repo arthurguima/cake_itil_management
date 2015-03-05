@@ -105,6 +105,24 @@
                 $val['Ord']['dt_fim_pdd']
             );
         }
+
+        if (isset($val['Ord']['dt_recebimento_termo'])) {
+            $results[$key]['Ord']['dt_recebimento_termo'] = $this->dateFormatAfterFind(
+                $val['Ord']['dt_recebimento_termo']
+            );
+        }
+
+        if (isset($val['Ord']['dt_recebimento_homo'])) {
+            $results[$key]['Ord']['dt_recebimento_homo'] = $this->dateFormatAfterFind(
+                $val['Ord']['dt_recebimento_homo']
+            );
+        }
+
+        if (isset($val['Ord']['dt_recebimento_termo_prov'])) {
+            $results[$key]['Ord']['dt_recebimento_termo_prov'] = $this->dateFormatAfterFind(
+                $val['Ord']['dt_recebimento_termo_prov']
+            );
+        }
     }
     return $results;
   }
@@ -134,6 +152,15 @@
     }
     if(!empty($this->data['Ord']['dt_fim_pdd'])) {
         $this->data['Ord']['dt_fim_pdd'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_fim_pdd'])));
+    }
+    if(!empty($this->data['Ord']['dt_recebimento_termo'])) {
+        $this->data['Ord']['dt_recebimento_termo'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_recebimento_termo'])));
+    }
+    if(!empty($this->data['Ord']['dt_recebimento_homo'])) {
+        $this->data['Ord']['dt_recebimento_homo'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_recebimento_homo'])));
+    }
+    if(!empty($this->data['Ord']['dt_recebimento_termo_prov'])) {
+        $this->data['Ord']['dt_recebimento_termo_prov'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_recebimento_termo_prov'])));
     }
     return true;
   }

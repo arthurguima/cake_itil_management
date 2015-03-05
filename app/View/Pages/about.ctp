@@ -2,6 +2,13 @@
   $this->Html->addCrumb("Sobre o SGD", '/pages/about');
 ?>
 
+<style>
+  .nav.nav-tabs-pages>li.active>a{
+      background-color: #eee !important;
+  }
+</style>
+<?php echo $this->Html->css('plugins/timeline.css'); ?>
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs nav-tabs-black nav-tabs-pages" role="tablist">
   <li role="presentation" class="active"><a href="#dev" aria-controls="dev" role="tab" data-toggle="tab">Desenvolvimento</a></li>
@@ -33,114 +40,137 @@
     <div class="error">
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
-        <br />
-        <div class="well">
-          <ul class="list-unstyled spaced">
-            <li>
-              <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.8.8</h4>
-                <div class="personal-info">
-                  Veja o que mudou:<br/><br/>
-                  <ul>
-                    <li>Calendário</li>
-                    <li>Checklist de OS</li>
-                    <li>Correção de Bugs</li>
-                    <li>Melhorias de Usabilidade</li>
-                  </ul>
-                </div>
-            </li>
-          </ul>
-        </div>
-        <div class="well">
-          <ul class="list-unstyled spaced">
-            <li>
-              <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.6</h4>
-                <div class="personal-info">
-                  Veja o que mudou:<br/><br/>
-                  <ul>
-                    <li>Relatório de Indisponibilidade</li>
-                    <li>Correção de Bugs.</li>
-                  </ul>
-                </div>
-            </li>
-          </ul>
-        </div>
-        <div class="well">
-          <ul class="list-unstyled spaced">
-            <li>
-              <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.5</h4>
-                <div class="personal-info">
-                  Veja o que mudou:<br/><br/>
-                  <ul>
-                    <li>Melhorias na gestão dos Chamados.</li>
-                    <li>Visão dos chamados no Dashboard</li>
-                    <li>Correção de Bugs.</li>
-                  </ul>
-                </div>
-            </li>
-          </ul>
-        </div>
-        <div class="well">
-          <ul class="list-unstyled spaced">
-            <li>
-              <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4.2</h4>
-                <div class="personal-info">
-                  Veja o que mudou:<br/><br/>
-                  <ul>
-                    <li>Melhorias na gestão das RDMs.</li>
-                    <li>Pequenas melhorias no Dashboard.</li>
-                    <li>Registrar OS de cada SS.</li>
-                    <li>Pesquisa avançada por chamados.</li>
-                    <li>Correção de Bugs.</li>
-                  </ul>
-                </div>
-            </li>
-          </ul>
-        </div>
-        <div class="well">
-          <ul class="list-unstyled spaced">
-            <li>
-              <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4</h4>
-                <div class="personal-info">
-                  Veja o que mudou:<br/><br/>
-                  <ul>
-                    <li>Registrar RDMs dos diversos serviços.</li>
-                    <li>Controlar quem pode remover registros do banco.</li>
-                    <li>Registrar SS de cada serviço e relacioná-las com as demandas e itens de contrato.</li>
-                    <li>Registrar PE de cada SS.</li>
-                    <li>Nova visualização de Demandas Internas na Dashboard (TipoXStatus).</li>
-                    <li>Correção de Bugs.</li>
-                  </ul>
-                </div>
-            </li>
-          </ul>
-        </div>
-        <div class="well">
-          <ul class="list-unstyled spaced">
-            <li>
-              <h4> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.0</h4>
-                <div class="personal-info">
-                  Esse é um novo mundo de gestão da DITE!<br/><br/> Agora você pode:<br/><br/>
-                  <ul>
-                    <li>Registrar Indisponibilidades dos Sistemas.</li>
-                    <li>Controlar os contratos de cada cliente, seus itens e aditivos.</li>
-                    <li>Controlar as áreas de cada cliente e seus serviços.</li>
-                    <li>Registrar as demandas de cada serviço.</li>
-                    <li>Registrar todo o conhecimento para as operações diárias no DITE.</li>
-                  </ul>
-                </div>
-            </li>
-          </ul>
-        </div>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-badge success">
+              <i class="fa fa-calendar fa-fw"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.8.8</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Calendário</li>
+                        <li>Checklist de OS</li>
+                        <li>Correção de Bugs</li>
+                        <li>Histórico em Pop-up</li>
+                        <li>Melhorias de Usabilidade e Interface</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-badge info">
+              <i class="fa fa-exclamation-triangle"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.6</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Relatório de Indisponibilidade</li>
+                        <li>Correção de Bugs.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-badge warning">
+              <i class="fa fa-phone"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.5</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Melhorias na gestão dos Chamados.</li>
+                        <li>Visão dos chamados no Dashboard</li>
+                        <li>Correção de Bugs.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4.2</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Melhorias na gestão das RDMs.</li>
+                        <li>Pequenas melhorias no Dashboard.</li>
+                        <li>Registrar OS de cada SS.</li>
+                        <li>Pesquisa avançada por chamados.</li>
+                        <li>Correção de Bugs.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-badge success">
+              <i class="fa fa-briefcase fa-fw"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Registrar RDMs dos diversos serviços.</li>
+                        <li>Controlar quem pode remover registros do banco.</li>
+                        <li>Registrar SS de cada serviço e relacioná-las com as demandas e itens de contrato.</li>
+                        <li>Registrar PE de cada SS.</li>
+                        <li>Nova visualização de Demandas Internas na Dashboard (TipoXStatus).</li>
+                        <li>Correção de Bugs.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-badge danger">
+              <i class="fa fa-bomb"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.0</h4>
+                    <div class="personal-info">
+                      Esse é um novo mundo de gestão da DITE!<br/><br/> Agora você pode:<br/><br/>
+                      <ul>
+                        <li>Registrar Indisponibilidades dos Sistemas.</li>
+                        <li>Controlar os contratos de cada cliente, seus itens e aditivos.</li>
+                        <li>Controlar as áreas de cada cliente e seus serviços.</li>
+                        <li>Registrar as demandas de cada serviço.</li>
+                        <li>Registrar todo o conhecimento para as operações diárias no DITE.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
-
-<style>
-  .nav.nav-tabs-pages>li.active>a{
-      background-color: #eee !important;
-  }
-</style>
 
 <script>
   $('#abas a').click(function (e) {

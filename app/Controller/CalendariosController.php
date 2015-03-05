@@ -60,7 +60,7 @@
             'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $rdm['Rdm']['dt_prevista']))),
             'allDay' => true,
             'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
-            'description' => $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . ($rdm['Rdm']['ambiente'] == '1' ? ' Homologação' : ($rdm['Rdm']['ambiente'] == '2' ? 'Produção' : 'Treinamento')),
+            'description' => $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . " "  . ($rdm['Rdm']['ambiente'] == '1' ? ' Homologação' : ($rdm['Rdm']['ambiente'] == '2' ? 'Produção' : 'Treinamento')),
             'className' => 'calendar-rdm'
         );
       }

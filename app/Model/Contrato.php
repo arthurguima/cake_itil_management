@@ -10,6 +10,9 @@
       'className' => 'Aditivo',
       'foreignKey' => 'contrato_id',
       'dependent' => true
+    ),
+    'ItemPe' => array(
+      'className' => 'ItemPe'
     )
   );
 

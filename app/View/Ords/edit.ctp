@@ -43,14 +43,30 @@
         echo $this->BootstrapForm->input('pe_id', array(
                     'label' => array('text' => 'PA: ')));
 
-        echo $this->BootstrapForm->input('ths', array(
-                'label' => array('text' => 'TH (Link): ')));
+        echo $this->BootstrapForm->input('dt_recebimento_termo_prov', array(
+                        'label' => array('text' => 'Data Prevista do Termo de Recebimento Provisório: '),
+                        'type' => 'text',
+                        'id' => 'dp'));
 
         echo $this->BootstrapForm->input('trp', array(
                 'label' => array('text' => 'TRP (Link): ')));
 
+        echo $this->BootstrapForm->input('dt_recebimento_homo', array(
+                  'label' => array('text' => 'Data Prevista do Termo de Homologação: '),
+                  'type' => 'text',
+                  'id' => 'dp'));
+
+        echo $this->BootstrapForm->input('ths', array(
+                'label' => array('text' => 'TH (Link): ')));
+
+        echo $this->BootstrapForm->input('dt_recebimento_termo', array(
+                  'label' => array('text' => 'Data Prevista do Termo de Recebimento: '),
+                  'type' => 'text',
+                  'id' => 'dp'));
+
         echo $this->BootstrapForm->input('trd', array(
                 'label' => array('text' => 'TRD (Link): ')));
+
       ?>
     </div>
     <div class="col-lg-6">

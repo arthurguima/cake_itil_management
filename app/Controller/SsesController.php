@@ -82,8 +82,19 @@
 		if (!$this->Ss->exists($id)) {
 			throw new NotFoundException(__('SS Inválida'));
 		}
-		$options = array('conditions' => array('Ss.' . $this->Ss->primaryKey => $id));
-		$this->Ss->recursive = 2;
+		$this->Ss->Behaviors->attach('Containable');
+		$options = array(
+			'conditions' => array('Ss.' . $this->Ss->primaryKey => $id),
+			'contain' => array(
+				'Pe' => array('ItemPe'=> array('Item'=> array()), 'Status' => array()),
+				'Demanda' => array('Status' => array(), 'DemandaTipo' => array()),
+				'Ord' => array('Status' => array(), 'Pe' => array()),
+				'Historico' => array(),
+				'Servico' => array(),
+				'Status' => array(),
+			)
+		);
+		//$this->Ss->recursive = 3;
 		$this->set('ss', $this->Ss->find('first', $options));
 	}
 

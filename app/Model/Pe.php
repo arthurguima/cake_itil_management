@@ -21,6 +21,9 @@
   public $hasMany = array(
     'Historico' => array(
       'className' => 'Historico'
+    ),
+    'ItemPe' => array(
+      'className' => 'itemPe'
     )
   );
 

@@ -40,7 +40,7 @@
   </div>
 
   <div class="col-lg-8">
-    <div class="panel panel-danger panel-info">
+    <div class="panel panel-danger">
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>

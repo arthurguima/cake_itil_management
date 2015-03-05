@@ -137,7 +137,14 @@
                   <?php echo $this->Tables->OrdStatusEditable($ord['Ord']['id']) ?>
 
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ord['Ord']['responsavel']; ?></div></td>
-                  <td class="checklist"><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></td>
+                  <td class="checklist">
+                    <?php
+                      echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) . "<br />";
+                      echo $this->Ord->PrazocheckList($ord['Ord']['dt_ini_pdd'], $ord['Ord']['trp'], $ord['Ord']['dt_recebimento_termo_prov'],
+                           $ord['Ord']['ths'], $ord['Ord']['dt_recebimento_homo'],
+                           $ord['Ord']['trd'], $ord['Ord']['dt_recebimento_termo']);
+                    ?>
+                  </td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('ords', $ord['Ord']['id'], 14);

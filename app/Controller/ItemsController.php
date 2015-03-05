@@ -101,7 +101,7 @@
 		//$this->autoRender = false;
 
 		//$this->Demanda->recursive = -1;
-		if($this->params['url']['tipo'] == 'Contrato'){
+		if(($this->params['url']['tipo'] == 'Contrato') || ($this->params['url']['id'] == '0')){
 			$this->set('items',
 									$this->Item->find('list', array(
 										'fields' => array('Item.id', 'Item.nome'),

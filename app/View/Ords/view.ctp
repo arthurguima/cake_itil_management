@@ -77,11 +77,6 @@
             <a href=<?php echo Router::url('/', true) . '/sses/view/' . $ord['Ss']['id']; ?>>
             <b>SS: </b><?php echo $ord['Ss']['nome']; ?></a>
           </li>
-          <li>
-            <a href=<?php echo Router::url('/', true) . '/pes/view/'. $ord['Pe']['id']; ?>>
-              <b>PA: </b><?php echo $ord['Pe']['numero'] . "/" . $ord['Pe']['ano']; ?> - <?php echo $ord['Pe']['Item']['nome']; ?>
-            </a>
-          </li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $ord['Ord']['cvs_url']; ?></a></li>
           <li><a><b>Termos: </b><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></li>
           <li><a><b>Observação: </b><?php echo $ord['Ord']['observacao']; ?></a></li>
@@ -91,7 +86,7 @@
   </div>
 
   <div class="col-lg-8">
-    <div class="panel panel-danger panel-info">
+    <div class="panel panel-danger">
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Histórico</b>

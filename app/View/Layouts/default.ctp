@@ -87,6 +87,7 @@
 											<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contrato (Em Breve)", '/relatorios/contratos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li>
 											</ul>
 									</li>
@@ -116,7 +117,11 @@
 								</ul>
 								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 					</div>
-					<span class="notes hidden-xs hidden-sm">Sistema de gestão da DITE - Versão 1.8.8 <br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?></span>
+					<span class="notes hidden-xs hidden-sm">
+						Sistema de gestão da DITE - Versão 1.8.8
+						<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
+						<br /><br /><a href="/painel.php" style="padding-left: 52px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
+					</span>
 			</div>
 			<!-- Fim sidebar -->
 		</nav>
@@ -128,7 +133,7 @@
 			<div class='row'><!--nocache--><?php echo $this->Session->flash(); ?><!--/nocache--></div>
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<!-- div id="footer">
+		<!--div id="footer">
 		</div>
 	</div>
 	<hr style="margin-top:50px;" /--><?php //echo $this->element('sql_dump'); ?>

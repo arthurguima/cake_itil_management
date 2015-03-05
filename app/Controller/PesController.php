@@ -71,7 +71,7 @@
       throw new NotFoundException(__('PA Inválida'));
     }
     $options = array('conditions' => array('Pe.' . $this->Pe->primaryKey => $id));
-    $this->Pe->recursive = 1;
+    $this->Pe->recursive = 2;
     $this->set('pe', $this->Pe->find('first', $options));
   }
 
@@ -96,6 +96,7 @@
   }
 
   public function edit($id = null) {
+    $this->Pe->recursive = 2;
     if (!$id) { throw new NotFoundException(__('PA  Inválida'));}
 
     if ($this->request->is('post') || $this->request->is('put')) {

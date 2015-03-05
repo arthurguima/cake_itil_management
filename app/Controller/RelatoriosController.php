@@ -82,4 +82,38 @@
 
   }
 
+  public function contratos(){
+    /* Lista de Contratos */
+    $this->loadModel('Pe');
+    $this->Pe->recursive = 3;
+    $this->Pe->Behaviors->attach('Containable');
+
+    debug($this->request->data);
+
+    if(isset($this->request->data['contrato_id'])){
+      if(($this->request->data['Aditivo']['Aditivo']['0'] != 'Aditivo' )){
+        $conditions = '(Item.aditivo_id = "'. $this->request->data['Aditivo']['Aditivo']['0'] .'")';
+      }
+      else{
+        $conditions = '(Item.contrato_id = "'. $this->request->data['contrato_id'] .'")';
+      }
+
+      $this->set('pes', $this->Pe->find('first', array(
+        //'conditions' => array($conditions),
+        'contain' => array(
+          'Item' => array(
+            'conditions' => array($conditions)
+          )
+        )
+      )));
+    }
+
+    /* Filtros */
+    $this->loadModel('Contrato');
+    $this->set('contratos', $this->Contrato->find('list', array('fields' => array('Contrato.id', 'Contrato.numero'))));
+    $this->set(compact('contratos'));
+
+    // Os filtros de aditivos & itens de contrato são montados via ajax
+  }
+
 }

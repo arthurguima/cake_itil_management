@@ -15,7 +15,7 @@
 <div style="padding: 25px 15px; border-left: 1px solid #e7e7e7;">
   <div class="row">
     <div class="col-lg-12">
-      <div class="panel panel-danger panel-info">
+      <div class="panel panel-danger">
         <div class="panel-heading">
           <p>
             <h3 class="panel-title"><b>Histórico</b>

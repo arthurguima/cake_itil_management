@@ -48,17 +48,11 @@
                     'label' => array('text' => 'Fim da Validade do PDD: '),
                     'type' => 'text',
                     'id' => 'dp'));
-
-        echo $this->BootstrapForm->input('cvs_url', array(
-                    'label' => array('text' => 'Url: ')));
-
-        echo $this->BootstrapForm->input('observacao', array(
-                    'label' => array('text' => 'Observação: '),
-                    'type' => 'textarea'));
       ?>
     </div>
     <div class="col-lg-6">
-      <?php
+      <?php       
+
         echo $this->BootstrapForm->input('responsavel', array(
                   'label' => array('text' => 'Responsável: '),
                   'value' => $this->Ldap->nomeUsuario()));
@@ -67,17 +61,13 @@
         echo $this->BootstrapForm->input('status_id', array(
                     'label' => array('text' => 'Status: ')));
 
-        echo $this->BootstrapForm->input('contrato', array(
-                'label' => array('text' => 'Contrato: '),
-                'input' => 'text',
-                'multiple' => "false",
-                'options' => $contratos));
-      ?>
+        echo $this->BootstrapForm->input('cvs_url', array(
+                    'label' => array('text' => 'Url: ')));
 
-      <div id="aditivoList"></div>
-      <div id="itemList"></div>
-
-      <?php echo $this->BootstrapForm->input('valor_item', array('label' => array('text' => 'Volume Utilizado: '))); ?>
+        echo $this->BootstrapForm->input('observacao', array(
+                    'label' => array('text' => 'Observação: '),
+                    'type' => 'textarea'));
+     ?>
     </div>
   </div>
   <div class="form-footer col-lg-12 col-md-6 pull-right">
@@ -91,28 +81,6 @@
 </div>
 
 <script>
-  /* Lista de Itens */
-    function getItens(tipo, id){
-      $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "items/optionlist?controller=Pe&tipo=" + tipo + "&id=" + id,
-        cache: false,
-        success: function(html){
-          $("#itemList").html(html);
-        }
-      })
-    }
-
-  /* Lista de Aditivos */
-    function getAditivos(contrato){
-      $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "aditivos/optionlist?controller=Pe&contrato=" + contrato,
-        cache: false,
-        success: function(html){
-          $("#aditivoList").html(html);
-        }
-      });
-    }
-
   $(document).ready(function() {
     $('#myModal').on('shown.bs.modal', function (e) {
       document.getElementById('modal-body').appendChild(
@@ -120,25 +88,6 @@
       );
       document.getElementById('demandaFrame').style.display = "block";
       //document.getElementById('demandaFrame').style.height = "720px";
-    });
-
-    // Quando selecionado o Contrato
-    $( "select#PeContrato" ).change(function () {
-      var str = "";
-      $( "select#PeContrato option:selected" ).each(function() {
-         getItens("Contrato", $(this).val());
-         getAditivos($(this).val());
-      })
-    }).change();
-
-    // Quando selecionado o Aditivo
-    $(document).on('change', $("select#AditivoAditivo"), function () {
-      var str = "";
-      $("select#AditivoAditivo option:selected").each(function() {
-         if($(this).val() != "Aditivo"){
-          getItens("Aditivo", $(this).val());
-         }
-      })
     });
 
     $("[id*='dpdecade']").datetimepicker({
