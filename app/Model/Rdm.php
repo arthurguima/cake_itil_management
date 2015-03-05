@@ -24,6 +24,7 @@
   public $hasMany = array(
     'Historico' => array(
       'className' => 'Historico',
+      'order' => array("Historico.data" => "ASC")
     )
   );
 

@@ -7,6 +7,7 @@
 			'foreignKey' => 'ss_id',
 			'dependent' => false,
 			'conditions' => '',
+			'order' => array("Historico.data" => "ASC")
 		),
 		'Pe' => array(
 			'className' => 'Pe',

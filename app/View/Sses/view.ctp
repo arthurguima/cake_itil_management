@@ -19,6 +19,9 @@
                   array('controller' => 'sses', 'action' => 'edit', $ss['Ss']['id']),
                   array('escape' => false));
               }
+
+              echo "<a id='viewTimeline' data-toggle='modal' data-target='#Timeline'>
+                <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar Timeline'></i></a></span>";
             ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.info-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
@@ -344,6 +347,18 @@
 </div>
 <iframe id="demandaFrame" style="display:none;" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
 
+<div class="modal fade" id="Timeline" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="TimelineFrame"  src="<?php echo(Router::url('/', true). "sses/timeline/" . $ss['Ss']['id'] );?>" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php
   //-- ClarityID

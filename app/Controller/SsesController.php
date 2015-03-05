@@ -98,6 +98,29 @@
 		$this->set('ss', $this->Ss->find('first', $options));
 	}
 
+	public function timeline($id = null) {
+		$this->Historico->recursive = -1;
+		$this->layout = false;
+
+		if (!$this->Ss->exists($id)) {
+			throw new NotFoundException(__('SS Inválida'));
+		}
+		$this->Ss->Behaviors->attach('Containable');
+		$options = array(
+			'conditions' => array('Ss.' . $this->Ss->primaryKey => $id),
+			'contain' => array(
+				'Pe' => array('Historico' => array()),
+				'Demanda' => array('Historico' => array()),
+				'Ord' => array('Historico' => array()),
+				'Historico' => array(),
+				'Servico' => array(),
+				'Status' => array(),
+			)
+		);
+		//$this->Ss->recursive = 3;
+		$this->set('ss', $this->Ss->find('first', $options));
+	}
+
 	public function add() {
 		if ($this->request->is('post')) {
 

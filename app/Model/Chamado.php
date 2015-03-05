@@ -20,7 +20,8 @@
 
 	public $hasMany = array(
 		'Historico' => array(
-			'className' => 'Historico'
+			'className' => 'Historico',
+			'order' => array("Historico.data" => "ASC")
 		)
 	);
 }

@@ -1,5 +1,7 @@
 <?php class Historico extends AppModel {
 
+  public $order = array("Historico.data" => "ASC", "Historico.id" => "ASC");
+
   public $belongsTo = array(
     'Demanda' => array(
       'className' => 'Demanda',

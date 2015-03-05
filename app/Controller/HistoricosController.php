@@ -107,25 +107,25 @@
       $this->Historico->recursive = -1;
       $this->layout = false;
 
-      /* TODO: Refazer a estrutura abaixo */
-
-      if($this->params['url']['controller'] == 'demandas'){
-        $this->set('historicos', $this->Historico->findAllByDemandaId( $this->params['url']['id']));
-      }
-      if($this->params['url']['controller'] == 'rdms'){
-        $this->set('historicos', $this->Historico->findAllByRdmId( $this->params['url']['id']));
-      }
-      if($this->params['url']['controller'] == 'pes'){
-        $this->set('historicos', $this->Historico->findAllByPeId( $this->params['url']['id']));
-      }
-      if($this->params['url']['controller'] == 'ords'){
-        $this->set('historicos', $this->Historico->findAllByOrdId( $this->params['url']['id']));
-      }
-      if($this->params['url']['controller'] == 'sses'){
-        $this->set('historicos', $this->Historico->findAllBySsId( $this->params['url']['id']));
-      }
-      if($this->params['url']['controller'] == 'chamados'){
-        $this->set('historicos', $this->Historico->findAllByChamadoId( $this->params['url']['id']));
+      switch($this->params['url']['controller']){
+        case 'demandas':
+          $this->set('historicos', $this->Historico->findAllByDemandaId( $this->params['url']['id']));
+          break;
+        case 'rdms':
+          $this->set('historicos', $this->Historico->findAllByRdmId( $this->params['url']['id']));
+          break;
+        case 'pes':
+          $this->set('historicos', $this->Historico->findAllByPeId( $this->params['url']['id']));
+          break;
+        case 'ords':
+          $this->set('historicos', $this->Historico->findAllByOrdId( $this->params['url']['id']));
+          break;
+        case 'sses':
+          $this->set('historicos', $this->Historico->findAllBySsId( $this->params['url']['id']));
+          break;
+        case 'chamados':
+          $this->set('historicos', $this->Historico->findAllByChamadoId( $this->params['url']['id']));
+          break;
       }
 
     }
