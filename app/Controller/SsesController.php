@@ -88,7 +88,7 @@
 			'contain' => array(
 				'Pe' => array('ItemPe'=> array('Item'=> array()), 'Status' => array()),
 				'Demanda' => array('Status' => array(), 'DemandaTipo' => array()),
-				'Ord' => array('Status' => array(), 'Pe' => array()),
+				'Ord' => array('ItemPe'=> array('Item'=> array()), 'Status' => array(), 'Pe' => array()),
 				'Historico' => array(),
 				'Servico' => array(),
 				'Status' => array(),
@@ -99,7 +99,6 @@
 	}
 
 	public function timeline($id = null) {
-		$this->Historico->recursive = -1;
 		$this->layout = false;
 
 		if (!$this->Ss->exists($id)) {

@@ -100,7 +100,7 @@
           //  'end' => $demanda['Demanda']['dt_prevista'],
             'allDay' => true,
             'url' => Router::url('/') . 'demandas/view/'.$demanda['Demanda']['id'],
-            //'details' => $demanda['Demanda']['details'],
+            'description' => $demanda['Servico']['sigla'],
             'className' => 'calendar-demanda'
         );
       }

@@ -10,10 +10,20 @@
 
   public function view($id = null){
     if (!$id) { throw new NotFoundException(__('Contrato Inválido')); }
-    $contrato = $this->Contrato->findById($id);
+    $this->Contrato->Behaviors->attach('Containable');
 
-    if (!$contrato) { throw new NotFoundException(__('Contrato Inválido'));}
-    $this->set('contrato', $contrato);
+    $this->set('contrato', $this->Contrato->find('first', array(
+      'conditions' => array('id' => $id),
+      'contain' => array(
+        'Aditivo' => array(),
+        'Item' => array(),
+        'Regra' => array(
+          'Servico' => array()
+        ),
+      )
+    )));
+
+    //if (!$contrato) { throw new NotFoundException(__('Contrato Inválido'));}
   }
 
   public function edit($id = null){

@@ -19,10 +19,25 @@
  */
   public function view($id = null) {
     if (!$id) { throw new NotFoundException(__('Aditivo Inválido')); }
-    $aditivo = $this->Aditivo->findById($id);
+    //$this->Aditivo->recursive = 2;
+    //$aditivo = $this->Aditivo->findById($id);
 
-    if (!$aditivo) { throw new NotFoundException(__('Aditivo Inválido'));}
-    $this->set('aditivo', $aditivo);
+    //if (!$aditivo) { throw new NotFoundException(__('Aditivo Inválido'));}
+    //$this->set('aditivo', $aditivo);
+
+    $this->Aditivo->Behaviors->attach('Containable');
+
+    $this->set('aditivo', $this->Aditivo->find('first', array(
+      'conditions' => array('id' => $id),
+      'contain' => array(
+        'Aditivo' => array(),
+        'Item' => array(),
+        'Regra' => array(
+          'Servico' => array()
+        ),
+        'Contrato' => array()
+      )
+    )));
   }
 
 /**

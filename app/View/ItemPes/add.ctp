@@ -12,8 +12,12 @@
     <?php
       echo $this->BootstrapForm->create('ItemPe');
 
-      if(!strcmp($this->params['url']['controller'],'pes')){
-        echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+      switch($this->params['url']['controller']){
+        case 'pes':
+          echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+
+        case 'ords':
+          echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
       }
 
       echo $this->BootstrapForm->input('contrato', array(

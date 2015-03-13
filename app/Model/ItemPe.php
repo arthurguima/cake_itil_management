@@ -16,7 +16,11 @@
 		'Pe' => array(
 			'className' => 'Pe',
 			'foreignKey' => 'item_id',
-		)
+		),
+		'Ord' => array(
+			'className' => 'Ord',
+			'foreignKey' => 'item_id',
+		),
 	);
 
 	public $hasMany = array();

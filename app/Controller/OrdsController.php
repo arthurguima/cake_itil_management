@@ -127,7 +127,12 @@
 				'Pe' => array(
 					'Item' => array()
 				),
-				'Historico' => array()
+				'Historico' => array(),
+				'ItemPe' => array(
+					'Item' => array(),
+					'Aditivo' => array(),
+					'Contrato' => array()
+				)
 			)
 		);
 		$this->Ord->recursive = 3;

@@ -13,6 +13,9 @@
     ),
     'ItemPe' => array(
       'className' => 'ItemPe'
+    ),
+    'Regra' => array(
+      'className' => 'Regra'
     )
   );
 

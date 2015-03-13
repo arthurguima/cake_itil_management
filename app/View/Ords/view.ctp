@@ -86,6 +86,70 @@
   </div>
 
   <div class="col-lg-8">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title">Itens de Contrato
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'itempes', 'action' => 'add','?' => array('controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <a style="cursor:pointer;" onclick="javascript:$('div.panel-body.itens-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></a>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body itens-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Contrato</th>
+                <th>Aditivo</th>
+                <th>Volume</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($ord['ItemPe'] as $item): ?>
+                <tr>
+                  <td><?php echo $item['Item']['nome']; ?></td>
+                  <td><?php echo $item['Contrato']['numero']; ?></td>
+                  <td>
+                    <?php
+                      if(isset($item['Aditivo']['dt_inicio'])){
+                          echo date('d/m/Y', strtotime($item['Aditivo']['dt_inicio']));
+                      }
+                      else{ echo " --- ";}
+                    ?>
+                  </td>
+                  <td><?php echo $item['volume'] . " " . $item['Item']['metrica']; ?></td>
+                  <td>
+                     <?php
+                        if($this->Ldap->autorizado(2)){
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'itempes', 'action' => 'edit', $item['id'], '?' => array('controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                array('controller' => 'itempes', 'action' => 'delete', $item['id'], '?' => array('controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view' )),
+                                array('escape' => false), "Você tem certeza");
+                        }
+                     ?>
+                   </td>
+                </tr>
+              <?php endforeach; ?>
+              <?php unset($item); ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
     <div class="panel panel-danger">
       <div class="panel-heading">
         <p>

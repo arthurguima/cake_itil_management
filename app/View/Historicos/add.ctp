@@ -11,7 +11,7 @@
       echo $this->Html->css('font-awesome-4.2.0/css/font-awesome.min.css');
       //-- Custom admin CSS --
       echo $this->Html->css('sb-admin-2.css');
-      
+
       echo $this->Html->meta('icon');
       /* JS */
       //-- jQuery Version 1.11.0 --
@@ -39,25 +39,24 @@
     <?php
       echo $this->BootstrapForm->create('Historico');
 
-      if(!strcmp($this->params['url']['controller'],'demandas')){
-        echo $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-      }
-      if(!strcmp($this->params['url']['controller'],'rdms')){
-        echo $this->BootstrapForm->hidden('rdm_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-      }
-      if(!strcmp($this->params['url']['controller'],'sses')){
-        echo $this->BootstrapForm->hidden('ss_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-      }
-      if(!strcmp($this->params['url']['controller'],'pes')){
-        echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-      }
+      switch($this->params['url']['controller']){
+        case 'demandas':
+          echo $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
 
-      if(!strcmp($this->params['url']['controller'],'ords')){
-        echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-      }
+        case 'rdms':
+          echo $this->BootstrapForm->hidden('rdm_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
 
-      if(!strcmp($this->params['url']['controller'],'chamados')){
-        echo $this->BootstrapForm->hidden('chamado_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+        case 'pes':
+          echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+
+        case 'ords':
+          echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+
+        case 'sses':
+          echo $this->BootstrapForm->hidden('ss_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+
+        case 'chamados':
+          echo $this->BootstrapForm->hidden('chamado_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
       }
 
       echo $this->BootstrapForm->input('data', array(

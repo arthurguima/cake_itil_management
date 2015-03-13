@@ -961,3 +961,27 @@ td.fc-widget-header {
 td.fc-day{
   background-color: #EBF1F2;
 }
+
+/* Vis Timeline */
+
+.vis.timeline.root {
+  border-color: #C6CFDB;
+  background-color: #EBF1F2;
+}
+
+.vis.timeline .timeaxis .grid.odd {
+  background: #e9e9e9;
+}
+
+.vis.timeline .labelset .inner,
+.timeaxis .text{
+  font-weight: bold;
+}
+
+.item.box a {
+  color: #000;
+}
+.vis.timeline .item.selected {
+  border-color: #FFC200;
+  background-color: #FFF785 !important;
+}
