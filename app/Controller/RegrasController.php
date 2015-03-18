@@ -97,4 +97,23 @@
 		}
 		return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
 	}
+
+	/**
+	* retorna o Modelo da regra solicitada
+	*/
+	public function modelo(){
+		$this->layout = null;
+		//$this->autoRender = false;
+
+		if(isset($this->params['url']['id'])){
+			$this->set('regra',
+				$this->Regra->find('first',
+					array(
+						'fields' => array('Regra.modelo'),
+						'conditions' => array('Regra.id' => $this->params['url']['id'])
+					)
+				)
+			);
+		}
+	}
 }

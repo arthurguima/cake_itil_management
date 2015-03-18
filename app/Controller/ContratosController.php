@@ -20,6 +20,11 @@
         'Regra' => array(
           'Servico' => array()
         ),
+        'Indicadore' => array(
+          'Regra' => array(
+            'Servico' => array()
+          ),
+        ),
       )
     )));
 

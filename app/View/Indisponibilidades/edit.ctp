@@ -75,7 +75,8 @@
       format: "dd/mm/yyyy hh:ii:ss",
       autoclose: true,
       todayBtn: true,
-      language: 'pt-BR'
+      language: 'pt-BR',
+      minuteStep: 1,      
     });
 
     $('#ServicoServico').select2();

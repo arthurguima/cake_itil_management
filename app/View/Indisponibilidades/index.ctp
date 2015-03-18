@@ -45,7 +45,7 @@
             echo $this->Search->end();
           ?>
         </div>
-    </div>
+      </div>
     </div>
 </div>
 

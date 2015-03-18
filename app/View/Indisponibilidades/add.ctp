@@ -58,10 +58,12 @@
 <script>
   $(document).ready(function() {
     $("[id*='dp']").datetimepicker({
+      minuteStep: 1,
       format: "dd/mm/yyyy hh:ii",
       autoclose: true,
       todayBtn: true,
-      language: 'pt-BR'
+      language: 'pt-BR',
+      initialDate: new Date(new Date().setMinutes(0)),
     });
 
     $('#ServicoServico').select2();

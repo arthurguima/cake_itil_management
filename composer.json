@@ -28,7 +28,4 @@
 	"bin": [
 		"lib/Cake/Console/cake"
 	]
-	"require": {
-  	"slywalker/boost_cake": "*"
-  }
 }

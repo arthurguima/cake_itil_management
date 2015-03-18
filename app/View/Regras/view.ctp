@@ -46,4 +46,10 @@
         </div>
       </div>
     </div>
+
+    <div class="form-footer col-lg-10 col-md-6 pull-right">
+      <?php
+        echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-lg-3 col-md-6'));
+      ?>
+    </div>
 </div>

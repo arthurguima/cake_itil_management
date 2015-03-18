@@ -17,6 +17,9 @@
     ),
     'Regra' => array(
       'className' => 'Regra'
+    ),
+    'Indicadore' => array(
+      'className' => 'Indicadore'
     )
   );
 

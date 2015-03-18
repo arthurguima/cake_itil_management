@@ -19,25 +19,30 @@
  */
   public function view($id = null) {
     if (!$id) { throw new NotFoundException(__('Aditivo Inválido')); }
-    //$this->Aditivo->recursive = 2;
-    //$aditivo = $this->Aditivo->findById($id);
-
-    //if (!$aditivo) { throw new NotFoundException(__('Aditivo Inválido'));}
-    //$this->set('aditivo', $aditivo);
-
     $this->Aditivo->Behaviors->attach('Containable');
 
-    $this->set('aditivo', $this->Aditivo->find('first', array(
+    $aditivo = $this->Aditivo->find('first', array(
       'conditions' => array('id' => $id),
       'contain' => array(
-        'Aditivo' => array(),
         'Item' => array(),
         'Regra' => array(
           'Servico' => array()
         ),
-        'Contrato' => array()
+        'Indicadore' => array(
+          'Regra' => array(
+            'Servico' => array()
+          ),
+        ),
       )
-    )));
+    ));
+
+    $this->set('aditivo', $aditivo);
+
+    /* Limitação do CakePhp: contain + BelongsTo */
+    $this->loadModel('Contrato');
+    $this->Contrato->Behaviors->attach('Containable');
+    $this->Contrato->recursive = -1;
+    $this->set('contrato', $this->Contrato->find('first', array('conditions' => array('Contrato.id' => $aditivo['Aditivo']['contrato_id']))));
   }
 
 /**

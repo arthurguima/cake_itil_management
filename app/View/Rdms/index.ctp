@@ -107,7 +107,7 @@
                   <td data-order=<?php echo $this->Times->CleanDate($rdm['Rdm']['dt_prevista']); ?>>
                     <?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?>
                   </td>
-                  <td><?php echo (($rdm['Rdm']['dt_executada'] == null) ? "" : $this->Time->format('d/m/Y', $rdm['Rdm']['dt_executada'])); ?></td>
+                  <td><?php echo (($rdm['Rdm']['dt_executada'] == null) ? " " : $this->Times->pastDate($rdm['Rdm']['dt_executada'])); ?></td>
                   <td><?php echo $rdm['Rdm']['responsavel']; ?></td>
                   <td>
                     <?php

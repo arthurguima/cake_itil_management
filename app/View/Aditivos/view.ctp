@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb('Contratos', '/contratos');
-  $this->Html->addCrumb($aditivo['Contrato']['numero'], array('controller' => 'contratos', 'action' => 'view', $aditivo['Contrato']['id']));
+  $this->Html->addCrumb($contrato['Contrato']['numero'], array('controller' => 'contratos', 'action' => 'view', $contrato['Contrato']['id']));
   $this->Html->addCrumb('Aditivos', '');
   $this->Html->addCrumb($aditivo['Aditivo']['id'], array('controller' => 'items', 'action' => 'edit', $aditivo['Aditivo']['id']));
 ?>
@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-2">
+  <div class="col-lg-3">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <p>
@@ -28,8 +28,8 @@
           <li><a><b>Data Início: </b><?php echo $aditivo['Aditivo']['dt_inicio']; ?></a></li>
           <li><a><b>Data Fim: </b><?php echo $this->Times->pastDate($aditivo['Aditivo']['dt_fim']) ?></a></li>
           <li>
-            <?php echo $this->Html->link("<b>Contrato: </b> " . $aditivo['Contrato']['numero'],
-                  array('controller' => 'contratos', 'action' => 'view', $aditivo['Contrato']['id']),
+            <?php echo $this->Html->link("<b>Contrato: </b> " . $contrato['Contrato']['numero'],
+                  array('controller' => 'contratos', 'action' => 'view', $contrato['Contrato']['id']),
                   array('escape' => false)); ?>
           </li>
         </ul>
@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div class="col-lg-10">
+  <div class="col-lg-9">
     <div class="panel panel-default panel-danger">
       <div class="panel-heading">
         <p>
@@ -140,7 +140,66 @@
                    </td>
                 </tr>
               <?php endforeach; ?>
-              <?php unset($regra); debug($aditivo); ?>
+              <?php unset($regra); ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title">Indicadores
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'indicadores', 'action' => 'add','?' => array('controller' => 'aditivos', 'id' =>  $aditivo['Aditivo']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <a style="cursor:pointer;" onclick="javascript:$('div.panel-body.indicadores-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></a>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body indicadores-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Serviço</th>
+                <th>Data</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($aditivo['Indicadore'] as $in): ?>
+                <tr>
+                  <td><?php echo $in['Regra']['nome']; ?></td>
+                  <td><?php echo $in['Regra']['Servico']['nome']; ?></td>
+                  <td><?php echo $in['mes'] . "/" . $in['ano']; ?></td>
+                  <td>
+                     <?php
+                        echo $this->Html->link("<i class='fa fa-search-plus'></i> ",
+                           array('controller' => 'indicadores', 'action' => 'view', $in['id'], '?' => array('controller' => 'aditivos', 'id' =>  $aditivo['Aditivo']['id'], 'action' => 'view' )),
+                           array('escape' => false));
+
+                        if($this->Ldap->autorizado(2)){
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                array('controller' => 'indicadores', 'action' => 'edit', $in['id'], '?' => array('controller' => 'aditivos', 'id' =>  $aditivo['Aditivo']['id'], 'action' => 'view' )),
+                                array('escape' => false));
+                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                array('controller' => 'indicadores', 'action' => 'delete', $in['id'], '?' => array('controller' => 'aditivos', 'id' =>  $aditivo['Aditivo']['id'], 'action' => 'view' )),
+                                array('escape' => false), "Você tem certeza");
+                        }
+                     ?>
+                   </td>
+                </tr>
+              <?php endforeach; ?>
+              <?php unset($regra); ?>
             </tbody>
           </table>
         </div>

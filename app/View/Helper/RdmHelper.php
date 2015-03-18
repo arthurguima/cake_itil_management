@@ -14,22 +14,21 @@
   * Destaca se a RDM foi concluida ou cancelada
   */
   public function sucesso($bol, $dt_executada, $class="") {
-    if($bol == 2){
-        return "<span class='label label-default' id='" . $class . "'>Cancelada</span>";
+    if($bol == null){
+        return " ";
     }
 
-    if($dt_executada == null){
+    switch ($bol) {
+    case 1:
+      if($dt_executada != null)
+        return "<span class='label label-success' id='" . $class . "'>Sim</span>";
+      else return "";
+    case 2:
+      return "<span class='label label-default' id='" . $class . "'>Cancelada</span>";
+    case 0:
+      return "<span class='label label-default' id='" . $class . "'>Não</span>";
+    default:
       return " ";
-    }
-    else{
-      switch ($bol) {
-      case 0:
-          return "<span class='label label-default' id='" . $class . "'>Não</span>";
-      case 1:
-          return "<span class='label label-success' id='" . $class . "'>Sim</span>";
-      default:
-        return " ";
-      }
     }
   }
 

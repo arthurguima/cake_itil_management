@@ -46,7 +46,7 @@ class PagesController extends AppController {
 		$this->loadModel('Servico');
 		$this->Servico->Behaviors->attach('Containable');
 		if(date("d") < 21){
-			$this->set('servicos', $this->Servico->find('all', array(
+			$servicos = $this->Servico->find('all', array(
 				'contain' => array(
 					'Indisponibilidade' => array(
 						'Motivo' => array(),
@@ -56,10 +56,10 @@ class PagesController extends AppController {
 
 					)
 				)
-			)));
+			));
 		}
 		else{
-			$this->set('servicos', $this->Servico->find('all', array(
+			$servicos = $this->Servico->find('all', array(
 				'contain' => array(
 					'Indisponibilidade' => array(
 						'Motivo' => array(),
@@ -67,9 +67,10 @@ class PagesController extends AppController {
 																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("+1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 ))')
 					)
 				)
-			)));
+			));
 		}
-		$this->Servico->recursive = 2;
+		$this->set('servicos', $servicos);
+		//$this->Servico->recursive = 2;
 
 		/*Lista de Demandas*/
 		$this->loadModel('Demanda');
