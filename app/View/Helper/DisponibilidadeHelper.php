@@ -1,4 +1,5 @@
 <?php class DisponibilidadeHelper extends AppHelper {
+  public $helpers = array('Times');
 
   public function online($url, $method){ // Utilizado no Home
     if($url != null):
@@ -60,18 +61,29 @@
     foreach ($servico['Indisponibilidade'] as $ind):
       if($ind['Motivo']['contavel'] != 0){ //
         $contabilizadas++;
-        $aux = date_diff(date_create($ind['dt_inicio']),date_create($ind['dt_fim']));
-        $total += (($aux->y * 365.25 + $aux->m * 30 + $aux->d) * 15 + $aux->h + $aux->i/60);
-        //o dia é contando como X para compensar o horário comercial
+        //$aux = date_diff(date_create($ind['dt_inicio']),date_create($ind['dt_fim']));
+        $total += $this->Times->diffInSec($ind['dt_inicio'], $ind['dt_fim']);
       }
 
       if($ind['dt_fim'] == null){ $ativas++; }
     endforeach;
     unset($ind);
 
-    if($total > 0): $percent = ($total/330)*100;
-    else: $percent = 0;
-    endif;
+    if($total > 0){
+      if(date("d") < 21){
+        $dt_inicio = "21/" . date("m/Y",strtotime("-1 month"));
+        $dt_fim =  "20/" . date('m/Y');
+      }
+      else{
+        $dt_inicio = "21/" . date('m/Y');
+        $dt_fim = "20/" . date("m/Y",strtotime("+1 month"));
+      }
+      $percent = ($total / $this->Times->diffInSec(
+            $this->Times->AmericanDate($dt_inicio), $this->Times->AmericanDate($dt_fim)))*100;
+    }
+    else{
+      $percent = 0;
+    }
 
     return "
     <div class='col-sm-12 col-lg-3  col-md-6 well indis'>
@@ -81,11 +93,11 @@
       <div class='indis-body col-lg-12'>
         <div class='col-lg-6 col-xs-6 col-md-6'>
           <div class='semicircle'>
-            <div id='" . $servico['Servico']['id'] . "' data-dimension='60' data-width='4'  data-text='" . round((100 - $percent),2) . "%' data-total='330' data-percent='" . $percent . "' data-part='" . $total . "' data-fontsize='9px'  data-fgcolor='#d9534f' data-bgcolor='#5CB85C' data-fill='#EEE'></div>
+            <div id='" . $servico['Servico']['id'] . "' data-dimension='60' data-width='4'  data-text='" . round((100 - $percent),2) . "%' data-total='100' data-percent='" . $percent . "' data-fontsize='9px'  data-fgcolor='#d9534f' data-bgcolor='#5CB85C' data-fill='#EEE'></div>
             </div>
         </div>
         <div class='col-lg-6 col-xs-6 col-md-6 indis-text'>
-          <p>" . round($total,2) . " hora(s)</p> <span class=". ($ativas ? "red" : "")  .">" . $ativas . " ativa(s)</span>
+          <p>" . $this->Times->SecToString($total) . "</p> <span class=". ($ativas ? "red" : "")  .">" . $ativas . " ativa(s)</span>
         </div>
       </div>
       <div class='indis-footer col-lg-12'>

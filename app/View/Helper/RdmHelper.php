@@ -19,14 +19,15 @@
     }
 
     switch ($bol) {
+    case 0:
+        return "<span class='label label-default' id='" . $class . "'>Não</span>";
     case 1:
       if($dt_executada != null)
         return "<span class='label label-success' id='" . $class . "'>Sim</span>";
-      else return "";
+      else
+        return "";
     case 2:
       return "<span class='label label-default' id='" . $class . "'>Cancelada</span>";
-    case 0:
-      return "<span class='label label-default' id='" . $class . "'>Não</span>";
     default:
       return " ";
     }

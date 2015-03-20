@@ -63,7 +63,7 @@
             <tbody>
               <?php foreach($contrato['Aditivo'] as $aditivo): ?>
                 <tr>
-                  <td><?php echo $this->Time->format('d/m/Y', $aditivo['dt_inicio']); ?></td>
+                  <td><?php echo $this->Times->pastDate($aditivo['dt_inicio']); ?></td>
                   <td><?php echo $this->Times->pastDate($aditivo['dt_fim']); ?></td>
 
                   <td>

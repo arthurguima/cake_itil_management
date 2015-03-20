@@ -87,7 +87,8 @@
 									<li> <!-- Relatórios -->
 											<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade/Serviço", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade Geral", '/relatorios/indis_total', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contrato (Em Breve)", '/relatorios/contratos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li>
 											</ul>

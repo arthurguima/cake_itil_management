@@ -38,7 +38,7 @@
           <li><a><b>Data Prevista: </b><?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?></a></li>
           <li><a><b>Data de Execução: </b><?php echo $rdm['Rdm']['dt_executada']; ?></a></li>
           <li><a><b>Tipo: </b><?php echo $rdm['RdmTipo']['nome']; ?></a></li>
-          <li><a><b>Concluída?: </b><?php echo $this->Rdm->sucesso($rdm['Rdm']['dt_executada'], $rdm['Rdm']['dt_executada']); ?></a></li>
+          <li><a><b>Concluída?: </b><?php echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']); ?></a></li>
           <li><a><b>Observação: </b><?php echo $rdm['Rdm']['observacao']; ?></a></li>
         <ul>
       </div>

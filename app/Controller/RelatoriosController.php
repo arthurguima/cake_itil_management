@@ -42,6 +42,41 @@
     $this->set(compact('motivos'));
   }
 
+  public function indis_total() {
+    /* Lista de Servicos */
+    $this->loadModel('Servico');
+    $this->Servico->Behaviors->attach('Containable');
+    $this->Servico->recursive = 2;
+
+    if(isset($this->request->data['dt_inicio']) && isset($this->request->data['dt_fim'])){
+      $fim = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_fim']);
+      $inicio = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_inicio']);
+
+      $conditions = '(Indisponibilidade.dt_inicio >= "'. $inicio .'") && (Indisponibilidade.dt_fim <= "'. $fim .'")';
+
+      if($this->request->data['motivo_id'] != ''){
+        $conditions = $conditions . " && (Indisponibilidade.motivo_id = " . $this->request->data['motivo_id'] .")";
+      }
+
+      $this->set('servicos', $this->Servico->find('all', array(
+        //'conditions' => array('id' => $this->request->data['servico_id']),
+        'contain' => array(
+          'Indisponibilidade' => array(
+            'Motivo' => array(),
+            'conditions' => array($conditions)
+          )
+        )
+      )));
+    }
+
+    /* Filtros */
+    $this->loadModel('Motivo');
+    $this->Motivo->Behaviors->attach('Containable');
+
+    $this->set('motivos', $this->Motivo->find('list', array('fields' => array('Motivo.id', 'Motivo.nome'))));
+    $this->set(compact('motivos'));
+  }
+
   public function servicos() {
     /* Lista de Servicos */
     $this->loadModel('Servico');

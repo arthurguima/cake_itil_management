@@ -50,6 +50,11 @@
 								'rule'    => array('between', 3, 110),
 								'message' => 'O campo deve conter de 3 a 110 caracteres!'
 		)),
+		'observacao' => array(
+			'between' => array(
+								'rule'    => array('between', 3, 1000),
+								'message' => 'O campo deve conter de 3 a 1000 caracteres!'
+		)),
 		'numero' => array(
 			'unique' => array(
 				'rule' => array('checkUnique', array('numero', 'ano', 'servico_id'), false),

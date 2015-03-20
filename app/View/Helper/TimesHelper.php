@@ -126,32 +126,36 @@
 
     /*
     * Quanto tempo se passou entre duas datas
-    * considerando o dia de trabalho da dataprev 07:00 até 22:00
+    * considerando o dia de trabalho da dataprev  (aproximado)
+      Segunda-Sexta, 07:00-22:00 hs
+      Sábado, 07:00-14:00 hs
     */
     public function totalTime($time1, $time2) {
       $t1 = date_create($time1);
       $t2 = date_create($time2);
       $total = date_diff($t1,$t2);
 
-      return (($total->y * 365.25 + $total->m * 30 + $total->d) * 24 + $total->h). "h " . $total->i . "min" ;
+      return (($total->y * 365.25 + $total->m * 30 + $total->d) * 15 + $total->h). "h " . $total->i . "min" ;
     }
 
     /*
     * Quanto tempo se passou entre duas datas em segundos
-    * considerando o dia de trabalho da dataprev 07:00 até 22:00
+    * considerando o dia de trabalho da dataprev (aproximado)
+      Segunda-Sexta, 07:00-22:00 hs
+      Sábado, 07:00-14:00 hs
     */
     public function diffInSec($time1, $time2) {
       $t1 = date_create($time1);
       $t2 = date_create($time2);
       $total = date_diff($t1,$t2);
 
-      return ((($total->y * 365.25 + $total->m * 30 + $total->d) * 24 + $total->h) * 60 + $total->i)*60 + $total->s; ;
+      return ((($total->y * 365.25 + $total->m * 30 + $total->d) * 15 + $total->h) * 60 + $total->i)*60 + $total->s;
     }
 
     /*
     * Recebe um total de tempo em segundos e retorna uma string em Horas
     */
     public function SecToString($time) {
-      return floor(($time/3600)) . "h " . ($time%3600)/60 . "min";
+      return floor(($time/3600)) . "h " . round(($time%3600)/60,2) . "min";
     }
 }?>
