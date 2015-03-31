@@ -64,7 +64,7 @@
             <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">
@@ -198,10 +198,20 @@
 
   //-- Jeditable
   echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //Select2
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
     var oTable =  $('#dataTables-ss').dataTable({
       "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
         language: {

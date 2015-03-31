@@ -15,7 +15,8 @@
         ),
         'servico' => array(
           'Pe.servico_id' => array(
-            'select' => $this->Filter->select('Serviço', $this->Pe->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+            'select' => $this->Filter->select('Serviço', $this->Pe->Servico->find('list',
+                  array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
         'status_diferente' => array(

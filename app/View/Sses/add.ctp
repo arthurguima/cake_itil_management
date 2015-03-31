@@ -30,7 +30,7 @@
           <label for="SsClarityDmId" class="control-label col-lg-3">DM Clarity: </label>
           <div class="col-lg-9">
              <div class='input-group'>
-               <input name="data[Ss][clarity_dm_id]" class="form-control" type="text" id="SsClarityDmId">
+               <input name="data[Ss][clarity_dm_id]" placeholder="DM.XXXX" class="form-control" type="text" id="SsClarityDmId">
                <span class='input-group-addon '>
                  <?php
                    echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getClarityInfo($("#SsClarityDmId").val(), "Ss");',
@@ -61,6 +61,7 @@
 
           echo $this->BootstrapForm->input('servico_id', array(
                       'label' => array('text' => 'Serviço: '),
+                      'class' => 'select2',
                       'empty'=>'Serviço'));
 
           echo $this->BootstrapForm->input('cvs_url', array(
@@ -149,6 +150,10 @@
     }
 
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
     $('#myModal').on('shown.bs.modal', function (e) {
       document.getElementById('modal-body').appendChild(
           document.getElementById('demandaFrame')

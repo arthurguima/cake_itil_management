@@ -22,8 +22,9 @@
                   'label' => array('text' => 'Número: ')));
 
       echo $this->BootstrapForm->input('servico_id', array(
-                  'label' => array('text' => 'Serviço: '),
-                  'empty' => ""));
+                  'class' => 'select2',
+                  'empty'=>'Serviço',
+                  'label' => array('text' => 'Serviço: ')));
 
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão do serviço: ')));
@@ -90,6 +91,10 @@
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
         minView: 2,

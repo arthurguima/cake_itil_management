@@ -5,9 +5,13 @@ function getClarityInfo(dm, control){
     $.each( data, function( key, val ) {
       $('#' + control + toCamelCase(key)).val(val);
       $('.' + control + toCamelCase(key)).val(val);
-      console.log('#' + control + toCamelCase(key) + " - " + val);
+
+      $('#' + control + toCamelCase(key)).css('border', '1px solid #4cae4c');
+      $('.' + control + toCamelCase(key)).css('border', '1px solid #4cae4c');
+      //console.log('#' + control + toCamelCase(key) + " - " + val);
     });
   });
+  alert("Este processo pode demorar. Espere alguns segundos pela resposta do Clarity!");
 }
 
 

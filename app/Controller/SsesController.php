@@ -9,7 +9,8 @@
 				),
 				'servico' => array(
 					'Ss.servico_id' => array(
-						'select' => $this->Filter->select('Serviço', $this->Ss->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+						'select' => $this->Filter->select('Serviço', $this->Ss->Servico->find('list',
+						 		array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
 					)
 				),
 				'status' => array(
@@ -33,7 +34,7 @@
 					)
 				),
 				'clarity_dm' => array(
-					'Ss.clarity_dm_id' => array('operator' => '='),
+					'Ss.clarity_dm_id' => array('operator' => 'LIKE'),
 				),
 				'dtprevisao' => array(
 					'Ss.dt_prevista' => array(

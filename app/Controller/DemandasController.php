@@ -16,7 +16,8 @@
         ),
         'servico' => array(
           'Demanda.servico_id' => array(
-            'select' => $this->Filter->select('Serviço', $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+            'select' => $this->Filter->select('Serviço', $this->Demanda->Servico->find('list',
+                 array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
         'status' => array(
@@ -54,7 +55,7 @@
           )
         ),
         'clarity_dm' => array(
-          'Demanda.clarity_dm_id' => array('operator' => '='),
+          'Demanda.clarity_dm_id' => array('operator' => 'LIKE'),
         ),
         'tipo' => array(
           'Demanda.demanda_tipo_id' => array(
@@ -131,7 +132,7 @@
     }
 
     /* Relacionamentos */
-      $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
+      $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
 
       $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));

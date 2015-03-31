@@ -513,6 +513,21 @@ table.dataTable thead .sorting:after {
  margin-right: 3px;
 }
 
+/* Select2 */
+.select2{
+  width: 100%;
+}
+#s2id_groupSelect,
+.select2-input,
+.select2-container,
+.select2-search-field,
+.select2-choices{
+  min-width: 215px;
+}
+input#s2id_autogen1_search{
+  min-width: 200px;
+}
+
 /* Multiple Select*/
 .bootstrap-select > .btn {
   height: 45px;

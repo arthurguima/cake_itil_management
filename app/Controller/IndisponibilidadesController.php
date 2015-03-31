@@ -13,7 +13,7 @@
           '_Servico.id' => array(
             'select' => $this->Filter->select('Serviço', $this->Indisponibilidade->Servico->find('list', array(
                         'contain' => array('_IndisponibilidadesServico', '_Servico'), //'Hack' para HABTM
-                        'fields' => array('Servico.id', 'Servico.sigla'))))
+                        'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
         'motivo' => array(

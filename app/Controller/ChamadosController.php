@@ -42,7 +42,8 @@
 				),
 				'servico' => array(
 					'Chamado.servico_id' => array(
-						'select' => $this->Filter->select('Serviço', $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+						'select' => $this->Filter->select('Serviço', $this->Chamado->Servico->find('list',
+									array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
 					)
 				),
 				'status' => array(
@@ -187,7 +188,7 @@
 		}
 
 		/* Relacionamentos */
-			$servicos = $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
+			$servicos = $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
 			$this->set(compact('servicos'));
 
 			//$chamadoTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));

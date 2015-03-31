@@ -26,7 +26,10 @@
         echo $this->BootstrapForm->hidden('servico_id', array('value' => $this->params['url']['servico']));
       }
       else{
-        echo $this->BootstrapForm->input('servico_id', array('label' => array('text' => 'Serviço: ')));
+        echo $this->BootstrapForm->input('servico_id', array(
+                    'class' => 'select2',
+                    'empty'=>'Serviço',
+                    'label' => array('text' => 'Serviço: ')));
       }
 
       echo $this->BootstrapForm->input('ano', array(
@@ -77,6 +80,10 @@
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
     $("[id*='dpdecade']").datetimepicker({
       format: "yyyy",
         startView: "decade",
@@ -111,4 +118,10 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>

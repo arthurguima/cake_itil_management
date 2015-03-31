@@ -13,7 +13,8 @@
         ),
         'servico' => array(
           'Rdm.servico_id' => array(
-            'select' => $this->Filter->select('Serviço', $this->Rdm->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+            'select' => $this->Filter->select('Serviço', $this->Rdm->Servico->find('list',
+                  array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
         'ambiente_' => array(

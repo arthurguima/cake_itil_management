@@ -32,7 +32,7 @@
          <label for="DemandaClarityDmId" class="control-label col-lg-3">DM Clarity: </label>
          <div class="col-lg-9">
             <div class='input-group'>
-              <input name="data[Demanda][clarity_dm_id]" class="form-control" type="text" id="DemandaClarityDmId">
+              <input name="data[Demanda][clarity_dm_id]" placeholder="DM.XXXX" class="form-control" type="text" id="DemandaClarityDmId">
               <span class='input-group-addon '>
                 <?php
                   echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getClarityInfo($("#DemandaClarityDmId").val(), "Demanda");',
@@ -77,6 +77,8 @@
                     'label' => array('text' => 'Tipo da Demanda: ')));
 
         echo $this->BootstrapForm->input('servico_id', array(
+                    'class' => 'select2',
+                    'empty'=>'Serviço',
                     'label' => array('text' => 'Serviço: ')));
 
         echo $this->BootstrapForm->input('status_id', array(
@@ -139,6 +141,10 @@
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
         minView: 2,
@@ -168,4 +174,10 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>
