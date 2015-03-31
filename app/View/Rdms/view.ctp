@@ -50,7 +50,7 @@
       <div class="panel-heading">
         <p>
           <h3 class="panel-title">Demandas
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
       </div>

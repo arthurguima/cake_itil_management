@@ -41,23 +41,26 @@
 
       switch($this->params['url']['controller']){
         case 'demandas':
-          echo $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-
+          $con =  $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
         case 'rdms':
-          echo $this->BootstrapForm->hidden('rdm_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-
+          $con =  $this->BootstrapForm->hidden('rdm_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
         case 'pes':
-          echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-
+          $con =  $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
         case 'ords':
-          echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-
+          $con =  $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
         case 'sses':
-          echo $this->BootstrapForm->hidden('ss_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-
+          $con =  $this->BootstrapForm->hidden('ss_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
         case 'chamados':
-          echo $this->BootstrapForm->hidden('chamado_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          $con =  $this->BootstrapForm->hidden('chamado_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
       }
+      if(isset($con))
+        echo $con;
 
       echo $this->BootstrapForm->input('data', array(
                               'label' => array('text' => 'Data: '),

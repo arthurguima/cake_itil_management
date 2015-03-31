@@ -28,10 +28,22 @@
           </div>
        </div>
 
+       <div class="form-group">
+         <label for="DemandaClarityDmId" class="control-label col-lg-3">DM Clarity: </label>
+         <div class="col-lg-9">
+            <div class='input-group'>
+              <input name="data[Demanda][clarity_dm_id]" class="form-control" type="text" id="DemandaClarityDmId">
+              <span class='input-group-addon '>
+                <?php
+                  echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getClarityInfo($("#DemandaClarityDmId").val(), "Demanda");',
+                              array('escape' => false, 'title' => "Resgata Informações Básicas do Clarity"));
+                ?>
+              </span>
+            </div>
+         </div>
+      </div>
+
        <?php
-        echo $this->BootstrapForm->input('clarity_dm_id', array(
-                   'label' => array('text' => 'DM Clarity: '),
-                   'type' => 'text'));
 
         echo $this->BootstrapForm->input('mantis_id', array(
                    'label' => array('text' => 'Nº Mantis: '),
@@ -73,11 +85,13 @@
         echo $this->BootstrapForm->input('data_cadastro', array(
                    'label' => array('text' => 'Data de Cadastro: '),
                    'type' => 'text',
+                   'class' => 'DemandaDataCadastro form-control',
                    'id' => 'dp '));
 
         echo $this->BootstrapForm->input('dt_prevista', array(
                    'label' => array('text' => 'Previsão de Término: '),
                    'type' => 'text',
+                   'class' => 'DemandaDtPrevista form-control',
                    'id' => 'dp '));
 
         echo $this->BootstrapForm->input('data_homologacao', array(
@@ -146,6 +160,9 @@
 <?php
   //-- ClarityID
   echo $this->Html->script('getIdClarity.js');
+
+  //-- ClarityInfo
+  echo $this->Html->script('getClarityInfo.js');
 
   //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');

@@ -72,7 +72,7 @@
 		$this->Filter->setPaginate('conditions', $conditions);
 		$this->Filter->setPaginate('limit', 3000);
 
-		$this->Chamado->recursive = 2;
+		//$this->Chamado->recursive = 2;
 		$this->set('chamados', $this->paginate());
 	}
 

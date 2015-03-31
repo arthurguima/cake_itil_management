@@ -151,4 +151,45 @@
     // Os filtros de aditivos & itens de contrato são montados via ajax
   }
 
+  public function demandas(){
+    /* Lista de Servicos */
+    $this->loadModel('Demanda');
+    //$this->Servico->recursive = 3;
+    $this->Demanda->Behaviors->attach('Containable');
+
+    $demandas = $this->Demanda->find('all', array(
+      //'group' => array('Demanda.servico_id'),
+      'contain' => array(
+        'Servico' => array(),
+        'DemandaTipo' => array(),
+        'Status' => array(),
+      ),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Demanda.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+
+    $this->set('servicos',$this->servicos_demandas($demandas));
+  }
+
+  private function servicos_demandas($demandas){
+    $demandasAUX = array();
+
+    foreach ($demandas as $dem){
+      $demandasAUX[$dem['Servico']['sigla']][] = $dem;
+    }
+
+    return $demandasAUX;
+  }
+
 }
+
+//'recursive' => -1

@@ -89,6 +89,7 @@
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade/Serviço", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade Geral", '/relatorios/indis_total', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não finalizadas", '/relatorios/demandas', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contrato (Em Breve)", '/relatorios/contratos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li>
 											</ul>
@@ -138,6 +139,6 @@
 		<!--div id="footer">
 		</div>
 	</div>
-	<hr style="margin-top:50px;" /--><?php //echo $this->element('sql_dump'); ?>
+	<hr style="margin-top:50px;" /--><?php // echo $this->element('sql_dump'); ?>
 </body>
 </html>

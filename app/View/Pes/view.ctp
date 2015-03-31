@@ -41,15 +41,12 @@
             </a>
           </li>
           <li><a><b>Status: </b><?php echo $pe['Status']['nome']; ?></a></li>
-          <li><a href='/sgd/sses/view/<?php echo $pe['Ss']['id']; ?>'><b>SS: </b><?php echo $pe['Ss']['nome']; ?></a></li>
+          <li>
+            <a href=<?php echo Router::url('/', true) . '/sses/view/' . $pe['Ss']['id']; ?>>
+            <b>SS: </b><?php echo $pe['Ss']['nome'] . " <i class='fa-external-link-square fa' style='font-size: 15px !important;'></i>" ; ?></a>
+          </li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $pe['Pe']['cvs_url']; ?></a></li>
           <li><a><b>Observação: </b><?php echo $pe['Pe']['observacao']; ?></a></li>
-          <li>
-            <a>
-             <b><?php echo $pe['Item']['nome']; ?>:</b>
-             <?php echo $pe['Pe']['valor_item'] . '/' . $pe['Item']['metrica'] . " / " . $pe['Item']['aditivo_id'] ;?>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -146,7 +143,7 @@
                   <td>
                     <?php
                       if(isset($item['Aditivo']['dt_inicio'])){
-                          echo date('d/m/Y', strtotime($item['Aditivo']['dt_inicio']));
+                          echo $item['Aditivo']['dt_inicio'];
                       }
                       else{ echo " --- ";}
                     ?>

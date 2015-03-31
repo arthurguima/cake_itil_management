@@ -29,6 +29,7 @@
               <tr>
                 <th>Nome</th>
                 <th>Tipo</th>
+                <th>Finaliza o Processo</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -37,6 +38,7 @@
                 <tr>
                    <td><?php echo $stat['Status']['nome']; ?></td>
                    <td><?php echo $this->Status->tipo($stat['Status']['tipo']); ?></td>
+                   <td><?php echo $this->Times->yesOrNo($stat['Status']['fim']); ?></td>
                    <td><?php echo $this->Tables->getMenu('status',  $stat['Status']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>

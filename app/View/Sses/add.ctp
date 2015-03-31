@@ -26,10 +26,22 @@
            </div>
         </div>
 
+        <div class="form-group">
+          <label for="SsClarityDmId" class="control-label col-lg-3">DM Clarity: </label>
+          <div class="col-lg-9">
+             <div class='input-group'>
+               <input name="data[Ss][clarity_dm_id]" class="form-control" type="text" id="SsClarityDmId">
+               <span class='input-group-addon '>
+                 <?php
+                   echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getClarityInfo($("#SsClarityDmId").val(), "Ss");',
+                               array('escape' => false, 'title' => "Resgata Informações Básicas do Clarity"));
+                 ?>
+               </span>
+             </div>
+          </div>
+       </div>
+
         <?php
-          echo $this->BootstrapForm->input('clarity_dm_id', array(
-                      'label' => array('text' => 'Clarity DM: '),
-                      'type' => 'text'));
 
           echo $this->BootstrapForm->input('nome', array(
                       'label' => array('text' => 'Nome: ')));
@@ -69,6 +81,7 @@
 
           echo $this->BootstrapForm->input('dt_recebimento', array(
                       'label' => array('text' => 'Data de Recebimento da SS: '),
+                      'class' => 'SsDtRecebimento form-control',
                       'type' => 'text',
                       'id' => 'dp '));
 
@@ -79,6 +92,7 @@
 
           echo $this->BootstrapForm->input('dt_prazo', array(
                       'label' => array('text' => 'Prazo final contratual: '),
+                      'class' => 'SsDtPrazo form-control',
                       'type' => 'text',
                       'id' => 'dp '));
 
@@ -175,6 +189,9 @@
 <?php
   //-- ClarityID
   echo $this->Html->script('getIdClarity.js');
+
+  //-- ClarityInfo
+  echo $this->Html->script('getClarityInfo.js');
 
   //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');

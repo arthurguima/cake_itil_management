@@ -34,8 +34,8 @@
         echo $this->BootstrapForm->input('cvs_url', array(
                     'label' => array('text' => 'Url: ')));
 
-        echo $this->BootstrapForm->input('pf', array(
-                    'label' => array('text' => 'Volume Final: ')));
+        /*echo $this->BootstrapForm->input('pf', array(
+                    'label' => array('text' => 'Volume Final: ')));*/
 
         echo $this->BootstrapForm->input('responsavel', array(
                               'label' => array('text' => 'Responsável: ')));

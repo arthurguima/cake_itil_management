@@ -70,8 +70,23 @@
     if (!$this->Pe->exists($id)) {
       throw new NotFoundException(__('PA Inválida'));
     }
-    $options = array('conditions' => array('Pe.' . $this->Pe->primaryKey => $id));
-    $this->Pe->recursive = 2;
+    $this->Pe->Behaviors->load('Containable');
+    $options = array(
+			'conditions' => array('Pe.' . $this->Pe->primaryKey => $id),
+			'contain' => array(
+				'Status' => array(),
+				'Ss' => array(),
+				'Servico' => array(),
+				'Historico' => array(),
+        'Item' => array(),
+				'ItemPe' => array(
+					'Item' => array(),
+					'Aditivo' => array(),
+					'Contrato' => array()
+				)
+			)
+		);
+
     $this->set('pe', $this->Pe->find('first', $options));
   }
 

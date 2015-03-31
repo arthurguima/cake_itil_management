@@ -17,7 +17,7 @@
           /* Se ainda não ha uma previsão*/
           if($time2 == null){
             return "<div style='font-size: 12px;'><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
-                    Previsão Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
+                    Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
           }
 
           /* Se não foi Homologado e está atrasado */
@@ -135,7 +135,9 @@
       $t2 = date_create($time2);
       $total = date_diff($t1,$t2);
 
-      return (($total->y * 365.25 + $total->m * 30 + $total->d) * 15 + $total->h). "h " . $total->i . "min" ;
+      $value = ($total->y * 365.25 + $total->m * 30 + $total->d) * 15;
+      $value -= $value/7;
+      return ($value + $total->h). "h " . $total->i . "min" ;
     }
 
     /*
@@ -149,7 +151,10 @@
       $t2 = date_create($time2);
       $total = date_diff($t1,$t2);
 
-      return ((($total->y * 365.25 + $total->m * 30 + $total->d) * 15 + $total->h) * 60 + $total->i)*60 + $total->s;
+      $value = ($total->y * 365.25 + $total->m * 30 + $total->d) * 15;
+      $value -= $value/7;
+      $value = (( $value + $total->h) * 60 + $total->i)*60 + $total->s;
+      return $value;
     }
 
     /*

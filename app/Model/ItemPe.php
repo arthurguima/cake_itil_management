@@ -15,11 +15,11 @@
 		),
 		'Pe' => array(
 			'className' => 'Pe',
-			'foreignKey' => 'item_id',
+			'foreignKey' => 'pe_id',
 		),
 		'Ord' => array(
 			'className' => 'Ord',
-			'foreignKey' => 'item_id',
+			'foreignKey' => 'ord_id',
 		),
 	);
 

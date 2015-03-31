@@ -40,6 +40,12 @@
 	);
 
 	public $validate = array(
+		'nome' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'maxLength' => 110,
+				'message' => 'Campo deve ser preenchido!')
+		),
 		'data_homologacao' => array(
 			'MaiorQueDataInicial' => array(
 					"allowEmpty"=> true,

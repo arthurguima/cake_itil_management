@@ -50,6 +50,7 @@
                       Veja o que mudou:<br/><br/>
                       <ul>
                         <li>Timeline da SS</li>
+                        <li>Resgatar dados do Clarity em Demandas Internas e SS</li>
                         <li>Melhorias de Usabilidade e Interface</li>
                       </ul>
                     </div>

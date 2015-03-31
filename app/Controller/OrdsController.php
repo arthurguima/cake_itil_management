@@ -116,7 +116,7 @@
 			throw new NotFoundException(__('OS Inválida!'));
 		}
 		$this->Ord->Behaviors->load('Containable');
-		$this->Ord->contain('Status', 'Ss', 'Pe', 'Servico');
+		//$this->Ord->contain('Status', 'Ss', 'Pe', 'Servico');
 
 		$options = array(
 			'conditions' => array('Ord.' . $this->Ord->primaryKey => $id),
@@ -135,7 +135,7 @@
 				)
 			)
 		);
-		$this->Ord->recursive = 3;
+		//$this->Ord->recursive = 3;
 		$this->set('ord', $this->Ord->find('first', $options));
 	}
 

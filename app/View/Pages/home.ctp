@@ -4,13 +4,14 @@
 
 <div class="row">
 
-	<div class="col-lg-3 col-md-12 pull-right col-sm-12">
+	<div class="col-lg-3 col-md-12 pull-right col-sm-12 delete-online">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
 						Serviços Online:
 						<?php echo $this->Html->link('<i class="fa fa-refresh pull-right"></i>', 'javascript:refreshCode();', array('escape' => false)); ?>
+						<span style="cursor:pointer;" onclick="javascript:$('div.delete-online').remove();"><i class="fa fa-trash-o pull-right"></i></span>
 					</h3>
 				</p>
 			</div>
@@ -22,19 +23,30 @@
 		</div>
 	</div>
 
-	<div class="col-lg-9 col-md-12 col-sm-12 pull-left">
+	<div class="col-lg-9 col-md-12 col-sm-12 pull-left delete-indis">
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">
 				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Estimativa de Disponibilidade</b> - Período
 					<?php
 						if(date("d") < 21){
 							echo "21/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');
+							echo $this->Html->link('<i class="fa-external-link-square fa pull-right"></i>)',
+									"http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=21%2F" .
+									date("m",strtotime("-1 month")) .
+									"%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m') . "01%2F" . date('Y') ."%2023%3A59%3A59",
+									array('escape' => false, 'target' => '_blank' ));
 						}
 						else{
 							echo "21/" . date('m/Y') . " a 20/" . date("m/Y",strtotime("+1 month"));
+							echo $this->Html->link('<i class="fa-external-link-square fa pull-right"></i>',
+									"http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=21%2F" .
+									date('m') .
+									"%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m',strtotime("+1 month")) . "01%2F" . date('Y') ."%2023%3A59%3A59",
+									array('escape' => false, 'target' => '_blank' ));
 						}
 					?></span>
 					<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.indisponibilidades-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+					<span style="cursor:pointer;" onclick="javascript:$('div.delete-indis').remove();"><i class="fa fa-trash-o pull-right"></i></span>
 				</h3></p>
 			</div>
 			<div class="panel-body indisponibilidades-body">
@@ -48,13 +60,14 @@
 		</div>
 	</div>
 
-	<div class="col-lg-9  col-md-12 col-sm-12 pull-left">
+	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-dem">
 		<div class="panel panel-default ">
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
 						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Demandas Internas
 							<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandas-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+							<span style="cursor:pointer;" onclick="javascript:$('div.delete-dem').remove();"><i class="fa fa-trash-o pull-right"></i></span>
 						</b>
 					</h3>
 				</p>
@@ -90,13 +103,14 @@
 		</div>
 	</div>
 
-	<div class="col-lg-9  col-md-12 col-sm-12 pull-left">
+	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-cham">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
 						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Chamados
 							<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.chamados-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+							<span style="cursor:pointer;" onclick="javascript:$('div.delete-cham').remove();"><i class="fa fa-trash-o pull-right"></i></span>
 						</b>
 					</h3>
 				</p>

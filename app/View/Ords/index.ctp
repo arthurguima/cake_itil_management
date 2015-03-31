@@ -140,7 +140,8 @@
                   <td class="checklist">
                     <?php
                       echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) . "<br />";
-                      echo $this->Ord->PrazocheckList($ord['Ord']['dt_ini_pdd'], $ord['Ord']['trp'], $ord['Ord']['dt_recebimento_termo_prov'],
+                      if(isset($ord['Ord']['dt_homologacao']))
+                        echo $this->Ord->PrazocheckList($ord['Ord']['dt_homologacao'], $ord['Ord']['trp'], $ord['Ord']['dt_recebimento_termo_prov'],
                            $ord['Ord']['ths'], $ord['Ord']['dt_recebimento_homo'],
                            $ord['Ord']['trd'], $ord['Ord']['dt_recebimento_termo']);
                     ?>

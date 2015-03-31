@@ -11,9 +11,8 @@
     <?php
       echo $this->BootstrapForm->create('DemandaTipo');
 
-     echo $this->BootstrapForm->input('nome', array(
+      echo $this->BootstrapForm->input('nome', array(
                 'label' => array('text' => 'Nome: ')));
-
     ?>
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php

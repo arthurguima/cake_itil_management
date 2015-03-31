@@ -28,13 +28,14 @@
             <thead>
               <tr>
                 <th>Nome</th>
+                <th>Demanda chegou ao fim?</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($demandaTipos as $tipo): ?>
                 <tr>
-                   <td><?php echo $tipo['DemandaTipo']['nome']; ?></td>
+                   <td><?php echo $tipo['DemandaTipo']['nome']; ?></td>                   
                    <td><?php echo $this->Tables->getMenu('demandatipos', $tipo['DemandaTipo']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>

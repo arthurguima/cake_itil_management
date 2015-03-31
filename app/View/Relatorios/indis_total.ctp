@@ -1,7 +1,19 @@
+<?php
+  $this->Html->addCrumb("Relatórios", '');
+  $this->Html->addCrumb("Disponibilidade Geral", '/relatorios/indis_total');
+?>
+
 <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">
         Disponibilidade
+        <?php
+          echo $this->Html->link('<i class="fa-external-link-square fa pull-right"></i>)',
+              "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=21%2F" .
+              date("m",strtotime("-1 month")) .
+              "%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m') . "01%2F" . date('Y') ."%2023%3A59%3A59",
+              array('escape' => false, 'target' => '_blank' ));
+        ?>
       </h3>
     </div>
   <div class="col-lg-12 pull-left filters">
@@ -59,7 +71,7 @@
                 <tr>
                   <th>Serviço</th>
                   <th>Tempo Indisponível</th>
-                  <!--th>Tempo Acordado(Hora)</th-->
+                  <th>Tempo Acordado(Hora)</th>
                   <th>Disponibilidade Obtida</th>
                   <th>Disponibilidade Acordada</th>
                   <th>IQOM(qtd incidentes)</th>
@@ -79,17 +91,19 @@
                 ?>
                 <tr>
                   <td><?php echo $ser['Servico']['sigla']; ?></td>
-                  <td><?php echo $this->Times->SecToString($totaltime); ?></td>
-                  <!-- td>
-                    <?php/*
+                  <td data-order="<?php echo $totaltime; ?>">
+                    <?php echo $this->Times->SecToString($totaltime); ?>
+                  </td>
+                  <td>
+                    <?php
                       echo $this->Times->SecToString(0.02*$this->Times->diffInSec(
-                        $this->Times->AmericanDate($this->request->data['dt_inicio']), $this->Times->AmericanDate($this->request->data['dt_fim'])));*/
+                        $this->Times->AmericanDate($this->request->data['dt_inicio']), $this->Times->AmericanDate($this->request->data['dt_fim'])));
                     ?>
                   </td-->
                   <td><?php echo round(100 - ($totaltime/$total)*100,2); ?>%</td>
                   <td>98%</td>
                   <td><?php echo sizeof($ser['Indisponibilidade']); ?></td>
-                  <td>
+                  <td data-order="<?php echo $totaltime/sizeof($ser['Indisponibilidade']); ?>">
                     <?php
                       if(sizeof($ser['Indisponibilidade']))
                         echo $this->Times->SecToString($totaltime/sizeof($ser['Indisponibilidade']));
@@ -109,6 +123,29 @@
   </div>
 <?php endif; ?>
 
+<?php
+  //-- DataTables JavaScript --
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+  //-- DataTables --> TableTools
+  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+  //-- DataTables --> Responsive
+  echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+?>
+
+
 <script>
   $(document).ready(function() {
     $("[id*='dp']").datetimepicker({
@@ -118,13 +155,52 @@
       todayBtn: true,
       language: 'pt-BR'
     });
+
+    var  oTable =  $('#dataTables-Indisponibilidades').dataTable({
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+          language: {
+            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+          },
+        //  responsive: true,
+          "dom": 'TC<"clear">lfrtip',
+          "colVis": {
+            "buttonText": "Esconder Colunas"
+          },
+          "tableTools": {
+              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+              "aButtons": [
+                {
+                    "sExtends": "copy",
+                    "sButtonText": "Copiar",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    //"mColumns": [ 0,1,2,3,4,5,6,7 ]
+                },
+                {
+                    "sExtends": "print",
+                    "sButtonText": "Imprimir",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    //"mColumns": [ 0,1,2,3,4,5,6,7 ]
+                },
+                {
+                    "sExtends": "csv",
+                    "sButtonText": "CSV",
+                    "sFileName": "Indisponibilidades.csv",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    //"mColumns": [ 0,1,2,3,4,5,6,7 ]
+                },
+                {
+                    "sExtends": "pdf",
+                    "sButtonText": "PDF",
+                    "sFileName": "Indisponibilidades.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    //"mColumns": [ 0,1,2,3,4,5,6,7 ],
+                    "sPdfOrientation": "landscape",
+                    "sTitle": "Controle de Disponibilidade",
+                    "sPdfMessage": "<?php echo date('d/m/y')?>",
+                },
+              ]
+          }
+      });
+      var colvis = new $.fn.dataTable.ColVis( oTable );
   });
 </script>
-
-
-<?php
-  //-- TimePicker --
-  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
-  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
-  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
-?>

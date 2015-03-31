@@ -71,11 +71,11 @@
               ?>
             </a>
           </li>
-          <li><a><b>Volume Final: </b><?php echo $ord['Ord']['pf']; ?></a></li>
+          <!--li><a><b>Volume Final: </b><?php// echo $ord['Ord']['pf']; ?></a></li-->
           <li><a><b>Status: </b><?php echo $ord['Status']['nome']; ?></a></li>
           <li>
             <a href=<?php echo Router::url('/', true) . '/sses/view/' . $ord['Ss']['id']; ?>>
-            <b>SS: </b><?php echo $ord['Ss']['nome']; ?></a>
+            <b>SS: </b><?php echo $ord['Ss']['nome'] . " <i class='fa-external-link-square fa' style='font-size: 15px !important;'></i>"; ?></a>
           </li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $ord['Ord']['cvs_url']; ?></a></li>
           <li><a><b>Termos: </b><?php echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) ?></li>

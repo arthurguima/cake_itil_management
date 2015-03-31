@@ -24,7 +24,7 @@
       'order' => array("Historico.data" => "ASC")
     ),
     'ItemPe' => array(
-      'className' => 'itemPe'
+      'className' => 'ItemPe'
     )
   );
 

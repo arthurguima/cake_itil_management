@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-3">
+  <div class="col-lg-5">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <p>
@@ -64,6 +64,15 @@
           <li><a><b>Tipo: </b><?php echo $demanda['DemandaTipo']['nome']; ?></a></li>
           <li><a><b>Criador: </b><?php echo $demanda['Demanda']['criador']; ?></a></li>
           <li><a><b>Executor: </b><?php echo $demanda['Demanda']['executor']; ?></a></li>
+
+          <?php if(isset($demanda['Ss'][0])):
+            foreach($demanda['Ss'] as $ss): ?>
+              <li>
+                <a href=<?php echo Router::url('/', true) . 'sses/view/' . $ss['id']; ?>>
+                <b>SS: </b><?php echo $ss['nome'] . " <i class='fa-external-link-square fa' style='font-size: 15px !important;'></i>" ; ?></a>
+              </li>
+          <?php endforeach; endif; ?>
+
           <li><a><b>Descrição: </b><?php echo $demanda['Demanda']['descricao']; ?></a></li>
           <li><a><b>Status: </b><?php echo $demanda['Status']['nome']; ?></a></li>
         </ul>
@@ -71,62 +80,7 @@
     </div>
   </div>
 
-  <div class="col-lg-5">
-    <div class="panel panel-danger">
-      <div class="panel-heading">
-        <p>
-          <h3 class="panel-title"><b>Histórico</b>
-            <?php
-              if($this->Ldap->autorizado(2)){
-                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-                array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
-                array('escape' => false));
-              }
-            ?>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-          </h3>
-        </p>
-      </div>
-      <div class="panel-body historico-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Descrição</th>
-                <th>Analista</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($demanda['Historico'] as $hist): ?>
-                  <tr>
-                    <td><?php echo $hist['data']; ?></td>
-                    <td><?php echo $this->Historicos->findLinks($hist['descricao']); ?></td>
-                    <td><?php echo $hist['analista']; ?></td>
-                    <td>
-                       <?php
-                         if($this->Ldap->autorizado(2)){
-                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                  array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
-                                  array('escape' => false));
-                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
-                                  array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
-                                  array('escape' => false), "Você tem certeza");
-                         }
-                       ?>
-                     </td>
-                  </tr>
-                <?php endforeach; ?>
-              <?php unset($hist); ?>
-          </tbody>
-        </table>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4">
+  <div class="col-lg-7">
     <div class="panel panel-default panel-info">
       <div class="panel-heading">
         <p>
@@ -183,7 +137,7 @@
     </div>
   </div>
 
-  <div class="col-lg-4 pull-right">
+  <div class="col-lg-7">
     <div class="panel panel-default panel-default">
       <div class="panel-heading">
         <p>
@@ -213,6 +167,61 @@
                 </tr>
               <?php endforeach; ?>
             <?php unset($rdm); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Histórico</b>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body historico-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Analista</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($demanda['Historico'] as $hist): ?>
+                  <tr>
+                    <td><?php echo $hist['data']; ?></td>
+                    <td><?php echo $this->Historicos->findLinks($hist['descricao']); ?></td>
+                    <td><?php echo $hist['analista']; ?></td>
+                    <td>
+                       <?php
+                         if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                  array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                                  array('escape' => false));
+                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                  array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
+                                  array('escape' => false), "Você tem certeza");
+                         }
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($hist); ?>
           </tbody>
         </table>
       </div>

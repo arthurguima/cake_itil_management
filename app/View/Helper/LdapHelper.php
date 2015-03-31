@@ -100,7 +100,7 @@ class LdapHelper extends AppHelper {
       }
     }
 
-    return true;
+    return true; //apenas para testes locais
   }
 
 }?>

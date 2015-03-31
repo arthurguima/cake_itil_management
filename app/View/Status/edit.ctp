@@ -11,8 +11,15 @@
     <?php
       echo $this->BootstrapForm->create('Status');
 
-     echo $this->BootstrapForm->input('nome', array(
+      echo $this->BootstrapForm->input('nome', array(
                 'label' => array('text' => 'Nome: ')));
+
+      echo $this->BootstrapForm->input('fim', array(
+           'class' => 'col-sm-3 pull-left col-sm-offset-3',
+           'type' => "checkbox",
+           'label' => array(
+             'text' => 'Finaliza o Processo? ',
+             'class' => 'control-label col-sm-2')));
 
      echo $this->BootstrapForm->input('id');
 

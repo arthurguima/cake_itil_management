@@ -1,3 +1,8 @@
+<?php
+  $this->Html->addCrumb("Relatórios", '');
+  $this->Html->addCrumb("Disponibilidade por Serviço", '/relatorios/indisponibilidades');
+?>
+
 <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">

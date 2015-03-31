@@ -18,7 +18,7 @@
       foreach($pes as $pe) {
         $data[] = array(
             'id' => $pe['Pe']['id'],
-            'title'=> "PA " .  $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] . "; Validade PDD ",
+            'title'=> "PA " .  $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] . " - Validade PDD ",
             'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $pe['Pe']['validade_pdd']))),
             'allDay' => true,
             'url' => Router::url('/') . 'pes/view/'.$pe['Pe']['id'],
