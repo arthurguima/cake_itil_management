@@ -65,7 +65,7 @@
          <label for="RdmSucesso" class="col-lg-3 control-label">Concluída?: </label>
          <div class="col-lg-9">
            <select name="data[Rdm][sucesso]" class="form-control" id="filtersucesso">
-             <option>Concluída?</option>
+             <option  value="-1">Concluída?</option>
              <option value="0" <?php if($this->data['Rdm']['sucesso'] == 0) echo 'selected="selected"'; ?>>Não</option>
              <option value="1" <?php if($this->data['Rdm']['sucesso'] == 1) echo 'selected="selected"'; ?>>Sim</option>
              <option value="2" <?php if($this->data['Rdm']['sucesso'] == 2) echo 'selected="selected"'; ?>>Cancelada</option>

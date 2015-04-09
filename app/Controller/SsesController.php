@@ -134,7 +134,7 @@
 
 		/* Relacionamentos */
 		$this->set('servicos',
-								$this->Ss->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia'))));
+								$this->Ss->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))));
 
 		$this->set('statuses',
 								$this->Ss->Status->find('list', array('conditions' => array('Status.tipo' => 2), 'fields' => array('Status.id', 'Status.nome'))));

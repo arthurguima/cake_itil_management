@@ -16,8 +16,8 @@
 
           /* Se ainda não ha uma previsão*/
           if($time2 == null){
-            return "<div style='font-size: 12px;'><i class='fa fa-exclamation-circle' style='color: #D9534F;'></i>
-                    Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F;'></i></div>" ;
+            return "<i class='fa fa-exclamation-circle' style='color: #D9534F; font-size: 14px;'></i>
+                    Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F; font-size: 14px;'></i>" ;
           }
 
           /* Se não foi Homologado e está atrasado */
@@ -41,7 +41,7 @@
             $color = $this->color($per);
 
           return "<span class='small'>" . $string . "</span>
-                  <div class='progress progress-striped active'>
+                  <div class='progress progress-striped active progress-xs'>
                     <div class='progress-bar progress-bar-" . $color . "' role='progressbar' aria-valuenow='"
                     . $per . "' aria-valuemin='0' aria-valuemax='100' style='width: " . $per . "%'></div>
                   </div>";
@@ -136,8 +136,8 @@
       $total = date_diff($t1,$t2);
 
       $value = ($total->y * 365.25 + $total->m * 30 + $total->d) * 15;
-      $value -= $value/7;
-      return ($value + $total->h). "h " . $total->i . "min" ;
+      $value -= round($value/7,0);
+      return ($value + $total->h). "h " . round($total->i,2) . "min" ;
     }
 
     /*

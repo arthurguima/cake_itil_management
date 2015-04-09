@@ -89,7 +89,7 @@
                     <?php
                       echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 10);
                       if($this->Ldap->autorizado(2)){
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                        echo $this->Html->link(" <i class='fa fa-pencil'></i>",
                                   array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'index' )),
                                   array('escape' => false));
                       }

@@ -103,7 +103,7 @@
       }
     }
     /* Relacionamentos */
-    $servicos = $this->Indisponibilidade->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
+    $servicos = $this->Indisponibilidade->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
     $this->set(compact('servicos'));
     $motivos = $this->Indisponibilidade->Motivo->find('list', array('fields' => array('Motivo.id', 'Motivo.nome')));
     $this->set(compact('motivos'));
@@ -133,7 +133,7 @@
     }
 
     /* Relacionamentos */
-    $servicos = $this->Indisponibilidade->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
+    $servicos = $this->Indisponibilidade->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
     $this->set(compact('servicos'));
     $motivos = $this->Indisponibilidade->Motivo->find('list', array('fields' => array('Motivo.id', 'Motivo.nome')));
     $this->set(compact('motivos'));

@@ -38,6 +38,7 @@
             </div>
           </div>
           <div class="col-lg-12 filters-item">
+            <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control', 'placeholder' => "Solicitante")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>

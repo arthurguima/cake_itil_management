@@ -11,6 +11,9 @@
     // Add filter
     $this->Filter->addFilters(
       array(
+        'nome_' => array(
+          'Demanda.nome' => array('operator' => 'LIKE')
+        ),
         'responsavel' => array(
           'Demanda.criador' => array('operator' => 'LIKE')
         ),
@@ -132,7 +135,7 @@
     }
 
     /* Relacionamentos */
-      $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
+      $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
 
       $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
@@ -166,7 +169,7 @@
     }
 
     /* Relacionamentos */
-      $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
+      $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
 
       $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));

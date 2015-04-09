@@ -14,7 +14,8 @@
       $fim = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_fim']);
       $inicio = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_inicio']);
 
-      $conditions = '(Indisponibilidade.dt_inicio >= "'. $inicio .'") && (Indisponibilidade.dt_fim <= "'. $fim .'")';
+      $conditions = '((Indisponibilidade.dt_inicio >= "'. $inicio .'") && (Indisponibilidade.dt_inicio <= "'. $fim .'"))
+                     && ((Indisponibilidade.dt_fim <= "'. $fim .'") || (Indisponibilidade.dt_fim IS NULL))';
 
       if($this->request->data['motivo_id'] != ''){
         $conditions = $conditions . " && (Indisponibilidade.motivo_id = " . $this->request->data['motivo_id'] .")";
@@ -30,9 +31,28 @@
         )
       )));
     }
+    else{
+      if(isset($this->params['url']['servico_id']) && isset($this->params['url']['dt_inicio']) && isset($this->params['url']['dt_fim'])){
+        $fim = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->params['url']['dt_fim']);
+        $inicio = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->params['url']['dt_inicio']);
+
+        $conditions = '((Indisponibilidade.dt_inicio >= "'. $inicio .'") && (Indisponibilidade.dt_inicio <= "'. $fim .'"))
+                       && ((Indisponibilidade.dt_fim <= "'. $fim .'") || (Indisponibilidade.dt_fim IS NULL))';
+
+        $this->set('servico', $this->Servico->find('first', array(
+          'conditions' => array('id' => $this->params['url']['servico_id']),
+          'contain' => array(
+            'Indisponibilidade' => array(
+              'Motivo' => array(),
+              'conditions' => array($conditions)
+            )
+          )
+        )));
+      }
+    }
 
     /* Filtros */
-    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome'))));
+    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))));
     $this->set(compact('servicos'));
 
     $this->loadModel('Motivo');
@@ -106,7 +126,7 @@
     }
 
     /* Filtros */
-    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome'))));
+    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))));
     $this->set(compact('servicos'));
 
     /*$this->loadModel('Motivo');

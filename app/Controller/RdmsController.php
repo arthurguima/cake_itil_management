@@ -109,7 +109,7 @@
     }
 
     /* Relacionamentos */
-    $servicos = $this->Rdm->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
+    $servicos = $this->Rdm->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
     $this->set(compact('servicos'));
 
     $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));

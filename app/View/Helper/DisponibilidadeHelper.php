@@ -53,7 +53,7 @@
       return "<i class='fa fa-exclamation-triangle yellow' title='URL não cadastrada!'></i> ";
   }
 
-  public function indisponibilidades($servico){
+  public function indisponibilidades($servico,$dt_inicio,$dt_fim){
     $total = 0;
     $ativas = 0;
     $contabilizadas = 0;
@@ -86,29 +86,33 @@
     }
 
     return "
-    <div class='col-sm-12 col-lg-3  col-md-6 well indis'>
-      <div class='indis-tittle col-lg-12'>
-        <a class='servico'><b>" . $servico['Servico']['sigla'] . "</b></a>
-      </div>
-      <div class='indis-body col-lg-12'>
-        <div class='col-lg-6 col-xs-6 col-md-6'>
-          <div class='semicircle'>
-            <div id='" . $servico['Servico']['id'] . "' data-dimension='60' data-width='4'  data-text='" . round((100 - $percent),2) . "%' data-total='100' data-percent='" . $percent . "' data-fontsize='9px'  data-fgcolor='#d9534f' data-bgcolor='#5CB85C' data-fill='#EEE'></div>
+      <div class='col-sm-12 col-lg-2  col-md-4 well indis'>
+        <a class='servico' href=". Router::url('/', true). "relatorios/indisponibilidades?servico_id=" . $servico['Servico']['id'] . "&dt_inicio=" . $dt_inicio . "&dt_fim=" . $dt_fim . ">
+          <div class='indis-tittle col-lg-12'>
+              <b>" . $servico['Servico']['sigla'] . "</b>
+          </div>
+          <div class='indis-body col-lg-12'>
+            <div class='col-lg-6 col-xs-6 col-md-12'>
+              <div class='semicircle'>
+                <div id='" . $servico['Servico']['id'] . "' data-dimension='50' data-width='4'  data-text='" . round((100 - $percent),2) . "%' data-total='100' data-percent='" . $percent . "' data-fontsize='9px'  data-fgcolor='#d9534f' data-bgcolor='#5CB85C' data-fill='#EEE'></div>
+                </div>
             </div>
-        </div>
-        <div class='col-lg-6 col-xs-6 col-md-6 indis-text'>
-          <p>" . $this->Times->SecToString($total) . "</p> <span class=". ($ativas ? "red" : "")  .">" . $ativas . " ativa(s)</span>
-        </div>
-      </div>
-      <div class='indis-footer col-lg-12'>
-        <b style='color:#D9534F;'>" . count($servico['Indisponibilidade']) . "</b> registrada(s) / <b style='color:#D9534F;'>" . $contabilizadas  . "</b> contabilizada(s)
-      </div>
-      <script>
-        $(document).ready(function() {
-          $('#" . $servico['Servico']['id'] . "').circliful();
-        });
-      </script>
-    </div>";
+            <div class='col-lg-6 col-xs-6 col-md-12 indis-text'>
+              " . $this->Times->SecToString($total) . "<br /> <span class=". ($ativas ? "red" : "")  .">" . $ativas . " ativa(s)</span>
+            </div>
+          </div>
+          <div class='indis-footer col-lg-12'>
+            <b style='" . (count($servico['Indisponibilidade']) ? "color:#D9534F;" : " ")  .
+            "'>" . count($servico['Indisponibilidade']) . "</b> registrada(s) / <b style='" . ($contabilizadas ? "color:#D9534F;" : " ") .
+            "'>" . $contabilizadas  . "</b> contabilizada(s)
+          </div>
+          <script>
+            $(document).ready(function() {
+              $('#" . $servico['Servico']['id'] . "').circliful();
+            });
+          </script>
+        </a>
+      </div>";
   }
 
 }?>

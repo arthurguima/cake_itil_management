@@ -43,7 +43,7 @@
 		}
 
 		/* Relacionamentos */
-      $servicos = $this->Regra->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
+      $servicos = $this->Regra->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
 	}
 
@@ -70,7 +70,7 @@
 		}
 
 		/* Relacionamentos */
-			$servicos = $this->Regra->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
+			$servicos = $this->Regra->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
 			$this->set(compact('servicos'));
 	}
 

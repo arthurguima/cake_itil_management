@@ -24,8 +24,20 @@
       </div>
       <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
-          <li><a><b>Número do Evento: </b><?php echo $Indisponibilidade['Indisponibilidade']['num_evento']; ?></a></p>
-          <li><a><b>Número do Incidente: </b><?php echo $Indisponibilidade['Indisponibilidade']['num_incidente']; ?></a></p>
+          <li>
+            <a href="<?php
+              echo "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_evento'] . "%25"?>" target='_blank'>
+              <b>Número do Evento: </b>
+              <?php  echo $Indisponibilidade['Indisponibilidade']['num_evento'] . "<i class='fa fa-external-link-square pull-right'></i>"; ?>
+            </a>
+          </li>
+          <li>
+            <a href="<?php
+              echo "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_incidente'] . "%25"?>" target='_blank'>
+              <b>Número do Incidente: </b>
+              <?php  echo $Indisponibilidade['Indisponibilidade']['num_incidente'] . "<i class='fa fa-external-link-square pull-right'></i>"; ?>
+            </a>
+          </li>
           <li><a><b>Motivo: </b><?php echo $Indisponibilidade['Motivo']['nome']; ?></a></p>
           <li><a><b>Início: </b><?php echo $Indisponibilidade['Indisponibilidade']['dt_inicio']; ?></a></p>
           <li><a><b>Duração: </b>

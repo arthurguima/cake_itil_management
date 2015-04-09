@@ -107,8 +107,16 @@
                   <td data-order=<?php echo $this->Times->CleanDate($rdm['Rdm']['dt_prevista']); ?>>
                     <?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?>
                   </td>
-                  <td><?php echo (($rdm['Rdm']['dt_executada'] == null) ? " " : $this->Times->pastDate($rdm['Rdm']['dt_executada'])); ?></td>
-                  <td><?php echo $rdm['Rdm']['responsavel']; ?></td>
+                  <td>
+                    <?php
+                      //TODO: refatorar essa lógica
+                      if($rdm['Rdm']['sucesso'] == 2)
+                        echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']);
+                      else
+                        echo (($rdm['Rdm']['dt_executada'] == null) ? " " : $this->Times->pastDate($rdm['Rdm']['dt_executada']));
+                    ?>
+                  </td>
+                  <td><div class="sub-17"><?php echo $rdm['Rdm']['responsavel']; ?></div></td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('rdms', $rdm['Rdm']['id'], 14);

@@ -19,7 +19,9 @@
       endif;
 
       echo $this->BootstrapForm->input('servico_id', array(
-                  'label' => array('text' => 'Serviço')));
+                  'class' => 'select2',
+                  'empty'=>'Serviço',
+                  'label' => array('text' => 'Serviço: ')));
 
       echo $this->BootstrapForm->input('nome', array(
                   'label' => array('text' => 'Nome')));
@@ -43,5 +45,21 @@
 </div>
 
 <?php
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
+?>
+
+<?php
   echo $this->TinyMCE->inicialize();
 ?>
+
+<script>
+  $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+  });
+</script>

@@ -29,19 +29,23 @@
 				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Estimativa de Disponibilidade</b> - Período
 					<?php
 						if(date("d") < 21){
-							echo "21/" . date("m/Y",strtotime("-1 month")) . " a 20/" . date('m/Y');
-							echo $this->Html->link('<i class="fa-external-link-square fa pull-right"></i>)',
+							$init = "21/" . date("m/Y",strtotime("-1 month"));
+							$end = "20/" . date('m/Y');
+							echo $init . " a " . $end;
+							echo $this->Html->link('<i class="fa-external-link-square fa pull-right"></i>',
 									"http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=21%2F" .
 									date("m",strtotime("-1 month")) .
-									"%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m') . "01%2F" . date('Y') ."%2023%3A59%3A59",
+									"%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m') . "%2F" . date('Y') ."%2023%3A59%3A59",
 									array('escape' => false, 'target' => '_blank' ));
 						}
 						else{
-							echo "21/" . date('m/Y') . " a 20/" . date("m/Y",strtotime("+1 month"));
+							$init = "21/" . date('m/Y');
+							$end = "20/" . date("m/Y",strtotime("+1 month"));
+							echo $init . " a " . $end;
 							echo $this->Html->link('<i class="fa-external-link-square fa pull-right"></i>',
 									"http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=21%2F" .
 									date('m') .
-									"%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m',strtotime("+1 month")) . "01%2F" . date('Y') ."%2023%3A59%3A59",
+									"%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m',strtotime("+1 month")) . "%2F" . date('Y') ."%2023%3A59%3A59",
 									array('escape' => false, 'target' => '_blank' ));
 						}
 					?></span>
@@ -52,7 +56,7 @@
 			<div class="panel-body indisponibilidades-body">
 				<div class="tab-content">
 						<?php foreach ($servicos as $servico): ?>
-							<?php echo $this->Disponibilidade->indisponibilidades($servico)?>
+							<?php echo $this->Disponibilidade->indisponibilidades($servico,$init,$end)?>
 						<?php endforeach; ?>
 						<?php unset($servico);?>
 				</div>

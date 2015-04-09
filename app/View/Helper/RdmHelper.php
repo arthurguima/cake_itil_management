@@ -27,7 +27,7 @@
       else
         return "";
     case 2:
-      return "<span class='label label-default' id='" . $class . "'>Cancelada</span>";
+      return "<span class='label label-danger' id='" . $class . "'>Cancelada</span>";
     default:
       return " ";
     }
