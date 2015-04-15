@@ -65,6 +65,7 @@
         				<th>Duração</th>
         				<th>Motivo</th>
                 <th>Observação</th>
+                <th>Observação</th>
         				<th><span class="editable">Status</span></th>
                 <th>Ações</th>
               </tr>
@@ -106,17 +107,21 @@
                   </td>
         				  <td><?php echo $Indisponibilidade['Motivo']['nome']; ?></td>
                   <td><?php echo $this->Tables->popupBox($Indisponibilidade['Indisponibilidade']['observacao']) ?></td>
+                  <td><?php echo $Indisponibilidade['Indisponibilidade']['observacao']; ?></td>
 
                   <td id="<?php echo $Indisponibilidade['Indisponibilidade']['id']?>">
                     <?php
                       if($Indisponibilidade['Indisponibilidade']['dt_fim'] == null):
                         echo "<span class='label label-success'>Aberto</span>";
-                        echo $this->Tables->StatusEditable($Indisponibilidade['Indisponibilidade']['id'], "indisponibilidades");
                       else:
                         echo "<span class='label label-default'>Fechado</span>";
                       endif;
                     ?>
                   </td>
+                  <?php
+                    if($Indisponibilidade['Indisponibilidade']['dt_fim'] == null)
+                      echo $this->Tables->StatusEditable($Indisponibilidade['Indisponibilidade']['id'], "indisponibilidades");
+                  ?>
                   <td><?php echo $this->Tables->getMenu('Indisponibilidades', $Indisponibilidade['Indisponibilidade']['id'], 14); ?></td>
                 </tr>
               <?php endforeach; ?>
@@ -172,6 +177,7 @@
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
         //  responsive: true,
+          "columnDefs": [  { "visible": false, "targets": 7 } ],
           "dom": 'TC<"clear">lfrtip',
           "colVis": {
             "buttonText": "Esconder Colunas"
@@ -183,30 +189,30 @@
                     "sExtends": "copy",
                     "sButtonText": "Copiar",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                    "mColumns": [ 0,1,2,3,4,5,7,8 ]
                 },
                 {
                     "sExtends": "print",
                     "sButtonText": "Imprimir",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                    "mColumns": [ 0,1,2,3,4,5,7,8 ]
                 },
                 {
                     "sExtends": "csv",
                     "sButtonText": "CSV",
                     "sFileName": "Indisponibilidades.csv",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                    "mColumns": [ 0,1,2,3,4,5,7,8 ]
                 },
                 {
                     "sExtends": "pdf",
                     "sButtonText": "PDF",
                     "sFileName": "Indisponibilidades.pdf",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,5,6,7 ],
+                    "mColumns": [ 0,1,2,3,4,5,7,8 ],
                     "sPdfOrientation": "landscape",
                     "sTitle": "Controle de Disponibilidade",
-                    "sPdfMessage": "<?php echo date('d/m/y')?>",
+                    "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
                 },
               ]
           }

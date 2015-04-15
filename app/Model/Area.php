@@ -25,7 +25,7 @@
       'maxLength' => 50,
       'message' => 'Campo deve ser preenchido!'
     ),
-    'cliente' => array(
+    'Cliente' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
         'maxLength' => 45,

@@ -1,24 +1,24 @@
 <?php
   $this->Html->addCrumb("Relatórios", '');
-  $this->Html->addCrumb("Demandas Internas", '/relatorios/demandas');
+  $this->Html->addCrumb("Demandas Atrasadas", '/relatorios/dematrasadas');
 ?>
 
 <div class="row">
   <div class="col-lg-12">
     <h3 class="page-header">
-      Demandas Internas Não Finalizadas
+      Demandas Internas Atrasadas
       <span style="cursor:pointer;" onclick="javascript:$('div.panel-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
     </h3>
   </div>
 </div>
 
-<?php $var = 0; foreach ($servicos as $key => $serv): ?>
+<?php $var = 0; foreach ($atrasos as $key => $atras): ?>
   <div class="row">
     <div class="col-lg-12 demandas delete-<?php echo $var; ?>">
       <div class="panel panel-default">
         <div class="panel-heading">
           <b>
-            Demandas - <?php echo $key; ?>
+            <?php echo $key; ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.hide-<?php echo $var; ?>').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
             <span style="cursor:pointer;" onclick="javascript:$('div.delete-<?php echo $var; ?>').remove();"><i class="fa fa-trash-o pull-right"></i></span>
             <span style="cursor:pointer;" onclick="javascript:$('div.demandas').not('div.delete-<?php echo $var; ?>').remove();"><i class="fa fa-binoculars pull-right"></i></span>
@@ -29,18 +29,20 @@
             <table class="table display table-striped table-bordered table-hover" id="dataTables-<?php echo $var; ?>">
               <thead>
                 <tr>
+                  <th>Serviço</th>
                   <th>Demanda</th>
                   <th>Nome</th>
                   <th>Tipo</th>
                   <th>Status</th>
                   <th>Data de Cadastro</th>
                   <th/>Data Prevista</th>
-                  <th>Prazo</th>
+                  <th>Dias em Atraso</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($serv as $dem): ?>
+                <?php foreach ($atras as $dem): ?>
                   <tr>
+                    <td><?php echo $dem['Servico']['sigla']; ?></td>
                     <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php
                         echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
@@ -48,16 +50,15 @@
                       ?>
                     </td>
                     <td><?php echo $this->html->link($dem['Demanda']['nome'], array('controller'=> 'demandas', 'action' => 'view', $dem['Demanda']['id'])); ?></td>
-                    <td><?php echo $dem['DemandaTipo']['nome']; ?></td>
+                    <td>
+                      <span style="border-bottom: 3px solid #<?php echo substr(md5($dem['DemandaTipo']['nome']), 0, 6) ?>;">
+                        <?php echo $dem['DemandaTipo']['nome']; ?>
+                      </span>
+                    </td>
                     <td><?php echo $dem['Status']['nome']; ?></td>
                     <td><?php echo $dem['Demanda']['data_cadastro']; ?></td>
                     <td><?php echo $dem['Demanda']['dt_prevista']; ?></td>
-                    <td class="text-center">
-                      <?php echo $this->Times->timeLeftTo($dem['Demanda']['data_cadastro'], $dem['Demanda']['dt_prevista'],
-                               $dem['Demanda']['data_cadastro'] . " - " . $dem['Demanda']['dt_prevista'],
-                              ($dem['Demanda']['data_homologacao']));
-                      ?>
-                    </td>
+                    <td class="text-center"><?php echo $this->Times->timeLeftTo_days($dem['Demanda']['dt_prevista']);?></td>
                   </tr>
                 <?php endforeach; ?>
                 <?php unset($dem); ?>
@@ -142,7 +143,7 @@
     });
   </script>
 <?php $var++; endforeach; ?>
-<?php unset($serv); ?>
+<?php unset($atras); ?>
 
 <?php
   //-- ClarityID

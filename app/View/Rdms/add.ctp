@@ -34,8 +34,8 @@
         <label for="RdmAmbiente" class="col-lg-3 control-label">Ambiente: </label>
         <div class="col-lg-9">
           <select name="data[Rdm][ambiente]" class="form-control" id="filterambiente">
-            <option value="1">Homologação</option>
             <option value="2">Produção</option>
+            <option value="1">Homologação</option>
             <option value="3">Treinamento</option>
           </select>
         </div>

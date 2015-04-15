@@ -87,11 +87,27 @@
 									<li> <!-- Relatórios -->
 											<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade/Serviço", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade Geral", '/relatorios/indis_total', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não finalizadas", '/relatorios/demandas', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contrato (Em Breve)", '/relatorios/contratos', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li>
+												<li>
+													<a href="#"><i class='fa fa-angle-double-right'></i> Disponibilidade <span class="fa arrow"></span></a>
+													<ul class="nav nav-third-level collapse">
+														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade/Serviço", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
+														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade Geral", '/relatorios/indis_total', array('escape' => false)); ?></li>
+													</ul>
+												<li>
+												<li>
+													<a href="#"><i class='fa fa-angle-double-right'></i> Demandas Internas <span class="fa arrow"></span></a>
+													<ul class="nav nav-third-level collapse">
+														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não Finalizadas", '/relatorios/demandas', array('escape' => false)); ?></li>
+														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Atrasadas", '/relatorios/dematrasadas', array('escape' => false)); ?></li>
+													</ul>
+												<li>
+													<li>
+														<a href="#"><i class='fa fa-angle-double-right'></i> (Em Breve) <span class="fa arrow"></span></a>
+														<ul class="nav nav-third-level collapse">
+															<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contrato (Em Breve)", '/relatorios/contratos', array('escape' => false)); ?></li>
+															<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li>
+														</ul>
+													<li>
 											</ul>
 									</li>
 									<li> <!-- Base de Conhecimenton -->

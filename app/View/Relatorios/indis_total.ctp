@@ -7,13 +7,6 @@
     <div class="col-lg-12">
       <h3 class="page-header">
         Disponibilidade
-        <?php
-          echo $this->Html->link('<i class="fa-external-link-square fa pull-right"></i>)',
-              "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=21%2F" .
-              date("m",strtotime("-1 month")) .
-              "%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=20%2F" . date('m') . "01%2F" . date('Y') ."%2023%3A59%3A59",
-              array('escape' => false, 'target' => '_blank' ));
-        ?>
       </h3>
     </div>
   <div class="col-lg-12 pull-left filters">
@@ -103,14 +96,18 @@
                   <td><?php echo round(100 - ($totaltime/$total)*100,2); ?>%</td>
                   <td>98%</td>
                   <td><?php echo sizeof($ser['Indisponibilidade']); ?></td>
-                  <td data-order="<?php echo $totaltime/sizeof($ser['Indisponibilidade']); ?>">
-                    <?php
-                      if(sizeof($ser['Indisponibilidade']))
-                        echo $this->Times->SecToString($totaltime/sizeof($ser['Indisponibilidade']));
-                      else
-                        echo "---";
-                    ?>
-                  </td>
+                  <?php if(sizeof($ser['Indisponibilidade']) > 0): ?>
+                    <td data-order="<?php echo $totaltime/sizeof($ser['Indisponibilidade']); ?>">
+                      <?php
+                        if(sizeof($ser['Indisponibilidade']))
+                          echo $this->Times->SecToString($totaltime/sizeof($ser['Indisponibilidade']));
+                        else
+                          echo "---";
+                      ?>
+                    </td>
+                <?php else: ?>
+                  <td>0h</td>
+                <?php endif ?>
                 </tr>
                 <?php endforeach; ?>
                 <?php unset($Indisponibilidade); ?>
@@ -191,12 +188,24 @@
                 {
                     "sExtends": "pdf",
                     "sButtonText": "PDF",
-                    "sFileName": "Indisponibilidades.pdf",
+                    "sFileName": "Indisponibilidades(<?php
+                      if (isset($this->request->data['dt_inicio']) && isset($this->request->data['dt_fim']))
+                          echo str_replace('/', '_', $this->request->data['dt_inicio'] . " a "  . $this->request->data['dt_fim']);
+                    ?>).pdf",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
                     //"mColumns": [ 0,1,2,3,4,5,6,7 ],
                     "sPdfOrientation": "landscape",
                     "sTitle": "Controle de Disponibilidade",
-                    "sPdfMessage": "<?php echo date('d/m/y')?>",
+                    <?php
+                      if (isset($this->request->data['dt_inicio'])){
+                        echo ('"sPdfMessage": "A partir de: ' . $this->request->data['dt_inicio'] .
+                              ' Até ' . $this->request->data['dt_fim'] .
+                              ' Extraído em: ' . date('d/m/y') . '"');
+                      }
+                      else{
+                          echo('"sPdfMessage": "Extraido em: ' . date('d/m/y') . '"');
+                      }
+                    ?>
                 },
               ]
           }

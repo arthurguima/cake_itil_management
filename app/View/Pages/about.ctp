@@ -33,6 +33,22 @@
           </ul>
         </div>
       </div>
+
+      <div class="well">
+        <h3 class="page-header"><i class="fa fa-rocket"></i> Ambiente de Desenvolvimento:</h3>
+        <br />
+        <div class="well">
+          <ul class="list-unstyled spaced">
+            <li>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> CakePhp</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Bootstrap 3</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> SBAdmin</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Jquery</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> DataTables</h5>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -42,6 +58,9 @@
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
           <li class="timeline-inverted">
+            <div class="timeline-badge danger">
+              <i class="fa fa-eyedropper fa-fw"></i>
+            </div>
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
@@ -51,7 +70,11 @@
                       <ul>
                         <li>Timeline da SS</li>
                         <li>Resgatar dados do Clarity em Demandas Internas e SS</li>
+                        <li>Registro dos Indicadores de Contrato</li>
                         <li>Melhorias de Usabilidade e Interface</li>
+                        <li>Relatório de Demandas Internas Não Finalizadas</li>
+                        <li>Link para as Indisponibilidades do Período na Home (SDM & Interno)</li>
+                        <li>Relatório de Disponibilidade Geral</li>
                       </ul>
                     </div>
                 </li>

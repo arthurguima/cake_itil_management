@@ -246,7 +246,7 @@
                     "sPdfOrientation": "landscape",
                     "mColumns": [ 0,1,2,3,6,7,8,9 ],
                     "sTitle": "Listagem de Demandas Internas",
-                    "sPdfMessage": "<?php echo date('d/m/y')?>"
+                    "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>"
                 },
               ]
           }

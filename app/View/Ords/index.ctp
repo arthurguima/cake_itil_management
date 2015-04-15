@@ -250,7 +250,7 @@
                   "sPdfOrientation": "landscape",
                   "mColumns": [ 0,1,3,4,5,6,7],
                   "sTitle": "Listagem de Ordens de Serviço",
-                  "sPdfMessage": "<?php echo date('d/m/y')?>",
+                  "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
               },
             ]
         }

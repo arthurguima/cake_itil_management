@@ -81,6 +81,23 @@
   </div>
 
   <div class="col-lg-7">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Clarity (Web Service)</b>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.clarity-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body clarity-body">
+        <ul id="clarity">
+          <div class="col-md-6 col-md-offset-4 load"><?php echo $this->Html->image('loading.gif', array('alt' => 'Carregando', 'width' => '30%')); ?></div>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
     <div class="panel panel-default panel-info">
       <div class="panel-heading">
         <p>
@@ -255,6 +272,9 @@
 <?php
   //-- ClarityID
   echo $this->Html->script('getIdClarity.js');
+
+  //-- ClarityInfo
+  echo $this->Html->script('getClarityInfo.js');
 ?>
 
 <script>
@@ -266,5 +286,7 @@
       document.getElementById('demandaFrame').style.display = "block";
       //document.getElementById('demandaFrame').style.height = "720px";
     });
+
+    getClarityInfoOnView('<?php echo $demanda['Demanda']['clarity_dm_id']?>', 'demandas');
   });
 </script>

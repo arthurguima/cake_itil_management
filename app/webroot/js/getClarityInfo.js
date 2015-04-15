@@ -14,6 +14,21 @@ function getClarityInfo(dm, control){
   alert("Este processo pode demorar. Espere alguns segundos pela resposta do Clarity!");
 }
 
+function getClarityInfoOnView(dm, control){
+  $.getJSON( "http://bsad225949//wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+//  $.getJSON( "http://www-apps/_projects/dite/wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+    $('.load').remove();
+    $.each( data, function( key, val ) {
+      if(key == 'dt_prevista')
+        $('ul#clarity').append($('ul#clarity').val() + "<li>" + "Data Prevista: " + val +"</li>");
+      else
+        if (key == 'status')
+          $('ul#clarity').append($('ul#clarity').val() + "<li>" + "Status: " + val +"</li>");
+      //console.log(key + ' -> ' + val);
+    });
+  });
+}
+
 
 function toCamelCase(s) {
   return (s||'').toLowerCase().replace(/(\b|_)\w/g, function(m) {

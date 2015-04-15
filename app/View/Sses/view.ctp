@@ -176,7 +176,14 @@
                     <!--td><?php //echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td-->
                     <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
                     <td><?php echo $os['responsavel']; ?></td>
-                    <td class="checklist"><?php echo $this->Ord->getCheckList($os['ths'], $os['trp'], $os['trd']) ?></td>
+                    <td class="checklist">
+                      <?php
+                        echo $this->Ord->getCheckList($os['ths'], $os['trp'], $os['trd']) . "<br />";
+                        if(isset($os['dt_homologacao']))
+                          echo $this->Ord->PrazocheckList($os['dt_homologacao'], $os['trp'], $os['dt_recebimento_termo_prov'],
+                              $os['ths'], $os['dt_recebimento_homo'], $os['trd'], $os['dt_recebimento_termo']);
+                      ?>
+                    </td>                    
                     <td class="text-center">
                       <?php
                         if($os['dt_ini_pdd'] != null){

@@ -23,6 +23,7 @@
 		</div>
 	</div>
 
+	<!-- Estimativa de Disponibildidade -->
 	<div class="col-lg-9 col-md-12 col-sm-12 pull-left delete-indis">
 		<div class="panel panel-default panel-info">
 			<div class="panel-heading">
@@ -54,16 +55,42 @@
 				</h3></p>
 			</div>
 			<div class="panel-body indisponibilidades-body">
+				<ul class="nav nav-tabs nav-tabs-black cliente" role="tablist" id="abasIndi">
+						<?php
+							$active = true;
+							foreach ($clientes as $key => $cli){
+								if($active == true){
+									echo '<li role="presentation" class="active">';
+									$active = false;
+								}else{
+									echo '<li role="presentation">';
+								}
+								echo '<a href="#' . $key .'" aria-controls="' . $key .'" role="tab" data-toggle="tab">' . $key .'</a></li>';
+							}unset($cli);
+						?>
+				</ul>
 				<div class="tab-content">
-						<?php foreach ($servicos as $servico): ?>
-							<?php echo $this->Disponibilidade->indisponibilidades($servico,$init,$end)?>
-						<?php endforeach; ?>
-						<?php unset($servico);?>
+					<?php
+						$active = true;
+						foreach ($clientes as $key => $cli){
+							if($active == true){
+								echo "<div role='tabpanel' class='tab-pane active' id='" . $key . "'>";
+								$active = false;
+							}else{
+								echo "<div role='tabpanel' class='tab-pane' id='" . $key . "'>";
+							}
+							foreach ($cli as $servico){
+									echo $this->Disponibilidade->indisponibilidades($servico,$init,$end);
+							}unset($servico);
+							echo "</div>";
+						}unset($cli);
+					?>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<!-- Demandas Internas -->
 	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-dem">
 		<div class="panel panel-default ">
 			<div class="panel-heading">
@@ -107,6 +134,7 @@
 		</div>
 	</div>
 
+	<!-- Chamados -->
 	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-cham">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -177,4 +205,9 @@
 
 		$('#myStat').circliful();
 	});
+
+  $('#abasIndi a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
 </script>

@@ -76,6 +76,7 @@
                   <th>Início</th>
                   <th>Duração</th>
                   <th>Observação</th>
+                  <th>Observação</th>
                   <th>Tipo</th>
                   <th><span class="editable">Status</span></th>
                   <th>Ações</th>
@@ -86,14 +87,16 @@
                   <tr>
                     <td><?php echo $Indisponibilidade['num_evento']; ?></td>
                     <td><?php echo $Indisponibilidade['num_incidente']; ?></td>
-                    <td><?php echo $Indisponibilidade['dt_inicio']; ?></td>
+                    <td data-order=<?php echo $this->Time->format('Ymd', $Indisponibilidade['dt_inicio']); ?>>
+                      <?php echo $this->Time->format('d/m/Y H:i', $Indisponibilidade['dt_inicio']); ?>
+                    </td>
                     <td><!-- TODO: transformar em HELPER -->
                       <?php
                         if($Indisponibilidade['dt_fim'] != null){
                           echo $this->Times->totalTime($Indisponibilidade['dt_inicio'], $Indisponibilidade['dt_fim']);
                           $totaltime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], $Indisponibilidade['dt_fim']);
 
-                          if($Indisponibilidade['Motivo']['contavel'] != true)
+                          if($Indisponibilidade['Motivo']['contavel'] == true)
                             $contatime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], $Indisponibilidade['dt_fim']);
                         }
                         else{
@@ -104,20 +107,24 @@
                             $contatime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], date('Y-m-d'));
                         }
                       ?>
-                    </td>
+                    </td><!-- TODO: transformar em HELPER -->
                     <td><?php echo $this->Tables->popupBox($Indisponibilidade['observacao']) ?></td>
+                    <td><?php echo $Indisponibilidade['observacao']; ?></td>
                     <td><?php echo $Indisponibilidade['Motivo']['nome'] ?></td>
 
                     <td id="<?php echo $Indisponibilidade['id']?>">
                       <?php
                         if($Indisponibilidade['dt_fim'] == null):
                           echo "<span class='label label-success'>Aberto</span>";
-                          echo $this->Tables->StatusEditable($Indisponibilidade['id'], "indisponibilidades");
                         else:
                           echo "<span class='label label-default'>Fechado</span>";
                         endif;
                       ?>
                     </td>
+                    <?php
+                      if($Indisponibilidade['dt_fim'] == null)
+                        echo $this->Tables->StatusEditable($Indisponibilidade['id'], "indisponibilidades");
+                    ?>
                     <td><?php echo $this->Tables->getMenu('Indisponibilidades', $Indisponibilidade['id'], 14); ?></td>
                   </tr>
                 <?php endforeach; ?>
@@ -148,8 +155,8 @@
                 </a>
 
               </li>
-              <li><a><b>Indisponível: </b><?php echo   $this->Times->SecToString($totaltime); ?></a></li>
-              <li><a><b>Contabilizado: </b><?php echo   $this->Times->SecToString($contatime); ?></a></li>
+              <!--li><a><b>Indisponível: </b><?php //echo   $this->Times->SecToString($totaltime); ?></a></li-->
+              <li><a><b>Indisponibilidade Contabilizada: </b><?php echo   $this->Times->SecToString($contatime); ?></a></li>
             </ul>
             <div class='semicircle col-md-6 col-md-offset-3'>
               <?php
@@ -173,8 +180,8 @@
                   ?>
                 </a>
               </li>
-              <li><a><b>Indisponível: </b><?php echo   $this->Times->SecToString($totaltime); ?></a></li>
-              <li><a><b>Contabilizado: </b><?php echo   $this->Times->SecToString($contatime); ?></a></li>
+              <!--li><a><b>Indisponível: </b><?php //echo   $this->Times->SecToString($totaltime); ?></a></li-->
+              <li><a><b>Indisponibilidade Contabilizada: </b><?php echo   $this->Times->SecToString($contatime); ?></a></li>
             </ul>
             <div class='semicircle col-md-6 col-md-offset-3'>
               <?php
@@ -205,26 +212,110 @@
 
     $('#semicircle').circliful();
 
-    //$('.select2').select2({
-    // containerCssClass: 'select2'
-    //});
-  });
+    $('.select2').select2({
+     containerCssClass: 'select2'
+    });
+
+    var  oTable =  $('#dataTables-Indisponibilidades').dataTable({
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+          language: {
+            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+          },
+        //  responsive: true,
+          "dom": 'TC<"clear">lfrtip',
+          "colVis": {
+            "buttonText": "Esconder Colunas"
+          },
+          "columnDefs": [  { "visible": false, "targets": 5 } ],
+          "tableTools": {
+              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+              "aButtons": [
+                {
+                    "sExtends": "copy",
+                    "sButtonText": "Copiar",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,5,6,7 ],
+                },
+                {
+                    "sExtends": "print",
+                    "sButtonText": "Imprimir",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,5,6,7 ],
+                },
+                {
+                    "sExtends": "csv",
+                    "sButtonText": "CSV",
+                    "sFileName": "Indisponibilidades - <?php if(isset($servico['Servico']['sigla'])) echo $servico['Servico']['sigla']; ?>.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,5,6,7 ],
+                },
+                {
+                    "sExtends": "pdf",
+                    "sButtonText": "PDF",
+                    "sFileName": "Indisponibilidades - <?php if(isset($servico['Servico']['sigla'])) echo $servico['Servico']['sigla']; ?>.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,6,7 ],
+                    "sPdfOrientation": "landscape",
+                    "sTitle": "<?php if(isset($servico['Servico']['nome'])) echo $servico['Servico']['nome']; ?> - Controle de Disponibilidade",
+                    <?php
+                      if (isset($this->request->data['dt_inicio'])){
+                        echo ('"sPdfMessage": "A partir de: ' . $this->request->data['dt_inicio'] .
+                              ' Até ' . $this->request->data['dt_fim'] .
+                              ' Extraido em: ' . date('d/m/y') . '"');
+                      }
+                      else{
+                        if(isset($this->params['url']['dt_inicio'])){
+                          echo ('"sPdfMessage": "A partir de: ' . $this->params['url']['dt_inicio'] .
+                                ' Até ' . $this->params['url']['dt_fim'] .
+                                ' Extraído em: ' . date('d/m/y') . '"');
+                        }else{
+                          echo('"sPdfMessage": "Extraido em: ' . date('d/m/y') . '"');
+                        }
+                      }
+                    ?>
+                },
+              ]
+          }
+    });
+    var colvis = new $.fn.dataTable.ColVis( oTable );
+
+    $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'top'});
+});
 </script>
 
 
+
 <?php
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
   // Circliful
   echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
   echo $this->Html->css('plugins/jquery.circliful.css');
-
-  //-- TimePicker --
-  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
-  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
-  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
 
   //Select2
   echo $this->Html->script('plugins/select2/select2.min');
   echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
   echo $this->Html->css('plugins/select2');
   echo $this->Html->css('plugins/select2-bootstrap');
+
+  //-- DataTables JavaScript --
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+  //-- DataTables --> TableTools
+  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+  //-- DataTables --> Responsive
+  echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 ?>

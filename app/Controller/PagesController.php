@@ -54,7 +54,8 @@ class PagesController extends AppController {
 																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 ))')
 
 
-					)
+					),
+					'Area' => array('Cliente'=> array())
 				)
 			));
 		}
@@ -65,11 +66,12 @@ class PagesController extends AppController {
 						'Motivo' => array(),
 						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 )) ||
 																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("+1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 ))')
-					)
+					),
+					'Area' => array('Cliente'=> array())
 				)
 			));
-		}
-		$this->set('servicos', $servicos);
+		}		
+		$this->set('clientes', $this->servicoPorCliente($servicos));
 		//$this->Servico->recursive = 2;
 
 		/*Lista de Demandas*/
@@ -85,6 +87,17 @@ class PagesController extends AppController {
 
 		$this->loadModel('Chamado');
 		$this->set('chamados', $this->chamadosPorServico($this->Chamado->find('all')));
+	}
+
+	/*
+	* Cria um array que separa os serviços por cliente.
+	*/
+	private function servicoPorCliente($servicos){
+		$clientes = array();
+		foreach ($servicos as $ser){
+			$clientes[$ser['Area']['0']['Cliente']['sigla']][] = $ser;
+		}
+		return $clientes;
 	}
 
 	/*

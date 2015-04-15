@@ -12,9 +12,16 @@
 
   public function index(){
     $this->Servico->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a área (otimização)
-    $this->Servico->contain('Area');//Carrega apenas o Relacionamento com a área (otimização)
+    //$this->Servico->contain('Area');//Carrega apenas o Relacionamento com a área (otimização)
 
-    $this->set('servicos', $this->Servico->find('all', array('contain' => false)));
+    $this->set('servicos',
+      $this->Servico->find('all', array('contain' =>
+        array(
+          'Area' => array(
+            'Cliente' => array()
+          )
+        )
+      )));
   }
 
   public function view($id = null){

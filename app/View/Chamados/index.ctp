@@ -189,7 +189,7 @@
                   "sPdfOrientation": "landscape",
                   "mColumns": [ 0,1,2,3,4,5,6,7 ],
                   "sTitle": "Listagem de Chamados",
-                  "sPdfMessage": "<?php echo date('d/m/y')?>"
+                  "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>"
               },
             ]
         }

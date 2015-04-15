@@ -443,6 +443,12 @@ table.dataTable thead .sorting:after {
   min-height: 82px;
 }
 
+ul#abasIndi {
+  margin-bottom: 10px;
+}
+ul.cliente li a {
+  font-weight: bold;
+}
 .nav-tabs-black{
   margin-bottom: 20px;
 }
@@ -787,6 +793,7 @@ padding-left: 6px;
 }
 
 .indis-footer {
+  font-size: 12px;
   padding-bottom: 2px;
   background-color: #fcfcfc;
   border: 1px solid #DAE5E8;
@@ -797,7 +804,7 @@ padding-left: 6px;
   background-color: #DAE5E8;
 }
 .indis-body {
-  min-height: 73px;
+  min-height: 74px;
   padding: 0;
 }
 

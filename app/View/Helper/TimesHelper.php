@@ -66,6 +66,14 @@
           return $color;
       }
 
+      public function timeLeftTo_days($time) {
+        $t1 = date_create(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$time));
+        $t2 = date_create(date('Y-m-d'));
+        $total = date_diff($t1,$t2);
+
+        return $total->days;
+      }
+
       /*
       * Coloca as datas no formato americano
       */

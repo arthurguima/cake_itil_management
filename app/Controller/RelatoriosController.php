@@ -171,6 +171,7 @@
     // Os filtros de aditivos & itens de contrato são montados via ajax
   }
 
+
   public function demandas(){
     /* Lista de Servicos */
     $this->loadModel('Demanda');
@@ -200,6 +201,39 @@
     $this->set('servicos',$this->servicos_demandas($demandas));
   }
 
+  public function dematrasadas(){
+    $this->loadModel('Demanda');
+    $this->Demanda->Behaviors->attach('Containable');
+
+    $demandas = $this->Demanda->find('all', array(
+      'conditions' => array("data_homologacao IS NULL && dt_prevista IS NOT NULL && dt_prevista < '" . date('Y-m-d') . "'"),
+      'contain' => array(
+        'Servico' => array(),
+        'DemandaTipo' => array(),
+        'Status' => array(),
+      ),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Demanda.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+
+    $this->set('atrasos', $this->atraso_demandas($demandas));
+  }
+
+
+  /* Funções de Apoio */
+
+  /*
+   * Recebe um array de demandas e separa por serviço
+  */
   private function servicos_demandas($demandas){
     $demandasAUX = array();
 
@@ -210,6 +244,38 @@
     return $demandasAUX;
   }
 
-}
+  /*
+   * Recebe um array de demandas e separa por tempo de atraso
+  */
+  private function atraso_demandas($demandas){
+    $demandasAUX = array();
+    $demandasAUX['Atrasadas entre 1 e 15 dias'] = array();
+    $demandasAUX['Atrasadas entre 16 e 30 dias'] = array();
+    $demandasAUX['Atrasadas entre 31 e 60 dias'] = array();
+    $demandasAUX['Atrasadas há mais de 60 dias'] = array();
 
-//'recursive' => -1
+    foreach ($demandas as $dem){
+      $t1 = date_create(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$dem['Demanda']['dt_prevista']));
+      $t2 = date_create(date('Y-m-d'));
+      $total = date_diff($t1,$t2);
+
+      if($total->days <= 15){
+        $demandasAUX['Atrasadas entre 1 e 15 dias'][] = $dem;
+      }else{
+        if($total->days <= 30){
+          $demandasAUX['Atrasadas entre 16 e 30 dias'][] = $dem;
+        }else{
+          if($total->days <= 60){
+            $demandasAUX['Atrasadas entre 31 e 60 dias'][] = $dem;
+          }
+          else{
+            $demandasAUX['Atrasadas há mais de 60 dias'][] = $dem;
+          }
+        }
+      }
+    }
+
+    return $demandasAUX;
+  }
+
+}
