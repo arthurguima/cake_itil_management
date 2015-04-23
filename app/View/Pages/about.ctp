@@ -64,6 +64,21 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
+                  <div class="timeline-panel">
+                    <ul class="list-unstyled spaced">
+                      <li>
+                        <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.0</h4>
+                          <div class="personal-info">
+                            Veja o que mudou:<br/><br/>
+                            <ul>
+                              <li>Dashboard Separada Por Clientes</li>                              
+                            </ul>
+                          </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.9.X</h4>
                     <div class="personal-info">
                       Veja o que mudou:<br/><br/>

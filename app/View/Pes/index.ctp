@@ -40,6 +40,7 @@
             <div class="form-group"><?php echo $this->Search->input('num_ce_', array('class' => 'form-control', 'placeholder' => "Número da CE de envio:")); ?></div>
           </div>
           <div class="col-lg-12">
+            <div class="form-group"><?php echo $this->Search->input('ss_associada', array('class' => 'form-control', 'placeholder' => "Nº da SS associada")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>

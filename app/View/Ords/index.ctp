@@ -68,6 +68,8 @@
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">
+            <div class="form-group"><?php echo $this->Search->input('ss_associada', array('class' => 'form-control', 'placeholder' => "Nº da SS Associada")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('pe_associada', array('class' => 'form-control', 'placeholder' => "Nº da PA Associada")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'form-control')); ?></div>
           </div>

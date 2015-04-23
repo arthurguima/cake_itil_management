@@ -4,6 +4,7 @@
 
 <div class="row">
 
+	<!-- Serviços Online -->
 	<div class="col-lg-3 col-md-12 pull-right col-sm-12 delete-online">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -58,7 +59,7 @@
 				<ul class="nav nav-tabs nav-tabs-black cliente" role="tablist" id="abasIndi">
 						<?php
 							$active = true;
-							foreach ($clientes as $key => $cli){
+							foreach ($clientesindis as $key => $cli){
 								if($active == true){
 									echo '<li role="presentation" class="active">';
 									$active = false;
@@ -72,7 +73,7 @@
 				<div class="tab-content">
 					<?php
 						$active = true;
-						foreach ($clientes as $key => $cli){
+						foreach ($clientesindis as $key => $cli){
 							if($active == true){
 								echo "<div role='tabpanel' class='tab-pane active' id='" . $key . "'>";
 								$active = false;
@@ -104,31 +105,70 @@
 				</p>
 			</div>
 			<div class="panel-body demandas-body">
-				<ul class="nav nav-tabs nav-tabs-black" role="tablist">
-				  <li role="presentation" class="active"><a href="#status" role="tab" data-toggle="tab">Status</a></li>
-				  <li role="presentation"><a href="#tipos" role="tab" data-toggle="tab">Tipos</a></li>
-					<li role="presentation"><a href="#tipos_status" role="tab" data-toggle="tab">TiposXStatus</a></li>
+				<ul class="nav nav-tabs nav-tabs-black cliente" role="tablist">
+					<?php $active = true; foreach ($cliendemandas as $key1 => $demandas): ?>
+						<?php
+							if($active == true){
+								echo '<li role="presentation" class="active"><a href="#' . $key1 . 'dem" role="tab" data-toggle="tab">' . $key1 . '</a></li>';
+								$active = false;
+							}else{
+								echo '<li role="presentation"><a href="#' . $key1 . 'dem" role="tab" data-toggle="tab">' . $key1 . '</a></li>';
+							}
+						?>
+					<?php endforeach; ?>
 				</ul>
-
 				<div class="tab-content">
-				  <div role="tabpanel" class="tab-pane active" id="status">
-						<?php foreach ($demandas as $key => $value): ?>
-							<?php echo $this->Demanda->demandasStatus($demandas[$key], $key)?>
-						<?php endforeach; ?>
-						<?php unset($demanda);?>
-					</div>
-				  <div role="tabpanel" class="tab-pane" id="tipos">
-						<?php foreach ($demandas as $key => $value): ?>
-							<?php echo $this->Demanda->demandasTipos($demandas[$key], $key)?>
-						<?php endforeach; ?>
-						<?php unset($demanda);?>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="tipos_status">
-						<?php foreach ($demandas as $key => $value): ?>
-							<?php echo $this->Demanda->demandasStatusTipos($demandas[$key], $key)?>
-						<?php endforeach; ?>
-						<?php unset($demanda);?>
-					</div>
+					<?php $active = true; foreach ($cliendemandas as $key1 => $demandas):
+							if($active == true){
+								echo '<div role="tabpanel" class="col-lg-12 tab-pane active" id="' . $key1 . 'dem">';
+								$active = false;
+							}else{
+								echo '<div role="tabpanel" class="col-lg-12 tab-pane" id="' . $key1 . 'dem">';
+							}?>
+							<ul class="nav nav-tabs nav-tabs-black" role="tablist">
+								<li role="presentation" class="active"><a href="#geral<?php echo $key1; ?>" role="tab" data-toggle="tab">Visão Geral</a></li>
+							  <li role="presentation"><a href="#status<?php echo $key1; ?>" role="tab" data-toggle="tab">Status</a></li>
+							  <li role="presentation"><a href="#tipos<?php echo $key1; ?>" role="tab" data-toggle="tab">Tipos</a></li>
+								<li role="presentation"><a href="#atrasos<?php echo $key1; ?>" role="tab" data-toggle="tab">Atrasos (em dias)</a></li>
+								<li role="presentation"><a href="#tipos_status<?php echo $key1; ?>" role="tab" data-toggle="tab">TiposXStatus</a></li>
+							</ul>
+
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="geral<?php echo $key1; ?>">
+									<?php echo $this->Demanda->demandasGeral($demandas,$key1); ?>
+								</div>
+							  <div role="tabpanel" class="tab-pane" id="status<?php echo $key1; ?>">
+									<?php
+										foreach ($demandas as $key => $value){
+											echo $this->Demanda->demandasStatus($demandas[$key], $key);
+										}
+									?>
+								</div>
+							  <div role="tabpanel" class="tab-pane" id="tipos<?php echo $key1; ?>">
+									<?php
+										foreach ($demandas as $key => $value){
+											echo $this->Demanda->demandasTipos($demandas[$key], $key);
+									 	}unset($demanda);
+									?>
+								</div>
+								<div role="tabpanel" class="tab-pane" id="atrasos<?php echo $key1; ?>">
+									<?php
+										foreach ($demandas as $key => $value){
+											echo $this->Demanda->demandasAtrasos($demandas[$key], $key);
+										}
+									?>
+								</div>
+								<div role="tabpanel" class="tab-pane" id="tipos_status<?php echo $key1; ?>">
+									<?php
+										foreach ($demandas as $key => $value){
+											echo $this->Demanda->demandasStatusTipos($demandas[$key], $key);
+										}
+										unset($demanda);
+									?>
+								</div>
+							</div>
+						</div>
+					<?php endforeach; ?>
 				</div>
 			</div>
 		</div>
@@ -148,32 +188,62 @@
 				</p>
 			</div>
 			<div class="panel-body chamados-body">
-				<ul class="nav nav-tabs nav-tabs-black" role="tablist">
-					<li role="presentation" class="active"><a href="#cham_status" role="tab" data-toggle="tab">Status</a></li>
-					<li role="presentation"><a href="#cham_tipos" role="tab" data-toggle="tab">Tipos</a></li>
-					<li role="presentation"><a href="#cham_tipos_status" role="tab" data-toggle="tab">TiposXStatus</a></li>
+				<ul class="nav nav-tabs nav-tabs-black cliente" role="tablist">
+					<?php $active = true; foreach ($clienchamados as $cliente => $cham): ?>
+						<?php
+							if($active == true){
+								echo '<li role="presentation" class="active"><a href="#' . $cliente . 'cham" role="tab" data-toggle="tab">' . $cliente . '</a></li>';
+								$active = false;
+							}else{
+								echo '<li role="presentation"><a href="#' . $cliente . 'cham" role="tab" data-toggle="tab">' . $cliente . '</a></li>';
+							}
+						?>
+					<?php endforeach; ?>
 				</ul>
-
 				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane active" id="cham_status">
-						<?php foreach ($chamados as $key => $value): ?>
-							<?php echo $this->Chamado->chamadosStatus($chamados[$key], $key)?>
-						<?php endforeach; ?>
-						<?php unset($chamado);?>
+					<?php $active = true; foreach ($clienchamados as $cliente => $chamados):
+							if($active == true){
+								echo '<div role="tabpanel" class="col-lg-12 tab-pane active" id="' . $cliente . 'cham">';
+								$active = false;
+							}else{
+								echo '<div role="tabpanel" class="col-lg-12 tab-pane" id="' . $cliente . 'cham">';
+							}
+					?>
+						<ul class="nav nav-tabs nav-tabs-black" role="tablist">
+							<li role="presentation" class="active"><a href="#geral_status<?php echo $cliente; ?>" role="tab" data-toggle="tab">Visão Geral</a></li>
+							<li role="presentation"><a href="#cham_status<?php echo $cliente; ?>" role="tab" data-toggle="tab">Status</a></li>
+							<li role="presentation"><a href="#cham_tipos<?php echo $cliente; ?>" role="tab" data-toggle="tab">Tipos</a></li>
+							<li role="presentation"><a href="#cham_tipos_status<?php echo $cliente; ?>" role="tab" data-toggle="tab">TiposXStatus</a></li>
+						</ul>
+
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="geral_status<?php echo $cliente; ?>">
+								<?php echo $this->Chamado->chamadosGeral($chamados,$cliente); ?>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="cham_status<?php echo $cliente; ?>">
+								<?php
+									foreach ($chamados as $key => $value){
+										echo $this->Chamado->chamadosStatus($chamados[$key], $key);
+									}unset($chamado);
+								?>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="cham_tipos<?php echo $cliente; ?>">
+								<?php
+									foreach ($chamados as $key => $value){
+										echo $this->Chamado->chamadosTipos($chamados[$key], $key);
+									}unset($chamado);
+								?>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="cham_tipos_status<?php echo $cliente; ?>">
+								<?php
+								 	foreach ($chamados as $key => $value){
+										echo $this->Chamado->chamadosStatusTipos($chamados[$key], $key);
+									}unset($chamado);
+								?>
+							</div>
+						</div>
 					</div>
-					<div role="tabpanel" class="tab-pane" id="cham_tipos">
-						<?php foreach ($chamados as $key => $value): ?>
-							<?php echo $this->Chamado->chamadosTipos($chamados[$key], $key)?>
-						<?php endforeach; ?>
-						<?php unset($chamado);?>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="cham_tipos_status">
-						<?php foreach ($chamados as $key => $value): ?>
-							<?php echo $this->Chamado->chamadosStatusTipos($chamados[$key], $key)?>
-						<?php endforeach; ?>
-						<?php unset($chamado);?>
-					</div>
-				</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

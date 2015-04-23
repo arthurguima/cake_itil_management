@@ -94,7 +94,7 @@
           <div class='indis-body col-lg-12'>
             <div class='col-lg-6 col-xs-6 col-md-12'>
               <div class='semicircle'>
-                <div id='" . $servico['Servico']['id'] . "' data-dimension='50' data-width='4'  data-text='" . round((100 - $percent),2) . "%' data-total='100' data-percent='" . $percent . "' data-fontsize='9px'  data-fgcolor='#d9534f' data-bgcolor='#5CB85C' data-fill='#EEE'></div>
+                <div id='" . $servico['Servico']['id'] . "' data-dimension='50' data-width='4'  data-text='" . round((100 - $percent),2) . "%' data-total='100' data-percent='" . $percent . "' data-fontsize='11'  data-fgcolor='#d9534f' data-bgcolor='#5CB85C' data-fill='#EEE'></div>
                 </div>
             </div>
             <div class='col-lg-6 col-xs-6 col-md-12 indis-text'>

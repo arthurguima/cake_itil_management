@@ -793,8 +793,8 @@ padding-left: 6px;
 }
 
 .indis-footer {
-  font-size: 12px;
-  padding-bottom: 2px;
+  font-size: 11px;
+  padding-bottom: 4px;
   background-color: #fcfcfc;
   border: 1px solid #DAE5E8;
   padding-top: 5px;
@@ -840,7 +840,7 @@ svg.peity {
 }
 
 .indis-body tr {
-  border: 3px solid #eee;
+  border: 3px solid #ccc;
   border-right: 0;
 }
 
@@ -946,6 +946,16 @@ span.color-legend {
   margin-right: 5px;
   border: 1px solid #252D2F;
 }
+span.color-legend-sm{
+  padding: 0px 2px 0px 3px;
+  margin-right: 5px;
+}
+#status_tipos li {
+  display: flex;
+  margin-bottom: 3px;
+  font-size: 12px;
+}
+
 
 p.legend{
   font-size: 12px;

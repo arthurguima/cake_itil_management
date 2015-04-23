@@ -3,8 +3,40 @@
 	public function index() {
 		$this->Filter->addFilters(
 			array(
+				'ss_associada' => array(
+					'OR' => array(
+						'Ss.numero' => array(
+							'operator' => 'LIKE',
+							'explode' => array(
+		            'character'   => '/',
+		            'concatenate' => 'OR')
+						),
+						'Ss.ano' => array(
+							'operator' => 'LIKE',
+							'explode' => array(
+								'character'   => '/',
+								'concatenate' => 'OR')
+						)
+					)
+				),
+				'pe_associada' => array(
+					'OR' => array(
+						'Pe.numero' => array(
+							'operator' => 'LIKE',
+							'explode' => array(
+		            'character'   => '/',
+		            'concatenate' => 'OR')
+						),
+						'Pe.ano' => array(
+							'operator' => 'LIKE',
+							'explode' => array(
+								'character'   => '/',
+								'concatenate' => 'OR')
+						)
+					)
+				),
 				'responsavel_' => array(
-					'Pe.responsavel' => array('operator' => 'LIKE')
+					'Ord.responsavel' => array('operator' => 'LIKE')
 				),
 				'status' => array(
 					'Ord.status_id' => array(

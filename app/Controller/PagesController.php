@@ -70,24 +70,61 @@ class PagesController extends AppController {
 					'Area' => array('Cliente'=> array())
 				)
 			));
-		}		
-		$this->set('clientes', $this->servicoPorCliente($servicos));
+		}
+		$this->set('clientesindis', $this->servicoPorCliente($servicos));
 		//$this->Servico->recursive = 2;
 
 		/*Lista de Demandas*/
 		$this->loadModel('Demanda');
-		$this->set('demandas', $this->demandasPorServico($this->Demanda->find('all'/*, APÓS DEFINIR UM PERÍODO DE TEMPO PARA MOSTRAR AS INFORMAÇÕES
-			array(
-				'fields' => 'Demanda.id, Servico.sigla, Status.nome',
-				'conditions' => array('((DATE_FORMAT(Demanda.data_cadastro,"%m") = "'.date("m").'") && (DATE_FORMAT(Demanda.data_cadastro,"%d") <= 20 )) ||
-															((DATE_FORMAT(Demanda.data_cadastro,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Demanda.data_cadastro,"%d") > 20 ))'),
+		$this->Demanda->Behaviors->attach('Containable');
+		$demandas = $this->Demanda->find('all', array(
+      'contain' => array(
+        'Servico' => array('Area' => array('Cliente'=> array())),
+        'DemandaTipo' => array(),
+        'Status' => array(),
+      ),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Demanda.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+		//debug($this->demandasPorServico($demandas));
+		$this->set('cliendemandas', $this->demandasPorServico($demandas));
 
-			)*/))
-		);
-
+		/*Lista de Chamados*/
 		$this->loadModel('Chamado');
-		$this->set('chamados', $this->chamadosPorServico($this->Chamado->find('all')));
+		$this->Chamado->Behaviors->attach('Containable');
+		$chamados = $this->Chamado->find('all', array(
+      //'group' => array('Demanda.servico_id'),
+      'contain' => array(
+				'Servico' => array('Area' => array('Cliente'=> array())),
+        'ChamadoTipo' => array(),
+        'Status' => array(),
+      ),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Chamado.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+		$this->set('clienchamados', $this->chamadosPorServico($chamados));
 	}
+
+
+/* Funções de Apoio */
 
 	/*
 	* Cria um array que separa os serviços por cliente.
@@ -108,38 +145,93 @@ class PagesController extends AppController {
 		$demandasAUX = array();
 
 		foreach ($demandas as $dem){
+			/* Cliente ao qual o serviço pertence */
+			$cliente = $dem['Servico']['Area']['0']['Cliente']['sigla'];
+
 			/* Contador de Demandas */
-			if(isset($demandasAUX[$dem['Servico']['sigla']]['Status']['total'])){
-				$demandasAUX[$dem['Servico']['sigla']]['Status']['total'] += 1;
+							 //$demandasAUX['MTE']['PROGER']['Status']['total']
+			if(isset($demandasAUX[$cliente][$dem['Servico']['sigla']]['Status']['total'])){
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Status']['total'] += 1;
 			}else{
-				$demandasAUX[$dem['Servico']['sigla']]['Status']['total'] = 1;
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Status']['total'] = 1;
 			}
 
 			/* Separa as demanads por Status */
-			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']]['total'])){
-				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome'] ]['total'] = 1;
+									//$demandasAUX['MTE']['PROGER']['Status']['Aberta']['total']
+			if( !isset( $demandasAUX[$cliente][$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']]['total'] ) ){
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Status'][$dem['Status']['nome'] ]['total'] = 1;
 			}
 			else{
-				$demandasAUX[$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']]['total'] += 1;
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Status'][$dem['Status']['nome']]['total'] += 1;
 			}
 
 			/* Separa as demanads por Tipo */
-
-			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'])){
-				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'] = 1;
+								 //$demandasAUX['MTE']['PROGER']['Tipo']['PDD']['total']
+			if(!isset( $demandasAUX[$cliente][$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'] )){
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'] = 1;
 			}
 			else{
-				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'] += 1;
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']]['total'] += 1;
 			}
 
 
-			/* Status de cada tipo de Demanda */
-			if(!isset($demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']])){
-				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']] = 1;
+			/* Status separado por cada tipo de Demanda */
+								 //$demandasAUX['MTE']['PROGER']['Tipo']['PDD']['Em Atendimento']
+			if(!isset( $demandasAUX[$cliente][$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']] )){
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']] = 1;
 			}
 			else{
-				$demandasAUX[$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']] += 1;
+				$demandasAUX[$cliente][$dem['Servico']['sigla']]['Tipo'][$dem['DemandaTipo']['nome']][$dem['Status']['nome']] += 1;
 			}
+
+			/* Demandas separadas por tipo de Atraso */
+								 //$demandasAUX['MTE']['PROGER']['Atraso']['1 e 15']; $demandasAUX['MTE']['PROGER']['Atraso']['indisponível'];
+			if(isset($dem['Demanda']['dt_prevista'])){
+				$t1 = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$dem['Demanda']['dt_prevista']);
+				if(strtotime($t1) < strtotime(date('Y-m-d'))){
+					$t1 = date_create($t1);
+					$t2 = date_create(date('Y-m-d'));
+	        $total = date_diff($t1,$t2)->days;
+						if($total < 15)
+							$key = 'entre 1 e 15';
+						else if($total < 30)
+							$key = 'entre 16 e 30';
+						else if($total < 60)
+							$key = 'entre 31 e 60';
+						else if($total > 60)
+							$key = 'há mais de 60 ';
+
+					if(isset($demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['total'])){
+						$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['total'] += 1;
+					}
+					else{
+						$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['total'] = 1;
+					}
+
+					if(!isset( $demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso'][$key] )){
+						$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso'][$key] = 1;
+					}
+					else{
+						$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso'][$key] += 1;
+					}
+				}
+			}
+			else{
+				if(!isset( $demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['indisponivel'] )){
+					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['indisponivel'] = 1;
+				}
+				else{
+					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['indisponivel'] += 1;
+				}
+
+				if(isset($demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['total'])){
+					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['total'] += 1;
+				}
+				else{
+					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['total'] = 1;
+				}
+			}
+
 		}
 
 		return $demandasAUX;
@@ -153,37 +245,40 @@ class PagesController extends AppController {
 		$chamadosAUX = array();
 
 		foreach ($chamados as $cham){
+			/* Cliente ao qual o serviço pertence */
+			$cliente = $cham['Servico']['Area']['0']['Cliente']['sigla'];
+
 			/* Contador de chamados */
-			if(isset($chamadosAUX[$cham['Servico']['sigla']]['Status']['total'])){
-				$chamadosAUX[$cham['Servico']['sigla']]['Status']['total'] += 1;
+			if(isset($chamadosAUX[$cliente][$cham['Servico']['sigla']]['Status']['total'])){
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Status']['total'] += 1;
 			}else{
-				$chamadosAUX[$cham['Servico']['sigla']]['Status']['total'] = 1;
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Status']['total'] = 1;
 			}
 
 			/* Separa as demanads por Status */
-			if(!isset($chamadosAUX[$cham['Servico']['sigla']]['Status'][$cham['Status']['nome']]['total'])){
-				$chamadosAUX[$cham['Servico']['sigla']]['Status'][$cham['Status']['nome'] ]['total'] = 1;
+			if(!isset($chamadosAUX[$cliente][$cham['Servico']['sigla']]['Status'][$cham['Status']['nome']]['total'])){
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Status'][$cham['Status']['nome'] ]['total'] = 1;
 			}
 			else{
-				$chamadosAUX[$cham['Servico']['sigla']]['Status'][$cham['Status']['nome']]['total'] += 1;
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Status'][$cham['Status']['nome']]['total'] += 1;
 			}
 
 			/* Separa as demanads por Tipo */
 
-			if(!isset($chamadosAUX[$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']]['total'])){
-				$chamadosAUX[$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']]['total'] = 1;
+			if(!isset($chamadosAUX[$cliente][$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']]['total'])){
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']]['total'] = 1;
 			}
 			else{
-				$chamadosAUX[$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']]['total'] += 1;
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']]['total'] += 1;
 			}
 
 
 			/* Status de cada tipo de chamado */
-			if(!isset($chamadosAUX[$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']][$cham['Status']['nome']])){
-				$chamadosAUX[$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']][$cham['Status']['nome']] = 1;
+			if(!isset($chamadosAUX[$cliente][$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']][$cham['Status']['nome']])){
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']][$cham['Status']['nome']] = 1;
 			}
 			else{
-				$chamadosAUX[$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']][$cham['Status']['nome']] += 1;
+				$chamadosAUX[$cliente][$cham['Servico']['sigla']]['Tipo'][$cham['ChamadoTipo']['nome']][$cham['Status']['nome']] += 1;
 			}
 		}
 
