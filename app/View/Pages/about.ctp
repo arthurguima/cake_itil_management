@@ -71,7 +71,8 @@
                           <div class="personal-info">
                             Veja o que mudou:<br/><br/>
                             <ul>
-                              <li>Dashboard Separada Por Clientes</li>                              
+                              <li>Dashboard Separada Por Clientes</li>
+                              <li>Análise de Demandas Atrasdas no Dashboard</li>                              
                             </ul>
                           </div>
                       </li>

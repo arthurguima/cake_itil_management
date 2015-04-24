@@ -236,6 +236,11 @@
 
 			$statuses = $this->Chamado->Status->find('list', array('conditions' => array('Status.tipo' => 5), 'fields' => array('Status.id', 'Status.nome')));
 			$this->set(compact('statuses'));
+
+			$this->set('demandas',
+									$this->Chamado->Demanda->find('list', array(
+										'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
+										'conditions' => array('Demanda.servico_id' => $this->data['Chamado']['servico_id']))));
 	}
 
 /**

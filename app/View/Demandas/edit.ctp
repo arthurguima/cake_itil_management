@@ -96,7 +96,7 @@
         echo $this->BootstrapForm->input('data_homologacao', array(
                   'label' => array('text' => 'Data de Homologação: '),
                   'type' => 'text',
-                  'id' => 'dp '));
+                  'id' => 'dp '));        
       ?>
     </div>
       <?php echo $this->BootstrapForm->input('id'); ?>
@@ -144,6 +144,7 @@
       document.getElementById('demandaFrame').style.display = "block";
       //document.getElementById('demandaFrame').style.height = "720px";
     })
+
   });
 </script>
 

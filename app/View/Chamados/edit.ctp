@@ -64,6 +64,13 @@
            'text' => 'Pai?',
            'class' => 'control-label col-sm-2')));
 
+     echo $this->BootstrapForm->input('Demanda', array(
+                 'label' => array('text' => 'Demanda: '),
+                 'input' => 'text',
+                 'multiple' => "false",
+                 'empty' => 'Demanda',
+                 'options' => $demandas));
+
       echo $this->BootstrapForm->input('id');
     ?>
     <div class="form-footer col-lg-10 col-md-6 pull-right">
@@ -106,6 +113,8 @@
       })
     }).change();
 
+    $('#ChamadoDemanda').select2();
+
   });
 </script>
 
@@ -114,4 +123,10 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>

@@ -137,7 +137,7 @@
 								<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 					</div>
 					<span class="notes hidden-xs hidden-sm">
-						Sistema de gestão da DITE - Versão 1.9.X
+						Sistema de gestão da DITE - Versão 2.0
 						<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
 						<br /><br /><a href="/painel.php" style="padding-left: 52px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
 					</span>
