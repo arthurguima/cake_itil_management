@@ -22,6 +22,19 @@
                              'type' => 'checkbox'));
 
     ?>
+
+    <div class="form-group">
+      <label for="MotivoAmbiente" class="col-lg-3 control-label">Ambiente: </label>
+      <div class="col-lg-9">
+        <select name="data[Motivo][ambiente]" class="form-control" id="filterambiente">
+          <option value="1" <?php if($this->data['Motivo']['ambiente'] == 1) echo 'selected="selected"'; ?>>Homologação</option>
+          <option value="2" <?php if($this->data['Motivo']['ambiente'] == 2) echo 'selected="selected"'; ?>>Produção</option>
+          <option value="3" <?php if($this->data['Motivo']['ambiente'] == 3) echo 'selected="selected"'; ?>>Treinamento</option>
+          <option value="3" <?php if($this->data['Motivo']['ambiente'] == 4) echo 'selected="selected"'; ?>>Sustentação</option>
+        </select>
+      </div>
+    </div>
+
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');

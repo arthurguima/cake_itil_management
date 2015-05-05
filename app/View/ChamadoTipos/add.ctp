@@ -15,6 +15,8 @@
                 'label' => array('text' => 'Nome: ')));
 
       echo $this->BootstrapForm->input('servico_id', array(
+                  'class' => 'select2',
+                  'empty'=>'Serviço',
                   'label' => array('text' => 'Serviço: ')));
     ?>
     <div class="form-footer col-lg-10 col-md-6 pull-right">
@@ -26,3 +28,19 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+  });
+</script>
+
+<?php
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
+?>

@@ -171,8 +171,9 @@
     // Os filtros de aditivos & itens de contrato são montados via ajax
   }
 
-
+  //TODO: Filtrar o cliente na SQL de consulta
   public function demandas(){
+
     /* Lista de Servicos */
     $this->loadModel('Demanda');
     //$this->Servico->recursive = 3;
@@ -181,7 +182,7 @@
     $demandas = $this->Demanda->find('all', array(
       //'group' => array('Demanda.servico_id'),
       'contain' => array(
-        'Servico' => array(),
+        'Servico' => array('Area' => array('Cliente'=> array()) ),
         'DemandaTipo' => array(),
         'Status' => array(),
       ),
@@ -198,7 +199,17 @@
       )
     ));
 
-    $this->set('servicos',$this->servicos_demandas($demandas));
+    if(isset($this->request->data['cliente_id']))
+      $this->set('servicos',$this->servicos_demandas($demandas,$this->request->data['cliente_id']));
+    else
+      $this->set('servicos',$this->servicos_demandas($demandas,null));
+
+    /* Filtro Por Clientes */
+    $this->loadModel('Cliente');
+    $this->Cliente->Behaviors->attach('Containable');
+
+    $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
+    $this->set(compact('clientes'));
   }
 
   public function dematrasadas(){
@@ -208,7 +219,7 @@
     $demandas = $this->Demanda->find('all', array(
       'conditions' => array("data_homologacao IS NULL && dt_prevista IS NOT NULL && dt_prevista < '" . date('Y-m-d') . "'"),
       'contain' => array(
-        'Servico' => array(),
+        'Servico' => array('Area' => array('Cliente'=> array()) ),
         'DemandaTipo' => array(),
         'Status' => array(),
       ),
@@ -225,7 +236,17 @@
       )
     ));
 
-    $this->set('atrasos', $this->atraso_demandas($demandas));
+    if(isset($this->request->data['cliente_id']))
+      $this->set('atrasos', $this->atraso_demandas($demandas,$this->request->data['cliente_id']));
+    else
+      $this->set('atrasos', $this->atraso_demandas($demandas,null));
+
+    /* Filtro Por Clientes */
+    $this->loadModel('Cliente');
+    $this->Cliente->Behaviors->attach('Containable');
+
+    $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
+    $this->set(compact('clientes'));
   }
 
 
@@ -234,11 +255,16 @@
   /*
    * Recebe um array de demandas e separa por serviço
   */
-  private function servicos_demandas($demandas){
+  private function servicos_demandas($demandas,$cliente=null){
     $demandasAUX = array();
-
     foreach ($demandas as $dem){
-      $demandasAUX[$dem['Servico']['sigla']][] = $dem;
+      if(isset($cliente)){
+        if($dem['Servico']['Area']['0']['Cliente']['id'] == $cliente){
+          $demandasAUX[$dem['Servico']['sigla']][] = $dem;
+        }
+      }
+      else
+        $demandasAUX[$dem['Servico']['sigla']][] = $dem;
     }
 
     return $demandasAUX;
@@ -247,7 +273,7 @@
   /*
    * Recebe um array de demandas e separa por tempo de atraso
   */
-  private function atraso_demandas($demandas){
+  private function atraso_demandas($demandas,$cliente=null){
     $demandasAUX = array();
     $demandasAUX['Atrasadas entre 1 e 15 dias'] = array();
     $demandasAUX['Atrasadas entre 16 e 30 dias'] = array();
@@ -255,21 +281,25 @@
     $demandasAUX['Atrasadas há mais de 60 dias'] = array();
 
     foreach ($demandas as $dem){
-      $t1 = date_create(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$dem['Demanda']['dt_prevista']));
-      $t2 = date_create(date('Y-m-d'));
-      $total = date_diff($t1,$t2);
+      if(isset($cliente)){
+        if($dem['Servico']['Area']['0']['Cliente']['id'] == $cliente){
+          $t1 = date_create(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$dem['Demanda']['dt_prevista']));
+          $t2 = date_create(date('Y-m-d'));
+          $total = date_diff($t1,$t2);
 
-      if($total->days <= 15){
-        $demandasAUX['Atrasadas entre 1 e 15 dias'][] = $dem;
-      }else{
-        if($total->days <= 30){
-          $demandasAUX['Atrasadas entre 16 e 30 dias'][] = $dem;
-        }else{
-          if($total->days <= 60){
-            $demandasAUX['Atrasadas entre 31 e 60 dias'][] = $dem;
-          }
-          else{
-            $demandasAUX['Atrasadas há mais de 60 dias'][] = $dem;
+          if($total->days <= 15){
+            $demandasAUX['Atrasadas entre 1 e 15 dias'][] = $dem;
+          }else{
+            if($total->days <= 30){
+              $demandasAUX['Atrasadas entre 16 e 30 dias'][] = $dem;
+            }else{
+              if($total->days <= 60){
+                $demandasAUX['Atrasadas entre 31 e 60 dias'][] = $dem;
+              }
+              else{
+                $demandasAUX['Atrasadas há mais de 60 dias'][] = $dem;
+              }
+            }
           }
         }
       }

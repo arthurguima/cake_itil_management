@@ -64,10 +64,10 @@
            'text' => 'Pai?',
            'class' => 'control-label col-sm-2')));
 
-     echo $this->BootstrapForm->input('Demanda', array(
+     echo $this->BootstrapForm->input('demanda_id', array(
                  'label' => array('text' => 'Demanda: '),
                  'input' => 'text',
-                 'multiple' => "false",
+                // 'multiple' => "false",
                  'empty' => 'Demanda',
                  'options' => $demandas));
 
@@ -113,7 +113,7 @@
       })
     }).change();
 
-    $('#ChamadoDemanda').select2();
+    $('#ChamadoDemandaId').select2();
 
   });
 </script>

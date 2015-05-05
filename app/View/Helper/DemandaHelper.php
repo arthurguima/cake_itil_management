@@ -68,7 +68,7 @@
    endforeach;
 
    return "
-   <div class='col-sm-12 col-lg-4  col-md-12 well indis demanda-indis'>
+   <div class='col-sm-12 col-lg-4  col-md-12 well indis indis-atraso'>
     <div class='indis-tittle col-lg-12'>
       <a class='servico col-lg-12'><b>" . $Servico . "</b></a>
     </div>

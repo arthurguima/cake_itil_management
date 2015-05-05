@@ -63,6 +63,7 @@
           <li><a><b>Serviço: </b> <?php echo $demanda['Servico']['sigla']; ?></a></li>
           <li><a><b>Tipo: </b><?php echo $demanda['DemandaTipo']['nome']; ?></a></li>
           <li><a><b>Criador: </b><?php echo $demanda['Demanda']['criador']; ?></a></li>
+          <li><a><b>Solicitada pelo Cliente: </b><?php echo $this->Times->yesOrNo($demanda['Demanda']['origem_cliente']); ?></a></li>
           <li><a><b>Executor: </b><?php echo $demanda['Demanda']['executor']; ?></a></li>
 
           <?php if(isset($demanda['Ss'][0])):

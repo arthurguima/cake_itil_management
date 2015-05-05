@@ -19,7 +19,7 @@
         ),
         'ambiente_' => array(
           'Rdm.ambiente' => array(
-            'select' => $this->Filter->select('Ambiente', array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento') )
+            'select' => $this->Filter->select('Ambiente', array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento', 4 => 'Sustentação') )
           )
         ),
         'tipo' => array(

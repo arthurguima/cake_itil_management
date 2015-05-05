@@ -63,7 +63,7 @@
                 <th>Nº Incidente   <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Início</th>
         				<th>Duração</th>
-        				<th>Motivo</th>
+        				<th>Motivo/Ambiente</th>
                 <th>Observação</th>
                 <th>Observação</th>
         				<th><span class="editable">Status</span></th>
@@ -105,7 +105,10 @@
                           endif;
                     ?>
                   </td>
-        				  <td><?php echo $Indisponibilidade['Motivo']['nome']; ?></td>
+        				  <td>
+                    <?php echo $Indisponibilidade['Motivo']['nome']; ?><br />
+                    <?php echo $this->Rdm->getAmbiente($Indisponibilidade['Motivo']['ambiente']); ?>
+                  </td>
                   <td><?php echo $this->Tables->popupBox($Indisponibilidade['Indisponibilidade']['observacao']) ?></td>
                   <td><?php echo $Indisponibilidade['Indisponibilidade']['observacao']; ?></td>
 

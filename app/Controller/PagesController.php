@@ -217,11 +217,11 @@ class PagesController extends AppController {
 				}
 			}
 			else{
-				if(!isset( $demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['indisponivel'] )){
-					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['indisponivel'] = 1;
+				if(!isset( $demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['Sem data prevista'] )){
+					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['Sem data prevista'] = 1;
 				}
 				else{
-					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['indisponivel'] += 1;
+					$demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['Sem data prevista'] += 1;
 				}
 
 				if(isset($demandasAUX[$cliente][$dem['Servico']['sigla']]['Atraso']['total'])){

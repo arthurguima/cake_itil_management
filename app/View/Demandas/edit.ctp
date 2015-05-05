@@ -96,7 +96,10 @@
         echo $this->BootstrapForm->input('data_homologacao', array(
                   'label' => array('text' => 'Data de Homologação: '),
                   'type' => 'text',
-                  'id' => 'dp '));        
+                  'id' => 'dp '));
+
+        echo $this->BootstrapForm->input('origem_cliente', array(
+                   'label' => array('text' => 'Solicitada pelo Cliente?: ')));
       ?>
     </div>
       <?php echo $this->BootstrapForm->input('id'); ?>

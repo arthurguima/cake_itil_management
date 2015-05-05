@@ -14,6 +14,11 @@
         'nome_' => array(
           'Demanda.nome' => array('operator' => 'LIKE')
         ),
+        'origem_cliente' => array(
+          'Demanda.origem_cliente' => array(
+            'select' => $this->Filter->select('Solicitada pelo cliente?', array(1 => 'Sim', 0 => 'Não') )
+          )
+        ),
         'responsavel' => array(
           'Demanda.criador' => array('operator' => 'LIKE')
         ),

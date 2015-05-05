@@ -831,8 +831,12 @@ svg.peity {
   margin-top: 10px;
 }
 
-.demanda-indis .indis-body {
+.demanda-indis .indis-body,
+.indis-atraso .indis-body{
   min-height: inherit;
+}
+.indis-atraso {
+  min-height: 214px;
 }
 
 .indis-body th:first-child {

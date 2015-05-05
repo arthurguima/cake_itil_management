@@ -217,7 +217,7 @@
                     "sButtonText": "PDF",
                     "sFileName": "RDM.pdf",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ],
+                    "mColumns": [ 0,1,2,3,4,7,8,9,10 ],
                     "sPdfOrientation": "landscape",
                     "sTitle": "Requisições de Mudança",
                     "sPdfMessage": "<?php echo date('d/m/y')?>",

@@ -22,6 +22,19 @@
                                  'class' => 'control-label col-sm-2')));
 
     ?>
+
+    <div class="form-group">
+      <label for="MotivoAmbiente" class="col-lg-3 control-label">Ambiente: </label>
+      <div class="col-lg-9">
+        <select name="data[Motivo][ambiente]" class="form-control" id="filterambiente">
+          <option value="2">Produção</option>
+          <option value="1">Homologação</option>
+          <option value="3">Treinamento</option>
+          <option value="4">Sustentação</option>
+        </select>
+      </div>
+    </div>
+
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');

@@ -49,15 +49,16 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-Indicadores">
             <thead>
               <tr>
+                <th>Data</th>
                 <th>Contrato/Aditivo</th>
                 <th>Regra</th>
-                <th>Data</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($indicadores as $in): ?>
                 <tr>
+                  <td><?php echo $in['Indicadore']['mes'] . "/" . $in['Indicadore']['ano']; ?></td>
                   <td>
                     <?php
                       if(isset($in['Regra']['Contrato']['numero']))
@@ -67,7 +68,6 @@
                     ?>
                   </td>
                   <td><?php echo $in['Regra']['nome']; ?></td>
-                  <td><?php echo $in['Indicadore']['mes'] . "/" . $in['Indicadore']['ano']; ?></td>
                   <td>
                     <?php
                       echo $this->Html->link("<i class='fa fa-search-plus'></i> ",
@@ -95,6 +95,23 @@
   </div>
 </div>
 
+<?php
+  //-- DataTables JavaScript --
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+  //-- DataTables --> TableTools
+  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+  //-- DataTables --> Responsive
+  echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+?>
+
 <script>
 /* Lista de Aditivos */
   function getAditivos(contrato){
@@ -116,5 +133,49 @@
          getAditivos($(this).val());
       })
     }).change();
+
+
+    var  oTable =  $('#dataTables-Indicadores').dataTable({
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+          language: {
+            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+          },
+          "dom": 'TC<"clear">lfrtip',
+          "colVis": {
+            "buttonText": "Esconder Colunas"
+          },
+          "tableTools": {
+              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+              "aButtons": [
+                {
+                    "sExtends": "copy",
+                    "sButtonText": "Copiar",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                },
+                {
+                    "sExtends": "print",
+                    "sButtonText": "Imprimir",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                },
+                {
+                    "sExtends": "csv",
+                    "sButtonText": "CSV",
+                    "sFileName": "Indicadores.csv",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                },
+                {
+                    "sExtends": "pdf",
+                    "sButtonText": "PDF",
+                    "sFileName": "Indicadores.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    //"mColumns": [ 0,1,2,3,4,5,7,8 ],
+                    "sPdfOrientation": "landscape",
+                    "sTitle": "Controle de Indicadores",
+                    "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
+                },
+              ]
+          }
+      });
+      var colvis = new $.fn.dataTable.ColVis( oTable );
   });
 </script>

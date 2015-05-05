@@ -44,6 +44,7 @@
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
@@ -82,6 +83,7 @@
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
                 <th class="hidden-xs hidden-sm">Solicitante</th>
+                <th>Solicitada pelo Cliente?</th>
                 <th></th>
               </tr>
             </thead>
@@ -120,6 +122,7 @@
                   </td>
                   <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['Demanda']['criador']; ?></div></td>
+                  <td><?php echo $this->Times->yesOrNo($demanda['Demanda']['origem_cliente']); ?></td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14);

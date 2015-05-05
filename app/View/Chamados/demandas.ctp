@@ -82,7 +82,7 @@
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['Chamado']['responsavel']; ?></div></td>
                   <td>
                     <?php
-                      echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 2);
+                      echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 10);
                       if($this->Ldap->autorizado(2)){
                         echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                   array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'demandas' )),

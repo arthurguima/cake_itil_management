@@ -100,6 +100,9 @@
                    'label' => array('text' => 'Data de Homologação: '),
                    'type' => 'text',
                    'id' => 'dp '));
+
+        echo $this->BootstrapForm->input('origem_cliente', array(
+                   'label' => array('text' => 'Solicitada pelo Cliente?: ')));
       ?>
     </div>
 

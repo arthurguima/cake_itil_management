@@ -37,6 +37,7 @@
             <option value="2">Produção</option>
             <option value="1">Homologação</option>
             <option value="3">Treinamento</option>
+            <option value="4">Sustentação</option>
           </select>
         </div>
       </div>

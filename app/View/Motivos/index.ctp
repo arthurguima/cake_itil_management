@@ -29,6 +29,7 @@
               <tr>
                 <th>Nome</th>
                 <th>Entra no calculo de horas?</th>
+                <th>Ambiente</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -37,6 +38,7 @@
                 <tr>
                   <td><?php echo $motivo['Motivo']['nome']; ?></td>
                   <td><?php echo $this->Times->yesOrNo($motivo['Motivo']['contavel']); ?></td>
+                  <td><?php echo $this->Rdm->getAmbiente($motivo['Motivo']['ambiente']); ?></td>
                   <td><?php echo $this->Tables->getMenu('motivos', $motivo['Motivo']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>

@@ -41,6 +41,7 @@
             <option value="1" <?php if($this->data['Rdm']['ambiente'] == 1) echo 'selected="selected"'; ?>>Homologação</option>
             <option value="2" <?php if($this->data['Rdm']['ambiente'] == 2) echo 'selected="selected"'; ?>>Produção</option>
             <option value="3" <?php if($this->data['Rdm']['ambiente'] == 3) echo 'selected="selected"'; ?>>Treinamento</option>
+            <option value="3" <?php if($this->data['Rdm']['ambiente'] == 4) echo 'selected="selected"'; ?>>Sustentação</option>
           </select>
         </div>
       </div>

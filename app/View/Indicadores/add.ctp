@@ -15,7 +15,8 @@
       if(!strcmp($this->params['url']['controller'],'aditivos')):
         echo $this->BootstrapForm->hidden('aditivo_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
       else:
-        echo $this->BootstrapForm->hidden('contrato_id', array('value' => $this->params['url']['id']));
+        if(!strcmp($this->params['url']['controller'],'contratos')):
+          echo $this->BootstrapForm->hidden('contrato_id', array('value' => $this->params['url']['id']));
       endif;
 
       echo $this->BootstrapForm->input('regra_id', array(

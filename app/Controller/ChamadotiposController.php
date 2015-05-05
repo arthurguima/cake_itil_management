@@ -76,7 +76,7 @@
 		$this->set(compact('chamadotipos'));
 
 		/* Relacionamentos */
-			$servicos = $this->ChamadoTipo->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
+			$servicos = $this->ChamadoTipo->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
 			$this->set(compact('servicos'));
 	}
 
