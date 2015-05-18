@@ -84,4 +84,23 @@
         return $this->redirect(array('action' => 'index'));
     }
   }
+
+  /**
+  * returns a list of itens filtered by cliente
+  */
+  public function optionList(){
+    $this->layout = null;
+    //$this->autoRender = false;
+
+    $this->loadModel('Cliente');
+    $this->Cliente->Behaviors->attach('Containable');
+    $cliente = $this->Cliente->find('first', array(
+      'conditions' => array('Cliente.id' => $this->params['url']['cliente']),
+      'contain'=> array(
+        'Contrato' => array('fields' => array('Contrato.id', 'Contrato.data_ini'))
+      )
+    ));
+    //$this->Demanda->recursive = -1;
+    $this->set('contratos', $cliente['Contrato']);
+  }
 }?>

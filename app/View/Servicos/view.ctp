@@ -7,7 +7,8 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-4">
+<div class="col-lg-12">
+  <div class="col-lg-6">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <p>
@@ -24,14 +25,14 @@
           <li><a><b>Nome: </b><?php echo $Servico['Servico']['nome']; ?></a></li>
           <li><a><b>Sigla: </b><?php echo $Servico['Servico']['sigla']; ?></a></li>
           <li><a><b>Tecnologia: </b><?php echo $Servico['Servico']['tecnologia']; ?></a></li>
-		  <li><a><b>URL: </b><?php echo $Servico['Servico']['url']; ?></a></li>
+		  <li><a><b>URL(Balanceamento): </b><?php echo $Servico['Servico']['url']; ?></a></li>
           <li><a><b>Status: </b><?php echo $this->Times->active($Servico['Servico']['status'])?></td></a></li>
         <ul>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-4">
+  <div class="col-lg-6">
     <div class="panel panel-default panel-info">
       <div class="panel-heading"> <p><h3 class="panel-title">Áreas</h3></p></div>
       <div class="panel-body">
@@ -68,8 +69,65 @@
       </div>
     </div>
   </div>
+</div>
+</div>
 
-  <div class="col-lg-4">
+<div class="row">
+<div class="col-lg-12">
+  <div class="col-lg-6">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Containers</b>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'containers', 'action' => 'add','?' => array('controller' => 'servicos', 'id' =>  $Servico['Servico']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body historico-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>URL</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($Servico['Container'] as $container): ?>
+                  <tr>
+                    <td><?php echo $container['nome']; ?></td>
+                    <td><?php echo $container['url']; ?></td>
+                    <td>
+                       <?php
+                         if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                  array('controller' => 'containers', 'action' => 'edit', $container['id'], '?' => array('controller' => 'servicos', 'id' =>  $Servico['Servico']['id'], 'action' => 'view' )),
+                                  array('escape' => false));
+                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                  array('controller' => 'containers', 'action' => 'delete', $container['id'], '?' => array('controller' => 'servicos', 'id' => $Servico['Servico']['id'], 'action' => 'view' )),
+                                  array('escape' => false), "Você tem certeza");
+                         }
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($container); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
     <div class="panel panel-default panel-danger">
       <div class="panel-heading"> <p><h3 class="panel-title">Dependências</h3></p></div>
       <div class="panel-body">
@@ -103,6 +161,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <div class="col-md-12">

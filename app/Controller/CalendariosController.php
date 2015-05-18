@@ -54,14 +54,22 @@
                 array('Rdm.dt_prevista >= "' . $this->params['url']['start'] . '" && Rdm.dt_prevista <= "' . $this->params['url']['end'] . '"')));
 
       foreach($rdms as $rdm) {
+        if($rdm['Rdm']['sucesso'] == 2){
+          $title = "RDM - Cancelada - " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'];
+          $class = 'calendar-rdm-cancelada';
+        }
+        else{
+          $title = "RDM " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'];
+          $class = 'calendar-rdm';
+        }
         $data[] = array(
             'id' => $rdm['Rdm']['id'],
-            'title'=> "RDM " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'],
+            'title'=> $title,
             'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $rdm['Rdm']['dt_prevista']))),
             'allDay' => true,
             'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
             'description' => $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . " "  . ($rdm['Rdm']['ambiente'] == '1' ? ' Homologação' : ($rdm['Rdm']['ambiente'] == '2' ? 'Produção' : 'Treinamento')),
-            'className' => 'calendar-rdm'
+            'className' => $class
         );
       }
 

@@ -28,36 +28,21 @@
 </div>
 
 <?php if($this->request->data != null): ?>
-  <?php $totaltime = 0; ?>
-  <div class="row">
-    <div class="col-lg-3">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <p>
-            <h3 class="panel-title">Informações</h3>
-          </p>
-        </div>
-        <div class="panel-body">
-          <ul class="nav nav-pills nav-stacked">
-            <li><a><b>Numero: </b><?php debug($pes);//echo $contrato['numero']; ?></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+
 <?php endif; ?>
 
 <script>
-  /* Lista de Itens
-  function getItens(tipo, id){
+
+/* Lista de Contratos */
+  function getContratos(cliente){
     $.ajax({
-      url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "items/optionlist?controller=relatorios&tipo=" + tipo + "&id=" + id,
+      url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "contratos/optionlist?controller=relatorios&cliente=" + cliente,
       cache: false,
       success: function(html){
-        $("#itemList").html(html);
+        $("#contratoList").html(html);
       }
-    })
-  }*/
+    });
+  }
 
 /* Lista de Aditivos */
   function getAditivos(contrato){
@@ -79,16 +64,6 @@
          getAditivos($(this).val());
       })
     }).change();
-
-    /* Quando selecionado o Aditivo
-    $(document).on('change', $("select#AditivoAditivo"), function () {
-      var str = "";
-      $("select#AditivoAditivo option:selected").each(function() {
-         if($(this).val() != "Aditivo"){
-          getItens("Aditivo", $(this).val());
-         }
-      })
-    });*/
   });
 </script>
 

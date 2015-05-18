@@ -619,6 +619,10 @@ td i.yellow{
   border: 2px solid #56CDDF !important;
 }
 
+.panel-success {
+  border: 2px solid #d6e9c6 !important;
+}
+
 .panel-primary {
   border: 2px solid #428bca !important;
 }
@@ -999,6 +1003,11 @@ table#dataTables-Servico{
   border: 1px solid #ebccd1 !important;
   color: #a94442 !important;
   /*  font-weight: bold !important;*/
+}
+.calendar-rdm-cancelada {
+  background-color: #F2DEE6 !important;
+  border: 2px solid #111 !important;
+  color: #550000 !important;
 }
 .calendar-ss{
   background-color: #56CDDF !important;

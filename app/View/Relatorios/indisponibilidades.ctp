@@ -85,8 +85,20 @@
               <tbody>
                 <?php foreach ($servico['Indisponibilidade'] as $Indisponibilidade): ?>
                   <tr>
-                    <td><?php echo $Indisponibilidade['num_evento']; ?></td>
-                    <td><?php echo $Indisponibilidade['num_incidente']; ?></td>
+                    <td>
+                      <?php
+                        echo $this->Html->link($Indisponibilidade['num_evento'],
+                              "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_evento'] . "%25",
+                              array('target' => '_blank'));
+                      ?>
+                    </td>
+                    <td>
+                      <?php
+                        echo $this->Html->link($Indisponibilidade['num_incidente'],
+                              "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_incidente'] . "%25",
+                              array('target' => '_blank'));
+                      ?>
+                    </td>
                     <td data-order=<?php echo $this->Time->format('Ymd', $Indisponibilidade['dt_inicio']); ?>>
                       <?php echo $this->Time->format('d/m/Y H:i', $Indisponibilidade['dt_inicio']); ?>
                     </td>

@@ -57,28 +57,31 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.0</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Dashboard Separada Por Clientes</li>
+                        <li>Análise de Demandas Atrasadas no Dashboard</li>
+                        <li>Disponibilidade dos Containers de Serviço</li>
+                        <li>Relatórios Separados por Clientes</li>
+                        <li>Visões Gerais por clientes no Dashboard</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li class="timeline-inverted">
             <div class="timeline-badge danger">
               <i class="fa fa-eyedropper fa-fw"></i>
             </div>
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
-                <li>
-                  <div class="timeline-panel">
-                    <ul class="list-unstyled spaced">
-                      <li>
-                        <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.0</h4>
-                          <div class="personal-info">
-                            Veja o que mudou:<br/><br/>
-                            <ul>
-                              <li>Dashboard Separada Por Clientes</li>
-                              <li>Análise de Demandas Atrasdas no Dashboard</li>                              
-                            </ul>
-                          </div>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.9.X</h4>
                     <div class="personal-info">

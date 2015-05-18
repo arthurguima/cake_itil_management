@@ -12,7 +12,8 @@
     'Ss' => array('className' => 'Ss'),
     'Chamado' => array('className' => 'Chamado'),
     'ChamadoTipo' => array('className' => 'ChamadoTipo'),
-    'Regra' => array('className' => 'Regra')
+    'Regra' => array('className' => 'Regra'),
+    'Container' => array('className' => 'Container')
   );
 
   public $validate = array(

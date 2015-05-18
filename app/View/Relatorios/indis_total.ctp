@@ -53,70 +53,96 @@
               $this->Times->AmericanDate($this->request->data['dt_inicio']), $this->Times->AmericanDate($this->request->data['dt_fim']));
   ?>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="panel panel-default">
-        <div class="panel-heading"><b> Lista de Indisponibilidades </b></div>
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-Indisponibilidades">
-              <thead>
-                <tr>
-                  <th>Serviço</th>
-                  <th>Tempo Indisponível</th>
-                  <th>Tempo Acordado(Hora)</th>
-                  <th>Disponibilidade Obtida</th>
-                  <th>Disponibilidade Acordada</th>
-                  <th>IQOM(qtd incidentes)</th>
-                  <th>MTTR(tempo médio de restauração)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                //  debug($servicos);
-                  foreach ($servicos as $ser):
-                    $totaltime = 0;
-                    foreach ($ser['Indisponibilidade'] as $in):
-                      if($in['dt_fim'] != null):
-                        $totaltime += $this->Times->diffInSec($in['dt_inicio'], $in['dt_fim']);
-                      endif;
-                    endforeach;
-                ?>
-                <tr>
-                  <td><?php echo $ser['Servico']['sigla']; ?></td>
-                  <td data-order="<?php echo $totaltime; ?>">
-                    <?php echo $this->Times->SecToString($totaltime); ?>
-                  </td>
-                  <td>
-                    <?php
-                      echo $this->Times->SecToString(0.02*$this->Times->diffInSec(
-                        $this->Times->AmericanDate($this->request->data['dt_inicio']), $this->Times->AmericanDate($this->request->data['dt_fim'])));
-                    ?>
-                  </td-->
-                  <td><?php echo round(100 - ($totaltime/$total)*100,2); ?>%</td>
-                  <td>98%</td>
-                  <td><?php echo sizeof($ser['Indisponibilidade']); ?></td>
-                  <?php if(sizeof($ser['Indisponibilidade']) > 0): ?>
-                    <td data-order="<?php echo $totaltime/sizeof($ser['Indisponibilidade']); ?>">
+  <ul class="nav nav-tabs nav-tabs-black nav-tabs-pages" role="tabclientes">
+    <?php
+      $active = 0;
+      foreach ($clientes as $key => $clie){
+        if($active == 0){
+          echo '<li role="presentation" class="active"><a href="#'. $key .'" aria-controls="'. $key .'" role="tab" data-toggle="tab">'. $key .'</a></li>';
+          $active = 1;
+        }
+        else
+          echo '<li role="presentation" ><a href="#'. $key .'" aria-controls="'. $key .'" role="tab" data-toggle="tab">'. $key .'</a></li>';
+      }
+    ?>
+  </ul>
+
+  <div class="tab-content">
+    <?php $active = 0; foreach ($clientes as $key => $servico):
+        if($active == 0){
+          echo '<div role="tabpanel" class="tab-pane active" id="'.$key.'">';
+          $active = 1;
+        }
+        else
+          echo '<div role="tabpanel" class="tab-pane" id="'.$key.'">';
+    ?>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading"><b> Lista de Indisponibilidades </b></div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered table-hover" id="dataTables-Indisponibilidades">
+                    <thead>
+                      <tr>
+                        <th>Serviço</th>
+                        <th>Tempo Indisponível</th>
+                        <th>Tempo Acordado(Hora)</th>
+                        <th>Disponibilidade Obtida</th>
+                        <th>Disponibilidade Acordada</th>
+                        <th>IQOM(qtd incidentes)</th>
+                        <th>MTTR(tempo médio de restauração)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       <?php
-                        if(sizeof($ser['Indisponibilidade']))
-                          echo $this->Times->SecToString($totaltime/sizeof($ser['Indisponibilidade']));
-                        else
-                          echo "---";
+                      //  debug($servicos);
+                        foreach ($servico as $ser):
+                          $totaltime = 0;
+                          foreach ($ser['Indisponibilidade'] as $in):
+                            if($in['dt_fim'] != null):
+                              $totaltime += $this->Times->diffInSec($in['dt_inicio'], $in['dt_fim']);
+                            endif;
+                          endforeach;
                       ?>
-                    </td>
-                <?php else: ?>
-                  <td>0h</td>
-                <?php endif ?>
-                </tr>
-                <?php endforeach; ?>
-                <?php unset($Indisponibilidade); ?>
-              </tbody>
-            </table>
+                      <tr>
+                        <td><?php echo $ser['Servico']['sigla']; ?></td>
+                        <td data-order="<?php echo $totaltime; ?>">
+                          <?php echo $this->Times->SecToString($totaltime); ?>
+                        </td>
+                        <td>
+                          <?php
+                            echo $this->Times->SecToString(0.02*$this->Times->diffInSec(
+                              $this->Times->AmericanDate($this->request->data['dt_inicio']), $this->Times->AmericanDate($this->request->data['dt_fim'])));
+                          ?>
+                        </td-->
+                        <td><?php echo round(100 - ($totaltime/$total)*100,2); ?>%</td>
+                        <td>98%</td>
+                        <td><?php echo sizeof($ser['Indisponibilidade']); ?></td>
+                        <?php if(sizeof($ser['Indisponibilidade']) > 0): ?>
+                          <td data-order="<?php echo $totaltime/sizeof($ser['Indisponibilidade']); ?>">
+                            <?php
+                              if(sizeof($ser['Indisponibilidade']))
+                                echo $this->Times->SecToString($totaltime/sizeof($ser['Indisponibilidade']));
+                              else
+                                echo "---";
+                            ?>
+                          </td>
+                      <?php else: ?>
+                        <td>0h</td>
+                      <?php endif ?>
+                      </tr>
+                      <?php endforeach; ?>
+                      <?php unset($Indisponibilidade); ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <?php endforeach; ?>
   </div>
 <?php endif; ?>
 
@@ -211,5 +237,17 @@
           }
       });
       var colvis = new $.fn.dataTable.ColVis( oTable );
+
+      $('#tabclientes a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
   });
 </script>
+
+<style>
+  .nav.nav-tabs-pages>li.active>a{
+    background-color: #eee !important;
+    font-weight: bold;
+  }
+</style>

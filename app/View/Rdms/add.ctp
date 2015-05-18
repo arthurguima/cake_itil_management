@@ -27,7 +27,7 @@
                   'label' => array('text' => 'Serviço: ')));
 
       echo $this->BootstrapForm->input('versao', array(
-                 'label' => array('text' => 'Versão do serviço: ')));
+                 'label' => array('text' => 'Versão/Fase/TAG: ')));
       ?>
 
       <div class="form-group">

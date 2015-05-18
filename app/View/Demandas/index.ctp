@@ -45,6 +45,7 @@
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>

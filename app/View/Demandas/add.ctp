@@ -101,8 +101,10 @@
                    'type' => 'text',
                    'id' => 'dp '));
 
+        $options = array( 1 => 'Sim', 0 => 'Não');
         echo $this->BootstrapForm->input('origem_cliente', array(
-                   'label' => array('text' => 'Solicitada pelo Cliente?: ')));
+                   'label' => array('text' => 'Solicitada pelo Cliente?: '),
+                   'options' => $options));
       ?>
     </div>
 

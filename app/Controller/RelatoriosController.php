@@ -78,16 +78,19 @@
         $conditions = $conditions . " && (Indisponibilidade.motivo_id = " . $this->request->data['motivo_id'] .")";
       }
 
-      $this->set('servicos', $this->Servico->find('all', array(
+      $servicos = $this->Servico->find('all', array(
         //'conditions' => array('id' => $this->request->data['servico_id']),
         'contain' => array(
           'Indisponibilidade' => array(
+            'Servico' => array('Area' => array('Cliente'=> array()) ),
             'Motivo' => array(),
             'conditions' => array($conditions)
           )
         )
-      )));
+      ));
     }
+
+    $this->set('clientes', $this->IndiPorServicoPorCliente($servicos));
 
     /* Filtros */
     $this->loadModel('Motivo');
@@ -138,37 +141,13 @@
   }
 
   public function contratos(){
-    /* Lista de Contratos */
-    $this->loadModel('Pe');
-    $this->Pe->recursive = 3;
-    $this->Pe->Behaviors->attach('Containable');
-
-    debug($this->request->data);
-
-    if(isset($this->request->data['contrato_id'])){
-      if(($this->request->data['Aditivo']['Aditivo']['0'] != 'Aditivo' )){
-        $conditions = '(Item.aditivo_id = "'. $this->request->data['Aditivo']['Aditivo']['0'] .'")';
-      }
-      else{
-        $conditions = '(Item.contrato_id = "'. $this->request->data['contrato_id'] .'")';
-      }
-
-      $this->set('pes', $this->Pe->find('first', array(
-        //'conditions' => array($conditions),
-        'contain' => array(
-          'Item' => array(
-            'conditions' => array($conditions)
-          )
-        )
-      )));
-    }
 
     /* Filtros */
-    $this->loadModel('Contrato');
-    $this->set('contratos', $this->Contrato->find('list', array('fields' => array('Contrato.id', 'Contrato.numero'))));
-    $this->set(compact('contratos'));
+    $this->loadModel('Cliente');
+    $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
+    $this->set(compact('clientes'));
 
-    // Os filtros de aditivos & itens de contrato são montados via ajax
+    // Os filtros de contratos, aditivos são montados via ajax
   }
 
   //TODO: Filtrar o cliente na SQL de consulta
@@ -249,8 +228,16 @@
     $this->set(compact('clientes'));
   }
 
-
   /* Funções de Apoio */
+
+  private function IndiPorServicoPorCliente($servicos){
+    $clientes = array();
+    foreach ($servicos as $ser){
+      $clientes[$ser['Area']['0']['Cliente']['sigla']][] = $ser;
+    }
+
+    return $clientes;
+  }
 
   /*
    * Recebe um array de demandas e separa por serviço

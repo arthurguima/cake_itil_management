@@ -1,6 +1,20 @@
 <?php class DisponibilidadeHelper extends AppHelper {
   public $helpers = array('Times');
 
+  public function container_online($url, $method){
+    if($url != null){
+      $headers = @get_headers($url,1);
+      $x =  explode(" ", $headers[0]);
+
+      if($headers == false || (intval($x[1]) >= 400)){
+        return 0;
+      }
+
+      return 1;
+    }
+    return 0;
+  }
+
   public function online($url, $method){ // Utilizado no Home
     if($url != null):
       $begin = microtime(true); //Inicio do do c�lculo do tempo de resposta
@@ -11,20 +25,20 @@
       if($headers == false ){
         $end = microtime(true); //Final do tempo de resposta
         $tempo = $end - $begin;
-        return "<td><i class='fa fa-exclamation-circle yellow'></i></td><td> Host desconhecido!</td>";
+        return "<td><i class='fa fa-exclamation-circle yellow'></i> Host desconhecido!</td>";
       }
 
       if(intval($x[1]) >= 400):
         $end = microtime(true); //Final do tempo de resposta
         $tempo = $end - $begin;
-        return "<td><i title='" . $x[1] ."' class='fa fa-times-circle red'></i></td> (" . $headers['Date'] . ") ";
+        return "<td><i title='" . $x[1] ."' class='fa fa-times-circle red'></i> (" . $headers['Date'] . ") </td>";
       endif;
 
       $end = microtime(true); //Final do tempo de resposta
       $tempo = $end - $begin;
-      return "<td><i title='" . $x[1] . "' class='fa fa-check-circle green'></i></td><td>" . number_format($tempo,3,",","") . " ms</td>";
+      return "<td><i title='" . $x[1] . "' class='fa fa-check-circle green'></i> " . number_format($tempo,3,",","") . " ms</td>";
     endif;
-      return "<td><i class='fa fa-exclamation-triangle yellow'></i></td><td> URL não cadastrada!</td>";
+      return "<td><i class='fa fa-exclamation-triangle yellow'></i> URL não cadastrada!</td>";
   }
 
   public function online2($url, $method){ // Utilizada na tabela de servicos

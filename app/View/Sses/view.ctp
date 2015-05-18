@@ -54,6 +54,23 @@
   </div>
 
   <div class="col-lg-8">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Clarity (Web Service)</b>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.clarity-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body clarity-body">
+        <ul id="clarity">
+          <div class="col-md-6 col-md-offset-4 load"><?php echo $this->Html->image('loading.gif', array('alt' => 'Carregando', 'width' => '30%')); ?></div>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
     <div class="panel panel-info">
       <div class="panel-heading">
         <p>
@@ -183,7 +200,7 @@
                           echo $this->Ord->PrazocheckList($os['dt_homologacao'], $os['trp'], $os['dt_recebimento_termo_prov'],
                               $os['ths'], $os['dt_recebimento_homo'], $os['trd'], $os['dt_recebimento_termo']);
                       ?>
-                    </td>                    
+                    </td>
                     <td class="text-center">
                       <?php
                         if($os['dt_ini_pdd'] != null){
@@ -382,6 +399,9 @@
   //-- ClarityID
   echo $this->Html->script('getIdClarity.js');
 
+  //-- ClarityInfo
+  echo $this->Html->script('getClarityInfo.js');
+
   //-- Jeditable
   echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
 ?>
@@ -397,5 +417,7 @@
     });
 
     $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+
+    getClarityInfoOnView('<?php echo $ss['Ss']['clarity_dm_id']?>', 'sses');
   });
 </script>

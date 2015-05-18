@@ -5,6 +5,11 @@
       'className' => 'Area',
       'foreignKey' => 'cliente_id',
       'dependent' => false,
+    ),
+    'Contrato' => array(
+      'className' => 'Contrato',
+      'foreignKey' => 'cliente_id',
+      'dependent' => false,
     )
   );
 

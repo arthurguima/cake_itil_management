@@ -82,7 +82,7 @@
   </div>
 
   <div class="col-lg-7">
-    <div class="panel panel-warning">
+    <div class="panel panel-success">
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Clarity (Web Service)</b>

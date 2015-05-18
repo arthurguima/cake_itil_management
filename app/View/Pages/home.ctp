@@ -269,8 +269,23 @@
 		})
 	}
 
+	/*
+	* Servico: ID
+	* Sigla: String
+	*/
+	function refreshContainers(servico, sigla){
+		$.ajax({
+			url: "servicos/containersonline/" + servico,
+			cache: false,
+			success: function(html){
+				$("#containers_" + sigla).html(html);
+			}
+		})
+	}
+
 	$(document).ready(function() {
-		setInterval(function(){ refreshCode(); }, 50000);
+		setInterval(function(){ refreshCode(); }, 170000);
+		setInterval(function(){ $('.get-containers').click(); }, 185000);
 		refreshCode();
 
 		$('#myStat').circliful();
