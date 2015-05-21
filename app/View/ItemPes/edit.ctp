@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h3 class="page-header">
-      Editar Item de Contrato da PA
+      Editar Item de Contrato
     </h3>
   </div>
 </div>
@@ -15,16 +15,29 @@
   <div class="col-lg-6">
     <?php
       echo $this->BootstrapForm->create('ItemPe');
-
       echo $this->BootstrapForm->input('id');
 
-      echo $this->BootstrapForm->input('contrato', array(
-              'label' => array('text' => 'Contrato: '),
-              'input' => 'text',
-              'options' => $contratos));
-      ?>
+      if($this->params['url']['controller'] == 'pes'){
+        echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+
+        echo $this->BootstrapForm->input('contrato', array(
+                'label' => array('text' => 'Contrato: '),
+                'input' => 'text',
+                'options' => $contratos));
+
+      }
+      if($this->params['url']['controller'] == 'ords'){
+          echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          echo $this->BootstrapForm->input('itempe_id', array(
+                  'label' => array('text' => 'Item de Contrato da Pa: '),
+                  'input' => 'text',
+                  'options' => $items));
+      }
+    ?>
+
     <div id="aditivoList"></div>
     <div id="itemList"></div>
+
     <?php echo $this->BootstrapForm->input('volume', array('label' => array('text' => 'Volume Utilizado: '))); ?>
 
     <div class="form-footer col-lg-10 col-md-6 pull-right">
@@ -35,19 +48,21 @@
       ?>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div class="well col-lg-9 error-message">
-      <?php
-        $str =  "Atual: Contrato -> " . $this->data['Contrato']['numero'];
-        if(isset($this->data['Aditivo']['dt_inicio'])){
-            $str = $str . "; Aditivo -> " . date('d/m/Y', strtotime($this->data['Aditivo']['dt_inicio']));
-        }
-        else{   $str = $str . "; Aditivo -> *** ";}
-        $str = $str ."; Item -> " . $this->data['Item']['nome'];
-        echo $str;
-      ?>
+  <?php if($this->params['url']['controller'] == 'pes'): ?>
+    <div class="col-lg-6">
+      <div class="well col-lg-9 error-message">
+        <?php
+          $str =  "Atual: Contrato -> " . $this->data['Contrato']['numero'];
+          if(isset($this->data['Aditivo']['dt_inicio'])){
+              $str = $str . "; Aditivo -> " . date('d/m/Y', strtotime($this->data['Aditivo']['dt_inicio']));
+          }
+          else{   $str = $str . "; Aditivo -> *** ";}
+          $str = $str ."; Item -> " . $this->data['Item']['nome'];
+          echo $str;
+        ?>
+      </div>
     </div>
-  </div>
+  <?php endif; ?>
 </div>
 
 <script>

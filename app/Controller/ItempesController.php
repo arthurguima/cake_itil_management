@@ -25,8 +25,26 @@
 				$this->Session->setFlash('Não foi possível criar o novo item contrato.', 'alert-box', array ('class' => 'alert alert-danger'));
 			}
 		}
+
 		/* Relacionamento */
 		$this->set('contratos', $this->ItemPe->Contrato->find('list', array('fields' => array('Contrato.id', 'Contrato.numero'))));
+		if($this->params['url']['pe'] != null){
+			$this->ItemPe->Behaviors->attach('Containable');
+			$items = $this->ItemPe->find('all', array(
+				'conditions' => array('ItemPe.pe_id =' . $this->params['url']['pe']),
+				'contain' => array('Item' => array()),
+				'fields' => array('ItemPe.id', 'ItemPe.volume', 'Item.nome')));
+
+			$this->set('items', $this->ItemdaPa($items));
+		}
+	}
+
+	private function ItemdaPa($items){
+		$itemsaux = array();
+		foreach($items as $i){
+			$itemsaux[$i['ItemPe']['id']] = $i['Item']['nome'] . " | Valor: " . $i['ItemPe']['volume'];
+		}
+		return $itemsaux;
 	}
 
 /**
@@ -41,7 +59,7 @@
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 
-			if ($this->request->data) {
+			if ($this->request->data && ($this->params['url']['controller'] != 'ords')) {
 				$this->request->data['ItemPe']['contrato_id'] = $this->request->data['ItemPe']['contrato'];
 
 				if($this->request->data['Aditivo']['Aditivo']['0'] != 'Aditivo' ){
@@ -61,6 +79,16 @@
 		}
 		/* Relacionamento */
 		$this->set('contratos', $this->ItemPe->Contrato->find('list', array('fields' => array('Contrato.id', 'Contrato.numero'))));
+		if($this->params['url']['controller'] == 'ords'){
+			$this->ItemPe->Behaviors->attach('Containable');
+			//debug($this->data['ItemPe']);
+			$items = $this->ItemPe->find('all', array(
+				'conditions' => array('ItemPe.pe_id = ' . $this->params['url']['pe_id']),
+				'contain' => array('Item' => array()),
+				'fields' => array('ItemPe.id', 'ItemPe.volume', 'Item.nome')));
+
+			$this->set('items', $this->ItemdaPa($items));
+		}
 	}
 
 /**

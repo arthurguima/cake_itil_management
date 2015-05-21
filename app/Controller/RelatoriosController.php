@@ -142,12 +142,42 @@
 
   public function contratos(){
 
+    if($this->request->data !=null){
+      $this->loadModel('ItemPe');
+      $this->ItemPe->Behaviors->load('Containable');
+      //$this->ItemPe->contain('Pe', 'Ord');
+      $this->set('items', $this->itemsEmpenhados(
+        $this->ItemPe->find('all', array(
+          'conditions'=> array('contrato_id ='.$this->request->data['Contrato']['Contrato'][0]),
+          'contain' => array(
+            'Pe' => array('Ss' => array()),
+            'Ord' => array('Ss' => array(), 'Pe' => array()),
+          ),
+        )
+      )));
+    }
+
     /* Filtros */
     $this->loadModel('Cliente');
     $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
 
     // Os filtros de contratos, aditivos são montados via ajax
+  }
+
+  private function itemsEmpenhados($itemPes){
+    $sses = array();
+    /*foreach $itemPes as $i{
+      if($i['Pe']['id'] == null)
+        $tipo = 'Ord'
+      else
+        $tipo = 'Pe'
+
+      $sses[$i[$tipo]['Ss']['id']] = $i[$tipo]['Ss'];
+      $sses[$i[$tipo]['Ss']['id']][$tipo]
+    }*/
+
+    return $itemPes;
   }
 
   //TODO: Filtrar o cliente na SQL de consulta

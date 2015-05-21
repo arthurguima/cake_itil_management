@@ -61,11 +61,14 @@
 										  <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Dashboard',
 																							Router::url('/', true) . "index.php", array('escape' => false)); ?>
 									</li>
-									<li>
-											<?php echo $this->Html->link("<i class='fa fa-calendar fa-fw'></i> Calendário", '/calendarios/show', array('escape' => false)); ?>
-											<span class="fa arrow"></span>
+									<li><!-- Calendário -->
+											<a href="#"><i class="fa fa-calendar fa-fw"></i> Calendários <span class="fa arrow"></span></a>
+											<ul class="nav nav-second-level">
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Previsões de Término", '/calendarios/show/1155', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/calendarios/show/2', array('escape' => false)); ?></li>
+											</ul>
 									</li>
-									<li> <!-- Sustentação -->
+									<li> <!-- Negócio -->
 											<a href="#"><i class="fa fa-briefcase fa-fw"></i> Demandas <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
@@ -73,7 +76,7 @@
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
 											</ul>
 									</li>
-									<li> <!-- Sustentação -->
+									<li> <!-- Gestão do serviço -->
 											<a href="#"><i class="fa fa-wrench fa-fw"></i> Sustentação<span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados", '/chamados', array('escape' => false)); ?></li>

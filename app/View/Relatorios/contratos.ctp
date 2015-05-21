@@ -11,10 +11,11 @@
         <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
         <div class="col-lg-12 filters-item">
           <div class="form-group" style="float:left;">
-            <?php echo $this->BootstrapForm->input('contrato_id', array(
-                              'label' => array('text' => 'Contrato: '),
+            <?php echo $this->BootstrapForm->input('cliente_id', array(
+                              'label' => array('text' => 'Cliente: '),
                               'class' => "form-control pull-right")); ?>
           </div>
+          <div id="contratoList" style="float:left;"></div>
           <div id="aditivoList" style="float:left;"></div>
           <!--div id="itemList"></div-->
         </div>
@@ -28,6 +29,7 @@
 </div>
 
 <?php if($this->request->data != null): ?>
+  <?php debug($this->request->data); debug($items) ?>
 
 <?php endif; ?>
 
@@ -40,6 +42,14 @@
       cache: false,
       success: function(html){
         $("#contratoList").html(html);
+
+        //QUando o contrato é resgatado com sucesso trago a lista de aditivos
+        $( "select#ContratoContrato" ).change(function () {
+          var str = "";
+          $( "select#ContratoContrato option:selected" ).each(function() {
+             getAditivos($(this).val());
+          })
+        }).change();
       }
     });
   }
@@ -57,11 +67,17 @@
 
   $(document).ready(function() {
     // Quando selecionado o Contrato
-    $( "select#contrato_id" ).change(function () {
+    $( "select#ContratoContrato" ).change(function () {
       var str = "";
-      $( "select#contrato_id option:selected" ).each(function() {
-         //getItens("Contrato", $(this).val());
+      $( "select#ContratoContrato option:selected" ).each(function() {
          getAditivos($(this).val());
+      })
+    }).change();
+
+    $( "select#cliente_id" ).change(function () {
+      var str = "";
+      $( "select#cliente_id option:selected" ).each(function() {
+         getContratos($(this).val());
       })
     }).change();
   });

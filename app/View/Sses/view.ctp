@@ -222,7 +222,7 @@
                       <ul>
                         <?php
                           foreach($os['ItemPe'] as $item):
-                            echo "<li>" . $item['Item']['nome'] . " - " . $item['volume'] . '/' . $item['Item']['metrica'] . "</li>";
+                            echo "<li>" . $item['ItemPePai']['Item']['nome'] . " - " . $item['volume'] . '/' . $item['ItemPePai']['Item']['metrica'] . "</li>";
                           endforeach;
                           unset($item);
                         ?>

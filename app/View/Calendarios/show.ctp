@@ -3,7 +3,7 @@
 ?>
 
 <div class="row">
-    <div class="col-lg-12"><h3 class="page-header"><i class="fa fa-calendar fa-fw"></i> Calendário de Previsões de Término</h3></div>
+    <div class="col-lg-12"><h3 class="page-header"><i class="fa fa-calendar fa-fw"></i> Calendário </h3></div>
 </div>
 
 <div class="row">
@@ -28,11 +28,18 @@
 				center: 'title',
 				right: 'month,basicWeek,basicDay'
 			},
+      
+      views: {
+        month: {
+            eventLimit: 7 // adjust to 6 only for agendaWeek/agendaDay
+        }
+      },
 
       events: {
-        url: 'json',
+        url: "<?php echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0]; ?>",
         //color: '#DEDEDE',   // an option!
         //textColor: 'black' // an option!
+        //As cores estão vindo dos métodos que geram os arrays para cada Model
       },
 
       eventRender: function(event, element) {

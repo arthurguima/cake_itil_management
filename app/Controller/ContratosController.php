@@ -97,7 +97,7 @@
     $cliente = $this->Cliente->find('first', array(
       'conditions' => array('Cliente.id' => $this->params['url']['cliente']),
       'contain'=> array(
-        'Contrato' => array('fields' => array('Contrato.id', 'Contrato.data_ini'))
+        'Contrato' => array('fields' => array('Contrato.id', 'Contrato.numero'))
       )
     ));
     //$this->Demanda->recursive = -1;

@@ -994,13 +994,13 @@ table#dataTables-Servico{
 /* Calendário */
 .calendar-demanda{
   background-color: #428bca !important;
-  border: 1px solid #428bca !important;
+  border: 1px solid #0a5a9c !important;
   color: #fff !important;
   /*  font-weight: bold !important;*/
 }
 .calendar-rdm{
   background-color: #f2dede !important;
-  border: 1px solid #ebccd1 !important;
+  border: 1px solid #AE7F7F !important;
   color: #a94442 !important;
   /*  font-weight: bold !important;*/
 }
@@ -1011,19 +1011,19 @@ table#dataTables-Servico{
 }
 .calendar-ss{
   background-color: #56CDDF !important;
-  border: 1px solid #bce8f1 !important;
+  border: 1px solid #12A4B8 !important;
   color: #fff !important;
   /*  font-weight: bold !important;*/
 }
 .calendar-pa{
   background-color: #C6CFDB !important;
-  border: 1px solid #ddd !important;
+  border: 1px solid #697E9C !important;
   color: #000 !important;
   /*  font-weight: bold !important;*/
 }
 .calendar-os{
   background-color: #fcf8e3 !important;
-  border: 1px solid #faebcc !important;
+  border: 1px solid #B8AE7E !important;
   color: #8a6d3b !important;
 /*  font-weight: bold !important;*/
 }
@@ -1043,6 +1043,11 @@ table#dataTables-Servico{
   font-weight: 600;
 }
 
+.fc-more {
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
 
 td.fc-widget-header {
   background-color: #C6CFDB;
