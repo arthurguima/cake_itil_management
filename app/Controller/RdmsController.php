@@ -5,6 +5,9 @@
     // Add filter
     $this->Filter->addFilters(
       array(
+        'responsavel_' => array(
+          'Rdm.responsavel' => array('operator' => 'LIKE')
+        ),
         'nome_' => array(
           'Rdm.nome' => array('operator' => 'LIKE')
         ),
@@ -20,6 +23,11 @@
         'ambiente_' => array(
           'Rdm.ambiente' => array(
             'select' => $this->Filter->select('Ambiente', array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento', 4 => 'Sustentação') )
+          )
+        ),
+        'concluida_' => array(
+          'Rdm.sucesso' => array(
+            'select' => $this->Filter->select('Concluida', array(0 => 'Não', 1 => 'Sim', 2 => 'Cancelada', -1 => "Não preenchido") )
           )
         ),
         'tipo' => array(

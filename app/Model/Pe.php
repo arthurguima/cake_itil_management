@@ -18,6 +18,12 @@
     )
   );
 
+  public $hasOne = array(
+    'Ord' => array(
+      'className' => 'Ord',      
+    )
+  );
+
   public $hasMany = array(
     'Historico' => array(
       'className' => 'Historico',

@@ -96,7 +96,7 @@
                 <th>Validade do PDD</th>
                 <th>Responsável</th>
                 <th><span class="editable">Status</span></th>
-                <th>Valor/Métrica</th>
+                <th>Valor/Métrica Estimada</th>
                 <th></th>
               </tr>
             </thead>
@@ -182,7 +182,7 @@
                 <th>Termos <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
-                <th>Valor/Métrica</th>
+                <th>Valor/Métrica Final</th>
                 <th></th>
               </tr>
             </thead>

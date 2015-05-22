@@ -145,16 +145,41 @@
     if($this->request->data !=null){
       $this->loadModel('ItemPe');
       $this->ItemPe->Behaviors->load('Containable');
-      //$this->ItemPe->contain('Pe', 'Ord');
-      $this->set('items', $this->itemsEmpenhados(
-        $this->ItemPe->find('all', array(
-          'conditions'=> array('contrato_id ='.$this->request->data['Contrato']['Contrato'][0]),
-          'contain' => array(
-            'Pe' => array('Ss' => array()),
-            'Ord' => array('Ss' => array(), 'Pe' => array()),
-          ),
-        )
-      )));
+
+      if($this->request->data['Contrato']['Contrato'][0] != "Contrato"){
+
+        // Resgasta o que foi planejado nas PAS do contrato X
+        // A partir disso pode-se fazer o batimento com o que realmente foi utilizado
+        if($this->request->data['Aditivo']['Aditivo'][0] != "Aditivo"){
+          $conditions = 'ItemPe.aditivo_id = '.$this->request->data['Aditivo']['Aditivo'][0];
+
+          $this->loadModel('Aditivo');
+          $this->Aditivo->Behaviors->load('Containable');
+          $this->Aditivo->contain('Contrato');
+          $this->set('aditivo', $this->Aditivo->find('first', array('conditions'=> array('Aditivo.id = ' .$this->request->data['Aditivo']['Aditivo'][0]))));
+          $this->set(compact('aditivo'));
+        }
+        else{
+          $conditions = 'ItemPe.contrato_id = '. $this->request->data['Contrato']['Contrato'][0];
+
+          $this->loadModel('Contrato');
+          $this->set('contrato', $this->Contrato->find('first', array('conditions'=> array('Contrato.id = ' .$this->request->data['Contrato']['Contrato'][0]))));
+          $this->set(compact('aditivo'));
+        }
+
+        $this->set('items', $this->itemsEmpenhados(
+          $this->ItemPe->find('all', array(
+            'contain' => array(
+              'ItemPeFilha' => array(),
+              'Item' => array(),
+              'Pe' => array('Ord' => array())
+            ),
+            'conditions'=> array(
+                $conditions . ' && ItemPe.itempe_id IS NULL'
+            )
+          )
+        )));
+      }
     }
 
     /* Filtros */
@@ -165,19 +190,31 @@
     // Os filtros de contratos, aditivos são montados via ajax
   }
 
+  /*
+   * Se existe uma contagem para a Pa automaticamente RESERVAMOS o valor
+   * Se existe também uma OS para a Pa o valor está EMPENHADO
+   * se já foi feita a contagem final o valor foi utilizado
+  */
   private function itemsEmpenhados($itemPes){
-    $sses = array();
-    /*foreach $itemPes as $i{
-      if($i['Pe']['id'] == null)
-        $tipo = 'Ord'
-      else
-        $tipo = 'Pe'
+    $item = array();
+    foreach ($itemPes as $i){
+      if(!isset($item[$i['Item']['id']])){
+        $item[$i['Item']['id']] = $i['Item'];
+        $item[$i['Item']['id']]['Reservado'] = 0;
+        $item[$i['Item']['id']]['Empenhado'] = 0;
+        $item[$i['Item']['id']]['Utilizado'] = 0;
+      }
+      if(!isset($i['Pe']['Ord']['id'])) //PA sem OS
+        $item[$i['Item']['id']]['Reservado'] += $i['ItemPe']['volume'];
+      else{
+        if(isset($i['ItemPeFilha']['id']))// Possui OS com contagem final
+          $item[$i['Item']['id']]['Utilizado'] += $i['ItemPe']['volume'];
+        else
+          $item[$i['Item']['id']]['Empenhado'] += $i['ItemPe']['volume'];//OS sem contagem final
+      }
+    }
 
-      $sses[$i[$tipo]['Ss']['id']] = $i[$tipo]['Ss'];
-      $sses[$i[$tipo]['Ss']['id']][$tipo]
-    }*/
-
-    return $itemPes;
+    return $item;
   }
 
   //TODO: Filtrar o cliente na SQL de consulta

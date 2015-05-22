@@ -29,8 +29,48 @@
 </div>
 
 <?php if($this->request->data != null): ?>
-  <?php debug($this->request->data); debug($items) ?>
-
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <b>
+            <?php
+              if(isset($aditivo))
+                echo "Contrato: " . $aditivo['Contrato']['numero'] . " | Aditivo: " . $aditivo['Aditivo']['dt_inicio'];
+              else
+                echo "Contrato: " . $contrato['numero'];
+            ?>
+          </b>
+        </div>
+        <div class="panel-body ">
+          <div class="table-responsive">
+            <table class="table display table-striped table-bordered table-hover" id="dataTables-contrato">
+              <thead>
+                <tr>
+                  <th>Item de Contrato</th>
+                  <th>Volume Contratado</th>
+                  <th>Volume Reservado</th>
+                  <th>Volume Empenhado</th>
+                  <th>Volume Utilizado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($items as $item): ?>
+                  <tr>
+                    <td><?php echo $item['nome']; ?></td>
+                    <td><?php echo $item['volume'] . " " . $item['metrica']; ?></td>
+                    <td><?php echo $item['Reservado'] . " " . $item['metrica']; ?></td>
+                    <td><?php echo $item['Empenhado'] . " " . $item['metrica']; ?></td>
+                    <td><?php echo $item['Utilizado'] . " " . $item['metrica']; ?></td>
+                  </tr>
+                <?php endforeach; ?>
+                <?php unset($item); ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 <?php endif; ?>
 
 <script>
