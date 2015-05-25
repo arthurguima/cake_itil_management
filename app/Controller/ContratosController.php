@@ -88,7 +88,7 @@
   /**
   * returns a list of itens filtered by cliente
   */
-  public function optionList(){
+  public function optionlist(){
     $this->layout = null;
     //$this->autoRender = false;
 

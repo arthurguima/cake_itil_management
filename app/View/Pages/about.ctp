@@ -70,6 +70,7 @@
                         <li>Disponibilidade dos Containers de Serviço</li>
                         <li>Relatórios Separados por Clientes</li>
                         <li>Visões Gerais por clientes no Dashboard</li>
+                        <li>Relatório de Contrato</li>
                       </ul>
                     </div>
                 </li>

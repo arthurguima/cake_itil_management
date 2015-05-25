@@ -59,9 +59,9 @@
                   <tr>
                     <td><?php echo $item['nome']; ?></td>
                     <td><?php echo $item['volume'] . " " . $item['metrica']; ?></td>
-                    <td><?php echo $item['Reservado'] . " " . $item['metrica']; ?></td>
-                    <td><?php echo $item['Empenhado'] . " " . $item['metrica']; ?></td>
-                    <td><?php echo $item['Utilizado'] . " " . $item['metrica']; ?></td>
+                    <td><?php echo $item['Reservado'] . " " . $item['metrica'] . ' (' . round(($item['Reservado']/$item['volume'])*100,2) .'%)'; ?></td>
+                    <td><?php echo $item['Empenhado'] . " " . $item['metrica'] . ' (' . round(($item['Empenhado']/$item['volume'])*100,2) .'%)'; ?></td>
+                    <td><?php echo $item['Utilizado'] . " " . $item['metrica'] . ' (' . round(($item['Utilizado']/$item['volume'])*100,2) .'%)'; ?></td>
                   </tr>
                 <?php endforeach; ?>
                 <?php unset($item); ?>
@@ -71,10 +71,49 @@
         </div>
       </div>
     </div>
+  </div>
 <?php endif; ?>
 
-<script>
+<div class="row">
+  <?php
+    foreach ($items as $key => $item){
+      echo '<script>
 
+        $(document).ready(function() {
+          var chart = new CanvasJS.Chart("chartContainer'. $key .'", {
+
+            title:{
+              text: "' . $item['nome'] . '",
+              fontSize: 20
+            },
+            data: [
+              {
+               type: "column",
+               dataPoints: [
+                 { label: "Volume Total", y: ' . $item['volume'] . '},
+                 { label: "Reservado", y: ' . $item['Reservado'] . ' },
+                 { label: "Empenhado", y: ' . $item['Empenhado'] . ' },
+                 { label: "Utilizado", y: ' . $item['Utilizado'] . ' }
+               ]
+             }
+            ],
+            /** Set axisY properties here*/
+            axisY:{
+              suffix: "'. $item['metrica'] .'"
+            }
+           });
+
+          chart.render();
+        });
+    </script>
+    <div class="col-lg-3" id="chartContainer'. $key .'" style="height: 350px; margin-left: 15px;"></div>
+      ';
+    }
+    unset($item);
+  ?>
+</div>
+
+<script>
 /* Lista de Contratos */
   function getContratos(cliente){
     $.ajax({
@@ -121,6 +160,7 @@
       })
     }).change();
   });
+
 </script>
 
 
@@ -128,6 +168,9 @@
   // Circliful
   echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
   echo $this->Html->css('plugins/jquery.circliful.css');
+
+  // CanvasJs
+  echo $this->Html->script('plugins/canvasjs/jquery.canvasjs.min.js');
 
   //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
