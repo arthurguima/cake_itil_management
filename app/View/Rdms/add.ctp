@@ -18,6 +18,10 @@
                  'label' => array('text' => 'Responsável: '),
                  'value' => $this->Ldap->nomeUsuario()));
 
+      echo $this->BootstrapForm->input('solicitante', array(
+                'label' => array('text' => 'Solicitante: '),
+                'value' => $this->Ldap->nomeUsuario()));
+
       echo $this->BootstrapForm->input('numero', array(
                   'label' => array('text' => 'Número: ')));
 

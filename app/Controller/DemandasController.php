@@ -129,7 +129,7 @@
       if ($this->Demanda->save($this->request->data)) {
         $this->Session->setFlash('Nova Demanda Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
         if($this->params['url']['controller'] == null){
-          return $this->redirect(array('action' => 'index'));
+          $this->redirect(array('action' => 'view', $this->Demanda->id));
         }
         else{
           return $this->redirect(array('controller' => $this->params['url']['controller'], 'action' => 'view', $this->params['url']['id']));

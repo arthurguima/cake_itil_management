@@ -1079,3 +1079,10 @@ td.fc-day{
   border-color: #FFC200;
   background-color: #FFF785 !important;
 }
+
+
+/*CanvasJs*/
+.chart-container{
+  margin-right: 5px;
+  margin-bottom: 5px;
+}

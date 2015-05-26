@@ -37,6 +37,22 @@
                 'rule'    => array('between', 3, 110),
                 'message' => 'O campo deve conter de 3 a 110 caracteres!'
     )),
+    'solicitante' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!'),
+      'between' => array(
+                'rule'    => array('between', 3, 150),
+                'message' => 'O campo deve conter de 3 a 150 caracteres!'
+    )),
+    'responsavel' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!'),
+      'between' => array(
+                'rule'    => array('between', 3, 150),
+                'message' => 'O campo deve conter de 3 a 150 caracteres!'
+    )),
     'servico_id' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',

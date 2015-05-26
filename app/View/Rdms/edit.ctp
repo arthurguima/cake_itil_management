@@ -26,6 +26,9 @@
       echo $this->BootstrapForm->input('responsavel', array(
                  'label' => array('text' => 'Responsável: ')));
 
+     echo $this->BootstrapForm->input('solicitante', array(
+               'label' => array('text' => 'Solicitante: ')));
+
       echo $this->BootstrapForm->input('numero', array(
                   'label' => array('text' => 'Número: ')));
 

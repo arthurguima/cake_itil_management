@@ -180,7 +180,7 @@
 					return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
 				}
 				else{
-					return $this->redirect(array('controller' =>  'chamados', 'action' => 'index'));
+					$this->redirect(array('action' => 'view', $this->Chamado->id));
 				}
 			} else {
 				$this->Session->setFlash('Não foi possível adicionar o novo chamado.', 'alert-box', array ('class' => 'alert alert-danger'));

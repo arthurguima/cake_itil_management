@@ -127,7 +127,7 @@
 			$this->Ss->create();
 			if ($this->Ss->save($this->request->data)) {
 				$this->Session->setFlash('SS criada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-					return $this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'view', $this->Ss->id));
 			}
 			$this->Session->setFlash('Não foi possível criar a nova SS. Verifique se ela já existe no sistema.', 'alert-box', array ('class' => 'alert alert-danger'));
 		}

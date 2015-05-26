@@ -35,6 +35,8 @@
           <li><a><b>Serviço: </b><?php echo $rdm['Servico']['nome']; ?></a></li>
           <li><a><b>Ambiente: </b><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></a></li>
           <li><a><b>Versão: </b><?php echo $rdm['Rdm']['versao']; ?></a></li>
+          <li><a><b>Solicitante: </b><?php echo $rdm['Rdm']['solicitante']; ?></a></li>
+          <li><a><b>Responsável: </b><?php echo $rdm['Rdm']['responsavel']; ?></a></li>
           <li><a><b>Data Prevista: </b><?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?></a></li>
           <li><a><b>Data de Execução: </b><?php echo $rdm['Rdm']['dt_executada']; ?></a></li>
           <li><a><b>Tipo: </b><?php echo $rdm['RdmTipo']['nome']; ?></a></li>

@@ -64,7 +64,7 @@
       $this->Contrato->create();
       if ($this->Contrato->save($this->request->data)) {
         $this->Session->setFlash('Contrato Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-          return $this->redirect(array('controller' => 'contratos', 'action' => 'index'));
+        $this->redirect(array('action' => 'view', $this->Contrato->id));
       }
       $this->Session->setFlash('Não foi possível criar o novo contrato.', 'alert-box', array ('class' => 'alert alert-danger'));
     }

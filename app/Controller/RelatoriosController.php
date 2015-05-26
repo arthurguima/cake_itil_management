@@ -160,11 +160,11 @@
           $this->set(compact('aditivo'));
         }
         else{
-          $conditions = 'ItemPe.contrato_id = '. $this->request->data['Contrato']['Contrato'][0];
+          $conditions = 'ItemPe.contrato_id = '. $this->request->data['Contrato']['Contrato'][0] . "&& ItemPe.aditivo_id  IS NULL";
 
           $this->loadModel('Contrato');
           $this->set('contrato', $this->Contrato->find('first', array('conditions'=> array('Contrato.id = ' .$this->request->data['Contrato']['Contrato'][0]))));
-          $this->set(compact('aditivo'));
+          $this->set(compact('contrato'));
         }
 
         $this->set('items', $this->itemsEmpenhados(

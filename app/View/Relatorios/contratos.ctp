@@ -99,14 +99,18 @@
             ],
             /** Set axisY properties here*/
             axisY:{
-              suffix: "'. $item['metrica'] .'"
+              suffix: "'. $item['metrica'] .'",
+              valueFormatString: "### ### ###",
+            },
+            axisX:{
+              labelFontSize: 12,
             }
            });
 
           chart.render();
         });
     </script>
-    <div class="col-lg-3" id="chartContainer'. $key .'" style="height: 350px; margin-left: 15px;"></div>
+    <div class="col-lg-4 chart-container" id="chartContainer'. $key .'" style="height: 350px; max-width: 450px;"></div>
       ';
     }
     unset($item);

@@ -97,7 +97,7 @@
       $this->Indisponibilidade->create();
       if ($this->Indisponibilidade->save($this->request->data)) {
         $this->Session->setFlash('Indisponibilidade Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-        return $this->redirect(array('controller' => 'indisponibilidades', 'action' => 'index' ));
+        $this->redirect(array('action' => 'view', $this->Indiponibilidade->id));
       } else {
         $this->Session->setFlash('Não foi possível criar o novo Indisponibilidade.', 'alert-box', array ('class' => 'alert alert-danger'));
       }

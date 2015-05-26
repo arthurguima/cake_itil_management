@@ -5,6 +5,9 @@
     // Add filter
     $this->Filter->addFilters(
       array(
+        'solicitante_' => array(
+          'Rdm.solicitante' => array('operator' => 'LIKE')
+        ),
         'responsavel_' => array(
           'Rdm.responsavel' => array('operator' => 'LIKE')
         ),
@@ -111,7 +114,7 @@
       $this->Rdm->create();
       if ($this->Rdm->save($this->request->data)) {
         $this->Session->setFlash('Rdm criada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-          return $this->redirect(array('action' => 'index'));
+        $this->redirect(array('action' => 'view', $this->Rdm->id));
       }
       $this->Session->setFlash('Não foi possível criar a nova rdm.', 'alert-box', array ('class' => 'alert alert-danger'));
     }

@@ -49,7 +49,7 @@
       $this->Area->create();
       if ($this->Area->save($this->request->data)) {
         $this->Session->setFlash('Área  criada com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-          return $this->redirect(array('action' => 'index'));
+        $this->redirect(array('action' => 'view', $this->Area->id));
       }
       $this->Session->setFlash('Não foi possível criar a nova Área.', 'alert-box', array ('class' => 'alert alert-danger'));
     }
