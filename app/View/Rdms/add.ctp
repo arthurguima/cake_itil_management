@@ -67,7 +67,7 @@
         <div class="col-lg-9">
           <select name="data[Rdm][sucesso]" class="form-control" id="filtersucesso">
             <option value="-1">Concluída?</option>
-            <option value="o">Não</option>
+            <option value="0">Não</option>
             <option value="1">Sim</option>
             <option value="2">Cancelada</option>
           </select>

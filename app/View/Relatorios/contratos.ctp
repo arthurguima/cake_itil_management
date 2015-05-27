@@ -48,10 +48,11 @@
               <thead>
                 <tr>
                   <th>Item de Contrato</th>
-                  <th>Volume Contratado</th>
-                  <th>Volume Reservado</th>
-                  <th>Volume Empenhado</th>
-                  <th>Volume Utilizado</th>
+                  <th>Volume Contratado (VC)</th>
+                  <th>Volume Reservado (R)</th>
+                  <th>Volume Empenhado (E)</th>
+                  <th>Volume Utilizado (U)</th>
+                  <th>Volume Restante (VC-(R+E+U))</th>
                 </tr>
               </thead>
               <tbody>
@@ -62,6 +63,7 @@
                     <td><?php echo $item['Reservado'] . " " . $item['metrica'] . ' (' . round(($item['Reservado']/$item['volume'])*100,2) .'%)'; ?></td>
                     <td><?php echo $item['Empenhado'] . " " . $item['metrica'] . ' (' . round(($item['Empenhado']/$item['volume'])*100,2) .'%)'; ?></td>
                     <td><?php echo $item['Utilizado'] . " " . $item['metrica'] . ' (' . round(($item['Utilizado']/$item['volume'])*100,2) .'%)'; ?></td>
+                    <td><?php echo $this->Contrato->VolumeRestante($item['volume'] - ($item['Reservado']+$item['Utilizado']+$item['Empenhado']), $item['metrica']); ?></td>
                   </tr>
                 <?php endforeach; ?>
                 <?php unset($item); ?>
@@ -84,7 +86,7 @@
 
             title:{
               text: "' . $item['nome'] . '",
-              fontSize: 20
+              fontSize: 18
             },
             data: [
               {
@@ -99,8 +101,9 @@
             ],
             /** Set axisY properties here*/
             axisY:{
-              suffix: "'. $item['metrica'] .'",
+              suffix: " '. $item['metrica'] .'",
               valueFormatString: "### ### ###",
+              labelFontSize: 12,
             },
             axisX:{
               labelFontSize: 12,

@@ -608,7 +608,12 @@ td i.yellow{
 }
 
 .panel-warning {
-  border: 2px solid #fcf8e3 !important;
+  border: 2px solid #D8D2AF !important;
+}
+.panel-warning>.panel-heading {
+  color: #fff;
+  background-color: #D8D2AF;
+  border-color: #D8D2AF;
 }
 
 .panel-default {

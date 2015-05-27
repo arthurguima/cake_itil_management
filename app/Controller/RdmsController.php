@@ -88,7 +88,7 @@
         $this->Rdm->id = $id;
         if ($this->Rdm->save($this->request->data)) {
             $this->Session->setFlash('Rdm atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-            return $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'view', $this->Rdm->id));
         }
         $this->Session->setFlash('Não foi possível atualizar a rdm.', 'alert-box', array ('class' => 'alert alert-danger'));
     }

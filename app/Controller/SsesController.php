@@ -146,7 +146,7 @@
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Ss->save($this->request->data)) {
 				$this->Session->setFlash('SS  atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index' ));
+				$this->redirect(array('action' => 'view', $this->Ss->id));
 			} else {
 				$this->Session->setFlash('Não foi possível atualizar a SS.', 'alert-box', array ('class' => 'alert alert-danger'));
 			}

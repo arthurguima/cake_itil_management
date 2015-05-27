@@ -45,6 +45,12 @@
               <h5> <i class="ace-icon fa fa-hand-o-right"></i> SBAdmin</h5>
               <h5> <i class="ace-icon fa fa-hand-o-right"></i> Jquery</h5>
               <h5> <i class="ace-icon fa fa-hand-o-right"></i> DataTables</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Circliful</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> CanvasJs</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Fulcalendar</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Jeditable</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> TinyMce</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Vis</h5>
             </li>
           </ul>
         </div>
