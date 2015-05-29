@@ -20,14 +20,14 @@
 
   public $hasOne = array(
     'Ord' => array(
-      'className' => 'Ord',      
+      'className' => 'Ord',
     )
   );
 
   public $hasMany = array(
     'Historico' => array(
       'className' => 'Historico',
-      'order' => array("Historico.data" => "ASC")
+      'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
     ),
     'ItemPe' => array(
       'className' => 'ItemPe'

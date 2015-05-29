@@ -28,22 +28,19 @@
           </div>
        </div>
 
-       <div class="form-group">
-         <label for="DemandaClarityDmId" class="control-label col-lg-3">DM Clarity: </label>
-         <div class="col-lg-9">
-            <div class='input-group'>
-              <input name="data[Demanda][clarity_dm_id]" placeholder="DM.XXXX" class="form-control" type="text" id="DemandaClarityDmId">
-              <span class='input-group-addon '>
-                <?php
-                  echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getClarityInfo($("#DemandaClarityDmId").val(), "Demanda");',
-                              array('escape' => false, 'title' => "Resgata Informações Básicas do Clarity"));
-                ?>
-              </span>
-            </div>
-         </div>
-      </div>
-
-       <?php
+    <?php
+        echo $this->BootstrapForm->input('clarity_dm_id', array(
+                 'label' => array(
+                   'text' => 'DM Clarity: ' .
+                    $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                               array(
+                                 'escape' => false, 'title' => "Resgata Informações Básicas do Clarity",
+                                 'class' => 'btn btn-default',
+                                 'onclick' => "javascript:getClarityInfo($('#DemandaClarityDmId').val(), 'Demanda');"
+                               ))
+                  ),
+                 'type' => 'text',
+                 'placeholder' => "DM.XXXX"));
 
         echo $this->BootstrapForm->input('mantis_id', array(
                    'label' => array('text' => 'Nº Mantis: '),

@@ -129,9 +129,9 @@
 									if(isset($rdmsmes[$key1]))
 										echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Ambiente'], "Ambientes alterados no mês " . date('m/Y') , $key1, 'mesamb', $rdmsmes[$key1]['Total']);
 									//Sucesso
-									echo $this->Rdm->rdmgraph($cliente['Sucesso'], "RDMs executadas com sucesso em " . date('Y') , $key1, 'anosuc', $cliente['Total']);
+									echo $this->Rdm->rdmgraph($cliente['Sucesso'], "Execução das RDMs em " . date('Y') , $key1, 'anosuc', $cliente['Total']);
 									if(isset($rdmsmes[$key1]))
-										echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Sucesso'], "RDMs executadas com sucesso no mês " . date('m/Y') , $key1, 'messuc', $rdmsmes[$key1]['Total']);
+										echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Sucesso'], "Execução das RDMs no mês " . date('m/Y') , $key1, 'messuc', $rdmsmes[$key1]['Total']);
 									//Servico
 									echo $this->Rdm->rdmgraph($cliente['Servico'], "RDMs por serviço em " . date('Y') , $key1, 'anoserv', $cliente['Total']);
 									if(isset($rdmsmes[$key1]))
@@ -139,7 +139,7 @@
 									//Tipo
 									//echo $this->Rdm->rdmgraph($cliente['Tipo'], "RDMs por tipo em " . date('Y') , $key1, 'ano', $cliente['Total']);
 									//if(isset($rdmsmes[$key1]))
-									//	echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Tipo'], "RDMs por tipo no mês " . date('m/Y') , $key1, 'mes', $rdmsmes[$key1]['Total']);								
+									//	echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Tipo'], "RDMs por tipo no mês " . date('m/Y') , $key1, 'mes', $rdmsmes[$key1]['Total']);
 								?>
 							</div>
 					<?php if($active == true) $active = false; endforeach; ?>

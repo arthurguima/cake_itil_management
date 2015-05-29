@@ -254,7 +254,7 @@
 	public function delete($id = null) {
 		$this->Chamado->id = $id;
 		if (!$this->Chamado->exists()) {
-			throw new NotFoundException(__('Invalid chamado'));
+			throw new NotFoundException(__('Chamado Inválido'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Chamado->delete()) {

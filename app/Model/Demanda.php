@@ -35,7 +35,7 @@
 		),
 		'Historico' => array(
 			'className' => 'Historico',
-			'order' => array("Historico.data" => "ASC")
+			'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
 		)
 	);
 
@@ -77,9 +77,23 @@
 		'clarity_dm_id' => array(
 			'unique' => array(
 				'rule' => 'isUnique',
-				'required' => 'create',
+				'required' => 'true',
+				'on' => 'create',
 				'message' => 'Já existe outra demanda com esse DM ID casdastrada!'
 			)
+		),
+		'clarity_id' => array(
+			'unique' => array(
+				'rule' => 'isUnique',
+				'required' => 'true',
+				'on' => 'create',
+				'message' => 'Já existe outra demanda com esse ID casdastrada!'
+			)
+		),
+		'servico_id' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!')
 		)
 	);
 

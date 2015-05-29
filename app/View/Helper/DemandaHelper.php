@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class='indis-footer col-lg-12'>
-      <b style='color:#D9534F;'>". $demanda['Atraso']['total']  ."</b> demanda(s)
+      <b style='color:#D9534F;'>". $demanda['Atraso']['total']  ."</b> demanda(s) - (dias em atraso)
     </div>
       <script>
         $(document).ready(function() {

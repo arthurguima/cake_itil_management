@@ -164,7 +164,7 @@ class PagesController extends AppController {
 				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente]))
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] += 1;
 				else
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] = 1;				
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] = 1;
 			//Sucesso
 				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso]))
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] += 1;
@@ -214,10 +214,10 @@ class PagesController extends AppController {
 				$sucesso = "Indefinido";
 				break;
 			case 0:
-				$sucesso = "Não";
+				$sucesso = "Sem sucesso";
 				break;
 			case 1:
-				$sucesso = "Sim";
+				$sucesso = "Sucesso";
 				break;
 			case 2:
 				$sucesso = "Cancelada";
