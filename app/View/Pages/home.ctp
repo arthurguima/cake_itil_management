@@ -139,7 +139,7 @@
 									//Tipo
 									//echo $this->Rdm->rdmgraph($cliente['Tipo'], "RDMs por tipo em " . date('Y') , $key1, 'ano', $cliente['Total']);
 									//if(isset($rdmsmes[$key1]))
-									//	echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Tipo'], "RDMs por tipo no mês " . date('m/Y') , $key1, 'mes', $rdmsmes[$key1]['Total']);
+									//echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Tipo'], "RDMs por tipo no mês " . date('m/Y') , $key1, 'mes', $rdmsmes[$key1]['Total']);
 								?>
 							</div>
 					<?php if($active == true) $active = false; endforeach; ?>
@@ -228,6 +228,9 @@
 					<?php endforeach; ?>
 				</div>
 			</div>
+			<ul class="list-group">
+    		<li class="list-group-item small">*Não são mostradas aqui as demandas internas cujo processo já foi finalizado</li>
+  		</ul>
 		</div>
 	</div>
 
@@ -303,6 +306,9 @@
 				<?php endforeach; ?>
 			</div>
 		</div>
+		<ul class="list-group">
+			<li class="list-group-item small">*Não são mostradas aqui os chamados cujo processo já foi finalizado</li>
+		</ul>
 	</div>
 </div>
 

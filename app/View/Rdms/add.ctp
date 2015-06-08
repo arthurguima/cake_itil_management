@@ -82,6 +82,7 @@
       ?>
 
     <div id="demandaList"></div>
+    <div id="chamadoList"></div>
 
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
@@ -118,12 +119,24 @@
       })
     }
 
+    function getChamados(servico){
+      $.ajax({
+        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "chamados/optionlist?servico=" + servico,
+        cache: false,
+        success: function(html){
+          $("#chamadoList").html(html);
+        }
+      })
+    }
+
     $( "select#RdmServicoId" ).change(function () {
       var str = "";
       $( "select#RdmServicoId option:selected" ).each(function() {
          getDemandas($(this).val());
+         getChamados($(this).val());
       })
     }).change();
+
   });
 </script>
 

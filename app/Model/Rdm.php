@@ -6,7 +6,8 @@
       'joinTable' => 'demandas_rdms',
       'foreignKey' => 'rdm_id',
       'associationForeignKey' => 'demanda_id',
-    )
+    ),
+    'Chamado' => array('className' => 'Chamado')
   );
 
   public $belongsTo = array(
@@ -18,7 +19,6 @@
       'className' => 'RdmTipo',
       'foreignKey' => 'rdm_tipo_id'
     )
-
   );
 
   public $hasMany = array(

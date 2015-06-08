@@ -149,6 +149,7 @@ class PagesController extends AppController {
 	* Cria um array que separa os serviços por cliente.
 	*/
 	private function rdmsPorCliente($rdms){
+		$clientes = array();
 		foreach ($rdms as $rdm){
 			$ambiente = $this->ambiente($rdm['Rdm']['ambiente']);
 			$sucesso = $this->sucesso($rdm['Rdm']['sucesso']);
