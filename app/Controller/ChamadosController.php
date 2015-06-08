@@ -285,4 +285,16 @@
 				return $status['Status']['nome'];
 		}
 	}
+
+	/**
+  * returns a list of demandas filtered by $servico
+  */
+  public function optionList(){
+    $this->layout = null;
+
+	  $this->set('chamados',
+                $this->Chamado->find('list', array(
+                  'fields' => array('Chamado.id', 'Chamado.numero'),
+                  'conditions' => array('Chamado.servico_id' => $this->params['url']['servico']))));
+  }
 }

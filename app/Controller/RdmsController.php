@@ -102,6 +102,11 @@
                 $this->Rdm->Demanda->find('list', array(
                   'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
                   'conditions' => array('Demanda.servico_id' => $this->data['Rdm']['servico_id']))));
+    $this->set('chamados',
+                $this->Rdm->Chamado->find('list', array(
+                  'fields' => array('Chamado.id', 'Chamado.numero'),
+                  'conditions' => array('Chamado.servico_id' => $this->data['Rdm']['servico_id']))));
+
 
     $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));
     $this->set(compact('rdmTipos'));

@@ -22,7 +22,7 @@
           <label for="DemandaClarityId" class="control-label col-lg-3">Clarity ID: </label>
           <div class="col-lg-9">
              <div class='input-group'>
-               <input name="data[Demanda][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="DemandaClarityId">
+               <input required="required" name="data[Demanda][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="DemandaClarityId">
                <span class='input-group-addon'><a id='viewClarity' data-toggle='modal' data-target='#myModal'></a></span>
              </div>
           </div>
