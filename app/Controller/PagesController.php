@@ -156,6 +156,9 @@ class PagesController extends AppController {
 			$servico = $rdm['Servico']['sigla'];
 			$tipo = $rdm['RdmTipo']['nome'];
 
+			if(isset($rdm['Rdm']['dt_executada']))
+				$mes = date('m',strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$rdm['Rdm']['dt_executada'])));
+
 			if(!isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total']))
 				$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total'] = 1;
 			else
@@ -167,11 +170,23 @@ class PagesController extends AppController {
 				else
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] = 1;
 			//Sucesso
-				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso]))
+				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso])){
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] += 1;
-				else
+					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
+						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
+					else
+						if(isset($mes))
+							$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
+				}
+				else{
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] = 1;
-			//Serviço
+					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
+						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
+					else
+						if(isset($mes))
+							$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
+				}
+				//Serviço
 				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico]))
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico] += 1;
 				else
@@ -181,6 +196,8 @@ class PagesController extends AppController {
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo] += 1;
 				else
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo] = 1;
+
+				ksort($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
 		}
 		return $clientes;
 	}

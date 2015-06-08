@@ -140,6 +140,9 @@
 									//echo $this->Rdm->rdmgraph($cliente['Tipo'], "RDMs por tipo em " . date('Y') , $key1, 'ano', $cliente['Total']);
 									//if(isset($rdmsmes[$key1]))
 									//echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Tipo'], "RDMs por tipo no mês " . date('m/Y') , $key1, 'mes', $rdmsmes[$key1]['Total']);
+
+									//Sucesso durante o ano
+									echo $this->Rdm->rdmSucessoTimegraph($rdmsano[$key1]['Mensal']['Sucesso'], $key1);
 								?>
 							</div>
 					<?php if($active == true) $active = false; endforeach; ?>
@@ -313,12 +316,15 @@
 </div>
 
 <?php
- // Circliful
- echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
- echo $this->Html->css('plugins/jquery.circliful.css');
+ 	// Circliful
+ 	echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
+ 	echo $this->Html->css('plugins/jquery.circliful.css');
 
- // Piety
+ 	// Piety
   echo $this->Html->script('plugins/peity/jquery.peity.min.js');
+
+	// CanvasJs
+	echo $this->Html->script('plugins/canvasjs/jquery.canvasjs.min.js');
 ?>
 
 <script>

@@ -138,6 +138,9 @@
           </table>
         </div>
       </div>
+      <ul class="list-group">
+  			<li class="list-group-item small">*Lista de Demandas Internas limitada em 150 registros</li>
+  		</ul>
     </div>
   </div>
 </div>

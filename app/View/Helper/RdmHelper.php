@@ -79,6 +79,55 @@
    </div>";
   }
 
+  public function rdmSucessoTimegraph($ano, $cliente){
+    $points = array();
+    foreach($ano as $key => $mes){
+      foreach($mes as $numero => $valor){
+        if(!isset($points[$key]))
+          $points[$key] = "{ x: ". $numero .", y: ". $valor ." },";
+        else
+          $points[$key] = $points[$key] . "{ x: ". $numero .", y: ". $valor ." },";
+      }
+    }
+
+    $string = " ";
+    foreach($points as $key => $value){
+      $string = $string . '{
+        name: "'.$key.'",
+        type: "spline",
+        showInLegend: true,
+        dataPoints: [ '. $value .' ]
+      },';
+    }
+
+    return '
+    <script type="text/javascript">
+      $(document).ready(function() {
+      	var chart = new CanvasJS.Chart("chartContainer'. $cliente .'",
+      	{
+          title:{
+            text: "Sucesso das RDMs de '. date('Y') .'",
+            fontSize: 18
+          },
+          axisX:{
+            title: "Mês",
+            titleFontSize: 12
+          },
+          axisY:{
+            title: "Qtd de RDMs",
+            titleFontSize: 12
+          },
+      		animationEnabled: true,
+      		data: [
+        		'. $string .'
+          ],
+      	});
+      	chart.render();
+      });
+    </script>
+    <div class="col-lg-4 chart-container" id="chartContainer'. $cliente .'" style="height: 300px; max-width: 500px;"></div>';
+  }
+
   private function colorAsArray($color){
     $string = "[";
     foreach($color as $co):
