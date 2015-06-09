@@ -1,6 +1,6 @@
 //Resgata informações de Demandas Cadastradas no Clarity
 function getClarityInfo(dm, control){
-  $.getJSON( "http://bsad225949//wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+  $.getJSON( "http://bsad229628//wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
 //  $.getJSON( "http://www-apps/_projects/dite/wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
     $.each( data, function( key, val ) {
       $('#' + control + toCamelCase(key)).val(val);
@@ -15,7 +15,7 @@ function getClarityInfo(dm, control){
 }
 
 function getClarityInfoOnView(dm, control){
-  $.getJSON( "http://bsad225949//wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+  $.getJSON( "http://bsad229628//wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
 //  $.getJSON( "http://www-apps/_projects/dite/wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
     $('.load').remove();
     $.each( data, function( key, val ) {

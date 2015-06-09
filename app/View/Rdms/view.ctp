@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb('Rdms', '/rdms');
-  $this->Html->addCrumb($rdm['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id']));
+  $this->Html->addCrumb($rdm['numero'], array('controller' => 'rdms', 'action' => 'view', $rdm['numero']));
 ?>
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">RDM: <?php echo $rdm['Rdm']['nome'] . " - " . $rdm['Servico']['nome']; ?></h3></div>
@@ -176,6 +176,10 @@
 
   //-- Jeditable
   echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //-- ClarityID
+  echo $this->Html->script('getSDMInfo.js');
+
 ?>
 
 <script>
@@ -187,5 +191,6 @@
       document.getElementById('demandaFrame').style.display = "block";
       //document.getElementById('demandaFrame').style.height = "720px";
     });
+    getSDMInfoOnView('<?php echo $rdm['numero']?>', 'Rdms');
   });
 </script>

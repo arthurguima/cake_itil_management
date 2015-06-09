@@ -7,19 +7,33 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-12 col-md-6">
+    <div class='col-lg-6'>
     <?php
       echo $this->BootstrapForm->create('Rdm');
+        ?>
+      <div class="form-group">
+                   <label for="numero" class="control-label col-lg-3">Número: </label>
+                   <div class="col-lg-9">
+                      <div class='input-group'>
+                        <input name="numero" class="form-control" type="text" id="numero">
+                        <span class='input-group-addon '>
+                          <?php
+                            echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getSDMInfo($("#numero").val(), "Rdm");',
+                                                     array('escape' => false, 'title' => "Resgata Informações Básicas do SDM"));
+                          ?>
+                        </span>
+                      </div>
+                   </div>
+                </div>
+    <?php
 
       echo $this->BootstrapForm->input('nome', array(
-                  'label' => array('text' => 'Nome: ')));
+                'label' => array('text' => 'Nome: ')));
 
       echo $this->BootstrapForm->input('responsavel', array(
-                 'label' => array('text' => 'Responsável: '),
-                 'value' => $this->Ldap->nomeUsuario()));
-
-      echo $this->BootstrapForm->input('numero', array(
-                  'label' => array('text' => 'Número: ')));
+               'label' => array('text' => 'Responsável: '),
+               'value' => $this->Ldap->nomeUsuario()));
 
       echo $this->BootstrapForm->input('servico_id', array(
                   'class' => 'select2',
@@ -29,7 +43,6 @@
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão/Fase/TAG: ')));
       ?>
-
       <div class="form-group">
         <label for="RdmAmbiente" class="col-lg-3 control-label">Ambiente: </label>
         <div class="col-lg-9">
@@ -49,11 +62,13 @@
         echo $this->BootstrapForm->input('dt_prevista', array(
                     'label' => array('text' => 'Data prevista: '),
                     'type' => 'text',
+                    'class' => 'RdmDtPrevista form-control',
                     'id' => 'dp '));
 
         echo $this->BootstrapForm->input('dt_executada', array(
                     'label' => array('text' => 'Data de execução: '),
                     'type' => 'text',
+                    'class' => 'RdmDtExecutada form-control',
                     'id' => 'dp '));
 
       ?>
@@ -78,7 +93,9 @@
       ?>
 
     <div id="demandaList"></div>
-
+  </div>
+</div>
+</div>
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');
@@ -91,10 +108,6 @@
 
 
 <script>
-  $(document).ready(function() {
-    $('.select2').select2({
-      containerCssClass: 'select2'
-    });
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
@@ -114,16 +127,11 @@
       })
     }
 
-    $( "select#RdmServicoId" ).change(function () {
-      var str = "";
-      $( "select#RdmServicoId option:selected" ).each(function() {
-         getDemandas($(this).val());
-      })
-    }).change();
-  });
 </script>
 
 <?php
+//-- SDMInfo
+echo $this->Html->script('getSDMInfo.js');
   //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
