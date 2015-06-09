@@ -54,24 +54,48 @@
     $data = array();
     foreach($rdms as $rdm) {
       if($rdm['Rdm']['sucesso'] == 2){
-        $title = "RDM - Cancelada - " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'];
+        //$title = "RDM - Cancelada - " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'];
         $class = 'calendar-rdm-cancelada';
       }
       else{
-        $title = "RDM " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'];
+        //$title = "RDM " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'];
         $class = 'calendar-rdm';
       }
       $data[] = array(
           'id' => $rdm['Rdm']['id'],
-          'title'=> $title,
+          'title'=> "RDM " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'], //$title,
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $rdm['Rdm']['dt_prevista']))),
           'allDay' => true,
           'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
-          'description' => $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . " "  . ($rdm['Rdm']['ambiente'] == '1' ? ' Homologação' : ($rdm['Rdm']['ambiente'] == '2' ? 'Produção' : 'Treinamento')),
+          'description' =>  $this->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada'])
+                           . " " . $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . " "  . ($rdm['Rdm']['ambiente'] == '1' ? ' Homologação' : ($rdm['Rdm']['ambiente'] == '2' ? 'Produção' : 'Treinamento')),
           'className' => $class
       );
     }
     return $data;
+  }
+
+  /*
+  * Destaca se a RDM foi concluida ou cancelada
+  */
+  private function sucesso($bol, $dt_executada, $class="") {
+    if($bol == null){
+        return " ";
+    }
+
+    switch ($bol) {
+    case 0:
+        return "<span class='label label-default' id='" . $class . "'>Sem Sucesso</span>";
+    case 1:
+      if($dt_executada != null)
+        return "<span class='label label-success' id='" . $class . "'>Sucesso</span>";
+      else
+        return "";
+    case 2:
+      return "<span class='label label-danger' id='" . $class . "'>Cancelada</span>";
+    default:
+      return " ";
+    }
   }
 
   private function sses($params){

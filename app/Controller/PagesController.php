@@ -172,6 +172,7 @@ class PagesController extends AppController {
 			//Sucesso
 				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso])){
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] += 1;
+					//Sucesso no mês X
 					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
 						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
 					else
@@ -180,6 +181,7 @@ class PagesController extends AppController {
 				}
 				else{
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] = 1;
+					//Sucesso no mês X
 					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
 						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
 					else

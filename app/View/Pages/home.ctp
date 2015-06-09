@@ -310,7 +310,7 @@
 			</div>
 		</div>
 		<ul class="list-group">
-			<li class="list-group-item small">*Não são mostradas aqui os chamados cujo processo já foi finalizado</li>
+			<li class="list-group-item small">*Não são mostrados aqui os chamados cujo processo já foi finalizado</li>
 		</ul>
 	</div>
 </div>
