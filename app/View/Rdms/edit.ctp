@@ -26,6 +26,9 @@
       echo $this->BootstrapForm->input('responsavel', array(
                  'label' => array('text' => 'Responsável: ')));
 
+     echo $this->BootstrapForm->input('solicitante', array(
+               'label' => array('text' => 'Solicitante: ')));
+
       echo $this->BootstrapForm->input('numero', array(
                   'label' => array('text' => 'Número: ')));
 
@@ -82,6 +85,12 @@
                     'multiple' => "true",
                     'options' => $demandas));
 
+        echo $this->BootstrapForm->input('Chamado', array(
+                    'label' => array('text' => 'Chamado(s): '),
+                    'input' => 'text',
+                    'multiple' => "true",
+                    'options' => $chamados));
+
         echo $this->BootstrapForm->input('observacao', array(
                     'label' => array('text' => 'Observação: '),
                     'type' => 'textarea'));
@@ -112,6 +121,7 @@
     });
 
     $('#DemandaDemanda').select2();
+    $('#ChamadoChamado').select2();
   });
 </script>
 

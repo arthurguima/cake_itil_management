@@ -4,7 +4,7 @@
   $this->Html->addCrumb("Novo", '');
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Novo Item de Contrato da PA</h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Novo Item de Contrato</h3></div>
 </div>
 
 <div class="row">
@@ -12,15 +12,22 @@
     <?php
       echo $this->BootstrapForm->create('ItemPe');
 
-      if($this->params['url']['controller'] == 'pes')
-          echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-      if($this->params['url']['controller'] == 'ords')
-          echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+      if($this->params['url']['controller'] == 'pes'){
+        echo $this->BootstrapForm->hidden('pe_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
 
-      echo $this->BootstrapForm->input('contrato', array(
-              'label' => array('text' => 'Contrato: '),
-              'input' => 'text',
-              'options' => $contratos));
+        echo $this->BootstrapForm->input('contrato', array(
+                'label' => array('text' => 'Contrato: '),
+                'input' => 'text',
+                'options' => $contratos));
+
+      }
+      if($this->params['url']['controller'] == 'ords'){
+          echo $this->BootstrapForm->hidden('ord_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          echo $this->BootstrapForm->input('itempe_id', array(
+                  'label' => array('text' => 'Item de Contrato da Pa: '),
+                  'input' => 'text',
+                  'options' => $items));
+      }
     ?>
 
     <div id="aditivoList"></div>

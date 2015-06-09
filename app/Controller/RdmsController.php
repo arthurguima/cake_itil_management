@@ -5,6 +5,12 @@
     // Add filter
     $this->Filter->addFilters(
       array(
+        'solicitante_' => array(
+          'Rdm.solicitante' => array('operator' => 'LIKE')
+        ),
+        'responsavel_' => array(
+          'Rdm.responsavel' => array('operator' => 'LIKE')
+        ),
         'nome_' => array(
           'Rdm.nome' => array('operator' => 'LIKE')
         ),
@@ -20,6 +26,11 @@
         'ambiente_' => array(
           'Rdm.ambiente' => array(
             'select' => $this->Filter->select('Ambiente', array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento', 4 => 'Sustentação') )
+          )
+        ),
+        'concluida_' => array(
+          'Rdm.sucesso' => array(
+            'select' => $this->Filter->select('Concluida', array(0 => 'Não', 1 => 'Sim', 2 => 'Cancelada', -1 => "Não preenchido") )
           )
         ),
         'tipo' => array(
@@ -77,7 +88,7 @@
         $this->Rdm->id = $id;
         if ($this->Rdm->save($this->request->data)) {
             $this->Session->setFlash('Rdm atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-            return $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'view', $this->Rdm->id));
         }
         $this->Session->setFlash('Não foi possível atualizar a rdm.', 'alert-box', array ('class' => 'alert alert-danger'));
     }
@@ -91,6 +102,11 @@
                 $this->Rdm->Demanda->find('list', array(
                   'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
                   'conditions' => array('Demanda.servico_id' => $this->data['Rdm']['servico_id']))));
+    $this->set('chamados',
+                $this->Rdm->Chamado->find('list', array(
+                  'fields' => array('Chamado.id', 'Chamado.numero'),
+                  'conditions' => array('Chamado.servico_id' => $this->data['Rdm']['servico_id']))));
+
 
     $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));
     $this->set(compact('rdmTipos'));
@@ -103,7 +119,7 @@
       $this->Rdm->create();
       if ($this->Rdm->save($this->request->data)) {
         $this->Session->setFlash('Rdm criada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-          return $this->redirect(array('action' => 'index'));
+        $this->redirect(array('action' => 'view', $this->Rdm->id));
       }
       $this->Session->setFlash('Não foi possível criar a nova rdm.', 'alert-box', array ('class' => 'alert alert-danger'));
     }

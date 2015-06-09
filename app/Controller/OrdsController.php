@@ -162,9 +162,7 @@
 				),
 				'Historico' => array(),
 				'ItemPe' => array(
-					'Item' => array(),
-					'Aditivo' => array(),
-					'Contrato' => array()
+					'ItemPePai' => array('Item' => array(),'Contrato' => array(),'Aditivo' => array(),),					
 				)
 			)
 		);

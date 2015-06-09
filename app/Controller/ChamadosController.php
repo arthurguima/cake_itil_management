@@ -180,7 +180,7 @@
 					return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
 				}
 				else{
-					return $this->redirect(array('controller' =>  'chamados', 'action' => 'index'));
+					$this->redirect(array('action' => 'view', $this->Chamado->id));
 				}
 			} else {
 				$this->Session->setFlash('Não foi possível adicionar o novo chamado.', 'alert-box', array ('class' => 'alert alert-danger'));
@@ -254,7 +254,7 @@
 	public function delete($id = null) {
 		$this->Chamado->id = $id;
 		if (!$this->Chamado->exists()) {
-			throw new NotFoundException(__('Invalid chamado'));
+			throw new NotFoundException(__('Chamado Inválido'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Chamado->delete()) {
@@ -285,4 +285,16 @@
 				return $status['Status']['nome'];
 		}
 	}
+
+	/**
+  * returns a list of demandas filtered by $servico
+  */
+  public function optionList(){
+    $this->layout = null;
+
+	  $this->set('chamados',
+                $this->Chamado->find('list', array(
+                  'fields' => array('Chamado.id', 'Chamado.numero'),
+                  'conditions' => array('Chamado.servico_id' => $this->params['url']['servico']))));
+  }
 }

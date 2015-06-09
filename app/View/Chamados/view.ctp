@@ -39,6 +39,48 @@
     </div>
   </div>
 
+  <div class="col-lg-7">
+    <div class="panel panel-default panel-default">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title">Rdms
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.rdm-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body rdm-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-demandas">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Número</th>
+                <th>Concluída?</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($chamado['Rdm'] as $rdm): ?>
+                <tr>
+                  <td><?php echo $rdm['nome']; ?></td>
+                  <td>  <?php
+                      echo $this->Html->link($rdm['numero'],
+                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['numero'],
+                            array('target' => '_blank'));
+                    ?>
+                  </td>
+                  <td><?php echo $this->Rdm->sucesso($rdm['sucesso'], $rdm['dt_executada']); ?></a></td>
+                  <td><?php echo $this->Tables->getMenu('rdms', $rdm['id'], 6); ?></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php unset($rdm); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
   <div class="col-lg-8">
     <div class="panel panel-danger">
       <div class="panel-heading">
@@ -81,7 +123,7 @@
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                 array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'chamados', 'id' => $chamado['Chamado']['id'], 'action' => 'view' )),
-                                array('escape' => false), "Você tem certeza");
+                                array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                         }
                        ?>
                      </td>

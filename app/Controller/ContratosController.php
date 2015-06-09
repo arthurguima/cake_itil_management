@@ -64,7 +64,7 @@
       $this->Contrato->create();
       if ($this->Contrato->save($this->request->data)) {
         $this->Session->setFlash('Contrato Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-          return $this->redirect(array('controller' => 'contratos', 'action' => 'index'));
+        $this->redirect(array('action' => 'view', $this->Contrato->id));
       }
       $this->Session->setFlash('Não foi possível criar o novo contrato.', 'alert-box', array ('class' => 'alert alert-danger'));
     }
@@ -88,7 +88,7 @@
   /**
   * returns a list of itens filtered by cliente
   */
-  public function optionList(){
+  public function optionlist(){
     $this->layout = null;
     //$this->autoRender = false;
 
@@ -97,7 +97,7 @@
     $cliente = $this->Cliente->find('first', array(
       'conditions' => array('Cliente.id' => $this->params['url']['cliente']),
       'contain'=> array(
-        'Contrato' => array('fields' => array('Contrato.id', 'Contrato.data_ini'))
+        'Contrato' => array('fields' => array('Contrato.id', 'Contrato.numero'))
       )
     ));
     //$this->Demanda->recursive = -1;

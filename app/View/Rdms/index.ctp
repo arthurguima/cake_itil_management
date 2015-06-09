@@ -39,12 +39,17 @@
               ?>
             </div>
           </div>
-          <div class="col-lg-12">
+          <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('solicitante_', array('class' => 'form-control', 'placeholder' => "Solicitante")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('versao_', array('class' => 'form-control', 'placeholder' => "Versão")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
+          </div>
+          <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('ambiente_', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('concluida_', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
           </div>
           <?php

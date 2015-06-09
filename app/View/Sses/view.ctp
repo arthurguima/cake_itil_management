@@ -96,7 +96,7 @@
                 <th>Validade do PDD</th>
                 <th>Responsável</th>
                 <th><span class="editable">Status</span></th>
-                <th>Valor/Métrica</th>
+                <th>Valor/Métrica Estimada</th>
                 <th></th>
               </tr>
             </thead>
@@ -182,7 +182,7 @@
                 <th>Termos <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
-                <th>Valor/Métrica</th>
+                <th>Valor/Métrica Final</th>
                 <th></th>
               </tr>
             </thead>
@@ -222,7 +222,7 @@
                       <ul>
                         <?php
                           foreach($os['ItemPe'] as $item):
-                            echo "<li>" . $item['Item']['nome'] . " - " . $item['volume'] . '/' . $item['Item']['metrica'] . "</li>";
+                            echo "<li>" . $item['ItemPePai']['Item']['nome'] . " - " . $item['volume'] . '/' . $item['ItemPePai']['Item']['metrica'] . "</li>";
                           endforeach;
                           unset($item);
                         ?>
@@ -349,7 +349,7 @@
                                 array('escape' => false));
                             echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                   array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'sses', 'id' => $ss['Ss']['id'], 'action' => 'view' )),
-                                  array('escape' => false), "Você tem certeza");
+                                  array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                           }
                        ?>
                      </td>

@@ -18,10 +18,14 @@
 		)
 	);
 
+	public $hasAndBelongsToMany = array(
+		'Rdm' => array('className' => 'Rdm')
+	);
+
 	public $hasMany = array(
 		'Historico' => array(
 			'className' => 'Historico',
-			'order' => array("Historico.data" => "ASC")
+			'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
 		)
 	);
 }

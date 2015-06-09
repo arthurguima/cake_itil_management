@@ -89,7 +89,7 @@
 			'contain' => array(
 				'Pe' => array('ItemPe'=> array('Item'=> array()), 'Status' => array()),
 				'Demanda' => array('Status' => array(), 'DemandaTipo' => array()),
-				'Ord' => array('ItemPe'=> array('Item'=> array()), 'Status' => array(), 'Pe' => array()),
+				'Ord' => array('ItemPe'=> array('ItemPePai' => array('Item'=> array())), 'Status' => array(), 'Pe' => array()),
 				'Historico' => array(),
 				'Servico' => array(),
 				'Status' => array(),
@@ -127,7 +127,7 @@
 			$this->Ss->create();
 			if ($this->Ss->save($this->request->data)) {
 				$this->Session->setFlash('SS criada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-					return $this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'view', $this->Ss->id));
 			}
 			$this->Session->setFlash('Não foi possível criar a nova SS. Verifique se ela já existe no sistema.', 'alert-box', array ('class' => 'alert alert-danger'));
 		}
@@ -146,7 +146,7 @@
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Ss->save($this->request->data)) {
 				$this->Session->setFlash('SS  atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index' ));
+				$this->redirect(array('action' => 'view', $this->Ss->id));
 			} else {
 				$this->Session->setFlash('Não foi possível atualizar a SS.', 'alert-box', array ('class' => 'alert alert-danger'));
 			}

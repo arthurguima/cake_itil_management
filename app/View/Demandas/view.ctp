@@ -141,7 +141,7 @@
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                 array('controller' => 'chamados', 'action' => 'delete', $chamado['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
-                                array('escape' => false), "Você tem certeza");
+                                array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                         }
                        ?>
                      </td>

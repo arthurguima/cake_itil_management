@@ -6,11 +6,11 @@
 
 	<!-- Serviços Online -->
 	<div class="col-lg-3 col-md-12 pull-right col-sm-12 delete-online">
-		<div class="panel panel-primary">
+		<div class="panel panel-default">
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
-						Serviços Online:
+						<b>Serviços Online:</b>
 						<?php echo $this->Html->link('<i class="fa fa-refresh pull-right"></i>', 'javascript:refreshCode();', array('escape' => false)); ?>
 						<span style="cursor:pointer;" onclick="javascript:$('div.delete-online').remove();"><i class="fa fa-trash-o pull-right"></i></span>
 					</h3>
@@ -26,7 +26,7 @@
 
 	<!-- Estimativa de Disponibildidade -->
 	<div class="col-lg-9 col-md-12 col-sm-12 pull-left delete-indis">
-		<div class="panel panel-default panel-info">
+		<div class="panel panel-warning">
 			<div class="panel-heading">
 				<p><h3 class="panel-title"><b><i class="fa fa-clock-o" style="font-size: 20px;"></i> <span>Estimativa de Disponibilidade</b> - Período
 					<?php
@@ -91,9 +91,69 @@
 		</div>
 	</div>
 
+	<!-- RDMs --> <?php //debug($rdmsmes);?>
+	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-rdm">
+		<div class="panel panel-danger ">
+			<div class="panel-heading">
+				<p>
+					<h3 class="panel-title">
+						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Requisões de Mudança
+							<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.rdms-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+							<span style="cursor:pointer;" onclick="javascript:$('div.delete-rdm').remove();"><i class="fa fa-trash-o pull-right"></i></span>
+						</b>
+					</h3>
+				</p>
+			</div>
+			<div class="panel-body rdms-body">
+				<ul class="nav nav-tabs nav-tabs-black cliente" role="tablist">
+					<?php $active = true; foreach ($rdmsano as $key => $cliente): ?>
+						<?php
+							if($active == true){
+								echo '<li role="presentation" class="active"><a href="#' . $key . 'rdm" role="tab" data-toggle="tab">' . $key . '</a></li>';
+								$active = false;
+							}else{
+								echo '<li role="presentation"><a href="#' . $key . 'rdm" role="tab" data-toggle="tab">' . $key . '</a></li>';
+							}
+						?>
+					<?php endforeach; ?>
+				</ul>
+				<div class="tab-content">
+					<?php
+						$active = true;
+						foreach ($rdmsano as $key1 => $cliente):
+					?>
+							<div role="tabpanel" class="tab-pane <?php echo $active ? "active" : ""; ?>" id="<?php echo $key1; ?>rdm">
+								<?php
+									//Ambiente
+									echo $this->Rdm->rdmgraph($cliente['Ambiente'], "Ambientes alterados em " . date('Y') , $key1, 'anoamb', $cliente['Total']);
+									if(isset($rdmsmes[$key1]))
+										echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Ambiente'], "Ambientes alterados no mês " . date('m/Y') , $key1, 'mesamb', $rdmsmes[$key1]['Total']);
+									//Sucesso
+									echo $this->Rdm->rdmgraph($cliente['Sucesso'], "Execução das RDMs em " . date('Y') , $key1, 'anosuc', $cliente['Total']);
+									if(isset($rdmsmes[$key1]))
+										echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Sucesso'], "Execução das RDMs no mês " . date('m/Y') , $key1, 'messuc', $rdmsmes[$key1]['Total']);
+									//Servico
+									echo $this->Rdm->rdmgraph($cliente['Servico'], "RDMs por serviço em " . date('Y') , $key1, 'anoserv', $cliente['Total']);
+									if(isset($rdmsmes[$key1]))
+										echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Servico'], "RDMs por serviço no mês " . date('m/Y') , $key1, 'messerv', $rdmsmes[$key1]['Total']);
+									//Tipo
+									//echo $this->Rdm->rdmgraph($cliente['Tipo'], "RDMs por tipo em " . date('Y') , $key1, 'ano', $cliente['Total']);
+									//if(isset($rdmsmes[$key1]))
+									//echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Tipo'], "RDMs por tipo no mês " . date('m/Y') , $key1, 'mes', $rdmsmes[$key1]['Total']);
+
+									//Sucesso durante o ano
+									echo $this->Rdm->rdmSucessoTimegraph($rdmsano[$key1]['Mensal']['Sucesso'], $key1);
+								?>
+							</div>
+					<?php if($active == true) $active = false; endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Demandas Internas -->
 	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-dem">
-		<div class="panel panel-default ">
+		<div class="panel panel-primary ">
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
@@ -171,12 +231,15 @@
 					<?php endforeach; ?>
 				</div>
 			</div>
+			<ul class="list-group">
+    		<li class="list-group-item small">*Não são mostradas aqui as demandas internas cujo processo já foi finalizado</li>
+  		</ul>
 		</div>
 	</div>
 
 	<!-- Chamados -->
 	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-cham">
-		<div class="panel panel-warning">
+		<div class="panel panel-success">
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
@@ -246,16 +309,22 @@
 				<?php endforeach; ?>
 			</div>
 		</div>
+		<ul class="list-group">
+			<li class="list-group-item small">*Não são mostrados aqui os chamados cujo processo já foi finalizado</li>
+		</ul>
 	</div>
 </div>
 
 <?php
- // Circliful
- echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
- echo $this->Html->css('plugins/jquery.circliful.css');
+ 	// Circliful
+ 	echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
+ 	echo $this->Html->css('plugins/jquery.circliful.css');
 
- // Piety
+ 	// Piety
   echo $this->Html->script('plugins/peity/jquery.peity.min.js');
+
+	// CanvasJs
+	echo $this->Html->script('plugins/canvasjs/jquery.canvasjs.min.js');
 ?>
 
 <script>

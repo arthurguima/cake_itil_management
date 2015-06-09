@@ -97,7 +97,7 @@
       $this->Indisponibilidade->create();
       if ($this->Indisponibilidade->save($this->request->data)) {
         $this->Session->setFlash('Indisponibilidade Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-        return $this->redirect(array('controller' => 'indisponibilidades', 'action' => 'index' ));
+        $this->redirect(array('action' => 'view', $this->Indisponibilidade->id));
       } else {
         $this->Session->setFlash('Não foi possível criar o novo Indisponibilidade.', 'alert-box', array ('class' => 'alert alert-danger'));
       }
@@ -123,7 +123,7 @@
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Indisponibilidade->save($this->request->data)) {
         $this->Session->setFlash('Indisponibilidade atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-        return $this->redirect(array('action' => 'index'));
+        $this->redirect(array('action' => 'view', $this->Indisponibilidade->id));
       } else {
         $this->Session->setFlash('A indisponibilidade não pode ser atualizada!', 'alert-box', array ('class' => 'alert alert-danger'));
       }

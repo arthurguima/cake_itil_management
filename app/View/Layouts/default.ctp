@@ -61,24 +61,27 @@
 										  <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Dashboard',
 																							Router::url('/', true) . "index.php", array('escape' => false)); ?>
 									</li>
-									<li>
-											<?php echo $this->Html->link("<i class='fa fa-calendar fa-fw'></i> Calendário", '/calendarios/show', array('escape' => false)); ?>
-											<span class="fa arrow"></span>
+									<li><!-- Calendário -->
+											<a href="#"><i class="fa fa-calendar fa-fw"></i> Calendários <span class="fa arrow"></span></a>
+											<ul class="nav nav-second-level">
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Previsões de Término", '/calendarios/show/1155', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/calendarios/show/2', array('escape' => false)); ?></li>
+											</ul>
 									</li>
-									<li> <!-- Sustentação -->
-											<a href="#"><i class="fa fa-briefcase fa-fw"></i> Demandas <span class="fa arrow"></span></a>
+									<li> <!-- Negócio -->
+											<a href="#"><i class="fa fa-briefcase fa-fw"></i> Negócio <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PA", '/pes', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Internas", '/demandas', array('escape' => false)); ?></li>
 											</ul>
 									</li>
-									<li> <!-- Sustentação -->
-											<a href="#"><i class="fa fa-wrench fa-fw"></i> Sustentação<span class="fa arrow"></span></a>
+									<li> <!-- Gestão do serviço -->
+											<a href="#"><i class="fa fa-wrench fa-fw"></i> Gestão do Serviço <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados", '/chamados', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados com Demandas", '/chamados/demandas', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Internas", '/demandas', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mudança", '/rdms', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Indicadores", '/indicadores', array('escape' => false)); ?></li>
@@ -93,25 +96,27 @@
 														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade/Serviço", '/relatorios/indisponibilidades', array('escape' => false)); ?></li>
 														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade Geral", '/relatorios/indis_total', array('escape' => false)); ?></li>
 													</ul>
-												<li>
+												</li>
 												<li>
 													<a href="#"><i class='fa fa-angle-double-right'></i> Demandas Internas <span class="fa arrow"></span></a>
 													<ul class="nav nav-third-level collapse">
 														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não Finalizadas", '/relatorios/demandas', array('escape' => false)); ?></li>
 														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Atrasadas", '/relatorios/dematrasadas', array('escape' => false)); ?></li>
 													</ul>
+												</li>
 												<li>
 													<li>
-														<a href="#"><i class='fa fa-angle-double-right'></i> (Em Breve) <span class="fa arrow"></span></a>
+														<a href="#"><i class='fa fa-angle-double-right'></i> (Em Teste) <span class="fa arrow"></span></a>
 														<ul class="nav nav-third-level collapse">
-															<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contrato (Em Breve)", '/relatorios/contratos', array('escape' => false)); ?></li>
-															<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li>
+															<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contrato", '/relatorios/contratos', array('escape' => false)); ?></li>
+															<!--li><?php //echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li -->
 														</ul>
-													<li>
+													</li>
+												</li>
 											</ul>
 									</li>
 									<li> <!-- Base de Conhecimenton -->
-											<a href="#"><i class="fa fa-institution fa-fw"></i> Base de Conhecimento<span class="fa arrow"></span></a>
+											<a href="#"><i class="fa fa-institution fa-fw"></i> Base de Conhecimento <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Sistemas Internos", '/internos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Procedimentos", '/procedimentos', array('escape' => false)); ?></li>
@@ -119,7 +124,7 @@
 											</ul>
 									</li>
 									<li> <!-- Admin -->
-											<a href="#"><i class="fa fa-gears fa-fw"></i> Admin<span class="fa arrow"></span></a>
+											<a href="#"><i class="fa fa-gears fa-fw"></i> Admin <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Áreas", '/areas', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Clientes", '/clientes', array('escape' => false)); ?></li>

@@ -121,10 +121,130 @@ class PagesController extends AppController {
       )
     ));
 		$this->set('clienchamados', $this->chamadosPorServico($chamados));
+
+		/*Lista de Rdms*/
+		$this->loadModel('Rdm');
+		$this->Rdm->Behaviors->attach('Containable');
+		$rdmsmes = $this->Rdm->find('all', array(
+		  'contain' => array(
+		    'Servico' => array('Area' => array('Cliente'=> array())),
+				'RdmTipo' => array()
+		  ),
+			'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%m") = "'.date("m").'"))')
+		));
+		$rdmsano = $this->Rdm->find('all', array(
+		  'contain' => array(
+		    'Servico' => array('Area' => array('Cliente'=> array())),
+				'RdmTipo' => array()
+		  ),
+			'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%Y") = "'.date("Y").'"))')
+		));
+		$this->set('rdmsmes', $this->rdmsPorCliente($rdmsmes));
+		$this->set('rdmsano', $this->rdmsPorCliente($rdmsano));
 	}
 
-
 /* Funções de Apoio */
+
+	/*
+	* Cria um array que separa os serviços por cliente.
+	*/
+	private function rdmsPorCliente($rdms){
+		$clientes = array();
+		foreach ($rdms as $rdm){
+			$ambiente = $this->ambiente($rdm['Rdm']['ambiente']);
+			$sucesso = $this->sucesso($rdm['Rdm']['sucesso']);
+			$servico = $rdm['Servico']['sigla'];
+			$tipo = $rdm['RdmTipo']['nome'];
+
+			if(isset($rdm['Rdm']['dt_executada']))
+				$mes = date('m',strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$rdm['Rdm']['dt_executada'])));
+
+			if(!isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total']))
+				$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total'] = 1;
+			else
+				$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total'] += 1;
+
+			//Ambiente
+				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente]))
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] += 1;
+				else
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] = 1;
+			//Sucesso
+				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso])){
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] += 1;
+					//Sucesso no mês X
+					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
+						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
+					else
+						if(isset($mes))
+							$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
+				}
+				else{
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] = 1;
+					//Sucesso no mês X
+					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
+						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
+					else
+						if(isset($mes))
+							$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
+				}
+				//Serviço
+				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico]))
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico] += 1;
+				else
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico] = 1;
+			//Tipo
+				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo]))
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo] += 1;
+				else
+					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo] = 1;
+
+				ksort($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
+		}
+		return $clientes;
+	}
+
+	/*
+	* Retorna o ambiente da RDM
+	*/
+	private function ambiente($amb){
+		switch($amb){
+			case 1:
+				$ambiente = "Homologação";
+				break;
+			case 2:
+				$ambiente = "Produção";
+				break;
+			case 3:
+				$ambiente = "Treinamento";
+				break;
+			case 4:
+				$ambiente = "Sustentação";
+				break;
+		}
+		return $ambiente;
+	}
+
+	/*
+	* Retorna como a rdm foi executada
+	*/
+	private function sucesso($suces){
+		switch($suces){
+			case -1:
+				$sucesso = "Indefinido";
+				break;
+			case 0:
+				$sucesso = "Sem sucesso";
+				break;
+			case 1:
+				$sucesso = "Sucesso";
+				break;
+			case 2:
+				$sucesso = "Cancelada";
+				break;
+		}
+		return $sucesso;
+	}
 
 	/*
 	* Cria um array que separa os serviços por cliente.

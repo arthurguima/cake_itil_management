@@ -21,6 +21,13 @@
         'message' => 'Campo deve ser preenchido'
       ),
     ),
+		'dt_fim' => array(
+			'MaiorQueDataInicial' => array(
+					"allowEmpty"=> true,
+					'rule' => array('compareFields', '>', 'dt_inicio'),
+					'message' => 'Data de Término deve ser posterior a data de Início!'
+			)
+		),
 		'motivo_id' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',

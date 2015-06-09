@@ -93,7 +93,8 @@
             <?php
               if($this->Ldap->autorizado(2)){
                 echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-                array('controller' => 'itempes', 'action' => 'add','?' => array('controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view' )),
+                array('controller' => 'itempes', 'action' => 'add','?' => array(
+                  'controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view', 'pe' => $ord['Ord']['pe_id'] )),
                 array('escape' => false));
               }
             ?>
@@ -114,24 +115,24 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach($ord['ItemPe'] as $item): ?>
+              <?php /*debug($ord);*/ foreach($ord['ItemPe'] as $item): ?>
                 <tr>
-                  <td><?php echo $item['Item']['nome']; ?></td>
-                  <td><?php echo $item['Contrato']['numero']; ?></td>
+                  <td><?php echo $item['ItemPePai']['Item']['nome']; ?></td>
+                  <td><?php echo $item['ItemPePai']['Contrato']['numero']; ?></td>
                   <td>
                     <?php
-                      if(isset($item['Aditivo']['dt_inicio'])){
-                          echo date('d/m/Y', strtotime($item['Aditivo']['dt_inicio']));
+                      if(isset($item['ItemPePai']['Aditivo']['dt_inicio'])){
+                          echo $item['ItemPePai']['Aditivo']['dt_inicio'];
                       }
                       else{ echo " --- ";}
                     ?>
                   </td>
-                  <td><?php echo $item['volume'] . " " . $item['Item']['metrica']; ?></td>
+                  <td><?php echo $item['volume'] . " " . $item['ItemPePai']['Item']['metrica']; ?></td>
                   <td>
                      <?php
                         if($this->Ldap->autorizado(2)){
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
-                                array('controller' => 'itempes', 'action' => 'edit', $item['id'], '?' => array('controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view' )),
+                                array('controller' => 'itempes', 'action' => 'edit', $item['id'], '?' => array('controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view', 'pe_id' => $ord['Ord']['pe_id'] )),
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                 array('controller' => 'itempes', 'action' => 'delete', $item['id'], '?' => array('controller' => 'ords', 'id' =>  $ord['Ord']['id'], 'action' => 'view' )),
@@ -190,7 +191,7 @@
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
                                 array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'ords', 'id' => $ord['Ord']['id'], 'action' => 'view' )),
-                                array('escape' => false), "Você tem certeza");
+                                array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                         }
                        ?>
                      </td>

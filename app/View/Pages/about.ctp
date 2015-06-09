@@ -45,6 +45,12 @@
               <h5> <i class="ace-icon fa fa-hand-o-right"></i> SBAdmin</h5>
               <h5> <i class="ace-icon fa fa-hand-o-right"></i> Jquery</h5>
               <h5> <i class="ace-icon fa fa-hand-o-right"></i> DataTables</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Circliful</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> CanvasJs</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Fulcalendar</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Jeditable</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> TinyMce</h5>
+              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Vis</h5>
             </li>
           </ul>
         </div>
@@ -67,9 +73,11 @@
                       <ul>
                         <li>Dashboard Separada Por Clientes</li>
                         <li>Análise de Demandas Atrasadas no Dashboard</li>
+                        <li>Análise de RDMs no Dashboard</li>
                         <li>Disponibilidade dos Containers de Serviço</li>
                         <li>Relatórios Separados por Clientes</li>
                         <li>Visões Gerais por clientes no Dashboard</li>
+                        <li>Relatório de Contrato</li>
                       </ul>
                     </div>
                 </li>

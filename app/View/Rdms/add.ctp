@@ -32,8 +32,15 @@
                 'label' => array('text' => 'Nome: ')));
 
       echo $this->BootstrapForm->input('responsavel', array(
-               'label' => array('text' => 'Responsável: '),
-               'value' => $this->Ldap->nomeUsuario()));
+                 'label' => array('text' => 'Responsável: '),
+                 'value' => $this->Ldap->nomeUsuario()));
+
+      echo $this->BootstrapForm->input('solicitante', array(
+                'label' => array('text' => 'Solicitante: '),
+                'value' => $this->Ldap->nomeUsuario()));
+
+      echo $this->BootstrapForm->input('numero', array(
+                  'label' => array('text' => 'Número: ')));
 
       echo $this->BootstrapForm->input('servico_id', array(
                   'class' => 'select2',
@@ -42,7 +49,7 @@
 
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão/Fase/TAG: ')));
-      ?>
+    ?>
       <div class="form-group">
         <label for="RdmAmbiente" class="col-lg-3 control-label">Ambiente: </label>
         <div class="col-lg-9">
@@ -78,7 +85,7 @@
         <div class="col-lg-9">
           <select name="data[Rdm][sucesso]" class="form-control" id="filtersucesso">
             <option value="-1">Concluída?</option>
-            <option value="o">Não</option>
+            <option value="0">Não</option>
             <option value="1">Sim</option>
             <option value="2">Cancelada</option>
           </select>
@@ -93,9 +100,10 @@
       ?>
 
     <div id="demandaList"></div>
+    <div id="chamadoList"></div>
+
   </div>
-</div>
-</div>
+
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');
@@ -126,6 +134,27 @@
         }
       })
     }
+
+
+    function getChamados(servico){
+      $.ajax({
+        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "chamados/optionlist?servico=" + servico,
+        cache: false,
+        success: function(html){
+          $("#chamadoList").html(html);
+        }
+      })
+    }
+
+    $( "select#RdmServicoId" ).change(function () {
+      var str = "";
+      $( "select#RdmServicoId option:selected" ).each(function() {
+         getDemandas($(this).val());
+         getChamados($(this).val());
+      })
+    }).change();
+
+  });
 
 </script>
 

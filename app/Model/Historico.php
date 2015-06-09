@@ -32,6 +32,12 @@
         'maxLength' => 50,
         'message' => 'Campo deve ser preenchido!')
     ),
+    'data' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'maxLength' => 50,
+        'message' => 'Campo deve ser preenchido!')
+    ),
   );
 
   public function beforeValidate($options = array()){

@@ -21,9 +21,18 @@
 			'className' => 'Ord',
 			'foreignKey' => 'ord_id',
 		),
+		'ItemPePai' => array(
+			'className' => 'ItemPe',
+			'foreignKey' => 'itempe_id'
+		),
 	);
 
-	public $hasMany = array();
+	public $hasOne = array(
+		'ItemPeFilha' => array(
+			'className' => 'ItemPe',
+			'foreignKey' => 'itempe_id'
+		),
+	);
 
 	public $validate = array();
 }?>

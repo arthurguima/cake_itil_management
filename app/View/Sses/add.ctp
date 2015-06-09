@@ -26,22 +26,19 @@
            </div>
         </div>
 
-        <div class="form-group">
-          <label for="SsClarityDmId" class="control-label col-lg-3">DM Clarity: </label>
-          <div class="col-lg-9">
-             <div class='input-group'>
-               <input name="data[Ss][clarity_dm_id]" placeholder="DM.XXXX" class="form-control" type="text" id="SsClarityDmId">
-               <span class='input-group-addon '>
-                 <?php
-                   echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getClarityInfo($("#SsClarityDmId").val(), "Ss");',
-                               array('escape' => false, 'title' => "Resgata Informações Básicas do Clarity"));
-                 ?>
-               </span>
-             </div>
-          </div>
-       </div>
-
         <?php
+          echo $this->BootstrapForm->input('clarity_dm_id', array(
+                 'label' => array(
+                   'text' => 'DM Clarity: ' .
+                    $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                               array(
+                                 'escape' => false, 'title' => "Resgata Informações Básicas do Clarity",
+                                 'class' => 'btn btn-default',
+                                 'onclick' => "javascript:getClarityInfo($('#SsClarityDmId').val(), 'Ss');"
+                               ))
+                  ),
+                 'type' => 'text',
+                 'placeholder' => "DM.XXXX"));
 
           echo $this->BootstrapForm->input('nome', array(
                       'label' => array('text' => 'Nome: ')));
