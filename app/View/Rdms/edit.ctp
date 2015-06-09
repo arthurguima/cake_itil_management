@@ -20,6 +20,9 @@
     <?php
       echo $this->BootstrapForm->create('Rdm');
 
+      echo $this->BootstrapForm->input('numero', array(
+                'label' => array('text' => 'Número: ')));
+
       echo $this->BootstrapForm->input('nome', array(
                   'label' => array('text' => 'Nome: ')));
 
@@ -28,9 +31,6 @@
 
      echo $this->BootstrapForm->input('solicitante', array(
                'label' => array('text' => 'Solicitante: ')));
-
-      echo $this->BootstrapForm->input('numero', array(
-                  'label' => array('text' => 'Número: ')));
 
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão/Fase/TAG: ')));

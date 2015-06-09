@@ -11,22 +11,18 @@
     <div class='col-lg-6'>
     <?php
       echo $this->BootstrapForm->create('Rdm');
-        ?>
-      <div class="form-group">
-                   <label for="numero" class="control-label col-lg-3">Número: </label>
-                   <div class="col-lg-9">
-                      <div class='input-group'>
-                        <input name="numero" class="form-control" type="text" id="numero">
-                        <span class='input-group-addon '>
-                          <?php
-                            echo $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', 'javascript:getSDMInfo($("#numero").val(), "Rdm");',
-                                                     array('escape' => false, 'title' => "Resgata Informações Básicas do SDM"));
-                          ?>
-                        </span>
-                      </div>
-                   </div>
-                </div>
-    <?php
+
+      echo $this->BootstrapForm->input('numero', array(
+               'label' => array(
+                 'text' => 'Número: ' .
+                  $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                             array(
+                               'escape' => false, 'title' => "Resgata Informações Básicas do Clarity",
+                               'class' => 'btn btn-default',
+                               'onclick' => "javascript:getSDMInfo($('#numero').val(), 'Rdm');"
+                             ))
+                ),
+               'type' => 'text'));
 
       echo $this->BootstrapForm->input('nome', array(
                 'label' => array('text' => 'Nome: ')));
@@ -39,11 +35,8 @@
                 'label' => array('text' => 'Solicitante: '),
                 'value' => $this->Ldap->nomeUsuario()));
 
-      echo $this->BootstrapForm->input('numero', array(
-                  'label' => array('text' => 'Número: ')));
-
       echo $this->BootstrapForm->input('servico_id', array(
-                  'class' => 'select2',
+                  //'class' => 'select2',
                   'empty'=>'Serviço',
                   'label' => array('text' => 'Serviço: ')));
 
@@ -116,7 +109,7 @@
 
 
 <script>
-
+  $(document).ready(function() {
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
         minView: 2,
@@ -155,7 +148,6 @@
     }).change();
 
   });
-
 </script>
 
 <?php
