@@ -19,7 +19,7 @@
                              array(
                                'escape' => false, 'title' => "Resgata Informações Básicas do Clarity",
                                'class' => 'btn btn-default',
-                               'onclick' => "javascript:getSDMInfo($('#numero').val(), 'Rdm');"
+                               'onclick' => "javascript:getSDMInfo($('#RdmNumero').val(), 'Rdm');"
                              ))
                 ),
                'type' => 'text'));
