@@ -271,7 +271,7 @@
         </div>
       </div>
       <div class='indis-footer col-lg-12'>
-        <b style='color:#D9534F;'>". $servicos['total']  ."</b> chamado(s)
+        <b style='color:#D9534F;'>". $servicos['total']  ."</b> demanda(s)
       </div>
       <script>
         $(document).ready(function() {

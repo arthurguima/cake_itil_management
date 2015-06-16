@@ -141,4 +141,202 @@
 
     return json_encode($data);
   }
+
+  public function ssesStatus($ss, $Servico, $cliente=""){
+
+   $legenda = "";
+   $values = "";
+   $colors = array();
+   $aux = 0;
+
+   foreach($ss['Status'] as $key => $value):
+    if($key != 'total'){
+      $colors[$key] = substr(md5($key), 0, 6);
+       $legenda = $legenda . "<p class='legend'><span class='color-legend' style='background-color:#" . $colors[$key] .";'></span><b>" . round(($ss['Status'][$key]['total']/$ss['Status']['total'])*100,2) . "%</b> - " . $key . " - " . $ss['Status'][$key]['total'] . "</p>";
+       if($aux == 1){
+         $values = $values . "," .$ss['Status'][$key]['total'];
+       }else{
+         $values = $values . $ss['Status'][$key]['total'];
+         $aux++;
+       }
+    }
+   endforeach;
+
+   return "
+   <div class='col-sm-12 col-lg-4  col-md-12 well indis demanda-indis'>
+    <div class='indis-tittle col-lg-12'>
+      <a class='servico col-lg-12'><b>" . $Servico . "</b></a>
+    </div>
+    <div class='indis-body'>
+      <div class='col-lg-4 col-xs-4 col-md-4'>
+        <span class='pie-ss" . $Servico . $cliente ."'>" . $values . "</span>
+      </div>
+      <div class='col-lg-8 col-xs-8 col-md-8'>
+        ". $legenda ."
+      </div>
+    </div>
+    <div class='indis-footer col-lg-12'>
+      <b style='color:#D9534F;'>". $ss['Status']['total']  ."</b> ss(es)
+    </div>
+      <script>
+        $(document).ready(function() {
+         $('.pie-ss" . $Servico . $cliente ."').peity('pie', {
+            fill: " . $this->colorAsArray($colors) .",
+            radius: 35
+          });
+        });
+       </script>
+   </div>";
+  }
+
+  public function ssesAtrasos($ss, $Servico, $cliente=""){
+
+   $legenda = "";
+   $values = "";
+   $colors = array();
+   $aux = 0;
+  // debug($ss['Atraso']);
+   foreach($ss['Atraso'] as $key => $value):
+    if($key != 'total'){
+      $colors[$key] = substr(md5($key), 0, 6);
+       $legenda = $legenda . "<p class='legend'><span class='color-legend' style='background-color:#" . $colors[$key] .";'></span><b>" . round(($ss['Atraso'][$key]/$ss['Atraso']['total'])*100,2) . "%</b> - " . $key . " - " . $ss['Atraso'][$key] . "</p>";
+       if($aux == 1){
+         $values = $values . "," .$ss['Atraso'][$key];
+       }else{
+         $values = $values . $ss['Atraso'][$key];
+         $aux++;
+       }
+    }
+   endforeach;
+
+   return "
+   <div class='col-sm-12 col-lg-4  col-md-12 well indis indis-atraso'>
+    <div class='indis-tittle col-lg-12'>
+      <a class='servico col-lg-12'><b>" . $Servico . "</b></a>
+    </div>
+    <div class='indis-body'>
+      <div class='col-lg-4 col-xs-4 col-md-4'>
+        <span class='pie-ssatraso" . $Servico . $cliente ."'>" . $values . "</span>
+      </div>
+      <div class='col-lg-8 col-xs-8 col-md-8'>
+        ". $legenda ."
+      </div>
+    </div>
+    <div class='indis-footer col-lg-12'>
+      <b style='color:#D9534F;'>". $ss['Atraso']['total']  ."</b> ss(es) - (dias em atraso)
+    </div>
+      <script>
+        $(document).ready(function() {
+         $('.pie-ssatraso" . $Servico . $cliente ."').peity('pie', {
+            fill: " . $this->colorAsArray($colors) .",
+            radius: 35
+          });
+        });
+       </script>
+   </div>";
+  }
+
+  private function colorAsArray($color){
+    $string = "[";
+    foreach($color as $co):
+      $string = $string . "'#" . $co ."',";
+    endforeach;
+
+    return $string . "]";
+  }
+
+  /*
+  * Analisa de forma geral todas as sses de um Cliente
+  */
+  public function ssesGeral($sses, $cliente){
+    $status = array();
+    $atrasos = array();
+
+    $status['Status']['total'] = 0;
+    foreach($sses as $serv){
+      foreach($serv['Status'] as $key => $value ){
+        if($key != 'total'){
+          if(isset($status['Status'][$key]['total'])){
+            $status['Status'][$key]['total'] += $value['total'];
+            $status['Status']['total'] += $value['total'];
+          }
+          else{
+            $status['Status'][$key]['total'] = $value['total'];
+            $status['Status']['total'] += $value['total'];
+          }
+        }
+      }
+    }
+
+    $atrasos['Atraso']['total'] = 0;
+    foreach($sses as $serv){
+      foreach($serv['Atraso'] as $key => $value ){
+        if(isset($serv['Atraso']['total'])){
+          if($key != 'total'){
+            if(isset($atrasos['Atraso'][$key])){
+              $atrasos['Atraso'][$key] += $value;
+            }
+            else{
+              $atrasos['Atraso'][$key] = $value;
+            }
+          }
+        }
+      }
+      $atrasos['Atraso']['total'] += $serv['Atraso']['total'];
+    }
+
+    $legenda = "";
+    $values = "";
+    $colors = array();
+    $aux = 0;
+    $servicos['total'] = 0;
+    foreach($sses as $key => $serv){
+      $servicos[$key] = $serv['Status']['total'];
+      $servicos['total'] += $serv['Status']['total'];
+    }
+
+    foreach($servicos as $key => $servicototal):
+      if($key != 'total'){
+        $colors[$key] = substr(md5($key), 0, 6);
+        $legenda = $legenda . "<p class='legend'><span class='color-legend' style='background-color:#" . $colors[$key] .";'></span><b>" . round(($servicototal/$servicos['total'])*100,2) . "%</b> - " . $key . " - " . $servicototal . "</p>";
+        if($aux == 1){
+          $values = $values . "," . $servicototal;
+        }else{
+          $values = $values . $servicototal;
+          $aux++;
+        }
+      }
+    endforeach;
+
+    $servic = "
+    <div class='col-sm-12 col-lg-4  col-md-12 well indis demanda-indis'>
+      <div class='indis-tittle col-lg-12'>
+        <a class='servico col-lg-12'><b>Serviços</b></a>
+      </div>
+      <div class='indis-body'>
+        <div class='col-lg-4 col-xs-4 col-md-4'>
+          <span class='pie-sses-total-Tipo-Serviços-" . $cliente . "'>" . $values . "</span>
+        </div>
+        <div class='col-lg-8 col-xs-8 col-md-8'>
+          ". $legenda ."
+        </div>
+      </div>
+      <div class='indis-footer col-lg-12'>
+        <b style='color:#D9534F;'>". $servicos['total']  ."</b> ss(es)
+      </div>
+      <script>
+        $(document).ready(function() {
+         $('.pie-sses-total-Tipo-Serviços-" . $cliente ."').peity('pie', {
+           fill: " . $this->colorAsArray($colors) .",
+           radius: 35
+         });
+        });
+      </script>
+    </div>";
+
+    $status = $this->ssesStatus($status, "Status",$cliente);
+    $atrasos = $this->ssesAtrasos($atrasos,"Atrasos",$cliente);
+
+    return $status . $atrasos . $servic;
+  }
 }?>

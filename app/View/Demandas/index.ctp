@@ -139,7 +139,9 @@
         </div>
       </div>
       <ul class="list-group">
-  			<li class="list-group-item small">*Lista de Demandas Internas limitada em 150 registros</li>
+  			<li class="list-group-item small red">
+          *Lista de Demandas Internas limitada em 150 registros. Utilize o filtro para melhores resultados.
+        </li>
   		</ul>
     </div>
   </div>

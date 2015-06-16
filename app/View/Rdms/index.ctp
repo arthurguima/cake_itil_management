@@ -137,6 +137,11 @@
           </table>
         </div>
       </div>
+      <ul class="list-group">
+  			<li class="list-group-item small red">
+          *Lista de RDMs limitada em 250 registros. Utilize o filtro para melhores resultados.
+        </li>
+  		</ul>
     </div>
   </div>
 </div>
@@ -192,6 +197,7 @@
           },
           "columnDefs": [  { "visible": false, "targets": 6 } ],
           "dom": 'TC<"clear">lfrtip',
+          "order": [[ 8, "desc" ]],
           "colVis": {
             "buttonText": "Esconder Colunas"
           },

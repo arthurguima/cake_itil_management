@@ -67,12 +67,12 @@
 				'rule'   => 'notempty',
 				'message' => 'Campo deve ser preenchido!')
 		),
-		'clarity_id' => array(
+		'clarity_dm_id' => array(
 			'allowEmpty' => true,
 			'unique' => array(
 				'rule' => 'isUnique',
 				'required' => 'create',
-				'message' => 'Já existe outra SS com esse Clarity ID'
+				'message' => 'Já existe outra SS com esse DM Clarity'
 			)
 		),
 		'servico_id' => array(
