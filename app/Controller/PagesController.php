@@ -148,7 +148,7 @@ class PagesController extends AppController {
 		$sses = $this->Ss->find('all', array(
 		  'contain' => array(
 		    'Servico' => array('Area' => array('Cliente'=> array())),
-				'Status' => array()
+				'Status' => array(),
 		  ),
       'joins' => array(
         array(
@@ -164,9 +164,19 @@ class PagesController extends AppController {
 			//'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%m") = "'.date("m").'"))')
 		));
 
-		//$this->set('sses', $sses); debug($sses);
+		$ssesano = $this->Ss->find('all', array(
+		  'contain' => array(
+		    'Servico' => array('Area' => array('Cliente'=> array())),
+				'Ord' => array(),
+				'Pe' => array(),
+				//'Status' => array()
+		  ),
+			'conditions' => array('((DATE_FORMAT(Ss.dt_recebimento,"%Y") = "'.date("Y").'"))')
+		));
+
+		//$this->set('ssesano', $ssesano); debug($ssesano);
 		$this->set('cliensses', $this->ssesPorCliente($sses));
-		//$this->set('rdmsano', $this->rdmsPorCliente($rdmsano));
+		$this->set('clienssessano', $this->ssesAnoPorCliente($ssesano));
 	}
 
 /* Funções de Apoio */
@@ -228,6 +238,67 @@ class PagesController extends AppController {
 				ksort($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
 		}
 		return $clientes;
+	}
+
+	/*
+	* Cria um array que separa as sses por clientes no ano atual
+	*/
+	private function ssesAnoPorCliente($sses){
+		$ssesAUX = array();
+
+	  foreach ($sses as $ss){
+	    /* Cliente ao qual o serviço pertence */
+	    $cliente = $ss['Servico']['Area']['0']['Cliente']['sigla'];
+			// Data em que a SS foi recebida
+			$recebido = date('m', strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$ss['Ss']['dt_recebimento'])))." ";
+
+			if(isset($ssesAUX[$cliente]['SS(s) Recebidas'][$recebido]))
+				$ssesAUX[$cliente]['SS(s) Recebidas'][$recebido] +=1;
+			else
+				$ssesAUX[$cliente]['SS(s) Recebidas'][$recebido] =1;
+
+			foreach($ss['Pe'] as $pe){
+				// Data em que a PA foi emitida
+				$emitida = date('m', strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$pe['dt_emissao'])))." ";
+
+				if(isset($ssesAUX[$cliente]['PA(s) Emitida(s)'][$emitida]))
+					$ssesAUX[$cliente]['PA(s) Emitida(s)'][$emitida] +=1;
+				else
+					$ssesAUX[$cliente]['PA(s) Emitida(s)'][$emitida] =1;
+			}
+
+			foreach($ss['Ord'] as $os){
+				// Data em que a OS foi homologada
+				$homologada = date('m', strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$os['dt_homologacao'])))." ";
+
+				if(isset($ssesAUX[$cliente]['OS(s) Homologada(s)'][$homologada]))
+					$ssesAUX[$cliente]['OS(s) Homologada(s)'][$homologada] +=1;
+				else
+					$ssesAUX[$cliente]['OS(s) Homologada(s)'][$homologada] =1;
+			}
+		}
+
+		for ($i = 1; $i <= date('m'); $i++) {
+			if($i < 10)
+				$pos = "0".$i." ";
+			else
+				$pos = $i." ";
+
+			if(!isset($ssesAUX[$cliente]['OS(s) Homologada(s)'][$pos]))
+				$ssesAUX[$cliente]['OS(s) Homologada(s)'][$pos] = 0;
+
+			if(!isset($ssesAUX[$cliente]['PA(s) Emitida(s)'][$pos]))
+				$ssesAUX[$cliente]['PA(s) Emitida(s)'][$pos] = 0;
+
+			if(!isset($ssesAUX[$cliente]['SS(s) Recebidas'][$pos]))
+				$ssesAUX[$cliente]['SS(s) Recebidas'][$pos] = 0;
+		}
+		ksort($ssesAUX[$cliente]['SS(s) Recebidas']);
+		ksort($ssesAUX[$cliente]['PA(s) Emitida(s)']);
+		ksort($ssesAUX[$cliente]['OS(s) Homologada(s)']);
+
+		return $ssesAUX;
+
 	}
 
 	/*

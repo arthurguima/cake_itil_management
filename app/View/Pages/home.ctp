@@ -1,5 +1,5 @@
 <div class="row">
-		<div class="col-lg-12"><h3 class="page-header">Bem Vindo ao SGD! - <?php debug($cliensses); echo $this->Ldap->nomeUsuario(); ?></h3></div>
+		<div class="col-lg-12"><h3 class="page-header">Bem Vindo ao SGD! - <?php echo $this->Ldap->nomeUsuario(); ?></h3></div>
 </div>
 
 <div class="row">
@@ -193,7 +193,10 @@
 
 	            <div class="tab-content">
 	              <div role="tabpanel" class="tab-pane active" id="geralss<?php echo $key1; ?>">
-	                <?php echo $this->Ss->ssesGeral($sses,$key1); ?>
+	                <?php
+										echo $this->Ss->ssesGeral($sses,$key1);
+										echo $this->Ss->ssTimegraph($clienssessano[$key1], $key1);
+									?>
 	              </div>
 	              <div role="tabpanel" class="tab-pane" id="statusss<?php echo $key1; ?>">
 	                <?php
@@ -216,6 +219,7 @@
 	    </div>
 	    <ul class="list-group">
 	      <li class="list-group-item small">*Não são mostradas aqui as SS cujo processo já foi finalizado</li>
+				<li class="list-group-item small">*São consideradas SS entregues aquelas cujas OS possuem data de Homologação</li>
 	    </ul>
 	  </div>
 	</div>

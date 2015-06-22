@@ -339,4 +339,55 @@
 
     return $status . $atrasos . $servic;
   }
+
+
+  public function ssTimegraph($ano, $cliente){
+    //debug($ano);
+    $points = array();
+    foreach($ano as $key => $mes){
+      foreach($mes as $numero => $valor){
+        if(!isset($points[$key]))
+          $points[$key] = "{ x: ". $numero .", y: ". $valor ." },";
+        else
+          $points[$key] = $points[$key] . "{ x: ". $numero .", y: ". $valor ." },";
+      }
+    }
+
+    $string = " ";
+    foreach($points as $key => $value){
+      $string = $string . '{
+        name: "'.$key.'",
+        type: "spline",
+        showInLegend: true,
+        dataPoints: [ '. $value .' ]
+      },';
+    }
+
+    return '
+    <script type="text/javascript">
+      $(document).ready(function() {
+      	var chart = new CanvasJS.Chart("chartContainerSs'. $cliente .'",
+      	{
+          title:{
+            text: "SS(es) de '. date('Y') .'",
+            fontSize: 18
+          },
+          axisX:{
+            title: "Mês",
+            titleFontSize: 12
+          },
+          axisY:{
+            title: "Qtd de SS",
+            titleFontSize: 12
+          },
+      		animationEnabled: true,
+      		data: [
+        		'. $string .'
+          ],
+      	});
+      	chart.render();
+      });
+    </script>
+    <div class="col-lg-4 chart-container" id="chartContainerSs'. $cliente .'" style="height: 300px; max-width: 500px;"></div>';
+  }
 }?>

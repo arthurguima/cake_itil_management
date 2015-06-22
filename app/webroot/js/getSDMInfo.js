@@ -1,7 +1,7 @@
 //Resgata informações de Demandas Cadastradas no Clarity
 function getSDMInfo(sdmid, control){
   $.getJSON( "http://bsad225949/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
-//  $.getJSON( "http://www-apps/_projects/dite/wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+//  $.getJSON( "http://www-apps/_projects/dite/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
     $.each( data, function( key, val ) {
       if(key == 'dt_prevista')
       {
