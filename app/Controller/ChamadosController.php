@@ -262,7 +262,10 @@
 		} else {
 			$this->Session->setFlash('O Chamado  com id: %s  não foi removido.', 'alert-box', array ('class' => 'alert alert-danger'), h($id));
 		}
-		return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+		if(isset($this->params['url']['id']))
+			return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+		else
+		return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action']));
 	}
 
 	/**

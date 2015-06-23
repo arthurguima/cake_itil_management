@@ -82,11 +82,16 @@
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['Chamado']['responsavel']; ?></div></td>
                   <td>
                     <?php
-                      echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 10);
+                      echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 2);
                       if($this->Ldap->autorizado(2)){
                         echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                   array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'demandas' )),
                                   array('escape' => false));
+
+
+                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;' title='Excluir'></i>",
+                                   array('controller'=> 'chamados', 'action' => 'delete', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'demandas' )),
+                                   array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                       }
                       echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $chamado['Chamado']['id'] . ")'>
                         <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
