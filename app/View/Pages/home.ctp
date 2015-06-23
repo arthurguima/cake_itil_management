@@ -218,8 +218,7 @@
 	      </div>
 	    </div>
 	    <ul class="list-group">
-	      <li class="list-group-item small">*Não são mostradas aqui as SS cujo processo já foi finalizado</li>
-				<li class="list-group-item small">*São consideradas SS entregues aquelas cujas OS possuem data de Homologação</li>
+	      <li class="list-group-item small">*Não são mostradas aqui as SS cujo processo já foi finalizado</li>			
 	    </ul>
 	  </div>
 	</div>

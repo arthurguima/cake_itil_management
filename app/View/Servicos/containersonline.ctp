@@ -27,7 +27,7 @@
 <script>
 $(document).ready(function() {
   <?php if(!isset($this->params['url']['position'])): ?>
-    $('[data-toggle="popover-<?php echo $servico['Servico']['sigla']; ?>"]').popover({trigger: 'hover','placement': 'left', html: 'true', delay: { "hide": 100 }});
+    $('[data-toggle="popover-<?php echo $servico['Servico']['sigla']; ?>"]').popover({trigger: 'hover','placement': 'left', html: 'true'});
   <?php else: ?>
     <?php if(!isset($this->params['url']['trigger'])): ?>
       $('[data-toggle="popover<?php echo $servico['Servico']['sigla']; ?>"]').popover({trigger: 'hover','placement': '<?php echo $this->params['url']['position']?>', html: 'true'});
@@ -35,12 +35,5 @@ $(document).ready(function() {
       $('[data-toggle="popover-<?php echo $servico['Servico']['sigla']; ?>"]').popover({trigger: '<?php echo $this->params['url']['trigger']?>','placement': '<?php echo $this->params['url']['position']?>', html: 'true'});
     <?php endif;?>
   <?php endif;?>
-  /* Tentativa de Dividir a tabela em 2 via JS
-  var $mainTable = $("#containers");
-  var splitBy = 3;
-  var rows = $mainTable.find ( "tr" ).slice( splitBy );
-  var $secondTable = $("#containers").parent().append("<table class='table table-striped table-bordered table-hover id='o'><tbody></tbody></table>");
-  $secondTable.find("tbody").append(rows);
-  $mainTable.find ( "tr" ).slice( splitBy ).remove(); */
 });
 </script>

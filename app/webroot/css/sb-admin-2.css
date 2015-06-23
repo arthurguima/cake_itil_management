@@ -989,10 +989,11 @@ i.checklist span {
 /*Containers*/
 table.containers{
   float: left;
-  /*max-width: 240px;*/
+  padding: 10px;
+  margin: 10px;
 }
 .popover{
-  width: 450px !important;
+  max-width: 850px !important;
 }
 table#dataTables-Servico{
   font-size: 11px;
