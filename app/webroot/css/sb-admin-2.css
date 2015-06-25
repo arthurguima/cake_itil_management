@@ -768,6 +768,15 @@ i.fa.checklist {
   font-size: 13px;
 }
 
+.clean-list li {
+  border-bottom: 1px dotted black;
+  display: block;
+}
+
+.clean-list li:only-child {
+  border-bottom: 0px dotted black;
+}
+
 .indis-tittle {
   font-size: 14px;
 }

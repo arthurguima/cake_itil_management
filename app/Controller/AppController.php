@@ -80,4 +80,13 @@ class AppController extends Controller {
           )
       )
   );
+
+  /* Variável de Sessão que controla a visão por clientes */
+  /*
+    $this->loadModel('User');
+    $cliente = $this->User->find('first', array(
+      'contain' => array('Cliente' => array()),
+      'conditions' => array('User.matricula =' . $_SESSION['cdUsuario'] )
+    ));
+  */
 }

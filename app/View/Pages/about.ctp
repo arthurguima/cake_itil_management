@@ -79,6 +79,7 @@
                         <li>Relatórios Separados por Clientes</li>
                         <li>Visões Gerais por clientes no Dashboard</li>
                         <li>Relatório de Contrato</li>
+                        <li>Relatório de Gestão de SS</li>
                       </ul>
                     </div>
                 </li>

@@ -31,27 +31,37 @@
           <li><a><b>Data de recebimento: </b><?php echo $this->Times->pastDate($ord['Ord']['dt_recebimento']); ?></a></li>
           <li>
             <a>
-              <b>Deploy Homologação: </b>
+              <b>Data de prevista para a Homologação (Interna): </b>
               <?php
-                if($ord['Ord']['dt_deploy_homologacao'] != null){
-                  echo $this->Times->pastDate($ord['Ord']['dt_deploy_homologacao']);
+                if($ord['Ord']['dt_homo_prev_int'] != null){
+                  echo $this->Times->pastDate($ord['Ord']['dt_homo_prev_int']);
                 }
                ?>
             </a>
           </li>
           <li>
             <a>
-              <b>Deploy Produção: </b>
+              <b>Data de Homologação (Interna): </b>
               <?php
-                if($ord['Ord']['dt_deploy_producao'] != null){
-                  echo $this->Times->pastDate($ord['Ord']['dt_deploy_producao']);
+                if($ord['Ord']['dt_homo_prev'] != null){
+                  echo $this->Times->pastDate($ord['Ord']['dt_homo_prev']);
+                }
+               ?>
+            </a>
+          </li>
+          <li>
+            <a>
+              <b>Data de prevista para a Homologação (Cliente): </b>
+              <?php
+                if($ord['Ord']['dt_fim_pdd'] != null){
+                  echo $this->Times->pastDate($ord['Ord']['dt_fim_pdd']);
                 }
               ?>
             </a>
           </li>
           <li>
             <a>
-              <b>Data de Homologação: </b>
+              <b>Data de Homologação(Cliente): </b>
               <?php
                 if($ord['Ord']['dt_homologacao'] != null){
                   echo $this->Times->pastDate($ord['Ord']['dt_homologacao']);

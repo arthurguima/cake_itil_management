@@ -98,6 +98,12 @@
 													</ul>
 												</li>
 												<li>
+													<a href="#"><i class='fa fa-angle-double-right'></i> Ss <span class="fa arrow"></span></a>
+													<ul class="nav nav-third-level collapse">
+														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Gestão de Ideias", '/relatorios/gsses', array('escape' => false)); ?></li>														
+													</ul>
+												</li>
+												<li>
 													<a href="#"><i class='fa fa-angle-double-right'></i> Demandas Internas <span class="fa arrow"></span></a>
 													<ul class="nav nav-third-level collapse">
 														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não Finalizadas", '/relatorios/demandas', array('escape' => false)); ?></li>

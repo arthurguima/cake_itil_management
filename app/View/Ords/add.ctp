@@ -69,6 +69,12 @@
 		</div>
 		<div class="col-lg-6">
 			<?php
+
+				echo $this->BootstrapForm->input('dt_ini_pdd', array(
+									'label' => array('text' => 'Data de Início da OS: '),
+									'type' => 'text',
+									'id' => 'dp'));
+
 				echo $this->BootstrapForm->input('dt_emissao', array(
 									'label' => array('text' => 'Data de Emissão: '),
 									'type' => 'text',
@@ -79,7 +85,7 @@
 									'type' => 'text',
 									'id' => 'dp'));
 
-				echo $this->BootstrapForm->input('dt_deploy_homologacao', array(
+				/*echo $this->BootstrapForm->input('dt_deploy_homologacao', array(
 									'label' => array('text' => 'Deploy Homologação: '),
 									'type' => 'text',
 									'id' => 'dp'));
@@ -87,25 +93,31 @@
 				echo $this->BootstrapForm->input('dt_deploy_producao', array(
 									'label' => array('text' => 'Deploy Produção: '),
 									'type' => 'text',
+									'id' => 'dp'));*/
+
+				echo $this->BootstrapForm->input('dt_homo_prev_int', array(
+									'label' => array('text' => 'Data de prevista para a Homologação (Interna): '),
+									'type' => 'text',
+									'id' => 'dp'));
+
+				echo $this->BootstrapForm->input('dt_homo_prev', array(
+									'label' => array('text' => 'Data de Homologação (Interna): '),
+									'type' => 'text',
+									'id' => 'dp'));
+
+				echo $this->BootstrapForm->input('dt_fim_pdd', array(
+									'label' => array('text' => 'Data de prevista para a Homologação (Cliente): '),
+									'type' => 'text',
 									'id' => 'dp'));
 
 				echo $this->BootstrapForm->input('dt_homologacao', array(
-									'label' => array('text' => 'Data de Homologação: '),
+									'label' => array('text' => 'Data de Homologação (Cliente): '),
 									'type' => 'text',
 									'id' => 'dp'));
 
 				echo $this->BootstrapForm->input('status_id', array(
 										'label' => array('text' => 'Status: ')));
 
-				echo $this->BootstrapForm->input('dt_ini_pdd', array(
-									'label' => array('text' => 'Data de Início da OS: '),
-									'type' => 'text',
-									'id' => 'dp'));
-
-				echo $this->BootstrapForm->input('dt_fim_pdd', array(
-									'label' => array('text' => 'Data de prevista para a Homologação: '),
-									'type' => 'text',
-									'id' => 'dp'));
 			?>
 		</div>
 	</div>
