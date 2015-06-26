@@ -100,7 +100,7 @@
 												<li>
 													<a href="#"><i class='fa fa-angle-double-right'></i> Ss <span class="fa arrow"></span></a>
 													<ul class="nav nav-third-level collapse">
-														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Gestão de Ideias", '/relatorios/gsses', array('escape' => false)); ?></li>														
+														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Gestão de Ideias", '/relatorios/gsses', array('escape' => false)); ?></li>
 													</ul>
 												</li>
 												<li>
@@ -135,12 +135,13 @@
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Áreas", '/areas', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Clientes", '/clientes', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Contratos", '/contratos', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços", '/servicos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dependências", '/dependencias', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Motivos para Indisponibilidade", '/motivos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Chamados", '/chamadotipos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de RDM", '/rdmtipos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Demandas", '/demandatipos', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Usuários", '/users', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços", '/servicos', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Status", '/status', array('escape' => false)); ?></li>
 											</ul>
 									</li>
