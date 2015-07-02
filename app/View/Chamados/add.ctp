@@ -15,11 +15,24 @@
     <?php
       echo $this->BootstrapForm->create('Chamado');
 
-      echo $this->BootstrapForm->input('nome', array(
-        'label' => array('text' => 'Nome: ')));
-
       echo $this->BootstrapForm->input('numero', array(
         'label' => array('text' => 'Número: ')));
+
+      echo $this->BootstrapForm->input('ano', array(
+                   'label' => array('text' => 'Ano: ' .
+                          $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                              array(
+                                'escape' => false, 'title' => "Resgata Informações Básicas do SDM",
+                                'class' => 'btn btn-default',
+                                'onclick' => "javascript:getSDMInfoChamados($('#ChamadoNumero').val(), $('#dpdecade').val(), 'Chamado');"
+                              ))
+                    ),
+                   //'type' => 'text',
+                   'id' => 'dpdecade',
+                   'value' => date('Y')));
+
+                   echo $this->BootstrapForm->input('nome', array(
+                     'label' => array('text' => 'Nome: ')));
 
       if(isset($this->params['url']['servico'])){
         echo $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id']));
@@ -36,7 +49,7 @@
                  'label' => array('text' => 'Ano: '),
                  'type' => 'text',
                  'id' => 'dpdecade',
-                 'value' => date('Y')));    
+                 'value' => date('Y')));
 
      echo $this->BootstrapForm->input('user_id', array(
                 'class' => 'select2',
@@ -116,6 +129,7 @@
 
 <?php
   //-- TimePicker --
+  echo $this->Html->script('getSDMInfoChamados.js');
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
