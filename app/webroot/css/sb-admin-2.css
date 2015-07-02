@@ -29,12 +29,12 @@ body {
 @media(min-width:768px) {
   #page-wrapper {
       position: inherit;
-      margin: 0 0 0 250px;
-      padding: 0 30px;
+      margin: 0 0 0 230px;
+      padding: 0 20px;
       border-left: 1px solid #e7e7e7;
   }
   #side-menu{
-    width: 240px;
+    width: 220px;
     float: left;
   }
 }
@@ -147,8 +147,8 @@ i.hide-sidebar{
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 250px;
-        margin-top: 82px;
+        width: 230px;
+        margin-top: 68px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -440,13 +440,6 @@ table.dataTable thead .sorting:after {
   border-color: #FF4444;
 }
 
-
-
-/* navbar */
-.navbar {
-  min-height: 82px;
-}
-
 ul#abasIndi {
   margin-bottom: 10px;
 }
@@ -485,9 +478,18 @@ ul.cliente li a {
     background-color: #3A4143;
   }
 
+.navbar-brand{
+  padding: 10px 6px;
+}
+
 .navbar-brand > span{
   margin-left: 15px;
+  font-size: 16px;
   font-weight: bolder;
+}
+
+.navbar-header{
+  height: 45px;
 }
 
 .navbar-brand > img{
@@ -530,6 +532,12 @@ input#s2id_autogen1_search{
 
 /* Título SGD */
 
+
+/* navbar */
+.navbar {
+  min-height: 68px;
+}
+
 .navbar-default{
   background-color: #252D2F;
   border-color: #2A3234;
@@ -539,6 +547,10 @@ input#s2id_autogen1_search{
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
   color: #E7E7E8;
+}
+.breadcrumb{
+  padding: 5px 15px;
+  margin-bottom: 5px;
 }
 .breadcrumb a{
   color: #252D2F;
@@ -965,7 +977,7 @@ td .tipo-demanda {
   position: fixed;
   top: 97%;
   transform: translateY(-97%);
-  padding-left: 15px;
+  padding-left: 10px;
 }
 .notes a{
   color: #E7E7E8;

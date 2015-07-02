@@ -46,7 +46,7 @@
 							<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand"> <!-- TODO Alterar -->
-							<?php echo $this->Html->image("logo-icon.svg", array('height' => '50px', 'class' => 'hidden-xs hidden-sm')); ?>
+							<?php echo $this->Html->image("logo-icon.svg", array('height' => '45px', 'class' => 'hidden-xs hidden-sm')); ?>
 						 	<span>SGD - Serviço de Gestão da DITE</small>
 					</a>
 			</div>
@@ -151,7 +151,7 @@
 					<span class="notes hidden-xs hidden-sm">
 						Sistema de gestão da DITE - Versão 2.0
 						<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
-						<br /><br /><a href="/painel.php" style="padding-left: 52px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
+						<br /><br /><a href="/painel.php" style="padding-left: 49px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
 					</span>
 			</div>
 			<!-- Fim sidebar -->
