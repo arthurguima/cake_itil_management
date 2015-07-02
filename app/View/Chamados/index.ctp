@@ -34,6 +34,7 @@
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'select2 form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('_responsavel', array('class' => 'select2 form-control')); ?></div>
           </div>
           <?php
             echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -84,7 +85,7 @@
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $chamado['Chamado']['id'] ?>"><?php echo $chamado['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->ChamadoStatusEditable($chamado['Chamado']['id']) ?>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['Chamado']['responsavel']; ?></div></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['User']['nome']; ?></div></td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 10);

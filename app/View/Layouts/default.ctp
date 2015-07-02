@@ -164,9 +164,9 @@
 			<div class='row'><!--nocache--><?php echo $this->Session->flash(); ?><!--/nocache--></div>
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<!--div id="footer">
+		<div id="footer">
 		</div>
 	</div>
-	<hr style="margin-top:50px;" /--><?php // echo $this->element('sql_dump'); ?>
+	<!-- hr style="margin-top:50px;" --><?php  //echo $this->element('sql_dump'); ?>
 </body>
 </html>

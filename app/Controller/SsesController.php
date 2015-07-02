@@ -5,7 +5,10 @@
 		$this->Filter->addFilters(
 			array(
 				'responsavel_' => array(
-					'Ss.responsavel' => array('operator' => 'LIKE')
+					'Ss.user_id' => array(
+						'select' => $this->Filter->select('Responsável', $this->Ss->User->find('list',
+									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
+					)
 				),
 				'servico' => array(
 					'Ss.servico_id' => array(
@@ -87,12 +90,13 @@
 		$options = array(
 			'conditions' => array('Ss.' . $this->Ss->primaryKey => $id),
 			'contain' => array(
-				'Pe' => array('ItemPe'=> array('Item'=> array()), 'Status' => array()),
+				'Pe' => array('User' => array(), 'ItemPe'=> array('Item'=> array()), 'Status' => array()),
 				'Demanda' => array('Status' => array(), 'DemandaTipo' => array()),
-				'Ord' => array('ItemPe'=> array('ItemPePai' => array('Item'=> array())), 'Status' => array(), 'Pe' => array()),
+				'Ord' => array('User' => array(), 'ItemPe'=> array('ItemPePai' => array('Item'=> array())), 'Status' => array(), 'Pe' => array()),
 				'Historico' => array(),
 				'Servico' => array(),
 				'Status' => array(),
+				'User' => array(),
 			)
 		);
 		//$this->Ss->recursive = 3;
@@ -133,6 +137,9 @@
 		}
 
 		/* Relacionamentos */
+		$users = $this->Ss->User->find('list', array('fields' => array('User.id', 'User.nome')));
+		$this->set(compact('users'));
+
 		$this->set('servicos',
 								$this->Ss->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))));
 
@@ -156,6 +163,9 @@
 		}
 
 		/* Relacionamentos */
+		$users = $this->Ss->User->find('list', array('fields' => array('User.id', 'User.nome')));
+		$this->set(compact('users'));
+
 		$this->set('demandas',
 								$this->Ss->Demanda->find('list', array(
 									'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),

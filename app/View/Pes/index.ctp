@@ -104,7 +104,7 @@
                     <?php echo $pe['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->PeStatusEditable($pe['Pe']['id']) ?>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $pe['Pe']['responsavel']; ?></div></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $pe['User']['nome']; ?></div></td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('pes', $pe['Pe']['id'], 14);

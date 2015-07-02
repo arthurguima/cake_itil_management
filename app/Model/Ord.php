@@ -15,7 +15,11 @@
     'Pe' => array(
       'className' => 'Pe',
       'foreignKey' => 'pe_id'
-    )
+    ),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
+		),
   );
 
   public $hasMany = array(
@@ -36,15 +40,7 @@
       'between' => array(
                 'rule'    => array('between', 3, 120),
                 'message' => 'O campo deve conter de 3 a 120 caracteres!'
-    )),
-    'responsavel' => array(
-      'NotEmpty' => array(
-        'rule'   => 'notempty',
-        'message' => 'Campo deve ser preenchido!'),
-      'between' => array(
-                'rule'    => array('between', 3, 200),
-                'message' => 'O campo deve conter de 3 a 200 caracteres!'
-    )),
+    )),    
     'numero' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
@@ -66,10 +62,26 @@
                 'rule'    => array('between', 3, 20),
                 'message' => 'O campo deve conter de 3 a 20 caracteres!'
     )),
+    'user_id' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!')
+    ),
   );
 
   public function afterFind($results, $primary = false) {
     foreach ($results as $key => $val) {
+        if (isset($val['Ord']['dt_homo_prev_int'])) {
+            $results[$key]['Ord']['dt_homo_prev_int'] = $this->dateFormatAfterFind(
+                $val['Ord']['dt_homo_prev_int']
+            );
+        }
+        if (isset($val['Ord']['dt_homo_prev'])) {
+            $results[$key]['Ord']['dt_homo_prev'] = $this->dateFormatAfterFind(
+                $val['Ord']['dt_homo_prev']
+            );
+        }
+
         if (isset($val['Ord']['dt_emissao'])) {
             $results[$key]['Ord']['dt_emissao'] = $this->dateFormatAfterFind(
                 $val['Ord']['dt_emissao']
@@ -136,6 +148,12 @@
   }
 
   public function beforeValidate($options = array()){
+    if(!empty($this->data['Ord']['dt_homo_prev_int'])) {
+        $this->data['Ord']['dt_homo_prev_int'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_homo_prev_int'])));
+    }
+    if(!empty($this->data['Ord']['dt_homo_prev'])) {
+        $this->data['Ord']['dt_homo_prev'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_homo_prev'])));
+    }
     if(!empty($this->data['Ord']['dt_emissao'])) {
         $this->data['Ord']['dt_emissao'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Ord']['dt_emissao'])));
     }

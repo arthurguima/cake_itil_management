@@ -45,7 +45,7 @@
           <li><a><b>Prazo: </b><?php echo $this->Times->timeLeftTo($ss['Ss']['dt_recebimento'], $ss['Ss']['dt_prazo'],
                    $ss['Ss']['dt_recebimento'] . " - " . $ss['Ss']['dt_prazo'],
                   ($ss['Ss']['dt_finalizada'])); ?></a></li>
-          <li><a><b>Responsável: </b><?php echo $ss['Ss']['responsavel']; ?></a></li>
+          <li><a><b>Responsável: </b><?php echo $ss['User']['nome']; ?></a></li>
           <li><a style="overflow: auto;"><b>URL: </b><?php echo $ss['Ss']['cvs_url']; ?></a></li>
           <li><a><b>Observação: </b><?php echo $ss['Ss']['observacao']; ?></a></li>
           <li class="checklist"><a><b>Checklist: </b><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></a></td>
@@ -117,7 +117,7 @@
                         }
                       ?>
                     </td>
-                    <td><?php echo $pe['responsavel']; ?></td>
+                    <td><?php if(isset($pe['User']['nome'])) echo $pe['User']['nome']; ?></td>
                     <td>
                       <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "statuspa-" . $pe['id'] ?>">
                       <?php echo $pe['Status']['nome']; ?></span>
@@ -192,7 +192,7 @@
                     <td><?php echo $this->Html->link($os['numero'] . "/" . $os['ano'], $os['cvs_url'], array('target' => '_blank')); ?></td>
                     <!--td><?php //echo $this->Html->link($os['nome'], $os['cvs_url']); ?></td-->
                     <td><?php echo $os['Pe']['numero'] . "/" . $os['Pe']['ano']; ?></td>
-                    <td><?php echo $os['responsavel']; ?></td>
+                    <td><?php echo $os['User']['nome']; ?></td>
                     <td class="checklist">
                       <?php
                         echo $this->Ord->getCheckList($os['ths'], $os['trp'], $os['trd']) . "<br />";

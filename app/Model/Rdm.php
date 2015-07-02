@@ -18,7 +18,11 @@
     'RdmTipo' => array(
       'className' => 'RdmTipo',
       'foreignKey' => 'rdm_tipo_id'
-    )
+    ),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
+		),
   );
 
   public $hasMany = array(
@@ -45,15 +49,17 @@
                 'rule'    => array('between', 3, 150),
                 'message' => 'O campo deve conter de 3 a 150 caracteres!'
     )),
-    'responsavel' => array(
+    'user_id' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido!'),
-      'between' => array(
-                'rule'    => array('between', 3, 150),
-                'message' => 'O campo deve conter de 3 a 150 caracteres!'
-    )),
+    ),
     'servico_id' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!')
+    ),
+    'dt_prevista' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido!')

@@ -13,8 +13,15 @@
       )
     ),
     'matricula' => array(
-      'rule' => 'notempty',
-      'message' => 'Campo deve ser preenchido!'
+      'empty' => array(
+        'rule' => 'notempty',
+        'message' => 'Campo deve ser preenchido!',
+      ),
+      'unique' => array(
+				'rule' => 'isUnique',
+				'required' => 'create',
+				'message' => 'Já existe outro usuário com essa matrícula'
+			)
     ),
     'Cliente' => array(
       'NotEmpty' => array(

@@ -142,6 +142,7 @@
 									//echo $this->Rdm->rdmgraph($rdmsmes[$key1]['Tipo'], "RDMs por tipo no mês " . date('m/Y') , $key1, 'mes', $rdmsmes[$key1]['Total']);
 
 									//Sucesso durante o ano
+									//debug($rdmsano[$key1]['Mensal']);
 									echo $this->Rdm->rdmSucessoTimegraph($rdmsano[$key1]['Mensal']['Sucesso'], $key1);
 								?>
 							</div>
@@ -218,7 +219,7 @@
 	      </div>
 	    </div>
 	    <ul class="list-group">
-	      <li class="list-group-item small">*Não são mostradas aqui as SS cujo processo já foi finalizado</li>			
+	      <li class="list-group-item small">*Não são mostradas aqui as SS cujo processo já foi finalizado</li>
 	    </ul>
 	  </div>
 	</div>

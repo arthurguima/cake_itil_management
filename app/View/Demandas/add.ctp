@@ -51,9 +51,10 @@
                    'type' => 'text'));
 
 
-        echo $this->BootstrapForm->input('criador', array(
-                   'label' => array('text' => 'Solicitante: '),
-                   'value' => $this->Ldap->nomeUsuario()));
+        echo $this->BootstrapForm->input('user_id', array(
+               'class' => 'select2',
+               'label' => array('text' => 'Responsável: '),
+               'empty' => "Responsável"));
 
         echo $this->BootstrapForm->input('executor', array(
                    'label' => array('text' => 'Responsável: ')));

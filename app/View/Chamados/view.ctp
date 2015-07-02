@@ -29,7 +29,7 @@
           <li><a><b>Número: </b><?php echo $chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano']; ?></a></li>
           <li><a><b>Tipo: </b><?php echo $chamado['ChamadoTipo']['nome']; ?></a></li>
           <li><a><b>Status: </b><?php echo $chamado['Status']['nome']; ?></a></li>
-          <li><a><b>Responsável: </b><?php echo $chamado['Chamado']['responsavel']; ?></a></li>
+          <li><a><b>Responsável: </b><?php echo $chamado['User']['nome']; ?></a></li>
           <li><a><b>Serviço: </b><?php echo $chamado['Servico']['nome']; ?></a></li>
           <li><a><b>Aberto?: </b><?php echo $this->Times->yesOrNo($chamado['Chamado']['aberto'])?></a></li>
           <li><a><b>Pai?: </b><?php echo $this->Times->yesOrNo($chamado['Chamado']['pai'])?></a></li>

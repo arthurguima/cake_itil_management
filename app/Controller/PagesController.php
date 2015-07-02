@@ -205,25 +205,22 @@ class PagesController extends AppController {
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] += 1;
 				else
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] = 1;
+
 			//Sucesso
 				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso])){
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] += 1;
-					//Sucesso no mês X
-					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
-						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
-					else
-						if(isset($mes))
-							$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
 				}
 				else{
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] = 1;
-					//Sucesso no mês X
-					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]) && isset($mes))
+				}
+				//Sucesso no mês X - se possui data de execução
+				if(isset($mes)){
+					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]))
 						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
 					else
-						if(isset($mes))
-							$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
+						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
 				}
+
 				//Serviço
 				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico]))
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico] += 1;
@@ -235,7 +232,10 @@ class PagesController extends AppController {
 				else
 					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo] = 1;
 
-				ksort($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
+				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]))
+					ksort($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
+				if(isset($mes))
+					unset($mes);
 		}
 		return $clientes;
 	}
@@ -406,9 +406,6 @@ class PagesController extends AppController {
 	*/
 	private function sucesso($suces){
 		switch($suces){
-			case -1:
-				$sucesso = "Indefinido";
-				break;
 			case 0:
 				$sucesso = "Sem sucesso";
 				break;
@@ -417,6 +414,9 @@ class PagesController extends AppController {
 				break;
 			case 2:
 				$sucesso = "Cancelada";
+				break;
+			case -1:
+				$sucesso = "Indefinido";
 				break;
 		}
 		return $sucesso;

@@ -21,7 +21,10 @@
 					)
 				),
         'responsavel_' => array(
-          'Pe.responsavel' => array('operator' => 'LIKE')
+          'Pe.user_id' => array(
+						'select' => $this->Filter->select('Responsável', $this->Pe->User->find('list',
+									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
+					)
         ),
         'status' => array(
           'Pe.status_id' => array(
@@ -75,7 +78,7 @@
     $this->Filter->setPaginate('limit', 3000);
 
     $this->Pe->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
-    $this->Pe->contain('Status', 'Ss', 'Servico');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+    $this->Pe->contain('Status', 'Ss', 'Servico', 'User');//Carrega apenas o Relacionamento com a Status e SS (otimização)
 
     //  $statuses = $this->Pe->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 
@@ -91,6 +94,7 @@
     $options = array(
 			'conditions' => array('Pe.' . $this->Pe->primaryKey => $id),
 			'contain' => array(
+        'User' => array(),
 				'Status' => array(),
 				'Ss' => array(),
 				'Servico' => array(),
@@ -119,6 +123,8 @@
     }
 
     /* Relacionamentos */
+      $users = $this->Pe->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
       /* Para encontrar o item de contrato ao qual está realacionado */
       $this->loadModel('Contrato');
       $this->set('contratos', $this->Contrato->find('list', array('fields' => array('Contrato.id', 'Contrato.numero'))));
@@ -149,6 +155,9 @@
     }
 
     /* Relacionamentos */
+      $users = $this->Pe->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
+
       /* Para encontrar o item de contrato ao qual está realacionado */
       $this->loadModel('Contrato');
       $this->set('contratos', $this->Contrato->find('list', array('fields' => array('Contrato.id', 'Contrato.numero'))));

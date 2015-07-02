@@ -138,7 +138,7 @@
                   </td>
                   <?php echo $this->Tables->OrdStatusEditable($ord['Ord']['id']) ?>
 
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ord['Ord']['responsavel']; ?></div></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ord['User']['nome']; ?></div></td>
                   <td class="checklist">
                     <?php
                       echo $this->Ord->getCheckList($ord['Ord']['ths'], $ord['Ord']['trp'], $ord['Ord']['trd']) . "<br />";

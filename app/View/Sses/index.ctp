@@ -127,7 +127,7 @@
                   </td>
                   <?php echo $this->Tables->SsStatusEditable($ss['Ss']['id']) ?>
 
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ss['Ss']['responsavel']; ?></div></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $ss['User']['nome']; ?></div></td>
                   <td class="checklist hidden-xs hidden-sm"><?php echo $this->Ss->getCheckList($ss['Ss']['dv'], $ss['Ss']['contagem']) ?></td>
                   <td>
                     <?php

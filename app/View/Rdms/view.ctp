@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb('Rdms', '/rdms');
-  $this->Html->addCrumb($rdm['numero'], array('controller' => 'rdms', 'action' => 'view', $rdm['numero']));
+  $this->Html->addCrumb($rdm['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['numero']));
 ?>
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">RDM: <?php echo $rdm['Rdm']['nome'] . " - " . $rdm['Servico']['nome']; ?></h3></div>
@@ -36,7 +36,7 @@
           <li><a><b>Ambiente: </b><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></a></li>
           <li><a><b>Versão: </b><?php echo $rdm['Rdm']['versao']; ?></a></li>
           <li><a><b>Solicitante: </b><?php echo $rdm['Rdm']['solicitante']; ?></a></li>
-          <li><a><b>Responsável: </b><?php echo $rdm['Rdm']['responsavel']; ?></a></li>
+          <li><a><b>Responsável: </b><?php echo $rdm['User']['nome']; ?></a></li>
           <li><a><b>Data Prevista: </b><?php echo $this->Times->pastDate($rdm['Rdm']['dt_prevista']); ?></a></li>
           <li><a><b>Data de Execução: </b><?php echo $rdm['Rdm']['dt_executada']; ?></a></li>
           <li><a><b>Tipo: </b><?php echo $rdm['RdmTipo']['nome']; ?></a></li>
@@ -139,7 +139,7 @@
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $chamado['id'] ?>"><?php echo $chamado['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->ChamadoStatusEditable($chamado['id']) ?>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['responsavel']; ?></div></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['User']['nome']; ?></div></td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('chamados', $chamado['id'], 10);
@@ -221,7 +221,7 @@
 
 <div class="col-md-12">
   <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
-</dvi>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -52,10 +52,11 @@
                      'id' => 'dpdecade',
                      'value' => date('Y')));
 
-          echo $this->BootstrapForm->input('responsavel', array(
-                      'label' => array('text' => 'Responsável: '),
-                      'value' => $this->Ldap->nomeUsuario()));
-
+          echo $this->BootstrapForm->input('user_id', array(
+                    'class' => 'select2',
+                    'label' => array('text' => 'Responsável: '),
+                    'empty' => "Responsável"));
+                    
           echo $this->BootstrapForm->input('servico_id', array(
                       'label' => array('text' => 'Serviço: '),
                       'class' => 'select2',

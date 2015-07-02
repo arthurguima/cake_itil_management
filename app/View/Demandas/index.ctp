@@ -83,7 +83,7 @@
 				        <th>Tipo da Demanda</th>
                 <th>Prazo</th>
                 <th><span class="editable">Status</span></th>
-                <th class="hidden-xs hidden-sm">Solicitante</th>
+                <th class="hidden-xs hidden-sm">Responsável</th>
                 <th>Solicitada pelo Cliente?</th>
                 <th></th>
               </tr>
@@ -122,7 +122,7 @@
                     </span>
                   </td>
                   <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['Demanda']['criador']; ?></div></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['User']['nome']; ?></div></td>
                   <td><?php echo $this->Times->yesOrNo($demanda['Demanda']['origem_cliente']); ?></td>
                   <td>
                     <?php

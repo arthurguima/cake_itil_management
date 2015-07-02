@@ -25,6 +25,7 @@
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('_responsavel', array('class' => 'select2 form-control')); ?></div>
           </div>
           <?php
             echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -79,7 +80,7 @@
                   </td>
                   <?php echo $this->Tables->ChamadoStatusEditable($chamado['Chamado']['id']) ?>
                   <td><?php echo $chamado['ChamadoTipo']['nome']; ?></td>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['Chamado']['responsavel']; ?></div></td>
+                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['User']['nome']; ?></div></td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 2);
@@ -136,58 +137,68 @@
 
   //-- Jeditable
     echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //Select2
+    echo $this->Html->script('plugins/select2/select2.min');
+    echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+    echo $this->Html->css('plugins/select2');
+    echo $this->Html->css('plugins/select2-bootstrap');
 ?>
 
 <script>
   $(document).ready(function() {
-      oTable = $('#dataTables-chamado').dataTable({
-          "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
-          language: {
-            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-          },
-          "dom": 'TC<"clear">lfrtip',
-          "colVis": {
-            "buttonText": "Esconder Colunas"
-          },
-          "columnDefs": [  { "visible": false, "targets": 3 } ],
-          "tableTools": {
-              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-              "aButtons": [
-                {
-                    "sExtends": "copy",
-                    "sButtonText": "Copiar",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,3,4,5,6,7,8,9 ]
-                },
-                {
-                    "sExtends": "print",
-                    "sButtonText": "Imprimir",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,3,4,5,6,7,8,9 ]
-                },
-                {
-                    "sExtends": "csv",
-                    "sButtonText": "CSV",
-                    "sFileName": "Chamados.csv",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,3,4,5,6,7,8,9 ]
-                },
-                {
-                    "sExtends": "pdf",
-                    "sButtonText": "PDF",
-                    "sFileName": "Chamados.pdf",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "sPdfOrientation": "landscape",
-                    "mColumns": [ 0,1,4,5,6,7,8,9 ],
-                    "sTitle": "Listagem de Chamados",
-                    "sPdfMessage": "<?php echo date('d/m/y')?>"
-                },
-              ]
-          }
-      });
-      var colvis = new $.fn.dataTable.ColVis( oTable );
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
 
-      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+    oTable = $('#dataTables-chamado').dataTable({
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+        language: {
+          url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+        },
+        "dom": 'TC<"clear">lfrtip',
+        "colVis": {
+          "buttonText": "Esconder Colunas"
+        },
+        "columnDefs": [  { "visible": false, "targets": 3 } ],
+        "tableTools": {
+            "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [
+              {
+                  "sExtends": "copy",
+                  "sButtonText": "Copiar",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,3,4,5,6,7,8,9 ]
+              },
+              {
+                  "sExtends": "print",
+                  "sButtonText": "Imprimir",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,3,4,5,6,7,8,9 ]
+              },
+              {
+                  "sExtends": "csv",
+                  "sButtonText": "CSV",
+                  "sFileName": "Chamados.csv",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "mColumns": [ 0,1,3,4,5,6,7,8,9 ]
+              },
+              {
+                  "sExtends": "pdf",
+                  "sButtonText": "PDF",
+                  "sFileName": "Chamados.pdf",
+                  "oSelectorOpts": { filter: 'applied', order: 'current' },
+                  "sPdfOrientation": "landscape",
+                  "mColumns": [ 0,1,4,5,6,7,8,9 ],
+                  "sTitle": "Listagem de Chamados",
+                  "sPdfMessage": "<?php echo date('d/m/y')?>"
+              },
+            ]
+        }
+    });
+    var colvis = new $.fn.dataTable.ColVis( oTable );
+
+    $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });
 
   function historico(id){

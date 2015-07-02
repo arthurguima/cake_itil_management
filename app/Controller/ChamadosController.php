@@ -64,7 +64,13 @@
 						'select' => $this->Filter->select('Tipo de Chamado', $this->Chamado->ChamadoTipo->find('list',
 									array('conditions' => array(), 'fields' => array('ChamadoTipo.id', 'ChamadoTipo.nome', 'ChamadoTipo.servico_id'))))
 					)
-				)
+				),
+				'_responsavel' => array(
+					'Chamado.user_id' => array(
+						'select' => $this->Filter->select('Responsável', $this->Chamado->User->find('list',
+									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
+					)
+				),
 			)
 		);
 
@@ -138,6 +144,12 @@
 									array('conditions' => array(), 'fields' => array('ChamadoTipo.id', 'ChamadoTipo.nome', 'ChamadoTipo.servico_id'))))
 					)
 				),
+				'_responsavel' => array(
+					'Chamado.user_id' => array(
+						'select' => $this->Filter->select('Responsável', $this->Chamado->User->find('list',
+									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
+					)
+				),
 			)
 		);
 
@@ -191,8 +203,8 @@
 			$servicos = $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
 			$this->set(compact('servicos'));
 
-			//$chamadoTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
-			//$this->set(compact('demandaTipos'));
+			$users = $this->Chamado->User->find('list', array('fields' => array('User.id', 'User.nome')));
+			$this->set(compact('users'));
 
 			$statuses = $this->Chamado->Status->find('list', array('conditions' => array('Status.tipo' => 5), 'fields' => array('Status.id', 'Status.nome')));
 			$this->set(compact('statuses'));
@@ -231,6 +243,9 @@
 		}
 
 		/* Relacionamentos */
+			$users = $this->Chamado->User->find('list', array('fields' => array('User.id', 'User.nome')));
+			$this->set(compact('users'));
+
 			$servicos = $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
 			$this->set(compact('servicos'));
 

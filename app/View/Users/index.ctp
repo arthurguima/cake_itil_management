@@ -70,7 +70,7 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
 
 <script>
   $(document).ready(function() {
-      $('#dataTables-demanda').dataTable({
+      $('#dataTables-users').dataTable({
         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'

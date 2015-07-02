@@ -20,7 +20,10 @@
           )
         ),
         'responsavel' => array(
-          'Demanda.criador' => array('operator' => 'LIKE')
+          'Demanda.user_id' => array(
+						'select' => $this->Filter->select('Responsável', $this->Demanda->User->find('list',
+									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
+					)
         ),
         'servico' => array(
           'Demanda.servico_id' => array(
@@ -141,6 +144,9 @@
     }
 
     /* Relacionamentos */
+      $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
+
       $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
 
@@ -175,6 +181,9 @@
     }
 
     /* Relacionamentos */
+      $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
+
       $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
 

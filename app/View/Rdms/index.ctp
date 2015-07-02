@@ -41,7 +41,7 @@
           </div>
           <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control select2', 'placeholder' => "Responsável")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('solicitante_', array('class' => 'form-control', 'placeholder' => "Solicitante")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('versao_', array('class' => 'form-control', 'placeholder' => "Versão")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
@@ -121,7 +121,7 @@
                         echo (($rdm['Rdm']['dt_executada'] == null) ? " " : $this->Times->pastDate($rdm['Rdm']['dt_executada']));
                     ?>
                   </td>
-                  <td><div class="sub-17"><?php echo $rdm['Rdm']['responsavel']; ?></div></td>
+                  <td><div class="sub-17"><?php echo $rdm['User']['nome']; ?></div></td>
                   <td>
                     <?php
                       echo $this->Tables->getMenu('rdms', $rdm['Rdm']['id'], 14);

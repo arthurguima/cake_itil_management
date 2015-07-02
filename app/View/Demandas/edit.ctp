@@ -57,8 +57,10 @@
                     'type' => 'text'));
 
 
-         echo $this->BootstrapForm->input('criador', array(
-                      'label' => array('text' => 'Solicitante: ')));
+         echo $this->BootstrapForm->input('user_id', array(
+               'class' => 'select2',
+               'label' => array('text' => 'Responsável: '),
+               'empty' => "Responsável"));
 
          echo $this->BootstrapForm->input('executor', array(
                      'label' => array('text' => 'Responsável: ')));
@@ -132,6 +134,10 @@
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+    
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
         minView: 2,
@@ -161,4 +167,10 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>

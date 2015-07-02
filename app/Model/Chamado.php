@@ -15,7 +15,11 @@
 		'Status' => array(
 			'className' => 'Status',
 			'foreignKey' => 'status_id'
-		)
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
+		),
 	);
 
 	public $hasAndBelongsToMany = array(
@@ -31,6 +35,11 @@
 
 	public $validate = array(
 		'servico_id' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!')
+		),
+		'user_id' => array(
 			'NotEmpty' => array(
 				'rule'   => 'notempty',
 				'message' => 'Campo deve ser preenchido!')

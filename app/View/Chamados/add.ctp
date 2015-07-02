@@ -36,11 +36,12 @@
                  'label' => array('text' => 'Ano: '),
                  'type' => 'text',
                  'id' => 'dpdecade',
-                 'value' => date('Y')));
+                 'value' => date('Y')));    
 
-      echo $this->BootstrapForm->input('responsavel', array(
-                 'label' => array('text' => 'Responsável: '),
-                 'value' => $this->Ldap->nomeUsuario()));
+     echo $this->BootstrapForm->input('user_id', array(
+                'class' => 'select2',
+                'label' => array('text' => 'Responsável: '),
+                'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('observacao', array(
                             'label' => array('text' => 'Observação: '),

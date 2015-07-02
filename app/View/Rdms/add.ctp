@@ -27,9 +27,10 @@
       echo $this->BootstrapForm->input('nome', array(
                 'label' => array('text' => 'Nome: ')));
 
-      echo $this->BootstrapForm->input('responsavel', array(
+      echo $this->BootstrapForm->input('user_id', array(
+                 'class' => 'select2',
                  'label' => array('text' => 'Responsável: '),
-                 'value' => $this->Ldap->nomeUsuario()));
+                 'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('solicitante', array(
                 'label' => array('text' => 'Solicitante: '),
@@ -110,6 +111,10 @@
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+    
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
         minView: 2,

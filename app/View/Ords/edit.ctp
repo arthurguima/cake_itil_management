@@ -37,8 +37,10 @@
         /*echo $this->BootstrapForm->input('pf', array(
                     'label' => array('text' => 'Volume Final: ')));*/
 
-        echo $this->BootstrapForm->input('responsavel', array(
-                              'label' => array('text' => 'Responsável: ')));
+        echo $this->BootstrapForm->input('user_id', array(
+                'class' => 'select2',
+                'label' => array('text' => 'Responsável: '),
+                'empty' => "Responsável"));
 
         echo $this->BootstrapForm->input('pe_id', array(
                     'label' => array('text' => 'PA: ')));
@@ -60,7 +62,7 @@
                 'label' => array('text' => 'TH (Link): ')));
 
         echo $this->BootstrapForm->input('dt_recebimento_termo', array(
-                  'label' => array('text' => 'Data Prevista do Termo de Recebimento: '),
+                  'label' => array('text' => 'Data Prevista do Termo de Recebimento Definitivo: '),
                   'type' => 'text',
                   'id' => 'dp'));
 
@@ -136,6 +138,10 @@
 <script>
 
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
     $("[id*='dpdecade']").datetimepicker({
       format: "yyyy",
         startView: "decade",
@@ -161,4 +167,10 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>

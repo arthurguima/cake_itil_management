@@ -38,33 +38,35 @@
         </div>
 
         <?php
-        echo $this->BootstrapForm->input('clarity_dm_id', array(
+          echo $this->BootstrapForm->input('clarity_dm_id', array(
                     'label' => array('text' => 'Clarity DM: '),
                     'type' => 'text'));
 
-        echo $this->BootstrapForm->input('id');
+          echo $this->BootstrapForm->input('id');
 
-        echo $this->BootstrapForm->input('nome', array(
+          echo $this->BootstrapForm->input('nome', array(
                     'label' => array('text' => 'Nome: ')));
 
-        echo $this->BootstrapForm->input('numero', array(
+          echo $this->BootstrapForm->input('numero', array(
                     'label' => array('text' => 'Número: ')));
 
-        echo $this->BootstrapForm->input('ano', array(
+          echo $this->BootstrapForm->input('ano', array(
                    'label' => array('text' => 'Ano: '),
                    'type' => 'text',
                    'id' => 'dpdecade'));
 
-        echo $this->BootstrapForm->input('responsavel', array(
-                    'label' => array('text' => 'Responsável: ')));
+          echo $this->BootstrapForm->input('user_id', array(
+                    'class' => 'select2',
+                    'label' => array('text' => 'Responsável: '),
+                    'empty' => "Responsável"));
 
-        echo $this->BootstrapForm->input('cvs_url', array(
+          echo $this->BootstrapForm->input('cvs_url', array(
                     'label' => array('text' => 'Url: ')));
 
-        echo $this->BootstrapForm->input('observacao', array(
+          echo $this->BootstrapForm->input('observacao', array(
                     'label' => array('text' => 'Observação: '),
                     'type' => 'textarea'));
-      ?>
+        ?>
     </div>
     <div class="col-lg-6">
       <?php
@@ -143,6 +145,9 @@
 
     $("#DemandaDemanda").select2();
 
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
 
     $("[id*='dpdecade']").datetimepicker({
       format: "yyyy",
