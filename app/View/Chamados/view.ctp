@@ -138,5 +138,8 @@
 </div>
 
 <div class="col-md-12">
-  <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
+  <?php
+  echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2'));
+  echo $this->Html->script('getSDMInfoChamados.js');
+  ?>
 </dvi>
