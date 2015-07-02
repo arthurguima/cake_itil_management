@@ -15,7 +15,11 @@
     'Ss' => array(
       'className' => 'Ss',
       'foreignKey' => 'ss_id'
-    )
+    ),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
+		),
   );
 
   public $hasOne = array(
@@ -57,7 +61,7 @@
                 'message' => 'O campo deve conter de 1 a 20 caracteres!'
       )
     ),
-    'responsavel' => array(
+    'user_id' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido!')

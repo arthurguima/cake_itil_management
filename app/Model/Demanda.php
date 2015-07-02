@@ -11,7 +11,11 @@
 		'Status' => array(
 			'className' => 'Status',
 			'foreignKey' => 'status_id'
-		)
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
+		),
 	);
 
 	public $hasAndBelongsToMany = array(
@@ -67,11 +71,6 @@
 			'NotEmpty' => array(
 				'rule'   => 'notempty',
 				'maxLength' => 250,
-				'message' => 'Campo deve ser preenchido!')
-		),
-		'criador' => array(
-			'NotEmpty' => array(
-				'rule'   => 'notempty',
 				'message' => 'Campo deve ser preenchido!')
 		),
 		'clarity_dm_id' => array(

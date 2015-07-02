@@ -36,8 +36,10 @@
                  'type' => 'text',
                  'id' => 'dpdecade'));
 
-      echo $this->BootstrapForm->input('responsavel', array(
-                 'label' => array('text' => 'Responsável: ')));
+     echo $this->BootstrapForm->input('user_id', array(
+                'class' => 'select2',
+                'label' => array('text' => 'Responsável: '),
+                'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('observacao', array(
                             'label' => array('text' => 'Observação: '),
@@ -86,6 +88,10 @@
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+    
     $("[id*='dpdecade']").datetimepicker({
       format: "yyyy",
         startView: "decade",

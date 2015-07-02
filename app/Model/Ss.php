@@ -38,7 +38,11 @@
 		),
 		'Status' => array(
 			'className' => 'Status'
-		)
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
+		),
 	);
 
 	public $validate = array(
@@ -62,7 +66,7 @@
 				'message' => 'Já existe outra SS com esse número, nesse ano, para esse serviço.'
 			)
 		),
-		'responsavel' => array(
+		'user_id' => array(
 			'NotEmpty' => array(
 				'rule'   => 'notempty',
 				'message' => 'Campo deve ser preenchido!')

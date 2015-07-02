@@ -82,6 +82,7 @@
             </a>
           </li>
           <!--li><a><b>Volume Final: </b><?php// echo $ord['Ord']['pf']; ?></a></li-->
+          <li><a><b>Responsável: </b><?php echo $ord['User']['nome']; ?></a></li>
           <li><a><b>Status: </b><?php echo $ord['Status']['nome']; ?></a></li>
           <li>
             <a href=<?php echo Router::url('/', true) . '/sses/view/' . $ord['Ss']['id']; ?>>

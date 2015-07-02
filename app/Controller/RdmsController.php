@@ -9,7 +9,10 @@
           'Rdm.solicitante' => array('operator' => 'LIKE')
         ),
         'responsavel_' => array(
-          'Rdm.responsavel' => array('operator' => 'LIKE')
+          'Rdm.user_id' => array(
+						'select' => $this->Filter->select('Responsável', $this->Rdm->User->find('list',
+									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
+					)
         ),
         'nome_' => array(
           'Rdm.nome' => array('operator' => 'LIKE')
@@ -99,6 +102,9 @@
     }
 
     /* Relacionamentos */
+    $users = $this->Rdm->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $this->set(compact('users'));
+
     $this->set('demandas',
                 $this->Rdm->Demanda->find('list', array(
                   'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
@@ -128,6 +134,9 @@
     /* Relacionamentos */
     $servicos = $this->Rdm->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
     $this->set(compact('servicos'));
+
+    $users = $this->Rdm->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $this->set(compact('users'));
 
     $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));
     $this->set(compact('rdmTipos'));

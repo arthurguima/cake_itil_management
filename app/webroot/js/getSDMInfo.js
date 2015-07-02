@@ -1,7 +1,7 @@
 //Resgata informações de Demandas Cadastradas no Clarity
 function getSDMInfo(sdmid, control){
-  $.getJSON( "http://bsad225949/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
-//  $.getJSON( "http://www-apps/_projects/dite/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
+//  $.getJSON( "http://bsad225949/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
+  $.getJSON( "http://www-apps/_projects/dite/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
     $.each( data, function( key, val ) {
       /*if(key == 'dt_prevista')
       {
@@ -23,6 +23,11 @@ function getSDMInfo(sdmid, control){
       $('.' + control + toCamelCase(key)).css('border', '1px solid #4cae4c');
       //console.log('#' + control + toCamelCase(key) + " - " + val);
     });
+
+    if(control == "rdms"){
+     getDemandas($( "select#RdmServicoId option:selected" ).val());
+     getChamados($( "select#RdmServicoId option:selected" ).val());
+    }
   });
   alert("Este processo pode demorar. Espere alguns segundos pela resposta do SDM!");
 }

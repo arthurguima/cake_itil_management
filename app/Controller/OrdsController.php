@@ -36,7 +36,10 @@
 					)
 				),
 				'responsavel_' => array(
-					'Ord.responsavel' => array('operator' => 'LIKE')
+					'Ord.user_id' => array(
+						'select' => $this->Filter->select('Responsável', $this->Ord->User->find('list',
+									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
+					)
 				),
 				'status' => array(
 					'Ord.status_id' => array(
@@ -139,7 +142,7 @@
 		$this->Filter->setPaginate('limit', 3000);
 
 		$this->Ord->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
-		$this->Ord->contain('Status', 'Ss', 'Pe', 'Servico');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+		$this->Ord->contain('Status', 'Ss', 'Pe', 'Servico', 'User');//Carrega apenas o Relacionamento com a Status e SS (otimização)
 
 		$this->set('ords', $this->paginate());
 	}
@@ -154,6 +157,7 @@
 		$options = array(
 			'conditions' => array('Ord.' . $this->Ord->primaryKey => $id),
 			'contain' => array(
+				'User' => array(),
 				'Status' => array(),
 				'Ss' => array(),
 				'Servico' => array(),
@@ -162,7 +166,7 @@
 				),
 				'Historico' => array(),
 				'ItemPe' => array(
-					'ItemPePai' => array('Item' => array(),'Contrato' => array(),'Aditivo' => array(),),					
+					'ItemPePai' => array('Item' => array(),'Contrato' => array(),'Aditivo' => array(),),
 				)
 			)
 		);
@@ -182,6 +186,9 @@
 		}
 
 		/* Relacionamentos */
+		$users = $this->Ord->User->find('list', array('fields' => array('User.id', 'User.nome')));
+		$this->set(compact('users'));
+
 		$this->set('pes',
 								$this->Ord->Pe->find('list', array('conditions' => array('Pe.ss_id' => $this->params['url']['id']), 'fields' => array('Pe.id', 'Pe.numero'))));
 
@@ -212,6 +219,9 @@
 		}
 
 		/* Relacionamentos */
+		$users = $this->Ord->User->find('list', array('fields' => array('User.id', 'User.nome')));
+		$this->set(compact('users'));
+
 		$this->set('pes',
 								$this->Ord->Pe->find('list', array('conditions' => array('Pe.ss_id' => $this->data['Ord']['ss_id']), 'fields' => array('Pe.id', 'Pe.numero'))));
 

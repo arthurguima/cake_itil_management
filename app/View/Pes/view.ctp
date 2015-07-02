@@ -40,6 +40,7 @@
               ?>
             </a>
           </li>
+          <li><a><b>Responsável: </b><?php echo $pe['User']['nome']; ?></a></li>
           <li><a><b>Status: </b><?php echo $pe['Status']['nome']; ?></a></li>
           <li>
             <a href=<?php echo Router::url('/', true) . '/sses/view/' . $pe['Ss']['id']; ?>>
