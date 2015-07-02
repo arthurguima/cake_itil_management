@@ -190,33 +190,6 @@
     // Os filtros de contratos, aditivos são montados via ajax
   }
 
-  /*
-   * Se existe uma contagem para a Pa automaticamente RESERVAMOS o valor
-   * Se existe também uma OS para a Pa o valor está EMPENHADO
-   * se já foi feita a contagem final o valor foi utilizado
-  */
-  private function itemsEmpenhados($itemPes){
-    $item = array();
-    foreach ($itemPes as $i){
-      if(!isset($item[$i['Item']['id']])){
-        $item[$i['Item']['id']] = $i['Item'];
-        $item[$i['Item']['id']]['Reservado'] = 0;
-        $item[$i['Item']['id']]['Empenhado'] = 0;
-        $item[$i['Item']['id']]['Utilizado'] = 0;
-      }
-      if(!isset($i['Pe']['Ord']['id'])) //PA sem OS
-        $item[$i['Item']['id']]['Reservado'] += $i['ItemPe']['volume'];
-      else{
-        if(isset($i['ItemPeFilha']['id']))// Possui OS com contagem final
-          $item[$i['Item']['id']]['Utilizado'] += $i['ItemPe']['volume'];
-        else
-          $item[$i['Item']['id']]['Empenhado'] += $i['ItemPe']['volume'];//OS sem contagem final
-      }
-    }
-
-    return $item;
-  }
-
   //TODO: Filtrar o cliente na SQL de consulta
   public function demandas(){
 
@@ -293,6 +266,64 @@
 
     $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
+  }
+
+  /*
+   * Mostra uma visão diferenciada para gestão de idéias (SSs)
+  */
+  public function gsses(){
+    $this->loadModel('Ss');
+    $this->Ss->Behaviors->attach('Containable');
+
+    $sses = $this->Ss->find('all', array(
+      'contain' => array(
+        'Servico' => array(/*'Area' => array('Cliente'=> array()) */),
+        'Pe' => array('ItemPe' => array('Item' => array())),
+        'Ord' => array('ItemPe'=> array('ItemPePai' => array('Item'=> array()))),
+        'Demanda' => array(),
+        'Status' => array()
+      ),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Ss.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+
+    $this->set('sses', $sses);
+  }
+
+  /*
+   * Se existe uma contagem para a Pa automaticamente RESERVAMOS o valor
+   * Se existe também uma OS para a Pa o valor está EMPENHADO
+   * se já foi feita a contagem final o valor foi utilizado
+  */
+  private function itemsEmpenhados($itemPes){
+    $item = array();
+    foreach ($itemPes as $i){
+      if(!isset($item[$i['Item']['id']])){
+        $item[$i['Item']['id']] = $i['Item'];
+        $item[$i['Item']['id']]['Reservado'] = 0;
+        $item[$i['Item']['id']]['Empenhado'] = 0;
+        $item[$i['Item']['id']]['Utilizado'] = 0;
+      }
+      if(!isset($i['Pe']['Ord']['id'])) //PA sem OS
+        $item[$i['Item']['id']]['Reservado'] += $i['ItemPe']['volume'];
+      else{
+        if(isset($i['ItemPeFilha']['id']))// Possui OS com contagem final
+          $item[$i['Item']['id']]['Utilizado'] += $i['ItemPe']['volume'];
+        else
+          $item[$i['Item']['id']]['Empenhado'] += $i['ItemPe']['volume'];//OS sem contagem final
+      }
+    }
+
+    return $item;
   }
 
   /* Funções de Apoio */

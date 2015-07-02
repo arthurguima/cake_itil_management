@@ -1,5 +1,9 @@
 <?php class Cliente extends AppModel {
 
+  public $hasAndBelongsToMany = array(
+    'User' => array()
+  );
+
   public $hasMany = array(
     'Area' => array(
       'className' => 'Area',

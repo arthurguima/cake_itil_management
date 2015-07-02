@@ -28,4 +28,12 @@
 			'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
 		)
 	);
+
+	public $validate = array(
+		'servico_id' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!')
+		),
+	);
 }

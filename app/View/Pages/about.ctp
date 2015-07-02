@@ -74,10 +74,12 @@
                         <li>Dashboard Separada Por Clientes</li>
                         <li>Análise de Demandas Atrasadas no Dashboard</li>
                         <li>Análise de RDMs no Dashboard</li>
+                        <li>Análise das SSes no Dashboard</li>
                         <li>Disponibilidade dos Containers de Serviço</li>
                         <li>Relatórios Separados por Clientes</li>
                         <li>Visões Gerais por clientes no Dashboard</li>
                         <li>Relatório de Contrato</li>
+                        <li>Relatório de Gestão de SS</li>
                       </ul>
                     </div>
                 </li>

@@ -80,7 +80,7 @@
                 <th>Nome</th>
                 <th>Número  <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Data Prevista</th>
-                <th>Data de Execução</th>
+                <th>Execução</th>
                 <th>Responsável</th>
                 <th>Ações</th>
               </tr>
@@ -89,9 +89,9 @@
               <?php foreach ($rdms as $rdm): ?>
                 <tr>
                   <td><?php echo $this->Html->link($rdm['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $rdm['Servico']['id'])); ?></td>
-                  <td><?php echo $rdm['Rdm']['versao']; ?></td>
+                  <td><div class="sub-20"><?php echo $rdm['Rdm']['versao']; ?></div></td>
                   <td><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></td>
-                  <td><?php echo $rdm['RdmTipo']['nome']; ?></td>
+                  <td><div class="sub-20"><?php echo $rdm['RdmTipo']['nome']; ?></div></td>
                   <td><?php echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']); ?></a></td>
                   <td>
                     <?php
@@ -137,6 +137,11 @@
           </table>
         </div>
       </div>
+      <ul class="list-group">
+  			<li class="list-group-item small red">
+          *Lista de RDMs limitada em 250 registros. Utilize o filtro para melhores resultados.
+        </li>
+  		</ul>
     </div>
   </div>
 </div>
@@ -192,6 +197,7 @@
           },
           "columnDefs": [  { "visible": false, "targets": 6 } ],
           "dom": 'TC<"clear">lfrtip',
+          "order": [[ 8, "desc" ]],
           "colVis": {
             "buttonText": "Esconder Colunas"
           },

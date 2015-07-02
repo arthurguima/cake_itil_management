@@ -62,8 +62,9 @@
     //$this->Filter->addFilters('filtro');
 
     // Define conditions
+    $this->Filter->setPaginate('order', 'Rdm.dt_prevista DESC, Rdm.dt_executada, Rdm.modified DESC, Rdm.created DESC');
     $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
-    $this->Filter->setPaginate('limit', 3000);
+    $this->Filter->setPaginate('limit', 250);
 
     $this->Rdm->recursive = 0;
     $this->set('rdms', $this->paginate());

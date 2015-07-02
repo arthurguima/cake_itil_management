@@ -141,6 +141,42 @@ class PagesController extends AppController {
 		));
 		$this->set('rdmsmes', $this->rdmsPorCliente($rdmsmes));
 		$this->set('rdmsano', $this->rdmsPorCliente($rdmsano));
+
+		/*Lista de Sses*/
+		$this->loadModel('Ss');
+		$this->Ss->Behaviors->attach('Containable');
+		$sses = $this->Ss->find('all', array(
+		  'contain' => array(
+		    'Servico' => array('Area' => array('Cliente'=> array())),
+				'Status' => array(),
+		  ),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Ss.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+			)
+			//'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%m") = "'.date("m").'"))')
+		));
+
+		$ssesano = $this->Ss->find('all', array(
+		  'contain' => array(
+		    'Servico' => array('Area' => array('Cliente'=> array())),
+				'Ord' => array(),
+				'Pe' => array(),
+				//'Status' => array()
+		  ),
+			'conditions' => array('((DATE_FORMAT(Ss.dt_recebimento,"%Y") = "'.date("Y").'"))')
+		));
+
+		//$this->set('ssesano', $ssesano); debug($ssesano);
+		$this->set('cliensses', $this->ssesPorCliente($sses));
+		$this->set('clienssessano', $this->ssesAnoPorCliente($ssesano));
 	}
 
 /* Funções de Apoio */
@@ -202,6 +238,146 @@ class PagesController extends AppController {
 				ksort($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
 		}
 		return $clientes;
+	}
+
+	/*
+	* Cria um array que separa as sses por clientes no ano atual
+	*/
+	private function ssesAnoPorCliente($sses){
+		$ssesAUX = array();
+
+	  foreach ($sses as $ss){
+	    /* Cliente ao qual o serviço pertence */
+	    $cliente = $ss['Servico']['Area']['0']['Cliente']['sigla'];
+			// Data em que a SS foi recebida
+			$recebido = date('m', strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$ss['Ss']['dt_recebimento'])))." ";
+
+			if(isset($ssesAUX[$cliente]['SS(s) Recebidas'][$recebido]))
+				$ssesAUX[$cliente]['SS(s) Recebidas'][$recebido] +=1;
+			else
+				$ssesAUX[$cliente]['SS(s) Recebidas'][$recebido] =1;
+
+			foreach($ss['Pe'] as $pe){
+				// Data em que a PA foi emitida
+				$emitida = date('m', strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$pe['dt_emissao'])))." ";
+
+				if(isset($ssesAUX[$cliente]['PA(s) Emitida(s)'][$emitida]))
+					$ssesAUX[$cliente]['PA(s) Emitida(s)'][$emitida] +=1;
+				else
+					$ssesAUX[$cliente]['PA(s) Emitida(s)'][$emitida] =1;
+			}
+
+			foreach($ss['Ord'] as $os){
+				// Data em que a OS foi homologada
+				$homologada = date('m', strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$os['dt_homologacao'])))." ";
+
+				if(isset($ssesAUX[$cliente]['OS(s) Homologada(s)'][$homologada]))
+					$ssesAUX[$cliente]['OS(s) Homologada(s)'][$homologada] +=1;
+				else
+					$ssesAUX[$cliente]['OS(s) Homologada(s)'][$homologada] =1;
+			}
+		}
+
+		for ($i = 1; $i <= date('m'); $i++) {
+			if($i < 10)
+				$pos = "0".$i." ";
+			else
+				$pos = $i." ";
+
+			if(!isset($ssesAUX[$cliente]['OS(s) Homologada(s)'][$pos]))
+				$ssesAUX[$cliente]['OS(s) Homologada(s)'][$pos] = 0;
+
+			if(!isset($ssesAUX[$cliente]['PA(s) Emitida(s)'][$pos]))
+				$ssesAUX[$cliente]['PA(s) Emitida(s)'][$pos] = 0;
+
+			if(!isset($ssesAUX[$cliente]['SS(s) Recebidas'][$pos]))
+				$ssesAUX[$cliente]['SS(s) Recebidas'][$pos] = 0;
+		}
+		ksort($ssesAUX[$cliente]['SS(s) Recebidas']);
+		ksort($ssesAUX[$cliente]['PA(s) Emitida(s)']);
+		ksort($ssesAUX[$cliente]['OS(s) Homologada(s)']);
+
+		return $ssesAUX;
+
+	}
+
+	/*
+	* Cria um array que separa as sses por clientes.
+	*/
+	private function ssesPorCliente($sses){
+	  $ssesAUX = array();
+
+	  foreach ($sses as $ss){
+	    /* Cliente ao qual o serviço pertence */
+	    $cliente = $ss['Servico']['Area']['0']['Cliente']['sigla'];
+
+	    /* Contador de Demandas */
+	            //$ssesAUX['MTE']['PROGER']['Status']['total']
+	    if(isset($ssesAUX[$cliente][$ss['Servico']['sigla']]['Status']['total'])){
+	      $ssesAUX[$cliente][$ss['Servico']['sigla']]['Status']['total'] += 1;
+	    }else{
+	      $ssesAUX[$cliente][$ss['Servico']['sigla']]['Status']['total'] = 1;
+	    }
+
+	    /* Separa as demanads por Status */
+	                //$ssesAUX['MTE']['PROGER']['Status']['Aberta']['total']
+	    if( !isset( $ssesAUX[$cliente][$ss['Servico']['sigla']]['Status'][$ss['Status']['nome']]['total'] ) ){
+	      $ssesAUX[$cliente][$ss['Servico']['sigla']]['Status'][$ss['Status']['nome'] ]['total'] = 1;
+	    }
+	    else{
+	      $ssesAUX[$cliente][$ss['Servico']['sigla']]['Status'][$ss['Status']['nome']]['total'] += 1;
+	    }
+
+	    /* Demandas separadas por tipo de Atraso */
+	              //$ssesAUX['MTE']['PROGER']['Atraso']['1 e 15']; $ssesAUX['MTE']['PROGER']['Atraso']['indisponível'];
+	    if(isset($ss['Ss']['dt_prazo'])){
+	      $t1 = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$ss['Ss']['dt_prevista']);
+	      if(strtotime($t1) < strtotime(date('Y-m-d'))){
+	        $t1 = date_create($t1);
+	        $t2 = date_create(date('Y-m-d'));
+	        $total = date_diff($t1,$t2)->days;
+	          if($total < 15)
+	            $key = 'entre 1 e 15';
+	          else if($total < 30)
+	            $key = 'entre 16 e 30';
+	          else if($total < 60)
+	            $key = 'entre 31 e 60';
+	          else if($total > 60)
+	            $key = 'há mais de 60 ';
+
+	        if(isset($ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['total'])){
+	          $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['total'] += 1;
+	        }
+	        else{
+	          $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['total'] = 1;
+	        }
+
+	        if(!isset( $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso'][$key] )){
+	          $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso'][$key] = 1;
+	        }
+	        else{
+	          $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso'][$key] += 1;
+	        }
+	      }
+	    }
+	    else{
+	      if(!isset( $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['Sem data prevista'] )){
+	        $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['Sem data prevista'] = 1;
+	      }
+	      else{
+	        $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['Sem data prevista'] += 1;
+	      }
+
+	      if(isset($ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['total'])){
+	        $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['total'] += 1;
+	      }
+	      else{
+	        $ssesAUX[$cliente][$ss['Servico']['sigla']]['Atraso']['total'] = 1;
+	      }
+	    }
+	  }
+
+	  return $ssesAUX;
 	}
 
 	/*

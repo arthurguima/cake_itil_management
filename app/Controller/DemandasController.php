@@ -94,6 +94,7 @@
     //$this->Filter->addFilters('filtro');
 
     // Define conditions
+    $this->Filter->setPaginate('order', 'Demanda.data_homologacao, Demanda.modified DESC, Demanda.created DESC');
     $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
     $this->Filter->setPaginate('limit', 150);
 

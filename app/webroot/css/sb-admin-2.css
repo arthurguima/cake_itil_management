@@ -366,6 +366,10 @@ table.dataTable thead .sorting:after {
 
 /*-- Custom -- */
 
+.fa-sm{
+  font-size: 10px;
+}
+
 /* Botão preto nas tables*/
 .table .fa {
   font-size: 18px;
@@ -559,7 +563,7 @@ span.breadcrumb {
 td i.green,
 td i.red,
 td i.yellow{
-  font-size: 18px !important;
+  font-size: 14px !important;
 }
 
 .green,
@@ -762,6 +766,15 @@ td.checklist a{
 td.checklist a,
 i.fa.checklist {
   font-size: 13px;
+}
+
+.clean-list li {
+  border-bottom: 1px dotted black;
+  display: block;
+}
+
+.clean-list li:only-child {
+  border-bottom: 0px dotted black;
 }
 
 .indis-tittle {
@@ -982,6 +995,15 @@ i.checklist span {
   display: none;
 }
 
+/*Containers*/
+table.containers{
+  float: left;
+  padding: 10px;
+  margin: 10px;
+}
+.popover{
+  max-width: 850px !important;
+}
 table#dataTables-Servico{
   font-size: 11px;
 }
@@ -994,7 +1016,6 @@ table#dataTables-Servico{
 .personal-info {
   margin-left: 21px;
 }
-
 
 /* Calendário */
 .calendar-demanda{

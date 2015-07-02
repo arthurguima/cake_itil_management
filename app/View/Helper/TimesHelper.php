@@ -16,8 +16,7 @@
 
           /* Se ainda não ha uma previsão*/
           if($time2 == null){
-            return "<i class='fa fa-exclamation-circle' style='color: #D9534F; font-size: 14px;'></i>
-                    Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F; font-size: 14px;'></i>" ;
+            return "Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F; font-size: 12px;'></i>" ;
           }
 
           /* Se não foi Homologado e está atrasado */

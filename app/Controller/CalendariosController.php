@@ -68,7 +68,7 @@
           'allDay' => true,
           'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
           'description' =>  $this->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada'])
-                           . " " . $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . " "  . ($rdm['Rdm']['ambiente'] == '1' ? ' Homologação' : ($rdm['Rdm']['ambiente'] == '2' ? 'Produção' : 'Treinamento')),
+                           . " " . $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . " "  . $this->getAmbiente($rdm['Rdm']['ambiente']),
           'className' => $class
       );
     }
@@ -96,6 +96,16 @@
     default:
       return " ";
     }
+  }
+
+  private function getAmbiente($value){
+    switch ($value):
+      case 1: return "<span class='label label-warning'>Homologação</span>";
+      case 2: return "<span class='label label-info'>Produção</span>";
+      case 3: return "<span class='label label-primary'>Treinamento</span>";
+      case 4: return "<span class='label label-success'>Sustentação</span>";
+    endswitch;
+    return "<span class='label label-warning'>Homologação</span>";
   }
 
   private function sses($params){
