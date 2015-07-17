@@ -89,11 +89,11 @@
               <?php foreach ($rdms as $rdm): ?>
                 <tr>
                   <td><?php echo $this->Html->link($rdm['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $rdm['Servico']['id'])); ?></td>
-                  <td><div class="sub-20"><?php echo $rdm['Rdm']['versao']; ?></div></td>
+                  <td ><div class="sub-17" style="font-size: 10px;"><?php echo $rdm['Rdm']['versao']; ?></div></td>
                   <td><?php echo $this->Rdm->getAmbiente($rdm['Rdm']['ambiente']); ?></td>
-                  <td><div class="sub-20"><?php echo $rdm['RdmTipo']['nome']; ?></div></td>
+                  <td><div class="sub-17" style="font-size: 10px;"><?php echo $rdm['RdmTipo']['nome']; ?></div></td>
                   <td><?php echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']); ?></a></td>
-                  <td>
+                  <td class="sub-20">
                     <?php
                       echo $this->Tables->popupBox(
                         $this->Html->link($rdm['Rdm']['nome'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id'])),

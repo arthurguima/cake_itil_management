@@ -18,7 +18,7 @@
                   'onblur' =>"getID('DemandaClarity');"));
       ?>
 
-        <div class="form-group">
+        <div class="form-group required">
           <label for="DemandaClarityId" class="control-label col-lg-3">Clarity ID: </label>
           <div class="col-lg-9">
              <div class='input-group'>
@@ -57,7 +57,7 @@
                'empty' => "Responsável"));
 
         echo $this->BootstrapForm->input('executor', array(
-                   'label' => array('text' => 'Responsável: ')));
+                   'label' => array('text' => 'Solicitante: ')));
 
         echo $this->BootstrapForm->input('prioridade', array(
                    'label' => array('text' => 'Prioridade: ')));

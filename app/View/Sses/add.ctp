@@ -16,11 +16,11 @@
                    'type' => 'text',
                    'onblur' =>"getID('SsClarity');")); ?>
 
-         <div class="form-group">
+         <div class="form-group required">
            <label for="SsClarityId" class="control-label col-lg-3">Clarity ID: </label>
            <div class="col-lg-9">
               <div class='input-group'>
-                <input name="data[Ss][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="SsClarityId">
+                <input name="data[Ss][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="SsClarityId" required="required">
                 <span class='input-group-addon'><a id='viewClarity' data-toggle='modal' data-target='#myModal'></a></span>
               </div>
            </div>
@@ -56,7 +56,7 @@
                     'class' => 'select2',
                     'label' => array('text' => 'Responsável: '),
                     'empty' => "Responsável"));
-                    
+
           echo $this->BootstrapForm->input('servico_id', array(
                       'label' => array('text' => 'Serviço: '),
                       'class' => 'select2',

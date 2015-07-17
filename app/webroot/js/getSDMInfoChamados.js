@@ -2,8 +2,8 @@
 function getSDMInfoChamados(sdmid, sdmano, control){
   //alert(sdmid);
   //alert ("http://localhost//wsdl-sdm/sgdGetChamadoSDM.php?numero=" + sdmid + "/" + sdmano);
-  $.getJSON( "http://localhost//wsdl-sdm/sgdGetChamadoSDM.php?numero=" + sdmid + "/" + sdmano, function( data ) {
-//  $.getJSON( "http://www-apps/_projects/dite/wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+//  $.getJSON( "http://localhost//wsdl-sdm/sgdGetChamadoSDM.php?numero=" + sdmid + "/" + sdmano, function( data ) {
+  $.getJSON( "http://www-apps/_projects/dite/wsdl-sdm/sgdGetChamadoSDM.php?numero=" + sdmid + "/" + sdmano, function( data ) {
     $.each( data, function( key, val ) {
       if(key == 'dt_prevista')
       {

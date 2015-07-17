@@ -125,7 +125,7 @@
       	chart.render();
       });
     </script>
-    <div class="col-lg-4 chart-container" id="chartContainer'. $cliente .'" style="height: 300px; max-width: 500px;"></div>';
+    <div class="col-lg-8 chart-container" id="chartContainer'. $cliente .'" style="height: 300px; max-width: 800px;"></div>';
   }
 
   private function colorAsArray($color){

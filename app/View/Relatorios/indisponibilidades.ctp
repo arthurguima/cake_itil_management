@@ -111,12 +111,12 @@
                           if($Indisponibilidade['Motivo']['contavel'] == true)
                             $contatime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], $Indisponibilidade['dt_fim']);
                         }
-                        else{
-                          echo $this->Times->totalTime($Indisponibilidade['dt_inicio'], date('Y-m-d'));
-                          $totaltime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], date('Y-m-d'));
+                        else{                          
+                          echo $this->Times->totalTime($Indisponibilidade['dt_inicio'], date('Y-m-d H:i:s'));
+                          $totaltime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], date('Y-m-d H:i:s'));
 
                           if($Indisponibilidade['Motivo']['contavel'] == true)
-                            $contatime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], date('Y-m-d'));
+                            $contatime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], date('Y-m-d H:i:s'));
                         }
                       ?>
                     </td><!-- TODO: transformar em HELPER -->

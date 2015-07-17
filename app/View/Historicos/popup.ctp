@@ -12,6 +12,12 @@
   echo $this->Html->css('sb-admin-2.css');
 ?>
 
+<style media="screen">
+    body{
+      background-color: #fff;
+    }
+</style>
+
 <div style="padding: 25px 15px; border-left: 1px solid #e7e7e7;">
   <div class="row">
     <div class="col-lg-12">

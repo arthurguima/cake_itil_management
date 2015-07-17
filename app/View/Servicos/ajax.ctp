@@ -24,12 +24,12 @@
     <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover" id="dataTables-Servico">
         <thead>
-          <tr>
+          <tr style="font-size:10px;" >
             <th>Serviço</th>
             <th>Resposta</th>
             <th>
-              <p>Containers
-              <i class="fa fa-refresh" style="font-size:14px;" onclick="javascript:$('.get-containers').click();"></i></p>
+              Containers
+              <i class="fa fa-refresh" style="font-size:14px;" onclick="javascript:$('.get-containers').click();"></i>
             </th>
           </tr>
         </thead>
@@ -39,7 +39,7 @@
               <td>
                 <b>
                   <?php echo $this->Html->link($servico['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $servico['Servico']['id']),
-                        array('style' => "color: black; text-decoration:none;", 'id' => $servico['Servico']['sigla'])); ?>
+                        array('style' => "font-size: 9px; color: black; text-decoration:none;", 'id' => $servico['Servico']['sigla'])); ?>
                 </b>
               </td>
               <?php echo $this->Disponibilidade->online($servico['Servico']['url'], 'GET'); ?>

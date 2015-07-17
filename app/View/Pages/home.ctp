@@ -5,7 +5,7 @@
 <div class="row">
 
 	<!-- Serviços Online -->
-	<div class="col-lg-3 col-md-12 pull-right col-sm-12 delete-online">
+	<div class="col-lg-3 col-md-12 pull-right col-sm-12 col-xs-12 delete-online">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<p>
@@ -92,12 +92,12 @@
 	</div>
 
 	<!-- RDMs --> <?php //debug($rdmsmes);?>
-	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-rdm">
+	<div class="col-lg-9  col-md-12 col-sm-12 pull-left col-xs-12 delete-rdm">
 		<div class="panel panel-danger ">
 			<div class="panel-heading">
 				<p>
 					<h3 class="panel-title">
-						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Requisões de Mudança
+						<b><i class="fa fa-pie-chart" style="font-size: 20px;"></i> Requisições de Mudança
 							<span style="cursor:pointer;" onclick="javascript:$('div.panel-body.rdms-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
 							<span style="cursor:pointer;" onclick="javascript:$('div.delete-rdm').remove();"><i class="fa fa-trash-o pull-right"></i></span>
 						</b>
@@ -153,7 +153,7 @@
 	</div>
 
 	<!-- Sses -->
-	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-dem">
+	<div class="col-lg-9  col-md-12 col-sm-12 col-xs-12 pull-left delete-dem">
 	  <div class="panel panel-info">
 	    <div class="panel-heading">
 	      <p>
@@ -311,7 +311,7 @@
 	</div>
 
 	<!-- Chamados -->
-	<div class="col-lg-9  col-md-12 col-sm-12 pull-left delete-cham">
+	<div class="col-lg-9  col-md-12 col-sm-12  col-xs-12 pull-left delete-cham">
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				<p>

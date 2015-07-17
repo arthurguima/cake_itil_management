@@ -388,6 +388,6 @@
       	chart.render();
       });
     </script>
-    <div class="col-lg-4 chart-container" id="chartContainerSs'. $cliente .'" style="height: 300px; max-width: 500px;"></div>';
+    <div class="col-lg-9 chart-container" id="chartContainerSs'. $cliente .'" style="height: 300px; max-width: 800px;"></div>';
   }
 }?>

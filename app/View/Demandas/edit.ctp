@@ -26,11 +26,11 @@
                    'onblur' =>"getID('DemandaClarity');",
                    'value' => "http://www-dtpprojetos/niku/nu#action:pma.ideaProperties&id=" . $this->data['Demanda']['clarity_id'])); ?>
 
-         <div class="form-group">
+         <div class="form-group required">
            <label for="DemandaClarityId" class="control-label col-lg-3">Clarity ID: </label>
            <div class="col-lg-9">
               <div class='input-group'>
-                <input name="data[Demanda][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" id="DemandaClarityId"
+                <input name="data[Demanda][clarity_id]" style="background-color: #EEEEEE;" class="form-control" type="text" required="required" id="DemandaClarityId"
                 value=
                 <?php echo ("'" . $this->data['Demanda']['clarity_id'] . "'>"); ?>
                 <span class='input-group-addon'>
@@ -63,7 +63,7 @@
                'empty' => "Responsável"));
 
          echo $this->BootstrapForm->input('executor', array(
-                     'label' => array('text' => 'Responsável: ')));
+                     'label' => array('text' => 'Solicitante: ')));
 
          echo $this->BootstrapForm->input('prioridade', array(
                     'label' => array('text' => 'Prioridade: ')));
@@ -137,7 +137,7 @@
     $('.select2').select2({
       containerCssClass: 'select2'
     });
-    
+
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
         minView: 2,

@@ -97,9 +97,3 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
 
  });
 </script>
-
-<style>
-div.sub-20 {
-  overflow:  inherit !important;
-}
-</style>
