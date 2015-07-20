@@ -64,6 +64,13 @@ class AppController extends Controller {
       'Session'
   );
 
+  /* Variável de Sessão que controla a visão por clientes */
+  /*  $this->loadModel('User');
+    $this->Session->write('Person.eyeColor', $this->User->find('first', array(
+      'contain' => array('Cliente' => array()),
+      'conditions' => array('User.matricula =' . $_SESSION['cdUsuario'] )
+    )));*/
+
   var $helpers = array(
       'FilterResults.Search' => array(
           'operators' => array(
@@ -80,13 +87,21 @@ class AppController extends Controller {
           )
       )
   );
+  function beforeFilter() {
+    App::import('Vendor', 'ldapInclude', array('file' => 'ldapInclude.php'));
 
-  /* Variável de Sessão que controla a visão por clientes */
-  /*
-    $this->loadModel('User');
-    $cliente = $this->User->find('first', array(
-      'contain' => array('Cliente' => array()),
-      'conditions' => array('User.matricula =' . $_SESSION['cdUsuario'] )
-    ));
-  */
+    if (isset($_SESSION['cdUsuario'])) {
+      $this->loadModel('User');
+      $user = $this->User->find('first', array(
+          'contain' => array('Cliente' => array()),
+          'conditions' => array('User.matricula =' . $_SESSION['cdUsuario'])
+      ));
+      $this->Session->write('User.uid', $user['User']['id']);
+      $this->Session->write('User.nome', $user['User']['nome']);
+    }
+    else{
+      $this->Session->write('User.uid', '0');
+    }
+  }
+
 }

@@ -30,11 +30,12 @@
       echo $this->BootstrapForm->input('user_id', array(
                  'class' => 'select2',
                  'label' => array('text' => 'Responsável: '),
+                 'selected' => $this->Session->read('User.uid'),
                  'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('solicitante', array(
                 'label' => array('text' => 'Solicitante: '),
-                'value' => $this->Ldap->nomeUsuario()));
+                'value' => $this->Session->read('User.nome')));
 
       echo $this->BootstrapForm->input('servico_id', array(
                   //'class' => 'select2',
@@ -114,7 +115,7 @@
     $('.select2').select2({
       containerCssClass: 'select2'
     });
-    
+
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
         minView: 2,

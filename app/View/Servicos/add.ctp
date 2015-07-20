@@ -23,6 +23,9 @@
        echo $this->BootstrapForm->input('tecnologia', array(
                   'label' => array('text' => 'Tecnologia:')));
 
+      echo $this->BootstrapForm->input('cliente_id', array(
+                 'label' => array('text' => 'Cliente:')));
+
        echo $this->BootstrapForm->input('Area', array(
                   'label' => array('text' => 'Área(s):'),
                   'input' => 'text',

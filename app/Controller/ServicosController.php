@@ -8,9 +8,8 @@
     $this->set('servicos',
       $this->Servico->find('all', array('contain' =>
         array(
-          'Area' => array(
-            'Cliente' => array()
-          ),
+          'Cliente' => array(),
+          'Area' => array(),
           'Container' => array(),
         )
       )));
@@ -53,6 +52,9 @@
 
     $this->set('dependencias',
                 $this->Servico->Dependencia->find('list', array('fields' => array('Dependencia.id', 'Dependencia.nome'))));
+
+    $this->set('clientes',
+                $this->Servico->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.nome'))));
   }
 
   public function add() {
@@ -73,6 +75,9 @@
 
     $this->set('dependencias',
                 $this->Servico->Dependencia->find('list', array('fields' => array('Dependencia.id', 'Dependencia.nome'))));
+
+    $this->set('clientes',
+                $this->Servico->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.nome'))));
   }
 
   public function delete($id) {

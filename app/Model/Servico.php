@@ -6,6 +6,13 @@
     'Dependencia' => array('classname' => 'Dependencia')
   );
 
+  public $belongsTo = array(
+    'Cliente' => array(
+      'className' => 'Cliente',
+      'foreignKey' => 'cliente_id'
+    )
+  );
+
   public $hasMany = array(
     'Demanda' => array('className' => 'Demanda'),
     'Rdm' => array('className' => 'Rdm'),

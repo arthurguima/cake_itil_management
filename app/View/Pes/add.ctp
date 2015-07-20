@@ -56,6 +56,7 @@
         echo $this->BootstrapForm->input('user_id', array(
                 'class' => 'select2',
                 'label' => array('text' => 'Responsável: '),
+                'selected' => $this->Session->read('User.uid'),
                 'empty' => "Responsável"));
 
         echo $this->BootstrapForm->input('status_id', array(
@@ -85,7 +86,7 @@
     $('.select2').select2({
       containerCssClass: 'select2'
     });
-    
+
     $('#myModal').on('shown.bs.modal', function (e) {
       document.getElementById('modal-body').appendChild(
           document.getElementById('demandaFrame')

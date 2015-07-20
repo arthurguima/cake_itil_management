@@ -64,7 +64,7 @@
           <li><a><b>Tipo: </b><?php echo $demanda['DemandaTipo']['nome']; ?></a></li>
           <li><a><b>Responsável: </b><?php echo $demanda['User']['nome']; ?></a></li>
           <li><a><b>Solicitada pelo Cliente: </b><?php echo $this->Times->yesOrNo($demanda['Demanda']['origem_cliente']); ?></a></li>
-          <li><a><b>Solicitante: </b><?php echo $demanda['Demanda']['executor']; ?></a></li>
+          <li><a><b>Executor: </b><?php echo $demanda['Demanda']['executor']; ?></a></li>
 
           <?php if(isset($demanda['Ss'][0])):
             foreach($demanda['Ss'] as $ss): ?>

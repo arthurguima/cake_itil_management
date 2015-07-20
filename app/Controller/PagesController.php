@@ -55,7 +55,7 @@ class PagesController extends AppController {
 
 
 					),
-					'Area' => array('Cliente'=> array())
+					'Cliente'=> array()
 				)
 			));
 		}
@@ -67,7 +67,7 @@ class PagesController extends AppController {
 						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 )) ||
 																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("+1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 ))')
 					),
-					'Area' => array('Cliente'=> array())
+					'Cliente'=> array()
 				)
 			));
 		}
@@ -79,7 +79,7 @@ class PagesController extends AppController {
 		$this->Demanda->Behaviors->attach('Containable');
 		$demandas = $this->Demanda->find('all', array(
       'contain' => array(
-        'Servico' => array('Area' => array('Cliente'=> array())),
+        'Servico' => array('Cliente'=> array()),
         'DemandaTipo' => array(),
         'Status' => array(),
       ),
@@ -104,7 +104,7 @@ class PagesController extends AppController {
 		$chamados = $this->Chamado->find('all', array(
       //'group' => array('Demanda.servico_id'),
       'contain' => array(
-				'Servico' => array('Area' => array('Cliente'=> array())),
+				'Servico' => array('Cliente'=> array()),
         'ChamadoTipo' => array(),
         'Status' => array(),
       ),
@@ -127,14 +127,14 @@ class PagesController extends AppController {
 		$this->Rdm->Behaviors->attach('Containable');
 		$rdmsmes = $this->Rdm->find('all', array(
 		  'contain' => array(
-		    'Servico' => array('Area' => array('Cliente'=> array())),
+		    'Servico' => array('Cliente'=> array()),
 				'RdmTipo' => array()
 		  ),
 			'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%m") = "'.date("m").'"))')
 		));
 		$rdmsano = $this->Rdm->find('all', array(
 		  'contain' => array(
-		    'Servico' => array('Area' => array('Cliente'=> array())),
+		    'Servico' => array('Cliente'=> array()),
 				'RdmTipo' => array()
 		  ),
 			'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%Y") = "'.date("Y").'"))')
@@ -147,7 +147,7 @@ class PagesController extends AppController {
 		$this->Ss->Behaviors->attach('Containable');
 		$sses = $this->Ss->find('all', array(
 		  'contain' => array(
-		    'Servico' => array('Area' => array('Cliente'=> array())),
+		    'Servico' => array('Cliente'=> array()),
 				'Status' => array(),
 		  ),
       'joins' => array(
@@ -166,7 +166,7 @@ class PagesController extends AppController {
 
 		$ssesano = $this->Ss->find('all', array(
 		  'contain' => array(
-		    'Servico' => array('Area' => array('Cliente'=> array())),
+		    'Servico' => array('Cliente'=> array()),
 				'Ord' => array(),
 				'Pe' => array(),
 				//'Status' => array()
@@ -178,6 +178,10 @@ class PagesController extends AppController {
 		$this->set('cliensses', $this->ssesPorCliente($sses));
 		$this->set('clienssessano', $this->ssesAnoPorCliente($ssesano));
 	}
+
+	public function workspace(){
+	}
+
 
 /* Funções de Apoio */
 
@@ -195,45 +199,45 @@ class PagesController extends AppController {
 			if(isset($rdm['Rdm']['dt_executada']))
 				$mes = date('m',strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$rdm['Rdm']['dt_executada'])));
 
-			if(!isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total']))
-				$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total'] = 1;
+			if(!isset($clientes[$rdm['Servico']['Cliente']['sigla']]['Total']))
+				$clientes[$rdm['Servico']['Cliente']['sigla']]['Total'] = 1;
 			else
-				$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Total'] += 1;
+				$clientes[$rdm['Servico']['Cliente']['sigla']]['Total'] += 1;
 
 			//Ambiente
-				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente]))
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] += 1;
+				if(isset($clientes[$rdm['Servico']['Cliente']['sigla']]['Ambiente'][$ambiente]))
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Ambiente'][$ambiente] += 1;
 				else
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Ambiente'][$ambiente] = 1;
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Ambiente'][$ambiente] = 1;
 
 			//Sucesso
-				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso])){
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] += 1;
+				if(isset($clientes[$rdm['Servico']['Cliente']['sigla']]['Sucesso'][$sucesso])){
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Sucesso'][$sucesso] += 1;
 				}
 				else{
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Sucesso'][$sucesso] = 1;
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Sucesso'][$sucesso] = 1;
 				}
 				//Sucesso no mês X - se possui data de execução
 				if(isset($mes)){
-					if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]))
-						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
+					if(isset($clientes[$rdm['Servico']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes]))
+						$clientes[$rdm['Servico']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] +=1;
 					else
-						$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
+						$clientes[$rdm['Servico']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso][$mes] =1;
 				}
 
 				//Serviço
-				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico]))
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico] += 1;
+				if(isset($clientes[$rdm['Servico']['Cliente']['sigla']]['Servico'][$servico]))
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Servico'][$servico] += 1;
 				else
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Servico'][$servico] = 1;
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Servico'][$servico] = 1;
 			//Tipo
-				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo]))
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo] += 1;
+				if(isset($clientes[$rdm['Servico']['Cliente']['sigla']]['Tipo'][$tipo]))
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Tipo'][$tipo] += 1;
 				else
-					$clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Tipo'][$tipo] = 1;
+					$clientes[$rdm['Servico']['Cliente']['sigla']]['Tipo'][$tipo] = 1;
 
-				if(isset($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]))
-					ksort($clientes[$rdm['Servico']['Area']['0']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
+				if(isset($clientes[$rdm['Servico']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]))
+					ksort($clientes[$rdm['Servico']['Cliente']['sigla']]['Mensal']['Sucesso'][$sucesso]);
 				if(isset($mes))
 					unset($mes);
 		}
@@ -248,7 +252,7 @@ class PagesController extends AppController {
 
 	  foreach ($sses as $ss){
 	    /* Cliente ao qual o serviço pertence */
-	    $cliente = $ss['Servico']['Area']['0']['Cliente']['sigla'];
+	    $cliente = $ss['Servico']['Cliente']['sigla'];
 			// Data em que a SS foi recebida
 			$recebido = date('m', strtotime(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$ss['Ss']['dt_recebimento'])))." ";
 
@@ -309,7 +313,7 @@ class PagesController extends AppController {
 
 	  foreach ($sses as $ss){
 	    /* Cliente ao qual o serviço pertence */
-	    $cliente = $ss['Servico']['Area']['0']['Cliente']['sigla'];
+	    $cliente = $ss['Servico']['Cliente']['sigla'];
 
 	    /* Contador de Demandas */
 	            //$ssesAUX['MTE']['PROGER']['Status']['total']
@@ -428,7 +432,7 @@ class PagesController extends AppController {
 	private function servicoPorCliente($servicos){
 		$clientes = array();
 		foreach ($servicos as $ser){
-			$clientes[$ser['Area']['0']['Cliente']['sigla']][] = $ser;
+			$clientes[$ser['Cliente']['sigla']][] = $ser;
 		}
 		return $clientes;
 	}
@@ -442,7 +446,7 @@ class PagesController extends AppController {
 
 		foreach ($demandas as $dem){
 			/* Cliente ao qual o serviço pertence */
-			$cliente = $dem['Servico']['Area']['0']['Cliente']['sigla'];
+			$cliente = $dem['Servico']['Cliente']['sigla'];
 
 			/* Contador de Demandas */
 							 //$demandasAUX['MTE']['PROGER']['Status']['total']
@@ -542,7 +546,7 @@ class PagesController extends AppController {
 
 		foreach ($chamados as $cham){
 			/* Cliente ao qual o serviço pertence */
-			$cliente = $cham['Servico']['Area']['0']['Cliente']['sigla'];
+			$cliente = $cham['Servico']['Cliente']['sigla'];
 
 			/* Contador de chamados */
 			if(isset($chamadosAUX[$cliente][$cham['Servico']['sigla']]['Status']['total'])){

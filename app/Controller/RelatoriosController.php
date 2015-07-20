@@ -82,7 +82,7 @@
         //'conditions' => array('id' => $this->request->data['servico_id']),
         'contain' => array(
           'Indisponibilidade' => array(
-            'Servico' => array('Area' => array('Cliente'=> array()) ),
+            'Servico' => array('Cliente'=> array() ),
             'Motivo' => array(),
             'conditions' => array($conditions)
           )
@@ -201,7 +201,7 @@
     $demandas = $this->Demanda->find('all', array(
       //'group' => array('Demanda.servico_id'),
       'contain' => array(
-        'Servico' => array('Area' => array('Cliente'=> array()) ),
+        'Servico' => array('Cliente'=> array() ),
         'DemandaTipo' => array(),
         'Status' => array(),
       ),
@@ -238,7 +238,7 @@
     $demandas = $this->Demanda->find('all', array(
       'conditions' => array("data_homologacao IS NULL && dt_prevista IS NOT NULL && dt_prevista < '" . date('Y-m-d') . "'"),
       'contain' => array(
-        'Servico' => array('Area' => array('Cliente'=> array()) ),
+        'Servico' => array('Cliente'=> array() ),
         'DemandaTipo' => array(),
         'Status' => array(),
       ),
@@ -277,7 +277,7 @@
 
     $sses = $this->Ss->find('all', array(
       'contain' => array(
-        'Servico' => array(/*'Area' => array('Cliente'=> array()) */),
+        'Servico' => array(/*'Cliente'=> array() */),
         'Pe' => array('ItemPe' => array('Item' => array())),
         'Ord' => array('ItemPe'=> array('ItemPePai' => array('Item'=> array()))),
         'Demanda' => array(),
@@ -331,7 +331,7 @@
   private function IndiPorServicoPorCliente($servicos){
     $clientes = array();
     foreach ($servicos as $ser){
-      $clientes[$ser['Area']['0']['Cliente']['sigla']][] = $ser;
+      $clientes[$ser['Cliente']['sigla']][] = $ser;
     }
 
     return $clientes;
@@ -344,7 +344,7 @@
     $demandasAUX = array();
     foreach ($demandas as $dem){
       if(isset($cliente)){
-        if($dem['Servico']['Area']['0']['Cliente']['id'] == $cliente){
+        if($dem['Servico']['Cliente']['id'] == $cliente){
           $demandasAUX[$dem['Servico']['sigla']][] = $dem;
         }
       }
@@ -367,7 +367,7 @@
 
     foreach ($demandas as $dem){
       if(isset($cliente)){
-        if($dem['Servico']['Area']['0']['Cliente']['id'] == $cliente){
+        if($dem['Servico']['Cliente']['id'] == $cliente){
           $t1 = date_create(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$dem['Demanda']['dt_prevista']));
           $t2 = date_create(date('Y-m-d'));
           $total = date_diff($t1,$t2);

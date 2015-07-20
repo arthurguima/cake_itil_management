@@ -14,6 +14,11 @@
       'className' => 'Contrato',
       'foreignKey' => 'cliente_id',
       'dependent' => false,
+    ),
+    'Servico' => array(
+      'className' => 'Servico',
+      'foreignKey' => 'cliente_id',
+      'dependent' => false,
     )
   );
 

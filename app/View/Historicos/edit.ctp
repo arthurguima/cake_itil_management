@@ -5,6 +5,11 @@
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">Editar Historico</h3></div>
 </div>
+<style media="screen">
+    body{
+      background-color: #fff;
+    }
+</style>
 
 <div class="row">
   <div class="col-lg-6">

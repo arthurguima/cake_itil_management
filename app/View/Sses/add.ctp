@@ -55,6 +55,7 @@
           echo $this->BootstrapForm->input('user_id', array(
                     'class' => 'select2',
                     'label' => array('text' => 'Responsável: '),
+                    'selected' => $this->Session->read('User.uid'),
                     'empty' => "Responsável"));
 
           echo $this->BootstrapForm->input('servico_id', array(

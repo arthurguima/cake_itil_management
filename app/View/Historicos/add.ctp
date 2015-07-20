@@ -30,6 +30,12 @@
   $this->Html->addCrumb('Histórico', '');
   $this->Html->addCrumb("Novo", array('controller' => 'historicos', 'action' => 'add'));
 ?>
+<style media="screen">
+    body{
+      background-color: #fff;
+    }
+</style>
+
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">Novo Historico</h3></div>
 </div>
@@ -69,7 +75,7 @@
 
       echo $this->BootstrapForm->input('analista', array(
                   'label' => array('text' => 'Analista: '),
-                  'value' => $this->Ldap->nomeUsuario()));
+                  'value' => $this->Session->read('User.nome')));
 
       echo $this->BootstrapForm->input('descricao', array(
                   'label' => array('text' => 'Descrição: '),

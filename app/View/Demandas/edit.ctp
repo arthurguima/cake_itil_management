@@ -63,7 +63,7 @@
                'empty' => "Responsável"));
 
          echo $this->BootstrapForm->input('executor', array(
-                     'label' => array('text' => 'Solicitante: ')));
+                     'label' => array('text' => 'Executor: ')));
 
          echo $this->BootstrapForm->input('prioridade', array(
                     'label' => array('text' => 'Prioridade: ')));

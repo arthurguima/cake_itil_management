@@ -52,7 +52,7 @@
                         endforeach;
                     ?>
                   </td>
-                  <td/><?php echo $servico['Area']['0']['Cliente']['nome']; ?></td>
+                  <td/><?php echo $servico['Cliente']['nome']; ?></td>
                   <td><?php echo $this->Times->active($servico['Servico']['status'])?></td>
                   <!--td><?php //echo $this->Disponibilidade->online2($servico['Servico']['url'], 'GET'); ?></td-->
                  <td><?php echo $this->Tables->getMenu('Servicos', $servico['Servico']['id'], 12); ?></td>

@@ -9,7 +9,7 @@
       <?php
           echo $this->Html->link("<i class='fa fa-search-plus'></i>",
           array('controller' => 'Servicos', 'action' => 'view', $this->data['Servico']['id']),
-          array('escape' => false));          
+          array('escape' => false));
       ?>
     </h3>
   </div>
@@ -31,6 +31,9 @@
 
          echo $this->BootstrapForm->input('tecnologia', array(
                     'label' => array('text' => 'Tecnologia:')));
+
+        echo $this->BootstrapForm->input('cliente_id', array(
+                   'label' => array('text' => 'Cliente:')));
 
          echo $this->BootstrapForm->input('Area', array(
                     'label' => array('text' => 'Área(s):'),
