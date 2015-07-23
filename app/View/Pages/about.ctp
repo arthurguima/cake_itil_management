@@ -63,6 +63,28 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li class="timeline-inverted">
+            <div class="timeline-badge info">
+              <i class="fa fa-user-plus fa-fw"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.1</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Menu Gerencial</li>
+                        <li>Script de atualização automática de RDM</li>
+                        <li>Resgatar dados dos Chamados no SDM</li>
+                        <li>Resgatar dados das RDMs no SDM</li>
+                        <li>Workspace</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li>
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">

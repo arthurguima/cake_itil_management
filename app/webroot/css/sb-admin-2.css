@@ -195,6 +195,12 @@ i.hide-sidebar{
     padding: 0;
     list-style: none;
 }
+.badge{
+  background-color: #32404e;
+}
+.nav-tabs-black > li > a {
+  border: 1px solid #ddd;
+}
 
 .chat li {
     margin-bottom: 10px;

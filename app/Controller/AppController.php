@@ -96,8 +96,12 @@ class AppController extends Controller {
           'contain' => array('Cliente' => array()),
           'conditions' => array('User.matricula =' . $_SESSION['cdUsuario'])
       ));
-      $this->Session->write('User.uid', $user['User']['id']);
-      $this->Session->write('User.nome', $user['User']['nome']);
+      if(sizeof($user) > 0){
+        $this->Session->write('User.uid', $user['User']['id']);
+        $this->Session->write('User.nome', $user['User']['nome']);
+      }else{
+        $this->Session->write('User.uid', '0');
+      }
     }
     else{
       $this->Session->write('User.uid', '0');

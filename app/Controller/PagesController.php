@@ -37,7 +37,7 @@ class PagesController extends AppController {
  */
 	public $uses = array();
 
-	public function home(){
+	public function dashboard(){
 		if($this->request->is('ajax')) {
       $this->layout = 'ajax';
   	}
@@ -180,6 +180,138 @@ class PagesController extends AppController {
 	}
 
 	public function workspace(){
+		/*Lista de Chamados*/
+		$this->loadModel('Chamado');
+		$this->Chamado->Behaviors->attach('Containable');
+		$chamados = $this->Chamado->find('all', array(
+      //'group' => array('Demanda.servico_id'),
+      'contain' => array(
+				'Servico' => array(),
+        'ChamadoTipo' => array(),
+        'Status' => array(),
+      ),
+			'conditions' => array('Chamado.user_id = ' . $this->Session->read('User.uid')),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Chamado.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+		$this->set('chamados', $chamados);
+
+		/*Lista de Rdms*/
+		$this->loadModel('Rdm');
+		$this->Rdm->Behaviors->attach('Containable');
+		$rdms = $this->Rdm->find('all', array(
+		  'contain' => array(
+		    'Servico' => array(),
+				'RdmTipo' => array()
+		  ),
+			'conditions' => array('Rdm.sucesso = -1 && Rdm.user_id = ' . $this->Session->read('User.uid'))
+		));
+		$this->set('rdms', $rdms);
+
+
+		/*Lista de Demandas*/
+		$this->loadModel('Demanda');
+		$this->Demanda->Behaviors->attach('Containable');
+		$demandas = $this->Demanda->find('all', array(
+      'contain' => array(
+        'Servico' => array(),
+        'DemandaTipo' => array(),
+        'Status' => array(),
+      ),
+			'conditions' => array('Demanda.user_id = ' . $this->Session->read('User.uid')),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Demanda.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+		$this->set('demandas', $demandas);
+
+		/*Lista de PEs*/
+		$this->loadModel('Pe');
+		$this->Pe->Behaviors->attach('Containable');
+		$pes = $this->Pe->find('all', array(
+      'contain' => array(
+				'Ss' => array(),
+        'Servico' => array(),
+        'Status' => array(),
+      ),
+			'conditions' => array('Pe.user_id = ' . $this->Session->read('User.uid')),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Pe.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+		$this->set('pes', $pes);
+
+		/*Lista de PEs*/
+		$this->loadModel('Ord');
+		$this->Ord->Behaviors->attach('Containable');
+		$ords = $this->Ord->find('all', array(
+      'contain' => array(
+				'Ss' => array(),
+        'Servico' => array(),
+        'Status' => array(),
+      ),
+			'conditions' => array('Ord.user_id = ' . $this->Session->read('User.uid')),
+      'joins' => array(
+        array(
+          'table'=>'statuses',
+          'alias' => 'Status_',
+          'type'=>'inner',
+          'conditions'=> array(
+            'Status_.id = Ord.status_id',
+            'Status_.fim =' => null,
+          ),
+        )
+      )
+    ));
+		$this->set('ords', $ords);
+
+		/*Lista de Sses*/
+		$this->loadModel('Ss');
+		$this->Ss->Behaviors->attach('Containable');
+		$sses = $this->Ss->find('all', array(
+			'contain' => array(
+				'Servico' => array('Cliente'=> array()),
+				'Status' => array(),
+			),
+			'conditions' => array('Ss.user_id = ' . $this->Session->read('User.uid')),
+			'joins' => array(
+				array(
+					'table'=>'statuses',
+					'alias' => 'Status_',
+					'type'=>'inner',
+					'conditions'=> array(
+						'Status_.id = Ss.status_id',
+						'Status_.fim =' => null,
+					),
+				)
+			)
+		));
+		$this->set('sses', $sses);
 	}
 
 

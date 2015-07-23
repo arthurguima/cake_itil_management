@@ -5,7 +5,7 @@
   //-- MetisMenu CSS --
   echo $this->Html->css('plugins/metisMenu/metisMenu.min.css');
   //-- Custom Fonts
-  echo $this->Html->css('font-awesome-4.2.0/css/font-awesome.min.css');
+  echo $this->Html->css('font-awesome-4.3.0/css/font-awesome.min.css');
   //-- Custom admin CSS --
   echo $this->Html->css('sb-admin-2.css');
 ?>

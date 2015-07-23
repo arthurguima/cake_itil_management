@@ -20,8 +20,8 @@ function getClarityInfo(dm, control){
 }
 
 function getClarityInfoOnView(dm, control){
-  $.getJSON( "http://bsad229628//wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
-//  $.getJSON( "http://www-apps/_projects/dite/wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+//  $.getJSON( "http://bsad229628//wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
+  $.getJSON( "http://www-apps/_projects/dite/wsdl/sgdGetClarity.php?dmClarity=" + dm, function( data ) {
     $('.load').remove();
     $.each( data, function( key, val ) {
       if(key == 'dt_prevista')

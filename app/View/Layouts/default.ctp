@@ -28,7 +28,7 @@
 		//-- Timeline CSS --
 		//echo $this->Html->css('plugins/timeline.css');
 		//-- Custom Fonts
-		echo $this->Html->css('font-awesome-4.2.0/css/font-awesome.min.css');
+		echo $this->Html->css('font-awesome-4.3.0/css/font-awesome.min.css');
 		//-- Custom admin CSS --
 		echo $this->Html->css('sb-admin-2.css');
 	?>
@@ -60,7 +60,7 @@
 						<ul class="nav" id="side-menu">
 								<!--li class="sidebar-search"> Busca </li -->
 								<li>
-									  <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Dashboard',
+									  <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Workspace',
 																						Router::url('/', true) . "index.php", array('escape' => false)); ?>
 								</li>
 								<li><!-- Calendário -->
@@ -92,6 +92,10 @@
 								<li> <!-- Gerencial -->
 										<a href="#"><i class="fa fa-folder fa-fw"></i> Gerencial <span class="fa arrow"></span></a>
 										<ul class="nav nav-second-level">
+											<li>
+													<?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dashboard",
+																									Router::url('/', true) . "dashboard", array('escape' => false)); ?>
+											</li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas do DEFT", 'http://www-apps/_projects/dite/demandas/demandas_deft', array('escape' => false, "target" => '_blank')); ?></li>
 										</ul>
 								</li>
@@ -157,7 +161,7 @@
 							<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 				</div>
 				<span class="notes hidden-xs hidden-sm">
-					Sistema de gestão da DITE - Versão 2.0
+					Sistema de gestão da DITE - Versão 2.1
 					<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
 					<br /><br /><a href="/painel.php" style="padding-left: 49px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
 				</span>
