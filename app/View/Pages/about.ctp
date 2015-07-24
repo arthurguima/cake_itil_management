@@ -79,6 +79,7 @@
                         <li>Resgatar dados dos Chamados no SDM</li>
                         <li>Resgatar dados das RDMs no SDM</li>
                         <li>Workspace</li>
+                        <li>Cadastro de demandas filhas das demandas internas</li>
                       </ul>
                     </div>
                 </li>

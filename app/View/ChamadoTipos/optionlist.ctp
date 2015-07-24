@@ -4,7 +4,10 @@
     <select name="data[Chamado][chamado_tipo_id]" seperator="</div>" class="form-control" id="ChamadoChamadoTipoId">
       <option>Tipo de Chamado</option>
       <?php foreach ($chamadotipos as $key => $value):
-        echo "<option value='" . $key . "'>" . $chamadotipos[$key] . "</option>"
+        if($this->request['url']['tipo'] == $key)
+          echo "<option selected value='" . $key . "'>" . $chamadotipos[$key] . "</option>";
+        else
+          echo "<option value='" . $key . "'>" . $chamadotipos[$key] . "</option>";
       ?>
       <?php endforeach; ?>
     </select>

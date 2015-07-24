@@ -12,6 +12,10 @@
       <?php
         echo $this->BootstrapForm->create('Demanda');
 
+        if(isset($this->params['url']['pai'])){
+          echo $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['pai'], 'type'=> "hidden"));
+        }
+
         echo $this->BootstrapForm->input('clarity_url', array(
                   'label' => array('text' => 'URL do Clarity: '),
                   'type' => 'text',
@@ -78,6 +82,7 @@
         echo $this->BootstrapForm->input('servico_id', array(
                     'class' => 'select2',
                     'empty'=>'Serviço',
+                    'selected' => $this->params['url']['servico'], 
                     'label' => array('text' => 'Serviço: ')));
 
         echo $this->BootstrapForm->input('status_id', array(

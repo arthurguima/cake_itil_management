@@ -118,7 +118,23 @@
     if (!$this->Demanda->exists($id)) {
       throw new NotFoundException(__('Invalid demanda'));
     }
-    $options = array('conditions' => array('Demanda.' . $this->Demanda->primaryKey => $id));
+    //$this->Demanda->recursive = 2;
+    $this->Demanda->Behaviors->load('Containable');
+
+    $options = array(
+      'conditions' => array('Demanda.' . $this->Demanda->primaryKey => $id),
+      'contain' => array(
+        'DemandaPai' => array(),
+        'DemandaFilha' => array('Servico', 'DemandaTipo', 'Status'),
+        'Rdm' => array(),
+        'Status' => array(),
+        'Chamado' => array(),
+        'DemandaTipo' => array(),
+        'Servico' => array(),
+        'User' => array(),
+        'Historico' => array()
+      )
+    );
     $this->set('demanda', $this->Demanda->find('first', $options));
   }
 

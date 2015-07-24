@@ -91,7 +91,7 @@
     $('.select2').select2({
       containerCssClass: 'select2'
     });
-    
+
     $("[id*='dpdecade']").datetimepicker({
       format: "yyyy",
         startView: "decade",
@@ -104,7 +104,7 @@
 
     function getChamadoTipos(servico){
       $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "chamadotipos/optionlist?servico=" + servico,
+        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "chamadotipos/optionlist?tipo=<?php echo $this->data['ChamadoTipo']['id'] ?>&servico=" + servico,
         cache: false,
         success: function(html){
           $("#chamadoTipoList").html(html);

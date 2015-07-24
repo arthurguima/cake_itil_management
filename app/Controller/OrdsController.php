@@ -208,7 +208,7 @@
 					return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
 				}
 				else{
-					return $this->redirect(array('action' => 'index'));
+					$this->redirect(array('action' => 'view', $this->Ord->id));
 				}
 			} else {
 			$this->Session->setFlash('Não foi possível atualizar a OS.', 'alert-box', array ('class' => 'alert alert-danger'));

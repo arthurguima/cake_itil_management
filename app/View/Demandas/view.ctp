@@ -61,6 +61,12 @@
             </a>
           </li>
           <li><a><b>Serviço: </b> <?php echo $demanda['Servico']['sigla']; ?></a></li>
+          <?php if(isset($demanda['DemandaPai'])): ?>
+              <li>
+                <a href=<?php echo Router::url('/', true) . 'demandas/view/' . $demanda['DemandaPai']['id']; ?>>
+                <b>Demanda Pai: </b><?php echo $demanda['DemandaPai']['nome'] . " <i class='fa-external-link-square fa' style='font-size: 15px !important;'></i>" ; ?></a>
+              </li>
+          <?php endif; ?>
           <li><a><b>Tipo: </b><?php echo $demanda['DemandaTipo']['nome']; ?></a></li>
           <li><a><b>Responsável: </b><?php echo $demanda['User']['nome']; ?></a></li>
           <li><a><b>Solicitada pelo Cliente: </b><?php echo $this->Times->yesOrNo($demanda['Demanda']['origem_cliente']); ?></a></li>
@@ -185,6 +191,67 @@
                 </tr>
               <?php endforeach; ?>
             <?php unset($rdm); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Demandas Filhas</b>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'demandas', 'action' => 'add','?' => array('controller' => 'demandas', 'servico' => $demanda['Demanda']['servico_id'], 'pai' => $demanda['Demanda']['id'],'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.demandafilha-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body demandafilha-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Serviço</th>
+                <th>Tipo</th>
+                <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                <th>DM Clarity <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
+                <th>Prazo</th>
+                <th><span class="editable">Status</span></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php  foreach($demanda['DemandaFilha'] as $dem): ?>
+                <tr>
+                  <td><?php echo($dem['Servico']['nome']); ?></td>
+                  <td><?php echo($dem['DemandaTipo']['nome']); ?></td>
+                  <td><?php echo $this->Tables->popupBox($dem['nome'], $dem['descricao']) ?></td>
+                  <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
+                      <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                                 $dem['clarity_id'] .")'>" . $dem['clarity_dm_id'] ."</a></span>" ?>
+                  </td>
+                  <td>
+                    <?php echo $this->Times->timeLeftTo($dem['data_cadastro'], $dem['dt_prevista'],
+                           $dem['data_cadastro'] . " - " . $dem['dt_prevista'],
+                          ($dem['data_homologacao']));
+                    ?>
+                  </td>
+                  <td>
+                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $dem['id'] ?>"><?php echo $dem['Status']['nome']; ?></span>
+                  </td>
+                  <?php echo $this->Tables->DemandaStatusEditable($dem['id'], "demandas") ?>
+                  <td><?php echo $this->Tables->getMenu('demandas', $dem['id'], 6); ?></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php unset($area); ?>
           </tbody>
         </table>
       </div>

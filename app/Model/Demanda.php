@@ -16,6 +16,10 @@
 			'className' => 'User',
 			'foreignKey' => 'user_id'
 		),
+		'DemandaPai' => array(
+			'className' => 'Demanda',
+			'foreignKey' => 'demanda_id'
+		),
 	);
 
 	public $hasAndBelongsToMany = array(
@@ -36,6 +40,10 @@
 	public $hasMany = array(
 		'Chamado' => array(
 			'className' => 'Chamado',
+		),
+		'DemandaFilha' => array(
+			'className' => 'Demanda',
+			'foreignKey' => 'demanda_id'
 		),
 		'Historico' => array(
 			'className' => 'Historico',
