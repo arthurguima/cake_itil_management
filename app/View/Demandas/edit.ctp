@@ -85,6 +85,11 @@
         echo $this->BootstrapForm->input('status_id', array(
                    'label' => array('text' => 'Status: ')));
 
+        echo $this->BootstrapForm->input('demanda_id', array(
+                    'label' => array('text' => 'Demanda interna Pai: '),
+                    'empty' => 'Demanda Pai',
+                    'class'=> "select2"));
+
         echo $this->BootstrapForm->input('data_cadastro', array(
                   'label' => array('text' => 'Data de Cadastro: '),
                   'type' => 'text',

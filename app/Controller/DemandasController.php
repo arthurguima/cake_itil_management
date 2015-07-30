@@ -197,6 +197,11 @@
     }
 
     /* Relacionamentos */
+      $this->set('demandas',
+                $this->Demanda->find('list', array(
+                  'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
+                  'conditions' => array('Demanda.servico_id' => $this->data['Demanda']['servico_id']))));
+
       $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
       $this->set(compact('users'));
 

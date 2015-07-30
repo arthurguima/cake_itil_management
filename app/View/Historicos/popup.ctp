@@ -44,6 +44,7 @@
                   <th>Data</th>
                   <th>Descrição</th>
                   <th>Analista</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -52,6 +53,16 @@
                       <td><?php echo $hist['Historico']['data']; ?></td>
                       <td><?php echo $this->Historicos->findLinks($hist['Historico']['descricao']); ?></td>
                       <td><?php echo $hist['Historico']['analista']; ?></td>
+                      <td>
+                        <?php
+                          if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil pull-right'></i>",
+                            array('controller' => 'historicos', 'action' => 'edit', $hist['Historico']['id'], 
+                            '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id'], 'popup' => 'true' )),
+                            array('escape' => false));
+                          }
+                        ?>
+                      </td>
                     </tr>
                   <?php endforeach; ?>
                 <?php unset($hist); ?>

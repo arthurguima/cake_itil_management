@@ -71,6 +71,7 @@
       echo $this->BootstrapForm->input('data', array(
                               'label' => array('text' => 'Data: '),
                               'type' => 'text',
+                              'value' => date('d/m/Y'),
                               'id' => 'dp '));
 
       echo $this->BootstrapForm->input('analista', array(

@@ -82,7 +82,7 @@
         echo $this->BootstrapForm->input('servico_id', array(
                     'class' => 'select2',
                     'empty'=>'Serviço',
-                    'selected' => $this->params['url']['servico'], 
+                    'selected' => $this->params['url']['servico'],
                     'label' => array('text' => 'Serviço: ')));
 
         echo $this->BootstrapForm->input('status_id', array(

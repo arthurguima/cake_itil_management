@@ -198,6 +198,27 @@
     //$this->Servico->recursive = 3;
     $this->Demanda->Behaviors->attach('Containable');
 
+    $conditions_serv = "";
+    if(isset($this->request->data['cliente_id']) && !empty($this->request->data['cliente_id'])){
+      $conditions_serv = $conditions_serv . 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
+    }
+
+    $conditions = "";
+    $and = false;
+    if(isset($this->request->data['origem_cliente']) && $this->request->data['origem_cliente'] != ''){
+      $conditions = $conditions . 'Demanda.origem_cliente = ' . $this->request->data['origem_cliente'];
+      $and = true;
+    }
+    if(isset($this->request->data['demanda_tipo_id']) && $this->request->data['demanda_tipo_id'] != ''){
+      $and ? ($conditions = $conditions . ' AND ' ) : ($conditions = $conditions);
+      $conditions = $conditions . 'Demanda.demanda_tipo_id = ' . $this->request->data['demanda_tipo_id'];
+      $and = true;
+    }
+    if(isset($this->request->data['user_id']) && $this->request->data['user_id'] != ''){
+      $and ? ($conditions = $conditions . ' AND ' ) : ($conditions = $conditions);
+      $conditions = $conditions . 'Demanda.user_id = ' . $this->request->data['user_id'];
+    }
+
     $demandas = $this->Demanda->find('all', array(
       //'group' => array('Demanda.servico_id'),
       'contain' => array(
@@ -205,6 +226,7 @@
         'DemandaTipo' => array(),
         'Status' => array(),
       ),
+      'conditions' => array($conditions),
       'joins' => array(
         array(
           'table'=>'statuses',
@@ -214,14 +236,17 @@
             'Status_.id = Demanda.status_id',
             'Status_.fim =' => null,
           ),
+        ),
+        array(
+          'table'=>'servicos',
+          'alias' => 'Servico_',
+          'type'=>'inner',
+          'conditions'=> array('Servico_.id = Demanda.servico_id', $conditions_serv),
         )
       )
     ));
 
-    if(isset($this->request->data['cliente_id']))
-      $this->set('servicos',$this->servicos_demandas($demandas,$this->request->data['cliente_id']));
-    else
-      $this->set('servicos',$this->servicos_demandas($demandas,null));
+    $this->set('servicos',$this->servicos_demandas($demandas,null));
 
     /* Filtro Por Clientes */
     $this->loadModel('Cliente');
@@ -229,14 +254,39 @@
 
     $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
+
+    $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
+    $this->set(compact('demandaTipos'));
+
+    $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $this->set(compact('users'));
   }
 
   public function dematrasadas(){
     $this->loadModel('Demanda');
     $this->Demanda->Behaviors->attach('Containable');
+    
+    $conditions_serv = "";
+    if(isset($this->request->data['cliente_id']) && !empty($this->request->data['cliente_id'])){
+      $conditions_serv = $conditions_serv . 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
+    }
+
+    $conditions = "";
+    if(isset($this->request->data['origem_cliente']) && $this->request->data['origem_cliente'] != ''){
+      $conditions = $conditions . ' && origem_cliente = ' . $this->request->data['origem_cliente'];
+    }
+    if(isset($this->request->data['demanda_tipo_id']) && $this->request->data['demanda_tipo_id'] != ''){
+      $conditions = $conditions . ' && demanda_tipo_id = ' . $this->request->data['demanda_tipo_id'];
+    }
+    if(isset($this->request->data['user_id']) && $this->request->data['user_id'] != ''){
+      $conditions = $conditions . ' && user_id = ' . $this->request->data['user_id'];
+    }
 
     $demandas = $this->Demanda->find('all', array(
-      'conditions' => array("data_homologacao IS NULL && dt_prevista IS NOT NULL && dt_prevista < '" . date('Y-m-d') . "'"),
+      'conditions' => array(
+        "data_homologacao IS NULL && dt_prevista IS NOT NULL && dt_prevista < '" .
+        date('Y-m-d') . "'" . $conditions
+      ),
       'contain' => array(
         'Servico' => array('Cliente'=> array() ),
         'DemandaTipo' => array(),
@@ -251,14 +301,17 @@
             'Status_.id = Demanda.status_id',
             'Status_.fim =' => null,
           ),
+        ),
+        array(
+          'table'=>'servicos',
+          'alias' => 'Servico_',
+          'type'=>'inner',
+          'conditions'=> array('Servico_.id = Demanda.servico_id', $conditions_serv),
         )
       )
     ));
 
-    if(isset($this->request->data['cliente_id']))
-      $this->set('atrasos', $this->atraso_demandas($demandas,$this->request->data['cliente_id']));
-    else
-      $this->set('atrasos', $this->atraso_demandas($demandas,null));
+    $this->set('atrasos', $this->atraso_demandas($demandas,null));
 
     /* Filtro Por Clientes */
     $this->loadModel('Cliente');
@@ -266,6 +319,12 @@
 
     $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
+
+    $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
+    $this->set(compact('demandaTipos'));
+
+    $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $this->set(compact('users'));
   }
 
   /*
@@ -343,12 +402,6 @@
   private function servicos_demandas($demandas,$cliente=null){
     $demandasAUX = array();
     foreach ($demandas as $dem){
-      if(isset($cliente)){
-        if($dem['Servico']['Cliente']['id'] == $cliente){
-          $demandasAUX[$dem['Servico']['sigla']][] = $dem;
-        }
-      }
-      else
         $demandasAUX[$dem['Servico']['sigla']][] = $dem;
     }
 
@@ -366,25 +419,21 @@
     $demandasAUX['Atrasadas há mais de 60 dias'] = array();
 
     foreach ($demandas as $dem){
-      if(isset($cliente)){
-        if($dem['Servico']['Cliente']['id'] == $cliente){
-          $t1 = date_create(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$dem['Demanda']['dt_prevista']));
-          $t2 = date_create(date('Y-m-d'));
-          $total = date_diff($t1,$t2);
+      $t1 = date_create(preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$dem['Demanda']['dt_prevista']));
+      $t2 = date_create(date('Y-m-d'));
+      $total = date_diff($t1,$t2);
 
-          if($total->days <= 15){
-            $demandasAUX['Atrasadas entre 1 e 15 dias'][] = $dem;
-          }else{
-            if($total->days <= 30){
-              $demandasAUX['Atrasadas entre 16 e 30 dias'][] = $dem;
-            }else{
-              if($total->days <= 60){
-                $demandasAUX['Atrasadas entre 31 e 60 dias'][] = $dem;
-              }
-              else{
-                $demandasAUX['Atrasadas há mais de 60 dias'][] = $dem;
-              }
-            }
+      if($total->days <= 15){
+        $demandasAUX['Atrasadas entre 1 e 15 dias'][] = $dem;
+      }else{
+        if($total->days <= 30){
+          $demandasAUX['Atrasadas entre 16 e 30 dias'][] = $dem;
+        }else{
+          if($total->days <= 60){
+            $demandasAUX['Atrasadas entre 31 e 60 dias'][] = $dem;
+          }
+          else{
+            $demandasAUX['Atrasadas há mais de 60 dias'][] = $dem;
           }
         }
       }

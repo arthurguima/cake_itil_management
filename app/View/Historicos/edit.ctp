@@ -1,4 +1,42 @@
 <?php
+  if(isset($this->params['url']['popup']) && $this->params['url']['popup'] == 'true'){
+      /* CSS */
+      //-- Bootstrap Core CSS --
+      echo $this->Html->css('bootstrap.min.css');
+      //-- MetisMenu CSS --
+      echo $this->Html->css('plugins/metisMenu/metisMenu.min.css');
+      //-- Timeline CSS --
+      //echo $this->Html->css('plugins/timeline.css');
+      //-- Custom Fonts
+      echo $this->Html->css('font-awesome-4.2.0/css/font-awesome.min.css');
+      //-- Custom admin CSS --
+      echo $this->Html->css('sb-admin-2.css');
+
+      echo $this->Html->meta('icon');
+      /* JS */
+      //-- jQuery Version 1.11.0 --
+      echo $this->Html->script('jquery-1.11.0.js');
+      //-- Bootstrap Core JavaScript --
+      echo $this->Html->script('bootstrap.min.js');
+      //-- Metis Menu Plugin JavaScript -->
+      echo $this->Html->script('plugins/metisMenu/metisMenu.min.js');
+      echo $this->Html->script('sb-admin-2.js');
+      //-- Sidebar
+      echo $this->Html->script('sidebar.js');
+  }
+
+  $this->Html->addCrumb('Demandas', '/demandas');
+  $this->Html->addCrumb("id:" . $this->params['url']['id'], array('controller' => 'demandas', 'action' => 'view', $this->params['url']['id']));
+  $this->Html->addCrumb('Histórico', '');
+  $this->Html->addCrumb("Novo", array('controller' => 'historicos', 'action' => 'add'));
+?>
+<style media="screen">
+    body{
+      background-color: #fff;
+    }
+</style>
+
+<?php
   $this->Html->addCrumb('Histórico', '');
   $this->Html->addCrumb("Editar", '');
 ?>

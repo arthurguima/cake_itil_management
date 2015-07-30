@@ -170,7 +170,7 @@
 		</nav>
 		<div id="page-wrapper">
 			<span class="breadcrumb pull-right">
-				<b><?php echo $this->Html->getCrumbs(' > ', array('text' => "<i class='fa fa-home'></i> Home", 'url' => Router::url('/', true) . "index.php", 'escape' => false)); ?></b>
+				<b><?php echo $this->Html->getCrumbs(' / ', array('text' => "<i class='fa fa-home'></i> Home", 'url' => Router::url('/', true) . "index.php", 'escape' => false)); ?></b>
 			</span>
 			<div style='clear:both'></div>
 			<div class='row'><!--nocache--><?php echo $this->Session->flash(); ?><!--/nocache--></div>

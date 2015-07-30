@@ -57,12 +57,19 @@
  * @return void
  */
   public function edit($id = null) {
+    if($this->params['url']['popup'] == 'true'){  $this->layout = false; }
     if (!$id) { throw new NotFoundException(__('Historico de Contrato Inválido'));}
 
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Historico->save($this->request->data)) {
         $this->Session->setFlash('Historico de Contrato atualizado com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-        return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+        if(isset($this->params['url']['popup']) && $this->params['url']['popup'] == 'true'){
+          return $this->redirect(array('controller' =>  "historicos", 'action' => 'popup',
+           '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id']) ));
+        }
+        else{
+          return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+        }
       } else {
         $this->Session->setFlash('Não foi possível atualizar o .', 'alert-box', array ('class' => 'alert alert-danger'));
       }

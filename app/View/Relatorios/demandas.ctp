@@ -21,10 +21,28 @@
         <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
         <div class="col-lg-12">
           <div class="form-group">
-            <?php echo $this->BootstrapForm->input('cliente_id', array(
-                              'label' => array('text' => 'Cliente: '),
-                              'class' => 'select2 form-control',
-                              'empty' => 'Cliente'));
+            <?php
+
+              echo $this->BootstrapForm->input('cliente_id', array(
+                          'label' => array('text' => 'Cliente: '),
+                          'class' => 'select2 form-control',
+                          'empty' => 'Cliente'));
+
+              $options = array( 1 => 'Sim', 0 => 'Não');
+              echo $this->BootstrapForm->input('origem_cliente', array(
+                          'label' => array('text' => 'Solicitada pelo Cliente?: '),
+                          'empty' => 'Solicitada pelo Cliente',
+                          'options' => $options));
+
+              echo $this->BootstrapForm->input('demanda_tipo_id', array(
+                          'label' => array('text' => 'Tipo da Demanda: '),
+                          'empty' =>  'Tipo'));
+
+              echo $this->BootstrapForm->input('user_id', array(
+                     'class' => 'select2',
+                     'label' => array('text' => 'Responsável: '),
+                     'selected' => $this->Session->read('User.uid'),
+                     'empty' => "Responsável"));
             ?>
           </div>
         </div>
@@ -60,6 +78,7 @@
                   <th>Status</th>
                   <th>Data de Cadastro</th>
                   <th/>Data Prevista</th>
+                  <th>Solicitada pelo Cliente?</th>
                   <th>Prazo</th>
                 </tr>
               </thead>
@@ -77,6 +96,7 @@
                     <td><?php echo $dem['Status']['nome']; ?></td>
                     <td><?php echo $dem['Demanda']['data_cadastro']; ?></td>
                     <td><?php echo $dem['Demanda']['dt_prevista']; ?></td>
+                    <td><?php echo $this->Times->yesOrNo($dem['Demanda']['origem_cliente']); ?></td>
                     <td class="text-center">
                       <?php echo $this->Times->timeLeftTo($dem['Demanda']['data_cadastro'], $dem['Demanda']['dt_prevista'],
                                $dem['Demanda']['data_cadastro'] . " - " . $dem['Demanda']['dt_prevista'],
@@ -169,6 +189,14 @@
 <?php $var++; endforeach; ?>
 <?php unset($serv); ?>
 
+<script>
+$(document).ready(function() {
+  $('.select2').select2({
+    containerCssClass: 'select2'
+  });
+});
+</script>
+
 <?php
   //-- ClarityID
   echo $this->Html->script('getIdClarity.js');
@@ -187,4 +215,10 @@
     echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
     echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
     echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>

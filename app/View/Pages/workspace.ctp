@@ -594,7 +594,7 @@
 	$('a[aria-controls="ords"]').on('shown.bs.tab', function (e) {
 		if(typeof oTableOrd == 'undefined'){
 			oTableOrd =  $('#dataTables-ords').dataTable({
-				"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+				"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
 					language: {
 						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 					},
@@ -643,7 +643,7 @@
 	$('a[aria-controls="rdms"]').on('shown.bs.tab', function (e) {
 		if(typeof oTableRdm == 'undefined'){
 			oTableRdm =  $('#dataTables-rdm').dataTable({
-					"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+					"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
 						language: {
 							url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 						},
@@ -695,7 +695,7 @@
 	$('a[aria-controls="pes"]').on('shown.bs.tab', function (e) {
 			if(typeof oTablepes == 'undefined'){
 				oTablepes = $('#dataTables-pes').dataTable({
-				"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+				"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
 					language: {
 						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 					},
@@ -744,7 +744,7 @@
 	$('a[aria-controls="sses"]').on('shown.bs.tab', function (e) {
 		if(typeof oTablesses == 'undefined'){
 		 	oTablesses =  $('#dataTables-ss').dataTable({
-	      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+	      "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
 	        language: {
 	          url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 	        },
@@ -794,7 +794,7 @@
 	$('a[aria-controls="chamados"]').on('shown.bs.tab', function (e) {
 		if(typeof oTablechamado == 'undefined'){
 			oTablechamado = $('#dataTables-chamado').dataTable({
-	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+	        "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
 	        language: {
 	          url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 	        },
@@ -843,7 +843,7 @@
 
   $(document).ready(function() {
 		var oTable = $('#dataTables-demanda').dataTable({
-					"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+					"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
 					language: {
 						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 					},
