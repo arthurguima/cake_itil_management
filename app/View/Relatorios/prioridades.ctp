@@ -1,12 +1,12 @@
 <?php
   $this->Html->addCrumb("Relatórios", '');
-  $this->Html->addCrumb("Demandas Atrasadas", '/relatorios/dematrasadas');
+  $this->Html->addCrumb("Prioridade das Demandas", '/relatorios/prioridades');
 ?>
 
 <div class="row">
   <div class="col-lg-12">
     <h3 class="page-header">
-      Demandas Internas Atrasadas
+      Prioridade das Demandas
       <span style="cursor:pointer;" onclick="javascript:$('div.panel-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
     </h3>
     <div class="col-lg-12 pull-left filters">
@@ -21,10 +21,11 @@
           <div class="col-lg-12">
             <div class="form-group">
               <?php
-                  echo $this->BootstrapForm->input('cliente_id', array(
-                              'label' => array('text' => 'Cliente: '),
+                  echo $this->BootstrapForm->input('servico_id', array(
+                              'label' => array('text' => 'Serviço: '),
                               'class' => 'select2 form-control',
-                              'empty' => 'Cliente'));
+                              'selected' => $this->request->data['servico_id'],
+                              'empty' => 'Serviço'));
 
                   $options = array( 1 => 'Sim', 0 => 'Não');
                   echo $this->BootstrapForm->input('origem_cliente', array(
@@ -34,6 +35,7 @@
 
                   echo $this->BootstrapForm->input('demanda_tipo_id', array(
                               'label' => array('text' => 'Tipo da Demanda: '),
+                              'class' => 'select2 form-control',
                               'empty' =>  'Tipo'));
 
                   echo $this->BootstrapForm->input('user_id', array(
@@ -54,43 +56,44 @@
   </div>
 </div>
 
-<?php if(isset($this->request->data['cliente_id'])): ?>
-<?php $var = 0; foreach ($atrasos as $key => $atras): ?>
+<?php if(isset($demandas)): ?>
   <div class="row">
-    <div class="col-lg-12 demandas delete-<?php echo $var; ?>">
+    <div class="col-lg-12 demandas">
       <div class="panel panel-default">
         <div class="panel-heading">
           <b>
-            <?php echo $key; ?>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.hide-<?php echo $var; ?>').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-            <span style="cursor:pointer;" onclick="javascript:$('div.delete-<?php echo $var; ?>').remove();"><i class="fa fa-trash-o pull-right"></i></span>
-            <span style="cursor:pointer;" onclick="javascript:$('div.demandas').not('div.delete-<?php echo $var; ?>').remove();"><i class="fa fa-binoculars pull-right"></i></span>
+            Prioridade das Demandas
           </b>
         </div>
-        <div class="panel-body hide-<?php echo $var; ?>">
+        <div class="panel-body">
           <div class="table-responsive">
-            <table class="table display table-striped table-bordered table-hover" id="dataTables-<?php echo $var; ?>">
+            <table class="table display table-striped table-bordered table-hover" id="dataTables-dem">
               <thead>
                 <tr>
-                  <th>Serviço</th>
+                  <th><span class="editable">Prioridade</span></th>
                   <th>Demanda</th>
+                  <th>Mantis</th>
                   <th>Nome</th>
                   <th>Tipo</th>
-                  <th>Status</th>
-                  <th>Data de Cadastro</th>
-                  <th/>Data Prevista</th>
-                  <th>Dias em Atraso</th>
+                  <th><span class="editable">Status</span></th>
+                  <th>Prazo</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($atras as $dem): ?>
+                <?php foreach ($demandas as $dem): ?>
                   <tr>
-                    <td><?php echo $dem['Servico']['sigla']; ?></td>
+                    <td>
+                      <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $dem['Demanda']['id']?>"><?php echo $dem['Demanda']['prioridade']; ?></span>
+                    </td>
+                    <?php echo $this->Tables->PrioridadeEditable($dem['Demanda']['id'], "demandas") ?>
                     <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php
                         echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
                               $dem['Demanda']['clarity_id'] .")'>" . $dem['Demanda']['clarity_dm_id'] ."</a></span>"
                       ?>
+                    </td>
+                    <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">
+                      <?php echo $this->Html->link($dem['Demanda']['mantis_id'],"http://www-testes/view.php?id=" . $dem['Demanda']['mantis_id'], array('target' => '_blank')); ?>
                     </td>
                     <td><?php echo $this->html->link($dem['Demanda']['nome'], array('controller'=> 'demandas', 'action' => 'view', $dem['Demanda']['id'])); ?></td>
                     <td>
@@ -98,10 +101,18 @@
                         <?php echo $dem['DemandaTipo']['nome']; ?>
                       </span>
                     </td>
-                    <td><?php echo $dem['Status']['nome']; ?></td>
-                    <td><?php echo $dem['Demanda']['data_cadastro']; ?></td>
-                    <td><?php echo $dem['Demanda']['dt_prevista']; ?></td>
-                    <td class="text-center"><?php echo $this->Times->timeLeftTo_days($dem['Demanda']['dt_prevista']);?></td>
+                    <td>
+                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $dem['Demanda']['id'] ?>">
+                        <?php echo $dem['Status']['nome']; ?>
+                      </span>
+                    </td>
+                    <?php echo $this->Tables->DemandaStatusEditable($dem['Demanda']['id'], "demandas") ?>
+                    <td class="text-center">
+                      <?php echo $this->Times->timeLeftTo($dem['Demanda']['data_cadastro'], $dem['Demanda']['dt_prevista'],
+                               $dem['Demanda']['data_cadastro'] . " - " . $dem['Demanda']['dt_prevista'],
+                              ($dem['Demanda']['data_homologacao']));
+                      ?>
+                    </td>
                   </tr>
                 <?php endforeach; ?>
                 <?php unset($dem); ?>
@@ -129,7 +140,7 @@
 
   <script>
     $(document).ready(function() {
-      var  oTable<?php echo $var; ?> =   $('#dataTables-<?php echo $var; ?>').dataTable({
+      var  oTable =   $('#dataTables-dem').dataTable({
           "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
             language: {
               url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
@@ -157,24 +168,24 @@
                   {
                       "sExtends": "csv",
                       "sButtonText": "CSV",
-                      "sFileName": "Demandas(<?php echo $key; ?>).csv",
+                      "sFileName": "Demandas.csv",
                       "oSelectorOpts": { filter: 'applied', order: 'current' },
                       "mColumns": "visible",
                   },
                   {
                       "sExtends": "pdf",
                       "sButtonText": "PDF",
-                      "sFileName": "Demandas(<?php echo $key; ?>).pdf",
+                      "sFileName": "Demandas.pdf",
                       "oSelectorOpts": { filter: 'applied', order: 'current' },
                       "mColumns": "visible",
                       "sPdfOrientation": "landscape",
-                      "sTitle": "Demandas(<?php echo $key; ?>)",
+                      "sTitle": "Prioridade das Demandas",
                       "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
                   },
                 ]
             },
         });
-        var colvis = new $.fn.dataTable.ColVis( oTable<?php echo $var; ?> );
+        var colvis = new $.fn.dataTable.ColVis( oTable );
 
         $('#myModal').on('shown.bs.modal', function (e) {
           document.getElementById('modal-body').appendChild(
@@ -185,8 +196,6 @@
         });
     });
   </script>
-<?php $var++; endforeach; ?>
-<?php unset($atras); ?>
 <?php endif; ?>
 
 <script>
@@ -201,6 +210,9 @@ $(document).ready(function() {
   //-- ClarityID
   echo $this->Html->script('getIdClarity.js');
 
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
   //-- DataTables JavaScript --
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
   echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
@@ -208,9 +220,6 @@ $(document).ready(function() {
   //-- DataTables --> TableTools
   echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
   echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-  //-- DataTables --> Responsive
-  echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
-  echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
   //-- DataTables --> ColVis
     echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
     echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');

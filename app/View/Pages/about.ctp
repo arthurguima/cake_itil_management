@@ -80,6 +80,7 @@
                         <li>Resgatar dados das RDMs no SDM</li>
                         <li>Workspace</li>
                         <li>Cadastro de demandas filhas das demandas internas</li>
+                        <li>Relatório de Prioridade das Demandas</li>
                       </ul>
                     </div>
                 </li>

@@ -120,6 +120,7 @@
 												<ul class="nav nav-third-level collapse">
 													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não Finalizadas", '/relatorios/demandas', array('escape' => false)); ?></li>
 													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Atrasadas", '/relatorios/dematrasadas', array('escape' => false)); ?></li>
+													<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Lista de Prioridades", '/relatorios/prioridades', array('escape' => false)); ?></li>
 												</ul>
 											</li>
 											<li>

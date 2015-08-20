@@ -265,7 +265,7 @@
   public function dematrasadas(){
     $this->loadModel('Demanda');
     $this->Demanda->Behaviors->attach('Containable');
-    
+
     $conditions_serv = "";
     if(isset($this->request->data['cliente_id']) && !empty($this->request->data['cliente_id'])){
       $conditions_serv = $conditions_serv . 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
@@ -319,6 +319,62 @@
 
     $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
+
+    $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
+    $this->set(compact('demandaTipos'));
+
+    $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $this->set(compact('users'));
+  }
+
+  public function prioridades(){
+    $this->loadModel('Demanda');
+    $this->Demanda->Behaviors->attach('Containable');
+
+    $conditions = "";
+    if(isset($this->request->data['servico_id']) && !empty($this->request->data['servico_id'])){
+      $conditions = $conditions . 'servico_id = ' . $this->request->data['servico_id'];
+    }
+    if(isset($this->request->data['origem_cliente']) && $this->request->data['origem_cliente'] != ''){
+      $conditions = $conditions . ' && origem_cliente = ' . $this->request->data['origem_cliente'];
+    }    
+    if(isset($this->request->data['demanda_tipo_id']) && $this->request->data['demanda_tipo_id'] != ''){
+      $conditions = $conditions . ' && demanda_tipo_id = ' . $this->request->data['demanda_tipo_id'];
+    }
+    if(isset($this->request->data['user_id']) && $this->request->data['user_id'] != ''){
+      $conditions = $conditions . ' && user_id = ' . $this->request->data['user_id'];
+    }
+    if(isset($this->request->data['servico_id']) && !empty($this->request->data['servico_id'])){
+      $demandas = $this->Demanda->find('all', array(
+        'conditions' => array(
+          $conditions
+        ),
+        'contain' => array(
+          'DemandaTipo' => array(),
+          'Status' => array(),
+        ),
+        'joins' => array(
+          array(
+            'table'=>'statuses',
+            'alias' => 'Status_',
+            'type'=>'inner',
+            'conditions'=> array(
+              'Status_.id = Demanda.status_id',
+              'Status_.fim =' => null,
+            ),
+          )
+        )
+      ));
+
+      $this->set('demandas', $demandas);
+    }
+
+    /* Filtro Por Clientes */
+    $this->loadModel('Servico');
+    $this->Servico->Behaviors->attach('Containable');
+
+    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))));
+    $this->set(compact('servicos'));
 
     $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
     $this->set(compact('demandaTipos'));
