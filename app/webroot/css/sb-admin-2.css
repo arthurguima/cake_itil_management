@@ -718,6 +718,15 @@ li.list-group-item.red {
   border-color: #962d22;
 }
 
+.panel-purple {
+  border: 2px solid #564aa3 !important;
+}
+.panel-purple>.panel-heading {
+  background-color: #564aa3;
+  color: #ecf0f1;
+  border-color: #564aa3;
+}
+
 /**/
 .btn-danger {
   background-color: #E04A32;

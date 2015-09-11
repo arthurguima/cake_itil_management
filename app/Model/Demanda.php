@@ -48,6 +48,10 @@
 		'Historico' => array(
 			'className' => 'Historico',
 			'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
+		),
+		'Subtarefa' => array(
+			'className' => 'Subtarefa',
+			'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC")
 		)
 	);
 

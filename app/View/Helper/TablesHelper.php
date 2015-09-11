@@ -116,6 +116,21 @@
             </script>";
   }
 
+  public function SubtarefaStatusEditable($id, $controller){
+    return  "
+            <script>
+              $(document).ready(function() {
+                  $('#sub-" . $id . "').editable('" . Router::url('/', true). "/subtarefas/ajax_edit_status',{
+                     name: 'check',
+                     data   : \"{0:'Em andamento', 1:'Finalizada'}\",
+                     type   : 'select',
+                     submit: \"<button class='btn btn-sm btn-success' type='submit' >Salvar</button>\",
+                     cancel: \"<button class='btn btn-sm btn-danger' type='cancel' >Cancelar</button>\",
+                  });
+              });
+            </script>";
+  }
+
   /*
   * Imprime os menus da Tabela de Index
   * 2: Visualizar
