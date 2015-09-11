@@ -12,37 +12,43 @@
       echo $this->BootstrapForm->create('Indisponibilidade');
 
       echo $this->BootstrapForm->input('num_evento', array(
-                  'label' => array('text' => 'Nº Evento: '),
-                  'type' => 'text'));
+              'label' => array('text' => 'Nº Evento: '),
+              'type' => 'text'));
 
       echo $this->BootstrapForm->input('num_incidente', array(
-                  'label' => array('text' => 'Nº Incidente: '),
-                  'type' => 'text'));
+              'label' => array('text' => 'Nº Incidente: '),
+              'type' => 'text'));
 
       echo $this->BootstrapForm->input('Servico', array(
-                 'label' => array('text' => 'Serviço(s): '),
-                 'input' => 'text',
-                 'multiple' => true,
-                 'options' => $servicos));
+             'label' => array('text' => 'Serviço(s): '),
+             'input' => 'text',
+             'multiple' => true,
+             'options' => $servicos));
 
       echo $this->BootstrapForm->input('motivo_id', array(
-                 'label' => array('text' => 'Motivo: '),
-                 'options' => $motivos));
+             'label' => array('text' => 'Motivo: '),
+             'options' => $motivos));
 
       echo $this->BootstrapForm->input('dt_inicio', array(
-                 'type' => 'text',
-                 'label' => array('text' => 'Início:'),
-                 'id' => 'dp '));
+             'type' => 'text',
+             'label' => array('text' => 'Início:'),
+             'id' => 'dp '));
 
       echo $this->BootstrapForm->input('dt_fim', array(
-                 'label' => array('text' => 'Término:'),
-                 'type' => 'text',
-                 'id' => 'dp '));
+             'label' => array('text' => 'Término:'),
+             'type' => 'text',
+             'id' => 'dp '));
 
       echo $this->BootstrapForm->input('observacao', array(
-                 'label' => array('text' => 'Observação: '),
-                 'type' => 'textarea',
-                 'class' => 'form-control'));
+             'label' => array('text' => 'Observação: '),
+             'type' => 'textarea',
+             'class' => 'form-control'));
+
+      echo $this->BootstrapForm->input('user_id', array(
+              'class' => 'select2',
+              'label' => array('text' => 'Responsável: '),
+              'selected' => $this->Session->read('User.uid'),
+              'empty' => "Responsável"));
 
     ?>
     <div class="form-footer col-lg-10 col-md-6 pull-right">
@@ -57,6 +63,10 @@
 
 <script>
   $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
     $("[id*='dp']").datetimepicker({
       minuteStep: 1,
       format: "dd/mm/yyyy hh:ii",

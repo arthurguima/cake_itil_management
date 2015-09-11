@@ -7,6 +7,10 @@
 		'Motivo' => array(
 			'className' => 'Motivo',
 			'foreignKey' => 'motivo_id'
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
 		)
 	);
 

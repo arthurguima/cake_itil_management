@@ -27,6 +27,9 @@
 		  <li role="presentation"><a href="#chamados" aria-controls="chamados" role="tab" data-toggle="tab">
 				Chamados <span class="badge"><?php echo sizeof($chamados) ?></span></a>
 			</li>
+			<li role="presentation"><a href="#indisponibilidades" aria-controls="indisponibilidades" role="tab" data-toggle="tab">
+				Indisponibilidades <span class="badge"><?php echo sizeof($indisponibilidades) ?></span></a>
+			</li>
 		</ul>
 	</div>
 
@@ -417,6 +420,96 @@
 		  </div>
 		</div>
 
+		<!-- Indisponibilidades -->
+		<div role="tabpanel" class="tab-pane" id="indisponibilidades">
+		  <div class="col-lg-12">
+		    <div class="panel panel-purple">
+		      <div class="panel-heading">
+		        <b>Indisponibilidades sob a sua responsabilidade</b>
+		        <?php
+		          if($this->Ldap->autorizado(2)){
+		            echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+		            array('controller' => 'indisponibilidades', 'action' => 'add'),
+		            array('style' => 'color: #fff; font-size: 16px;','escape' => false));
+		          }
+		        ?>
+		      </div>
+		      <div class="panel-body">
+		        <div class="table-responsive">
+		          <table class="table table-striped table-bordered table-hover" id="dataTables-indisponibilidade">
+		            <thead>
+		              <tr>
+		                <th>Serviço</th>
+		                <th>Nº Evento   <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
+		                <th>Nº Incidente   <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
+		                <th>Início</th>
+		        				<th>Motivo/Ambiente</th>
+		                <th>Observação</th>
+		                <th>Observação</th>
+		        				<th><span class="editable">Status</span></th>
+		                <th>Ações</th>
+		              </tr>
+		            </thead>
+		            <tbody>
+		              <?php foreach ($indisponibilidades as $indisponibilidade): ?>
+		                <tr>
+		                  <td class="area-list">
+		                    <?php
+		                        foreach($indisponibilidade['Servico'] as $servico):
+		                          echo $this->Html->link($servico['sigla'] . "  ",
+		                          array('controller' => 'servicos', 'action' => 'view', $servico['id']));
+		                        endforeach;
+		                    ?>
+		                  </td>
+		                  <td>
+		                    <?php
+		                      echo $this->Html->link($indisponibilidade['Indisponibilidade']['num_evento'],
+		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_evento'] . "%25",
+		                            array('target' => '_blank'));
+		                    ?>
+		                  </td>
+		                  <td>
+		                    <?php
+		                      echo $this->Html->link($indisponibilidade['Indisponibilidade']['num_incidente'],
+		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_incidente'] . "%25",
+		                            array('target' => '_blank'));
+		                    ?>
+		                  </td>
+		        				  <td data-order=<?php echo $this->Time->format('Ymd', $indisponibilidade['Indisponibilidade']['dt_inicio']); ?>>
+		                    <?php echo $this->Time->format('d/m/Y H:i', $indisponibilidade['Indisponibilidade']['dt_inicio']); ?>
+		                  </td>
+		        				  <td>
+		                    <?php echo $indisponibilidade['Motivo']['nome']; ?><br />
+		                    <?php echo $this->Rdm->getAmbiente($indisponibilidade['Motivo']['ambiente']); ?>
+		                  </td>
+		                  <td><?php echo $this->Tables->popupBox($indisponibilidade['Indisponibilidade']['observacao']) ?></td>
+		                  <td><?php echo $indisponibilidade['Indisponibilidade']['observacao']; ?></td>
+
+		                  <td id="<?php echo $indisponibilidade['Indisponibilidade']['id']?>">
+		                    <?php
+		                      if($indisponibilidade['Indisponibilidade']['dt_fim'] == null):
+		                        echo "<span class='label label-success'>Aberto</span>";
+		                      else:
+		                        echo "<span class='label label-default'>Fechado</span>";
+		                      endif;
+		                    ?>
+		                  </td>
+		                  <?php
+		                    if($indisponibilidade['Indisponibilidade']['dt_fim'] == null)
+		                      echo $this->Tables->StatusEditable($indisponibilidade['Indisponibilidade']['id'], "indisponibilidades");
+		                  ?>
+		                  <td><?php echo $this->Tables->getMenu('Indisponibilidades', $indisponibilidade['Indisponibilidade']['id'], 14); ?></td>
+		                </tr>
+		              <?php endforeach; ?>
+		              <?php unset($indisponibilidade); ?>
+		            </tbody>
+		          </table>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 		<!-- Demadas Internas -->
 	  <div role="tabpanel" class="tab-pane active" id="demandas">
 	    <div class="col-lg-12">
@@ -791,6 +884,59 @@
 	    var colvis = new $.fn.dataTable.ColVis( oTablesses );
 		}
 	});
+
+	$('a[aria-controls="indisponibilidades"]').on('shown.bs.tab', function (e) {
+		if(typeof oTableIndis == 'undefined'){
+		 		oTableIndis =  $('#dataTables-indisponibilidade').dataTable({
+				"lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+					language: {
+						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+					},
+				//  responsive: true,
+					"columnDefs": [  { "visible": false, "targets": 7 } ],
+					"dom": 'TC<"clear">lfrtip',
+					"colVis": {
+						"buttonText": "Esconder Colunas"
+					},
+					"tableTools": {
+							"sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+							"aButtons": [
+								{
+										"sExtends": "copy",
+										"sButtonText": "Copiar",
+										"oSelectorOpts": { filter: 'applied', order: 'current' },
+										"mColumns": [ 0,1,2,3,4,5,7,8 ]
+								},
+								{
+										"sExtends": "print",
+										"sButtonText": "Imprimir",
+										"oSelectorOpts": { filter: 'applied', order: 'current' },
+										"mColumns": [ 0,1,2,3,4,5,7,8 ]
+								},
+								{
+										"sExtends": "csv",
+										"sButtonText": "CSV",
+										"sFileName": "Indisponibilidades.csv",
+										"oSelectorOpts": { filter: 'applied', order: 'current' },
+										"mColumns": [ 0,1,2,3,4,5,7,8 ]
+								},
+								{
+										"sExtends": "pdf",
+										"sButtonText": "PDF",
+										"sFileName": "Indisponibilidades.pdf",
+										"oSelectorOpts": { filter: 'applied', order: 'current' },
+										"mColumns": [ 0,1,2,3,4,5,7,8 ],
+										"sPdfOrientation": "landscape",
+										"sTitle": "Controle de Disponibilidade",
+										"sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
+								},
+							]
+					}
+			});
+			var colvis = new $.fn.dataTable.ColVis( oTableoTableIndis );
+		}
+	});
+
 	$('a[aria-controls="chamados"]').on('shown.bs.tab', function (e) {
 		if(typeof oTablechamado == 'undefined'){
 			oTablechamado = $('#dataTables-chamado').dataTable({

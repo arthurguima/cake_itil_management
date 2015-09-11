@@ -217,6 +217,19 @@ class PagesController extends AppController {
 		));
 		$this->set('rdms', $rdms);
 
+		/*Lista de indisponibilidades*/
+		$this->loadModel('Indisponibilidade');
+		$this->Indisponibilidade->Behaviors->attach('Containable');
+		$indisponibilidades = $this->Indisponibilidade->find('all', array(
+			'contain' => array(
+				'Servico' => array(),
+				'Motivo' => array()
+			),
+			'conditions' => array('Indisponibilidade.dt_fim IS NULL && Indisponibilidade.user_id = ' . $this->Session->read('User.uid'))
+		));
+		$this->set('indisponibilidades', $indisponibilidades);
+
+
 
 		/*Lista de Demandas*/
 		$this->loadModel('Demanda');

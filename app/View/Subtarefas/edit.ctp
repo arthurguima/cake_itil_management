@@ -41,7 +41,7 @@
   $this->Html->addCrumb("Editar", '');
 ?>
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Editar Historico</h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Editar Tarefa</h3></div>
 </div>
 <style media="screen">
     body{
@@ -78,7 +78,7 @@
                                    'text' => 'Finalizada?',
                                    'class' => 'control-label',
                                    'style' => "left: -400px;")));
-        echo $this->BootstrapForm->input('id'); 
+        echo $this->BootstrapForm->input('id');
 
       ?>
     <div class="form-footer col-lg-10 col-md-6 pull-right">

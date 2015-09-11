@@ -55,6 +55,11 @@
                  'type' => 'textarea',
                  'class' => 'form-control'));
 
+      echo $this->BootstrapForm->input('user_id', array(
+             'class' => 'select2',
+             'label' => array('text' => 'Responsável: '),
+             'empty' => "Responsável"));
+
       echo $this->BootstrapForm->input('id');
 
 
@@ -76,7 +81,11 @@
       autoclose: true,
       todayBtn: true,
       language: 'pt-BR',
-      minuteStep: 1,      
+      minuteStep: 1,
+    });
+
+    $('.select2').select2({
+      containerCssClass: 'select2'
     });
 
     $('#ServicoServico').select2();

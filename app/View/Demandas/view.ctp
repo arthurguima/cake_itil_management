@@ -265,7 +265,7 @@
     <div class="panel panel-purple">
       <div class="panel-heading">
         <p>
-          <h3 class="panel-title"><b>Sub-tarefas</b>
+          <h3 class="panel-title"><b>Tarefas</b>
             <?php
               if($this->Ldap->autorizado(2)){
                 echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",

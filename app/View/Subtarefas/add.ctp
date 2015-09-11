@@ -37,7 +37,7 @@
 </style>
 
 <div class="row">
-  <div class="col-lg-12"><h3 class="page-header">Nova Subtarefa</h3></div>
+  <div class="col-lg-12"><h3 class="page-header">Nova Tarefa</h3></div>
 </div>
 
 <div class="row">
@@ -55,7 +55,7 @@
 
         echo $this->BootstrapForm->input('dt_prevista', array(
                                 'label' => array('text' => 'Data Prevista: '),
-                                'type' => 'text',                                
+                                'type' => 'text',
                                 'id' => 'dp '));
 
         echo $this->BootstrapForm->input('descricao', array(

@@ -38,6 +38,7 @@
               <?php  echo $Indisponibilidade['Indisponibilidade']['num_incidente'] . "<i class='fa fa-external-link-square pull-right'></i>"; ?>
             </a>
           </li>
+          <li><a><b>Responsável: </b><?php echo $Indisponibilidade['User']['nome']; ?></a></p>
           <li><a><b>Motivo: </b><?php echo $Indisponibilidade['Motivo']['nome']; ?></a></p>
           <li><a><b>Início: </b><?php echo $Indisponibilidade['Indisponibilidade']['dt_inicio']; ?></a></p>
           <li><a><b>Duração: </b>
