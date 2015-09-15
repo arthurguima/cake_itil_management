@@ -1131,6 +1131,12 @@ table#dataTables-Servico{
   color: #8a6d3b !important;
 /*  font-weight: bold !important;*/
 }
+.calendar-indis{
+  background-color: #564aa3 !important;
+  border: 1px solid #2A1E75 !important;
+  color: #fff !important;
+/*  font-weight: bold !important;*/
+}
 
 .fc-unthemed .fc-today {
   background: #EBF1F2 !important;

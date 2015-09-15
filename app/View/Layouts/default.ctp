@@ -68,6 +68,7 @@
 										<ul class="nav nav-second-level">
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Previsões de Término", '/calendarios/show/1155', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/calendarios/show/2', array('escape' => false)); ?></li>
+											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Indisponibilidades", '/calendarios/show/13', array('escape' => false)); ?></li>
 										</ul>
 								</li>
 								<li> <!-- Negócio -->

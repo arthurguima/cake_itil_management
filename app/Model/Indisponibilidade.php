@@ -53,7 +53,13 @@
 				'required' => 'create',
 				'message' => 'Já existe outra indisponibilidade com esse número de evento!'
 			)
-		)
+		),
+		'user_id' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido'
+      ),
+    ),
   );
 
 	public function beforeValidate($options = array()){

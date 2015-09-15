@@ -39,6 +39,8 @@
           $data = array_merge($data,$this->ords($this->params));
         if($id % 11 == 0)
           $data = array_merge($data,$this->demandas($this->params));
+        if($id % 13 == 0) // não aparece no padrão (2310)
+          $data = array_merge($data,$this->indisponibilidades($this->params));
       }
 
       $this->set("json", json_encode($data));
@@ -194,6 +196,34 @@
           'url' => Router::url('/') . 'demandas/view/'.$demanda['Demanda']['id'],
           'description' => $demanda['Servico']['sigla'] . " - " . $demanda['DemandaTipo']['nome'],
           'className' => 'calendar-demanda'
+      );
+    }
+    return $data;
+  }
+
+  private function indisponibilidades($params){
+    $this->loadModel('Indisponibilidade');
+    $this->Indisponibilidade->Behaviors->load('Containable');
+    $this->Indisponibilidade->contain('Motivo', 'Servico');
+    $indisponibilidades = $this->Indisponibilidade->find('all', array('conditions'=>
+                  array('Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_fim <= "' . $params['url']['end'] .'"')));
+
+    $data = array();
+    foreach($indisponibilidades as $indisponibilidade) {
+      $servicos = "";
+      foreach($indisponibilidade['Servico'] as $servico):
+        $servicos = $servicos . $servico['sigla'] . ";  ";
+      endforeach;
+
+      $data[] = array(
+          'id' => $indisponibilidade['Indisponibilidade']['id'],
+          'title'=> $indisponibilidade['Motivo']['nome'],
+          'start'=> $indisponibilidade['Indisponibilidade']['dt_inicio'],
+          'end' => $indisponibilidade['Indisponibilidade']['dt_fim'],
+          'allDay' => false,
+          'url' => Router::url('/') . 'indisponibilidades/view/'. $indisponibilidade['Indisponibilidade']['id'],
+          'description' => $servicos,
+          'className' => 'calendar-indis'
       );
     }
     return $data;
