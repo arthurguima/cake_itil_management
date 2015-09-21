@@ -291,6 +291,7 @@
 		                <th>Número  <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
 		                <th>Data Prevista</th>
 		                <th>Execução</th>
+										<th>CheckList</th>
 		                <th>Ações</th>
 		              </tr>
 		            </thead>
@@ -330,6 +331,20 @@
 		                        echo (($rdm['Rdm']['dt_executada'] == null) ? " " : $this->Times->pastDate($rdm['Rdm']['dt_executada']));
 		                    ?>
 		                  </td>
+											<td>
+		                    <b>Autorizada</b>
+		                    <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
+		                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
+		                    </span>
+		                    <b>FARM</b>
+		                    <span id="<?php echo "rdm-farm-" . $rdm['Rdm']['id']?>">
+		                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['farm']); ?>
+		                    </span>
+		                  </td>
+		                  <?php
+		                    echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "autorizada");
+		                    echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "farm");
+		                  ?>
 		                  <td>
 		                    <?php
 		                      echo $this->Tables->getMenu('rdms', $rdm['Rdm']['id'], 14);

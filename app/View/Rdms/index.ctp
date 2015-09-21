@@ -81,6 +81,7 @@
                 <th>Número  <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Data Prevista</th>
                 <th>Execução</th>
+                <th>CheckList</th>
                 <th>Responsável</th>
                 <th>Ações</th>
               </tr>
@@ -121,6 +122,22 @@
                         echo (($rdm['Rdm']['dt_executada'] == null) ? " " : $this->Times->pastDate($rdm['Rdm']['dt_executada']));
                     ?>
                   </td>
+
+                  <td>
+                    <b>Autorizada</b>
+                    <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
+                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
+                    </span>
+                    <b>FARM</b>
+                    <span id="<?php echo "rdm-farm-" . $rdm['Rdm']['id']?>">
+                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['farm']); ?>
+                    </span>
+                  </td>
+                  <?php
+                    echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "autorizada");
+                    echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "farm");
+                  ?>
+
                   <td><div class="sub-17"><?php echo $rdm['User']['nome']; ?></div></td>
                   <td>
                     <?php
@@ -160,6 +177,9 @@
 </div>
 
 <?php
+//-- Jeditable
+echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
 //-- DataTables JavaScript -->
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
   echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');

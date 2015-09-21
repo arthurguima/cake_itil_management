@@ -136,4 +136,18 @@
 
     return $string . "]";
   }
+
+  public function getCheck($check){
+
+      $value = "<span>";
+
+      if($check == 1){
+          $value = $value . " <i class='fa fa-check-square-o fa-done checklist'><span>(OK)</span></i>";
+      }else{
+          $value = $value . " <i class='fa fa-square-o fa-undone checklist'><span>(  )</span></i>";
+      }
+
+      return $value . "</span>";
+
+  }
 }?>

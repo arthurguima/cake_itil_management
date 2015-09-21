@@ -152,4 +152,29 @@
         return $this->redirect(array('action' => 'index'));
     }
   }
+
+  /**
+  * Form inline
+  */
+  public function ajax_edit_item(){
+    $this->autoRender = false;
+    $this->layout = 'ajax';
+
+    if ($this->request->data) {
+        $values = explode('-', $this->request->data('id'));
+        $rdm = $values[2];
+        $item = $values[1];        
+
+        $this->Rdm->id = $rdm;
+        $this->Rdm->saveField($item, $this->request->data('check'));
+
+        if($this->request->data('check') == 0):
+          return "<i class='fa fa-square-o fa-undone checklist'><span>(  )</span></i>";
+        else:
+          return "<i class='fa fa-check-square-o fa-done checklist'><span>(OK)</span></i>";
+        endif;
+
+    }
+  }
+
 }?>

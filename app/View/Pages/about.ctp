@@ -63,6 +63,21 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.5</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Checklist de RDM</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li class="timeline-inverted">
             <div class="timeline-badge info">
               <i class="fa fa-user-plus fa-fw"></i>
