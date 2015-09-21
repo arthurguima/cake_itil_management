@@ -61,7 +61,7 @@
             </a>
           </li>
           <li><a><b>Serviço: </b> <?php echo $demanda['Servico']['sigla']; ?></a></li>
-          <?php if(isset($demanda['DemandaPai'])): ?>
+          <?php if(isset($demanda['DemandaPai']['id'])): ?>
               <li>
                 <a href=<?php echo Router::url('/', true) . 'demandas/view/' . $demanda['DemandaPai']['id']; ?>>
                 <b>Demanda Pai: </b><?php echo $demanda['DemandaPai']['nome'] . " <i class='fa-external-link-square fa' style='font-size: 15px !important;'></i>" ; ?></a>

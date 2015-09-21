@@ -81,6 +81,9 @@
                         <li>Workspace</li>
                         <li>Cadastro de demandas filhas das demandas internas</li>
                         <li>Relatório de Prioridade das Demandas</li>
+                        <li>Calendário de Indisponibilidades</li>
+                        <li>Subtarefas de uma Demanda</li>
+                        <li>Demandas Filhas de uma Demanda</li>
                       </ul>
                     </div>
                 </li>

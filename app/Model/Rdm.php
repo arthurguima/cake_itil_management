@@ -64,6 +64,14 @@
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido!')
     ),
+    'numero' => array(
+			'unique' => array(
+				'rule' => 'isUnique',
+				'required' => 'true',
+				'on' => 'create',
+				'message' => 'Já existe outra RDM com esse número casdastrada!'
+			)
+		),
   );
 
   public function beforeValidate($options = array()){
