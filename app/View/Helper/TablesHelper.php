@@ -137,7 +137,7 @@
               $(document).ready(function() {
                   $('#rdm-" . $column . "-" . $id . "').editable('" . Router::url('/', true). "/rdms/ajax_edit_item',{
                      name: 'check',
-                     data   : \"{0:'Em andamento', 1:'Finalizada'}\",
+                     data   : \"{0:'Desmarcar', 1:'Marcar'}\",
                      type   : 'select',
                      submit: \"<button class='btn btn-sm btn-success' type='submit' >Salvar</button>\",
                      cancel: \"<button class='btn btn-sm btn-danger' type='cancel' >Cancelar</button>\",

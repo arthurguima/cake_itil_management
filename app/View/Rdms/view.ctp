@@ -42,10 +42,25 @@
           <li><a><b>Tipo: </b><?php echo $rdm['RdmTipo']['nome']; ?></a></li>
           <li><a><b>Concluída?: </b><?php echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']); ?></a></li>
           <li><a><b>Observação: </b><?php echo $rdm['Rdm']['observacao']; ?></a></li>
+          <li class="checklist">
+            <a>
+              <b>Autorizada</b>
+              <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
+                <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
+              </span>
+            </a>
+            <a>
+              <b>FARM</b>
+              <span id="<?php echo "rdm-farm-" . $rdm['Rdm']['id']?>">
+                <?php echo $this->Rdm->getCheck($rdm['Rdm']['farm']); ?>
+              </span>
+            </a>
+          </li>
         <ul>
       </div>
     </div>
   </div>
+
 
   <div class="col-lg-8">
     <div class="panel panel-default panel-default">
@@ -261,6 +276,13 @@
   //-- ClarityID
   echo $this->Html->script('getSDMInfo.js');
 
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+?>
+
+<?php
+  echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "autorizada");
+  echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "farm");
 ?>
 
 <script>
