@@ -182,6 +182,7 @@
         //  responsive: true,
           "columnDefs": [  { "visible": false, "targets": 7 } ],
           "dom": 'TC<"clear">lfrtip',
+          "order": [[ 3, "desc" ]],
           "colVis": {
             "buttonText": "Esconder Colunas"
           },

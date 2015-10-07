@@ -104,7 +104,10 @@
         if (strtotime($this->AmericanDate($time)) > time()):
            return "<span class='label label-success'>" . $time . "</span>";
         else:
-           return "<span class='label label-default'>" . $time . "</span>";
+          if ($this->AmericanDate($time) == date("Y-m-d")) {
+            return "<span class='label label-warning'>" . $time . "</span>";
+          }
+          return "<span class='label label-default'>" . $time . "</span>";
         endif;
     }
 

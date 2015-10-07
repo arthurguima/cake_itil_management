@@ -20,7 +20,8 @@
     'Chamado' => array('className' => 'Chamado'),
     'ChamadoTipo' => array('className' => 'ChamadoTipo'),
     'Regra' => array('className' => 'Regra'),
-    'Container' => array('className' => 'Container')
+    'Container' => array('className' => 'Container'),
+    'Release' => array('className' => 'Release')
   );
 
   public $validate = array(

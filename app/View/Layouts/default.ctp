@@ -88,6 +88,7 @@
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mudança", '/rdms', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Indicadores", '/indicadores', array('escape' => false)); ?></li>
+											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Releases", '/releases', array('escape' => false)); ?></li>
 										</ul>
 								</li>
 								<li> <!-- Gerencial -->
@@ -133,6 +134,7 @@
 													</ul>
 												</li>
 											</li>
+											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Releases", '/relatorios/releases', array('escape' => false)); ?></li>
 										</ul>
 								</li>
 								<li> <!-- Base de Conhecimenton -->
@@ -163,7 +165,7 @@
 							<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 				</div>
 				<span class="notes hidden-xs hidden-sm">
-					Sistema de gestão da DITE - Versão 2.1
+					Sistema de gestão da DITE - Versão 2.5
 					<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
 					<br /><br /><a href="/painel.php" style="padding-left: 49px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
 				</span>

@@ -337,7 +337,7 @@
     }
     if(isset($this->request->data['origem_cliente']) && $this->request->data['origem_cliente'] != ''){
       $conditions = $conditions . ' && origem_cliente = ' . $this->request->data['origem_cliente'];
-    }    
+    }
     if(isset($this->request->data['demanda_tipo_id']) && $this->request->data['demanda_tipo_id'] != ''){
       $conditions = $conditions . ' && demanda_tipo_id = ' . $this->request->data['demanda_tipo_id'];
     }
@@ -413,6 +413,40 @@
 
     $this->set('sses', $sses);
   }
+
+  /*
+   * Mostra os releases de um serviço como Timeline
+  */
+  public function releases(){
+    $this->loadModel('Release');
+    $this->Release->Behaviors->attach('Containable');
+
+    $conditions = "";
+    if(isset($this->request->data['servico_id']) && !empty($this->request->data['servico_id'])){
+      $conditions = $conditions . 'Release.servico_id = ' . $this->request->data['servico_id'];
+
+
+      $releases = $this->Release->find('all', array(
+        'conditions' => array(
+          $conditions
+        ),
+        'contain' => array(
+          'Servico' => array(),
+          'Rdm' => array(),
+          'Note' => array()
+        )
+      ));
+
+      $this->set('releases', $releases);
+    }
+
+    $this->loadModel('Servico');
+    $this->Servico->Behaviors->attach('Containable');
+
+    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))));
+    $this->set(compact('servicos'));
+  }
+
 
   /*
    * Se existe uma contagem para a Pa automaticamente RESERVAMOS o valor

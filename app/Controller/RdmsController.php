@@ -163,18 +163,39 @@
     if ($this->request->data) {
         $values = explode('-', $this->request->data('id'));
         $rdm = $values[2];
-        $item = $values[1];        
+        $item = $values[1];
+
+        $this->request->data['Historico']['rdm_id'] = $rdm;
+        $this->request->data['Historico']['descricao'] = $item . " no SDM.";
+        $this->request->data['Historico']['data'] = date("Y-m-d");
+        $this->request->data['Historico']['analista'] = $this->Session->read('User.nome');
 
         $this->Rdm->id = $rdm;
         $this->Rdm->saveField($item, $this->request->data('check'));
+        $this->Rdm->Historico->save($this->request->data);
 
         if($this->request->data('check') == 0):
           return "<i class='fa fa-square-o fa-undone checklist'><span>(  )</span></i>";
         else:
           return "<i class='fa fa-check-square-o fa-done checklist'><span>(OK)</span></i>";
         endif;
-
     }
+  }
+
+  /**
+  * returns a list of rdms filtered by $servico
+  */
+  public function optionList(){
+    $this->layout = null;
+    //$this->autoRender = false;
+
+    $this->set('rdms',
+                $this->Rdm->find('list', array(
+                  'fields' => array('Rdm.id', 'Rdm.numero'),
+                  'conditions' => array(
+                      'Rdm.servico_id' => $this->params['url']['servico'],
+                      'Rdm.sucesso' => -1
+                  ))));
   }
 
 }?>
