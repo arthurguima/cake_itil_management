@@ -4,10 +4,21 @@
     // Add filter
     $this->Filter->addFilters(
       array(
-        'versao_' => array(
-          'Rdm.versao' => array('operator' => 'LIKE')
+        'servico' => array(
+          'Servico.id' => array(
+            'select' => $this->Filter->select('Serviço', $this->Release->Servico->find('list', array(
+                        'contain' => array('_IndisponibilidadesServico', '_Servico'), //'Hack' para HABTM
+                        'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+          )
         ),
-
+        'dt_executada' => array(
+          'Rdm.dt_executada' => array(
+            'operator' => 'BETWEEN',
+            'between' => array(
+              'text' => ' a ',
+            )
+          )
+        ),
       )
     );
     //$this->Filter->addFilters('filtro');

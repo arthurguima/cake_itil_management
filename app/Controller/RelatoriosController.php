@@ -430,9 +430,10 @@
         'conditions' => array(
           $conditions
         ),
+        'order' => array("Rdm.dt_executada" => "DESC"),
         'contain' => array(
           'Servico' => array(),
-          'Rdm' => array(),
+          'Rdm' => array('Demanda' => array(), 'Chamado' => array()),
           'Note' => array()
         )
       ));

@@ -29,8 +29,8 @@
 		),
     'observacao' => array(
 			'between' => array(
-                'rule'    => array('between', 0, 150),
-                'message' => 'O campo deve conter de 0 a 150 caracteres!')
+                'rule'    => array('between', 0, 450),
+                'message' => 'O campo deve conter de 0 a 450 caracteres!')
 		),
     'servico_id' => array(
 			'NotEmpty' => array(

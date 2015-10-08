@@ -73,14 +73,33 @@
     $this->set('rdms', $this->paginate());
   }
 
-  public function view($id = null){
-  if (!$this->Rdm->exists($id)) {
-      throw new NotFoundException(__('Rdm Inválida'));
+  /**
+   * view method
+   *
+   * @throws NotFoundException
+   * @param int id
+   * @return void
+   */
+    public function view($id = null) {
+      if (!$this->Rdm->exists($id)) {
+        throw new NotFoundException(__('Rdm Invalida'));
+      }
+      $this->Rdm->Behaviors->load('Containable');
+
+      $options = array(
+        'conditions' => array('Rdm.' . $this->Rdm->primaryKey => $id),
+        'contain' => array(
+          'Demanda' => array('Status' => array()),
+          'Chamado' => array('ChamadoTipo' => array(),'Status' => array(),'User' => array()),
+          'RdmTipo' => array(),
+          'Servico' => array(),
+          'User' => array(),
+          'Historico' => array(),
+          'Release' => array()
+        )
+      );
+      $this->set('rdm', $this->Rdm->find('first', $options));
     }
-    $options = array('conditions' => array('Rdm.' . $this->Rdm->primaryKey => $id));
-    $this->Rdm->recursive = 2;
-    $this->set('rdm', $this->Rdm->find('first', $options));
-  }
 
   public function edit($id = null){
     if (!$id) { throw new NotFoundException(__('Rdm Inválida'));}

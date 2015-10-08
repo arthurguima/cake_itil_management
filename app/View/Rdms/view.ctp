@@ -42,6 +42,7 @@
           <li><a><b>Tipo: </b><?php echo $rdm['RdmTipo']['nome']; ?></a></li>
           <li><a><b>Concluída?: </b><?php echo $this->Rdm->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada']); ?></a></li>
           <li><a><b>Observação: </b><?php echo $rdm['Rdm']['observacao']; ?></a></li>
+          <li><?php echo $this->Html->link("<b>Release: </b>" . $rdm['Release']['versao'], array('controller' => 'releases', 'action' => 'view', $rdm['Release']['id']), array('escape' => false)); ?></li>
           <li class="checklist">
             <a>
               <b>Autorizada</b>

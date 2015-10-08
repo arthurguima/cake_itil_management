@@ -17,6 +17,29 @@
         </div>
       </h3>
     </div>
+    <div class="col-lg-12 pull-left filters">
+      <div class="">
+        <div class="row">
+          <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span>
+        </div>
+        <div class="row inner" style="display: none;">
+          <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
+          <div class="col-lg-12 filters-item">
+            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
+            <b>Data de Execução: </b>
+            <?php echo $this->Search->input('dt_executada',
+                        array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                        array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+            ?>
+          </div>
+          <?php
+            echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
+                              'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+            echo $this->Search->end();
+          ?>
+        </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -65,10 +88,23 @@
     //-- DataTables --> Responsive
     echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
     echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
+
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 ?>
 
 <script>
   $(document).ready(function() {
+      $("[id*='filterDt']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: 2,
+        autoclose: true,
+        todayBtn: true,
+        language: 'pt-BR'
+      });
+
       $('#dataTables-releases').dataTable({
         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
           language: {

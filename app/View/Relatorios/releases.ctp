@@ -53,14 +53,41 @@
                     <ul class="list-unstyled spaced">
                       <li>
                         <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão: ' . $rel['Release']['versao'] . '</h4>
-                          <div class="personal-info"><ul>';
+                          <div class="personal-info"><p>' . $rel['Release']['observacao'] .'</p>';
 
-                foreach ($rel['Note'] as $note):
-                  $item = $item . "<li>" . $note['valor'] . "</li>";
-                endforeach;
-                unset($note);
+
+                /*Notas de Versão*/
+                $item = $item . ' <ul>';
+                  foreach ($rel['Note'] as $note):
+                    $item = $item . "<li>" . $note['valor'] . "</li>";
+                  endforeach;
+                  unset($note);
                 $item = $item . ' </ul>';
-                $item = $item . '<hr/><b>RDM:</b> ' . $rel['Rdm']['numero'] . " <span class='pull-right'>" . $rel['Rdm']['dt_executada'] . "</span>";
+
+                $item = $item . '<hr /><b>RDM:</b> ' . $this->Html->link($rel['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $rel['Rdm']['id'] )) . " <span class='pull-right'>" . $rel['Rdm']['dt_executada'] . "</span>";
+
+                /*Demandas e Chamados Resolvidos*/
+                $item = $item . '<div class="col-lg-10">';
+                    if (sizeof($rel['Rdm']['Demanda']) > 0){
+                      $item = $item . '<br /><p><b>Demandas</b></p>';
+                      $item = $item . ' <ul>';
+                        foreach ($rel['Rdm']['Demanda'] as $dem):
+                          $item = $item . "<li><b>" . $dem['clarity_dm_id'] . ":</b> " . $dem['nome'] . "</li>";
+                        endforeach;
+                        unset($dem);
+                      $item = $item . ' </ul>';
+                    }
+
+                    if (sizeof($rel['Rdm']['Chamado']) > 0){
+                      $item = $item . '<br /><p><b>Chamados</b></p>';
+                      $item = $item . ' <ul>';
+                        foreach ($rel['Rdm']['Chamado'] as $cham):
+                          $item = $item . "<li><b>" . $cham['numero'] . "/" . $cham['ano'] .":</b> " . $cham['nome'] . "</li>";
+                        endforeach;
+                        unset($cham);
+                      $item = $item . '</ul>';
+                    }
+                $item = $item . '</div>';
 
                 $item = $item . '</div></li></ul></div></li>';
                 echo $item;

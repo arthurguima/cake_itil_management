@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `releases` (
   `servico_id` int(11) unsigned NOT NULL,
   `versao` varchar(40) NOT NULL,
   `rdm_id` int(11) unsigned NOT NULL,
-  `observacao` varchar(150) DEFAULT NULL,
+  `observacao` varchar(450) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

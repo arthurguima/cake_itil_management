@@ -30,6 +30,8 @@
       'className' => 'Historico',
       'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
     ),
+  );
+  public $hasOne = array(
     'Release' => array(
       'className' => 'Release',
       //'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")

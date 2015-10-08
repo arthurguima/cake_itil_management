@@ -72,6 +72,7 @@
                       Veja o que mudou:<br/><br/>
                       <ul>
                         <li>Checklist de RDM</li>
+                        <li>Releases dos Serviços</li>
                       </ul>
                     </div>
                 </li>
