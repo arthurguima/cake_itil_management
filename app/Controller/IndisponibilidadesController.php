@@ -12,6 +12,7 @@
         'servico' => array(
           '_Servico.id' => array(
             'select' => $this->Filter->select('Serviço', $this->Indisponibilidade->Servico->find('list', array(
+                        'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
                         'contain' => array('_IndisponibilidadesServico', '_Servico'), //'Hack' para HABTM
                         'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
@@ -41,7 +42,14 @@
     );
 
     // Define conditions
-    $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
+    $conditions = $this->Filter->getConditions();
+
+    if($conditions == null)
+      $conditions = $conditions + array(998 => array('Indisponibilidade.dt_fim IS NULL'));
+
+  //  $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
+    $this->Filter->setPaginate('conditions', $conditions);
     $this->Filter->setPaginate('limit', 3000);
     if(sizeof($this->Filter->getConditions()) > 0):
       /**
@@ -106,7 +114,9 @@
     $users = $this->Indisponibilidade->User->find('list', array('fields' => array('User.id', 'User.nome')));
     $this->set(compact('users'));
 
-    $servicos = $this->Indisponibilidade->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
+    $servicos = $this->Indisponibilidade->Servico->find('list', array(
+      //'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
     $this->set(compact('servicos'));
     $motivos = $this->Indisponibilidade->Motivo->find('list', array('fields' => array('Motivo.id', 'Motivo.nome')));
     $this->set(compact('motivos'));

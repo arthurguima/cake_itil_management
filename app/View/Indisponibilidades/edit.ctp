@@ -25,6 +25,18 @@
                   'label' => array('text' => 'Nº Evento: '),
                   'type' => 'text'));
 
+      echo $this->BootstrapForm->input('ano', array(
+                   'label' => array('text' => 'Ano: ' .
+                          $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                              array(
+                                'escape' => false, 'title' => "Resgata Informações Básicas do SDM",
+                                'class' => 'btn btn-default',
+                                'onclick' => "javascript:getSDMInfoIndisponibilidades($('#IndisponibilidadeNumEvento').val(), $('#dpdecade').val(), 'Indisponibilidade');"
+                              ))
+                    ),
+                   //'type' => 'text',
+                   'id' => 'dpdecade'));
+
       echo $this->BootstrapForm->input('num_incidente', array(
                   'label' => array('text' => 'Nº Incidente: '),
                   'type' => 'text'));
@@ -76,6 +88,17 @@
 
 <script>
   $(document).ready(function() {
+
+    $("[id*='dpdecade']").datetimepicker({
+      format: "yyyy",
+        startView: "decade",
+        minView: "decade",
+        maxView: "decade",
+        viewSelect: "decade",
+        autoclose: true,
+        language: 'pt-BR'
+    });
+
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy hh:ii:ss",
       autoclose: true,

@@ -156,7 +156,9 @@
       </div>
       <ul class="list-group">
   			<li class="list-group-item small red">
-          *Lista de RDMs limitada em 250 registros. Utilize o filtro para melhores resultados.
+          * Lista de RDMs limitada em 250 registros.
+          * Mostra incialmente apenas RDMs em andamento.
+          * Utilize o filtro para melhores resultados.
         </li>
   		</ul>
     </div>

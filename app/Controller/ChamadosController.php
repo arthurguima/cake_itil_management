@@ -43,7 +43,8 @@
 				'servico' => array(
 					'Chamado.servico_id' => array(
 						'select' => $this->Filter->select('Serviço', $this->Chamado->Servico->find('list',
-									array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+									array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+										'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
 					)
 				),
 				'status' => array(
@@ -75,9 +76,17 @@
 		);
 
 		// Define conditions
-		$conditions = $this->Filter->getConditions() + array(999 => array('Chamado.demanda_id =' => null)); // Apenas Chamados que não são filhos de uma Demanda
+    // Apenas RDMS dos cliente do Usuário.
+    $conditions = $this->Filter->getConditions();
+
+    if($conditions == null)
+      $conditions = $conditions + array(997 => array('Chamado.aberto' => '1'));
+
+    $conditions = $conditions + array(998 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
+		$conditions = $conditions + array(999 => array('Chamado.demanda_id =' => null)); // Apenas Chamados que não são filhos de uma Demanda
 		$this->Filter->setPaginate('conditions', $conditions);
-		$this->Filter->setPaginate('limit', 3000);
+		$this->Filter->setPaginate('limit', 600);
 
 		//$this->Chamado->recursive = 2;
 		$this->set('chamados', $this->paginate());

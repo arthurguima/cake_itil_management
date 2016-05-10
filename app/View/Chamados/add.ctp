@@ -123,8 +123,9 @@
 </script>
 
 <?php
-  //-- TimePicker --
   echo $this->Html->script('getSDMInfoChamados.js');
+  
+  //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');

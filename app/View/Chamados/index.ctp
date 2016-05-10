@@ -105,6 +105,11 @@
           </table>
         </div>
       </div>
+      <ul class="list-group">
+  			<li class="list-group-item small red">
+          *Lista de Chamados limitada em 600 registros. *Mostra incialmente apenas chamados abertos. *Utilize o filtro para melhores resultados.
+        </li>
+  		</ul>
     </div>
   </div>
 </div>

@@ -51,7 +51,8 @@
     $this->Rdm->Behaviors->load('Containable');
     $this->Rdm->contain('Servico');
     $rdms = $this->Rdm->find('all', array('conditions'=>
-              array('Rdm.dt_prevista >= "' . $params['url']['start'] . '" && Rdm.dt_prevista <= "' . $params['url']['end'] . '"')));
+              array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Rdm.dt_prevista >= "' . $params['url']['start'] . '" && Rdm.dt_prevista <= "' . $params['url']['end'] . '"')));
+    //debug($rdms);
 
     $data = array();
     foreach($rdms as $rdm) {
@@ -115,7 +116,7 @@
     $this->Ss->Behaviors->load('Containable');
     $this->Ss->contain('Servico');
     $sses = $this->Ss->find('all', array('conditions'=>
-              array('Ss.dt_prazo >= "' . $params['url']['start'] . '" && Ss.dt_prazo <= "' . $params['url']['end'] . '"')));
+              array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Ss.dt_prazo >= "' . $params['url']['start'] . '" && Ss.dt_prazo <= "' . $params['url']['end'] . '"')));
 
     $data = array();
     foreach($sses as $ss) {
@@ -138,7 +139,7 @@
     $this->Pe->Behaviors->load('Containable');
     $this->Pe->contain('Servico');
     $pes = $this->Pe->find('all', array('conditions'=>
-            array('(Pe.validade_pdd >= "' . $params['url']['start'] . '") && (Pe.validade_pdd <= "' . $params['url']['end'] .'") ')));
+            array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& (Pe.validade_pdd >= "' . $params['url']['start'] . '") && (Pe.validade_pdd <= "' . $params['url']['end'] .'") ')));
 
     $data = array();
     foreach($pes as $pe) {
@@ -161,7 +162,7 @@
     $this->Ord->Behaviors->load('Containable');
     $this->Ord->contain('Ss', 'Servico');
     $ords = $this->Ord->find('all', array('conditions'=>
-              array('Ord.dt_fim_pdd >= "' . $params['url']['start'] . '" && Ord.dt_fim_pdd <= "' . $params['url']['end'] . '"')));
+              array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Ord.dt_fim_pdd >= "' . $params['url']['start'] . '" && Ord.dt_fim_pdd <= "' . $params['url']['end'] . '"')));
 
     $data = array();
     foreach($ords as $ord) {
@@ -183,7 +184,7 @@
     $this->Demanda->Behaviors->load('Containable');
     $this->Demanda->contain('DemandaTipo', 'Servico');
     $demandas = $this->Demanda->find('all', array('conditions'=>
-                  array('Demanda.dt_prevista >= "' . $params['url']['start'] . '" && Demanda.dt_prevista <= "' . $params['url']['end'] .'"')));
+                  array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Demanda.dt_prevista >= "' . $params['url']['start'] . '" && Demanda.dt_prevista <= "' . $params['url']['end'] .'"')));
 
     $data = array();
     foreach($demandas as $demanda) {

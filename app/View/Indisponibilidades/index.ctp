@@ -133,6 +133,11 @@
           </table>
         </div>
       </div>
+      <ul class="list-group">
+        <li class="list-group-item small red">
+          *Mostra incialmente apenas Indisponibilidades abertas. *Utilize o filtro para melhores resultados.
+        </li>
+      </ul>
     </div>
   </div>
 </div>

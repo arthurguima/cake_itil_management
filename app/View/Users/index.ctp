@@ -70,7 +70,7 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
 
 <script>
   $(document).ready(function() {
-      $('#dataTables-users').dataTable({
+    var  oTable =   $('#dataTables-users').dataTable({
         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
@@ -97,7 +97,9 @@ echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.ta
                 },
               ]
           }
-  })
+  });
+
+  var colvis = new $.fn.dataTable.ColVis( oTable );
 
   $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
 

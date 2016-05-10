@@ -140,7 +140,7 @@
       </div>
       <ul class="list-group">
   			<li class="list-group-item small red">
-          *Lista de Demandas Internas limitada em 150 registros. Utilize o filtro para melhores resultados.
+          *Lista de Demandas Internas limitada em 150 registros. *Mostra incialmente apenas demandas não finalizadas. *Utilize o filtro para melhores resultados.
         </li>
   		</ul>
     </div>

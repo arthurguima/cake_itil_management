@@ -23,7 +23,8 @@
         'servico' => array(
           'Rdm.servico_id' => array(
             'select' => $this->Filter->select('Serviço', $this->Rdm->Servico->find('list',
-                  array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+                  array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+                    'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
         'ambiente_' => array(
@@ -65,8 +66,18 @@
     //$this->Filter->addFilters('filtro');
 
     // Define conditions
+    // Apenas RDMS dos cliente do Usuário.
+    $conditions = $this->Filter->getConditions();
+
+    if($conditions == null)
+      $conditions = $conditions + array(998 => array('Rdm.sucesso =' => '-1'));
+
+    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
+		$this->Filter->setPaginate('conditions', $conditions);
+    debug($conditions);
+    debug($conditions[6]);
     $this->Filter->setPaginate('order', 'Rdm.dt_prevista DESC, Rdm.dt_executada, Rdm.modified DESC, Rdm.created DESC');
-    $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
     $this->Filter->setPaginate('limit', 250);
 
     $this->Rdm->recursive = 0;
@@ -151,7 +162,9 @@
     }
 
     /* Relacionamentos */
-    $servicos = $this->Rdm->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
+    $servicos = $this->Rdm->Servico->find('list', array(
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+      'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']) ));
     $this->set(compact('servicos'));
 
     $users = $this->Rdm->User->find('list', array('fields' => array('User.id', 'User.nome')));

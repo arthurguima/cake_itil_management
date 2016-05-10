@@ -10,6 +10,7 @@
   <div id='calendar' class="col-lg-12"></div>
 </div>
 
+<?//php debug($_SESSION) ?>
 
 <?php
  // FullCalendar
@@ -28,7 +29,7 @@
 				center: 'title',
 				right: 'month,basicWeek,basicDay'
 			},
-      
+
       views: {
         month: {
             eventLimit: 7 // adjust to 6 only for agendaWeek/agendaDay

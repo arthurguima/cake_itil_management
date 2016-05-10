@@ -28,7 +28,8 @@
         'servico' => array(
           'Demanda.servico_id' => array(
             'select' => $this->Filter->select('Serviço', $this->Demanda->Servico->find('list',
-                 array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+                    array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+                          'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
         'status' => array(
@@ -97,8 +98,16 @@
     //$this->Filter->addFilters('filtro');
 
     // Define conditions
+    // Apenas RDMS dos cliente do Usuário.
+    $conditions = $this->Filter->getConditions();
+
+    if($conditions == null)
+      $conditions = $conditions + array(998 => array('Status.fim IS NULL'));
+
+    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
     $this->Filter->setPaginate('order', 'Demanda.data_homologacao, Demanda.modified DESC, Demanda.created DESC');
-    $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
+    $this->Filter->setPaginate('conditions', $conditions);
     $this->Filter->setPaginate('limit', 150);
 
     $statuses = $this->Demanda->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
@@ -164,7 +173,9 @@
       $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
       $this->set(compact('users'));
 
-      $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
+      $servicos = $this->Demanda->Servico->find('list', array(
+        'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+        'conditions' => ("Servico.cliente_id" . $_SESSION['User']['clientes'])));
       $this->set(compact('servicos'));
 
       $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
