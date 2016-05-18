@@ -112,9 +112,8 @@
 
     $this->set('clientes', $this->ServicoPorCliente(
       $this->Servico->find('all',array(
-        'contain' => array(
-          'Area' => array('Cliente'=> array())
-        )
+        'contain' => array('Area' => array('Cliente'=> array())),
+        'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes'])
       )
     )));
   }

@@ -97,8 +97,7 @@
 											<li>
 													<?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dashboard",
 																									Router::url('/', true) . "dashboard", array('escape' => false)); ?>
-											</li>
-											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas do DEFT", 'http://www-apps/_projects/dite/demandas/demandas_deft', array('escape' => false, "target" => '_blank')); ?></li>
+											</li>											
 										</ul>
 								</li>
 								<li> <!-- Relatórios -->

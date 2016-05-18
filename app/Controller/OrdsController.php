@@ -50,7 +50,8 @@
 				'servico' => array(
 					'Ord.servico_id' => array(
 						'select' => $this->Filter->select('Serviço', $this->Ord->Servico->find('list',
-									array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+									array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+									'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
 					)
 				),
 				'status_diferente' => array(
@@ -138,8 +139,16 @@
 		);
 
 		// Define conditions
-		$this->Filter->setPaginate('conditions', $this->Filter->getConditions());
-		$this->Filter->setPaginate('limit', 3000);
+    // Apenas RDMS dos cliente do Usuário.
+    $conditions = $this->Filter->getConditions();
+
+    if($conditions == null)
+      $conditions = $conditions + array(998 => array('Status.fim IS NULL'));
+
+    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
+		$this->Filter->setPaginate('conditions', $conditions);
+		$this->Filter->setPaginate('limit', 250);
 
 		$this->Ord->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
 		$this->Ord->contain('Status', 'Ss', 'Pe', 'Servico', 'User');//Carrega apenas o Relacionamento com a Status e SS (otimização)

@@ -47,6 +47,7 @@ class PagesController extends AppController {
 		$this->Servico->Behaviors->attach('Containable');
 		if(date("d") < 21){
 			$servicos = $this->Servico->find('all', array(
+				'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
 				'contain' => array(
 					'Indisponibilidade' => array(
 						'Motivo' => array(),
@@ -61,6 +62,7 @@ class PagesController extends AppController {
 		}
 		else{
 			$servicos = $this->Servico->find('all', array(
+				'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
 				'contain' => array(
 					'Indisponibilidade' => array(
 						'Motivo' => array(),
@@ -78,6 +80,7 @@ class PagesController extends AppController {
 		$this->loadModel('Demanda');
 		$this->Demanda->Behaviors->attach('Containable');
 		$demandas = $this->Demanda->find('all', array(
+			'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
       'contain' => array(
         'Servico' => array('Cliente'=> array()),
         'DemandaTipo' => array(),
@@ -103,6 +106,7 @@ class PagesController extends AppController {
 		$this->Chamado->Behaviors->attach('Containable');
 		$chamados = $this->Chamado->find('all', array(
       //'group' => array('Demanda.servico_id'),
+			'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
       'contain' => array(
 				'Servico' => array('Cliente'=> array()),
         'ChamadoTipo' => array(),
@@ -130,14 +134,14 @@ class PagesController extends AppController {
 		    'Servico' => array('Cliente'=> array()),
 				'RdmTipo' => array()
 		  ),
-			'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%m") = "'.date("m").'"))')
+			'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes'] . ' && ((DATE_FORMAT(Rdm.dt_prevista,"%m") = "'.date("m").'"))')
 		));
 		$rdmsano = $this->Rdm->find('all', array(
 		  'contain' => array(
 		    'Servico' => array('Cliente'=> array()),
 				'RdmTipo' => array()
 		  ),
-			'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%Y") = "'.date("Y").'"))')
+			'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes'] . ' && ((DATE_FORMAT(Rdm.dt_prevista,"%Y") = "'.date("Y").'"))')
 		));
 		$this->set('rdmsmes', $this->rdmsPorCliente($rdmsmes));
 		$this->set('rdmsano', $this->rdmsPorCliente($rdmsano));
@@ -146,6 +150,7 @@ class PagesController extends AppController {
 		$this->loadModel('Ss');
 		$this->Ss->Behaviors->attach('Containable');
 		$sses = $this->Ss->find('all', array(
+			'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
 		  'contain' => array(
 		    'Servico' => array('Cliente'=> array()),
 				'Status' => array(),
@@ -171,7 +176,7 @@ class PagesController extends AppController {
 				'Pe' => array(),
 				//'Status' => array()
 		  ),
-			'conditions' => array('((DATE_FORMAT(Ss.dt_recebimento,"%Y") = "'.date("Y").'"))')
+			'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes'] . ' && ((DATE_FORMAT(Ss.dt_recebimento,"%Y") = "'.date("Y").'"))')
 		));
 
 		//$this->set('ssesano', $ssesano); debug($ssesano);
@@ -254,6 +259,19 @@ class PagesController extends AppController {
       )
     ));
 		$this->set('demandas', $demandas);
+
+		/*Lista de Subtarefas*/
+		$this->loadModel('Subtarefa');
+		$this->Subtarefa->Behaviors->attach('Containable');
+		$subtarefas = $this->Subtarefa->find('all', array(
+			'contain' => array(
+				'Demanda' => array(
+					'Servico' => array(),
+				)
+			),
+			'conditions' => array('Subtarefa.check = 0 && Demanda.user_id = ' . $this->Session->read('User.uid'))
+		));
+		$this->set('subtarefas', $subtarefas);
 
 		/*Lista de PEs*/
 		$this->loadModel('Pe');

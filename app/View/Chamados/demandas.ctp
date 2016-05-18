@@ -15,7 +15,7 @@
         <div class="row inner" style="display: none;">
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
-            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>            
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('pai_', array('class' => 'form-control', 'placeholder' => "Pai?")); ?></div>

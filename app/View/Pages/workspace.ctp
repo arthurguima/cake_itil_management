@@ -21,6 +21,9 @@
 		  <li role="presentation" class="active"><a href="#demandas" aria-controls="demandas" role="tab" data-toggle="tab">
 				Demandas Internas <span class="badge"><?php echo sizeof($demandas) ?></span></a>
 			</li>
+			<li role="presentation"><a href="#subtarefas" aria-controls="subtarefas" role="tab" data-toggle="tab">
+				Tarefas <span class="badge"><?php echo sizeof($subtarefas) ?></span></a>
+			</li>
 		  <li role="presentation"><a href="#rdms" aria-controls="rdms" role="tab" data-toggle="tab">
 				RDMs <span class="badge"><?php echo sizeof($rdms) ?></span></a>
 			</li>
@@ -610,7 +613,61 @@
 	      </div>
 	    </div>
 	  </div>
+
+		<!-- Subtarefas de Demanda -->
+		<div role="tabpanel" class="tab-pane" id="subtarefas">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<b> Tarefas de Demandas internas sob a sua responsabilidade </b>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover" id="dataTables-subtarefas">
+								<thead>
+									<tr>
+										<th>Demanda/Servico</th>
+										<th>Tarefa</th>
+										<th>Prazo</th>
+										<th><span class="editable">Finalizar</span></th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ($subtarefas as $sub): ?>
+										<tr>
+											<td><?php echo $this->Html->link($sub['Demanda']['clarity_dm_id']." / ".$sub['Demanda']['Servico']['sigla'],
+		                       array('controller' => 'Demandas', 'action' => 'view', $sub['Demanda']['id'])); ?></td>
+											<td><?php echo $sub['Subtarefa']['descricao']; ?></td>
+											<td class="text-center">
+		                    <?php echo $this->Times->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'],
+		                             $sub['Subtarefa']['created'] . " - " . $sub['Subtarefa']['dt_prevista'],null);
+		                    ?>
+		                  </td>
+											<td id="<?php echo "sub-" . $sub['Subtarefa']['id']?>">
+												<?php
+													if($sub['Subtarefa']['check'] == 0):
+														echo "<span class='label label-success'>Em andamento</span>";
+													else:
+														echo "<span class='label label-default'>Finalizada</span>";
+													endif;
+												?>
+											</td>
+											<?php
+												echo $this->Tables->SubtarefaStatusEditable($sub['Subtarefa']['id'], "subtarefas");
+											?>
+										</tr>
+									<?php endforeach; ?>
+									<?php unset($sub); ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
+</div>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1000,6 +1057,17 @@
 	    });
 	    var colvis = new $.fn.dataTable.ColVis( oTablechamado );
 		}
+	});
+
+	$('a[aria-controls="subtarefas"]').on('shown.bs.tab', function (e) {
+		if(typeof oTablesubtarefa == 'undefined'){
+			oTablesubtarefa =  $('#dataTables-subtarefas').dataTable({
+					"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+						language: {
+							url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+						},
+				});
+			}
 	});
 
   $(document).ready(function() {

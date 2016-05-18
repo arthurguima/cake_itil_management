@@ -13,7 +13,8 @@
 				'servico' => array(
 					'Ss.servico_id' => array(
 						'select' => $this->Filter->select('Serviço', $this->Ss->Servico->find('list',
-						 		array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+						 		array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+											'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
 					)
 				),
 				'status' => array(
@@ -73,8 +74,16 @@
 		);
 
 		// Define conditions
-		$this->Filter->setPaginate('conditions', $this->Filter->getConditions());
-		$this->Filter->setPaginate('limit', 3000);
+    // Apenas SSes dos cliente do Usuário.
+    $conditions = $this->Filter->getConditions();
+
+		if($conditions == null)
+      $conditions = $conditions + array(998 => array('Status.fim IS NULL'));
+
+		$conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
+		$this->Filter->setPaginate('conditions', $conditions);
+		$this->Filter->setPaginate('limit', 200);
 
 		$statuses = $this->Ss->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 

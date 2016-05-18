@@ -110,7 +110,8 @@
     $this->Filter->setPaginate('conditions', $conditions);
     $this->Filter->setPaginate('limit', 150);
 
-    $statuses = $this->Demanda->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
+    $statuses = $this->Demanda->Status->find('list', array(
+      'conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 
     //$this->Demanda->recursive = 0;
     $this->set('demandas', $this->paginate());

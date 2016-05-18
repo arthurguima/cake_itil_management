@@ -144,6 +144,11 @@
           </table>
         </div>
       </div>
+      <ul class="list-group">
+  			<li class="list-group-item small red">
+          *Lista de SSes limitada em 200 registros. *Mostra incialmente apenas SSes não finalizadas. *Utilize o filtro para melhores resultados.
+        </li>
+  		</ul>
     </div>
   </div>
 </div>

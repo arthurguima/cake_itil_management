@@ -35,7 +35,8 @@
         'servico' => array(
           'Pe.servico_id' => array(
             'select' => $this->Filter->select('Serviço', $this->Pe->Servico->find('list',
-                  array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+                  array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+                        'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
         'status_diferente' => array(
@@ -74,8 +75,14 @@
     );
 
     // Define conditions
-    $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
-    $this->Filter->setPaginate('limit', 3000);
+    $conditions = $this->Filter->getConditions();
+    if($conditions == null)
+      $conditions = $conditions + array(998 => array('Status.fim IS NULL'));
+
+    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
+    $this->Filter->setPaginate('conditions', $conditions);
+    $this->Filter->setPaginate('limit', 250);
 
     $this->Pe->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
     $this->Pe->contain('Status', 'Ss', 'Servico', 'User');//Carrega apenas o Relacionamento com a Status e SS (otimização)

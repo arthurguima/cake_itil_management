@@ -120,6 +120,11 @@
           </table>
         </div>
       </div>
+      <ul class="list-group">
+  			<li class="list-group-item small red">
+          *Lista de PAs limitada em 250 registros. *Mostra incialmente apenas PAs não finalizadas. *Utilize o filtro para melhores resultados.
+        </li>
+  		</ul>
     </div>
   </div>
 </div>

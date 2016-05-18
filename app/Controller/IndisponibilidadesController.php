@@ -66,7 +66,7 @@
                   '_Servico' => array(
                     'className'  => 'Servico',
                     'foreignKey' => false,
-                    'conditions' => '_Servico.id = _IndisponibilidadesServico.servico_id',
+                    'conditions' => '_Servico.id = _IndisponibilidadesServico.servico_id && _Servico.cliente_id',
                     'fields' => 'id'
                   )
                 )

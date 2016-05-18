@@ -73,6 +73,7 @@
                       <ul>
                         <li>Checklist de RDM</li>
                         <li>Releases dos Serviços</li>
+                        <li>Visualização filtrada automaticamente por cliente</li>
                       </ul>
                     </div>
                 </li>

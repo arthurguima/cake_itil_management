@@ -131,7 +131,9 @@
 				),
 				'servico' => array(
 					'Chamado.servico_id' => array(
-						'select' => $this->Filter->select('Serviço', $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))))
+						'select' => $this->Filter->select('Serviço', $this->Chamado->Servico->find('list',
+						 array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+							'fields' => array('Servico.id', 'Servico.sigla'))))
 					)
 				),
 				'status' => array(
@@ -165,9 +167,12 @@
 		// Define conditions
 		$conditions = $this->Filter->getConditions() + array(999 => array('Chamado.demanda_id !=' => null)); // Apenas Chamados que são filhos de uma Demanda
 		$this->Filter->setPaginate('conditions', $conditions);
-		$this->Filter->setPaginate('limit', 3000);
+		$this->Filter->setPaginate('limit', 300);
+		$this->Chamado->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+		$this->Chamado->contain(array( 'Status', 'Servico', 'User', 'Demanda' => array('Status'), 'ChamadoTipo'));
 
-		$this->Chamado->recursive = 2;
+
+	//$this->Chamado->recursive = 1;
 		$this->set('chamados', $this->paginate());
 	}
 
