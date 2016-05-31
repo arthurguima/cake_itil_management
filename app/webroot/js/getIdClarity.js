@@ -1,18 +1,16 @@
 function getID(Id) {
 
   var url = document.getElementById(Id+'Url').value;
-  var clarity = url.indexOf("www-dtpprojetos");
-  var positionIni = url.indexOf("Properties&id=");
 
-  if (url=="" || clarity==-1 || positionIni==-1 ){
+  if (url==""){
     alert("Por favor, insira a URL da demanda do sistema CLARITY!");
     document.getElementById(Id).value= "";
     clearViewClarity();
   }
   else{
-    positionIni = positionIni + 14;
-    var idClarity = url.substr(positionIni, 7)
-
+    var positionIni = url.indexOf("Properties&id=");
+    var idClarity = (/Properties&id=([0-9]+)/).exec(url)[1];
+    
     if(isNaN(idClarity)==true){
   		alert("Por favor, insira a URL da demanda do sistema CLARITY!\n\n - N�o foi poss�vel obter o ID da demanda. [ID IS NUMERIC]");
   		document.getElementById(Id+'Id').value= "";

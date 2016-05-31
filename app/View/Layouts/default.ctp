@@ -54,7 +54,7 @@
 					<a> <!-- TODO Alterar -->
 							<?php echo $this->Html->image("logo-icon.svg", array('height' => '45px', 'class' => 'hidden-xs hidden-sm')); ?>
 					</a>
-					<span class="sgd">SGD - Serviço de Gestão da DITE</span>
+					<span class="sgd">SGS - Sistema de Gestão de Serviço</span>
 				</div>
 				<div class="sidebar-nav navbar-collapse">
 						<ul class="nav" id="side-menu">
@@ -97,7 +97,7 @@
 											<li>
 													<?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dashboard",
 																									Router::url('/', true) . "dashboard", array('escape' => false)); ?>
-											</li>											
+											</li>
 										</ul>
 								</li>
 								<li> <!-- Relatórios -->
@@ -164,9 +164,10 @@
 							<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 				</div>
 				<span class="notes hidden-xs hidden-sm">
-					Sistema de gestão da DITE - Versão 2.5
+					Sistema de gestão de Serviço - V 2.5
 					<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
-					<br /><br /><a href="/painel.php" style="padding-left: 49px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
+					<br /> <span style="margin-left: 13px;">arthur.doliveira@dataprev.gov.br</span>
+					<br /><br /><a href="/painel.php" style="padding-left: 38px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
 				</span>
 			</div>
 			<!-- Fim sidebar -->

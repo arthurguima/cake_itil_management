@@ -94,19 +94,32 @@
               "aButtons": [
                 {
                     "sExtends": "copy",
-                    "sButtonText": "Copiar"
+                    "sButtonText": "Copiar",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4 ]
                 },
                 {
                     "sExtends": "print",
-                    "sButtonText": "Imprimir"
+                    "sButtonText": "Imprimir",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4 ]
                 },
                 {
                     "sExtends": "csv",
-                    "sButtonText": "CSV"
+                    "sButtonText": "CSV",
+                    "sFileName": "Servicos.csv",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4 ]
                 },
                 {
                     "sExtends": "pdf",
-                    "sButtonText": "PDF"
+                    "sButtonText": "PDF",
+                    "sFileName": "Servicos.pdf",
+                    "oSelectorOpts": { filter: 'applied', order: 'current' },
+                    "mColumns": [ 0,1,2,3,4 ],
+                    "sPdfOrientation": "landscape",
+                    "sTitle": "Serviços Cadastrados",
+                    "sPdfMessage": "<?php echo date('d/m/y')?>",
                 },
               ]
           }

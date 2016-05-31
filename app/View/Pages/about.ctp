@@ -27,7 +27,6 @@
               <h4> <i class="ace-icon fa fa-hand-o-right"></i> Arthur Henrique Guimarães de Oliveira</h4>
                 <div class="personal-info">
                   <b>Email:</b><a href="mailto:arthur.doliveira@dataprev.gov.br"> arthur.doliveira@dataprev.gov.br</a><br/>
-                  Git + Bootstrap + CSS3 + Rails + Vim = <i class="ace-icon fa fa-heart"></i>
                 </div>
             </li>
           </ul>
@@ -67,13 +66,14 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.5</h4>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.5 - SGS</h4>
                     <div class="personal-info">
                       Veja o que mudou:<br/><br/>
                       <ul>
                         <li>Checklist de RDM</li>
                         <li>Releases dos Serviços</li>
                         <li>Visualização filtrada automaticamente por cliente</li>
+                        <li>Nome alterado para Sistema de Gestão de Serviço</li>
                       </ul>
                     </div>
                 </li>
@@ -264,7 +264,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.0</h4>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.0 -  SGD</h4>
                     <div class="personal-info">
                       Esse é um novo mundo de gestão da DITE!<br/><br/> Agora você pode:<br/><br/>
                       <ul>

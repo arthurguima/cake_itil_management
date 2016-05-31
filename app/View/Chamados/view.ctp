@@ -65,7 +65,7 @@
                   <td><?php echo $rdm['nome']; ?></td>
                   <td>  <?php
                       echo $this->Html->link($rdm['numero'],
-                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['numero'],
+                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['numero'],
                             array('target' => '_blank'));
                     ?>
                   </td>

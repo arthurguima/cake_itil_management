@@ -106,7 +106,7 @@
                   <td>
                     <?php
                       echo $this->Html->link($rdm['Rdm']['numero'],
-                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
+                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
                             array('target' => '_blank'));
                     ?>
                   </td>

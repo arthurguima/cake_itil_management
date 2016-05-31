@@ -72,7 +72,7 @@
                   <td data-order=<?php echo $chamado['Chamado']['ano'] . $chamado['Chamado']['numero']; ?>>
                     <?php
                       echo $this->Html->link($chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano'],
-                      "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $chamado['Chamado']['numero'] . "%25",
+                      "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $chamado['Chamado']['numero'] . "%25",
                       array('target' => '_blank'));
                     ?>
                   </td>

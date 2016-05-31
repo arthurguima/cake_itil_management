@@ -1,5 +1,7 @@
 <div class="row">
-		<div class="col-lg-12"><h3 class="page-header">Bem Vindo ao SGD! - <?php echo $this->Session->read('User.nome'); ?></h3></div>
+		<div class="col-lg-12">
+			<h3 class="page-header">Bem Vindo ao SGS! - <?php echo $this->Session->read('User.nome'); ?></h3>
+		</div>
 		<?php if($this->Session->read('User.uid') != 0): ?>
 			<div class="col-lg-12"><h6>Tarefas sob a sua responsabilidade:</h6></div>
 		<?php endif;?>
@@ -318,7 +320,7 @@
 		                  <td>
 		                    <?php
 		                      echo $this->Html->link($rdm['Rdm']['numero'],
-		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
+		                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
 		                            array('target' => '_blank'));
 		                    ?>
 		                  </td>
@@ -402,7 +404,7 @@
 		                  <td data-order=<?php echo $chamado['Chamado']['ano'] . $chamado['Chamado']['numero']; ?>>
 		                    <?php
 		                      echo $this->Html->link($chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano'],
-		                      "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $chamado['Chamado']['numero'] . "%25",
+		                      "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $chamado['Chamado']['numero'] . "%25",
 		                      array('target' => '_blank'));
 		                    ?>
 		                  </td>
@@ -482,14 +484,14 @@
 		                  <td>
 		                    <?php
 		                      echo $this->Html->link($indisponibilidade['Indisponibilidade']['num_evento'],
-		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_evento'] . "%25",
+		                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_evento'] . "%25",
 		                            array('target' => '_blank'));
 		                    ?>
 		                  </td>
 		                  <td>
 		                    <?php
 		                      echo $this->Html->link($indisponibilidade['Indisponibilidade']['num_incidente'],
-		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_incidente'] . "%25",
+		                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_incidente'] . "%25",
 		                            array('target' => '_blank'));
 		                    ?>
 		                  </td>
@@ -696,12 +698,12 @@
     </div>
   </div>
 <?php else:  ?>
-
+<div class="container">
 	<div class="error">
 		<div class="well">
-			<h3 class="page-header"><i class="fa red fa-user-times"></i> Usuário não encontrado no SGD </h3>
+			<h3 class="page-header"><i class="fa red fa-user-times"></i> Usuário não encontrado no SGS </h3>
 			<br />
-			<b>Tente um dos seguintes procedimentos:</b>
+			<h4>Tente um dos seguintes procedimentos:</h4>
 			<div class="well">
 				<ul class="list-unstyled spaced">
 					<li>
@@ -711,15 +713,18 @@
 
 					<li>
 						<i class="ace-icon fa fa-hand-o-right blue"></i>
-						Entre em Contato com os administradores do SGD para criar o seu cadastro.
+						Entre em Contato com os administradores do SGS para criar o seu cadastro.
 					</li>
 
 				</ul>
+				<br />
+				<b>Veja o que você está perdendo ao não usar o nosso workspace:</b>
+				<?php echo $this->Html->image('workspace.png', array('alt' => 'Visualização do workspace', 'class' => "img-responsive", 'style' => 'margin-top:10px;')); ?>
 			</div>
 		</div>
 	</div>
-<?php endif; ?>
 </div>
+<?php endif; ?>
 
 <?php
   //-- ClarityID
@@ -759,7 +764,7 @@
 	$('a[aria-controls="ords"]').on('shown.bs.tab', function (e) {
 		if(typeof oTableOrd == 'undefined'){
 			oTableOrd =  $('#dataTables-ords').dataTable({
-				"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+				"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
 					language: {
 						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 					},
@@ -808,7 +813,7 @@
 	$('a[aria-controls="rdms"]').on('shown.bs.tab', function (e) {
 		if(typeof oTableRdm == 'undefined'){
 			oTableRdm =  $('#dataTables-rdm').dataTable({
-					"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+					"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
 						language: {
 							url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 						},
@@ -860,7 +865,7 @@
 	$('a[aria-controls="pes"]').on('shown.bs.tab', function (e) {
 			if(typeof oTablepes == 'undefined'){
 				oTablepes = $('#dataTables-pes').dataTable({
-				"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+				"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
 					language: {
 						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 					},
@@ -909,7 +914,7 @@
 	$('a[aria-controls="sses"]').on('shown.bs.tab', function (e) {
 		if(typeof oTablesses == 'undefined'){
 		 	oTablesses =  $('#dataTables-ss').dataTable({
-	      "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+	      "lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
 	        language: {
 	          url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 	        },
@@ -1012,7 +1017,7 @@
 	$('a[aria-controls="chamados"]').on('shown.bs.tab', function (e) {
 		if(typeof oTablechamado == 'undefined'){
 			oTablechamado = $('#dataTables-chamado').dataTable({
-	        "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+	        "lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
 	        language: {
 	          url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 	        },
@@ -1062,7 +1067,7 @@
 	$('a[aria-controls="subtarefas"]').on('shown.bs.tab', function (e) {
 		if(typeof oTablesubtarefa == 'undefined'){
 			oTablesubtarefa =  $('#dataTables-subtarefas').dataTable({
-					"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+					"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
 						language: {
 							url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 						},
@@ -1072,7 +1077,7 @@
 
   $(document).ready(function() {
 		var oTable = $('#dataTables-demanda').dataTable({
-					"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+					"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
 					language: {
 						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
 					},

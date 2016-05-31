@@ -207,7 +207,7 @@
     $this->Indisponibilidade->Behaviors->load('Containable');
     $this->Indisponibilidade->contain('Motivo', 'Servico');
     $indisponibilidades = $this->Indisponibilidade->find('all', array('conditions'=>
-                  array('Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_fim <= "' . $params['url']['end'] .'"')));
+                  array('Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_inicio <= "' . $params['url']['end'] .'"')));
 
     $data = array();
     foreach($indisponibilidades as $indisponibilidade) {
@@ -216,11 +216,19 @@
         $servicos = $servicos . $servico['sigla'] . ";  ";
       endforeach;
 
+      if($indisponibilidade['Indisponibilidade']['dt_fim'] == null){
+        $fim = date("Y-m-d H:i:s");
+        $servicos =  "Aberta => " . $servicos;
+      }
+      else{
+        $fim = null;
+      }
+
       $data[] = array(
           'id' => $indisponibilidade['Indisponibilidade']['id'],
           'title'=> $indisponibilidade['Motivo']['nome'],
           'start'=> $indisponibilidade['Indisponibilidade']['dt_inicio'],
-          'end' => $indisponibilidade['Indisponibilidade']['dt_fim'],
+          'end' => $fim,
           'allDay' => false,
           'url' => Router::url('/') . 'indisponibilidades/view/'. $indisponibilidade['Indisponibilidade']['id'],
           'description' => $servicos,

@@ -667,9 +667,12 @@ li.list-group-item.red {
   border: 2px solid #4e5758 !important;
 }
 .panel-default>.panel-heading {
-  color: #ecf0f1;
+  color: #fff;
   background-color: #4e5758;
   border-color: #4e5758;
+}
+.panel-default .panel-heading i {
+  color: #fff;
 }
 
 .panel-info {
@@ -1037,12 +1040,12 @@ td .tipo-demanda {
   position: fixed;
   top: 94%;
   transform: translateY(-94%);
-  padding-left: 10px;
+  padding-left: 11px;
 }
 .notes a{
   color: #E7E7E8;
   text-decoration: underline;
-  padding-left: 63px;
+  padding-left: 54px;
 }
 
 span.color-legend {

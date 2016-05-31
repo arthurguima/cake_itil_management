@@ -52,7 +52,9 @@
     }
 
     /* Filtros */
-    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))));
+    $this->set('servicos', $this->Servico->find('list', array(
+      'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))));
     $this->set(compact('servicos'));
 
     $this->loadModel('Motivo');
@@ -80,6 +82,7 @@
 
       $servicos = $this->Servico->find('all', array(
         //'conditions' => array('id' => $this->request->data['servico_id']),
+        'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']),
         'contain' => array(
           'Indisponibilidade' => array(
             'Servico' => array('Cliente'=> array() ),
@@ -184,7 +187,9 @@
 
     /* Filtros */
     $this->loadModel('Cliente');
-    $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
+    $this->set('clientes', $this->Cliente->find('list', array(
+      'conditions' => array("Cliente.id" . $_SESSION['User']['clientes']),
+      'fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
 
     // Os filtros de contratos, aditivos são montados via ajax
@@ -198,9 +203,9 @@
     //$this->Servico->recursive = 3;
     $this->Demanda->Behaviors->attach('Containable');
 
-    $conditions_serv = "";
+    $conditions_serv = "Servico.cliente_id" . $_SESSION['User']['clientes'];
     if(isset($this->request->data['cliente_id']) && !empty($this->request->data['cliente_id'])){
-      $conditions_serv = $conditions_serv . 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
+      $conditions_serv = 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
     }
 
     $conditions = "";
@@ -252,7 +257,9 @@
     $this->loadModel('Cliente');
     $this->Cliente->Behaviors->attach('Containable');
 
-    $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
+    $this->set('clientes', $this->Cliente->find('list', array(
+      'conditions' => array("Cliente.id" . $_SESSION['User']['clientes']),
+      'fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
 
     $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
@@ -266,9 +273,9 @@
     $this->loadModel('Demanda');
     $this->Demanda->Behaviors->attach('Containable');
 
-    $conditions_serv = "";
+    $conditions_serv = "Servico.cliente_id" . $_SESSION['User']['clientes'];
     if(isset($this->request->data['cliente_id']) && !empty($this->request->data['cliente_id'])){
-      $conditions_serv = $conditions_serv . 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
+      $conditions_serv = 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
     }
 
     $conditions = "";
@@ -317,7 +324,9 @@
     $this->loadModel('Cliente');
     $this->Cliente->Behaviors->attach('Containable');
 
-    $this->set('clientes', $this->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'))));
+    $this->set('clientes', $this->Cliente->find('list', array(
+      'conditions' => array("Cliente.id" . $_SESSION['User']['clientes']),
+      'fields' => array('Cliente.id', 'Cliente.sigla'))));
     $this->set(compact('clientes'));
 
     $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
@@ -373,7 +382,9 @@
     $this->loadModel('Servico');
     $this->Servico->Behaviors->attach('Containable');
 
-    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))));
+    $this->set('servicos', $this->Servico->find('list', array(
+      'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+      'fields' => array('Servico.id', 'Servico.sigla'))));
     $this->set(compact('servicos'));
 
     $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
@@ -391,6 +402,7 @@
     $this->Ss->Behaviors->attach('Containable');
 
     $sses = $this->Ss->find('all', array(
+      'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']),
       'contain' => array(
         'Servico' => array(/*'Cliente'=> array() */),
         'Pe' => array('ItemPe' => array('Item' => array())),
@@ -444,7 +456,9 @@
     $this->loadModel('Servico');
     $this->Servico->Behaviors->attach('Containable');
 
-    $this->set('servicos', $this->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla'))));
+    $this->set('servicos', $this->Servico->find('list', array(
+      'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+      'fields' => array('Servico.id', 'Servico.sigla'))));
     $this->set(compact('servicos'));
   }
 
