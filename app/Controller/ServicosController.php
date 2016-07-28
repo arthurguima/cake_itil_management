@@ -55,6 +55,8 @@
 
     $this->set('clientes',
                 $this->Servico->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.nome'))));
+
+    $this->set('users', $this->Servico->User->find('list', array('fields' => array('User.id', 'User.nome'))));
   }
 
   public function add() {
@@ -78,6 +80,8 @@
 
     $this->set('clientes',
                 $this->Servico->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.nome'))));
+
+    $this->set('users', $this->Servico->User->find('list', array('fields' => array('User.id', 'User.nome'))));
   }
 
   public function delete($id) {

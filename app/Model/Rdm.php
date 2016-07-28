@@ -70,12 +70,17 @@
         'rule'   => 'notempty',
         'message' => 'Campo deve ser preenchido!')
     ),
+    'ano' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!')
+    ),
     'numero' => array(
 			'unique' => array(
-				'rule' => 'isUnique',
-				'required' => 'true',
+				'rule' => array('checkUnique', array('numero', 'ano', 'servico_id'), false),
+        'required' => 'true',
 				'on' => 'create',
-				'message' => 'Já existe outra RDM com esse número casdastrada!'
+				'message' => 'Já existe outra RDM com esse número para esse ano casdastrada!'
 			)
 		),
   );

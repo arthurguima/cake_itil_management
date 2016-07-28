@@ -24,6 +24,11 @@
                 ),
                'type' => 'text'));
 
+      echo $this->BootstrapForm->input('ano', array(
+                  'label' => array('text' => 'Ano: '),
+                  'id' => 'dpdecade',
+                  'value' => date('Y')));
+
       echo $this->BootstrapForm->input('nome', array(
                 'label' => array('text' => 'Nome: ')));
 
@@ -53,6 +58,8 @@
             <option value="1">Homologação</option>
             <option value="3">Treinamento</option>
             <option value="4">Sustentação</option>
+            <option value="5">Desenvolvimento</option>
+            <option value="6">Testes</option>
           </select>
         </div>
       </div>
@@ -121,6 +128,16 @@
         minView: 2,
         autoclose: true,
         todayBtn: true,
+        language: 'pt-BR'
+    });
+
+    $("[id*='dpdecade']").datetimepicker({
+      format: "yyyy",
+        startView: "decade",
+        minView: "decade",
+        maxView: "decade",
+        viewSelect: "decade",
+        autoclose: true,
         language: 'pt-BR'
     });
 

@@ -10,7 +10,11 @@
     'Cliente' => array(
       'className' => 'Cliente',
       'foreignKey' => 'cliente_id'
-    )
+    ),
+    'User' => array(
+      'className' => 'User',
+      'foreignKey' => 'responsavel_id'
+    ),
   );
 
   public $hasMany = array(

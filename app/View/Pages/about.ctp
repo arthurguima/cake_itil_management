@@ -62,6 +62,29 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li class="timeline-inverted">
+            <div class="timeline-badge warning">
+              <i class="fa fa-wrench fa-fw"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.6</h4>
+                    <div class="personal-info">
+                      Veja o que mudou:<br/><br/>
+                      <ul>
+                        <li>Removido Menu Gerencial</li>
+                        <li>Demanads Internas Com a gestão de serviço</li>
+                        <li>Controle de aprovação pelo CAB nas RDMs</li>
+                        <li>Script de Carga automática de RDMs</li>
+                        <li>Fim das Demandas internas -> Demandas</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
           <li>
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">

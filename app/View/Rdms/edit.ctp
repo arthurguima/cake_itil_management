@@ -23,6 +23,10 @@
       echo $this->BootstrapForm->input('numero', array(
                 'label' => array('text' => 'Número: ')));
 
+      echo $this->BootstrapForm->input('ano', array(
+                'label' => array('text' => 'Ano: '),
+                'id' => 'dpdecade'));
+
       echo $this->BootstrapForm->input('nome', array(
                   'label' => array('text' => 'Nome: ')));
 
@@ -46,7 +50,9 @@
             <option value="1" <?php if($this->data['Rdm']['ambiente'] == 1) echo 'selected="selected"'; ?>>Homologação</option>
             <option value="2" <?php if($this->data['Rdm']['ambiente'] == 2) echo 'selected="selected"'; ?>>Produção</option>
             <option value="3" <?php if($this->data['Rdm']['ambiente'] == 3) echo 'selected="selected"'; ?>>Treinamento</option>
-            <option value="3" <?php if($this->data['Rdm']['ambiente'] == 4) echo 'selected="selected"'; ?>>Sustentação</option>
+            <option value="4" <?php if($this->data['Rdm']['ambiente'] == 4) echo 'selected="selected"'; ?>>Sustentação</option>
+            <option value="5" <?php if($this->data['Rdm']['ambiente'] == 5) echo 'selected="selected"'; ?>>Desenvolvimento</option>
+            <option value="6" <?php if($this->data['Rdm']['ambiente'] == 6) echo 'selected="selected"'; ?>>Testes</option>
           </select>
         </div>
       </div>
@@ -123,6 +129,16 @@
         minView: 2,
         autoclose: true,
         todayBtn: true,
+        language: 'pt-BR'
+    });
+
+    $("[id*='dpdecade']").datetimepicker({
+      format: "yyyy",
+        startView: "decade",
+        minView: "decade",
+        maxView: "decade",
+        viewSelect: "decade",
+        autoclose: true,
         language: 'pt-BR'
     });
 

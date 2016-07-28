@@ -7,6 +7,8 @@
       case 2: return "<span class='label label-info'>Produção</span>";
       case 3: return "<span class='label label-primary'>Treinamento</span>";
       case 4: return "<span class='label label-success'>Sustentação</span>";
+      case 5: return "<span class='label label-default'>Desenvolvimento</span>";
+      case 6: return "<span class='label label-danger'>Testes</span>";
     endswitch;
     return "<span class='label label-warning'>Homologação</span>";
   }

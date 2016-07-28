@@ -35,6 +35,12 @@
         echo $this->BootstrapForm->input('cliente_id', array(
                    'label' => array('text' => 'Cliente:')));
 
+       echo $this->BootstrapForm->input('id_clarity', array(
+                 'label' => array('input' => 'text', 'text' => 'Identificador Clarity:')));
+
+       echo $this->BootstrapForm->input('id_sdm', array(
+                  'label' => array('input' => 'text', 'text' => 'Identificador SDM:')));
+
          echo $this->BootstrapForm->input('Area', array(
                     'label' => array('text' => 'Área(s):'),
                     'input' => 'text',
@@ -46,6 +52,12 @@
                     'input' => 'text',
                     'multiple' => "true",
                     'options' => $dependencias));
+
+        echo $this->BootstrapForm->input('responsavel_id', array(
+                   'class' => 'select2',
+                   'label' => array('text' => 'Lider Responsável: '),
+                   'empty' => "Responsável",
+                   'options' => $users));
 
          echo $this->BootstrapForm->input('status', array(
                     'checked' => 'checked',
@@ -75,6 +87,10 @@
       autoclose: true,
       todayBtn: true,
       language: 'pt'
+    });
+
+    $('.select2').select2({
+      containerCssClass: 'select2'
     });
 
     $('#AreaArea').select2();

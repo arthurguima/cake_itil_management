@@ -337,6 +337,10 @@
 		                    ?>
 		                  </td>
 											<td>
+												<b>CAB</b>
+		                    <span id="<?php echo "rdm-cab_approval-" . $rdm['Rdm']['id']?>">
+		                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['cab_approval']); ?>
+		                    </span>
 		                    <b>Autorizada</b>
 		                    <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
 		                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>

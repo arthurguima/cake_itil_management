@@ -75,8 +75,8 @@
     $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
 		$this->Filter->setPaginate('conditions', $conditions);
-    debug($conditions);
-    debug($conditions[6]);
+    //debug($conditions);
+    //debug($conditions[6]);
     $this->Filter->setPaginate('order', 'Rdm.dt_prevista DESC, Rdm.dt_executada, Rdm.modified DESC, Rdm.created DESC');
     $this->Filter->setPaginate('limit', 250);
 

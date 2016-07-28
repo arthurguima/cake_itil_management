@@ -41,7 +41,7 @@
                   echo $this->BootstrapForm->input('user_id', array(
                          'class' => 'select2',
                          'label' => array('text' => 'Responsável: '),
-                         'selected' => $this->Session->read('User.uid'),
+                         /*'selected' => $this->Session->read('User.uid'),*/
                          'empty' => "Responsável"));
               ?>
             </div>
@@ -77,6 +77,7 @@
                   <th>Tipo</th>
                   <th><span class="editable">Status</span></th>
                   <th>Prazo</th>
+                  <th>Histórico</th>
                 </tr>
               </thead>
               <tbody>
@@ -113,6 +114,12 @@
                               ($dem['Demanda']['data_homologacao']));
                       ?>
                     </td>
+                    <td>
+                      <?php
+                        echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $dem['Demanda']['id'] . ")'>
+                          <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                      ?>
+                    </td>
                   </tr>
                 <?php endforeach; ?>
                 <?php unset($dem); ?>
@@ -137,6 +144,19 @@
     </div>
   </div>
   <iframe id="demandaFrame" style="display:none;" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+
+  <div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     $(document).ready(function() {
@@ -195,16 +215,18 @@
           //document.getElementById('demandaFrame').style.height = "720px";
         });
     });
+
+    function historico(id){
+      document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=demandas&id=");?>" + id;
+    }
+
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
   </script>
 <?php endif; ?>
 
-<script>
-$(document).ready(function() {
-  $('.select2').select2({
-    containerCssClass: 'select2'
-  });
-});
-</script>
 
 <?php
   //-- ClarityID

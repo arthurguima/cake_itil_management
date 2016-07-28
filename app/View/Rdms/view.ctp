@@ -45,6 +45,12 @@
           <li><?php echo $this->Html->link("<b>Release: </b>" . $rdm['Release']['versao'], array('controller' => 'releases', 'action' => 'view', $rdm['Release']['id']), array('escape' => false)); ?></li>
           <li class="checklist">
             <a>
+              <b>CAB</b>
+              <span id="<?php echo "rdm-cab_approval-" . $rdm['Rdm']['id']?>">
+                <?php echo $this->Rdm->getCheck($rdm['Rdm']['cab_approval']); ?>
+              </span>
+            </a>
+            <a>
               <b>Autorizada</b>
               <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
                 <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
@@ -282,6 +288,7 @@
 ?>
 
 <?php
+  echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "cab_approval");
   echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "autorizada");
   echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "farm");
 ?>

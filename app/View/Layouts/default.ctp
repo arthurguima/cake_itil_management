@@ -63,21 +63,16 @@
 									  <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Workspace',
 																						Router::url('/', true) . "index.php", array('escape' => false)); ?>
 								</li>
+								<li>
+										<?php echo $this->Html->link("<i class='fa fa-folder fa-fw'></i> Dashboard",
+																						Router::url('/', true) . "dashboard", array('escape' => false)); ?>
+								</li>
 								<li><!-- Calendário -->
 										<a href="#"><i class="fa fa-calendar fa-fw"></i> Calendários <span class="fa arrow"></span></a>
 										<ul class="nav nav-second-level">
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Previsões de Término", '/calendarios/show/1155', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> RDMs", '/calendarios/show/2', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Indisponibilidades", '/calendarios/show/13', array('escape' => false)); ?></li>
-										</ul>
-								</li>
-								<li> <!-- Negócio -->
-										<a href="#"><i class="fa fa-briefcase fa-fw"></i> Negócio <span class="fa arrow"></span></a>
-										<ul class="nav nav-second-level">
-											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
-											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PA", '/pes', array('escape' => false)); ?></li>
-											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
-											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Internas", '/demandas', array('escape' => false)); ?></li>
 										</ul>
 								</li>
 								<li> <!-- Gestão do serviço -->
@@ -88,16 +83,16 @@
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mudança", '/rdms', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Indicadores", '/indicadores', array('escape' => false)); ?></li>
+											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas", '/demandas', array('escape' => false)); ?></li>
 											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Releases", '/releases', array('escape' => false)); ?></li>
 										</ul>
 								</li>
-								<li> <!-- Gerencial -->
-										<a href="#"><i class="fa fa-folder fa-fw"></i> Gerencial <span class="fa arrow"></span></a>
+								<li> <!-- Negócio -->
+										<a href="#"><i class="fa fa-briefcase fa-fw"></i> Negócio <span class="fa arrow"></span></a>
 										<ul class="nav nav-second-level">
-											<li>
-													<?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dashboard",
-																									Router::url('/', true) . "dashboard", array('escape' => false)); ?>
-											</li>
+											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
+											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PA", '/pes', array('escape' => false)); ?></li>
+											<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
 										</ul>
 								</li>
 								<li> <!-- Relatórios -->
@@ -164,7 +159,7 @@
 							<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 				</div>
 				<span class="notes hidden-xs hidden-sm">
-					Sistema de gestão de Serviço - V 2.5
+					Sistema de gestão de Serviço - V 2.6
 					<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
 					<br /> <span style="margin-left: 13px;">arthur.doliveira@dataprev.gov.br</span>
 					<br /><br /><a href="/painel.php" style="padding-left: 38px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
