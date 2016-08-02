@@ -26,6 +26,21 @@
                 'label' => array('text' => 'Descrição:'),
                 'type' => 'textarea'));
 
+      echo $this->BootstrapForm->input('dt_ini_prevista', array(
+                 'label' => array('text' => 'Data prevista de Início: '),
+                 'type' => 'text',
+                 'id' => 'dp'));
+
+      echo $this->BootstrapForm->input('dt_fim_prevista', array(
+                'label' => array('text' => 'Data prevista de Fim: '),
+                'type' => 'text',
+                'id' => 'dp'));
+
+      echo $this->BootstrapForm->input('dt_fim', array(
+                'label' => array('text' => 'Data de Finalização: '),
+                'type' => 'text',
+                'id' => 'dp'));
+
       echo $this->BootstrapForm->input('rdm_id', array(
                 'label' => array('text' => 'RDM:')));
 
@@ -45,10 +60,23 @@
     $('.select2').select2({
       containerCssClass: 'select2'
     });
+
+    $("[id*='dp']").datetimepicker({
+      format: "dd/mm/yyyy",
+        minView: 2,
+        autoclose: true,
+        todayBtn: true,
+        language: 'pt-BR'
+    });
   });
 </script>
 
 <?php
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
   //-- Select2 --
   echo $this->Html->script('plugins/select2/select2.min');
   echo $this->Html->css('plugins/select2');

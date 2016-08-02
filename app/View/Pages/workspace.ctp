@@ -21,7 +21,7 @@
 				OS <span class="badge"><?php echo sizeof($ords) ?></span></a>
 			</li>
 		  <li role="presentation" class="active"><a href="#demandas" aria-controls="demandas" role="tab" data-toggle="tab">
-				Demandas Internas <span class="badge"><?php echo sizeof($demandas) ?></span></a>
+				Demandas <span class="badge"><?php echo sizeof($demandas) ?></span></a>
 			</li>
 			<li role="presentation"><a href="#subtarefas" aria-controls="subtarefas" role="tab" data-toggle="tab">
 				Tarefas <span class="badge"><?php echo sizeof($subtarefas) ?></span></a>
@@ -534,12 +534,12 @@
 		  </div>
 		</div>
 
-		<!-- Demadas Internas -->
+		<!-- Demadas -->
 	  <div role="tabpanel" class="tab-pane active" id="demandas">
 	    <div class="col-lg-12">
 	      <div class="panel panel-default">
 	        <div class="panel-heading">
-						<b> Demandas internas sob a sua responsabilidade </b>
+						<b> Demandas sob a sua responsabilidade </b>
 						<?php
 							if($this->Ldap->autorizado(2)){
 								echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
@@ -625,7 +625,7 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<b> Tarefas de Demandas internas sob a sua responsabilidade </b>
+						<b> Tarefas de Demandas sob a sua responsabilidade </b>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -1120,7 +1120,7 @@
 										"oSelectorOpts": { filter: 'applied', order: 'current' },
 										"sPdfOrientation": "landscape",
 										"mColumns": [ 0,1,2,3,6,7,8 ],
-										"sTitle": "Listagem de Demandas Internas",
+										"sTitle": "Listagem de Demandas",
 										"sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>"
 								},
 							]

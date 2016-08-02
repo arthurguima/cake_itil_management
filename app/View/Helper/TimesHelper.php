@@ -11,6 +11,10 @@
         $time2 = $this->AmericanDate($time2);
         $time3 = $this->AmericanDate($time3);
 
+        if($time1 == null){
+          return "Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F; font-size: 12px;'></i>" ;
+        }
+
         /* Se ainda não foi homologado*/
         if ($time3 == null){
 
@@ -47,7 +51,7 @@
         }
         /* Se já foi homologado */
         else{
-          return "<div class=''><span class='label label-default'>" . $this->Time->format('d/m/Y', $time1) . " - " .
+          return "<div class='finished'><span class='label label-default'>" . $this->Time->format('d/m/Y', $time1) . " - " .
                    $this->Time->format('d/m/Y', $time3) . "</span></div>";
         }
     }

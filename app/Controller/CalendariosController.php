@@ -190,7 +190,7 @@
     foreach($demandas as $demanda) {
       $data[] = array(
           'id' => $demanda['Demanda']['id'],
-          'title'=> "DI - "  . $demanda['Demanda']['nome'],
+          'title'=> "DM - "  . $demanda['Demanda']['nome'],
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $demanda['Demanda']['dt_prevista']))),
         //  'end' => $demanda['Demanda']['dt_prevista'],
           'allDay' => true,

@@ -8,6 +8,7 @@
           'Servico.id' => array(
             'select' => $this->Filter->select('Serviço', $this->Release->Servico->find('list', array(
                         'contain' => array('_IndisponibilidadesServico', '_Servico'), //'Hack' para HABTM
+                        //'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
                         'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
@@ -18,17 +19,35 @@
               'text' => ' a ',
             )
           )
-        ),
+        ),        
+        'dt_fim' => array(
+          'Release.dt_fim' => array(
+            'operator' => 'BETWEEN',
+            'between' => array(
+              'text' => ' a ',
+            )
+          )
+        )
       )
     );
     //$this->Filter->addFilters('filtro');
+    $conditions = $this->Filter->getConditions();
+
+    if($conditions == null)
+      $conditions = $conditions + array(998 => array('Release.dt_fim IS NULL'));
+
+    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
     // Define conditions
     //$this->Filter->setPaginate('order', 'Release.dt_prevista DESC, Rdm.dt_executada, Rdm.modified DESC, Rdm.created DESC');
-    $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
-    $this->Filter->setPaginate('limit', 250);
+    $this->Filter->setPaginate('conditions', $conditions);
+    $this->Filter->setPaginate('limit', 15);
 
-    $this->Release->recursive = 0;
+    $this->Release->Behaviors->load('Containable');
+    $this->Filter->setPaginate('contain',
+      array('Servico', 'Rdm' => array('Demanda'=> array('Status'))));
+
+    //$this->Release->recursive = 3;
     $this->set('releases', $this->paginate());
   }
 

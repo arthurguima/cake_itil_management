@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">
-        Demandas Internas
+        Demandas
         <div class="col-lg-2 pull-right">
           <?php
             if($this->Ldap->autorizado(2)){
@@ -67,7 +67,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de Demandas Internas </b></div>
+      <div class="panel-heading"><b> Lista de Demandas </b></div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-demanda">
@@ -140,7 +140,7 @@
       </div>
       <ul class="list-group">
   			<li class="list-group-item small red">
-          *Lista de Demandas Internas limitada em 150 registros. *Mostra incialmente apenas demandas não finalizadas. *Utilize o filtro para melhores resultados.
+          *Lista de Demandas limitada em 150 registros. *Mostra incialmente apenas demandas não finalizadas. *Utilize o filtro para melhores resultados.
         </li>
   		</ul>
     </div>
@@ -254,7 +254,7 @@
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
                     "sPdfOrientation": "landscape",
                     "mColumns": [ 0,1,2,3,6,7,8,9 ],
-                    "sTitle": "Listagem de Demandas Internas",
+                    "sTitle": "Listagem de Demandas",
                     "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>"
                 },
               ]

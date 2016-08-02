@@ -32,18 +32,18 @@
     'nome' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
-        'maxLength' => 80,
+        'maxLength' => 120,
         'message' => 'Campo deve ser preenchido'
       ),
 	  'between' => array(
-                'rule'    => array('between', 3, 80),
+                'rule'    => array('between', 3, 120),
                 'message' => 'O campo deve conter de 3 a 80 caracteres!'
 		)
     ),
     'sigla' => array(
       'NotEmpty' => array(
         'rule'   => 'notempty',
-        'maxLength' => 20,
+        'maxLength' => 30,
         'message' => 'Campo deve ser preenchido'
       ),
 	  'between' => array(

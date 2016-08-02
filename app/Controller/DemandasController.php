@@ -281,7 +281,7 @@
         $status =  $this->Status->find('first', array('conditions' => array(
                'Status.id' => $this->request->data('status_id')), 'fields' => array('Status.nome')));
 
-        return $status['Status']['nome'];
+        return "<span style='border-bottom: 3px solid #" . substr(md5($status['Status']['nome']), 0, 6) . ";'>" . $status['Status']['nome'] . "</span>";
     }
   }
 

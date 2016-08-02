@@ -99,6 +99,7 @@ class AppController extends Controller {
       if(sizeof($user) > 0){
         $this->Session->write('User.uid', $user['User']['id']);
         $this->Session->write('User.nome', $user['User']['nome']);
+        $this->Session->write('User.admin', $user['User']['is_admin']);
         $clientes = "";
         $size = sizeof($user['Cliente']);
           foreach ($user['Cliente'] as $cliente){

@@ -78,6 +78,7 @@
                         <li>Controle de aprovação pelo CAB nas RDMs</li>
                         <li>Script de Carga automática de RDMs</li>
                         <li>Fim das Demandas internas -> Demandas</li>
+                        <li>Controle de usuários 100% dinâmico</li>
                       </ul>
                     </div>
                 </li>

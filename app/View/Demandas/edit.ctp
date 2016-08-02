@@ -86,7 +86,7 @@
                    'label' => array('text' => 'Status: ')));
 
         echo $this->BootstrapForm->input('demanda_id', array(
-                    'label' => array('text' => 'Demanda interna Pai: '),
+                    'label' => array('text' => 'Demanda Pai: '),
                     'empty' => 'Demanda Pai',
                     'class'=> "select2"));
 

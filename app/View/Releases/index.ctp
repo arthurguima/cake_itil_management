@@ -25,8 +25,19 @@
         <div class="row inner" style="display: none;">
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
-            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
-            <b>Data de Execução: </b>
+            <div class="form-group">
+              <?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?>
+            </div>
+            <div class="form-group">
+              <b>Data de Fim: </b>
+              <?php echo $this->Search->input('dt_fim',
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+              ?>
+            </div>
+          </div>
+          <div class="col-lg-12 filters-item">
+            <b>Data de Execução da RDM: </b>
             <?php echo $this->Search->input('dt_executada',
                         array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
                         array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
@@ -44,34 +55,134 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista </b></div>
-      <div class="panel-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-releases">
-            <thead>
-              <tr>
-                <th>Servico</th>
-                <th>Versão</th>
-                <th>RDM</th>
-                <th>Data</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($releases as $release): ?>
-                <tr>
-                  <td><?php echo $release['Servico']['sigla']; ?></td>
-                  <td/><?php echo $release['Release']['versao']; ?></td>
-                  <td/><?php echo $release['Rdm']['numero']; ?></td>
-                  <td/><?php echo $release['Rdm']['dt_executada']; ?></td>
-                 <td><?php echo $this->Tables->getMenu('Releases', $release['Release']['id'], 14); ?></td>
-                </tr>
-              <?php endforeach; ?>
-              <?php unset($release); ?>
-            </tbody>
-          </table>
+    <?php $var = 0; foreach ($releases as $release): ?>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <b>
+            <?php echo $release['Servico']['sigla'] . " - " .$release['Release']['versao']; ?>
+            <span style="float: right;"><?php echo $this->Tables->getMenu('Releases', $release['Release']['id'], 14); ?></span>
+          </b>
         </div>
+        <div class="panel-body">
+          <div class="">
+            <div class="bs-callout bs-callout-warning col-lg-5 pull-left">
+              <h4 class="normal">
+                RDM: <?php echo $this->Html->link($release['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $release['Rdm']['id'])); ?>
+                 -- Data Prevista: <?php echo $release['Rdm']['dt_prevista']; ?>
+                 <span class="bs-callout-actions">
+                   <?php
+                     echo $this->Tables->getMenu('rdms', $release['Rdm']['id'], 14);
+                     echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $release['Rdm']['id'] . ")'>
+                       <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a>";
+                   ?>
+                 </span>
+              </h4>
+            </div>
+            <div class="bs-callout bs-callout-default col-lg-6 pull-right">
+                <h4 class="normal">
+                <?php echo $this->Times->timeLeftTo($release['Release']['dt_ini_prevista'], $release['Release']['dt_fim_prevista'],
+                          $release['Release']['dt_ini_prevista'] . " - " .  $release['Release']['dt_fim_prevista'],
+                          ($release['Release']['dt_fim']));
+                          ?>
+                </h4>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-releases-<?php echo $var; ?>">
+              <thead>
+                <tr>
+                  <th>Prioridade</th>
+                  <th><span class="editable">Status</span></th>
+                  <th>Solicitada pelo Cliente?</th>
+                  <th>Demanda</th>
+                  <th>Mantis</th>
+                  <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                  <th>Prazo</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($release['Rdm']['Demanda'] as $d): ?>
+                  <tr>
+                    <td class="hidden-xs hidden-sm">
+                      <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $d['id']?>"><?php echo $d['prioridade']; ?></span>
+                    </td>
+                    <?php echo $this->Tables->PrioridadeEditable($d['id'], "demandas") ?>
+                    <td>
+                      <span style="border-bottom: 3px solid #<?php echo substr(md5($d['Status']['nome']), 0, 6) ?>;" cursor:pointer; title="Clique para alterar o status!" id="<?php echo "status-" . $d['id'] ?>">
+                        <?php echo $d['Status']['nome']; ?>
+                      </span>
+                    </td>
+                    <?php echo $this->Tables->DemandaStatusEditable($d['id'], "demandas") ?>
+                    <td><?php echo $this->Times->yesOrNo($d['origem_cliente']); ?></td>
+                    <td><?php echo $d['clarity_dm_id']; ?></td>
+                    <td><?php echo $d['mantis_id']; ?></td>
+                    <td><?php echo $this->Tables->popupBox($d['nome'], $d['descricao']) ?></td>
+                    <td>
+                      <?php echo $this->Times->timeLeftTo($d['data_cadastro'], $d['dt_prevista'],
+                             $d['data_cadastro'] . " - " . $d['dt_prevista'],
+                            ($d['data_homologacao']));?>
+                    </td>
+                   <td>
+                     <?php echo $this->Tables->getMenu('Releases', $release['Release']['id'], 14);
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $d['id'] . ")'>
+                       <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";?>
+                   </td>
+                  </tr>
+                <?php endforeach; ?>
+                <?php unset($d); ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function() {
+          $('#dataTables-releases-<?php echo $var; ?>').dataTable({
+              "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+                language: {
+                  url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+                },
+                responsive: true,
+                "dom": 'T<"clear">lfrtip',
+                "tableTools": {
+                    "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                    "aButtons": [
+                      {
+                          "sExtends": "copy",
+                          "sButtonText": "Copiar"
+                      },
+                      {
+                          "sExtends": "print",
+                          "sButtonText": "Imprimir"
+                      },
+                      {
+                          "sExtends": "csv",
+                          "sButtonText": "CSV"
+                      },
+                      {
+                          "sExtends": "pdf",
+                          "sButtonText": "PDF"
+                      },
+                    ]
+                }
+            });
+        });
+      </script>
+    <?php $var++; endforeach; ?>
+    <?php unset($release); ?>
+  </div>
+</div>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
       </div>
     </div>
   </div>
@@ -93,10 +204,25 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //Select2
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>
 
 <script>
   $(document).ready(function() {
+      $('.select2').select2({
+        containerCssClass: 'select2'
+      });
+
+      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+
       $("[id*='filterDt']").datetimepicker({
         format: "yyyy-mm-dd",
         minView: 2,
@@ -104,35 +230,9 @@
         todayBtn: true,
         language: 'pt-BR'
       });
-
-      $('#dataTables-releases').dataTable({
-        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
-          language: {
-            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-          },
-          responsive: true,
-          "dom": 'T<"clear">lfrtip',
-          "tableTools": {
-              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-              "aButtons": [
-                {
-                    "sExtends": "copy",
-                    "sButtonText": "Copiar"
-                },
-                {
-                    "sExtends": "print",
-                    "sButtonText": "Imprimir"
-                },
-                {
-                    "sExtends": "csv",
-                    "sButtonText": "CSV"
-                },
-                {
-                    "sExtends": "pdf",
-                    "sButtonText": "PDF"
-                },
-              ]
-          }
-      });
   });
+
+  function historico(id){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=demandas&id=");?>" + id;
+  }
 </script>
