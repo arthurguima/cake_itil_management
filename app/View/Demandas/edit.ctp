@@ -95,11 +95,13 @@
                   'type' => 'text',
                   'id' => 'dp '));
 
+        echo "<br />";
         echo $this->BootstrapForm->input('dt_prevista', array(
                   'label' => array('text' => 'Previsão de Término: '),
                   'type' => 'text',
                   'id' => 'dp '));
 
+        echo "<br />";
         echo $this->BootstrapForm->input('data_homologacao', array(
                   'label' => array('text' => 'Data de Homologação: '),
                   'type' => 'text',

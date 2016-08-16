@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-12 col-md-6">
+  <div class="col-lg-12">
     <div class='col-lg-6'>
       <?php
         echo $this->BootstrapForm->create('Demanda');
@@ -93,13 +93,13 @@
                    'type' => 'text',
                    'class' => 'DemandaDataCadastro form-control',
                    'id' => 'dp '));
-
+        echo "<br />";
         echo $this->BootstrapForm->input('dt_prevista', array(
                    'label' => array('text' => 'Previsão de Término: '),
                    'type' => 'text',
                    'class' => 'DemandaDtPrevista form-control',
                    'id' => 'dp '));
-
+        echo "<br />";
         echo $this->BootstrapForm->input('data_homologacao', array(
                    'label' => array('text' => 'Data de Homologação: '),
                    'type' => 'text',

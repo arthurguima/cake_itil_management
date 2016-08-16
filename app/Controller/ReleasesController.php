@@ -8,7 +8,7 @@
           'Servico.id' => array(
             'select' => $this->Filter->select('Serviço', $this->Release->Servico->find('list', array(
                         'contain' => array('_IndisponibilidadesServico', '_Servico'), //'Hack' para HABTM
-                        //'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+                        'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
                         'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
@@ -19,7 +19,7 @@
               'text' => ' a ',
             )
           )
-        ),        
+        ),
         'dt_fim' => array(
           'Release.dt_fim' => array(
             'operator' => 'BETWEEN',

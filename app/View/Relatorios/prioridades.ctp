@@ -73,9 +73,11 @@
                   <th><span class="editable">Prioridade</span></th>
                   <th>Demanda</th>
                   <th>Mantis</th>
-                  <th>Nome</th>
+                  <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                  <th>Título</th>
                   <th>Tipo</th>
                   <th><span class="editable">Status</span></th>
+                  <th>Release</th>
                   <th>Prazo</th>
                   <th>Histórico</th>
                 </tr>
@@ -83,7 +85,7 @@
               <tbody>
                 <?php foreach ($demandas as $dem): ?>
                   <tr>
-                    <td>
+                    <td >
                       <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $dem['Demanda']['id']?>"><?php echo $dem['Demanda']['prioridade']; ?></span>
                     </td>
                     <?php echo $this->Tables->PrioridadeEditable($dem['Demanda']['id'], "demandas") ?>
@@ -96,7 +98,8 @@
                     <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">
                       <?php echo $this->Html->link($dem['Demanda']['mantis_id'],"http://www-testes/view.php?id=" . $dem['Demanda']['mantis_id'], array('target' => '_blank')); ?>
                     </td>
-                    <td><?php echo $this->html->link($dem['Demanda']['nome'], array('controller'=> 'demandas', 'action' => 'view', $dem['Demanda']['id'])); ?></td>
+                    <td><?php echo $this->Tables->popupBox($dem['Demanda']['nome'], $dem['Demanda']['descricao']) ?></td>
+                    <td><?php echo $dem['Demanda']['nome']; ?></td>
                     <td>
                       <span style="border-bottom: 3px solid #<?php echo substr(md5($dem['DemandaTipo']['nome']), 0, 6) ?>;">
                         <?php echo $dem['DemandaTipo']['nome']; ?>
@@ -108,6 +111,15 @@
                       </span>
                     </td>
                     <?php echo $this->Tables->DemandaStatusEditable($dem['Demanda']['id'], "demandas") ?>
+                    <td>
+                      <?php
+                        if($dem['Rdm'])
+                          foreach ($dem['Rdm'] as $r) {
+                            if($r['Release'])
+                              echo "<li>" . $r['Release']['versao'] . "</li>";
+                          }
+                      ?>
+                    </td>
                     <td class="text-center">
                       <?php echo $this->Times->timeLeftTo($dem['Demanda']['data_cadastro'], $dem['Demanda']['dt_prevista'],
                                $dem['Demanda']['data_cadastro'] . " - " . $dem['Demanda']['dt_prevista'],
@@ -116,6 +128,7 @@
                     </td>
                     <td>
                       <?php
+                        echo $this->Tables->getMenu('demandas', $dem['Demanda']['id'], 2);
                         echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $dem['Demanda']['id'] . ")'>
                           <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
                       ?>
@@ -157,14 +170,47 @@
       </div>
     </div>
   </div>
+<?php endif; ?>
+  <?php
+    //-- ClarityID
+    echo $this->Html->script('getIdClarity.js');
+
+    //-- Jeditable
+    echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+    //-- DataTables JavaScript --
+    echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+    echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+    echo $this->Html->css('plugins/dataTables.bootstrap.css');
+    //-- DataTables --> TableTools
+    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+    //-- DataTables --> ColVis
+      echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+    //-- Select2 --
+    echo $this->Html->script('plugins/select2/select2.min');
+    echo $this->Html->css('plugins/select2');
+    echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+    echo $this->Html->css('plugins/select2-bootstrap');
+  ?>
 
   <script>
     $(document).ready(function() {
+      $('.select2').select2({
+        containerCssClass: 'select2'
+      });
+
+      $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+
       var  oTable =   $('#dataTables-dem').dataTable({
-          "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+          "lengthMenu": [[50, 25, 10, 100, -1], [50, 25, 10, 100, "Todos"]],
             language: {
               url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
             },
+            "columnDefs": [  { "visible": false, "targets": 4 } ],
           //  responsive: true,
             "dom": 'TC<"clear">lfrtip',
             "colVis": {
@@ -183,21 +229,21 @@
                       "sExtends": "print",
                       "sButtonText": "Imprimir",
                       "oSelectorOpts": { filter: 'applied', order: 'current' },
-                      //"mColumns": [ 0,1,2,3,4,5,6,7 ]
+                      "mColumns": [ 0,1,2,4,5,6,7,8,9 ]
                   },
                   {
                       "sExtends": "csv",
                       "sButtonText": "CSV",
-                      "sFileName": "Demandas.csv",
+                      "sFileName": "Prioridades.csv",
                       "oSelectorOpts": { filter: 'applied', order: 'current' },
-                      "mColumns": "visible",
+                      "mColumns": [ 0,1,2,4,5,6,7,8,9 ]
                   },
                   {
                       "sExtends": "pdf",
                       "sButtonText": "PDF",
-                      "sFileName": "Demandas.pdf",
+                      "sFileName": "Prioridades - Demandas.pdf",
                       "oSelectorOpts": { filter: 'applied', order: 'current' },
-                      "mColumns": "visible",
+                      "mColumns": [ 0,1,2,5,6,7,8,9 ],
                       "sPdfOrientation": "landscape",
                       "sTitle": "Prioridade das Demandas",
                       "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
@@ -219,37 +265,4 @@
     function historico(id){
       document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?controller=demandas&id=");?>" + id;
     }
-
-    $('.select2').select2({
-      containerCssClass: 'select2'
-    });
-
   </script>
-<?php endif; ?>
-
-
-<?php
-  //-- ClarityID
-  echo $this->Html->script('getIdClarity.js');
-
-  //-- Jeditable
-  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
-
-  //-- DataTables JavaScript --
-  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
-  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
-  echo $this->Html->css('plugins/dataTables.bootstrap.css');
-  //-- DataTables --> TableTools
-  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-  //-- DataTables --> ColVis
-    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
-    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
-
-  //-- Select2 --
-  echo $this->Html->script('plugins/select2/select2.min');
-  echo $this->Html->css('plugins/select2');
-  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-  echo $this->Html->css('plugins/select2-bootstrap');
-?>

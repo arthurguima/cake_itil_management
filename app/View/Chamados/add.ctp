@@ -10,8 +10,8 @@
   <div class="col-lg-12"><h3 class="page-header">Novo Chamado</h3></div>
 </div>
 
-<div class="row">
-  <div class="col-lg-6">
+<div class="row error">
+  <div class="col-lg-6 well">
     <?php
       echo $this->BootstrapForm->create('Chamado');
 
@@ -124,7 +124,7 @@
 
 <?php
   echo $this->Html->script('getSDMInfoChamados.js');
-  
+
   //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');

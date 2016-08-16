@@ -1,25 +1,13 @@
 <div class="row">
 		<div class="col-lg-12">
-			<h3 class="page-header">Bem Vindo ao SGS! - <?php echo $this->Session->read('User.nome'); ?></h3>
-		</div>
-		<?php if($this->Session->read('User.uid') != 0): ?>
-			<div class="col-lg-12"><h6>Tarefas sob a sua responsabilidade:</h6></div>
-		<?php endif;?>
+			<h3 class="page-header">Bem-vindo, <?php echo $this->Session->read('User.nome'); ?>!</h3>
+		</div>		
 </div>
 
 <div class="row">
 <?php if($this->Session->read('User.uid') != 0): ?>
 	<div class="col-lg-12">
 		<ul class="nav nav-tabs nav-tabs-black nav-tabs-pages" role="tablist">
-			<li role="presentation"><a href="#sses" aria-controls="sses" role="tab" data-toggle="tab">
-				SS <span class="badge"><?php echo sizeof($sses) ?></span></a>
-			</li>
-			<li role="presentation"><a href="#pes" aria-controls="pes" role="tab" data-toggle="tab">
-				PA <span class="badge"><?php echo sizeof($pes) ?></span></a>
-			</li>
-			<li role="presentation"><a href="#ords" aria-controls="ords" role="tab" data-toggle="tab">
-				OS <span class="badge"><?php echo sizeof($ords) ?></span></a>
-			</li>
 		  <li role="presentation" class="active"><a href="#demandas" aria-controls="demandas" role="tab" data-toggle="tab">
 				Demandas <span class="badge"><?php echo sizeof($demandas) ?></span></a>
 			</li>
@@ -35,6 +23,15 @@
 			<li role="presentation"><a href="#indisponibilidades" aria-controls="indisponibilidades" role="tab" data-toggle="tab">
 				Indisponibilidades <span class="badge"><?php echo sizeof($indisponibilidades) ?></span></a>
 			</li>
+			<li role="presentation" class="tab-deactivated tab-spaced"><a href="#sses" aria-controls="sses" role="tab" data-toggle="tab" style="background-color: rgba(204, 204, 204, 0.32);">
+				SS <span class="badge"><?php echo sizeof($sses) ?></span></a>
+			</li>
+			<li role="presentation" class="tab-deactivated"><a href="#pes" aria-controls="pes" role="tab" data-toggle="tab" style="background-color: rgba(204, 204, 204, 0.32);">
+				PA <span class="badge"><?php echo sizeof($pes) ?></span></a>
+			</li>
+			<li role="presentation" class="tab-deactivated"><a href="#ords" aria-controls="ords" role="tab" data-toggle="tab" style="background-color: rgba(204, 204, 204, 0.32);">
+				OS <span class="badge"><?php echo sizeof($ords) ?></span></a>
+			</li>
 		</ul>
 	</div>
 
@@ -42,14 +39,14 @@
 		<!-- SSes -->
 		<div role="tabpanel" class="tab-pane" id="sses">
 		  <div class="col-lg-12">
-		    <div class="panel panel-primary">
+		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
-						<b> Lista de SS sob sua responsabilidade</b>
+						<b> Lista de SS</b>
 	           <?php
 	              if($this->Ldap->autorizado(2)){
 	                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
 	                array('controller' => 'sses', 'action' => 'add'),
-	                array('style' => 'color: #fff; font-size: 16px;','escape' => false));
+	                array('escape' => false));
 	              }
 	           ?>
 	        </div>
@@ -126,7 +123,7 @@
 		<!-- PE -->
 		<div role="tabpanel" class="tab-pane" id="pes">
 			<div class="col-lg-12">
-		    <div class="panel panel-info">
+		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
 						<b> Lista de PA </b>
 					</div>
@@ -193,7 +190,7 @@
 		<!-- ORDs -->
 		<div role="tabpanel" class="tab-pane" id="ords">
 		  <div class="col-lg-12">
-		    <div class="panel panel-warning">
+		    <div class="panel panel-workspace">
 		      <div class="panel-heading"><b> Lista de OS </b></div>
 		      <div class="panel-body">
 		        <div class="table-responsive">
@@ -270,9 +267,9 @@
 		<!-- RDMs -->
 		<div role="tabpanel" class="tab-pane" id="rdms">
 		  <div class="col-lg-12">
-		    <div class="panel panel-danger">
+		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
-						<b>RDMs sob a sua responsabilidade</b>
+						<b>RDMs</b>
 						<?php
 							if($this->Ldap->autorizado(2)){
 								echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
@@ -376,7 +373,7 @@
 		<!-- Chamados -->
 		<div role="tabpanel" class="tab-pane" id="chamados">
 		  <div class="col-lg-12">
-		    <div class="panel panel-success">
+		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
 						<b> Lista de Chamados </b>
 						<?php
@@ -447,9 +444,9 @@
 		<!-- Indisponibilidades -->
 		<div role="tabpanel" class="tab-pane" id="indisponibilidades">
 		  <div class="col-lg-12">
-		    <div class="panel panel-purple">
+		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
-		        <b>Indisponibilidades sob a sua responsabilidade</b>
+		        <b>Indisponibilidades</b>
 		        <?php
 		          if($this->Ldap->autorizado(2)){
 		            echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
@@ -537,9 +534,9 @@
 		<!-- Demadas -->
 	  <div role="tabpanel" class="tab-pane active" id="demandas">
 	    <div class="col-lg-12">
-	      <div class="panel panel-default">
+	      <div class="panel panel-workspace">
 	        <div class="panel-heading">
-						<b> Demandas sob a sua responsabilidade </b>
+						<b> Demandas </b>
 						<?php
 							if($this->Ldap->autorizado(2)){
 								echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
@@ -623,9 +620,9 @@
 		<!-- Subtarefas de Demanda -->
 		<div role="tabpanel" class="tab-pane" id="subtarefas">
 			<div class="col-lg-12">
-				<div class="panel panel-default">
+				<div class="panel panel-workspace">
 					<div class="panel-heading">
-						<b> Tarefas de Demandas sob a sua responsabilidade </b>
+						<b> Tarefas de Demandas </b>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">

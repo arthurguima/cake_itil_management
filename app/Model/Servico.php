@@ -47,7 +47,7 @@
         'message' => 'Campo deve ser preenchido'
       ),
 	  'between' => array(
-                'rule'    => array('between', 2, 20),
+                'rule'    => array('between', 2, 30),
                 'message' => 'O campo deve conter de 2 a 20 caracteres!'
 		)
     ),

@@ -27,6 +27,15 @@
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Servico: </b><?php echo $release['Servico']['sigla']; ?></a></li>
           <li>
+            <a><b>Data de Início Prevista: </b>
+              <?php
+                  if($release['Release']['dt_ini_prevista'] != null){
+                    echo $this->Times->pastdate($release['Release']['dt_ini_prevista']);
+                  }
+              ?>
+            </a>
+          </li>
+          <li>
             <a>
               <b>Prazo: </b>
               <?php echo $this->Times->timeLeftTo($release['Release']['dt_ini_prevista'], $release['Release']['dt_fim_prevista'],
@@ -35,7 +44,13 @@
               ?>
             </a>
           </li>
-          <li><a><b>Rdm: </b><?php echo $release['Rdm']['numero']; ?></a></li>
+          <li>
+            <?php
+              echo $this->Html->link("<b>Rdm: </b>" . $release['Rdm']['numero'],
+              array('controller' => 'rdms', 'action' => 'view', $release['Rdm']['id'] ,'?' => array('controller' => 'releases', 'id' =>  $release['Release']['id'], 'action' => 'view' )),
+              array('escape' => false));
+            ?>
+          </li>
           <li><a><b>Data da RDM: </b><?php echo $release['Rdm']['dt_executada']; ?></a></li>
           <li><a><b>Versão: </b><?php echo $release['Release']['versao']; ?></a></li>
           <li><a><b>Observação: </b><?php echo $release['Release']['observacao']; ?></a></li>

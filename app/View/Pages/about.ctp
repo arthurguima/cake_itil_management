@@ -74,11 +74,15 @@
                       Veja o que mudou:<br/><br/>
                       <ul>
                         <li>Removido Menu Gerencial</li>
-                        <li>Demanads Internas Com a gestão de serviço</li>
+                        <li>Demandas Internas transferidas a gestão de serviço</li>
+                        <li>Mundaça de Demandas internas p/ Demandas</li>
                         <li>Controle de aprovação pelo CAB nas RDMs</li>
                         <li>Script de Carga automática de RDMs</li>
-                        <li>Fim das Demandas internas -> Demandas</li>
+                        <li>Script de Fechamento automático das Indisponibilidades</li>
                         <li>Controle de usuários 100% dinâmico</li>
+                        <li>Criado o Menu Funções Descontinuadas: Menu Negócio e Base de conhecimento</li>
+                        <li>Filtro no Calendário</li>
+                        <li>Melhorias da Interface</li>
                       </ul>
                     </div>
                 </li>

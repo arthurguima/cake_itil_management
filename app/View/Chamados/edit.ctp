@@ -16,8 +16,8 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-6">
+<div class="row error">
+  <div class="col-lg-6 well">
     <?php
       echo $this->BootstrapForm->create('Chamado');
 

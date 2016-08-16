@@ -88,23 +88,6 @@
   </div>
 
   <div class="col-lg-7">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <p>
-          <h3 class="panel-title"><b>Clarity (Web Service)</b>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.clarity-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-          </h3>
-        </p>
-      </div>
-      <div class="panel-body clarity-body">
-        <ul id="clarity">
-          <div class="col-md-6 col-md-offset-4 load"><?php echo $this->Html->image('loading.gif', array('alt' => 'Carregando', 'width' => '30%')); ?></div>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-7">
     <div class="panel panel-warning">
       <div class="panel-heading">
         <p>
@@ -166,7 +149,7 @@
   </div>
 
   <div class="col-lg-7">
-    <div class="panel panel-default panel-info">
+    <div class="panel panel-info">
       <div class="panel-heading">
         <p>
           <h3 class="panel-title"><b>Chamados</b>
@@ -222,11 +205,28 @@
     </div>
   </div>
 
-  <div class="col-lg-7">
+  <div class="col-lg-3">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Clarity (Web Service)</b>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.clarity-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body clarity-body">
+        <ul id="clarity">
+          <div class="col-md-6 col-md-offset-4 load"><?php echo $this->Html->image('loading.gif', array('alt' => 'Carregando', 'width' => '30%')); ?></div>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
     <div class="panel panel-default panel-default">
       <div class="panel-heading">
         <p>
-          <h3 class="panel-title">Rdms
+          <h3 class="panel-title"><b>Rdms</b>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.rdm-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>

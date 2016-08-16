@@ -78,7 +78,7 @@
                 <th class="hidden-xs hidden-sm">Clarity DM <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
                 <th class="hidden-xs hidden-sm">Mantis <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
                 <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
-                <th>Nome</th>
+                <th>Título</th>
 
 				        <th>Tipo da Demanda</th>
                 <th>Prazo</th>
@@ -92,7 +92,7 @@
               <?php foreach ($demandas as $demanda): ?>
                 <tr>
                   <td><?php echo $this->Html->link($demanda['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $demanda['Servico']['id'])); ?></td>
-                  <td class="hidden-xs hidden-sm">
+                  <td class="hidden-xs hidden-sm" data-order='<?php echo $demanda['Demanda']['prioridade']; ?>'>
                     <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $demanda['Demanda']['id']?>"><?php echo $demanda['Demanda']['prioridade']; ?></span>
                   </td>
                   <?php echo $this->Tables->PrioridadeEditable($demanda['Demanda']['id'], "demandas") ?>

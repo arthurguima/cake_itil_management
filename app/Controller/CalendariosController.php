@@ -2,7 +2,7 @@
     public $helpers = array('Html', 'Form', 'Times', 'Rdm');
 
     public function show($id = null){
-
+      $this->set('servicos', $this->servicos());
     }
 
     /*
@@ -46,12 +46,28 @@
       $this->set("json", json_encode($data));
   }
 
+  private function servicos(){
+    $this->loadModel('Servico');
+    $this->Servico->Behaviors->load('Containable');
+    $servicos = $this->Servico->find('list', array(
+      'contain' => array('Cliente' => array()),
+      'conditions' => array("Cliente.id" . $_SESSION['User']['clientes']),
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')
+    ));
+    return $servicos;
+  }
+
   private function rdms($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
     $this->loadModel('Rdm');
     $this->Rdm->Behaviors->load('Containable');
     $this->Rdm->contain('Servico');
     $rdms = $this->Rdm->find('all', array('conditions'=>
-              array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Rdm.dt_prevista >= "' . $params['url']['start'] . '" && Rdm.dt_prevista <= "' . $params['url']['end'] . '"')));
+              array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Rdm.dt_prevista >= "' . $params['url']['start'] . '" && Rdm.dt_prevista <= "' . $params['url']['end'] . '"')));
     //debug($rdms);
 
     $data = array();
@@ -66,12 +82,12 @@
       }
       $data[] = array(
           'id' => $rdm['Rdm']['id'],
-          'title'=> "RDM " .  $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'], //$title,
+          'title'=> $rdm['Rdm']['numero'] . " - " .   $rdm['Rdm']['nome'], //$title,
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $rdm['Rdm']['dt_prevista']))),
           'allDay' => true,
           'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
-          'description' =>  $this->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada'])
-                           . " " . $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . " "  . $this->getAmbiente($rdm['Rdm']['ambiente']),
+          'description' =>  $rdm['Servico']['sigla'] . " " . $this->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada'])
+                           . " " . $rdm['Rdm']['versao'] . " "  . $this->getAmbiente($rdm['Rdm']['ambiente']),
           'className' => $class
       );
     }
@@ -112,11 +128,16 @@
   }
 
   private function sses($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
     $this->loadModel('Ss');
     $this->Ss->Behaviors->load('Containable');
     $this->Ss->contain('Servico');
     $sses = $this->Ss->find('all', array('conditions'=>
-              array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Ss.dt_prazo >= "' . $params['url']['start'] . '" && Ss.dt_prazo <= "' . $params['url']['end'] . '"')));
+              array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Ss.dt_prazo >= "' . $params['url']['start'] . '" && Ss.dt_prazo <= "' . $params['url']['end'] . '"')));
 
     $data = array();
     foreach($sses as $ss) {
@@ -135,11 +156,16 @@
   }
 
   private function pes($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
     $this->loadModel('Pe');
     $this->Pe->Behaviors->load('Containable');
     $this->Pe->contain('Servico');
     $pes = $this->Pe->find('all', array('conditions'=>
-            array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& (Pe.validade_pdd >= "' . $params['url']['start'] . '") && (Pe.validade_pdd <= "' . $params['url']['end'] .'") ')));
+            array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& (Pe.validade_pdd >= "' . $params['url']['start'] . '") && (Pe.validade_pdd <= "' . $params['url']['end'] .'") ')));
 
     $data = array();
     foreach($pes as $pe) {
@@ -158,11 +184,16 @@
   }
 
   private function ords($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
     $this->loadModel('Ord');
     $this->Ord->Behaviors->load('Containable');
     $this->Ord->contain('Ss', 'Servico');
     $ords = $this->Ord->find('all', array('conditions'=>
-              array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Ord.dt_fim_pdd >= "' . $params['url']['start'] . '" && Ord.dt_fim_pdd <= "' . $params['url']['end'] . '"')));
+              array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Ord.dt_fim_pdd >= "' . $params['url']['start'] . '" && Ord.dt_fim_pdd <= "' . $params['url']['end'] . '"')));
 
     $data = array();
     foreach($ords as $ord) {
@@ -180,17 +211,22 @@
   }
 
   private function demandas($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
     $this->loadModel('Demanda');
     $this->Demanda->Behaviors->load('Containable');
     $this->Demanda->contain('DemandaTipo', 'Servico');
     $demandas = $this->Demanda->find('all', array('conditions'=>
-                  array("Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Demanda.dt_prevista >= "' . $params['url']['start'] . '" && Demanda.dt_prevista <= "' . $params['url']['end'] .'"')));
+                  array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Demanda.dt_prevista >= "' . $params['url']['start'] . '" && Demanda.dt_prevista <= "' . $params['url']['end'] .'"')));
 
     $data = array();
     foreach($demandas as $demanda) {
       $data[] = array(
           'id' => $demanda['Demanda']['id'],
-          'title'=> "DM - "  . $demanda['Demanda']['nome'],
+          'title'=> $demanda['Demanda']['nome'],
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $demanda['Demanda']['dt_prevista']))),
         //  'end' => $demanda['Demanda']['dt_prevista'],
           'allDay' => true,
@@ -203,11 +239,16 @@
   }
 
   private function indisponibilidades($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
     $this->loadModel('Indisponibilidade');
     $this->Indisponibilidade->Behaviors->load('Containable');
     $this->Indisponibilidade->contain('Motivo', 'Servico');
     $indisponibilidades = $this->Indisponibilidade->find('all', array('conditions'=>
-                  array('Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_inicio <= "' . $params['url']['end'] .'"')));
+                  array($p_servico . 'Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_inicio <= "' . $params['url']['end'] .'"')));
 
     $data = array();
     foreach($indisponibilidades as $indisponibilidade) {

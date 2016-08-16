@@ -37,9 +37,9 @@
                    //'type' => 'text',
                    'id' => 'dpdecade'));
 
-      echo $this->BootstrapForm->input('num_incidente', array(
+      /*echo $this->BootstrapForm->input('num_incidente', array(
                   'label' => array('text' => 'Nº Incidente: '),
-                  'type' => 'text'));
+                  'type' => 'text'));*/
 
 
       echo $this->BootstrapForm->input('Servico', array(

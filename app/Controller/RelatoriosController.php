@@ -361,6 +361,7 @@
         'contain' => array(
           'DemandaTipo' => array(),
           'Status' => array(),
+          'Rdm' => array('Release' => array())
         ),
         'joins' => array(
           array(

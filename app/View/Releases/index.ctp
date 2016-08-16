@@ -64,7 +64,7 @@
           </b>
         </div>
         <div class="panel-body">
-          <div class="">
+          <div class="col-lg-12">
             <div class="bs-callout bs-callout-warning col-lg-5 pull-left">
               <h4 class="normal">
                 RDM: <?php echo $this->Html->link($release['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $release['Rdm']['id'])); ?>
@@ -98,6 +98,7 @@
                   <th>Demanda</th>
                   <th>Mantis</th>
                   <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                  <th>Título</th>
                   <th>Prazo</th>
                   <th>Ações</th>
                 </tr>
@@ -110,7 +111,7 @@
                     </td>
                     <?php echo $this->Tables->PrioridadeEditable($d['id'], "demandas") ?>
                     <td>
-                      <span style="border-bottom: 3px solid #<?php echo substr(md5($d['Status']['nome']), 0, 6) ?>;" cursor:pointer; title="Clique para alterar o status!" id="<?php echo "status-" . $d['id'] ?>">
+                      <span style="border-bottom: 6px solid #<?php echo substr(md5($d['Status']['nome']), 0, 6) ?>;" cursor:pointer; title="Clique para alterar o status!" id="<?php echo "status-" . $d['id'] ?>">
                         <?php echo $d['Status']['nome']; ?>
                       </span>
                     </td>
@@ -119,13 +120,14 @@
                     <td><?php echo $d['clarity_dm_id']; ?></td>
                     <td><?php echo $d['mantis_id']; ?></td>
                     <td><?php echo $this->Tables->popupBox($d['nome'], $d['descricao']) ?></td>
+                    <td><?php echo $d['nome']; ?></td>
                     <td>
                       <?php echo $this->Times->timeLeftTo($d['data_cadastro'], $d['dt_prevista'],
                              $d['data_cadastro'] . " - " . $d['dt_prevista'],
                             ($d['data_homologacao']));?>
                     </td>
                    <td>
-                     <?php echo $this->Tables->getMenu('Releases', $release['Release']['id'], 14);
+                     <?php echo $this->Tables->getMenu('Demandas', $d['id'], 14);
                       echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $d['id'] . ")'>
                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";?>
                    </td>
@@ -144,26 +146,39 @@
                 language: {
                   url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
                 },
-                responsive: true,
+                "columnDefs": [  { "visible": false, "targets": 6 } ],
+                //responsive: true,
                 "dom": 'T<"clear">lfrtip',
                 "tableTools": {
                     "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
                     "aButtons": [
                       {
                           "sExtends": "copy",
-                          "sButtonText": "Copiar"
+                          "sButtonText": "Copiar",
+                          "oSelectorOpts": { filter: 'applied', order: 'current' },
+                          "mColumns": [ 0,1,2,3,4,6,7 ]
                       },
                       {
                           "sExtends": "print",
-                          "sButtonText": "Imprimir"
+                          "sButtonText": "Imprimir",
+                          "oSelectorOpts": { filter: 'applied', order: 'current' },
+                          "mColumns": [ 0,1,2,3,4,6,7 ]
                       },
                       {
                           "sExtends": "csv",
-                          "sButtonText": "CSV"
+                          "sButtonText": "CSV",
+                          "sFileName": "<?php echo $release['Servico']['sigla'] . " - " . $release['Release']['versao']; ?>.csv",
+                          "oSelectorOpts": { filter: 'applied', order: 'current' },
+                          "mColumns": [ 0,1,2,3,4,6,7 ]
                       },
                       {
                           "sExtends": "pdf",
-                          "sButtonText": "PDF"
+                          "sButtonText": "PDF",
+                          "sFileName": "<?php echo $release['Servico']['sigla'] . " - " . $release['Release']['versao']; ?>.pdf",
+                          "oSelectorOpts": { filter: 'applied', order: 'current' },
+                          "mColumns": [ 0,1,2,3,4,7 ],
+                          "sTitle": "<?php echo $release['Servico']['sigla'] . " - " . $release['Release']['versao']; ?>",
+                          "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
                       },
                     ]
                 }
@@ -220,6 +235,7 @@
       $('.select2').select2({
         containerCssClass: 'select2'
       });
+
 
       $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
 

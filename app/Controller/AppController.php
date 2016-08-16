@@ -89,6 +89,9 @@ class AppController extends Controller {
   );
   function beforeFilter() {
     App::import('Vendor', 'ldapInclude', array('file' => 'ldapInclude.php'));
+    //DEBUG
+      //$this->Session->write('cdUsuario', '354996');
+    //DEBUG
 
     if (isset($_SESSION['cdUsuario'])) {
       $this->loadModel('User');

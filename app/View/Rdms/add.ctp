@@ -63,6 +63,8 @@
           </select>
         </div>
       </div>
+    </div>
+    <div class='col-lg-6'>
 
       <?php
         echo $this->BootstrapForm->input('rdm_tipo_id', array(
