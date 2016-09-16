@@ -5,15 +5,6 @@
     <div class="col-lg-12">
       <h3 class="page-header">
         Controle de Disponibilidade
-        <div class="col-lg-2 pull-right">
-          <?php
-            if($this->Ldap->autorizado(2)){
-              echo $this->Html->link("<i class='fa fa-plus'></i> Nova",
-               array('controller' => 'Indisponibilidades', 'action' => 'add'),
-               array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
-            }
-          ?>
-        </div>
       </h3>
     </div>
     <div class="col-lg-12 pull-left filters">
@@ -52,7 +43,18 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de Indisponibilidades </b></div>
+      <div class="panel-heading">
+        <b> Lista de Indisponibilidades </b>
+        <div class="col-lg-2 pull-right">
+          <?php
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+               array('controller' => 'Indisponibilidades', 'action' => 'add'),
+               array('escape' => false));
+            }
+          ?>
+        </div>
+      </div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-Indisponibilidades">

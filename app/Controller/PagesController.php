@@ -47,7 +47,7 @@ class PagesController extends AppController {
 		$this->Servico->Behaviors->attach('Containable');
 		if(date("d") < 21){
 			$servicos = $this->Servico->find('all', array(
-				'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+				'conditions'=> array("Servico.cliente_id " . $_SESSION['User']['clientes']),
 				'contain' => array(
 					'Indisponibilidade' => array(
 						'Motivo' => array(),

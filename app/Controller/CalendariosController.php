@@ -86,8 +86,9 @@
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $rdm['Rdm']['dt_prevista']))),
           'allDay' => true,
           'url' => Router::url('/') . 'rdms/view/'.$rdm['Rdm']['id'],
-          'description' =>  $rdm['Servico']['sigla'] . " " . $this->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada'])
-                           . " " . $rdm['Rdm']['versao'] . " "  . $this->getAmbiente($rdm['Rdm']['ambiente']),
+          'description' =>  "<span class='sistema-calendario'>" . $rdm['Servico']['sigla'] . " " . $rdm['Rdm']['versao'] . "</span> "  .
+           $this->sucesso($rdm['Rdm']['sucesso'], $rdm['Rdm']['dt_executada'])
+           . $this->getAmbiente($rdm['Rdm']['ambiente']),
           'className' => $class
       );
     }

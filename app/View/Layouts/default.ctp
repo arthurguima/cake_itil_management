@@ -7,8 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<title><?php echo $title_for_layout; ?> </title>
+	<link rel="shortcut icon" sizes="16x16 32x32 48x48" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB50lEQVQ4T6XTTUgbQRQH8P8s66oYbCIKimIo7cEvSjFIkIKiIOLBg0Ib7EUQikiroXrwVF2h4MclNN4EWzEoRtGDKIjgoZQee2kMfpAqYmlB6kc07ppsdp+sNMGPjUo7xzfzfjNv3gzDfw52Pb/4uSgA6Sb/TOfBfewbAECswOHeAhBgIA+nJc35Z16HEmEGAFDgcA8D9OZvkszAFojgSTMnL30baVUuY3GgbKgsmxTKFEg4CQZqn6iyed5g1wMCFjli42vT7SsAozhgG7Dl88T7AKQTMYT8DdCiKYmvgeBan3Z2XinB3m9vATCqZ8m7dkT2HyUC/iiCUPzD07Z3AZAILpKZUUiq+qw9bO35rqbmRo9zcLpVZQgwoGnN65zSJy8AyW1pYqAxAEKQeDTLVhxpAo5XG0GqcB1ZWPc662PBeAmnHx7YOMZmAVi/qCa8O8uFtFMO5fDhZSAY5VlJYKLj5w1AD5y4TVk8eP1o1X3hHCzvF0HarogDBLRseJ2fDNsYC5IIPpxheR8krrtZeowd3wuQyoOAlQ1vR43euluB2KQ0bHn5VUn72LXpSI4c5UU0DoWbk2/1F3plGL7E2IqQy/z01V7lZ9/vUtfqWK9o1JJbAT1hcLAur1u2/4Ioav8E3PUjzwHhtqwRScFa2AAAAABJRU5ErkJggg==">
 	<?php
-		echo $this->Html->meta('icon');
+		//echo $this->Html->meta('icon','img/favicon.png',array('type' => 'icon'));
 		/* JS */
 		//-- jQuery Version 1.11.0 --
 		echo $this->Html->script('jquery-1.11.0.js');
@@ -41,7 +42,7 @@
 				<a> <!-- TODO Alterar -->
 						<?php echo $this->Html->image("logo-icon.svg", array('height' => '45px', 'class' => 'hidden-xs hidden-sm')); ?>
 				</a>
-				<span class="sgd">SGS - Sistema de Gestão de Serviço</span>			
+				<span class="sgd">SGS - Sistema de Gestão de Serviço</span>
 			</div>
 			<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
@@ -174,10 +175,15 @@
 				<b><?php echo $this->Html->getCrumbs(' / ', array('text' => "<i class='fa fa-home'></i> Home", 'url' => Router::url('/', true) . "index.php", 'escape' => false)); ?></b>
 			</span>
 			<div style='clear:both'></div>
-			<div class='row'><!--nocache--><?php echo $this->Session->flash(); ?><!--/nocache--></div>
+			<div class='row'>
+				<!--nocache-->
+				<?php echo $this->Session->flash(); ?>
+				<!--/nocache-->
+			</div>
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<!-- hr style="margin-top:50px;" --><?php  //echo $this->element('sql_dump'); ?>
 	</div>
+	<script>$(function() {setTimeout(function(){$('.alert').toggle();}, 3500);});</script>
 </body>
 </html>

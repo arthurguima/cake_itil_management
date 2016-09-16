@@ -25,13 +25,10 @@
 
           /* Se não foi Homologado e está atrasado */
           if(strtotime($time2) < time()){
-            return  " <span class='small'>" . $string . "</span>
-                      <div class='progress active'>
-                            <div class='progress-bar progress-bar-danger 'role='progressbar' aria-valuenow='100' aria-valuemin='0'
-                            aria-valuemax='100' style='width: 100%'>
-                            <i class='fa fa-exclamation-circle' style='color:white;'></i>
-                            <b>Atrasado </b><i class='fa fa-exclamation-circle' style='color:white;'></i></div>
-                      </div>";
+            return  " <span class='small red'>" . $string . "</span>
+                        <i class='small fa fa-exclamation-circle red'></i>
+                        <b class='small'>Atrasado </b><i class='fa fa-exclamation-circle red small'></i>
+                    ";
           }
 
           /* Coloca as datas no formato para o calculo de tempo */

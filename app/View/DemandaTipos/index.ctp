@@ -5,15 +5,6 @@
     <div class="col-lg-12">
       <h3 class="page-header">
         Tipos de Demandas
-        <div class="col-lg-2 pull-right">
-          <?php
-            if($this->Ldap->autorizado(2)){
-              echo $this->Html->link("<i class='fa fa-plus'></i> Nova",
-               array('controller' => 'demandatipos', 'action' => 'add'),
-               array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
-            }
-          ?>
-        </div>
       </h3>
     </div>
 </div>
@@ -21,13 +12,24 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de Tipos de Demandas </b></div>
+      <div class="panel-heading">
+        <b> Lista de Tipos de Demandas </b>
+        <div class="col-lg-2 pull-right">
+          <?php
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+               array('controller' => 'demandatipos', 'action' => 'add'),
+               array('escape' => false));
+            }
+          ?>
+        </div>
+      </div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-demanda">
             <thead>
               <tr>
-                <th>Nome</th>                
+                <th>Nome</th>
                 <th>Ações</th>
               </tr>
             </thead>

@@ -5,15 +5,6 @@
     <div class="col-lg-12">
       <h3 class="page-header">
          RDM - Requisições de Mudança
-         <div class="col-lg-2 pull-right">
-           <?php
-            if($this->Ldap->autorizado(2)){
-                echo $this->Html->link("<i class='fa fa-plus'></i> Nova",
-                array('controller' => 'rdms', 'action' => 'add'),
-                array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
-            }
-           ?>
-         </div>
       </h3>
     </div>
     <div class="col-lg-12 pull-left filters">
@@ -65,7 +56,18 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de RDMs </b></div>
+      <div class="panel-heading">
+        <b> Lista de RDMs </b>
+        <div class="col-lg-2 pull-right">
+          <?php
+           if($this->Ldap->autorizado(2)){
+               echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+               array('controller' => 'rdms', 'action' => 'add'),
+               array('escape' => false));
+           }
+          ?>
+        </div>
+      </div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-rdm">
@@ -124,18 +126,26 @@
                   </td>
 
                   <td>
-                    <b>CAB</b>
-                    <span id="<?php echo "rdm-cab_approval-" . $rdm['Rdm']['id']?>">
-                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['cab_approval']); ?>
-                    </span>
-                    <b>Autorizada</b>
-                    <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
-                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
-                    </span>
-                    <b>FARM</b>
-                    <span id="<?php echo "rdm-farm-" . $rdm['Rdm']['id']?>">
-                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['farm']); ?>
-                    </span>
+                    <ul style="font-size:9px; margin: 0; padding: 0; font-size: 10px; list-style: none;">
+                      <li>
+                        <b>CAB</b>
+                        <span id="<?php echo "rdm-cab_approval-" . $rdm['Rdm']['id']?>">
+                          <?php echo $this->Rdm->getCheck($rdm['Rdm']['cab_approval']); ?>
+                        </span>
+                      </li>
+                      <li>
+                        <b>Autorizada</b>
+                        <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
+                          <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
+                        </span>
+                      </li>
+                      <li>
+                        <b>FARM</b>
+                        <span id="<?php echo "rdm-farm-" . $rdm['Rdm']['id']?>">
+                          <?php echo $this->Rdm->getCheck($rdm['Rdm']['farm']); ?>
+                        </span>
+                      </li>
+                    <ul>
                   </td>
                   <?php
                     echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", 'cab_approval');

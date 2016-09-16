@@ -109,7 +109,7 @@
       $this->set('rdms',
                   $this->Release->Rdm->find('list', array(
                     'fields' => array('Rdm.id', 'Rdm.numero'),
-                    'conditions' => array('Rdm.servico_id' => $this->data['Release']['servico_id']))));
+                    'conditions' => array('Rdm.dt_executada IS NULL and Rdm.servico_id = ' . $this->data['Release']['servico_id']))));
   }
 
 /**

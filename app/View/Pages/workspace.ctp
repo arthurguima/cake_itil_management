@@ -1,7 +1,7 @@
 <div class="row">
 		<div class="col-lg-12">
 			<h3 class="page-header">Bem-vindo, <?php echo $this->Session->read('User.nome'); ?>!</h3>
-		</div>		
+		</div>
 </div>
 
 <div class="row">
@@ -333,21 +333,30 @@
 		                        echo (($rdm['Rdm']['dt_executada'] == null) ? " " : $this->Times->pastDate($rdm['Rdm']['dt_executada']));
 		                    ?>
 		                  </td>
-											<td>
-												<b>CAB</b>
-		                    <span id="<?php echo "rdm-cab_approval-" . $rdm['Rdm']['id']?>">
-		                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['cab_approval']); ?>
-		                    </span>
-		                    <b>Autorizada</b>
-		                    <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
-		                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
-		                    </span>
-		                    <b>FARM</b>
-		                    <span id="<?php echo "rdm-farm-" . $rdm['Rdm']['id']?>">
-		                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['farm']); ?>
-		                    </span>
+											<td >
+												<ul style="font-size:9px; margin: 0; padding: 0; font-size: 10px; list-style: none;">
+													<li>
+														<b>CAB</b>
+		                        <span id="<?php echo "rdm-cab_approval-" . $rdm['Rdm']['id']?>">
+		                          <?php echo $this->Rdm->getCheck($rdm['Rdm']['cab_approval']); ?>
+		                        </span>
+													</li>
+													<li>
+				                    <b>Autorizada</b>
+				                    <span id="<?php echo "rdm-autorizada-" . $rdm['Rdm']['id']?>">
+				                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['autorizada']); ?>
+				                    </span>
+													</li>
+													<li>
+				                    <b>FARM</b>
+				                    <span id="<?php echo "rdm-farm-" . $rdm['Rdm']['id']?>">
+				                      <?php echo $this->Rdm->getCheck($rdm['Rdm']['farm']); ?>
+				                    </span>
+													</li>
+												</ul>
 		                  </td>
 		                  <?php
+												echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", 'cab_approval');
 		                    echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "autorizada");
 		                    echo $this->Tables->RdmCheckEditable($rdm['Rdm']['id'], "rdms", "farm");
 		                  ?>
@@ -591,7 +600,6 @@
 	                              ($demanda['Demanda']['data_homologacao']));
 	                      ?>
 	                    </td>
-
 	                    <td>
 	                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>">
 	                        <?php echo $demanda['Status']['nome']; ?>

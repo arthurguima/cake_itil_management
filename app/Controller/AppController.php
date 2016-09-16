@@ -90,7 +90,7 @@ class AppController extends Controller {
   function beforeFilter() {
     App::import('Vendor', 'ldapInclude', array('file' => 'ldapInclude.php'));
     //DEBUG
-      //$this->Session->write('cdUsuario', '354996');
+      $this->Session->write('cdUsuario', '354996');
     //DEBUG
 
     if (isset($_SESSION['cdUsuario'])) {
@@ -114,10 +114,12 @@ class AppController extends Controller {
         $this->Session->write('User.clientes', $clientes);
       }else{
         $this->Session->write('User.uid', '0');
+        return $this->redirect("http://www-apps/");
       }
     }
     else{
       $this->Session->write('User.uid', '0');
+      return $this->redirect("http://www-apps/");
     }
   }
 

@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb('Chamados', '');
-  $this->Html->addCrumb($chamado['Chamado']['id'], array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id']));
+  $this->Html->addCrumb($chamado['Chamado']['numero'] . "/" . $chamado['Chamado']['ano'], array('controller' => 'chamados', $chamado['Chamado']['id']));
 ?>
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">Chamado: <?php echo $chamado['Chamado']['nome'] . " - " . $chamado['Servico']['nome']; ?></h3></div>

@@ -6,12 +6,14 @@
     //$this->Servico->contain('Area');//Carrega apenas o Relacionamento com a área (otimização)
 
     $this->set('servicos',
-      $this->Servico->find('all', array('contain' =>
-        array(
-          'Cliente' => array(),
-          'Area' => array(),
-          'Container' => array(),
-        )
+      $this->Servico->find('all', array(
+        'contain' =>
+          array(
+            'Cliente' => array(),
+            'Area' => array(),
+            'Container' => array(),
+          ),
+        'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes'])
       )));
   }
 
@@ -25,6 +27,7 @@
   }
 
   public function edit($id = null){
+        debug($_SESSION['User']['uid']);
     $this->Servico->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a área (otimização)
     $this->Servico->contain('Area', 'Dependencia');
 
@@ -116,8 +119,8 @@
 
     $this->set('clientes', $this->ServicoPorCliente(
       $this->Servico->find('all',array(
-        'contain' => array('Area' => array('Cliente'=> array())),
-        'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes'])
+        'contain' => array('Cliente'=> array()),
+        'conditions'=> array("Servico.cliente_id " . $_SESSION['User']['clientes'])
       )
     )));
   }
@@ -126,7 +129,7 @@
   private function ServicoPorCliente($servicos){
     $clientes = array();
     foreach ($servicos as $ser){
-      $clientes[$ser['Area']['0']['Cliente']['sigla']][] = $ser;
+      $clientes[$ser['Cliente']['sigla']][] = $ser;
     }
 
     return $clientes;

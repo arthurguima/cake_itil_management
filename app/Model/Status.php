@@ -42,5 +42,10 @@
     )
   );
 
+  public function beforeSave($options = array()){
+    if ($this->data['Status']['fim'] == 0)
+    $this->data['Status']['fim'] = null;
+    return true;
+  }
 
 }?>

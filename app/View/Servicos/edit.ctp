@@ -19,6 +19,7 @@
   <div class="col-lg-6">
     <?php
         echo $this->BootstrapForm->create('Servico');
+        //echo $this->BootstrapForm->hidden('last_edit_by', array('value' => $_SESSION['User.uid'], 'type'=> "hidden"));
 
         echo $this->BootstrapForm->input('nome', array(
                     'label' => array('text' => 'Nome:')));

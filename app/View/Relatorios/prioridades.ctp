@@ -79,7 +79,7 @@
                   <th><span class="editable">Status</span></th>
                   <th>Release</th>
                   <th>Prazo</th>
-                  <th>Histórico</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>

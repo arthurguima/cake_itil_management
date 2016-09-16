@@ -9,9 +9,9 @@
         <div class="col-lg-2 pull-right">
           <?php
             if($this->Ldap->autorizado(2)){
-              echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
+              echo $this->Html->link("<i style='margin-top: 10px;' class='fa fa-plus pull-right'></i>",
                array('controller' => 'Releases', 'action' => 'add'),
-               array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
+               array('style' => "color: #4e5758; font-size: 18px;",'escape' => false));
             }
           ?>
         </div>

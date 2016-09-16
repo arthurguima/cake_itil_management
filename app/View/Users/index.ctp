@@ -5,15 +5,6 @@
     <div class="col-lg-12">
       <h3 class="page-header">
         Usuários
-         <div class="col-lg-2 pull-right">
-           <?php
-              if($this->Ldap->autorizado(2)){
-                echo $this->Html->link("<i class='fa fa-plus'></i> Novo",
-                  array('controller' => 'users', 'action' => 'add'),
-                  array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
-              }
-            ?>
-         </div>
       </h3>
     </div>
 </div>
@@ -21,7 +12,18 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de Usuários </b></div>
+      <div class="panel-heading">
+        <b> Lista de Usuários </b>
+        <div class="col-lg-2 pull-right">
+          <?php
+             if($this->Ldap->autorizado(2)){
+               echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                 array('controller' => 'users', 'action' => 'add'),
+                 array('escape' => false));
+             }
+           ?>
+        </div>
+      </div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-users">

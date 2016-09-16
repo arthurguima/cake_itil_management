@@ -5,15 +5,6 @@
     <div class="col-lg-12">
       <h3 class="page-header">
         Demandas
-        <div class="col-lg-2 pull-right">
-          <?php
-            if($this->Ldap->autorizado(2)){
-              echo $this->Html->link("<i class='fa fa-plus'></i> Nova",
-               array('controller' => 'demandas', 'action' => 'add'),
-               array('class' => 'btn btn-sm btn-success pull-right', 'escape' => false));
-            }
-          ?>
-        </div>
       </h3>
     </div>
     <div class="col-lg-12 pull-left filters">
@@ -39,9 +30,9 @@
           </div>
           <div class="col-lg-12 filters-item">
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control', 'placeholder' => "Solicitante")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control select2', 'placeholder' => "Solicitante")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control select2')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
@@ -67,7 +58,18 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><b> Lista de Demandas </b></div>
+      <div class="panel-heading">
+        <b> Lista de Demandas </b>
+        <div class="col-lg-2 pull-right">
+          <?php
+            if($this->Ldap->autorizado(2)){
+              echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+               array('controller' => 'demandas', 'action' => 'add'),
+               array('escape' => false));
+            }
+          ?>
+        </div>
+      </div>
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover" id="dataTables-demanda">

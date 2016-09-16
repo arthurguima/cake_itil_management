@@ -104,10 +104,10 @@
     if ($this->request->is('post')) {
       $this->Indisponibilidade->create();
       if ($this->Indisponibilidade->save($this->request->data)) {
-        $this->Session->setFlash('Indisponibilidade Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+        $this->Session->setFlash('Indisponibilidade criada com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
         $this->redirect(array('action' => 'view', $this->Indisponibilidade->id));
       } else {
-        $this->Session->setFlash('Não foi possível criar o novo Indisponibilidade.', 'alert-box', array ('class' => 'alert alert-danger'));
+        $this->Session->setFlash('Não foi possível cadastrar a Indisponibilidade.', 'alert-box', array ('class' => 'alert alert-danger'));
       }
     }
     /* Relacionamentos */
@@ -170,9 +170,9 @@
     }
     $this->request->onlyAllow('post', 'delete');
     if ($this->Indisponibilidade->delete()) {
-      $this->Session->setFlash('Indisponibilidade  com id: %s foi removido.', 'alert-box', array ('class' => 'alert alert-success'), h($id));
+      $this->Session->setFlash('Indisponibilidade  com id: %s foi removida.', 'alert-box', array ('class' => 'alert alert-success'), h($id));
     } else {
-      $this->Session->setFlash('Indisponibilidade  com id: %s  não foi removido.', 'alert-box', array ('class' => 'alert alert-danger'), h($id));
+      $this->Session->setFlash('Indisponibilidade  com id: %s  não foi removida.', 'alert-box', array ('class' => 'alert alert-danger'), h($id));
     }
     return $this->redirect(array('controller' => 'indisponibilidades', 'action' => 'index'));
   }

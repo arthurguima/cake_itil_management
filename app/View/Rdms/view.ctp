@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb('Rdms', '/rdms');
-  $this->Html->addCrumb($rdm['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id']));
+  $this->Html->addCrumb($rdm['Rdm']['numero'] . "/" . $rdm['Rdm']['ano'], array('controller' => 'rdms', 'action' => 'view', $rdm['Rdm']['id']));
 ?>
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">RDM: <?php echo $rdm['Rdm']['nome'] . " - " . $rdm['Servico']['nome']; ?></h3></div>
@@ -239,10 +239,9 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="col-md-12">
-  <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
+  <div class="col-md-12">
+    <?php echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-md-2')); ?>
+  </div>
 </div>
 
 <!-- Modal -->

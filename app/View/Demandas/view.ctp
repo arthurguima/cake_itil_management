@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb('Demandas', '/demandas');
-  $this->Html->addCrumb($demanda['Demanda']['id'], array('controller' => 'demandas', 'action' => 'view', $demanda['Demanda']['id']));
+  $this->Html->addCrumb($demanda['Demanda']['clarity_dm_id'], array('controller' => 'demandas', 'action' => 'view', $demanda['Demanda']['id']));
 ?>
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">Demanda: <?php echo $demanda['Demanda']['clarity_dm_id'] ." - " . $demanda['Servico']['sigla'] ?></h3></div>

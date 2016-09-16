@@ -63,4 +63,9 @@
 		)
     )
   );
+
+  public function beforeSave($options = array()){    
+    $this->data['Servico']['last_edit_by'] = $_SESSION['User']['uid'];
+    return true;
+  }
 }?>
