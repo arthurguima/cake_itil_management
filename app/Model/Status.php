@@ -44,7 +44,9 @@
 
   public function beforeSave($options = array()){
     if ($this->data['Status']['fim'] == 0)
-    $this->data['Status']['fim'] = null;
+      $this->data['Status']['fim'] = null;
+
+    $this->data['Status']['last_edit_by'] = $_SESSION['User']['uid'];
     return true;
   }
 

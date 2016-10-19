@@ -33,5 +33,28 @@ class TinyMCEHelper extends AppHelper {
 
                 echo $this->Html->scriptBlock( $script );
         }
+
+        public function Simpleinicialize( $width = 550, $heigth = 400 )
+        {
+                echo $this->Html->script( 'plugins/tinymce/js/tinymce/tinymce.min.js' );
+
+                $script  = "tinyMCE.init({
+                      'language' : \"pt_BR\",
+                      'selector': \"textarea\",
+                      'thema': \"modern\",
+                      'width' : {$width},
+                      'height' : {$heigth},
+                      plugins: [
+                          'advlist autolink lists link charmap print preview anchor',
+                          'searchreplace visualblocks fullscreen',
+                          'insertdatetime table contextmenu paste'
+                      ],
+                      toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                      'autosave_ask_before_unload': false
+                	 })
+                ";
+
+                echo $this->Html->scriptBlock( $script );
+        }
 }
 ?>

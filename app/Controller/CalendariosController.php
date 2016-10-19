@@ -41,6 +41,8 @@
           $data = array_merge($data,$this->demandas($this->params));
         if($id % 13 == 0) // não aparece no padrão (2310)
           $data = array_merge($data,$this->indisponibilidades($this->params));
+        if($id % 17 == 0)
+          $data = array_merge($data,$this->subtarefas($this->params));
       }
 
       $this->set("json", json_encode($data));
@@ -116,6 +118,13 @@
     default:
       return " ";
     }
+  }
+
+  private function indisAberta($dt_fim) {
+    if($dt_fim != null)
+        return " ";
+    else
+      return "<span class='label label-default'>Aberto</span>";
   }
 
   private function getAmbiente($value){
@@ -239,17 +248,63 @@
     return $data;
   }
 
-  private function indisponibilidades($params){
+  private function subtarefas($params){
     if(isset($params['url']['servico']) && $params['url']['servico'] != '')
       $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
     else
       $p_servico = "";
 
+    $this->loadModel('Subtarefa');
+    $this->Subtarefa->Behaviors->load('Containable');
+    $subtarefas = $this->Subtarefa->find('all', array(
+			'contain' => array(
+				'Demanda' => array(
+					'Servico' => array(),
+				)
+			),
+      'conditions'=>
+         array('Demanda.user_id = ' . $this->Session->read('User.uid')))
+		);
+		$this->set('subtarefas', $subtarefas);
+
+    $data = array();
+    foreach($subtarefas as $sub) {
+      $data[] = array(
+          'id' => $sub['Demanda']['id'],
+          'title'=> $sub['Demanda']['Servico']['sigla'] . " - " . $sub['Demanda']['nome'],
+          'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $sub['Subtarefa']['dt_prevista']))),
+        //  'end' => $demanda['Demanda']['dt_prevista'],
+          'allDay' => true,
+          'url' => Router::url('/') . 'demandas/view/'. $sub['Demanda']['id'],
+          'description' => $this->subtarefaFinalizada($sub['Subtarefa']['check']) . " - " . $sub['Subtarefa']['descricao'],
+          'className' => 'calendar-os'
+      );
+    }
+    return $data;
+  }
+
+  private function subtarefaFinalizada($check){
+    if($check == 0)
+      return "<span class='label label-success'>Em andamento</span>";
+    else
+      return "<span class='label label-default'>Finalizada</span>";
+  }
+
+  private function indisponibilidades($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "IndisponibilidadesServico.servico_id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
     $this->loadModel('Indisponibilidade');
     $this->Indisponibilidade->Behaviors->load('Containable');
-    $this->Indisponibilidade->contain('Motivo', 'Servico');
-    $indisponibilidades = $this->Indisponibilidade->find('all', array('conditions'=>
-                  array($p_servico . 'Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_inicio <= "' . $params['url']['end'] .'"')));
+    $this->Indisponibilidade->bindModel(array('hasOne' => array('IndisponibilidadesServico')), false);
+    $this->Indisponibilidade->contain('Motivo', 'Servico', 'IndisponibilidadesServico');
+
+    $indisponibilidades = $this->Indisponibilidade->find('all', array(
+      'conditions'=>
+                  array($p_servico . 'Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_inicio <= "' . $params['url']['end'] .'"'),
+    ));
 
     $data = array();
     foreach($indisponibilidades as $indisponibilidade) {
@@ -260,7 +315,7 @@
 
       if($indisponibilidade['Indisponibilidade']['dt_fim'] == null){
         $fim = date("Y-m-d H:i:s");
-        $servicos =  "Aberta => " . $servicos;
+        $servicos =  $this->indisAberta($indisponibilidade['Indisponibilidade']['dt_fim']) . " " . $servicos;
       }
       else{
         $fim = null;
@@ -273,7 +328,7 @@
           'end' => $fim,
           'allDay' => false,
           'url' => Router::url('/') . 'indisponibilidades/view/'. $indisponibilidade['Indisponibilidade']['id'],
-          'description' => $servicos,
+          'description' => $this->getAmbiente($indisponibilidade['Motivo']['ambiente']) ." " . $servicos,
           'className' => 'calendar-indis'
       );
     }

@@ -27,6 +27,7 @@
             </div>
           </div>
           <div class="col-lg-12">
+            <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('motivo', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
           </div>

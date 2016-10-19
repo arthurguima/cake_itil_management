@@ -25,7 +25,6 @@
                   echo $this->BootstrapForm->end();
               ?>
               <div class="small" style="float: right;">
-                * Não está disponível para as indisponibilidades
               </div>
             </div>
           </div>

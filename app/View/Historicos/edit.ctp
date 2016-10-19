@@ -79,6 +79,10 @@
   </div>
 </div>
 
+<?php
+  echo $this->TinyMCE->Simpleinicialize();
+?>
+
 <script>
   $(document).ready(function() {
     $("[id*='dp']").datetimepicker({

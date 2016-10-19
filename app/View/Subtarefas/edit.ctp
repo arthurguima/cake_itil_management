@@ -72,7 +72,7 @@
                     'type' => 'textarea'));
 
         echo $this->BootstrapForm->input('check', array(
-                                 'checked' => 'checked',
+                                 'type' => 'checkbox',
                                  'class' => 'col-sm-3 pull-right col-sm-offset',
                                  'label' => array(
                                    'text' => 'Finalizada?',

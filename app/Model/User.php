@@ -30,4 +30,10 @@
       )
     )
   );
+
+  public function beforeSave($options = array()){
+    $this->data['User']['last_edit_by'] = $_SESSION['User']['uid'];
+    return true;
+  }
+
 }?>

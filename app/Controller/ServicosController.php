@@ -2,19 +2,26 @@
   public $helpers = array('Html', 'Form');
 
   public function index(){
+    // Add filter
+    $this->Filter->addFilters(
+      array(
+        'Cliente' => array(
+          'Servico.cliente_id' => array(
+            'select' => $this->Filter->select('Cliente', $this->Servico->Cliente->find('list', array('fields' => array('Cliente.id', 'Cliente.sigla'),
+            'conditions'=> array("Cliente.id" . $_SESSION['User']['clientes']))))
+          )
+        )
+    ));
+    $conditions = $this->Filter->getConditions();
+    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
     $this->Servico->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a área (otimização)
     //$this->Servico->contain('Area');//Carrega apenas o Relacionamento com a área (otimização)
+    $this->Filter->setPaginate('conditions', $conditions);
+    $this->Filter->setPaginate('limit', 1200);
+    $this->Servico->contain('Cliente','Area','Container');
 
-    $this->set('servicos',
-      $this->Servico->find('all', array(
-        'contain' =>
-          array(
-            'Cliente' => array(),
-            'Area' => array(),
-            'Container' => array(),
-          ),
-        'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes'])
-      )));
+    $this->set('servicos', $this->paginate());
   }
 
   public function view($id = null){

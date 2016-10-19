@@ -15,7 +15,7 @@
         <div class="row inner" style="display: none;">
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
-            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>            
+            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('pai_', array('class' => 'form-control', 'placeholder' => "Pai?")); ?></div>
@@ -54,6 +54,7 @@
                 <th>Aberto?</th>
                 <th>Pai?</th>
                 <th><span class="editable">Status do Chamado</span></th>
+                <th>Previsão</th>
                 <th>Tipo</th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
                 <th></th>
@@ -79,6 +80,17 @@
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $chamado['Chamado']['id'] ?>"><?php echo $chamado['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->ChamadoStatusEditable($chamado['Chamado']['id']) ?>
+                  <td>
+                    <?php
+                        if($chamado['Status']['fim'] == null)
+                          echo $this->Times->timeLeftTo($chamado['Chamado']['created'], $chamado['Chamado']['dt_prev_resolv'],
+                              $chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], null);
+                        else {
+                          echo $this->Times->timeLeftTo($chamado['Chamado']['created'], $chamado['Chamado']['dt_prev_resolv'],
+                              $chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], $chamado['Chamado']['modified']);
+                        }
+                    ?>
+                  </td>
                   <td><?php echo $chamado['ChamadoTipo']['nome']; ?></td>
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['User']['nome']; ?></div></td>
                   <td>

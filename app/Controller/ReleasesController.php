@@ -27,6 +27,12 @@
               'text' => ' a ',
             )
           )
+        ),
+        'concluida_' => array(
+          'Release.dt_fim' => array(
+            'select' => $this->Filter->select('Concluida', array("0" => 'Não', "null" => 'Sim', "-1" => "Não preenchido") ),
+            'operator'    => '!='
+          )
         )
       )
     );

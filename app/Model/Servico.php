@@ -35,10 +35,16 @@
         'maxLength' => 120,
         'message' => 'Campo deve ser preenchido'
       ),
-	  'between' => array(
-                'rule'    => array('between', 3, 120),
-                'message' => 'O campo deve conter de 3 a 80 caracteres!'
-		)
+  	  'between' => array(
+                  'rule'    => array('between', 3, 120),
+                  'message' => 'O campo deve conter de 3 a 80 caracteres!'
+  		),
+      'unique' => array(
+        'rule' => array('checkUnique', array('nome', 'cliente_id'), false),
+        'required' => 'true',
+        'on' => 'create',
+        'message' => 'Já existe outro Serviço com o mesmo nome cadastrado para esse Cliente!'
+      )
     ),
     'sigla' => array(
       'NotEmpty' => array(
@@ -64,7 +70,7 @@
     )
   );
 
-  public function beforeSave($options = array()){    
+  public function beforeSave($options = array()){
     $this->data['Servico']['last_edit_by'] = $_SESSION['User']['uid'];
     return true;
   }

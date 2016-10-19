@@ -45,11 +45,17 @@
                     'label' => array('text' => 'Serviço: ')));
       }
 
-     echo $this->BootstrapForm->input('user_id', array(
+      echo $this->BootstrapForm->input('user_id', array(
                 'class' => 'select2',
                 'label' => array('text' => 'Responsável: '),
                 'selected' => $this->Session->read('User.uid'),
                 'empty' => "Responsável"));
+
+      echo $this->BootstrapForm->input('dt_prev_resolv', array(
+                              'label' => array('text' => 'Previsão de Atendimento: '),
+                              'type' => 'text',
+                              'value' => date('d/m/Y'),
+                              'id' => 'dp '));
 
       echo $this->BootstrapForm->input('observacao', array(
                             'label' => array('text' => 'Observação: '),
@@ -91,6 +97,14 @@
   $(document).ready(function() {
     $('.select2').select2({
       containerCssClass: 'select2'
+    });
+
+    $("[id*='dp']").datetimepicker({
+      format: "dd/mm/yyyy",
+      minView: 2,
+      autoclose: true,
+      todayBtn: true,
+      language: 'pt-BR'
     });
 
     $("[id*='dpdecade']").datetimepicker({

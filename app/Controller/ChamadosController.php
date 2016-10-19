@@ -89,6 +89,8 @@
 		$this->Filter->setPaginate('limit', 600);
 
 		//$this->Chamado->recursive = 2;
+		$this->Chamado->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+    $this->Chamado->contain("Status", "Servico", "ChamadoTipo", "User");
 		$this->set('chamados', $this->paginate());
 	}
 
@@ -166,6 +168,12 @@
 
 		// Define conditions
 		$conditions = $this->Filter->getConditions() + array(999 => array('Chamado.demanda_id !=' => null)); // Apenas Chamados que são filhos de uma Demanda
+		if($conditions == null)
+      $conditions = $conditions + array(997 => array('Chamado.aberto' => '1'));
+
+    $conditions = $conditions + array(998 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+
+
 		$this->Filter->setPaginate('conditions', $conditions);
 		$this->Filter->setPaginate('limit', 300);
 		$this->Chamado->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)

@@ -83,6 +83,8 @@
                         <li>Criado o Menu Funções Descontinuadas: Menu Negócio e Base de conhecimento</li>
                         <li>Filtro no Calendário</li>
                         <li>Melhorias da Interface</li>
+                        <li>Calendário de Tarefas das Demandas</li>
+                        <li>Previsão de Atendimento do Chamado</li>
                       </ul>
                     </div>
                 </li>

@@ -63,9 +63,9 @@
                     'type' => 'textarea'));
 
         echo $this->BootstrapForm->input('check', array(
-                                 'checked' => 'checked',
-                                 'class' => 'col-sm-3 pull-right col-sm-offset',
-                                 'label' => array(
+                                'type' => 'checkbox',
+                                'class' => 'col-sm-3 pull-right col-sm-offset',
+                                'label' => array(
                                    'text' => 'Finalizada?',
                                    'class' => 'control-label',
                                    'style' => "left: -400px;")));

@@ -57,7 +57,7 @@
                         <?php
                           if($this->Ldap->autorizado(2)){
                             echo $this->Html->link("<i class='fa fa-pencil pull-right'></i>",
-                            array('controller' => 'historicos', 'action' => 'edit', $hist['Historico']['id'], 
+                            array('controller' => 'historicos', 'action' => 'edit', $hist['Historico']['id'],
                             '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id'], 'popup' => 'true' )),
                             array('escape' => false));
                           }

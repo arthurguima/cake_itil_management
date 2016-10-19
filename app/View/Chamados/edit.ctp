@@ -36,10 +36,15 @@
                  'type' => 'text',
                  'id' => 'dpdecade'));
 
-     echo $this->BootstrapForm->input('user_id', array(
+      echo $this->BootstrapForm->input('user_id', array(
                 'class' => 'select2',
                 'label' => array('text' => 'Responsável: '),
                 'empty' => "Responsável"));
+
+      echo $this->BootstrapForm->input('dt_prev_resolv', array(
+                              'label' => array('text' => 'Previsão de Atendimento: '),
+                              'type' => 'text',                              
+                              'id' => 'dpc '));
 
       echo $this->BootstrapForm->input('observacao', array(
                             'label' => array('text' => 'Observação: '),
@@ -100,6 +105,14 @@
         viewSelect: "decade",
         autoclose: true,
         language: 'pt-BR'
+    });
+
+    $("[id*='dpc']").datetimepicker({
+      format: "dd/mm/yyyy",
+      minView: 2,
+      autoclose: true,
+      todayBtn: true,
+      language: 'pt-BR'
     });
 
     function getChamadoTipos(servico){

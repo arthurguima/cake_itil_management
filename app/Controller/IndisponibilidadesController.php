@@ -22,6 +22,22 @@
             'select' => $this->Filter->select('Motivo', $this->Indisponibilidade->Motivo->find('list', array('fields' => array('Motivo.id', 'Motivo.nome'))))
           )
         ),
+        'numero_' => array(
+					'OR' => array(
+						'Indisponibilidade.num_evento' => array(
+							'operator' => 'LIKE',
+							'explode' => array(
+								'character'   => '/',
+								'concatenate' => 'OR')
+						),
+						'Indisponibilidade.ano' => array(
+							'operator' => 'LIKE',
+							'explode' => array(
+								'character'   => '/',
+								'concatenate' => 'OR')
+						)
+					)
+				),
         'dtinicio' => array(
           'Indisponibilidade.dt_inicio' => array(
             'operator' => 'BETWEEN',

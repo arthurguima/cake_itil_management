@@ -150,4 +150,9 @@
 		}
 		return true;
 	}
+
+	public function beforeSave($options = array()){
+    $this->data['Demanda']['last_edit_by'] = $_SESSION['User']['uid'];
+    return true;
+  }
 }?>

@@ -6,6 +6,21 @@
       <h3 class="page-header">
         Serviços
       </h3>
+      <div class="col-lg-12 pull-left filters">
+        <div class="">
+          <div class="row"><span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span></div>
+          <div class="row inner" style="display: none;">
+            <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
+            <div class="col-lg-12 filters-item">
+              <div class="form-group"><?php echo $this->Search->input('Cliente', array('class' => 'form-control select2')); ?></div>
+            </div>
+            <?php
+        		  echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
+                              'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+        			echo $this->Search->end();
+            ?>
+          </div>
+      </div>
     </div>
 </div>
 

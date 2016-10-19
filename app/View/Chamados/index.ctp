@@ -64,6 +64,7 @@
                 <th>Aberto?</th>
                 <th>Pai?</th>
                 <th><span class="editable">Status</span></th>
+                <th>Previsão</th>
                 <th class="hidden-xs hidden-sm">Responsável</th>
                 <th></th>
               </tr>
@@ -87,6 +88,17 @@
                     <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $chamado['Chamado']['id'] ?>"><?php echo $chamado['Status']['nome']; ?></span>
                   </td>
                   <?php echo $this->Tables->ChamadoStatusEditable($chamado['Chamado']['id']) ?>
+                  <td>
+                    <?php
+                        if($chamado['Status']['fim'] == null)
+                          echo $this->Times->timeLeftTo($chamado['Chamado']['created'], $chamado['Chamado']['dt_prev_resolv'],
+                              $chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], null);
+                        else {
+                          echo $this->Times->timeLeftTo($chamado['Chamado']['created'], $chamado['Chamado']['dt_prev_resolv'],
+                              $chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], $chamado['Chamado']['modified']);
+                        }
+                    ?>
+                  </td>
                   <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $chamado['User']['nome']; ?></div></td>
                   <td>
                     <?php
@@ -174,20 +186,20 @@
                   "sExtends": "copy",
                   "sButtonText": "Copiar",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                  "mColumns": [ 0,1,2,3,4,5,6,7,8 ]
               },
               {
                   "sExtends": "print",
                   "sButtonText": "Imprimir",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                  "mColumns": [ 0,1,2,3,4,5,6,7,8 ]
               },
               {
                   "sExtends": "csv",
                   "sButtonText": "CSV",
                   "sFileName": "Chamados.csv",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
-                  "mColumns": [ 0,1,2,3,4,5,6,7 ]
+                  "mColumns": [ 0,1,2,3,4,5,6,7,8 ]
               },
               {
                   "sExtends": "pdf",
@@ -195,7 +207,7 @@
                   "sFileName": "Chamados.pdf",
                   "oSelectorOpts": { filter: 'applied', order: 'current' },
                   "sPdfOrientation": "landscape",
-                  "mColumns": [ 0,1,2,3,4,5,6,7 ],
+                  "mColumns": [ 0,1,2,3,4,5,6,7,8 ],
                   "sTitle": "Listagem de Chamados",
                   "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>"
               },

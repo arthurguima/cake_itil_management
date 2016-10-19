@@ -58,6 +58,11 @@
     return $results;
   }
 
+  public function beforeSave($options = array()){
+    $this->data['Historico']['last_edit_by'] = $_SESSION['User']['uid'];
+    return true;
+  }
+
   public function dateFormatAfterFind($dateString) {
       return date('d/m/Y', strtotime($dateString));
   }
