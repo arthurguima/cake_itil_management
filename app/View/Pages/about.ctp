@@ -77,14 +77,17 @@
                         <li>Demandas Internas transferidas a gestão de serviço</li>
                         <li>Mundaça de Demandas internas p/ Demandas</li>
                         <li>Controle de aprovação pelo CAB nas RDMs</li>
-                        <li>Script de Carga automática de RDMs</li>
+                        <li>Script de Carga automática de RDMs e verificação de aprovação pelo CAB</li>
+                        <li>Script de Carga automática dos Incidentes</li>
                         <li>Script de Fechamento automático das Indisponibilidades</li>
                         <li>Controle de usuários 100% dinâmico</li>
                         <li>Criado o Menu Funções Descontinuadas: Menu Negócio e Base de conhecimento</li>
                         <li>Filtro no Calendário</li>
+                        <li>Melhorias no Calendário de Indisponibilidades</li>
                         <li>Melhorias da Interface</li>
                         <li>Calendário de Tarefas das Demandas</li>
-                        <li>Previsão de Atendimento do Chamado</li>
+                        <li>Previsão de Atendimeno do Chamado</li>
+                        <li>Flitro por Cliente na lista de Serviços</li>                        
                       </ul>
                     </div>
                 </li>
