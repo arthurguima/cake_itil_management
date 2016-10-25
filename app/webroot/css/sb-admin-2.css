@@ -210,6 +210,10 @@ i.hide-sidebar{
   border: 1px solid #ddd;
 }
 
+.row-nav-tabs{
+  height: 39px;
+}
+
 .chat li {
     margin-bottom: 10px;
     padding-bottom: 5px;
@@ -1154,8 +1158,8 @@ table#dataTables-Servico{
   color: #550000 !important;
 }
 .calendar-ss{
-  background-color: #56CDDF !important;
-  border: 1px solid #12A4B8 !important;
+  background-color: #12A4B8 !important;
+  border: 1px solid #56CDDF !important;
   color: #fff !important;
   /*  font-weight: bold !important;*/
 }
@@ -1200,6 +1204,10 @@ span.sistema-calendario {
   color: black;
   font-weight: bold;
   font-size: 14px;
+}
+
+.fc-event{
+  border-radius: 1px;
 }
 
 td.fc-widget-header {

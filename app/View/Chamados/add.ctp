@@ -10,8 +10,8 @@
   <div class="col-lg-12"><h3 class="page-header">Novo Chamado</h3></div>
 </div>
 
-<div class="row error">
-  <div class="col-lg-6 well">
+<div class="row">
+  <div class="col-lg-6">
     <?php
       echo $this->BootstrapForm->create('Chamado');
 
@@ -56,6 +56,12 @@
                               'type' => 'text',
                               'value' => date('d/m/Y'),
                               'id' => 'dp '));
+
+      echo $this->BootstrapForm->input('dt_resolv', array(
+                'label' => array('text' => 'Data de Atendimento: '),
+                'type' => 'text',
+                'id' => 'dpc '));
+
 
       echo $this->BootstrapForm->input('observacao', array(
                             'label' => array('text' => 'Observação: '),

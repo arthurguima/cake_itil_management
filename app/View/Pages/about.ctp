@@ -86,8 +86,9 @@
                         <li>Melhorias no Calendário de Indisponibilidades</li>
                         <li>Melhorias da Interface</li>
                         <li>Calendário de Tarefas das Demandas</li>
+                        <li>Calendário de Chamados</li>
                         <li>Previsão de Atendimeno do Chamado</li>
-                        <li>Flitro por Cliente na lista de Serviços</li>                        
+                        <li>Flitro por Cliente na lista de Serviços</li>
                       </ul>
                     </div>
                 </li>

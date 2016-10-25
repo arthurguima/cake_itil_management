@@ -42,16 +42,22 @@
                 'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('dt_prev_resolv', array(
-                              'label' => array('text' => 'Previsão de Atendimento: '),
-                              'type' => 'text',                              
-                              'id' => 'dpc '));
+                'label' => array('text' => 'Previsão de Atendimento: '),
+                'type' => 'text',
+                'id' => 'dpc '));
+
+      echo $this->BootstrapForm->input('dt_resolv', array(
+                'label' => array('text' => 'Data de Atendimento: '),
+                'type' => 'text',
+                'id' => 'dpc '));
+
 
       echo $this->BootstrapForm->input('observacao', array(
-                            'label' => array('text' => 'Observação: '),
-                            'type' => 'textarea'));
+                'label' => array('text' => 'Observação: '),
+                'type' => 'textarea'));
 
       echo $this->BootstrapForm->input('status_id', array(
-                  'label' => array('text' => 'Status: ')));
+                'label' => array('text' => 'Status: ')));
     ?>
 
       <div id="chamadoTipoList"></div>

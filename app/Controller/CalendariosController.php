@@ -43,6 +43,8 @@
           $data = array_merge($data,$this->indisponibilidades($this->params));
         if($id % 17 == 0)
           $data = array_merge($data,$this->subtarefas($this->params));
+        if($id % 23 == 0)
+          $data = array_merge($data,$this->chamados($this->params));
       }
 
       $this->set("json", json_encode($data));
@@ -95,6 +97,43 @@
       );
     }
     return $data;
+  }
+
+
+  private function chamados($params){
+    if(isset($params['url']['servico']) && $params['url']['servico'] != '')
+      $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
+    else
+      $p_servico = "";
+
+    $this->loadModel('Chamado');
+    $this->Chamado->Behaviors->load('Containable');
+    $this->Chamado->contain("Status", "Servico", "User");
+    $chamados = $this->Chamado->find('all', array('conditions'=>
+              array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Chamado.dt_prev_resolv >= "' . $params['url']['start'] . '" && Chamado.dt_prev_resolv <= "' . $params['url']['end'] . '"')));
+    //debug($rdms);
+
+    $data = array();
+    foreach($chamados as $ch) {
+      $data[] = array(
+          'id' => $ch['Chamado']['id'],
+          'title'=> $ch['Chamado']['numero'] . " - " .   $ch['Chamado']['nome'], //$title,
+          'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $ch['Chamado']['dt_prev_resolv']))),
+          'allDay' => true,
+          'url' => Router::url('/') . 'chamados/view/'.$ch['Chamado']['id'],
+          'description' =>  $this->yesOrNo($ch['Chamado']['aberto']) . " " . $ch['Servico']['sigla'],
+          'className' => "calendar-ss"
+      );
+    }
+    return $data;
+  }
+
+  private function yesOrNo($bol, $class="") {
+      if ($bol):
+        return "<span class='label label-success' id='" . $class . "'>Aberto</span>";
+      else:
+        return "<span class='label label-default' id='" . $class . "'>Fechado</span>";
+      endif;
   }
 
   /*

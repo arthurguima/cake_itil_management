@@ -44,7 +44,12 @@
 				'allowEmpty' => true,
 				'required' => 'create',
 				'message' => 'Já existe outra indisponibilidade com esse número de evento!'
-			)
+			),
+			'alphaNumeric' => array(
+                'rule' => 'alphaNumeric',
+                'required' => true,
+                'message' => 'Apenas Letra e Números.'
+      ),
 		),
 		'user_id' => array(
       'NotEmpty' => array(

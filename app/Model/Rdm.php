@@ -81,7 +81,12 @@
         'required' => 'true',
 				'on' => 'create',
 				'message' => 'Já existe outra RDM com esse número para esse ano casdastrada!'
-			)
+			),
+      'alphaNumeric' => array(
+                'rule' => 'alphaNumeric',
+                'required' => true,
+                'message' => 'Apenas Letra e Números.'
+      ),
 		),
   );
 

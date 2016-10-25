@@ -32,7 +32,7 @@
           <li>
             <a><b>Previsão de Atendimento: </b>
             <?php echo $this->Times->timeLeftTo($chamado['Chamado']['created'], $chamado['Chamado']['dt_prev_resolv'],
-                     $chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'],$chamado['Demanda']['Status']['fim']);
+                $chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], $chamado['Chamado']['dt_resolv']);
             ?>
             </a>
           </li>

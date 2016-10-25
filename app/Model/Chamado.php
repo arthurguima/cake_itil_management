@@ -50,12 +50,22 @@
         'required' => 'true',
 				'on' => 'create',
 				'message' => 'Já existe outro Chamado com esse número para esse ano casdastrado!'
-			)
+			),
+			'alphaNumeric' => array(
+                'rule' => 'alphaNumeric',
+                'required' => true,
+                'message' => 'Apenas Letra e Números.'
+      ),
 		)
 	);
 
 	public function afterFind($results, $primary = false) {
     foreach ($results as $key => $val) {
+				if (isset($val['Chamado']['dt_resolv'])) {
+						$results[$key]['Chamado']['dt_resolv'] = $this->dateFormatAfterFind(
+								$val['Chamado']['dt_resolv']
+						);
+				}
         if (isset($val['Chamado']['dt_prev_resolv'])) {
             $results[$key]['Chamado']['dt_prev_resolv'] = $this->dateFormatAfterFind(
                 $val['Chamado']['dt_prev_resolv']
@@ -75,6 +85,9 @@
 	}
 
 	public function beforeValidate($options = array()){
+		if(!empty($this->data['Chamado']['dt_resolv'])) {
+				$this->data['Chamado']['dt_resolv'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Chamado']['dt_resolv'])));
+		}
 		if(!empty($this->data['Chamado']['dt_prev_resolv'])) {
 				$this->data['Chamado']['dt_prev_resolv'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Chamado']['dt_prev_resolv'])));
 		}

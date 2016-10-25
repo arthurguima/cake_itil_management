@@ -6,7 +6,7 @@
 
 <div class="row">
 <?php if($this->Session->read('User.uid') != 0): ?>
-	<div class="col-lg-12">
+	<div class="col-lg-12  row-nav-tabs">
 		<ul class="nav nav-tabs nav-tabs-black nav-tabs-pages" role="tablist">
 		  <li role="presentation" class="active"><a href="#demandas" aria-controls="demandas" role="tab" data-toggle="tab">
 				Demandas <span class="badge"><?php echo sizeof($demandas) ?></span></a>
@@ -435,7 +435,7 @@
 																	$chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], null);
 														else {
 															echo $this->Times->timeLeftTo($chamado['Chamado']['created'], $chamado['Chamado']['dt_prev_resolv'],
-																	$chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], $chamado['Chamado']['modified']);
+																	$chamado['Chamado']['created'] . " - " . $chamado['Chamado']['dt_prev_resolv'], $chamado['Chamado']['dt_resolv']);
 														}
 												?>
 		                  </td>
