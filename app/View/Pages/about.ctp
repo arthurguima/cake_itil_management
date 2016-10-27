@@ -1,5 +1,5 @@
 <?php
-  $this->Html->addCrumb("Sobre o SGD", '/pages/about');
+  $this->Html->addCrumb("Sobre o SGS", '/pages/about');
 ?>
 
 <style>
