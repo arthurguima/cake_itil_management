@@ -30,8 +30,7 @@
         ),
         'concluida_' => array(
           'Release.dt_fim' => array(
-            'select' => $this->Filter->select('Concluida', array("0" => 'Não', "null" => 'Sim', "-1" => "Não preenchido") ),
-            'operator'    => '!='
+            'select' => $this->Filter->select('Concluida', array("0" => 'Sim') ),
           )
         )
       )
@@ -39,11 +38,21 @@
     //$this->Filter->addFilters('filtro');
     $conditions = $this->Filter->getConditions();
 
-    if($conditions == null)
+    if($conditions == null){
       $conditions = $conditions + array(998 => array('Release.dt_fim IS NULL'));
+    }
+    else{
+      if(!empty($conditions[3])){
+        $conditions = $conditions + array(998 => array('Release.dt_fim IS NOT NULL'));
+        unset($conditions[3]);
+      }else {
+        $conditions = $conditions + array(998 => array('Release.dt_fim IS NULL'));
+      }
+    }
 
     $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
+    //debug($conditions);
     // Define conditions
     //$this->Filter->setPaginate('order', 'Release.dt_prevista DESC, Rdm.dt_executada, Rdm.modified DESC, Rdm.created DESC');
     $this->Filter->setPaginate('conditions', $conditions);
