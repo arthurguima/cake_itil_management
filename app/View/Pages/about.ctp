@@ -62,6 +62,23 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li>
+            <div class="timeline-badge danger">
+              <i class="fa fa-bolt fa-fw"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.8 </h4>
+                    <div class="personal-info">
+                      <ul>
+                        <li>Criado o período de disponibilidade por cliente.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li class="timeline-inverted">
             <div class="timeline-badge warning">
               <i class="fa fa-wrench fa-fw"></i>
@@ -71,7 +88,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.6</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Removido Menu Gerencial</li>
                         <li>Demandas Internas transferidas a gestão de serviço</li>
@@ -102,7 +119,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.5 - SGS</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Checklist de RDM</li>
                         <li>Releases dos Serviços</li>
@@ -123,7 +140,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.1</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Menu Gerencial</li>
                         <li>Script de atualização automática de RDM</li>
@@ -147,7 +164,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.0</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Dashboard Separada Por Clientes</li>
                         <li>Análise de Demandas Atrasadas no Dashboard</li>
@@ -173,7 +190,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.9.X</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Timeline da SS</li>
                         <li>Resgatar dados do Clarity em Demandas Internas e SS</li>
@@ -197,7 +214,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.8.8</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Calendário</li>
                         <li>Checklist de OS</li>
@@ -219,7 +236,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.6</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Relatório de Indisponibilidade</li>
                         <li>Correção de Bugs.</li>
@@ -238,7 +255,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.5</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Melhorias na gestão dos Chamados.</li>
                         <li>Visão dos chamados no Dashboard</li>
@@ -255,7 +272,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4.2</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Melhorias na gestão das RDMs.</li>
                         <li>Pequenas melhorias no Dashboard.</li>
@@ -277,7 +294,7 @@
                 <li>
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4</h4>
                     <div class="personal-info">
-                      Veja o que mudou:<br/><br/>
+
                       <ul>
                         <li>Registrar RDMs dos diversos serviços.</li>
                         <li>Controlar quem pode remover registros do banco.</li>

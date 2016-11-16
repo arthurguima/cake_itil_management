@@ -117,6 +117,10 @@
 							<li>
 								<a href="#"><i class="fa fa-exclamation-circle fa-fw"></i> Funções Descontinuadas <span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
+									<li>
+											<?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Workspace',
+																							Router::url('/', true) . "workspace_old", array('escape' => false)); ?>
+									</li>
 									<li><!-- Calendário -->
 											<a href="#"><i class="fa fa-calendar fa-fw"></i> Calendários <span class="fa arrow"></span></a>
 											<ul class="nav nav-second-level">

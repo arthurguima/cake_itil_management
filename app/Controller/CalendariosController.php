@@ -369,7 +369,7 @@
 
       $data[] = array(
           'id' => $indisponibilidade['Indisponibilidade']['id'],
-          'title'=> $indisponibilidade['Motivo']['nome'],
+          'title'=> " - nº " . $indisponibilidade['Indisponibilidade']['num_evento'] . " - " . $indisponibilidade['Motivo']['nome'],
           'start'=> $indisponibilidade['Indisponibilidade']['dt_inicio'],
           'end' => $fim,
           'allDay' => false,

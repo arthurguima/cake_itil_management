@@ -184,6 +184,79 @@ class PagesController extends AppController {
 		$this->set('clienssessano', $this->ssesAnoPorCliente($ssesano));
 	}
 
+	public function workspace_old(){
+		/*Lista de PEs*/
+		$this->loadModel('Pe');
+		$this->Pe->Behaviors->attach('Containable');
+		$pes = $this->Pe->find('all', array(
+			'contain' => array(
+				'Ss' => array(),
+				'Servico' => array(),
+				'Status' => array(),
+			),
+			'conditions' => array('Pe.user_id = ' . $this->Session->read('User.uid')),
+			'joins' => array(
+				array(
+					'table'=>'statuses',
+					'alias' => 'Status_',
+					'type'=>'inner',
+					'conditions'=> array(
+						'Status_.id = Pe.status_id',
+						'Status_.fim =' => null,
+					),
+				)
+			)
+		));
+		$this->set('pes', $pes);
+
+		/*Lista de PEs*/
+		$this->loadModel('Ord');
+		$this->Ord->Behaviors->attach('Containable');
+		$ords = $this->Ord->find('all', array(
+			'contain' => array(
+				'Ss' => array(),
+				'Servico' => array(),
+				'Status' => array(),
+			),
+			'conditions' => array('Ord.user_id = ' . $this->Session->read('User.uid')),
+			'joins' => array(
+				array(
+					'table'=>'statuses',
+					'alias' => 'Status_',
+					'type'=>'inner',
+					'conditions'=> array(
+						'Status_.id = Ord.status_id',
+						'Status_.fim =' => null,
+					),
+				)
+			)
+		));
+		$this->set('ords', $ords);
+
+		/*Lista de Sses*/
+		$this->loadModel('Ss');
+		$this->Ss->Behaviors->attach('Containable');
+		$sses = $this->Ss->find('all', array(
+			'contain' => array(
+				'Servico' => array('Cliente'=> array()),
+				'Status' => array(),
+			),
+			'conditions' => array('Ss.user_id = ' . $this->Session->read('User.uid')),
+			'joins' => array(
+				array(
+					'table'=>'statuses',
+					'alias' => 'Status_',
+					'type'=>'inner',
+					'conditions'=> array(
+						'Status_.id = Ss.status_id',
+						'Status_.fim =' => null,
+					),
+				)
+			)
+		));
+		$this->set('sses', $sses);
+	}
+
 	public function workspace(){
 		/*Lista de Chamados*/
 		$this->loadModel('Chamado');
@@ -272,77 +345,6 @@ class PagesController extends AppController {
 			'conditions' => array('Subtarefa.check = 0 && Demanda.user_id = ' . $this->Session->read('User.uid'))
 		));
 		$this->set('subtarefas', $subtarefas);
-
-		/*Lista de PEs*/
-		$this->loadModel('Pe');
-		$this->Pe->Behaviors->attach('Containable');
-		$pes = $this->Pe->find('all', array(
-      'contain' => array(
-				'Ss' => array(),
-        'Servico' => array(),
-        'Status' => array(),
-      ),
-			'conditions' => array('Pe.user_id = ' . $this->Session->read('User.uid')),
-      'joins' => array(
-        array(
-          'table'=>'statuses',
-          'alias' => 'Status_',
-          'type'=>'inner',
-          'conditions'=> array(
-            'Status_.id = Pe.status_id',
-            'Status_.fim =' => null,
-          ),
-        )
-      )
-    ));
-		$this->set('pes', $pes);
-
-		/*Lista de PEs*/
-		$this->loadModel('Ord');
-		$this->Ord->Behaviors->attach('Containable');
-		$ords = $this->Ord->find('all', array(
-      'contain' => array(
-				'Ss' => array(),
-        'Servico' => array(),
-        'Status' => array(),
-      ),
-			'conditions' => array('Ord.user_id = ' . $this->Session->read('User.uid')),
-      'joins' => array(
-        array(
-          'table'=>'statuses',
-          'alias' => 'Status_',
-          'type'=>'inner',
-          'conditions'=> array(
-            'Status_.id = Ord.status_id',
-            'Status_.fim =' => null,
-          ),
-        )
-      )
-    ));
-		$this->set('ords', $ords);
-
-		/*Lista de Sses*/
-		$this->loadModel('Ss');
-		$this->Ss->Behaviors->attach('Containable');
-		$sses = $this->Ss->find('all', array(
-			'contain' => array(
-				'Servico' => array('Cliente'=> array()),
-				'Status' => array(),
-			),
-			'conditions' => array('Ss.user_id = ' . $this->Session->read('User.uid')),
-			'joins' => array(
-				array(
-					'table'=>'statuses',
-					'alias' => 'Status_',
-					'type'=>'inner',
-					'conditions'=> array(
-						'Status_.id = Ss.status_id',
-						'Status_.fim =' => null,
-					),
-				)
-			)
-		));
-		$this->set('sses', $sses);
 	}
 
 
