@@ -17,6 +17,8 @@
      echo $this->BootstrapForm->input('sigla', array(
         'label' => array('text' => 'Sigla: ')));
 
+     echo $this->BootstrapForm->input('dt_ini_disponibilidade', array(
+      'label' => array('text' => 'Início do Cálculo de ANS (dia): ')));
     ?>
       <div class="form-footer col-lg-10 col-md-6 pull-right">
         <?php

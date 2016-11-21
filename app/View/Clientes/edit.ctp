@@ -21,6 +21,9 @@
       echo $this->BootstrapForm->input('sigla', array(
         'label' => array('text' => 'Sigla: ')));
 
+      echo $this->BootstrapForm->input('dt_ini_disponibilidade', array(
+        'label' => array('text' => 'Início do Cálculo de ANS (dia): ')));
+
       echo $this->BootstrapForm->input('id');
 
     ?>

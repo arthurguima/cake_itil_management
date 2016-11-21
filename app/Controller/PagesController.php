@@ -44,36 +44,42 @@ class PagesController extends AppController {
 
 		/* Lista de Servicos */
 		$this->loadModel('Servico');
-		$this->Servico->Behaviors->attach('Containable');
-		if(date("d") < 21){
-			$servicos = $this->Servico->find('all', array(
-				'conditions'=> array("Servico.cliente_id " . $_SESSION['User']['clientes']),
-				'contain' => array(
-					'Indisponibilidade' => array(
-						'Motivo' => array(),
-						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 )) ||
-																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 ))')
+		$this->Servico->Behaviors->attach('Containable');			
+			$servicos_completo = Array();
+		  foreach ($_SESSION['Clientes']['indisponibilidades'] as $key => $value) {
+		    if(date("d") < $value+1){
+		      $servicos = $this->Servico->find('all', array(
+		        'conditions'=> array("Servico.cliente_id = " . $key),
+		        'contain' => array(
+		          'Indisponibilidade' => array(
+		            'Motivo' => array(),
+		            'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.
+		                                    date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= '. $value .' )) ||
+		                                  ((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.
+		                                    date("m",strtotime("-1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > '. $value .' ))')
 
 
-					),
-					'Cliente'=> array()
-				)
-			));
-		}
-		else{
-			$servicos = $this->Servico->find('all', array(
-				'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
-				'contain' => array(
-					'Indisponibilidade' => array(
-						'Motivo' => array(),
-						'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > 20 )) ||
-																	((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("+1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= 20 ))')
-					),
-					'Cliente'=> array()
-				)
-			));
-		}
-		$this->set('clientesindis', $this->servicoPorCliente($servicos));
+		          ),
+		          'Cliente'=> array()
+		        )
+		      ));
+		    }
+		    else{
+		      $servicos = $this->Servico->find('all', array(
+		        'conditions'=> array("Servico.cliente_id = " . $key),
+		        'contain' => array(
+		          'Indisponibilidade' => array(
+		            'Motivo' => array(),
+		            'conditions' => array('((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m").'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") > '. $value .' )) ||
+		                                  ((DATE_FORMAT(Indisponibilidade.dt_inicio,"%m") = "'.date("m",strtotime("+1 month")).'") && (DATE_FORMAT(Indisponibilidade.dt_inicio,"%d") <= '. $value .' ))')
+		          ),
+		          'Cliente'=> array()
+		        )
+		      ));
+		    }
+				$servicos_completo = array_merge($servicos_completo, $servicos);
+			}
+		$this->set('clientesindis', $this->servicoPorCliente($servicos_completo));
 		//$this->Servico->recursive = 2;
 
 		/*Lista de Demandas*/

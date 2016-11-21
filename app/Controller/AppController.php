@@ -105,11 +105,14 @@ class AppController extends Controller {
         $this->Session->write('User.admin', $user['User']['is_admin']);
         $clientes = "";
         $size = sizeof($user['Cliente']);
+        $indisponibilidade = Array();
           foreach ($user['Cliente'] as $cliente){
             $size = $size -1;
             $clientes = $clientes . $cliente["id"];
             if($size >= 1) $clientes = $clientes . ", ";
+            $indisponibilidade[$cliente["id"]] = $cliente["dt_ini_disponibilidade"];
           }
+          $this->Session->write('Clientes.indisponibilidades', $indisponibilidade);
         $clientes = " IN ("  . $clientes . ") ";
         $this->Session->write('User.clientes', $clientes);
       }else{

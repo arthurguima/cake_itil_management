@@ -72,7 +72,7 @@
                   <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.8 </h4>
                     <div class="personal-info">
                       <ul>
-                        <li>Criado o período de disponibilidade por cliente.</li>
+                        <li>Criado o controle do período de disponibilidade por cliente.</li>
                       </ul>
                     </div>
                 </li>
