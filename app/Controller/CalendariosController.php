@@ -337,14 +337,7 @@
 
     $this->loadModel('Indisponibilidade');
     $this->Indisponibilidade->Behaviors->load('Containable');
-    $this->Indisponibilidade->bindModel(array('hasMany' => array(
-      'IndisponibilidadesServico' => array(
-        'conditions' => array(
-          //'Servico.cliente_id '. $_SESSION['User']['clientes']
-        )
-      )
-    )), false);
-
+    $this->Indisponibilidade->bindModel(array('hasOne' => array('IndisponibilidadesServico')), false);
     $this->Indisponibilidade->contain('Motivo', 'Servico', 'IndisponibilidadesServico');
 
     $indisponibilidades = $this->Indisponibilidade->find('all', array(

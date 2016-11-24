@@ -64,7 +64,7 @@
 									$init = $cli[0]['Cliente']['dt_ini_disponibilidade']+1 ."/". date("m/Y",strtotime("-1 month"));
 									$end = $cli[0]['Cliente']['dt_ini_disponibilidade'] ."/". date('m/Y');
 									echo $init . " a " . $end;
-									$link1 = "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=". $cli[0]['Cliente']['dt_ini_disponibilidade']+1 ."%2F" . date("m",strtotime("-1 month")) . "%2F";
+									$link1 = "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25". $cli[0]['Cliente']['sigla'] ."%25&QBE.GE.outage_start_time=". $cli[0]['Cliente']['dt_ini_disponibilidade']+1 ."%2F" . date("m",strtotime("-1 month")) . "%2F";
 									$link = date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=". $cli[0]['Cliente']['dt_ini_disponibilidade'] ."%2F" . date('m') . "%2F" . date('Y') ."%2023%3A59%3A59";
 									echo '<a target="_blank" href="' . $link1 . $link .'"><i style="margin-left: 10px;" class="fa-external-link-square fa"></i>';
 								}
@@ -72,7 +72,7 @@
 									$init = $cli[0]['Cliente']['dt_ini_disponibilidade']+1 ."/". date('m/Y');
 									$end = $cli[0]['Cliente']['dt_ini_disponibilidade'] . "/". date("m/Y",strtotime("+1 month"));
 									echo $init . " a " . $end;
-									$link1 = "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25MTE%25&QBE.GE.outage_start_time=";
+									$link1 = "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH&FACTORY=in&QBE.EQ.active=1&QBE.IN.affected_service.name=%25". $cli[0]['Cliente']['sigla'] ."%25&QBE.GE.outage_start_time=";
 									$link = $cli[0]['Cliente']['dt_ini_disponibilidade']+1 ."%2F" . date('m') . "%2F" . date('Y') ."%2000%3A00%3A00&QBE.LE.outage_start_time=" . $cli[0]['Cliente']['dt_ini_disponibilidade'] ."%2F" . date('m',strtotime("+1 month")) . "%2F" . date('Y') ."%2023%3A59%3A59";
 									echo '<a target="_blank" href="' . $link1 . $link .'"><i style="margin-left: 10px;" class="fa-external-link-square fa"></i></a>';
 								}
