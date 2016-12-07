@@ -44,7 +44,7 @@ class PagesController extends AppController {
 
 		/* Lista de Servicos */
 		$this->loadModel('Servico');
-		$this->Servico->Behaviors->attach('Containable');			
+		$this->Servico->Behaviors->attach('Containable');
 			$servicos_completo = Array();
 		  foreach ($_SESSION['Clientes']['indisponibilidades'] as $key => $value) {
 		    if(date("d") < $value+1){

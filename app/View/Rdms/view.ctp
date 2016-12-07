@@ -28,7 +28,7 @@
           <li>
             <?php
               echo $this->Html->link("<b>Número: </b>" . $rdm['Rdm']['numero'] . " <i class='fa-external-link-square fa'></i>",
-                    "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
+                    "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
                     array('escape' => false , 'target' => '_blank'));
             ?>
           </li>

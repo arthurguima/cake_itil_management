@@ -250,7 +250,7 @@
 			if ($this->Chamado->save($this->request->data)) {
 				$this->Session->setFlash('Chamado Atualizado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
 				//Redirect
-				if($this->params['url']['id'] != null ){
+				if($this->params['url']['id'] != null && $this->params['url']['controller'] != ''){
 					return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
 				}
 				else{
