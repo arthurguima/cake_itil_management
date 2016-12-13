@@ -296,26 +296,47 @@
     $this->loadModel('Subtarefa');
     $this->Subtarefa->Behaviors->load('Containable');
     $subtarefas = $this->Subtarefa->find('all', array(
-			'contain' => array(
-				'Demanda' => array(
-					'Servico' => array(),
-				)
+      'contain' => array(
+				'Servico' => array(),
+				'Demanda' => array(),
+				'Rdm' => array(),
+				'Chamado' => array(),
+				'Release' => array()
 			),
       'conditions'=>
-         array('Demanda.user_id = ' . $this->Session->read('User.uid')))
+         array('Subtarefa.user_id = ' . $this->Session->read('User.uid')))
 		);
 		$this->set('subtarefas', $subtarefas);
 
     $data = array();
     foreach($subtarefas as $sub) {
+      $id = "";
+      $url = "#";
+      if(isset($sub['Demanda']['clarity_dm_id'])){
+        $id = $sub['Demanda']['clarity_dm_id'];
+        $url = Router::url('/') . 'demandas/view/'. $sub['Demanda']['id'];
+      }
+      elseif(isset($sub['Chamado']['numero'])){
+        $id = "Chamado: " . $sub['Chamado']['numero'] . "/" . $sub['Chamado']['ano'];
+        $url = Router::url('/') . 'chamados/view/'. $sub['Chamado']['id'];
+      }
+      elseif(isset($sub['Rdm']['numero'])){
+        $id = "RDM: " . $sub['Rdm']['numero'] . "/" . $sub['Rdm']['ano'];
+        $url = Router::url('/') . 'rdms/view/'. $sub['Rdm']['id'];
+      }
+      elseif(isset($sub['Release']['id'])){
+        $id = "Release: " . $sub['Release']['versao'];
+        $url = Router::url('/') . 'releases/view/'. $sub['Release']['id'];
+      }
+
       $data[] = array(
-          'id' => $sub['Demanda']['id'],
-          'title'=> $sub['Demanda']['Servico']['sigla'] . " - " . $sub['Demanda']['nome'],
+          'id' => $sub['Subtarefa']['id'],
+          'title'=> $sub['Servico']['sigla'] . " - " . $sub['Subtarefa']['descricao'],
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $sub['Subtarefa']['dt_prevista']))),
         //  'end' => $demanda['Demanda']['dt_prevista'],
           'allDay' => true,
-          'url' => Router::url('/') . 'demandas/view/'. $sub['Demanda']['id'],
-          'description' => $this->subtarefaFinalizada($sub['Subtarefa']['check']) . " - " . $sub['Subtarefa']['descricao'],
+          'url' => $url,
+          'description' => $this->subtarefaFinalizada($sub['Subtarefa']['check']) . " - " . $id,
           'className' => 'calendar-os'
       );
     }

@@ -96,6 +96,7 @@
 											</ul>
 										</li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Releases", '/relatorios/releases', array('escape' => false)); ?></li>
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tarefas", '/relatorios/tarefasusuario', array('escape' => false)); ?></li>										
 									</ul>
 							</li>
 							<li> <!-- Admin -->
@@ -190,6 +191,6 @@
 		</div>
 		<!-- hr style="margin-top:50px;" --><?php  //echo $this->element('sql_dump'); ?>
 	</div>
-	<script>$(function() {setTimeout(function(){$('.alert').toggle();}, 3500);});</script>
+	<script>$(function() {setTimeout(function(){$('.alert').toggle();}, 3800);});</script>
 </body>
 </html>

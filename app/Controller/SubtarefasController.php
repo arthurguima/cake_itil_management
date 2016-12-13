@@ -41,12 +41,25 @@
            '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id']) ));
         }
         else{
-          return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+          if(isset($this->params['url']['controller']))
+            return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+          else {
+            return $this->redirect(Router::url('/', true) . "index.php");
+          }
         }
       } else {
         $this->Session->setFlash('Não foi possível criar a nova subtarefa .', 'alert-box', array ('class' => 'alert alert-danger'));
       }
     }
+
+    /* Relacionamentos */
+      $users = $this->Subtarefa->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
+
+      $servicos = $this->Subtarefa->Servico->find('list', array(
+        'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+        'conditions' => ("Servico.cliente_id" . $_SESSION['User']['clientes'])));
+      $this->set(compact('servicos'));
   }
 
 /**
@@ -68,7 +81,11 @@
            '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id']) ));
         }
         else{
-          return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+          if(isset($this->params['url']['controller']))
+            return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+          else {
+            return $this->redirect(Router::url('/', true) . "index.php");
+          }
         }
       } else {
         $this->Session->setFlash('Não foi possível atualizar a Subtarefa .', 'alert-box', array ('class' => 'alert alert-danger'));
@@ -77,6 +94,15 @@
       $options = array('conditions' => array('Subtarefa.' . $this->Subtarefa->primaryKey => $id));
       $this->request->data = $this->Subtarefa->find('first', $options);
     }
+
+    /* Relacionamentos */
+      $users = $this->Subtarefa->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
+
+      $servicos = $this->Subtarefa->Servico->find('list', array(
+        'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+        'conditions' => ("Servico.cliente_id" . $_SESSION['User']['clientes'])));
+      $this->set(compact('servicos'));
   }
 
 /**
@@ -100,7 +126,11 @@
     } else {
       $this->Session->setFlash('O Subtarefa com id: %s  não foi removida.', 'alert-box', array ('class' => 'alert alert-danger'), h($id));
     }
-    return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+    if(isset($this->params['url']['controller']))
+      return $this->redirect(array('controller' =>  $this->params['url']['controller'], 'action' => $this->params['url']['action'], $this->params['url']['id'] ));
+    else {
+      return $this->redirect(Router::url('/', true) . "index.php");
+    }
   }
 
   /**

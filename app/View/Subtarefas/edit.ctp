@@ -25,10 +25,8 @@
       echo $this->Html->script('sidebar.js');
   }
 
-  $this->Html->addCrumb('Demandas', '/demandas');
-  $this->Html->addCrumb("id:" . $this->params['url']['id'], array('controller' => 'demandas', 'action' => 'view', $this->params['url']['id']));
-  $this->Html->addCrumb('Histórico', '');
-  $this->Html->addCrumb("Novo", array('controller' => 'historicos', 'action' => 'add'));
+  $this->Html->addCrumb('Tarefas', '');
+  $this->Html->addCrumb("Editar");
 ?>
 <style media="screen">
     body{
@@ -36,10 +34,6 @@
     }
 </style>
 
-<?php
-  $this->Html->addCrumb('Histórico', '');
-  $this->Html->addCrumb("Editar", '');
-?>
 <div class="row">
   <div class="col-lg-12"><h3 class="page-header">Editar Tarefa</h3></div>
 </div>
@@ -54,13 +48,16 @@
     <?php
       echo $this->BootstrapForm->create('Subtarefa');
 
-      switch($this->params['url']['controller']){
-        case 'demandas':
-          $con =  $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
-          break;
-      }
-      if(isset($con))
-        echo $con;
+      echo $this->BootstrapForm->input('user_id', array(
+              'class' => 'select2',
+              'label' => array('text' => 'Responsável: '),
+              'empty' => "Responsável"));
+
+        if(!isset($this->params['url']['controller']))
+          echo $this->BootstrapForm->input('servico_id', array(
+                'class' => 'select2',
+                'label' => array('text' => 'Serviço: '),
+                'empty' => "Serviço"));
 
         echo $this->BootstrapForm->input('dt_prevista', array(
                                 'label' => array('text' => 'Data Prevista: '),
@@ -100,6 +97,10 @@
       todayBtn: true,
       language: 'pt-BR'
     });
+
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
   });
 </script>
 
@@ -108,4 +109,10 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>

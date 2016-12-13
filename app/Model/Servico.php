@@ -25,7 +25,11 @@
     'ChamadoTipo' => array('className' => 'ChamadoTipo'),
     'Regra' => array('className' => 'Regra'),
     'Container' => array('className' => 'Container'),
-    'Release' => array('className' => 'Release')
+    'Release' => array('className' => 'Release'),
+    'Subtarefa' => array(
+			'className' => 'Subtarefa',
+			'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC")
+		)
   );
 
   public $validate = array(

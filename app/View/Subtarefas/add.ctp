@@ -25,8 +25,6 @@
       echo $this->Html->script('sidebar.js');
   }
 
-  $this->Html->addCrumb('Demandas', '/demandas');
-  $this->Html->addCrumb("id:" . $this->params['url']['id'], array('controller' => 'demandas', 'action' => 'view', $this->params['url']['id']));
   $this->Html->addCrumb('Sub-tarefa', '');
   $this->Html->addCrumb("Nova", array('controller' => 'subtarefas', 'action' => 'add'));
 ?>
@@ -49,9 +47,24 @@
         case 'demandas':
           $con =  $this->BootstrapForm->hidden('demanda_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
           break;
+        case 'chamados':
+          $con =  $this->BootstrapForm->hidden('chamado_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
+        case 'rdms':
+          $con =  $this->BootstrapForm->hidden('rdm_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
+        case 'releases':
+          $con =  $this->BootstrapForm->hidden('release_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
       }
       if(isset($con))
         echo $con;
+
+        echo $this->BootstrapForm->input('user_id', array(
+               'class' => 'select2',
+               'label' => array('text' => 'Responsável: '),
+               'selected' => $this->Session->read('User.uid'),
+               'empty' => "Responsável"));
 
         echo $this->BootstrapForm->input('dt_prevista', array(
                                 'label' => array('text' => 'Data Prevista: '),
@@ -69,6 +82,15 @@
                                    'text' => 'Finalizada?',
                                    'class' => 'control-label',
                                    'style' => "left: -400px;")));
+
+       if(!isset($this->params['url']['controller']))
+         echo $this->BootstrapForm->input('servico_id', array(
+               'class' => 'select2',
+               'label' => array('text' => 'Serviço: '),
+               'selected' => $this->params['url']['servico'],
+               'empty' => "Serviço"));
+        else
+          echo  $this->BootstrapForm->hidden('servico_id', array('value' => $this->params['url']['servico'], 'type'=> "hidden"));
 
       ?>
       <div class="form-footer col-lg-10 col-md-6 pull-right">
@@ -90,6 +112,10 @@
       todayBtn: true,
       language: 'pt-BR'
     });
+
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
   });
 </script>
 
@@ -98,4 +124,10 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
 ?>

@@ -344,11 +344,13 @@ class PagesController extends AppController {
 		$this->Subtarefa->Behaviors->attach('Containable');
 		$subtarefas = $this->Subtarefa->find('all', array(
 			'contain' => array(
-				'Demanda' => array(
-					'Servico' => array(),
-				)
+				'Servico' => array(),
+				'Demanda' => array(),
+				'Rdm' => array(),
+				'Chamado' => array(),
+				'Release' => array()
 			),
-			'conditions' => array('Subtarefa.check = 0 && Demanda.user_id = ' . $this->Session->read('User.uid'))
+			'conditions' => array('Subtarefa.check = 0 && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
 		$this->set('subtarefas', $subtarefas);
 	}

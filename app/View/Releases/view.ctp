@@ -98,7 +98,87 @@
       </div>
     </div>
   </div>
+
+  <div class="col-lg-6 pull-right">
+    <div class="panel panel-purple">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Tarefas</b>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'subtarefas', 'action' => 'add','?' => array('servico' => $release['Servico']['id'], 'controller' => 'releases', 'id' =>  $release['Release']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.subtarefa-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body subtarefa-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Data prevista</th>
+                <th>Tarefa</th>
+                <th>Responsável</th>
+                <th>Finalizada</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($release['Subtarefa'] as $sub): ?>
+                  <tr>
+                    <td class="text-center">
+                      <?php
+                        if($sub['check'] == 0)
+                          echo $this->Times->timeLeftTo($sub['created'], $sub['dt_prevista'],
+                            date("d/m/Y", strtotime($sub['created'])) . " - " . $sub['dt_prevista'],null);
+                        else {
+                          echo $this->Times->timeLeftTo($sub['created'], $sub['dt_prevista'],
+                            date("d/m/Y", strtotime($sub['created'])) . " - " . $sub['dt_prevista'],$sub['dt_prevista']);
+                        }
+                      ?>
+                    </td>
+                    <td><?php echo $sub['descricao']; ?></td>
+                    <td><?php echo $sub['User']['nome']; ?></td>
+                    <td id="<?php echo "sub-" . $sub['id']?>">
+                      <?php
+                        if($sub['check'] == 0):
+                          echo "<span class='label label-success'>Em andamento</span>";
+                        else:
+                          echo "<span class='label label-default'>Finalizada</span>";
+                        endif;
+                      ?>
+                    </td>
+                    <?php
+                      echo $this->Tables->SubtarefaStatusEditable($sub['id'], "subtarefas");
+                    ?>
+                    <td>
+                       <?php
+                         if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                  array('controller' => 'subtarefas', 'action' => 'edit', $sub['id'], '?' => array('controller' => 'releases', 'id' =>  $release['Release']['id'], 'action' => 'view' )),
+                                  array('escape' => false));
+                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                  array('controller' => 'subtarefas', 'action' => 'delete', $sub['id'], '?' => array('controller' => 'releases', 'id' => $release['Release']['id'], 'action' => 'view' )),
+                                  array('escape' => false), "Você tem certeza");
+                         }
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($sub); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
 
 <div class="col-md-12">
   <?php

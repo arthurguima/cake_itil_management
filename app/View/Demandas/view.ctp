@@ -269,7 +269,7 @@
             <?php
               if($this->Ldap->autorizado(2)){
                 echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-                array('controller' => 'subtarefas', 'action' => 'add','?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                array('controller' => 'subtarefas', 'action' => 'add','?' => array('servico' => $demanda['Servico']['id'], 'controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
                 array('escape' => false));
               }
             ?>
@@ -284,6 +284,7 @@
               <tr>
                 <th>Data prevista</th>
                 <th>Tarefa</th>
+                <th>Responsável</th>
                 <th>Finalizada</th>
                 <th></th>
               </tr>
@@ -291,8 +292,19 @@
             <tbody>
               <?php foreach($demanda['Subtarefa'] as $sub): ?>
                   <tr>
-                    <td><?php echo $sub['dt_prevista']; ?></td>
+                    <td class="text-center">
+                      <?php
+                        if($sub['check'] == 0)
+                          echo $this->Times->timeLeftTo($sub['created'], $sub['dt_prevista'],
+                            date("d/m/Y", strtotime($sub['created'])) . " - " . $sub['dt_prevista'],null);
+                        else {
+                          echo $this->Times->timeLeftTo($sub['created'], $sub['dt_prevista'],
+                            date("d/m/Y", strtotime($sub['created'])) . " - " . $sub['dt_prevista'],$sub['dt_prevista']);
+                        }
+                      ?>
+                    </td>
                     <td><?php echo $sub['descricao']; ?></td>
+                    <td><?php echo $sub['User']['nome']; ?></td>
                     <td id="<?php echo "sub-" . $sub['id']?>">
                       <?php
                         if($sub['check'] == 0):

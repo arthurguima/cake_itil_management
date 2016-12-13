@@ -405,28 +405,50 @@
 			<div class="col-lg-12">
 				<div class="panel panel-workspace">
 					<div class="panel-heading">
-						<b> Tarefas de Demandas </b>
+						<b> Tarefas </b>
+						<?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'subtarefas', 'action' => 'add'),
+                array('escape' => false));
+              }
+            ?>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
 							<table class="table table-striped table-bordered table-hover" id="dataTables-subtarefas">
 								<thead>
 									<tr>
-										<th>Demanda/Servico</th>
+										<th>Servico</th>
+										<th>Atividade</th>
 										<th>Tarefa</th>
 										<th>Prazo</th>
 										<th><span class="editable">Finalizar</span></th>
+										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php foreach ($subtarefas as $sub): ?>
 										<tr>
-											<td><?php echo $this->Html->link($sub['Demanda']['clarity_dm_id']." / ".$sub['Demanda']['Servico']['sigla'],
-		                       array('controller' => 'Demandas', 'action' => 'view', $sub['Demanda']['id'])); ?></td>
+											<td><?php echo $sub['Servico']['sigla'] ?></td>
+											<td>
+												<?php
+													if(isset($sub['Demanda']['clarity_dm_id']))
+														echo $this->Html->link($sub['Demanda']['clarity_dm_id'],array('controller' => 'Demandas', 'action' => 'view', $sub['Demanda']['id']));
+													elseif(isset($sub['Chamado']['numero']))
+														echo $this->Html->link("Chamado: " . $sub['Chamado']['numero'] . "/" . $sub['Chamado']['ano'], array('controller' => 'Chamados', 'action' => 'view', $sub['Chamado']['id']));
+													elseif(isset($sub['Rdm']['numero']))
+														echo $this->Html->link("RDM: " . $sub['Rdm']['numero'] . "/" . $sub['Rdm']['ano'], array('controller' => 'rdms', 'action' => 'view', $sub['Rdm']['id']));
+													elseif(isset($sub['Release']['id']))
+														echo $this->Html->link("Release: " . $sub['Release']['versao'], array('controller' => 'releases', 'action' => 'view', $sub['Release']['id']));
+													else
+														echo " --- ";
+												?>
+											</td>
 											<td><?php echo $sub['Subtarefa']['descricao']; ?></td>
 											<td class="text-center">
 		                    <?php echo $this->Times->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'],
-		                             $sub['Subtarefa']['created'] . " - " . $sub['Subtarefa']['dt_prevista'],null);
+		                             date("d/m/Y", strtotime($sub['Subtarefa']['created'])) . " - " . $sub['Subtarefa']['dt_prevista'],null);
 		                    ?>
 		                  </td>
 											<td id="<?php echo "sub-" . $sub['Subtarefa']['id']?>">
@@ -441,6 +463,9 @@
 											<?php
 												echo $this->Tables->SubtarefaStatusEditable($sub['Subtarefa']['id'], "subtarefas");
 											?>
+											<td>
+												<?php echo $this->Tables->getMenu('Subtarefas', $sub['Subtarefa']['id'],12); ?>
+											</td>
 										</tr>
 									<?php endforeach; ?>
 									<?php unset($sub); ?>

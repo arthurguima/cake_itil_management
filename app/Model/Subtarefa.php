@@ -6,6 +6,26 @@
     'Demanda' => array(
       'className' => 'Demanda',
       'foreignKey' => 'demanda_id'
+    ),
+    'Chamado' => array(
+      'className' => 'Chamado',
+      'foreignKey' => 'chamado_id'
+    ),
+    'Rdm' => array(
+      'className' => 'Rdm',
+      'foreignKey' => 'rdm_id'
+    ),
+    'Servico' => array(
+      'className' => 'Servico',
+      'foreignKey' => 'servico_id'
+    ),
+    'Release' => array(
+      'className' => 'Release',
+      'foreignKey' => 'release_id'
+    ),
+    'User' => array(
+      'className' => 'User',
+      'foreignKey' => 'user_id'
     )
   );
 
@@ -16,10 +36,19 @@
         'maxLength' => 250,
         'message' => 'Campo deve ser preenchido!')
     ),
-    'demanda_id' => array(
+    'servico_id' => array(
       'rule'   => 'notempty',
     ),
-		/*'dt_prevista' => array(
+    'user_id' => array(
+      'rule'   => 'notempty',
+    ),
+    'dt_prevista' => array(
+      'rule'   => 'notempty',
+    ),
+    /*'demanda_id' => array(
+      'rule'   => 'notempty',
+    ),
+		'dt_prevista' => array(
 			'MaiorQueHoje' => array(
 					"allowEmpty"=> true,
 					'rule' => array('compareFields', '>=', date()),

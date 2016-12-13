@@ -143,7 +143,7 @@
         'Servico' => array(),
         'User' => array(),
         'Historico' => array(),
-        'Subtarefa' => array()
+        'Subtarefa' => array('User')
       )
     );
     $this->set('demanda', $this->Demanda->find('first', $options));

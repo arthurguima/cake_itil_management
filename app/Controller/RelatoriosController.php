@@ -463,6 +463,52 @@
     $this->set(compact('servicos'));
   }
 
+  /*
+   * Relatório de atividades
+   * Procurar por todas as tarefas no nome do usuário em um período
+  */
+  public function tarefasusuario(){
+    $this->loadModel('Subtarefa');
+    $this->Subtarefa->Behaviors->attach('Containable');
+
+    $conditions = "";
+    if(isset($this->request->data['user_id']) && !empty($this->request->data['user_id'])){
+      $conditions = $conditions . 'Subtarefa.user_id = ' . $this->request->data['user_id'];
+
+    if(isset($this->request->data['dt_inicio']) && !empty($this->request->data['dt_inicio'])){
+      $inicio = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_inicio']);
+      $conditions = $conditions . " && Subtarefa.created >= '" . $inicio . "'";
+    }
+
+    if(isset($this->request->data['dt_fim']) && !empty($this->request->data['dt_fim'])){
+      $fim = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_fim']);
+      $conditions = $conditions . " && Subtarefa.dt_prevista <= '" . $fim . "'";
+    }
+
+      $subtarefas = $this->Subtarefa->find('all', array(
+        'conditions' => array(
+          $conditions
+        ),
+        'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC"),
+        'contain' => array(
+  				'Servico' => array(),
+  				'Demanda' => array(),
+  				'Chamado' => array(),
+  				'Release' => array(),
+          'Rdm' => array(),
+  			),
+      ));
+
+      $this->set('subtarefas', $subtarefas);
+    }
+
+    $this->loadModel('User');
+    $this->User->Behaviors->attach('Containable');
+
+    $this->set('users', $this->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'))));
+    $this->set(compact('users'));
+  }
 
   /*
    * Se existe uma contagem para a Pa automaticamente RESERVAMOS o valor

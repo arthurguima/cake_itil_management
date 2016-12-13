@@ -106,7 +106,8 @@
           'Servico' => array(),
           'User' => array(),
           'Historico' => array(),
-          'Release' => array()
+          'Release' => array(),
+          'Subtarefa' => array('User')
         )
       );
       $this->set('rdm', $this->Rdm->find('first', $options));

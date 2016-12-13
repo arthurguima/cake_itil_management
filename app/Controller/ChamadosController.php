@@ -196,7 +196,20 @@
 		if (!$this->Chamado->exists($id)) {
 			throw new NotFoundException(__('Chamado Inválido'));
 		}
-		$options = array('conditions' => array('Chamado.' . $this->Chamado->primaryKey => $id));
+		$this->Chamado->Behaviors->load('Containable');
+		$options = array(
+			'conditions' => array('Chamado.' . $this->Chamado->primaryKey => $id),
+			'contain'	=> array(
+					'Rdm' => array(),
+					'Historico' => array(),
+					'Servico' => array(),
+					'ChamadoTipo' => array(),
+					'Subtarefa' => array('User', 'Chamado'),
+					'Status' => array(),
+					'User' => array(),
+					'Demanda' => array()
+			)
+		);
 		$this->set('chamado', $this->Chamado->find('first', $options));
 	}
 

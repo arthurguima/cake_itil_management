@@ -15,7 +15,11 @@
     'Note' => array(
       'className' => 'Note',
       'foreignKey' => 'release_id'
-    )
+    ),
+    'Subtarefa' => array(
+			'className' => 'Subtarefa',
+			'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC")
+		)
   );
 
   public $validate = array(
