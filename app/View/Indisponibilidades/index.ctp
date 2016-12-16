@@ -128,7 +128,13 @@
                     if($Indisponibilidade['Indisponibilidade']['dt_fim'] == null)
                       echo $this->Tables->StatusEditable($Indisponibilidade['Indisponibilidade']['id'], "indisponibilidades");
                   ?>
-                  <td><?php echo $this->Tables->getMenu('Indisponibilidades', $Indisponibilidade['Indisponibilidade']['id'], 14); ?></td>
+                  <td>
+                    <?php
+                      echo $this->Tables->getMenu('Indisponibilidades', $Indisponibilidade['Indisponibilidade']['id'], 14);
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $Indisponibilidade['Indisponibilidade']['id'] . ",\"indisponibilidades\")'>
+                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                    ?>
+                  </td>
                 </tr>
               <?php endforeach; ?>
               <?php unset($Indisponibilidade); ?>
@@ -141,6 +147,19 @@
           *Mostra incialmente apenas Indisponibilidades abertas. *Utilize o filtro para melhores resultados.
         </li>
       </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Historico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <iframe id="historicoFrame" name='demanda' width='100%' height='720px' frameborder='0'></iframe>
+      </div>
     </div>
   </div>
 </div>
@@ -177,6 +196,9 @@
 ?>
 
 <script>
+  function historico(id, controller){
+    document.getElementById('historicoFrame').src = "<?php echo(Router::url('/', true). "historicos/popup?");?>" + "controller=" + controller + "&id=" + id;
+  }
   $(document).ready(function() {
     $('.select2').select2({
       containerCssClass: 'select2'

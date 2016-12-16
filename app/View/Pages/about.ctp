@@ -73,6 +73,8 @@
                     <div class="personal-info">
                       <ul>
                         <li>Criado o controle do período de disponibilidade por cliente (Dashboard).</li>
+                        <li>A criação de tarefas foi expandida. (Sistema/Chamados/Rdms/Releases) </li>
+                        <li>Criação de histórico nas indisponibilidades. </li>
                       </ul>
                     </div>
                 </li>

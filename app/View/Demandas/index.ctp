@@ -129,7 +129,7 @@
                   <td>
                     <?php
                       echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14);
-                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $demanda['Demanda']['id'] . ")'>
+                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $demanda['Demanda']['id'] .")'>
                         <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
                     ?>
                   </td>

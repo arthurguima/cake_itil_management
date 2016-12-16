@@ -22,6 +22,10 @@
     'Chamado' => array(
       'className' => 'Chamado',
       'foreignKey' => 'chamado_id'
+    ),
+    'Indisponibilidade' => array(
+      'className' => 'Indisponibilidade',
+      'foreignKey' => 'indisponibilidade_id'
     )
   );
 

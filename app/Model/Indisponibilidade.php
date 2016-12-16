@@ -18,6 +18,13 @@
 		'Servico' => array('className' => 'Servico')
 	);
 
+	public $hasMany = array(
+		'Historico' => array(
+			'className' => 'Historico',
+			'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
+		),
+	);
+
   public $validate = array(
     'dt_inicio' => array(
       'NotEmpty' => array(

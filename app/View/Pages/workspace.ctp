@@ -303,7 +303,13 @@
 		                    if($indisponibilidade['Indisponibilidade']['dt_fim'] == null)
 		                      echo $this->Tables->StatusEditable($indisponibilidade['Indisponibilidade']['id'], "indisponibilidades");
 		                  ?>
-		                  <td><?php echo $this->Tables->getMenu('Indisponibilidades', $indisponibilidade['Indisponibilidade']['id'], 14); ?></td>
+		                  <td>
+												<?php
+													echo $this->Tables->getMenu('Indisponibilidades', $indisponibilidade['Indisponibilidade']['id'], 14);
+													echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $indisponibilidade['Indisponibilidade']['id'] . ",\"indisponibilidades\")'>
+		                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+												?>
+											</td>
 		                </tr>
 		              <?php endforeach; ?>
 		              <?php unset($indisponibilidade); ?>

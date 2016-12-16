@@ -64,6 +64,9 @@
         case 'chamados':
           $con =  $this->BootstrapForm->hidden('chamado_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
           break;
+        case 'indisponibilidades':
+          $con =  $this->BootstrapForm->hidden('indisponibilidade_id', array('value' => $this->params['url']['id'], 'type'=> "hidden"));
+          break;
       }
       if(isset($con))
         echo $con;

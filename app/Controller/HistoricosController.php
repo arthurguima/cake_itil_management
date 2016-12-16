@@ -133,6 +133,9 @@
         case 'chamados':
           $this->set('historicos', $this->Historico->findAllByChamadoId( $this->params['url']['id']));
           break;
+        case 'indisponibilidades':
+          $this->set('historicos', $this->Historico->findAllByIndisponibilidadeId( $this->params['url']['id']));
+          break;
       }
 
     }
