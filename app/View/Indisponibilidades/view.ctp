@@ -139,7 +139,7 @@
                     <td>
                        <?php
                         if($this->Ldap->autorizado(2)){
-                          echo $this->Html->link("<i class='fa fa-indisponibilidadencil'></i>",
+                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'indisponibilidades', 'id' =>  $Indisponibilidade['Indisponibilidade']['id'], 'action' => 'view' )),
                                 array('escape' => false));
                           echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",

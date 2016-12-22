@@ -485,6 +485,9 @@
       $conditions = $conditions . " && Subtarefa.dt_prevista <= '" . $fim . "'";
     }
 
+    if((($this->request->data['check'] == 1) || ($this->request->data['check'] == 0)) && ($this->request->data['check'] != ''))
+      $conditions = $conditions . " && Subtarefa.check = " .  $this->request->data['check'];
+
       $subtarefas = $this->Subtarefa->find('all', array(
         'conditions' => array(
           $conditions
