@@ -92,11 +92,12 @@
 											<a href="#"><i class='fa fa-angle-double-right'></i> Demandas Internas <span class="fa arrow"></span></a>
 											<ul class="nav nav-third-level collapse">
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não Finalizadas", '/relatorios/demandas', array('escape' => false)); ?></li>
+												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas não Finalizadas por cliente", '/relatorios/demandas_cliente', array('escape' => false)); ?></li>
 												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas Atrasadas", '/relatorios/dematrasadas', array('escape' => false)); ?></li>
 											</ul>
 										</li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Releases", '/relatorios/releases', array('escape' => false)); ?></li>
-										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tarefas", '/relatorios/tarefasusuario', array('escape' => false)); ?></li>										
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tarefas", '/relatorios/tarefasusuario', array('escape' => false)); ?></li>
 									</ul>
 							</li>
 							<li> <!-- Admin -->

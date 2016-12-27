@@ -1,12 +1,12 @@
 <?php
   $this->Html->addCrumb("Relatórios", '');
-  $this->Html->addCrumb("Demandas Não Finalizadas", '/relatorios/demandas');
+  $this->Html->addCrumb("Demandas Não Finalizadas do Cliente", '/relatorios/demandas');
 ?>
 
 <div class="row">
   <div class="col-lg-12">
     <h3 class="page-header">
-      Demandas Não Finalizadas
+      Demandas Não Finalizadas do Cliente
       <span style="cursor:pointer;" onclick="javascript:$('div.panel-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
     </h3>
   </div>
@@ -41,7 +41,6 @@
               echo $this->BootstrapForm->input('user_id', array(
                      'class' => 'select2',
                      'label' => array('text' => 'Responsável: '),
-                     'selected' => $this->Session->read('User.uid'),
                      'empty' => "Responsável"));
             ?>
           </div>
@@ -55,35 +54,35 @@
   </div>
 </div>
 
-<?php $var = 0; foreach ($servicos as $key => $serv): ?>
+<?php if($this->request->data['cliente_id']):
+  $key = $this->request->data['cliente_id']; ?>
   <div class="row">
-    <div class="col-lg-12 demandas delete-<?php echo $var; ?>">
+    <div class="col-lg-12 demandas delete">
       <div class="panel panel-default">
         <div class="panel-heading">
           <b>
-            Demandas - <?php echo $key; ?>
-            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.hide-<?php echo $var; ?>').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-            <span style="cursor:pointer;" onclick="javascript:$('div.delete-<?php echo $var; ?>').remove();"><i class="fa fa-trash-o pull-right"></i></span>
-            <span style="cursor:pointer;" onclick="javascript:$('div.demandas').not('div.delete-<?php echo $var; ?>').remove();"><i class="fa fa-binoculars pull-right"></i></span>
+            Demandas - <?php echo $clientes[$this->request->data['cliente_id']]; ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.hide-d').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+            <span style="cursor:pointer;" onclick="javascript:$('div.delete').remove();"><i class="fa fa-trash-o pull-right"></i></span>
+            <span style="cursor:pointer;" onclick="javascript:$('div.demandas').not('div.delete').remove();"><i class="fa fa-binoculars pull-right"></i></span>
           </b>
         </div>
-        <div class="panel-body hide-<?php echo $var; ?>">
+        <div class="panel-body hide-d">
           <div class="table-responsive">
-            <table class="table display table-striped table-bordered table-hover" id="dataTables-<?php echo $var; ?>">
+            <table class="table display table-striped table-bordered table-hover" id="dataTables-d">
               <thead>
                 <tr>
                   <th>Demanda</th>
                   <th>Nome</th>
                   <th>Tipo</th>
                   <th>Status</th>
-                  <th>Data de Cadastro</th>
-                  <th/>Data Prevista</th>
                   <th>Solicitada pelo Cliente?</th>
                   <th>Prazo</th>
+                  <th>Histórico</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($serv as $dem): ?>
+                <?php foreach ($demandas as $dem): ?>
                   <tr>
                     <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php
@@ -94,14 +93,22 @@
                     <td><?php echo $this->html->link($dem['Demanda']['nome'], array('controller'=> 'demandas', 'action' => 'view', $dem['Demanda']['id'])); ?></td>
                     <td><?php echo $dem['DemandaTipo']['nome']; ?></td>
                     <td><?php echo $dem['Status']['nome']; ?></td>
-                    <td><?php echo $dem['Demanda']['data_cadastro']; ?></td>
-                    <td><?php echo $dem['Demanda']['dt_prevista']; ?></td>
                     <td><?php echo $this->Times->yesOrNo($dem['Demanda']['origem_cliente']); ?></td>
                     <td class="text-center">
                       <?php echo $this->Times->timeLeftTo($dem['Demanda']['data_cadastro'], $dem['Demanda']['dt_prevista'],
                                $dem['Demanda']['data_cadastro'] . " - " . $dem['Demanda']['dt_prevista'],
                               ($dem['Demanda']['data_homologacao']));
                       ?>
+                    </td>
+                    <td>
+                      <ul style="overflow: auto;">
+                        <?php
+                          foreach ($dem['Historico'] as $h):
+                            echo  '<li>' . $this->Historicos->findLinks($h['descricao']) . '</li>';
+                          endforeach;
+                          unset($dem);
+                        ?>
+                      </ul>
                     </td>
                   </tr>
                 <?php endforeach; ?>
@@ -130,7 +137,7 @@
 
   <script>
     $(document).ready(function() {
-      var  oTable<?php echo $var; ?> =   $('#dataTables-<?php echo $var; ?>').dataTable({
+      var  oTable =   $('#dataTables-d').dataTable({
           "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
             language: {
               url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
@@ -158,24 +165,24 @@
                   {
                       "sExtends": "csv",
                       "sButtonText": "CSV",
-                      "sFileName": "Demandas(<?php echo $key; ?>).csv",
+                      "sFileName": "Demandas(<?php echo $clientes[$this->request->data['cliente_id']]; ?>).csv",
                       "oSelectorOpts": { filter: 'applied', order: 'current' },
                       "mColumns": "visible",
                   },
                   {
                       "sExtends": "pdf",
                       "sButtonText": "PDF",
-                      "sFileName": "Demandas(<?php echo $key; ?>).pdf",
+                      "sFileName": "Demandas(<?php echo $clientes[$this->request->data['cliente_id']]; ?>).pdf",
                       "oSelectorOpts": { filter: 'applied', order: 'current' },
                       "mColumns": "visible",
                       "sPdfOrientation": "landscape",
-                      "sTitle": "Demandas(<?php echo $key; ?>)",
+                      "sTitle": "Demandas(<?php echo $clientes[$this->request->data['cliente_id']]; ?>)",
                       "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
                   },
                 ]
             },
         });
-        var colvis = new $.fn.dataTable.ColVis( oTable<?php echo $var; ?> );
+        var colvis = new $.fn.dataTable.ColVis( oTable );
 
         $('#myModal').on('shown.bs.modal', function (e) {
           document.getElementById('modal-body').appendChild(
@@ -186,8 +193,7 @@
         });
     });
   </script>
-<?php $var++; endforeach; ?>
-<?php unset($serv); ?>
+<?php endif; ?>
 
 <script>
 $(document).ready(function() {
