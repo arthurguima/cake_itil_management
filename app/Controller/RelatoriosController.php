@@ -296,6 +296,10 @@
       $and ? ($conditions = $conditions . ' AND ' ) : ($conditions = $conditions);
       $conditions = $conditions . 'Demanda.user_id = ' . $this->request->data['user_id'];
     }
+    if(isset($this->request->data['status_id']) && $this->request->data['status_id'] != ''){
+      $and ? ($conditions = $conditions . ' AND ' ) : ($conditions = $conditions);
+      $conditions = $conditions . 'Demanda.status_id = ' . $this->request->data['status_id'];
+    }
 
     $demandas = $this->Demanda->find('all', array(
       'contain' => array(
@@ -340,6 +344,10 @@
 
     $demandaTipos = $this->Demanda->DemandaTipo->find('list', array('fields' => array('DemandaTipo.id', 'DemandaTipo.nome')));
     $this->set(compact('demandaTipos'));
+
+    $statuses = $this->Demanda->Status->find('list',
+          array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
+    $this->set(compact('statuses'));
 
     $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
     $this->set(compact('users'));
@@ -517,7 +525,7 @@
 
       $releases = $this->Release->find('all', array(
         'conditions' => array(
-          $conditions
+          $conditions . " AND Release.dt_fim IS NOT NULL"
         ),
         'order' => array("Rdm.dt_executada" => "DESC"),
         'contain' => array(

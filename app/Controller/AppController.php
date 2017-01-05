@@ -103,6 +103,7 @@ class AppController extends Controller {
         $this->Session->write('User.uid', $user['User']['id']);
         $this->Session->write('User.nome', $user['User']['nome']);
         $this->Session->write('User.admin', $user['User']['is_admin']);
+        //$this->Session->write('User.auth_pass', $_SESSION['auth_pass']);
         $clientes = "";
         $size = sizeof($user['Cliente']);
         $indisponibilidade = Array();
@@ -124,6 +125,44 @@ class AppController extends Controller {
       $this->Session->write('User.uid', '0');
       return $this->redirect("http://www-apps/");
     }
+  }
+
+  public function mail(Array $conf){
+    $Email = new CakeEmail('apps_default');
+    $Email->from(array($conf['from'][0] . "@" . $conf['from'][1] => 'SGS - Sistema de Gestão de Serviço'));
+
+    $this->loadModel('User');
+    $user = $this->User->find('first', array(
+        'conditions' => array('User.id =' . $conf['to'])
+    ));
+
+    $this->loadModel('Servico');
+    $servico = $this->Servico->find('first', array(
+        'conditions' => array('Servico.id =' . $conf['servico_id'])
+    ));
+
+    $Email->emailFormat('html');
+    $Email->to($user['User']['mail']);
+    $Email->subject("[" . $servico['Servico']['sigla'] . "] " . $conf['subject']);
+
+    $Email->config(array(
+      'username' => $conf['from'][0],
+      'password' => $conf['auth_pass'],
+    ));
+
+    $html =
+    '
+      <ul>
+        <li>Serviço: '.$servico['Servico']['nome'].'</li>
+        <li>Atividade: '.$conf['tipo'].'</li>
+        <li>Data Prevista: '.$conf['data'].'</li>
+        <li>Descrição: '.$conf['mensagem'].'</li>
+      </ul>
+      <img rel="shortcut icon" sizes="48x48" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB50lEQVQ4T6XTTUgbQRQH8P8s66oYbCIKimIo7cEvSjFIkIKiIOLBg0Ib7EUQikiroXrwVF2h4MclNN4EWzEoRtGDKIjgoZQee2kMfpAqYmlB6kc07ppsdp+sNMGPjUo7xzfzfjNv3gzDfw52Pb/4uSgA6Sb/TOfBfewbAECswOHeAhBgIA+nJc35Z16HEmEGAFDgcA8D9OZvkszAFojgSTMnL30baVUuY3GgbKgsmxTKFEg4CQZqn6iyed5g1wMCFjli42vT7SsAozhgG7Dl88T7AKQTMYT8DdCiKYmvgeBan3Z2XinB3m9vATCqZ8m7dkT2HyUC/iiCUPzD07Z3AZAILpKZUUiq+qw9bO35rqbmRo9zcLpVZQgwoGnN65zSJy8AyW1pYqAxAEKQeDTLVhxpAo5XG0GqcB1ZWPc662PBeAmnHx7YOMZmAVi/qCa8O8uFtFMO5fDhZSAY5VlJYKLj5w1AD5y4TVk8eP1o1X3hHCzvF0HarogDBLRseJ2fDNsYC5IIPpxheR8krrtZeowd3wuQyoOAlQ1vR43euluB2KQ0bHn5VUn72LXpSI4c5UU0DoWbk2/1F3plGL7E2IqQy/z01V7lZ9/vUtfqWK9o1JJbAT1hcLAur1u2/4Ioav8E3PUjzwHhtqwRScFa2AAAAABJRU5ErkJggg==">
+      <p>Acesse em: <a href="http://www-apps/">www-apps/</a> -> SGS - Sistema de Gestão de Serviço</p>
+    ';
+
+    $Email->send($html);
   }
 
 }

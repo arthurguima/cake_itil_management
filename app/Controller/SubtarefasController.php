@@ -1,5 +1,10 @@
-<?php class SubtarefasController extends AppController {
+<?php
 
+App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
+App::import('Vendor', 'Encryption', array('file' => 'Encryption.php'));
+
+class SubtarefasController extends AppController {
 /**
  * index method
  *
@@ -31,11 +36,24 @@
  */
   public function add() {
     if($this->params['url']['popup'] == 'true'){  $this->layout = false; }
+    $converter = new Encryption;
 
     if ($this->request->is('post')) {
       $this->Subtarefa->create();
       if ($this->Subtarefa->save($this->request->data)) {
         $this->Session->setFlash('Subtarefa Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+
+        $this->mail(array(
+          'auth_pass' => $converter->decode($_SESSION['User']['auth_pass']),
+          'from' => explode('@', $_SESSION['email']),
+          'to' => $this->request->data['Subtarefa']['user_id'],
+          'servico_id' => $this->request->data['Subtarefa']['servico_id'],
+          'subject' => "[SGS] Uma nova tarefa foi atribuída para o dia '" . $this->request->data['Subtarefa']['dt_prevista']. "'!",
+          'tipo' => "Concluir Tarefa",
+          'data' => $this->request->data['Subtarefa']['dt_prevista'],
+          'mensagem' => $this->request->data['Subtarefa']['descricao'],
+        ));
+
         if(isset($this->params['url']['popup']) && $this->params['url']['popup'] == 'true'){
           return $this->redirect(array('controller' =>  "subtarefas", 'action' => 'popup',
            '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id']) ));

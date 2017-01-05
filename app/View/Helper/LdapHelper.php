@@ -1,4 +1,7 @@
-<?php  App::import('Vendor', 'ldapInclude', array('file' => 'ldapInclude.php'));
+<?php
+
+App::import('Vendor', 'ldapInclude', array('file' => 'ldapInclude.php'));
+App::import('Vendor', 'ldapInclude', array('file' => 'Encryption.php'));
 
 class LdapHelper extends AppHelper {
 
@@ -68,6 +71,15 @@ class LdapHelper extends AppHelper {
   public function redeUsuario(){
     if(isset($_SESSION['auth_user'])){
       return $_SESSION['auth_user'];
+    }
+    else{
+      return "";
+    }
+  }
+
+  public function passUsuario(){
+    if(isset($_SESSION['auth_pass'])){
+      return $_SESSION['auth_pass'];
     }
     else{
       return "";

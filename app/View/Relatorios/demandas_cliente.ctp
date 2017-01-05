@@ -19,8 +19,8 @@
       </div>
       <div class="row inner">
         <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
-        <div class="col-lg-12">
-          <div class="form-group">
+        <div class="col-lg-12 filters-item">
+          <div class="form-group ">
             <?php
 
               echo $this->BootstrapForm->input('cliente_id', array(
@@ -45,6 +45,15 @@
             ?>
           </div>
         </div>
+        <div class="col-lg-12">
+          <div class="form-group">
+            <?php
+            echo $this->BootstrapForm->input('status_id', array(
+                        'label' => array('text' => 'Status: '),
+                        'empty' =>  'Status'));
+            ?>
+          </div>
+        </div>
         <?php
           echo $this->BootstrapForm->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit', 'class' => 'control-label btn btn-default pull-right'));
           echo $this->BootstrapForm->end();
@@ -63,8 +72,6 @@
           <b>
             Demandas - <?php echo $clientes[$this->request->data['cliente_id']]; ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.hide-d').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
-            <span style="cursor:pointer;" onclick="javascript:$('div.delete').remove();"><i class="fa fa-trash-o pull-right"></i></span>
-            <span style="cursor:pointer;" onclick="javascript:$('div.demandas').not('div.delete').remove();"><i class="fa fa-binoculars pull-right"></i></span>
           </b>
         </div>
         <div class="panel-body hide-d">
@@ -104,7 +111,7 @@
                       <ul style="overflow: auto;">
                         <?php
                           foreach ($dem['Historico'] as $h):
-                            echo  '<li>' . $this->Historicos->findLinks($h['descricao']) . '</li>';
+                            echo  '<li>(' . $h['data'] . ') - ' .$this->Historicos->findLinks($h['descricao']) . '</li>';
                           endforeach;
                           unset($dem);
                         ?>

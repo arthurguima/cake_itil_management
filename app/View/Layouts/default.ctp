@@ -171,7 +171,7 @@
 						<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 			</div>
 			<span class="notes hidden-xs hidden-sm">
-				Sistema de gestão de Serviço - V 2.8
+				Sistema de gestão de Serviço - V 3.0
 				<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
 				<br /> <span style="margin-left: 13px;">arthur.doliveira@dataprev.gov.br</span>
 				<br /><br /><a href="/painel.php" style="padding-left: 38px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>

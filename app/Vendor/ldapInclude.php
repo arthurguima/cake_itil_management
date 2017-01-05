@@ -1,6 +1,6 @@
 <?php
   @session_start();
-  
+
   /*
    * validacao de usuario e senha no ldap
    */

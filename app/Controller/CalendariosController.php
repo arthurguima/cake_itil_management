@@ -121,7 +121,7 @@
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $ch['Chamado']['dt_prev_resolv']))),
           'allDay' => true,
           'url' => Router::url('/') . 'chamados/view/'.$ch['Chamado']['id'],
-          'description' =>  $this->yesOrNo($ch['Chamado']['aberto']) . " " . $ch['Servico']['sigla'],
+          'description' =>  $this->yesOrNo($ch['Chamado']['aberto']) . " <span class='sistema-calendario'>" .$ch['Servico']['sigla'] . "</span>",
           'className' => "calendar-ss"
       );
     }
@@ -280,7 +280,7 @@
         //  'end' => $demanda['Demanda']['dt_prevista'],
           'allDay' => true,
           'url' => Router::url('/') . 'demandas/view/'.$demanda['Demanda']['id'],
-          'description' => $demanda['Servico']['sigla'] . " - " . $demanda['DemandaTipo']['nome'],
+          'description' => "<span class='sistema-calendario'>" . $demanda['Servico']['sigla'] . "</span> - " . $demanda['DemandaTipo']['nome'],
           'className' => 'calendar-demanda'
       );
     }
@@ -313,30 +313,30 @@
       $id = "";
       $url = "#";
       if(isset($sub['Demanda']['clarity_dm_id'])){
-        $id = $sub['Demanda']['clarity_dm_id'];
+        $id = " - " . $sub['Demanda']['clarity_dm_id'];
         $url = Router::url('/') . 'demandas/view/'. $sub['Demanda']['id'];
       }
       elseif(isset($sub['Chamado']['numero'])){
-        $id = "Chamado: " . $sub['Chamado']['numero'] . "/" . $sub['Chamado']['ano'];
+        $id = " - Chamado: " . $sub['Chamado']['numero'] . "/" . $sub['Chamado']['ano'];
         $url = Router::url('/') . 'chamados/view/'. $sub['Chamado']['id'];
       }
       elseif(isset($sub['Rdm']['numero'])){
-        $id = "RDM: " . $sub['Rdm']['numero'] . "/" . $sub['Rdm']['ano'];
+        $id = " - RDM: " . $sub['Rdm']['numero'] . "/" . $sub['Rdm']['ano'];
         $url = Router::url('/') . 'rdms/view/'. $sub['Rdm']['id'];
       }
       elseif(isset($sub['Release']['id'])){
-        $id = "Release: " . $sub['Release']['versao'];
+        $id = " - Release: " . $sub['Release']['versao'];
         $url = Router::url('/') . 'releases/view/'. $sub['Release']['id'];
       }
 
       $data[] = array(
           'id' => $sub['Subtarefa']['id'],
-          'title'=> $sub['Servico']['sigla'] . " - " . $sub['Subtarefa']['descricao'],
+          'title'=>  $sub['Subtarefa']['descricao'],
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $sub['Subtarefa']['dt_prevista']))),
         //  'end' => $demanda['Demanda']['dt_prevista'],
           'allDay' => true,
           'url' => $url,
-          'description' => $this->subtarefaFinalizada($sub['Subtarefa']['check']) . " - " . $id,
+          'description' => "<span class='sistema-calendario'>" . $sub['Servico']['sigla'] . "</span> " . $this->subtarefaFinalizada($sub['Subtarefa']['check']) . $id,
           'className' => 'calendar-os'
       );
     }

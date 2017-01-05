@@ -12,6 +12,17 @@
         'message' => 'Campo deve ser preenchido!'
       )
     ),
+    'mail' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'maxLength' => 70,
+        'message' => 'Campo deve ser preenchido!'
+      ),
+      'mail' => array(
+        'rule'   => 'email',
+        'message' => 'Deve estar no formato de e-mail usuario@dominio!'
+      )
+    ),
     'matricula' => array(
       'empty' => array(
         'rule' => 'notempty',

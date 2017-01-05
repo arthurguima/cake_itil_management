@@ -19,6 +19,9 @@
       echo $this->BootstrapForm->input('matricula', array(
                   'label' => array('text' => 'Matrícula: ')));
 
+      echo $this->BootstrapForm->input('mail', array(
+                  'label' => array('text' => 'E-mail: ')));
+
       echo $this->BootstrapForm->input('Cliente', array(
                   'label' => array('text' => 'Clientes: '),
                   'input' => 'text',

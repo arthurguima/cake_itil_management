@@ -62,6 +62,24 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li class="timeline-inverted">
+            <div class="timeline-badge success">
+              <i class="fa fa-envelope-o fa-fw"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 3.0</h4>
+                    <div class="personal-info">
+
+                      <ul>
+                        <li>Envio de e-mails para os responsáveis pelas Subtarefas.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li>
             <div class="timeline-badge danger">
               <i class="fa fa-bolt fa-fw"></i>
@@ -115,7 +133,6 @@
               </ul>
             </div>
           </li>
-          <li>
           <li>
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
