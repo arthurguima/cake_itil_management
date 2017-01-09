@@ -336,7 +336,7 @@
         //  'end' => $demanda['Demanda']['dt_prevista'],
           'allDay' => true,
           'url' => $url,
-          'description' => "<span class='sistema-calendario'>" . $sub['Servico']['sigla'] . "</span> " . $this->subtarefaFinalizada($sub['Subtarefa']['check']) . $id,
+          'description' => "<span class='sistema-calendario'>" . $sub['Servico']['sigla'] . "</span> " . $id . " " . $this->subtarefaFinalizada($sub['Subtarefa']['check']),
           'className' => 'calendar-os'
       );
     }

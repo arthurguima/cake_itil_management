@@ -151,43 +151,6 @@ class PagesController extends AppController {
 		));
 		$this->set('rdmsmes', $this->rdmsPorCliente($rdmsmes));
 		$this->set('rdmsano', $this->rdmsPorCliente($rdmsano));
-
-		/*Lista de Sses*/
-		$this->loadModel('Ss');
-		$this->Ss->Behaviors->attach('Containable');
-		$sses = $this->Ss->find('all', array(
-			'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
-		  'contain' => array(
-		    'Servico' => array('Cliente'=> array()),
-				'Status' => array(),
-		  ),
-      'joins' => array(
-        array(
-          'table'=>'statuses',
-          'alias' => 'Status_',
-          'type'=>'inner',
-          'conditions'=> array(
-            'Status_.id = Ss.status_id',
-            'Status_.fim =' => null,
-          ),
-        )
-			)
-			//'conditions' => array('((DATE_FORMAT(Rdm.dt_prevista,"%m") = "'.date("m").'"))')
-		));
-
-		$ssesano = $this->Ss->find('all', array(
-		  'contain' => array(
-		    'Servico' => array('Cliente'=> array()),
-				'Ord' => array(),
-				'Pe' => array(),
-				//'Status' => array()
-		  ),
-			'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes'] . ' && ((DATE_FORMAT(Ss.dt_recebimento,"%Y") = "'.date("Y").'"))')
-		));
-
-		//$this->set('ssesano', $ssesano); debug($ssesano);
-		$this->set('cliensses', $this->ssesPorCliente($sses));
-		$this->set('clienssessano', $this->ssesAnoPorCliente($ssesano));
 	}
 
 	public function workspace_old(){

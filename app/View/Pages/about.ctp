@@ -73,7 +73,8 @@
                     <div class="personal-info">
 
                       <ul>
-                        <li>Envio de e-mails para os responsáveis pelas Subtarefas.</li>
+                        <li>Envio de e-mails para os responsáveis ao adicionar uma Subtarefa ou Demanda.</li>
+                        <li>Removidas as SS(es) do Dashboard</li>
                       </ul>
                     </div>
                 </li>

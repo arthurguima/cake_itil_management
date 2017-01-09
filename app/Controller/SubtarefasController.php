@@ -42,7 +42,7 @@ class SubtarefasController extends AppController {
       $this->Subtarefa->create();
       if ($this->Subtarefa->save($this->request->data)) {
         $this->Session->setFlash('Subtarefa Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
-
+ 
         $this->mail(array(
           'auth_pass' => $converter->decode($_SESSION['User']['auth_pass']),
           'from' => explode('@', $_SESSION['email']),

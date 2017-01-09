@@ -1,4 +1,9 @@
-<?php class DemandasController extends AppController {
+<?php
+App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
+App::import('Vendor', 'Encryption', array('file' => 'Encryption.php'));
+
+class DemandasController extends AppController {
 
   public $helpers = array('Times');
 
@@ -155,10 +160,23 @@
  * @return void
  */
   public function add() {
+    $converter = new Encryption;
     if ($this->request->is('post')) {
       $this->Demanda->create();
       if ($this->Demanda->save($this->request->data)) {
         $this->Session->setFlash('Nova Demanda Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+
+        $this->mail(array(
+          'auth_pass' => $converter->decode($_SESSION['User']['auth_pass']),
+          'from' => explode('@', $_SESSION['email']),
+          'to' => $this->request->data['Demanda']['user_id'],
+          'servico_id' => $this->request->data['Demanda']['servico_id'],
+          'subject' => "[" . $this->request->data['Demanda']['clarity_dm_id'] . "][SGS] Uma nova Demanda foi atribuída para você!",
+          'tipo' => "Acompanhar Demanda",
+          'data' => $this->request->data['Demanda']['dt_prevista'],
+          'mensagem' => $this->request->data['Demanda']['descricao'],
+        ));
+
         if($this->params['url']['controller'] == null){
           $this->redirect(array('action' => 'view', $this->Demanda->id));
         }
