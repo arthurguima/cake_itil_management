@@ -54,7 +54,10 @@
   </div>
 </div>
 
-<?php if(isset($this->request->data['cliente_id'])): ?>
+<?php
+  if(isset($this->request->data['cliente_id'])):
+    debug($_SESSION['Busca']);
+?>
 <?php $var = 0; foreach ($atrasos as $key => $atras): ?>
   <div class="row">
     <div class="col-lg-12 demandas delete-<?php echo $var; ?>">

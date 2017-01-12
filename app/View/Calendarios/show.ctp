@@ -22,6 +22,25 @@
                               'selected' => $this->params['url']['servico'],
                               'options' => $servicos,
                               'empty' => 'Serviço'));
+
+                  if( ($id % 13 == 0) || ($id % 2 == 0)){
+                    $ambientes = array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento', 4 => 'Sustentação', 5 => 'Desenvolvimento', 6 => 'Testes');
+                    echo $this->BootstrapForm->input('ambiente', array(
+                                'label' => array('text' => 'Ambiente: '),
+                                'class' => 'select2 form-control',
+                                'selected' => $this->params['url']['ambiente'],
+                                'options' => $ambientes,
+                                'empty' => 'Ambiente'));
+                  }
+                  if( ($id % 13 != 0)){
+                    echo $this->BootstrapForm->input('cliente_id', array(
+                                'label' => array('text' => 'Cliente: '),
+                                'class' => 'select2 form-control',
+                                'selected' => $this->params['url']['cliente'],
+                                'options' => $clientes,
+                                'empty' => 'Cliente'));
+                  }
+
                   echo $this->BootstrapForm->end();
               ?>
               <div class="small" style="float: right;">
@@ -73,8 +92,20 @@
 
       events: {
         url: "<?php
-              if(isset($this->params['url']['servico']))
+              if(isset($this->params['url']['servico']) && !isset($this->params['url']['ambiente']) && !isset($this->params['url']['cliente']))
                 echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0] . "?servico=". $this->params['url']['servico'];
+              elseif(isset($this->params['url']['servico']) && isset($this->params['url']['ambiente']) && !isset($this->params['url']['cliente']))
+                echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0] . "?servico=". $this->params['url']['servico']. "&ambiente=". $this->params['url']['ambiente'];
+              elseif(!isset($this->params['url']['servico']) && isset($this->params['url']['ambiente']) && !isset($this->params['url']['cliente']))
+                echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0] . "?ambiente=". $this->params['url']['ambiente'];
+              elseif(!isset($this->params['url']['servico']) && !isset($this->params['url']['ambiente']) && isset($this->params['url']['cliente']))
+                echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0] . "?cliente=". $this->params['url']['cliente'];
+              elseif(isset($this->params['url']['servico']) && !isset($this->params['url']['ambiente']) && isset($this->params['url']['cliente']))
+                echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0] . "?servico=". $this->params['url']['servico']. "&cliente=". $this->params['url']['cliente'];
+              elseif(!isset($this->params['url']['servico']) && isset($this->params['url']['ambiente']) && isset($this->params['url']['cliente']))
+                echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0] . "?cliente=". $this->params['url']['cliente']. "&ambiente=". $this->params['url']['ambiente'];
+              elseif(isset($this->params['url']['servico']) && isset($this->params['url']['ambiente']) && isset($this->params['url']['cliente']))
+                echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0] . "?cliente=". $this->params['url']['cliente']. "&ambiente=". $this->params['url']['ambiente']. "&servico=". $this->params['url']['servico'];
               else
                 echo Router::url('/', true). 'calendarios/json/' . $this->request->params['pass'][0];
              ?>",
@@ -98,7 +129,26 @@
 
   $( "select#servico_id" ).change(function () {
     $( "select#servico_id option:selected" ).each(function() {
-       window.location = '?servico=' + $(this).val();
+       window.location = replaceQueryParam('servico', $(this).val(), window.location.search);
     })
   });
+
+  $( "select#ambiente" ).change(function () {
+    $( "select#ambiente option:selected" ).each(function() {
+       window.location = replaceQueryParam('ambiente', $(this).val(), window.location.search);;
+    })
+  });
+
+  $( "select#cliente_id" ).change(function () {
+    $( "select#cliente_id option:selected" ).each(function() {
+       window.location = replaceQueryParam('cliente', $(this).val(), window.location.search);
+    })
+  });
+
+  function replaceQueryParam(param, newval, search) {
+    var regex = new RegExp("([?;&])" + param + "[^&;]*[;&]?");
+    var query = search.replace(regex, "$1").replace(/&$/, '');
+
+    return (query.length > 2 ? query + "&" : "?") + (newval ? param + "=" + newval : '');
+  }
 </script>

@@ -115,6 +115,8 @@ class DemandasController extends AppController {
     $this->Filter->setPaginate('conditions', $conditions);
     $this->Filter->setPaginate('limit', 150);
 
+    $this->Session->write('Busca', $this->request->data);
+
     $statuses = $this->Demanda->Status->find('list', array(
       'conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 

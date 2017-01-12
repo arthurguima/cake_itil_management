@@ -561,7 +561,7 @@
 
     if(isset($this->request->data['dt_inicio']) && !empty($this->request->data['dt_inicio'])){
       $inicio = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_inicio']);
-      $conditions = $conditions . " && Subtarefa.created >= '" . $inicio . "'";
+      $conditions = $conditions . " && Subtarefa.dt_prevista >= '" . $inicio . "'";
     }
 
     if(isset($this->request->data['dt_fim']) && !empty($this->request->data['dt_fim'])){

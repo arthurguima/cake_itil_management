@@ -64,13 +64,6 @@ class AppController extends Controller {
       'Session'
   );
 
-  /* Variável de Sessão que controla a visão por clientes */
-  /*  $this->loadModel('User');
-    $this->Session->write('Person.eyeColor', $this->User->find('first', array(
-      'contain' => array('Cliente' => array()),
-      'conditions' => array('User.matricula =' . $_SESSION['cdUsuario'] )
-    )));*/
-
   var $helpers = array(
       'FilterResults.Search' => array(
           'operators' => array(

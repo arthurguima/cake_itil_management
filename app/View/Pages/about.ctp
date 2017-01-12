@@ -74,7 +74,8 @@
 
                       <ul>
                         <li>Envio de e-mails para os responsáveis ao adicionar uma Subtarefa ou Demanda.</li>
-                        <li>Removidas as SS(es) do Dashboard</li>
+                        <li>Filtro de Cliente e Ambiente no Calendário.</li>
+                        <li>Removidas as SS(es) do Dashboard.</li>
                       </ul>
                     </div>
                 </li>

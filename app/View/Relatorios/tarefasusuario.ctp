@@ -39,14 +39,14 @@
               <?php
                 echo $this->BootstrapForm->input('dt_inicio', array(
                             'type' => 'text',
-                            'label' => array('text' => 'Data de Início:'),
+                            'label' => array('text' => 'Data Prevista maior/igual a:'),
                             'id' => 'dp ',
                             'value' => $this->params['url']['dt_inicio']));
               ?>
               <?php
                 echo $this->BootstrapForm->input('dt_fim', array(
                             'type' => 'text',
-                            'label' => array('text' => 'Data de Fim:'),
+                            'label' => array('text' => 'Data Prevista menor/igual a:'),
                             'id' => 'dp ',
                             'value' => $this->params['url']['dt_fim']));
               ?>

@@ -2,7 +2,9 @@
     public $helpers = array('Html', 'Form', 'Times', 'Rdm');
 
     public function show($id = null){
+      $this->set("id", $id);
       $this->set('servicos', $this->servicos());
+      $this->set('clientes', $this->clientes());
     }
 
     /*
@@ -61,11 +63,27 @@
     return $servicos;
   }
 
+  private function clientes(){
+    $this->loadModel('Cliente');
+    $this->Cliente->Behaviors->load('Containable');
+    $clientes = $this->Cliente->find('list', array(
+      'conditions' => array("Cliente.id" . $_SESSION['User']['clientes']),
+      'fields' => array('Cliente.id', 'Cliente.sigla')
+    ));
+    return $clientes;
+  }
+
   private function rdms($params){
+    $p_servico = "";
+
     if(isset($params['url']['servico']) && $params['url']['servico'] != '')
       $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
-    else
-      $p_servico = "";
+
+    if(isset($params['url']['ambiente']) && $params['url']['ambiente'] != '')
+      $p_servico = $p_servico . "Rdm.ambiente = " . $params['url']['ambiente'] . " && ";
+
+    if(isset($params['url']['cliente']) && $params['url']['cliente'] != '')
+      $p_servico = $p_servico . "Servico.cliente_id = " . $params['url']['cliente'] . " && ";
 
     $this->loadModel('Rdm');
     $this->Rdm->Behaviors->load('Containable');
@@ -101,10 +119,13 @@
 
 
   private function chamados($params){
+    $p_servico = "";
+
     if(isset($params['url']['servico']) && $params['url']['servico'] != '')
       $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
-    else
-      $p_servico = "";
+
+    if(isset($params['url']['cliente']) && $params['url']['cliente'] != '')
+      $p_servico = $p_servico . "Servico.cliente_id = " . $params['url']['cliente'] . " && ";
 
     $this->loadModel('Chamado');
     $this->Chamado->Behaviors->load('Containable');
@@ -117,11 +138,11 @@
     foreach($chamados as $ch) {
       $data[] = array(
           'id' => $ch['Chamado']['id'],
-          'title'=> $ch['Chamado']['numero'] . " - " .   $ch['Chamado']['nome'], //$title,
+          'title'=> $ch['Chamado']['nome'], //$title,
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $ch['Chamado']['dt_prev_resolv']))),
           'allDay' => true,
           'url' => Router::url('/') . 'chamados/view/'.$ch['Chamado']['id'],
-          'description' =>  $this->yesOrNo($ch['Chamado']['aberto']) . " <span class='sistema-calendario'>" .$ch['Servico']['sigla'] . "</span>",
+          'description' => $ch['Chamado']['numero'] . " - <span class='sistema-calendario'>" .$ch['Servico']['sigla'] . "</span> " . $this->yesOrNo($ch['Chamado']['aberto']),
           'className' => "calendar-ss"
       );
     }
@@ -260,10 +281,14 @@
   }
 
   private function demandas($params){
+    $p_servico = "";
+
     if(isset($params['url']['servico']) && $params['url']['servico'] != '')
       $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
-    else
-      $p_servico = "";
+
+    if(isset($params['url']['cliente']) && $params['url']['cliente'] != '')
+      $p_servico = $p_servico . "Servico.cliente_id = " . $params['url']['cliente'] . " && ";
+
 
     $this->loadModel('Demanda');
     $this->Demanda->Behaviors->load('Containable');
@@ -275,7 +300,7 @@
     foreach($demandas as $demanda) {
       $data[] = array(
           'id' => $demanda['Demanda']['id'],
-          'title'=> $demanda['Demanda']['nome'],
+          'title'=> $demanda['Demanda']['clarity_dm_id'] . " - " . $demanda['Demanda']['nome'],
           'start'=> date("Y-m-d", strtotime(str_replace('/', '-', $demanda['Demanda']['dt_prevista']))),
         //  'end' => $demanda['Demanda']['dt_prevista'],
           'allDay' => true,
@@ -288,10 +313,13 @@
   }
 
   private function subtarefas($params){
+    $p_servico = "";
+
     if(isset($params['url']['servico']) && $params['url']['servico'] != '')
       $p_servico = "Servico.id = " . $params['url']['servico'] . " && ";
-    else
-      $p_servico = "";
+
+    if(isset($params['url']['cliente']) && $params['url']['cliente'] != '')
+      $p_servico = $p_servico . "Servico.cliente_id = " . $params['url']['cliente'] . " && ";
 
     $this->loadModel('Subtarefa');
     $this->Subtarefa->Behaviors->load('Containable');
@@ -304,7 +332,7 @@
 				'Release' => array()
 			),
       'conditions'=>
-         array('Subtarefa.user_id = ' . $this->Session->read('User.uid')))
+         array($p_servico . 'Subtarefa.user_id = ' . $this->Session->read('User.uid')))
 		);
 		$this->set('subtarefas', $subtarefas);
 
@@ -351,10 +379,14 @@
   }
 
   private function indisponibilidades($params){
+    $p_servico = "";
+
     if(isset($params['url']['servico']) && $params['url']['servico'] != '')
       $p_servico = "IndisponibilidadesServico.servico_id = " . $params['url']['servico'] . " && ";
-    else
-      $p_servico = "";
+
+    if(isset($params['url']['ambiente']) && $params['url']['ambiente'] != '')
+      $p_servico = $p_servico . "Motivo.ambiente = " . $params['url']['ambiente'] . " && ";
+
 
     $this->loadModel('Indisponibilidade');
     $this->Indisponibilidade->Behaviors->load('Containable');
