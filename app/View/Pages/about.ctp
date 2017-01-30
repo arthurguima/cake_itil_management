@@ -76,6 +76,7 @@
                         <li>Envio de e-mails para os responsáveis ao adicionar uma Subtarefa ou Demanda.</li>
                         <li>Filtro de Cliente e Ambiente no Calendário.</li>
                         <li>Removidas as SS(es) do Dashboard.</li>
+                        <li>Possibilidade de escolher a aba inicial do Workspace.</li>
                       </ul>
                     </div>
                 </li>

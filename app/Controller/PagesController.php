@@ -316,6 +316,14 @@ class PagesController extends AppController {
 			'conditions' => array('Subtarefa.check = 0 && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
 		$this->set('subtarefas', $subtarefas);
+
+		/* Tarefas do Mês */
+		/*Lista de Subtarefas*/
+		/*$this->loadModel('Subtarefa');
+		$subtarefas = $this->Subtarefa->find('all', array(
+			'conditions' => array('Subtarefa.check = 0 && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
+		));
+		$this->set('subtarefaMs', $subtarefasM);*/	
 	}
 
 

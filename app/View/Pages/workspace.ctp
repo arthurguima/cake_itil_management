@@ -8,19 +8,19 @@
 <?php if($this->Session->read('User.uid') != 0): ?>
 	<div class="col-lg-12  row-nav-tabs">
 		<ul class="nav nav-tabs nav-tabs-black nav-tabs-pages" role="tablist">
-		  <li role="presentation" class="active"><a href="#demandas" aria-controls="demandas" role="tab" data-toggle="tab">
+		  <li role="presentation" <?php if($this->Session->read('User.workspace') == 1 || $this->Session->read('User.workspace') == 0) echo 'class="active"'; ?>><a href="#demandas" aria-controls="demandas" role="tab" data-toggle="tab">
 				Demandas <span class="badge"><?php echo sizeof($demandas) ?></span></a>
 			</li>
-			<li role="presentation"><a href="#subtarefas" aria-controls="subtarefas" role="tab" data-toggle="tab">
+			<li role="presentation" <?php if($this->Session->read('User.workspace') == 2) echo 'class="active"'; ?>><a href="#subtarefas" aria-controls="subtarefas" role="tab" data-toggle="tab">
 				Tarefas <span class="badge"><?php echo sizeof($subtarefas) ?></span></a>
 			</li>
-		  <li role="presentation"><a href="#rdms" aria-controls="rdms" role="tab" data-toggle="tab">
+		  <li role="presentation" <?php if($this->Session->read('User.workspace') == 3) echo 'class="active"'; ?>><a href="#rdms" aria-controls="rdms" role="tab" data-toggle="tab">
 				RDMs <span class="badge"><?php echo sizeof($rdms) ?></span></a>
 			</li>
-		  <li role="presentation"><a href="#chamados" aria-controls="chamados" role="tab" data-toggle="tab">
+		  <li role="presentation" <?php if($this->Session->read('User.workspace') == 4) echo 'class="active"'; ?>><a href="#chamados" aria-controls="chamados" role="tab" data-toggle="tab">
 				Chamados <span class="badge"><?php echo sizeof($chamados) ?></span></a>
 			</li>
-			<li role="presentation"><a href="#indisponibilidades" aria-controls="indisponibilidades" role="tab" data-toggle="tab">
+			<li role="presentation" <?php if($this->Session->read('User.workspace') == 5) echo 'class="active"'; ?>><a href="#indisponibilidades" aria-controls="indisponibilidades" role="tab" data-toggle="tab">
 				Indisponibilidades <span class="badge"><?php echo sizeof($indisponibilidades) ?></span></a>
 			</li>
 		</ul>
@@ -28,7 +28,7 @@
 
 	<div class="tab-content">
 		<!-- RDMs -->
-		<div role="tabpanel" class="tab-pane" id="rdms">
+		<div role="tabpanel" class="tab-pane <?php if($this->Session->read('User.workspace') == 3) echo "active"; ?>" id="rdms">
 		  <div class="col-lg-12">
 		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
@@ -143,7 +143,7 @@
 		</div>
 
 		<!-- Chamados -->
-		<div role="tabpanel" class="tab-pane" id="chamados">
+		<div role="tabpanel" class="tab-pane <?php if($this->Session->read('User.workspace') == 4) echo "active"; ?>" id="chamados">
 		  <div class="col-lg-12">
 		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
@@ -226,7 +226,7 @@
 		</div>
 
 		<!-- Indisponibilidades -->
-		<div role="tabpanel" class="tab-pane" id="indisponibilidades">
+		<div role="tabpanel" class="tab-pane <?php if($this->Session->read('User.workspace') == 5) echo "active"; ?>" id="indisponibilidades">
 		  <div class="col-lg-12">
 		    <div class="panel panel-workspace">
 		      <div class="panel-heading">
@@ -322,7 +322,7 @@
 		</div>
 
 		<!-- Demadas -->
-	  <div role="tabpanel" class="tab-pane active" id="demandas">
+	  <div role="tabpanel" class="tab-pane <?php if($this->Session->read('User.workspace') == 1 || $this->Session->read('User.workspace') == 0) echo "active"; ?>" id="demandas">
 	    <div class="col-lg-12">
 	      <div class="panel panel-workspace">
 	        <div class="panel-heading">
@@ -407,7 +407,7 @@
 	  </div>
 
 		<!-- Subtarefas de Demanda -->
-		<div role="tabpanel" class="tab-pane" id="subtarefas">
+		<div role="tabpanel" class="tab-pane <?php if($this->Session->read('User.workspace') == 2) echo "active"; ?>" id="subtarefas">
 			<div class="col-lg-12">
 				<div class="panel panel-workspace">
 					<div class="panel-heading">
@@ -576,219 +576,39 @@
 ?>
 
 <script>
-	$('a[aria-controls="rdms"]').on('shown.bs.tab', function (e) {
-		if(typeof oTableRdm == 'undefined'){
-			oTableRdm =  $('#dataTables-rdm').dataTable({
-					"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
-						language: {
-							url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-						},
-						"columnDefs": [  { "visible": false, "targets": 6 } ],
-						"dom": 'TC<"clear">lfrtip',
-						"order": [[ 8, "desc" ]],
-						"colVis": {
-							"buttonText": "Esconder Colunas"
-						},
-						"tableTools": {
-								"sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-								"aButtons": [
-									{
-											"sExtends": "copy",
-											"sButtonText": "Copiar",
-											"oSelectorOpts": { filter: 'applied', order: 'current' },
-											"mColumns": [ 0,1,2,3,4,6,7,8,9 ]
-									},
-									{
-											"sExtends": "print",
-											"sButtonText": "Imprimir",
-											"oSelectorOpts": { filter: 'applied', order: 'current' },
-											"mColumns": [ 0,1,2,3,4,6,7,8,9 ]
-									},
-									{
-											"sExtends": "csv",
-											"sButtonText": "CSV",
-											"sFileName": "RDM.csv",
-											"oSelectorOpts": { filter: 'applied', order: 'current' },
-											"mColumns": [ 0,1,2,3,4,6,7,8,9 ]
-									},
-									{
-											"sExtends": "pdf",
-											"sButtonText": "PDF",
-											"sFileName": "RDM.pdf",
-											"oSelectorOpts": { filter: 'applied', order: 'current' },
-											"mColumns": [ 0,1,2,3,4,7,8,9 ],
-											"sPdfOrientation": "landscape",
-											"sTitle": "Requisições de Mudança",
-											"sPdfMessage": "<?php echo date('d/m/y')?>",
-									},
-								]
-						}
-				});
-				var colvis = new $.fn.dataTable.ColVis( oTableRdm );
-			}
-	});
-
-	$('a[aria-controls="indisponibilidades"]').on('shown.bs.tab', function (e) {
-		if(typeof oTableIndis == 'undefined'){
-		 		oTableIndis =  $('#dataTables-indisponibilidade').dataTable({
-				"lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
-					language: {
-						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-					},
-				//  responsive: true,
-					"columnDefs": [  { "visible": false, "targets": 7 } ],
-					"dom": 'TC<"clear">lfrtip',
-					"colVis": {
-						"buttonText": "Esconder Colunas"
-					},
-					"tableTools": {
-							"sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-							"aButtons": [
-								{
-										"sExtends": "copy",
-										"sButtonText": "Copiar",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"mColumns": [ 0,1,2,3,4,5,7,8 ]
-								},
-								{
-										"sExtends": "print",
-										"sButtonText": "Imprimir",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"mColumns": [ 0,1,2,3,4,5,7,8 ]
-								},
-								{
-										"sExtends": "csv",
-										"sButtonText": "CSV",
-										"sFileName": "Indisponibilidades.csv",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"mColumns": [ 0,1,2,3,4,5,7,8 ]
-								},
-								{
-										"sExtends": "pdf",
-										"sButtonText": "PDF",
-										"sFileName": "Indisponibilidades.pdf",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"mColumns": [ 0,1,2,3,4,5,7,8 ],
-										"sPdfOrientation": "landscape",
-										"sTitle": "Controle de Disponibilidade",
-										"sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
-								},
-							]
-					}
-			});
-			var colvis = new $.fn.dataTable.ColVis( oTableoTableIndis );
-		}
-	});
-
-	$('a[aria-controls="chamados"]').on('shown.bs.tab', function (e) {
-		if(typeof oTablechamado == 'undefined'){
-			oTablechamado = $('#dataTables-chamado').dataTable({
-	        "lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
-	        language: {
-	          url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-	        },
-	        "dom": 'TC<"clear">lfrtip',
-	        "colVis": {
-	          "buttonText": "Esconder Colunas"
-	        },
-	        "tableTools": {
-	            "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-	            "aButtons": [
-	              {
-	                  "sExtends": "copy",
-	                  "sButtonText": "Copiar",
-	                  "oSelectorOpts": { filter: 'applied', order: 'current' },
-	                  "mColumns": [ 0,1,2,3,4,5,6,7 ]
-	              },
-	              {
-	                  "sExtends": "print",
-	                  "sButtonText": "Imprimir",
-	                  "oSelectorOpts": { filter: 'applied', order: 'current' },
-	                  "mColumns": [ 0,1,2,3,4,5,6,7 ]
-	              },
-	              {
-	                  "sExtends": "csv",
-	                  "sButtonText": "CSV",
-	                  "sFileName": "Chamados.csv",
-	                  "oSelectorOpts": { filter: 'applied', order: 'current' },
-	                  "mColumns": [ 0,1,2,3,4,5,6,7 ]
-	              },
-	              {
-	                  "sExtends": "pdf",
-	                  "sButtonText": "PDF",
-	                  "sFileName": "Chamados.pdf",
-	                  "oSelectorOpts": { filter: 'applied', order: 'current' },
-	                  "sPdfOrientation": "landscape",
-	                  "mColumns": [ 0,1,2,3,4,5,6,7 ],
-	                  "sTitle": "Listagem de Chamados",
-	                  "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>"
-	              },
-	            ]
-	        }
-	    });
-	    var colvis = new $.fn.dataTable.ColVis( oTablechamado );
+	$('a[aria-controls="demandas"]').on('shown.bs.tab', function (e) {
+		if(typeof oTable == 'undefined'){
+			<?php if($this->Session->read('User.workspace') != 1) $this->Workspace->dataTable(1); ?>
 		}
 	});
 
 	$('a[aria-controls="subtarefas"]').on('shown.bs.tab', function (e) {
 		if(typeof oTablesubtarefa == 'undefined'){
-			oTablesubtarefa =  $('#dataTables-subtarefas').dataTable({
-					"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
-						language: {
-							url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-						},
-				});
-			}
+			<?php $this->Workspace->dataTable(2); ?>
+		}
+	});
+
+	$('a[aria-controls="rdms"]').on('shown.bs.tab', function (e) {
+		if(typeof oTableRdm == 'undefined'){
+			<?php $this->Workspace->dataTable(3); ?>
+		}
+	});
+
+	$('a[aria-controls="chamados"]').on('shown.bs.tab', function (e) {
+		if(typeof oTablechamado == 'undefined'){
+			<?php $this->Workspace->dataTable(4); ?>
+		}
+	});
+
+	$('a[aria-controls="indisponibilidades"]').on('shown.bs.tab', function (e) {
+		if(typeof oTableIndis == 'undefined'){
+		 		<?php $this->Workspace->dataTable(5); ?>
+		}
 	});
 
   $(document).ready(function() {
-		var oTable = $('#dataTables-demanda').dataTable({
-					"lengthMenu": [[25, 15, 50, -1], [25, 15, 50, "Todos"]],
-					language: {
-						url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-					},
-					"columnDefs": [  { "visible": false, "targets": 5 } ],
-					//"dom": 'T<"clear">lfrtip',
-					"dom": 'TC<"clear">lfrtip',
-					"colVis": {
-						"buttonText": "Esconder Colunas"
-					},
-					"tableTools": {
-							"sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-							"aButtons": [
-								{
-										"sExtends": "copy",
-										"sButtonText": "Copiar",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"mColumns": [ 0,1,2,3,5,6,7,8, ]
-								},
-								{
-										"sExtends": "print",
-										"sButtonText": "Imprimir",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"mColumns": [ 0,1,2,3,5,6,7,8, ]
-								},
-								{
-										"sExtends": "csv",
-										"sButtonText": "CSV",
-										"sFileName": "Demandas.csv",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"mColumns": [ 0,1,2,3,5,6,7,8, ]
-								},
-								{
-										"sExtends": "pdf",
-										"sButtonText": "PDF",
-										"sFileName": "Demandas.pdf",
-										"oSelectorOpts": { filter: 'applied', order: 'current' },
-										"sPdfOrientation": "landscape",
-										"mColumns": [ 0,1,2,3,6,7,8 ],
-										"sTitle": "Listagem de Demandas",
-										"sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>"
-								},
-							]
-					}
-			});
-			var colvis = new $.fn.dataTable.ColVis( oTable );
+
+		<?php $this->Workspace->dataTable($this->Session->read('User.workspace')); ?>
 
 		  $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
 

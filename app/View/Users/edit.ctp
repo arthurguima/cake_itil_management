@@ -27,6 +27,20 @@
                   'input' => 'text',
                   'multiple' => true,));
     ?>
+      <div class="form-group">
+        <label for="UserWorkspaceFirst" class="col-lg-3 control-label">Workspace: </label>
+        <div class="col-lg-9">
+          <select name="data[User][workspace_first]" class="form-control" id="filterambiente">
+            <option value="1" <?php if($this->data['User']['workspace_first'] == 1) echo 'selected="selected"'; ?>>Demandas</option>
+            <option value="2" <?php if($this->data['User']['workspace_first'] == 2) echo 'selected="selected"'; ?>>Tarefas</option>
+            <option value="3" <?php if($this->data['User']['workspace_first'] == 3) echo 'selected="selected"'; ?>>RDMs</option>
+            <option value="4" <?php if($this->data['User']['workspace_first'] == 4) echo 'selected="selected"'; ?>>Chamados</option>
+            <option value="5" <?php if($this->data['User']['workspace_first'] == 5) echo 'selected="selected"'; ?>>Indisponibilidades</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="form-footer col-lg-10 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');

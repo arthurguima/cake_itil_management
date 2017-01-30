@@ -96,6 +96,7 @@ class AppController extends Controller {
         $this->Session->write('User.uid', $user['User']['id']);
         $this->Session->write('User.nome', $user['User']['nome']);
         $this->Session->write('User.admin', $user['User']['is_admin']);
+        $this->Session->write('User.workspace', $user['User']['workspace_first']);
         //Production
           //$this->Session->write('User.auth_pass', $_SESSION['auth_pass']);
         //Production

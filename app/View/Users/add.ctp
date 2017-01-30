@@ -25,6 +25,20 @@
                   'input' => 'text',
                   'multiple' => true,));
     ?>
+      <div class="form-group">
+        <label for="UserWorkspaceFirst" class="col-lg-3 control-label">Workspace: </label>
+        <div class="col-lg-9">
+          <select name="data[User][workspace_first]" class="form-control" id="filterambiente">
+            <option value="1">Demandas</option>
+            <option value="2">Tarefas</option>
+            <option value="3">RDMs</option>
+            <option value="4">Chamados</option>
+            <option value="5">Indisponibilidades</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="form-footer col-lg-10 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');
