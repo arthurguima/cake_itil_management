@@ -5,19 +5,19 @@
     // Add filter
     $this->Filter->addFilters(
       array(
-        'solicitante_' => array(
+        'solicitantef' => array(
           'Rdm.solicitante' => array('operator' => 'LIKE')
         ),
-        'responsavel_' => array(
+        'responsavelf' => array(
           'Rdm.user_id' => array(
 						'select' => $this->Filter->select('Responsável', $this->Rdm->User->find('list',
 									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
 					)
         ),
-        'nome_' => array(
+        'nomef' => array(
           'Rdm.nome' => array('operator' => 'LIKE')
         ),
-        'versao_' => array(
+        'versaof' => array(
           'Rdm.versao' => array('operator' => 'LIKE')
         ),
         'servico' => array(
@@ -27,12 +27,12 @@
                     'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
           )
         ),
-        'ambiente_' => array(
+        'ambientef' => array(
           'Rdm.ambiente' => array(
             'select' => $this->Filter->select('Ambiente', array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento', 4 => 'Sustentação') )
           )
         ),
-        'concluida_' => array(
+        'concluidaf' => array(
           'Rdm.sucesso' => array(
             'select' => $this->Filter->select('Concluida', array(0 => 'Não', 1 => 'Sim', 2 => 'Cancelada', -1 => "Não preenchido") )
           )
@@ -42,7 +42,7 @@
             'select' => $this->Filter->select('Tipo de RDM', $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome'))))
           )
         ),
-        'numero_' => array(
+        'numerof' => array(
           'Rdm.numero' => array('operator' => '='),
         ),
         'dtprevista' => array(
@@ -64,24 +64,31 @@
       )
     );
     //$this->Filter->addFilters('filtro');
+    //Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "rdms_index")));
+    $this->set('filtro', $filtro);
 
     // Define conditions
     // Apenas RDMS dos cliente do Usuário.
     $conditions = $this->Filter->getConditions();
 
-    if($conditions == null)
-      $conditions = $conditions + array(998 => array('Rdm.sucesso =' => '-1'));
+    if($conditions == null){
+      $this->set('conditions', false);
+    }
+    else{
+      $this->set('conditions', true);
 
-    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+      $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
-		$this->Filter->setPaginate('conditions', $conditions);
-    //debug($conditions);
-    //debug($conditions[6]);
-    $this->Filter->setPaginate('order', 'Rdm.dt_prevista DESC, Rdm.dt_executada, Rdm.modified DESC, Rdm.created DESC');
-    $this->Filter->setPaginate('limit', 250);
+  		$this->Filter->setPaginate('conditions', $conditions);
+      $this->Filter->setPaginate('order', 'Rdm.dt_prevista DESC, Rdm.dt_executada, Rdm.modified DESC, Rdm.created DESC');
+      $this->Filter->setPaginate('limit', 450);
 
-    $this->Rdm->recursive = 0;
-    $this->set('rdms', $this->paginate());
+      $this->Rdm->recursive = 0;
+      $this->set('rdms', $this->paginate());
+    }
   }
 
   /**

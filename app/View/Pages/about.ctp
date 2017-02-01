@@ -77,6 +77,7 @@
                         <li>Filtro de Cliente e Ambiente no Calendário.</li>
                         <li>Removidas as SS(es) do Dashboard.</li>
                         <li>Possibilidade de escolher a aba inicial do Workspace.</li>
+                        <li>Primeira versão dos Filtros Favoritos nos itens: Chamados, Chamados com Demandas, Demandas, Mudança e Indisponibilidades.</li>
                       </ul>
                     </div>
                 </li>

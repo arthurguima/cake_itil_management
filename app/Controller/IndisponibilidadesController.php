@@ -22,7 +22,7 @@
             'select' => $this->Filter->select('Motivo', $this->Indisponibilidade->Motivo->find('list', array('fields' => array('Motivo.id', 'Motivo.nome'))))
           )
         ),
-        'numero_' => array(
+        'numerof' => array(
 					'OR' => array(
 						'Indisponibilidade.num_evento' => array(
 							'operator' => 'LIKE',
@@ -53,47 +53,67 @@
               'text' => ' a ',
             )
           )
-        )
+        ),
+        'encerrada' => array(
+          'Indisponibilidade.dt_fim' => array(
+            'select' => $this->Filter->select('Encerrada?', array(1 => 'Sim', 0 => 'Não') )
+          )
+        ),
       )
     );
+    //Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "indispon_index")));
+    $this->set('filtro', $filtro);
 
     // Define conditions
     $conditions = $this->Filter->getConditions();
 
-    if($conditions == null)
-      $conditions = $conditions + array(998 => array('Indisponibilidade.dt_fim IS NULL'));
+    if($conditions == null){
+      $this->set('conditions', false);
+    }
+    else{
+      $this->set('conditions', true);
 
-  //  $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+      if(isset($conditions[5])){
+        if ($conditions[5]['Indisponibilidade.dt_fim ='] == 0)
+          $conditions[5] = array('Indisponibilidade.dt_fim IS NULL');
+        else
+          $conditions[5] = array('Indisponibilidade.dt_fim IS NOT NULL');
+      }
+      //  $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
-    $this->Filter->setPaginate('conditions', $conditions);
-    $this->Filter->setPaginate('limit', 3000);
-    if(sizeof($this->Filter->getConditions()) > 0):
-      /**
-      * 'Hack' para HABTM
-      */
-      $cond = $this->Filter->getConditions();
-      if(sizeof($cond[0]) > 0):  //Conditions 0 corresponde ao serviço
-        $this->Indisponibilidade->bindModel(array(
-               'hasOne' => array(
-                  '_IndisponibilidadesServico' => array(
-                    'className'  => 'IndisponibilidadesServico',
-                    'foreignKey' => 'indisponibilidade_id',
-                  ),
-                  '_Servico' => array(
-                    'className'  => 'Servico',
-                    'foreignKey' => false,
-                    'conditions' => '_Servico.id = _IndisponibilidadesServico.servico_id && _Servico.cliente_id',
-                    'fields' => 'id'
-                  )
-                )
-        ));
-      endif;
-    endif;
+        $this->Filter->setPaginate('conditions', $conditions);
+        $this->Filter->setPaginate('limit', 550);
+        if(sizeof($this->Filter->getConditions()) > 0):
+          /**
+          * 'Hack' para HABTM
+          */
+          $cond = $this->Filter->getConditions();
+          if(sizeof($cond[0]) > 0):  //Conditions 0 corresponde ao serviço
+            $this->Indisponibilidade->bindModel(array(
+                   'hasOne' => array(
+                      '_IndisponibilidadesServico' => array(
+                        'className'  => 'IndisponibilidadesServico',
+                        'foreignKey' => 'indisponibilidade_id',
+                      ),
+                      '_Servico' => array(
+                        'className'  => 'Servico',
+                        'foreignKey' => false,
+                        'conditions' => '_Servico.id = _IndisponibilidadesServico.servico_id && _Servico.cliente_id',
+                        'fields' => 'id'
+                      )
+                    )
+            ));
+          endif;
+        endif;
 
 
-    $this->Indisponibilidade->recursive = 1;
-    $this->set('Indisponibilidades', $this->paginate());
-    //$this->set('Indisponibilidades', $this->Indisponibilidade->find('all'));
+        $this->Indisponibilidade->recursive = 1;
+        $this->set('Indisponibilidades', $this->paginate());
+        //$this->set('Indisponibilidades', $this->Indisponibilidade->find('all'));
+    }
   }
 
 /**

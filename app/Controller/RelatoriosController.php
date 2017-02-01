@@ -276,6 +276,13 @@
     //$this->Servico->recursive = 3;
     $this->Demanda->Behaviors->attach('Containable');
 
+    //$this->Filter->addFilters('filtro');
+    //Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "r_dem_cliente")));
+    $this->set('filtro', $filtro);
+
     $conditions_serv = "Servico.cliente_id" . $_SESSION['User']['clientes'];
     if(isset($this->request->data['cliente_id']) && !empty($this->request->data['cliente_id'])){
       $conditions_serv = 'Servico_.cliente_id = ' . $this->request->data['cliente_id'];
@@ -423,6 +430,14 @@
   public function prioridades(){
     $this->loadModel('Demanda');
     $this->Demanda->Behaviors->attach('Containable');
+
+    //$this->Filter->addFilters('filtro');
+    //Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "r_prioridades")));
+    $this->set('filtro', $filtro);
+
 
     $conditions = "";
     if(isset($this->request->data['servico_id']) && !empty($this->request->data['servico_id'])){

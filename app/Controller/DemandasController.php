@@ -16,7 +16,7 @@ class DemandasController extends AppController {
     // Add filter
     $this->Filter->addFilters(
       array(
-        'nome_' => array(
+        'nomef' => array(
           'Demanda.nome' => array('operator' => 'LIKE')
         ),
         'origem_cliente' => array(
@@ -97,31 +97,51 @@ class DemandasController extends AppController {
         ),
         'prioridade' => array(
           'Demanda.prioridade' => array('operator' => '>=')
+        ),
+        'finalizada' => array(
+          'Demanda.status' => array(
+            'select' => $this->Filter->select('Demanda Finalizada?', array(1 => 'Sim', 0 => 'Não') )
+          )
         )
       )
     );
     //$this->Filter->addFilters('filtro');
+    //Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "demandas_index")));
+    $this->set('filtro', $filtro);
 
     // Define conditions
     // Apenas RDMS dos cliente do Usuário.
     $conditions = $this->Filter->getConditions();
 
-    if($conditions == null)
-      $conditions = $conditions + array(998 => array('Status.fim IS NULL'));
+    if($conditions == null){
+      $this->set('conditions', false);
+    }
+    else{
+      $this->set('conditions', true);
 
-    $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+      if(isset($conditions[14])){
+        if ($conditions[14]['Demanda.status ='] == 0)
+          $conditions[14] = array('Status.fim IS NULL');
+        else
+          $conditions[14] = array('Status.fim IS NOT NULL');
+      }
+      $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
-    $this->Filter->setPaginate('order', 'Demanda.data_homologacao, Demanda.modified DESC, Demanda.created DESC');
-    $this->Filter->setPaginate('conditions', $conditions);
-    $this->Filter->setPaginate('limit', 150);
+      $this->Filter->setPaginate('order', 'Demanda.data_homologacao, Demanda.modified DESC, Demanda.created DESC');
+      $this->Filter->setPaginate('conditions', $conditions);
+      $this->Filter->setPaginate('limit', 450);
 
-    $this->Session->write('Busca', $this->request->data);
+      $this->Session->write('Busca', $this->request->data);
 
-    $statuses = $this->Demanda->Status->find('list', array(
-      'conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
+      $statuses = $this->Demanda->Status->find('list', array(
+        'conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
 
-    //$this->Demanda->recursive = 0;
-    $this->set('demandas', $this->paginate());
+      //$this->Demanda->recursive = 0;
+      $this->set('demandas', $this->paginate());
+    }
   }
 
 /**

@@ -11,7 +11,7 @@
 				'semDemanda' => array(
             'Chamado.demanda_id'   => array('value' => null )
         ),
-				'numero_' => array(
+				'numerof' => array(
 					'OR' => array(
 						'Chamado.numero' => array(
 							'operator' => 'LIKE',
@@ -27,15 +27,15 @@
 						)
 					)
 				),
-				'nome_' => array(
+				'nomef' => array(
 					'Chamado.nome' => array('operator' => 'LIKE')
 				),
-				'pai_' => array(
+				'paif' => array(
 					'Chamado.pai' => array(
 						'select' => $this->Filter->select('Pai?', array(1 => 'Sim', 0 => 'Não'))
 					)
 				),
-				'aberto_' => array(
+				'abertof' => array(
 					'Chamado.aberto' => array(
 						'select' => $this->Filter->select('Aberto?', array(1 => 'Sim', 0 => 'Não'))
 					)
@@ -66,7 +66,7 @@
 									array('conditions' => array(), 'fields' => array('ChamadoTipo.id', 'ChamadoTipo.nome', 'ChamadoTipo.servico_id'))))
 					)
 				),
-				'_responsavel' => array(
+				'responsavelf' => array(
 					'Chamado.user_id' => array(
 						'select' => $this->Filter->select('Responsável', $this->Chamado->User->find('list',
 									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
@@ -74,24 +74,33 @@
 				),
 			)
 		);
+		//Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "chamados_index")));
+    $this->set('filtro', $filtro);
 
 		// Define conditions
     // Apenas RDMS dos cliente do Usuário.
     $conditions = $this->Filter->getConditions();
 
-    if($conditions == null)
-      $conditions = $conditions + array(997 => array('Chamado.aberto' => '1'));
+		if($conditions == null){
+      $this->set('conditions', false);
+    }
+    else{
+      $this->set('conditions', true);
 
-    $conditions = $conditions + array(998 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+			$conditions = $conditions + array(998 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
-		$conditions = $conditions + array(999 => array('Chamado.demanda_id =' => null)); // Apenas Chamados que não são filhos de uma Demanda
-		$this->Filter->setPaginate('conditions', $conditions);
-		$this->Filter->setPaginate('limit', 600);
+			$conditions = $conditions + array(999 => array('Chamado.demanda_id =' => null)); // Apenas Chamados que não são filhos de uma Demanda
+			$this->Filter->setPaginate('conditions', $conditions);
+			$this->Filter->setPaginate('limit', 600);
 
-		//$this->Chamado->recursive = 2;
-		$this->Chamado->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
-    $this->Chamado->contain("Status", "Servico", "ChamadoTipo", "User");
-		$this->set('chamados', $this->paginate());
+			//$this->Chamado->recursive = 2;
+			$this->Chamado->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+	    $this->Chamado->contain("Status", "Servico", "ChamadoTipo", "User");
+			$this->set('chamados', $this->paginate());
+		}
 	}
 
 /**
@@ -102,7 +111,7 @@
 	public function demandas() {
 		$this->Filter->addFilters(
 			array(
-			'numero_' => array(
+			'numerof' => array(
 					'OR' => array(
 						'Chamado.numero' => array(
 							'operator' => 'LIKE',
@@ -118,15 +127,15 @@
 						)
 					)
 				),
-				'nome_' => array(
+				'nomef' => array(
 					'Chamado.nome' => array('operator' => 'LIKE')
 				),
-				'pai_' => array(
+				'paif' => array(
 					'Chamado.pai' => array(
 						'select' => $this->Filter->select('Pai?', array(1 => 'Sim', 0 => 'Não'))
 					)
 				),
-				'aberto_' => array(
+				'abertof' => array(
 					'Chamado.aberto' => array(
 						'select' => $this->Filter->select('Aberto?', array(1 => 'Sim', 0 => 'Não'))
 					)
@@ -157,7 +166,7 @@
 									array('conditions' => array(), 'fields' => array('ChamadoTipo.id', 'ChamadoTipo.nome', 'ChamadoTipo.servico_id'))))
 					)
 				),
-				'_responsavel' => array(
+				'responsavelf' => array(
 					'Chamado.user_id' => array(
 						'select' => $this->Filter->select('Responsável', $this->Chamado->User->find('list',
 									array('conditions' => array(), 'fields' => array('User.id', 'User.nome'))))
@@ -165,23 +174,34 @@
 				),
 			)
 		);
+		//Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "chamado_dem_index")));
+    $this->set('filtro', $filtro);
 
 		// Define conditions
-		$conditions = $this->Filter->getConditions() + array(999 => array('Chamado.demanda_id !=' => null)); // Apenas Chamados que são filhos de uma Demanda
-		if($conditions == null)
-      $conditions = $conditions + array(997 => array('Chamado.aberto' => '1'));
+		$conditions = $this->Filter->getConditions();
 
-    $conditions = $conditions + array(998 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
+		if($conditions == null){
+      $this->set('conditions', false);
+    }
+    else{
+      $this->set('conditions', true);
+			$conditions = $conditions + array(999 => array('Chamado.demanda_id !=' => null)); // Apenas Chamados que são filhos de uma Demanda
+
+			$conditions = $conditions + array(998 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
 
-		$this->Filter->setPaginate('conditions', $conditions);
-		$this->Filter->setPaginate('limit', 300);
-		$this->Chamado->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
-		$this->Chamado->contain(array( 'Status', 'Servico', 'User', 'Demanda' => array('Status'), 'ChamadoTipo'));
+			$this->Filter->setPaginate('conditions', $conditions);
+			$this->Filter->setPaginate('limit', 450);
+			$this->Chamado->Behaviors->load('Containable');//Carrega apenas o Relacionamento com a Status e SS (otimização)
+			$this->Chamado->contain(array( 'Status', 'Servico', 'User', 'Demanda' => array('Status'), 'ChamadoTipo'));
 
 
-	//$this->Chamado->recursive = 1;
-		$this->set('chamados', $this->paginate());
+		//$this->Chamado->recursive = 1;
+			$this->set('chamados', $this->paginate());
+		}
 	}
 
 

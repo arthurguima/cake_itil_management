@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="col-lg-12 filters-item">
-            <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('nomef', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control select2', 'placeholder' => "Solicitante")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control select2')); ?></div>
@@ -37,6 +37,7 @@
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('finalizada', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
@@ -47,6 +48,9 @@
           <?php
       		  echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
                             'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+
+            if(sizeof($filtro) > 0) $id = $filtro['Filtro']['id']; else $id = "'null'";
+            echo $this->Filtros->btnSave("demandas_index", $this->Session->read('User.uid'), $id);
       			echo $this->Search->end();
           ?>
         </div>
@@ -54,100 +58,103 @@
   </div>
 </div>
 
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <b> Lista de Demandas </b>
-        <div class="col-lg-2 pull-right">
-          <?php
-            if($this->Ldap->autorizado(2)){
-              echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
-               array('controller' => 'demandas', 'action' => 'add'),
-               array('escape' => false));
-            }
-          ?>
+<?php if ($conditions):  ?>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <b> Lista de Demandas </b>
+          <div class="col-lg-2 pull-right">
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                 array('controller' => 'demandas', 'action' => 'add'),
+                 array('escape' => false));
+              }
+            ?>
+          </div>
         </div>
-      </div>
-      <div class="panel-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-demanda">
-            <thead>
-              <tr>
-                <th>Serviço</th>
-                <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
-                <th class="hidden-xs hidden-sm">Clarity DM <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
-                <th class="hidden-xs hidden-sm">Mantis <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
-                <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
-                <th>Título</th>
-
-				        <th>Tipo da Demanda</th>
-                <th>Prazo</th>
-                <th><span class="editable">Status</span></th>
-                <th class="hidden-xs hidden-sm">Responsável</th>
-                <th>Solicitada pelo Cliente?</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($demandas as $demanda): ?>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-demanda">
+              <thead>
                 <tr>
-                  <td><?php echo $this->Html->link($demanda['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $demanda['Servico']['id'])); ?></td>
-                  <td class="hidden-xs hidden-sm" data-order='<?php echo $demanda['Demanda']['prioridade']; ?>'>
-                    <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $demanda['Demanda']['id']?>"><?php echo $demanda['Demanda']['prioridade']; ?></span>
-                  </td>
-                  <?php echo $this->Tables->PrioridadeEditable($demanda['Demanda']['id'], "demandas") ?>
-                  <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
-                    <?php
-                      echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
-                            $demanda['Demanda']['clarity_id'] .")'>" . $demanda['Demanda']['clarity_dm_id'] ."</a></span>"
-                    ?>
-                  </td>
-                  <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">
-                    <?php echo $this->Html->link($demanda['Demanda']['mantis_id'],"http://www-testes/view.php?id=" . $demanda['Demanda']['mantis_id'], array('target' => '_blank')); ?>
-                  </td>
-                  <td><?php echo $this->Tables->popupBox($demanda['Demanda']['nome'], $demanda['Demanda']['descricao']) ?></td>
-                  <td><?php echo $demanda['Demanda']['nome']; ?></td>
-				          <td style="max-width: 110px;"><div class="tipo-demanda"><?php echo $demanda['DemandaTipo']['nome']; ?></div></td>
+                  <th>Serviço</th>
+                  <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
+                  <th class="hidden-xs hidden-sm">Clarity DM <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
+                  <th class="hidden-xs hidden-sm">Mantis <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
+                  <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+                  <th>Título</th>
 
-                  <td class="text-center">
-                    <?php echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
-                             $demanda['Demanda']['data_cadastro'] . " - " . $demanda['Demanda']['dt_prevista'],
-                            ($demanda['Demanda']['data_homologacao']));
-                    ?>
-                  </td>
-
-                  <td>
-                    <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>">
-                      <?php echo $demanda['Status']['nome']; ?>
-                    </span>
-                  </td>
-                  <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
-                  <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['User']['nome']; ?></div></td>
-                  <td><?php echo $this->Times->yesOrNo($demanda['Demanda']['origem_cliente']); ?></td>
-                  <td>
-                    <?php
-                      echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14);
-                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $demanda['Demanda']['id'] .")'>
-                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
-                    ?>
-                  </td>
+  				        <th>Tipo da Demanda</th>
+                  <th>Prazo</th>
+                  <th><span class="editable">Status</span></th>
+                  <th class="hidden-xs hidden-sm">Responsável</th>
+                  <th>Solicitada pelo Cliente?</th>
+                  <th></th>
                 </tr>
-              <?php endforeach; ?>
-              <?php unset($demanda); ?>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <?php foreach ($demandas as $demanda): ?>
+                  <tr>
+                    <td><?php echo $this->Html->link($demanda['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $demanda['Servico']['id'])); ?></td>
+                    <td class="hidden-xs hidden-sm" data-order='<?php echo $demanda['Demanda']['prioridade']; ?>'>
+                      <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $demanda['Demanda']['id']?>"><?php echo $demanda['Demanda']['prioridade']; ?></span>
+                    </td>
+                    <?php echo $this->Tables->PrioridadeEditable($demanda['Demanda']['id'], "demandas") ?>
+                    <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
+                      <?php
+                        echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                              $demanda['Demanda']['clarity_id'] .")'>" . $demanda['Demanda']['clarity_dm_id'] ."</a></span>"
+                      ?>
+                    </td>
+                    <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">
+                      <?php echo $this->Html->link($demanda['Demanda']['mantis_id'],"http://www-testes/view.php?id=" . $demanda['Demanda']['mantis_id'], array('target' => '_blank')); ?>
+                    </td>
+                    <td><?php echo $this->Tables->popupBox($demanda['Demanda']['nome'], $demanda['Demanda']['descricao']) ?></td>
+                    <td><?php echo $demanda['Demanda']['nome']; ?></td>
+  				          <td style="max-width: 110px;"><div class="tipo-demanda"><?php echo $demanda['DemandaTipo']['nome']; ?></div></td>
+
+                    <td class="text-center">
+                      <?php echo $this->Times->timeLeftTo($demanda['Demanda']['data_cadastro'], $demanda['Demanda']['dt_prevista'],
+                               $demanda['Demanda']['data_cadastro'] . " - " . $demanda['Demanda']['dt_prevista'],
+                              ($demanda['Demanda']['data_homologacao']));
+                      ?>
+                    </td>
+
+                    <td>
+                      <span style="cursor:pointer;" title="Clique para alterar o status!" id="<?php echo "status-" . $demanda['Demanda']['id'] ?>">
+                        <?php echo $demanda['Status']['nome']; ?>
+                      </span>
+                    </td>
+                    <?php echo $this->Tables->DemandaStatusEditable($demanda['Demanda']['id'], "demandas") ?>
+                    <td class="hidden-xs hidden-sm"><div class="sub-17"><?php echo $demanda['User']['nome']; ?></div></td>
+                    <td><?php echo $this->Times->yesOrNo($demanda['Demanda']['origem_cliente']); ?></td>
+                    <td>
+                      <?php
+                        echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14);
+                        echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $demanda['Demanda']['id'] .")'>
+                          <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+                      ?>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+                <?php unset($demanda); ?>
+              </tbody>
+            </table>
+          </div>
         </div>
+        <ul class="list-group">
+          <li class="list-group-item small red">
+            * Você também pode utilizar os relatórios de Demandas para facilitar a sua busca.
+          </li>
+          <li class="list-group-item small red">
+            * Lista limitada em 450 registros.
+          </li>
+    		</ul>
       </div>
-      <ul class="list-group">
-  			<li class="list-group-item small red">
-          *Lista de Demandas limitada em 150 registros. *Mostra incialmente apenas demandas não finalizadas. *Utilize o filtro para melhores resultados.
-        </li>
-  		</ul>
     </div>
   </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -209,9 +216,26 @@
   echo $this->Html->css('plugins/select2');
   echo $this->Html->css('plugins/select2-bootstrap');
 ?>
+<?php endif;?>
 
 <script>
+  <?php
+    if(sizeof($filtro) > 0){
+      $valor =  unserialize($filtro['Filtro']['valor']);
+      echo "var filtro_array = " . json_encode($valor). ";";
+    }
+    echo $this->Filtros->camelCase();
+  ?>
+
   $(document).ready(function() {
+    <?php
+      if(!$conditions)
+        echo "$('.filters > div > .inner').toggle();";
+
+      if(sizeof($filtro) > 0)
+        echo $this->Filtros->fillForm();
+    ?>
+
     $('.select2').select2({
       containerCssClass: 'select2'
     });

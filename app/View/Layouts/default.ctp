@@ -71,11 +71,11 @@
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados", '/chamados', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados com Demandas", '/chamados/demandas', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mudança", '/rdms', array('escape' => false)); ?></li>
-										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
-										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Indicadores", '/indicadores', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Demandas", '/demandas', array('escape' => false)); ?></li>
-										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Releases", '/releases', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Lista de Prioridades", '/relatorios/prioridades', array('escape' => false)); ?></li>
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Releases", '/releases', array('escape' => false)); ?></li>
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Disponibilidade", '/indisponibilidades', array('escape' => false)); ?></li>
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Indicadores de Contratos", '/indicadores', array('escape' => false)); ?></li>
 									</ul>
 							</li>
 							<li> <!-- Relatórios -->
@@ -192,6 +192,6 @@
 		</div>
 		<!-- hr style="margin-top:50px;" --><?php  //echo $this->element('sql_dump'); ?>
 	</div>
-	<script>$(function() {setTimeout(function(){$('.alert').toggle();}, 3800);});</script>
+	<script>$(function() {setTimeout(function(){$('.alert').toggle();}, 4200);});</script>
 </body>
 </html>

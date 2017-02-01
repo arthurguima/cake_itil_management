@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb("Relatórios", '');
-  $this->Html->addCrumb("Demandas Não Finalizadas do Cliente", '/relatorios/demandas');
+  $this->Html->addCrumb("Demandas Não Finalizadas do Cliente", '/relatorios/demandas_cliente');
 ?>
 
 <div class="row">
@@ -18,7 +18,7 @@
         </span>
       </div>
       <div class="row inner">
-        <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
+        <?php  echo $this->BootstrapForm->create(false, array('id' => "form-filter-results", 'class' => 'form-inline')); ?>
         <div class="col-lg-12 filters-item">
           <div class="form-group ">
             <?php
@@ -56,6 +56,8 @@
         </div>
         <?php
           echo $this->BootstrapForm->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit', 'class' => 'control-label btn btn-default pull-right'));
+          if(sizeof($filtro) > 0) $id = $filtro['Filtro']['id']; else $id = "'null'";
+          echo $this->Filtros->btnSave("r_dem_cliente", $this->Session->read('User.uid'), $id);
           echo $this->BootstrapForm->end();
         ?>
       </div>
@@ -203,11 +205,24 @@
 <?php endif; ?>
 
 <script>
-$(document).ready(function() {
-  $('.select2').select2({
-    containerCssClass: 'select2'
+  <?php
+    if(sizeof($filtro) > 0){
+      $valor =  unserialize($filtro['Filtro']['valor']);
+      echo "var filtro_array = " . json_encode($valor). ";";
+    }
+    echo $this->Filtros->camelCase();
+  ?>
+
+  $(document).ready(function() {
+    $('.select2').select2({
+      containerCssClass: 'select2'
+    });
+
+    <?php
+      if(sizeof($filtro) > 0)
+        echo $this->Filtros->fillFormB();
+    ?>
   });
-});
 </script>
 
 <?php
