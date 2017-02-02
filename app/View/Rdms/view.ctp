@@ -265,7 +265,7 @@
                 <th>Data prevista</th>
                 <th>Tarefa</th>
                 <th>Responsável</th>
-                <th>Finalizada</th>
+                <th><span class="editable">Status</span></th>
                 <th></th>
               </tr>
             </thead>
@@ -274,24 +274,14 @@
                   <tr>
                     <td class="text-center">
                       <?php
-                        if($sub['check'] == 0)
-                          echo $this->Times->timeLeftTo($sub['created'], $sub['dt_prevista'],
-                            date("d/m/Y", strtotime($sub['created'])) . " - " . $sub['dt_prevista'],null);
-                        else {
-                          echo $this->Times->timeLeftTo($sub['created'], $sub['dt_prevista'],
-                            date("d/m/Y", strtotime($sub['created'])) . " - " . $sub['dt_prevista'],$sub['dt_prevista']);
-                        }
+                        echo $this->Subtarefas->timeLeftTo($sub['created'], $sub['dt_prevista'], $sub['check'], $sub['dt_inicio'], $sub['dt_fim']);
                       ?>
                     </td>
                     <td><?php echo $sub['descricao']; ?></td>
                     <td><?php echo $sub['User']['nome']; ?></td>
                     <td id="<?php echo "sub-" . $sub['id']?>">
                       <?php
-                        if($sub['check'] == 0):
-                          echo "<span class='label label-success'>Em andamento</span>";
-                        else:
-                          echo "<span class='label label-default'>Finalizada</span>";
-                        endif;
+                        echo $this->Subtarefas->status($sub['check']);
                       ?>
                     </td>
                     <?php

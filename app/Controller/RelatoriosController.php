@@ -569,40 +569,56 @@
   public function tarefasusuario(){
     $this->loadModel('Subtarefa');
     $this->Subtarefa->Behaviors->attach('Containable');
+    $conditions = "Servico.cliente_id" . $_SESSION['User']['clientes'];
 
-    $conditions = "";
-    if(isset($this->request->data['user_id']) && !empty($this->request->data['user_id'])){
-      $conditions = $conditions . 'Subtarefa.user_id = ' . $this->request->data['user_id'];
+    //$this->Filter->addFilters('filtro');
+    //Filtro favorito do usuário
+    $this->loadModel('Filtro');
+    $this->Filtro->Behaviors->attach('Containable');
+    $filtro = $this->Filtro->find('first', array('contain' => array(), 'conditions' => array('user_id' => $this->Session->read('User.uid'), 'pagina' => "r_tarefasusuario")));
+    $this->set('filtro', $filtro);
 
     if(isset($this->request->data['dt_inicio']) && !empty($this->request->data['dt_inicio'])){
-      $inicio = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_inicio']);
-      $conditions = $conditions . " && Subtarefa.dt_prevista >= '" . $inicio . "'";
+      $this->set('pesquisa', true);
+
+      if(isset($this->request->data['dt_inicio']) && !empty($this->request->data['dt_inicio'])){
+        $inicio = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_inicio']);
+        $conditions = $conditions . "&& Subtarefa.dt_prevista >= '" . $inicio . "'";
+      }
+
+      if(isset($this->request->data['user_id']) && !empty($this->request->data['user_id']))
+        $conditions = $conditions . '&& Subtarefa.user_id = ' . $this->request->data['user_id'];
+
+      if(isset($this->request->data['servico_id']) && !empty($this->request->data['servico_id']))
+        $conditions = $conditions . '&& Subtarefa.servico_id = ' . $this->request->data['servico_id'];
+
+      if(isset($this->request->data['dt_fim']) && !empty($this->request->data['dt_fim'])){
+        $fim = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_fim']);
+        $conditions = $conditions . " && Subtarefa.dt_prevista <= '" . $fim . "'";
+      }
+
+      if(in_array($this->request->data['check'], [1,2,0]) && ($this->request->data['check'] != ''))
+        $conditions = $conditions . " && Subtarefa.check = " .  $this->request->data['check'];
+
+        $subtarefas = $this->Subtarefa->find('all', array(
+          'conditions' => array(
+            $conditions
+          ),
+          'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC"),
+          'contain' => array(
+    				'Servico' => array(),
+    				'Demanda' => array(),
+    				'Chamado' => array(),
+    				'Release' => array(),
+            'Rdm' => array(),
+            'User' =>array(),
+    			),
+        ));
+
+        $this->set('subtarefas', $subtarefas);
     }
-
-    if(isset($this->request->data['dt_fim']) && !empty($this->request->data['dt_fim'])){
-      $fim = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$this->request->data['dt_fim']);
-      $conditions = $conditions . " && Subtarefa.dt_prevista <= '" . $fim . "'";
-    }
-
-    if((($this->request->data['check'] == 1) || ($this->request->data['check'] == 0)) && ($this->request->data['check'] != ''))
-      $conditions = $conditions . " && Subtarefa.check = " .  $this->request->data['check'];
-
-      $subtarefas = $this->Subtarefa->find('all', array(
-        'conditions' => array(
-          $conditions
-        ),
-        'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC"),
-        'contain' => array(
-  				'Servico' => array(),
-  				'Demanda' => array(),
-  				'Chamado' => array(),
-  				'Release' => array(),
-          'Rdm' => array(),
-  			),
-      ));
-
-      $this->set('subtarefas', $subtarefas);
-    }
+    else
+      $this->set('pesquisa', false);
 
     $this->loadModel('User');
     $this->User->Behaviors->attach('Containable');
@@ -610,6 +626,14 @@
     $this->set('users', $this->User->find('list', array(
       'fields' => array('User.id', 'User.nome'))));
     $this->set(compact('users'));
+
+    $this->loadModel('Servico');
+    $this->Servico->Behaviors->attach('Containable');
+
+    $this->set('servicos', $this->Servico->find('list', array(
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+      'conditions' => ("Servico.cliente_id" . $_SESSION['User']['clientes']))));
+    $this->set(compact('servicos'));
   }
 
   /*

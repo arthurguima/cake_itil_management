@@ -60,6 +60,14 @@
     if(!empty($this->data['Subtarefa']['dt_prevista'])) {
         $this->data['Subtarefa']['dt_prevista'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Subtarefa']['dt_prevista'])));
     }
+
+    if(!empty($this->data['Subtarefa']['dt_fim'])) {
+        $this->data['Subtarefa']['dt_fim'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Subtarefa']['dt_fim'])));
+    }
+
+    if(!empty($this->data['Subtarefa']['dt_inicio'])) {
+        $this->data['Subtarefa']['dt_inicio'] = date("Y-m-d", strtotime(str_replace('/', '-', $this->data['Subtarefa']['dt_inicio'])));
+    }
     return true;
   }
 
@@ -68,6 +76,18 @@
         if (isset($val['Subtarefa']['dt_prevista'])) {
             $results[$key]['Subtarefa']['dt_prevista'] = $this->dateFormatAfterFind(
                 $val['Subtarefa']['dt_prevista']
+            );
+        }
+
+        if (isset($val['Subtarefa']['dt_inicio'])) {
+            $results[$key]['Subtarefa']['dt_inicio'] = $this->dateFormatAfterFind(
+                $val['Subtarefa']['dt_inicio']
+            );
+        }
+
+        if (isset($val['Subtarefa']['dt_fim'])) {
+            $results[$key]['Subtarefa']['dt_fim'] = $this->dateFormatAfterFind(
+                $val['Subtarefa']['dt_fim']
             );
         }
     }

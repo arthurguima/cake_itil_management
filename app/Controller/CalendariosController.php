@@ -332,7 +332,7 @@
 				'Release' => array()
 			),
       'conditions'=>
-         array($p_servico . 'Subtarefa.user_id = ' . $this->Session->read('User.uid')))
+         array($p_servico . 'Subtarefa.user_id = ' . $this->Session->read('User.uid') . '&& Subtarefa.dt_prevista >= "' . $params['url']['start'] . '" && Subtarefa.dt_prevista <= "' . $params['url']['end'] .'"'))
 		);
 		$this->set('subtarefas', $subtarefas);
 
@@ -374,6 +374,8 @@
   private function subtarefaFinalizada($check){
     if($check == 0)
       return "<span class='label label-success'>Em andamento</span>";
+    elseif($check == 2)
+      return "<span class='label label-info'>Aguardando Início</span>";
     else
       return "<span class='label label-default'>Finalizada</span>";
   }

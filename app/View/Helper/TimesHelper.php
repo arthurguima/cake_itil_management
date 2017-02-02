@@ -23,8 +23,9 @@
             return "Indisponível <i class='fa fa-exclamation-circle' style='color: #D9534F; font-size: 12px;'></i>" ;
           }
 
+
           /* Se não foi Homologado e está atrasado */
-          if(strtotime($time2) < time()){
+          if(strtotime($time2) < time() && (strtotime($time2) != strtotime(date("Y-m-d"))) ){
             return  " <span class='small red'>" . $string . "</span>
                         <i class='small fa fa-exclamation-circle red'></i>
                         <b class='small'>Atrasado </b><i class='fa fa-exclamation-circle red small'></i>

@@ -59,34 +59,67 @@
                 'label' => array('text' => 'Serviço: '),
                 'empty' => "Serviço"));
 
+        echo $this->BootstrapForm->input('dt_inicio', array(
+               'label' => array('text' => 'Data Prevista de Início: '),
+               'type' => 'text',
+               'id' => 'dp '));
+
         echo $this->BootstrapForm->input('dt_prevista', array(
-                                'label' => array('text' => 'Data Prevista: '),
+                                'label' => array('text' => 'Data Prevista de Fim: '),
                                 'type' => 'text',
                                 'id' => 'dp '));
+
+        echo $this->BootstrapForm->input('dt_fim', array(
+                                'label' => array('text' => 'Data de Finalização: '),
+                                'type' => 'text',
+                                'id' => 'dp '));
+
 
         echo $this->BootstrapForm->input('descricao', array(
                     'label' => array('text' => 'Tarefa: '),
                     'type' => 'textarea'));
 
-        echo $this->BootstrapForm->input('check', array(
-                                 'type' => 'checkbox',
-                                 'class' => 'col-sm-3 pull-right col-sm-offset',
-                                 'label' => array(
-                                   'text' => 'Finalizada?',
-                                   'class' => 'control-label',
-                                   'style' => "left: -400px;")));
         echo $this->BootstrapForm->input('id');
 
       ?>
-    <div class="form-footer col-lg-10 col-md-6 pull-right">
+      <div class="form-group">
+        <label for="SubtarefaCheck" class="col-lg-3 control-label">Status: </label>
+        <div class="col-lg-9">
+          <select name="data[Subtarefa][check]" class="form-control" id="filtercheck">
+            <option value="0" <?php if($this->data['Subtarefa']['check'] == 0) echo 'selected="selected"'?>>Em andamento</option>
+            <option value="1" <?php if($this->data['Subtarefa']['check'] == 1) echo 'selected="selected"'?>>Finalizada</option>
+            <option value="2" <?php if($this->data['Subtarefa']['check'] == 2) echo 'selected="selected"'?>>Aguardando Início</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="error">
+      	<div class="well">
+      		<h3 class="page-header">Como Funcionam as tarefas?</h3>
+          <ul>
+            <li>As tarefas estão sempre associadas ao usuário definido e um sistema.</li>
+            <li>Elas também podem ser associadas as Demandas, RDMs, Chamados e Releases.</li>
+            <li>Caso não exista uma <b>Data Prevista de Início</b> o sistema considera a <b>Data de criação da Tarefa</b>.</li>
+            <li>Caso não exista uma <b>Data de Finalização</b> o sistema considera a <b>Data Prevista de Fim</b>.</li>
+            <li>Existem apenas 3 status para as Demandas: Aguardando Início, Em andamento, Finalizada.</li>
+            <br/>
+            <!--li>As tarefas do Grupo de tarefas são criadas sob a responsabilidade do usuário e com a <b>Data Prevista de Fim</b> = 'data de hoje' + 1 dia.</li-->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-footer col-lg-10 col-md-12 pull-right">
       <?php
         echo $this->BootstrapForm->submit('Salvar');
         echo $this->Html->link('Voltar', 'javascript:history.back(1);', array('class' => 'btn btn-danger pull-right col-lg-3 col-md-6'));
         echo $this->Form->end();
       ?>
     </div>
-  </div>
 </div>
+
 
 <script>
   $(document).ready(function() {

@@ -313,7 +313,7 @@ class PagesController extends AppController {
 				'Chamado' => array(),
 				'Release' => array()
 			),
-			'conditions' => array('Subtarefa.check = 0 && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
+			'conditions' => array('Subtarefa.check IN (0,2) && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
 		$this->set('subtarefas', $subtarefas);
 
@@ -323,7 +323,7 @@ class PagesController extends AppController {
 		$subtarefas = $this->Subtarefa->find('all', array(
 			'conditions' => array('Subtarefa.check = 0 && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
-		$this->set('subtarefaMs', $subtarefasM);*/	
+		$this->set('subtarefaMs', $subtarefasM);*/
 	}
 
 

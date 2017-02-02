@@ -429,7 +429,7 @@
 										<th>Atividade</th>
 										<th>Tarefa</th>
 										<th>Prazo</th>
-										<th><span class="editable">Finalizar</span></th>
+										<th><span class="editable">Status</span></th>
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -453,17 +453,13 @@
 											</td>
 											<td><?php echo $sub['Subtarefa']['descricao']; ?></td>
 											<td class="text-center">
-		                    <?php echo $this->Times->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'],
-		                             date("d/m/Y", strtotime($sub['Subtarefa']['created'])) . " - " . $sub['Subtarefa']['dt_prevista'],null);
-		                    ?>
+												<?php
+                          echo $this->Subtarefas->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'], $sub['Subtarefa']['check'],  $sub['Subtarefa']['dt_inicio'], $sub['Subtarefa']['dt_fim']);
+                        ?>
 		                  </td>
 											<td id="<?php echo "sub-" . $sub['Subtarefa']['id']?>">
 												<?php
-													if($sub['Subtarefa']['check'] == 0):
-														echo "<span class='label label-success'>Em andamento</span>";
-													else:
-														echo "<span class='label label-default'>Finalizada</span>";
-													endif;
+													echo $this->Subtarefas->status($sub['Subtarefa']['check']);
 												?>
 											</td>
 											<?php

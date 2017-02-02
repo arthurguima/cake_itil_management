@@ -1,6 +1,6 @@
 <?php
   $this->Html->addCrumb("Relatórios", '');
-  $this->Html->addCrumb("Tarefas do Usuário", '/relatorios/tarefas_Usuario');
+  $this->Html->addCrumb("Tarefas", '/relatorios/tarefasusuario');
 ?>
 
 <div class="row">
@@ -16,17 +16,21 @@
           </span>
         </div>
         <div class="row inner">
-          <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
+          <?php  echo $this->BootstrapForm->create(false, array('id' => "form-filter-results", 'class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
             <div class="form-group">
               <?php
                 echo $this->BootstrapForm->input('user_id', array(
                         'label' => array('text' => 'Usuário: '),
                         'class' => 'select2 form-control',
-                        'selected' => $this->request->data['user_id'],
                         'empty' => 'Usuário'));
 
-                $options = array( 1 => 'Finalizada', 0 => 'Em andamento');
+                echo $this->BootstrapForm->input('servico_id', array(
+                        'label' => array('text' => 'Serviço: '),
+                        'class' => 'select2 form-control',
+                        'empty' => 'Serviço'));
+
+                $options = array( 2 => 'Aguardando Início', 1 => 'Finalizada', 0 => 'Em andamento');
                 echo $this->BootstrapForm->input('check', array(
                             'label' => array('text' => 'Finalizada?:  '),
                             'empty' => 'Status',
@@ -54,6 +58,8 @@
           </div>
           <?php
             echo $this->BootstrapForm->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit', 'class' => 'control-label btn btn-default pull-right'));
+            if(sizeof($filtro) > 0) $id = $filtro['Filtro']['id']; else $id = "'null'";
+            echo $this->Filtros->btnSave("r_tarefasusuario", $this->Session->read('User.uid'), $id);
             echo $this->BootstrapForm->end();
           ?>
         </div>
@@ -62,88 +68,109 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div role="tabpanel" class="tab-pane" id="versoes">
-      <div class="error">
-        <div class="well">
-          <h3 class="page-header"><i class="fa fa-list-alt"></i> Tarefas:</h3>
-          <div class="panel-body">
-            <div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover" id="dataTables-subtarefas">
-								<thead>
-									<tr>
-										<th>Servico</th>
-										<th>Atividade</th>
-										<th>Tarefa</th>
-										<th>Prazo</th>
-										<th><span class="editable">Finalizar</span></th>
-										<th>Ações</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($subtarefas as $sub): ?>
-										<tr>
-											<td><?php echo $sub['Servico']['sigla'] ?></td>
-											<td>
-												<?php
-													if(isset($sub['Demanda']['clarity_dm_id']))
-														echo $this->Html->link($sub['Demanda']['clarity_dm_id'],array('controller' => 'Demandas', 'action' => 'view', $sub['Demanda']['id']));
-													elseif(isset($sub['Chamado']['numero']))
-														echo $this->Html->link("Chamado: " . $sub['Chamado']['numero'] . "/" . $sub['Chamado']['ano'], array('controller' => 'Chamados', 'action' => 'view', $sub['Chamado']['id']));
-													elseif(isset($sub['Rdm']['numero']))
-														echo $this->Html->link("RDM: " . $sub['Rdm']['numero'] . "/" . $sub['Rdm']['ano'], array('controller' => 'rdms', 'action' => 'view', $sub['Rdm']['id']));
-													elseif(isset($sub['Release']['id']))
-														echo $this->Html->link("Release: " . $sub['Release']['versao'], array('controller' => 'releases', 'action' => 'view', $sub['Release']['id']));
-													else
-														echo " --- ";
-												?>
-											</td>
-											<td><?php echo $sub['Subtarefa']['descricao']; ?></td>
-											<td class="text-center">
-                        <?php
-                          if($sub['Subtarefa']['check'] == 0){
-                            echo $this->Times->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'],
-                              date("d/m/Y", strtotime($sub['Subtarefa']['created'])) . " - " . $sub['Subtarefa']['dt_prevista'],null);
-                          }
-                          else {
-                            echo $this->Times->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'],
-                              date("d/m/Y", strtotime($sub['Subtarefa']['created'])) . " - " . $sub['Subtarefa']['dt_prevista'], $sub['Subtarefa']['dt_prevista']);
-                          }
-                        ?>
-		                  </td>
-											<td id="<?php echo "sub-" . $sub['Subtarefa']['id']?>">
-												<?php
-													if($sub['Subtarefa']['check'] == 0):
-														echo "<span class='label label-success'>Em andamento</span>";
-													else:
-														echo "<span class='label label-default'>Finalizada</span>";
-													endif;
-												?>
-											</td>
-											<?php
-												echo $this->Tables->SubtarefaStatusEditable($sub['Subtarefa']['id'], "subtarefas");
-											?>
-											<td>
-												<?php echo $this->Tables->getMenu('Subtarefas', $sub['Subtarefa']['id'],12); ?>
-											</td>
-										</tr>
-									<?php endforeach; ?>
-									<?php unset($sub); ?>
-								</tbody>
-							</table>
-						</div>
+<?php if($pesquisa): ?>
+  <div class="row">
+    <div class="col-lg-12">
+      <div role="tabpanel" class="tab-pane" id="versoes">
+        <div class="error">
+          <div class="well">
+            <h3 class="page-header"><i class="fa fa-list-alt"></i> Tarefas:</h3>
+            <div class="panel-body">
+              <div class="table-responsive">
+  							<table class="table table-striped table-bordered table-hover" id="dataTables-subtarefas">
+  								<thead>
+  									<tr>
+  										<th>Servico</th>
+  										<th>Atividade</th>
+  										<th>Tarefa</th>
+  										<th>Prazo</th>
+  										<th><span class="editable">Status</span></th>
+                      <th>Responsavel</th>
+  										<th>Ações</th>
+  									</tr>
+  								</thead>
+  								<tbody>
+  									<?php foreach ($subtarefas as $sub): ?>
+  										<tr>
+  											<td><?php echo $sub['Servico']['sigla'] ?></td>
+  											<td>
+  												<?php
+  													if(isset($sub['Demanda']['clarity_dm_id']))
+  														echo $this->Html->link($sub['Demanda']['clarity_dm_id'],array('controller' => 'Demandas', 'action' => 'view', $sub['Demanda']['id']));
+  													elseif(isset($sub['Chamado']['numero']))
+  														echo $this->Html->link("Chamado: " . $sub['Chamado']['numero'] . "/" . $sub['Chamado']['ano'], array('controller' => 'Chamados', 'action' => 'view', $sub['Chamado']['id']));
+  													elseif(isset($sub['Rdm']['numero']))
+  														echo $this->Html->link("RDM: " . $sub['Rdm']['numero'] . "/" . $sub['Rdm']['ano'], array('controller' => 'rdms', 'action' => 'view', $sub['Rdm']['id']));
+  													elseif(isset($sub['Release']['id']))
+  														echo $this->Html->link("Release: " . $sub['Release']['versao'], array('controller' => 'releases', 'action' => 'view', $sub['Release']['id']));
+  													else
+  														echo " --- ";
+  												?>
+  											</td>
+  											<td><?php echo $sub['Subtarefa']['descricao']; ?></td>
+  											<td class="text-center">
+                          <?php
+                            echo $this->Subtarefas->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'], $sub['Subtarefa']['check'], $sub['Subtarefa']['dt_inicio'], $sub['Subtarefa']['dt_fim']);
+                          ?>
+  		                  </td>
+  											<td id="<?php echo "sub-" . $sub['Subtarefa']['id']?>">
+                          <?php
+  													echo $this->Subtarefas->status($sub['Subtarefa']['check']);
+  												?>
+  											</td>
+  											<?php
+  												echo $this->Tables->SubtarefaStatusEditable($sub['Subtarefa']['id'], "subtarefas");
+  											?>
+                        <td>
+                          <?php echo $sub['User']['nome']; ?>
+                        </td>
+  											<td>
+  												<?php echo $this->Tables->getMenu('Subtarefas', $sub['Subtarefa']['id'],12); ?>
+  											</td>
+  										</tr>
+  									<?php endforeach; ?>
+  									<?php unset($sub); ?>
+  								</tbody>
+  							</table>
+  						</div>
+            </div>
           </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<?php else: ?>
 
+  <div class="col-lg-6">
+    <div class="error">
+      <div class="well">
+        <h3 class="page-header">Como Funciona o relatório?</h3>
+        <ul>
+          <li> É necessário preencher pelo menos o campo <b>'Data Prevista maior/igual a:'</b> para que pesquisa seja feita.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<?php endif; ?>
 
 <script>
+  <?php
+    if(sizeof($filtro) > 0){
+      $valor =  unserialize($filtro['Filtro']['valor']);
+      echo "var filtro_array = " . json_encode($valor). ";";
+    }
+    echo $this->Filtros->camelCase();
+  ?>
+
   $(document).ready(function() {
+
+    <?php
+      if(sizeof($filtro) > 0)
+        echo $this->Filtros->fillFormB();
+    ?>
+
     $('.select2').select2({
       containerCssClass: 'select2'
     });
@@ -165,29 +192,29 @@
                     "sExtends": "copy",
                     "sButtonText": "Copiar",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4 ]
+                    "mColumns": [ 0,1,2,3,4,5 ]
                 },
                 {
                     "sExtends": "print",
                     "sButtonText": "Imprimir",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4 ]
+                    "mColumns": [ 0,1,2,3,4,5 ]
                 },
                 {
                     "sExtends": "csv",
                     "sButtonText": "CSV",
                     "sFileName": "Tarefas.csv",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4 ]
+                    "mColumns": [ 0,1,2,3,4,5 ]
                 },
                 {
                     "sExtends": "pdf",
                     "sButtonText": "PDF",
                     "sFileName": "Tarefas.pdf",
                     "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4 ],
+                    "mColumns": [ 0,1,2,3,4,5 ],
                     "sPdfOrientation": "landscape",
-                    "sTitle": "Tarefas do Usuário",
+                    "sTitle": "Lista de Tarefas",
                     "sPdfMessage": "<?php echo date('d/m/y')?>",
                 },
               ]

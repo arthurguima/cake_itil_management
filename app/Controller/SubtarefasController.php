@@ -42,7 +42,7 @@ class SubtarefasController extends AppController {
       $this->Subtarefa->create();
       if ($this->Subtarefa->save($this->request->data)) {
         $this->Session->setFlash('Subtarefa Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
- 
+
         $this->mail(array(
           'auth_pass' => $converter->decode($_SESSION['User']['auth_pass']),
           'from' => explode('@', $_SESSION['email']),
@@ -164,12 +164,12 @@ class SubtarefasController extends AppController {
         $this->Subtarefa->id = $subtarefa;
         $this->Subtarefa->saveField('check', $this->request->data('check'));
 
-        if($this->request->data('check') == 0):
+        if($this->request->data('check') == 0)
           return "<span class='label label-success'>Em andamento</span>";
-        else:
+        elseif($this->request->data('check') == 1)
           return "<span class='label label-default'>Finalizada</span>";
-        endif;
-
+        else
+          return "<span class='label label-info'>Aguardando Início</span>";
     }
   }
 
