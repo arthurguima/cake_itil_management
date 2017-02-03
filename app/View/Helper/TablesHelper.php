@@ -11,10 +11,10 @@
             </div>';
   }
 
-  public function popupBox2($string, $description=null) {
+  public function popupBox2($string, $description=null, $margin = "38") {
     $value = h(((($description != null) ? "<b>". ($string)  ."</b><br />" : $string) . " " . $description));
 
-    return '<div class="pull-right" style="margin-right: 38px; max-width: 10px;" type="button" data-container="body" data-toggle="popover2" data-original-title="Guias" data-placement="left" data-content="' . $value . '"><i class="fa fa-question-circle"></i></div>';
+    return '<div class="pull-right" style="margin-right: '. $margin .'px; max-width: 10px;" type="button" data-container="body" data-toggle="popover2" data-original-title="Guias" data-placement="left" data-content="' . $value . '"><i class="fa fa-question-circle"></i></div>';
   }
 
   public function StatusEditable($id, $controller){

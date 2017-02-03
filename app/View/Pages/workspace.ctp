@@ -51,6 +51,29 @@
 								array('style' => 'color: #fff; font-size: 16px;','escape' => false));
 							}
 						?>
+						<?php echo $this->Tables->popupBox2(
+							"<h4>Como funcionam as RDMs no Dashboard?</h4>",
+							"<ul>
+								<li>Faz gestão sobre as RDMs na sua responsabilidade</li>
+								<li>São atualmente cadastradas automaticamente pelo script de captura do SDM, porém a intervenção do Gestor de serviço (Você) pode melhorar consideravelmente a qualidade da informação.</li>
+								<li>Podem ser associadas com Demandas, Chamados e utilizadas para composição de um Release.</li>
+								<li>É possível Criar tarefas específicas para as suas RDMs.</li>
+								<li>Você pode sempre alimentar a tabela de Histórico da sua RDM e assim nunca perder uma informação importante.</li>
+								<li>O Atributo 'versão/fase/tag' ajuda na gerência das RDMs. Como na visualização  do calendário e definição de novo pacote, script de banco ou JOB.</li>
+								<li><b>Checklist:</b>
+									<ul>
+										<li><b>CAB</b> - Script automatizado consegue verificar e marcar automaticamente</li>
+										<li><b>Autorizada</b> - Necessário Intervenção Manual</li>
+										<li><b>FARM</b> - Necessário Intervenção Manual</li>
+									</ul>
+								</li>
+								<li><b>Finalizando uma RDM:</b>
+									<ul>
+										<li>Para finalizar uma RDM os campos <b>'Concluída?'</b> e <b>'Data de Execução'</b> devem estar preenchidos.</li>
+									</ul>
+								</li>
+							</ul>", "10")
+						?>
 					</div>
 		      <div class="panel-body">
 		        <div class="table-responsive">
@@ -166,6 +189,29 @@
 								array('style' => 'color: #3c763d; font-size: 16px;','escape' => false));
 							}
 						?>
+						<?php echo $this->Tables->popupBox2(
+							"<h4>Como funcionam os Chamados no Dashboard?</h4>",
+							"<ul>
+								<li>Faz gestão sobre os Chamados na sua responsabilidade</li>
+								<li>O tempo restante para a resolução dos chamados é calculado à partir da ‘Previsão de atendimento' e a data de cadastro do chamado.</li>
+								<li>Podem ser associadas com Demandas e RDMs.</li>
+								<li>É possível Criar tarefas específicas para os seus Chamados.</li>
+								<li>Você pode sempre alimentar a tabela de Histórico do seu Chamado e assim nunca perder uma informação importante.</li>
+								<li><b>Atributo ‘Pai’:</b> Informa se o chamado foi classificado como pai pelo atendimento.</li>
+								<li><b>Atributo ‘Tipo de Chamado’:</b> O tipo de chamado possibilita à gestão de serviço classificar chamados parecidos e recorrentes para análise futura.</li>
+								<li><b>Previsão de Atendimento e Data de Atendimento:</b>
+									<ul>
+										<li>A previsão de atendimento é usada para o cálculo do tempo restante e para a alimentação do calendário de chamados.</li>
+										<li>A data de atendimento server para marcar quando o chamado foi de fato resolvido.</li>
+									</ul>
+								</li>
+								<li><b>Finalizando um Chamado:</b>
+									<ul>
+										<li>Um chamado é dado como finalizado quando o seu Status Finaliza o processo (sai do workspace) e o campo 'aberto' é igual a \"Não\" (sai da lista de chamados).</li>
+									<ul>
+								</li>
+							</ul>", "10")
+						?>
 					</div>
 		      <div class="panel-body">
 		        <div class="table-responsive">
@@ -249,6 +295,16 @@
 		            array('style' => 'color: #fff; font-size: 16px;','escape' => false));
 		          }
 		        ?>
+						<?php echo $this->Tables->popupBox2(
+							"<h4>Como funcionam as Indisponibilidades no Dashboard?</h4>",
+							"<ul>
+								<li>Faz gestão sobre os incidentes que estão na responsabilidade da equipe./li>
+								<li>São atualmente cadastrados automaticamente pelo script de captura do SDM, porém a intervenção do Gestor de serviço pode melhorar consideravelmente a qualidade da informação.</li>
+								<li>São Finalizadas preenchendo o campo `Término` (data e horário da resolução do Incidente).</li>
+								<li>Podem ser associadas com vários sistemas.</li>
+								<li>Você pode sempre alimentar a tabela de Histórico do seu Chamado e assim nunca perder uma informação importante.</li>
+							</ul>", "10")
+						?>
 		      </div>
 		      <div class="panel-body">
 		        <div class="table-responsive">
@@ -345,6 +401,21 @@
 								array('style' => 'color: #000; font-size: 16px;','escape' => false));
 							}
 						?>
+						<?php echo $this->Tables->popupBox2(
+							"<h4>Como funcionam as Demandas no Dashboard?</h4>",
+							"<ul>
+								<li>Faz a gerência das demandas Clarity que estão na responsabilidade da equipe.</li>
+								<li>Podem ser associados com: Outras Demandas, Chamados e RDMs.</li>
+								<li>O tempo restante para a realização da demanda é calculado à partir das dos campos: 'data de cadastro' e 'Previsão de Término'.</li>
+								<li><b>Clarity WebService:</b> Consulta alguns campos da demanda no Clarity para que o gestor de Serviço possa verificar se os seus dados estão atualizados.</li>
+								<li>Você pode sempre alimentar a tabela de Histórico da sua Demanda e assim nunca perder uma informação importante.</li>
+								<li><b>Finalizando uma Demanda:</b>
+									<ul>
+										<li>Para finalizar uma demanda é necessário que seu status atual finalize o processo e que o campo 'data de homologação' esteja preenchido.</li>
+									<ul>
+								</li>
+							</ul>", "10")
+						?>
 					</div>
 	        <div class="panel-body">
 	          <div class="table-responsive">
@@ -430,6 +501,17 @@
                 array('escape' => false));
               }
             ?>
+						<?php echo $this->Tables->popupBox2(
+							"<h4>Como funcionam as Tarefas no Dashboard?</h4>",
+							"<ul>
+								<li>Faz gestão das Tarefas na sua responsabilidade</li>
+								<li>As tarefas estão sempre associadas ao usuário definido e um sistema.</li>
+								<li>Elas também podem ser associadas as Demandas, RDMs, Chamados e Releases.</li>
+			          <li>Caso não exista uma <b>Data Prevista de Início</b> o sistema considera a <b>Data de criação da Tarefa</b>.</li>
+			          <li>Caso não exista uma <b>Data de Finalização</b> o sistema considera a <b>Data Prevista de Fim</b>.</li>
+			          <li>Existem apenas 3 status para as Demandas: Aguardando Início, Em andamento, Finalizada.</li>
+							</ul>", "10")
+						?>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">

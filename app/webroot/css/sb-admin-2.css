@@ -240,6 +240,10 @@ i.hide-sidebar{
   font-size: 18px !important;
 }
 
+.panel-heading i.fa.fa-question-circle {
+  font-size: 19px !important;
+}
+
 .chat-panel .panel-body {
     height: 350px;
     overflow-y: scroll;
