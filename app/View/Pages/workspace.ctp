@@ -1,6 +1,17 @@
 <div class="row">
 		<div class="col-lg-12">
-			<h3 class="page-header">Bem-vindo, <?php echo $this->Session->read('User.nome'); ?>!</h3>
+			<h3 class="page-header">
+				Bem-vindo, <?php echo $this->Session->read('User.nome'); ?>! <?php echo $this->Tables->popupBox2(
+					"<h4>Como funciona o Dashboard?</h4>",
+					"<ul>
+						<li>Na tela do Dashboard são mostrados os itens cujo usuário é o responsável.</li>
+						<li>O botão <i class=\"fa fa-plus\" style=\"font-size: 15px !important;\"></i>  é um atalho para o cadastro de novos itens.</li>
+						<li>O Dashboard é divido em Abas. Cada aba possui em seu nome a quantidade de itens que estão abertos e sob a sua responsabilidade no momento.</li>
+						<li>Itens marcados com <span class=\"editable\">Sublinhado</span> podem ser editados com 1 clique.</li>
+						<li>Itens marcados com <i class=\"fa fa-comment-o\" style=\"font-size: 15px !important;\"></i> abrem um popup quando o mouse está em cima.</li>
+						<li>Itens marcados com <i class=\"fa-external-link-square fa\" style=\"font-size: 15px !important;\"></i> são links para outros sistemas.</li>
+					</ul>") ?>
+			</h3>
 		</div>
 </div>
 
@@ -607,6 +618,7 @@
 		<?php $this->Workspace->dataTable($this->Session->read('User.workspace')); ?>
 
 		  $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
+			$('[data-toggle="popover2"]').popover({trigger: 'hover','placement': 'left', html: 'true'});
 
       $("[id*='filterDt']").datetimepicker({
         format: "yyyy-mm-dd",

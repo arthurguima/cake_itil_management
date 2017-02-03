@@ -182,6 +182,7 @@
     </div>
   </div>
 </div>
+<?php endif;?>
 
 <?php
   //-- ClarityID
@@ -216,7 +217,6 @@
   echo $this->Html->css('plugins/select2');
   echo $this->Html->css('plugins/select2-bootstrap');
 ?>
-<?php endif;?>
 
 <script>
   <?php
@@ -240,6 +240,7 @@
       containerCssClass: 'select2'
     });
 
+    <?php if($conditions): ?>
     var  oTable = $('#dataTables-demanda').dataTable({
           "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
           language: {
@@ -287,6 +288,7 @@
           }
       });
       var colvis = new $.fn.dataTable.ColVis( oTable );
+      <?php endif; ?>
 
       $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
 

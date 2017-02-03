@@ -597,7 +597,9 @@
         $conditions = $conditions . " && Subtarefa.dt_prevista <= '" . $fim . "'";
       }
 
-      if(in_array($this->request->data['check'], [1,2,0]) && ($this->request->data['check'] != ''))
+      if(isset($this->request->data['check']))
+      if(($this->request->data['check'] == 1 || $this->request->data['check'] == 0 || $this->request->data['check'] == 2) && ($this->request->data['check'] != ''))
+      //if(in_array($this->request->data['check'], [1,2,0]) && ($this->request->data['check'] != '')) versão do php
         $conditions = $conditions . " && Subtarefa.check = " .  $this->request->data['check'];
 
         $subtarefas = $this->Subtarefa->find('all', array(

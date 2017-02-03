@@ -155,6 +155,38 @@
 
 <?php endif; ?>
 
+<?php
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2-bootstrap');
+
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //-- DataTables JavaScript --
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+    //-- DataTables --> TableTools
+    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+    //-- DataTables --> Responsive
+    echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
+    //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+?>
+
+
 <script>
   <?php
     if(sizeof($filtro) > 0){
@@ -166,6 +198,14 @@
 
   $(document).ready(function() {
 
+    $("[id*='dp']").datetimepicker({
+      format: 'dd/mm/yyyy',
+      minView: 2,
+      autoclose: true,
+      todayBtn: true,
+      language: 'pt-BR'
+    });
+
     <?php
       if(sizeof($filtro) > 0)
         echo $this->Filtros->fillFormB();
@@ -175,6 +215,7 @@
       containerCssClass: 'select2'
     });
 
+    <?php if($pesquisa): ?>
     var  oTable =  $('#dataTables-subtarefas').dataTable({
         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
           language: {
@@ -221,45 +262,6 @@
           }
       });
       var colvis = new $.fn.dataTable.ColVis( oTable );
-
-      $("[id*='dp']").datetimepicker({
-        format: 'dd/mm/yyyy',
-        minView: 2,
-        autoclose: true,
-        todayBtn: true,
-        language: 'pt-BR'
-      });
+    <?php endif; ?>
   });
 </script>
-
-
-<?php
-  //-- Select2 --
-  echo $this->Html->script('plugins/select2/select2.min');
-  echo $this->Html->css('plugins/select2');
-  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-  echo $this->Html->css('plugins/select2-bootstrap');
-
-  //-- Jeditable
-  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
-
-  //-- DataTables JavaScript --
-  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
-  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
-  echo $this->Html->css('plugins/dataTables.bootstrap.css');
-    //-- DataTables --> TableTools
-    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-    //-- DataTables --> Responsive
-    echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
-    //-- DataTables --> ColVis
-    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
-    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
-
-  //-- TimePicker --
-  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
-  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
-  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
-?>

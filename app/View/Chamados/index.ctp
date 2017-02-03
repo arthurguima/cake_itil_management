@@ -146,30 +146,31 @@
       </div>
     </div>
   </div>
-
-  <?php
-    //-- DataTables JavaScript -->
-      echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
-      echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
-      echo $this->Html->css('plugins/dataTables.bootstrap.css');
-      //-- DataTables --> TableTools
-      echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-      echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-      //-- DataTables --> ColVis
-        echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
-        echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
-        echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
-
-    //-- Jeditable
-    echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
-
-    //Select2
-    echo $this->Html->script('plugins/select2/select2.min');
-    echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-    echo $this->Html->css('plugins/select2');
-    echo $this->Html->css('plugins/select2-bootstrap');
-  ?>
 <?php endif; ?>
+
+<?php
+  //-- DataTables JavaScript -->
+    echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+    echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+    echo $this->Html->css('plugins/dataTables.bootstrap.css');
+    //-- DataTables --> TableTools
+    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+    //-- DataTables --> ColVis
+      echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //Select2
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->css('plugins/select2-bootstrap');
+?>
+
 
 <script>
   <?php
@@ -194,6 +195,7 @@
       containerCssClass: 'select2'
     });
 
+    <?php if($conditions): ?>
     oTable = $('#dataTables-chamado').dataTable({
         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
         language: {
@@ -239,6 +241,7 @@
         }
     });
     var colvis = new $.fn.dataTable.ColVis( oTable );
+    <?php endif; ?>
 
     $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
   });

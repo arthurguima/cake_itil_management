@@ -17,7 +17,7 @@
 
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="dev">
-    <div class="error">
+    <div class="col-lg-4 error">
       <div class="well">
         <h3 class="page-header"><i class="fa fa-rocket"></i> Desenvolvido por:</h3>
         <br />
@@ -55,7 +55,45 @@
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="col-lg-8 error">
+      <div class="well">
+        <h3 class="page-header"><i class="fa fa-hourglass-half" aria-hidden="true"></i> História:</h3>
+        <br />
+        <div class="well">
+          <ul class="spaced">
+            <li>O SGS surgiu no final de 2014 com o nome de SGD - Sistema de Gestão da DITE.</li>
+            <li>A sua evolução pode ser acompanhada em "Mais Informações" -> "Versões";</li>
+            <li>Em suas primeiras versões buscou atender necessidades tanto de negócio quanto da Gerência de serviço. Porém, por não contar com apoio suficiente voltou sua atenção apenas para a gestão de serviço.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8 error">
+      <div class="well">
+        <h3 class="page-header"><i class="fa fa-heartbeat" aria-hidden="true"></i> Objetivo:</h3>
+        <br />
+        <div class="well">
+          <ul class="spaced">
+            <li>Eliminar o uso de planilhas.</li>
+            <li>Manter a informação em um ambiente compartilhado pela equipe.</li>
+            <li>Manter um histórico das atividades da equipe.</li>
+            <li>Permitir o atendimento de uma atividade por pessoas diferentes em épocas diferentes.</li>
+            <li>Associar as diferentes atividades realizadas da equipe.</li>
+            <li>
+              Acelerar a obtenção de dados referentes às atividades da equipe. Respondendo perguntas como:
+              <ul>
+                <li>Quantas RDMs foram necessárias para implantar a versão X do sistema?</li>
+                <li>Qual RDM resolveu o incidente Y e qual a versão do sistema que foi implantada?</li>
+                <li>Qual a média de incidentes relacionados à Extrato CNIS o Seguro Desemprego apresenta?</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>
 
   <div role="tabpanel" class="tab-pane" id="versoes">
     <div class="error">
@@ -78,6 +116,7 @@
                         <li>Removidas as SS(es) do Dashboard.</li>
                         <li>Possibilidade de escolher a aba inicial do Workspace.</li>
                         <li>Primeira versão dos Filtros Favoritos nos itens: Chamados, Chamados com Demandas, Demandas, Mudança e Indisponibilidades.</li>
+                        <li>Refatoração das Tarefas. Criadas: data de início, fim, e o Status 'aguardando Início'.</li>
                       </ul>
                     </div>
                 </li>

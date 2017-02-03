@@ -6,9 +6,15 @@
   public function popupBox($string, $description=null) {
     $value = h(((($description != null) ? "<b>". ($string)  ."</b><br />" : $string) . " " . $description));
 
-    return '<div type="button" data-container="body" data-toggle="popover" data-original-title="Descrição" data-placement="right" data-content="' . $value .
+    return '<div type="button" data-container="body" data-toggle="popover" data-placement="right" data-content="' . $value .
             '"<div class="sub-20">' . $string . '</div>
             </div>';
+  }
+
+  public function popupBox2($string, $description=null) {
+    $value = h(((($description != null) ? "<b>". ($string)  ."</b><br />" : $string) . " " . $description));
+
+    return '<div class="pull-right" style="margin-right: 38px; max-width: 10px;" type="button" data-container="body" data-toggle="popover2" data-original-title="Guias" data-placement="left" data-content="' . $value . '"><i class="fa fa-question-circle"></i></div>';
   }
 
   public function StatusEditable($id, $controller){

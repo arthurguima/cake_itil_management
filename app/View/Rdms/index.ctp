@@ -197,36 +197,36 @@
       </div>
     </div>
   </div>
-
+<?php endif; ?>
 
 <?php
-  //-- Jeditable
-  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+//-- Jeditable
+echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
 
-  //-- DataTables JavaScript -->
-    echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
-    echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
-    echo $this->Html->css('plugins/dataTables.bootstrap.css');
-    //-- DataTables --> TableTools
-    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-    //-- DataTables --> ColVis
-      echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
-      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
-      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+//-- DataTables JavaScript -->
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+  //-- DataTables --> TableTools
+  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
 
-    //-- TimePicker --
-    echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
-    echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
-    echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 
-    //Select2
-    echo $this->Html->script('plugins/select2/select2.min');
-    echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-    echo $this->Html->css('plugins/select2');
-    echo $this->Html->css('plugins/select2-bootstrap');
-  ?>
-<?php endif; ?>
+  //Select2
+  echo $this->Html->script('plugins/select2/select2.min');
+  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
+  echo $this->Html->css('plugins/select2');
+  echo $this->Html->css('plugins/select2-bootstrap');
+?>
+
 
 <script>
   <?php
@@ -252,53 +252,55 @@
       containerCssClass: 'select2'
     });
 
-    var  oTable =  $('#dataTables-rdm').dataTable({
-        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
-          language: {
-            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-          },
-          "columnDefs": [  { "visible": false, "targets": 6 } ],
-          "dom": 'TC<"clear">lfrtip',
-          "order": [[ 8, "desc" ]],
-          "colVis": {
-            "buttonText": "Esconder Colunas"
-          },
-          "tableTools": {
-              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-              "aButtons": [
-                {
-                    "sExtends": "copy",
-                    "sButtonText": "Copiar",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
-                },
-                {
-                    "sExtends": "print",
-                    "sButtonText": "Imprimir",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
-                },
-                {
-                    "sExtends": "csv",
-                    "sButtonText": "CSV",
-                    "sFileName": "RDM.csv",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
-                },
-                {
-                    "sExtends": "pdf",
-                    "sButtonText": "PDF",
-                    "sFileName": "RDM.pdf",
-                    "oSelectorOpts": { filter: 'applied', order: 'current' },
-                    "mColumns": [ 0,1,2,3,4,7,8,9,10 ],
-                    "sPdfOrientation": "landscape",
-                    "sTitle": "Requisições de Mudança",
-                    "sPdfMessage": "<?php echo date('d/m/y')?>",
-                },
-              ]
-          }
-      });
-      var colvis = new $.fn.dataTable.ColVis( oTable );
+    <?php if($conditions): ?>
+      var  oTable =  $('#dataTables-rdm').dataTable({
+          "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+            language: {
+              url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+            },
+            "columnDefs": [  { "visible": false, "targets": 6 } ],
+            "dom": 'TC<"clear">lfrtip',
+            "order": [[ 8, "desc" ]],
+            "colVis": {
+              "buttonText": "Esconder Colunas"
+            },
+            "tableTools": {
+                "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                "aButtons": [
+                  {
+                      "sExtends": "copy",
+                      "sButtonText": "Copiar",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
+                  },
+                  {
+                      "sExtends": "print",
+                      "sButtonText": "Imprimir",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
+                  },
+                  {
+                      "sExtends": "csv",
+                      "sButtonText": "CSV",
+                      "sFileName": "RDM.csv",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,6,7,8,9,10 ]
+                  },
+                  {
+                      "sExtends": "pdf",
+                      "sButtonText": "PDF",
+                      "sFileName": "RDM.pdf",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,7,8,9,10 ],
+                      "sPdfOrientation": "landscape",
+                      "sTitle": "Requisições de Mudança",
+                      "sPdfMessage": "<?php echo date('d/m/y')?>",
+                  },
+                ]
+            }
+        });
+        var colvis = new $.fn.dataTable.ColVis( oTable );
+      <?php endif; ?>
 
       $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});
 
