@@ -61,7 +61,9 @@
         <div class="panel-heading">
           <b>
             <?php echo $release['Servico']['sigla'] . " - " .$release['Release']['versao']; ?>
-            <span style="float: right;"><?php echo $this->Tables->getMenu('Releases', $release['Release']['id'], 14); ?></span>
+            <span style="float: right;"><?php echo $this->Tables->getMenu('Releases', $release['Release']['id'], 14);
+              echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $release['Release']['id'] . ",\"releases\")'>
+              <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>"; ?></span>
           </b>
         </div>
         <div class="panel-body">

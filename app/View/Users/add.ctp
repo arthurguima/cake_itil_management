@@ -34,6 +34,7 @@
             <option value="3">RDMs</option>
             <option value="4">Chamados</option>
             <option value="5">Indisponibilidades</option>
+            <option value="6">Relases</option>
           </select>
         </div>
       </div>

@@ -167,7 +167,208 @@
     </div>
   </div>
 
+  <div class="col-lg-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <p>
+          <h3 class="panel-title"><b>Histórico</b>
+            <?php
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+                array('controller' => 'historicos', 'action' => 'add','?' => array('controller' => 'releases', 'id' =>  $release['Release']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
+            ?>
+            <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.historico-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+          </h3>
+        </p>
+      </div>
+      <div class="panel-body historico-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Analista</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($release['Historico'] as $hist): ?>
+                  <tr>
+                    <td><?php echo $hist['data']; ?></td>
+                    <td><?php echo $this->Historicos->findLinks($hist['descricao']); ?></td>
+                    <td><?php echo $hist['analista']; ?></td>
+                    <td>
+                       <?php
+                         if($this->Ldap->autorizado(2)){
+                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                                  array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>   $release['Release']['id'], 'action' => 'view' )),
+                                  array('escape' => false));
+                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                                  array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>  $release['Release']['id'], 'action' => 'view' )),
+                                  array('escape' => false), "Você tem certeza");
+                         }
+                       ?>
+                     </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php unset($hist); ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12 panel panel-default">
+    <div class="panel-heading">
+      <b>
+        <?php echo $release['Servico']['sigla'] . " - " .$release['Release']['versao']; ?>
+      </b>
+    </div>
+    <div class="panel-body">
+      <div class="col-lg-12">
+        <div class="bs-callout bs-callout-warning col-lg-5 pull-left">
+          <h4 class="normal">
+            RDM: <?php echo $this->Html->link($release['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $release['Rdm']['id'])); ?>
+             -- Data Prevista: <?php echo $release['Rdm']['dt_prevista']; ?>
+             <span class="bs-callout-actions">
+               <?php
+                 echo $this->Tables->getMenu('rdms', $release['Rdm']['id'], 14);
+                 echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $release['Rdm']['id'] . ")'>
+                   <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a>";
+               ?>
+             </span>
+          </h4>
+        </div>
+        <div class="bs-callout bs-callout-default col-lg-6 pull-right">
+            <h4 class="normal">
+            <?php echo $this->Times->timeLeftTo($release['Release']['dt_ini_prevista'], $release['Release']['dt_fim_prevista'],
+                      $release['Release']['dt_ini_prevista'] . " - " .  $release['Release']['dt_fim_prevista'],
+                      ($release['Release']['dt_fim']));
+                      ?>
+            </h4>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" id="dataTables-releases">
+          <thead>
+            <tr>
+              <th>Prioridade</th>
+              <th><span class="editable">Status</span></th>
+              <th>Solicitada pelo Cliente?</th>
+              <th>Demanda</th>
+              <th>Mantis</th>
+              <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+              <th>Título</th>
+              <th>Prazo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($release['Rdm']['Demanda'] as $d): ?>
+              <tr>
+                <td class="hidden-xs hidden-sm">
+                  <span style="cursor:pointer;" title="Clique para alterar a prioridade!" id="<?php echo $d['id']?>"><?php echo $d['prioridade']; ?></span>
+                </td>
+                <?php echo $this->Tables->PrioridadeEditable($d['id'], "demandas") ?>
+                <td>
+                  <span style="border-bottom: 6px solid #<?php echo substr(md5($d['Status']['nome']), 0, 6) ?>;" cursor:pointer; title="Clique para alterar o status!" id="<?php echo "status-" . $d['id'] ?>">
+                    <?php echo $d['Status']['nome']; ?>
+                  </span>
+                </td>
+                <?php echo $this->Tables->DemandaStatusEditable($d['id'], "demandas") ?>
+                <td><?php echo $this->Times->yesOrNo($d['origem_cliente']); ?></td>
+                <td><?php echo $d['clarity_dm_id']; ?></td>
+                <td><?php echo $d['mantis_id']; ?></td>
+                <td><?php echo $this->Tables->popupBox($d['nome'], $d['descricao']) ?></td>
+                <td><?php echo $d['nome']; ?></td>
+                <td>
+                  <?php echo $this->Times->timeLeftTo($d['data_cadastro'], $d['dt_prevista'],
+                         $d['data_cadastro'] . " - " . $d['dt_prevista'],
+                        ($d['data_homologacao']));?>
+                </td>
+               <td>
+                 <?php echo $this->Tables->getMenu('Demandas', $d['id'], 14);
+                  echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $d['id'] . ")'>
+                   <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";?>
+               </td>
+              </tr>
+            <?php endforeach; ?>
+            <?php unset($d); ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('#dataTables-releases').dataTable({
+          "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+            language: {
+              url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+            },
+            "columnDefs": [  { "visible": false, "targets": 6 } ],
+            //responsive: true,
+            "dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                "aButtons": [
+                  {
+                      "sExtends": "copy",
+                      "sButtonText": "Copiar",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,6,7 ]
+                  },
+                  {
+                      "sExtends": "print",
+                      "sButtonText": "Imprimir",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,6,7 ]
+                  },
+                  {
+                      "sExtends": "csv",
+                      "sButtonText": "CSV",
+                      "sFileName": "<?php echo $release['Servico']['sigla'] . " - " . $release['Release']['versao']; ?>.csv",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,6,7 ]
+                  },
+                  {
+                      "sExtends": "pdf",
+                      "sButtonText": "PDF",
+                      "sFileName": "<?php echo $release['Servico']['sigla'] . " - " . $release['Release']['versao']; ?>.pdf",
+                      "oSelectorOpts": { filter: 'applied', order: 'current' },
+                      "mColumns": [ 0,1,2,3,4,7 ],
+                      "sTitle": "<?php echo $release['Servico']['sigla'] . " - " . $release['Release']['versao']; ?>",
+                      "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
+                  },
+                ]
+            }
+        });
+    });
+  </script>
 </div>
+
+
+<?php
+  //-- DataTables JavaScript
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+    //-- DataTables --> TableTools
+    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+    //-- DataTables --> Responsive
+    echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
+
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+?>
+
 
 
 <div class="col-md-12">

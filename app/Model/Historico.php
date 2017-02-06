@@ -26,7 +26,11 @@
     'Indisponibilidade' => array(
       'className' => 'Indisponibilidade',
       'foreignKey' => 'indisponibilidade_id'
-    )
+    ),
+    'Release' => array(
+      'className' => 'Release',
+      'foreignKey' => 'release_id'
+    ),
   );
 
   public $validate = array(

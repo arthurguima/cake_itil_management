@@ -8,6 +8,10 @@
     'Rdm' => array(
       'className' => 'Rdm',
       'foreignKey' => 'rdm_id'
+    ),
+    'User' => array(
+      'className' => 'User',
+      'foreignKey' => 'user_id'
     )
   );
 
@@ -19,7 +23,11 @@
     'Subtarefa' => array(
 			'className' => 'Subtarefa',
 			'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC")
-		)
+		),
+    'Historico' => array(
+      'className' => 'Historico',
+      'order' => array("Historico.data" => "ASC", "Historico.created" => "ASC")
+    ),
   );
 
   public $validate = array(
@@ -42,6 +50,11 @@
 				'message' => 'Campo deve ser preenchido!'),
 		),
     'rdm_id' => array(
+			'NotEmpty' => array(
+				'rule'   => 'notempty',
+				'message' => 'Campo deve ser preenchido!'),
+		),
+    'user_id' => array(
 			'NotEmpty' => array(
 				'rule'   => 'notempty',
 				'message' => 'Campo deve ser preenchido!'),

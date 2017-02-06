@@ -70,8 +70,19 @@
   if (!$this->Release->exists($id)) {
       throw new NotFoundException(__('Release Inválida'));
     }
-    $options = array('conditions' => array('Release.' . $this->Release->primaryKey => $id));
-    $this->Release->recursive = 2;
+    $this->Release->Behaviors->attach('Containable');
+    $options = array(
+      'conditions' => array('Release.' . $this->Release->primaryKey => $id),
+      'contain' => array(
+        'Rdm' => array('Demanda' => array('Servico', 'DemandaTipo', 'Status'),),
+        'Note' => array(),
+        'Servico' => array(),
+        'Historico' => array(),
+        'Subtarefa' => array('User')
+      )
+    );
+    //$options = array('conditions' => array('Release.' . $this->Release->primaryKey => $id));
+    //$this->Release->recursive = 2;
     $this->set('release', $this->Release->find('first', $options));
   }
 
@@ -91,6 +102,9 @@
       }
     }
     /* Relacionamentos */
+      $users = $this->Release->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
+
       $servicos = $this->Release->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
   }
@@ -118,6 +132,9 @@
     }
 
     /* Relacionamentos */
+      $users = $this->Release->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $this->set(compact('users'));
+
       $servicos = $this->Release->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
       $this->set(compact('servicos'));
 

@@ -28,6 +28,9 @@
 		  <li role="presentation" <?php if($this->Session->read('User.workspace') == 3) echo 'class="active"'; ?>><a href="#rdms" aria-controls="rdms" role="tab" data-toggle="tab">
 				RDMs <span class="badge"><?php echo sizeof($rdms) ?></span></a>
 			</li>
+			<li role="presentation" <?php if($this->Session->read('User.workspace') == 6) echo 'class="active"'; ?>><a href="#releases" aria-controls="releases" role="tab" data-toggle="tab">
+				Releases <span class="badge"><?php echo sizeof($releases) ?></span></a>
+			</li>
 		  <li role="presentation" <?php if($this->Session->read('User.workspace') == 4) echo 'class="active"'; ?>><a href="#chamados" aria-controls="chamados" role="tab" data-toggle="tab">
 				Chamados <span class="badge"><?php echo sizeof($chamados) ?></span></a>
 			</li>
@@ -174,6 +177,84 @@
 		      </div>
 		    </div>
 		  </div>
+		</div>
+
+		<!-- Releases -->
+		<div role="tabpanel" class="tab-pane <?php if($this->Session->read('User.workspace') == 6) echo "active"; ?>" id="releases">
+			<div class="col-lg-12">
+				<div class="panel panel-workspace">
+					<div class="panel-heading">
+						<b>Releases</b>
+						<?php
+							if($this->Ldap->autorizado(2)){
+								echo $this->Html->link("<i class='fa fa-plus pull-right'></i>",
+								array('controller' => 'releases', 'action' => 'add'),
+								array('style' => 'color: #fff; font-size: 16px;','escape' => false));
+							}
+						?>
+						<?php echo $this->Tables->popupBox2(
+							"<h4>Como funcionam as RDMs no Dashboard?</h4>",
+							"<ul>
+								<li>Os releases foram criados no SGS como uma forma de unificar a visão do planejamento de mudanças, juntado em apenas um lugar informações da  RMD de implantação, Planejamento da entrega, versão do sistema e demandas associadas.</li>
+								<li>Para criar um release é necessário ter a RDM pai da versão criada.</li>
+								<li>As demandas mostradas são aquelas associadas à rdm.</li>
+								<li>O tempo de atendimento da Release é calculado de acordo com a <b>‘data prevista de Início’</b> e a <b>‘data prevista de Fim’</b>. A data de finalização é mostrada após a conclusão.</li>
+								<li>Para finalizar uma Release é necessário preencher o campo <b>'Data de Finalização'</b>.</li>
+								<li>É possível Criar tarefas específicas para as suas Releases.</li>
+								<!--li>Você pode sempre alimentar a tabela de Histórico da sua Release e assim nunca perder uma informação importante.</li -->
+							</ul>", "10")
+						?>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover" id="dataTables-rdm">
+								<thead>
+									<tr>
+										<th>Servico</th>
+										<th>Versão</th>
+										<th>Previsão do Release</th>
+										<th>RDM Pai</th>
+										<th>Previsão da RDM Pai</th>
+										<th>Ultimas informações</th>
+										<th>Ações</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ($releases as $release): ?>
+										<tr>
+											<td><?php echo $this->Html->link($release['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'view', $release['Servico']['id'])); ?></td>
+											<td ><?php echo $release['Release']['versao']; ?></td>
+											<td>
+												<?php
+														echo $this->Times->timeLeftTo($release['Release']['dt_ini_prevista'], $release['Release']['dt_fim_prevista'],
+																	$release['Release']['dt_ini_prevista'] . " - " . $release['Release']['dt_fim_prevista'], null);
+												?>
+		                  </td>
+											<td><?php echo $this->Html->link($release['Rdm']['numero'], array('controller' => 'rdms', 'action' => 'view', $release['Rdm']['id'])); ?></td>
+											<td>
+												<?php
+														echo $this->Times->timeLeftTo($release['Rdm']['created'], $release['Rdm']['dt_prevista'],
+																	$release['Rdm']['created'] . " - " . $release['Rdm']['dt_prevista'], null);
+												?>
+		                  </td>
+											<td></td>
+											<td>
+												<?php
+													echo $this->Tables->getMenu('releases', $release['Release']['id'], 14);
+													echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $release['Release']['id'] . ",\"releases\")'>
+														<i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+												?>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+									<?php unset($rdm); ?>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- Chamados -->

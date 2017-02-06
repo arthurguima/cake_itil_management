@@ -264,6 +264,20 @@ class PagesController extends AppController {
 		));
 		$this->set('rdms', $rdms);
 
+		/*Lista de Releases*/
+		$this->loadModel('Release');
+		$this->Release->Behaviors->attach('Containable');
+		$releases = $this->Release->find('all', array(
+		  'contain' => array(
+		    'Servico' => array(),
+				'Rdm' => array(),
+				'User' => array(),
+		  ),
+			'conditions' => array('Release.dt_fim IS NULL && Release.user_id = ' . $this->Session->read('User.uid'))
+		));
+		$this->set('releases', $releases);
+
+
 		/*Lista de indisponibilidades*/
 		$this->loadModel('Indisponibilidade');
 		$this->Indisponibilidade->Behaviors->attach('Containable');

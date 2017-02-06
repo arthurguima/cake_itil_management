@@ -44,6 +44,11 @@
       echo $this->BootstrapForm->input('rdm_id', array(
                 'label' => array('text' => 'RDM:')));
 
+      echo $this->BootstrapForm->input('user_id', array(
+            'class' => 'select2',
+            'label' => array('text' => 'Responsável: '),
+            'empty' => "Responsável"));
+
     ?>
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php

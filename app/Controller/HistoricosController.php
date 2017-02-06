@@ -136,6 +136,9 @@
         case 'indisponibilidades':
           $this->set('historicos', $this->Historico->findAllByIndisponibilidadeId( $this->params['url']['id']));
           break;
+        case 'releases':
+          $this->set('historicos', $this->Historico->findAllByReleaseId( $this->params['url']['id']));
+          break;
       }
 
     }

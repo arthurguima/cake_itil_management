@@ -36,6 +36,7 @@
             <option value="3" <?php if($this->data['User']['workspace_first'] == 3) echo 'selected="selected"'; ?>>RDMs</option>
             <option value="4" <?php if($this->data['User']['workspace_first'] == 4) echo 'selected="selected"'; ?>>Chamados</option>
             <option value="5" <?php if($this->data['User']['workspace_first'] == 5) echo 'selected="selected"'; ?>>Indisponibilidades</option>
+            <option value="6" <?php if($this->data['User']['workspace_first'] == 6) echo 'selected="selected"'; ?>>Releases</option>
           </select>
         </div>
       </div>

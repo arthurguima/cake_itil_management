@@ -117,6 +117,9 @@
                         <li>Possibilidade de escolher a aba inicial do Workspace.</li>
                         <li>Primeira versão dos Filtros Favoritos nos itens: Chamados, Chamados com Demandas, Demandas, Mudança e Indisponibilidades.</li>
                         <li>Refatoração das Tarefas. Criadas: data de início, fim, e o Status 'aguardando Início'.</li>
+                        <li>Inclusão de guias visuais explicando as regras do sistemas (Inciado).</li>
+                        <li>Inclusão das Releases no Dashboard.</li>
+                        <li>Manutenção de Históricos das Releases.</li>
                       </ul>
                     </div>
                 </li>
