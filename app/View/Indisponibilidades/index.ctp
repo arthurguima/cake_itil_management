@@ -148,7 +148,7 @@
         </div>
         <ul class="list-group">
           <li class="list-group-item small red">
-            * Lista limitada em 550 resultados. 
+            * Lista limitada em 550 resultados.
           </li>
         </ul>
       </div>
@@ -168,37 +168,38 @@
     </div>
   </div>
 
-  <?php
-    //-- DataTables JavaScript --
-    echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
-    echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
-    echo $this->Html->css('plugins/dataTables.bootstrap.css');
-    //-- DataTables --> TableTools
-    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-    //-- DataTables --> Responsive
-    echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
-    //-- DataTables --> ColVis
-      echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
-      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
-      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
-
-    //-- Jeditable
-    echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
-
-    //-- TimePicker --
-    echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
-    echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
-    echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
-
-    //Select2
-    echo $this->Html->script('plugins/select2/select2.min');
-    echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-    echo $this->Html->css('plugins/select2');
-    echo $this->Html->css('plugins/select2-bootstrap');
-  ?>
 <?php endif;?>
+
+<?php
+  //-- DataTables JavaScript --
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+  //-- DataTables --> TableTools
+  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+  //-- DataTables --> Responsive
+  echo $this->Html->script('plugins/dataTables/extensions/Responsive/js/dataTables.responsive.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/Responsive/css/dataTables.responsive.css');
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //-- TimePicker --
+  echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
+  echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
+  echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
+
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.full.min');
+  echo $this->Html->css('plugins/select2.min');
+  echo $this->Html->css('plugins/select2-bootstrap.min');
+  echo $this->Html->script('plugins/select2/pt-BR');
+?>
 
 <script>
   function historico(id, controller){
@@ -224,7 +225,8 @@
     ?>
 
     $('.select2').select2({
-      containerCssClass: 'select2'
+      language: "pt-BR",
+      theme: "bootstrap"
     });
 
     var  oTable =  $('#dataTables-Indisponibilidades').dataTable({

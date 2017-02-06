@@ -65,6 +65,7 @@
             <li>O SGS surgiu no final de 2014 com o nome de SGD - Sistema de Gestão da DITE.</li>
             <li>A sua evolução pode ser acompanhada em "Mais Informações" -> "Versões";</li>
             <li>Em suas primeiras versões buscou atender necessidades tanto de negócio quanto da Gerência de serviço. Porém, por não contar com apoio suficiente voltou sua atenção apenas para a gestão de serviço.</li>
+            <li>Atualizada a versão do Plugin Select2.</li>
           </ul>
         </div>
       </div>

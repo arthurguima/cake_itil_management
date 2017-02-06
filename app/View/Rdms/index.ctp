@@ -39,9 +39,9 @@
           </div>
           <div class="col-lg-12">
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('ambientef', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('ambientef', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('concluidaf', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'select2 form-control')); ?></div>
           </div>
           <?php
             echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -220,11 +220,11 @@ echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 
-  //Select2
-  echo $this->Html->script('plugins/select2/select2.min');
-  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-  echo $this->Html->css('plugins/select2');
-  echo $this->Html->css('plugins/select2-bootstrap');
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.full.min');
+  echo $this->Html->css('plugins/select2.min');
+  echo $this->Html->css('plugins/select2-bootstrap.min');
+  echo $this->Html->script('plugins/select2/pt-BR');
 ?>
 
 
@@ -249,7 +249,8 @@ echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
     ?>
 
     $('.select2').select2({
-      containerCssClass: 'select2'
+      language: "pt-BR",
+      theme: "bootstrap"
     });
 
     <?php if($conditions): ?>

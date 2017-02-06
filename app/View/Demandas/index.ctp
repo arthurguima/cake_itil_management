@@ -34,16 +34,16 @@
             <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control select2')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('finalizada', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">
-            <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente3', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente4', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'select2 form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'select2 form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente3', array('class' => 'select2 form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('status_diferente4', array('class' => 'select2 form-control')); ?></div>
           </div>
           <?php
       		  echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
@@ -211,11 +211,11 @@
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 
-  //Select2
-  echo $this->Html->script('plugins/select2/select2.min');
-  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-  echo $this->Html->css('plugins/select2');
-  echo $this->Html->css('plugins/select2-bootstrap');
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.full.min');
+  echo $this->Html->css('plugins/select2.min');
+  echo $this->Html->css('plugins/select2-bootstrap.min');
+  echo $this->Html->script('plugins/select2/pt-BR');
 ?>
 
 <script>
@@ -237,7 +237,8 @@
     ?>
 
     $('.select2').select2({
-      containerCssClass: 'select2'
+      language: "pt-BR",
+      theme: "bootstrap"
     });
 
     <?php if($conditions): ?>

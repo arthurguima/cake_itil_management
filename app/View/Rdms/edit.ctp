@@ -59,7 +59,10 @@
 
       <?php
         echo $this->BootstrapForm->input('rdm_tipo_id', array(
-                    'label' => array('text' => 'Tipo da RDM: ')));
+                  'label' => array(
+                    'text' => 'Tipo da RDM: '),
+                    'class' => 'select2',
+                  ));
 
         echo $this->BootstrapForm->input('dt_prevista', array(
                     'label' => array('text' => 'Data prevista: '),
@@ -121,7 +124,8 @@
 <script>
   $(document).ready(function() {
     $('.select2').select2({
-      containerCssClass: 'select2'
+      language: "pt-BR",
+      theme: "bootstrap"
     });
 
     $("[id*='dp']").datetimepicker({
@@ -142,8 +146,14 @@
         language: 'pt-BR'
     });
 
-    $('#DemandaDemanda').select2();
-    $('#ChamadoChamado').select2();
+    $('#DemandaDemanda').select2({
+      language: "pt-BR",
+      theme: "bootstrap"}
+    );
+    $('#ChamadoChamado').select2({
+      language: "pt-BR",
+      theme: "bootstrap"
+    });
   });
 </script>
 

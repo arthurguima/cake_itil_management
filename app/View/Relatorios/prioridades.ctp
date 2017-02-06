@@ -192,11 +192,11 @@
       echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
       echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
 
-    //-- Select2 --
-    echo $this->Html->script('plugins/select2/select2.min');
-    echo $this->Html->css('plugins/select2');
-    echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-    echo $this->Html->css('plugins/select2-bootstrap');
+      //-- Select2 --
+      echo $this->Html->script('plugins/select2/select2.full.min');
+      echo $this->Html->css('plugins/select2.min');
+      echo $this->Html->css('plugins/select2-bootstrap.min');
+      echo $this->Html->script('plugins/select2/pt-BR');
   ?>
 
   <script>
@@ -215,7 +215,8 @@
       ?>
 
       $('.select2').select2({
-        containerCssClass: 'select2'
+        language: "pt-BR",
+        theme: "bootstrap"
       });
 
       $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'right', html: 'true'});

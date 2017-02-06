@@ -111,7 +111,7 @@
                           if($Indisponibilidade['Motivo']['contavel'] == true)
                             $contatime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], $Indisponibilidade['dt_fim']);
                         }
-                        else{                          
+                        else{
                           echo $this->Times->totalTime($Indisponibilidade['dt_inicio'], date('Y-m-d H:i:s'));
                           $totaltime += $this->Times->diffInSec($Indisponibilidade['dt_inicio'], date('Y-m-d H:i:s'));
 
@@ -225,7 +225,8 @@
     $('#semicircle').circliful();
 
     $('.select2').select2({
-     containerCssClass: 'select2'
+      language: "pt-BR",
+      theme: "bootstrap"
     });
 
     var  oTable =  $('#dataTables-Indisponibilidades').dataTable({
@@ -305,11 +306,11 @@
   echo $this->Html->script('plugins/circliful/js/jquery.circliful.js');
   echo $this->Html->css('plugins/jquery.circliful.css');
 
-  //Select2
-  echo $this->Html->script('plugins/select2/select2.min');
-  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-  echo $this->Html->css('plugins/select2');
-  echo $this->Html->css('plugins/select2-bootstrap');
+  //-- Select2 --
+  echo $this->Html->script('plugins/select2/select2.full.min');
+  echo $this->Html->css('plugins/select2.min');
+  echo $this->Html->css('plugins/select2-bootstrap.min');
+  echo $this->Html->script('plugins/select2/pt-BR');
 
   //-- DataTables JavaScript --
   echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
