@@ -65,10 +65,10 @@
  echo $this->Html->script('plugins/fullcalendar/lang/pt-br.js');
  echo $this->Html->css('plugins/fullcalendar/fullcalendar.min.css');
  //-- Select2 --
- echo $this->Html->script('plugins/select2/select2.min');
- echo $this->Html->css('plugins/select2');
- echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
- echo $this->Html->css('plugins/select2-bootstrap');
+ echo $this->Html->script('plugins/select2/select2.full.min');
+ echo $this->Html->css('plugins/select2.min');
+ echo $this->Html->css('plugins/select2-bootstrap.min');
+ echo $this->Html->script('plugins/select2/pt-BR');
 ?>
 
 <script>

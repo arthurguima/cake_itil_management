@@ -46,10 +46,9 @@
       }
 
       echo $this->BootstrapForm->input('user_id', array(
-                'class' => 'select2',
-                'label' => array('text' => 'Responsável: '),
-                'selected' => $this->Session->read('User.uid'),
-                'empty' => "Responsável"));
+                 'class' => 'select2user',
+                 'label' => array('text' => 'Responsável: '),
+                 'selected' => $this->Session->read('User.uid')));
 
       echo $this->BootstrapForm->input('dt_prev_resolv', array(
                               'label' => array('text' => 'Previsão de Atendimento: '),
@@ -101,10 +100,13 @@
 
 <script>
   $(document).ready(function() {
-    $('.select2').select2({
+    <?php echo $this->User->select2(); ?>
+
+    $('select.select2').select2({
       language: "pt-BR",
       theme: "bootstrap"
     });
+
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",

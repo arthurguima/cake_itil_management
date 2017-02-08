@@ -40,6 +40,12 @@
           <li><a><b>Serviço: </b><?php echo $chamado['Servico']['nome']; ?></a></li>
           <li><a><b>Aberto?: </b><?php echo $this->Times->yesOrNo($chamado['Chamado']['aberto'])?></a></li>
           <li><a><b>Pai?: </b><?php echo $this->Times->yesOrNo($chamado['Chamado']['pai'])?></a></li>
+          <?php if(isset($chamado['Demanda']['id'])): ?>
+              <li>
+                <a href=<?php echo Router::url('/', true) . 'demandas/view/' . $chamado['Demanda']['id']; ?>>
+                <b>Demanda: </b><?php echo $chamado['Demanda']['nome'] . " <i class='fa-external-link-square fa' style='font-size: 15px !important;'></i>" ; ?></a>
+              </li>
+          <?php endif; ?>
           <li><a><b>Observação: </b><?php echo $chamado['Chamado']['observacao']; ?></a></li>
         </ul>
       </div>

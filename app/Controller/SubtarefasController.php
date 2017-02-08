@@ -71,7 +71,10 @@ class SubtarefasController extends AppController {
     }
 
     /* Relacionamentos */
-      $users = $this->Subtarefa->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $users = $this->Subtarefa->User->find('list', array(
+        'fields' => array('User.id', 'User.nome'),
+        'conditions' => array("User.id = " . $_SESSION['User']['uid'])
+      ));
       $this->set(compact('users'));
 
       $servicos = $this->Subtarefa->Servico->find('list', array(
@@ -114,8 +117,11 @@ class SubtarefasController extends AppController {
     }
 
     /* Relacionamentos */
-      $users = $this->Subtarefa->User->find('list', array('fields' => array('User.id', 'User.nome')));
-      $this->set(compact('users'));
+    $users = $this->Subtarefa->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.id = " . $this->request->data['User']['id'])
+    ));
+    $this->set(compact('users'));
 
       $servicos = $this->Subtarefa->Servico->find('list', array(
         'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),

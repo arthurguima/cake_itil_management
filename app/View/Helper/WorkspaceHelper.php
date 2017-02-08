@@ -203,7 +203,7 @@ public function dataTable($table){
       							]
       					}
       			});
-      			var colvis = new $.fn.dataTable.ColVis( oTableoTableIndis );";
+      			var colvis = new $.fn.dataTable.ColVis( oTableIndis );";
         break;
   }
 }

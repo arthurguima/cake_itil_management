@@ -138,20 +138,45 @@
     if (!$this->request->data) {
         $this->request->data = $sistema;
     }
-
     /* Relacionamentos */
-    $users = $this->Rdm->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $servicos = $this->Rdm->Servico->find('list', array(
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+      'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']) ));
+    $this->set(compact('servicos'));
+
+    $users = $this->Rdm->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.id = " . $this->request->data['Rdm']['user_id'])
+    ));
     $this->set(compact('users'));
 
     $this->set('demandas',
                 $this->Rdm->Demanda->find('list', array(
                   'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
-                  'conditions' => array('Demanda.servico_id' => $this->data['Rdm']['servico_id']))));
+                  'joins' => array(
+                    array(
+                      'table'=>'demandas_rdms',
+                      'alias' => 'DemandasRdm',
+                      'type'=>'inner',
+                      'conditions'=> array(
+                        'DemandasRdm.demanda_id = Demanda.id',
+                        'DemandasRdm.rdm_id =' => $this->request->data['Rdm']['id'],
+                      ),
+                    )))));
+
     $this->set('chamados',
                 $this->Rdm->Chamado->find('list', array(
                   'fields' => array('Chamado.id', 'Chamado.numero'),
-                  'conditions' => array('Chamado.servico_id' => $this->data['Rdm']['servico_id']))));
-
+                  'joins' => array(
+                    array(
+                      'table'=>'chamados_rdms',
+                      'alias' => 'ChamadosRdm',
+                      'type'=>'inner',
+                      'conditions'=> array(
+                        'ChamadosRdm.chamado_id = Chamado.id',
+                        'ChamadosRdm.rdm_id =' => $this->request->data['Rdm']['id'],
+                      ),
+                    )))));
 
     $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));
     $this->set(compact('rdmTipos'));
@@ -175,7 +200,10 @@
       'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']) ));
     $this->set(compact('servicos'));
 
-    $users = $this->Rdm->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $users = $this->Rdm->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.id = " . $_SESSION['User']['uid'])
+    ));
     $this->set(compact('users'));
 
     $rdmTipos = $this->Rdm->RdmTipo->find('list', array('fields' => array('RdmTipo.id', 'RdmTipo.nome')));
@@ -236,6 +264,24 @@
                       'Rdm.servico_id' => $this->params['url']['servico'],
                       'Rdm.sucesso' => -1
                   ))));
+  }
+
+  public function json(){
+    $this->layout = null;
+    $this->Rdm->recursive = 0;
+    $this->Rdm->Behaviors->load('Containable');
+
+    $rdms = $this->Rdm->find('all', array(
+      'fields' => array('Rdm.id', 'Rdm.numero'),
+      'conditions' => array("Rdm.numero LIKE '%" . $this->params['url']['q'] . "%'"),
+      'contain' => array()
+    ));
+    //debug($users);
+    $rdms = str_replace("{\"Rdm\":", "", json_encode($rdms));
+    $rdms = str_replace("}}", "}", $rdms);
+    $rdms = str_replace("numero", "text", $rdms);
+
+    $this->set("rdms",   $rdms);
   }
 
 }?>

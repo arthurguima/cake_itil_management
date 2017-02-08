@@ -42,11 +42,12 @@
                 'id' => 'dp'));
 
       echo $this->BootstrapForm->input('rdm_id', array(
-                'class' => 'select2',
-                'label' => array('text' => 'RDM:')));
+            'class' => 'select2rdm',
+            'label' => array('text' => 'Responsável: '),
+            'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('user_id', array(
-            'class' => 'select2',
+            'class' => 'select2user',
             'label' => array('text' => 'Responsável: '),
             'empty' => "Responsável"));
 
@@ -67,6 +68,8 @@
       language: "pt-BR",
       theme: "bootstrap"
     });
+    <?php echo $this->User->select2(); ?>
+    <?php echo $this->Rdm->select2(); ?>
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",

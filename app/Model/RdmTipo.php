@@ -1,5 +1,7 @@
 <?php class RdmTipo extends AppModel {
 
+  public $order = array("RdmTipo.nome" => "ASC");
+
   public $hasMany = array(
     'Rdm' => array(
       'className' => 'Rdm'

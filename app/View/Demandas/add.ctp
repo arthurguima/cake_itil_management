@@ -54,12 +54,12 @@
                    'label' => array('text' => 'Nome: '),
                    'type' => 'text'));
 
-
         echo $this->BootstrapForm->input('user_id', array(
-               'class' => 'select2',
+               'class' => 'select2user',
                'label' => array('text' => 'Responsável: '),
                'selected' => $this->Session->read('User.uid'),
                'empty' => "Responsável"));
+
 
         echo $this->BootstrapForm->input('executor', array(
                    'label' => array('text' => 'Executor: ')));
@@ -156,6 +156,8 @@
       language: "pt-BR",
       theme: "bootstrap"
     });
+
+    <?php echo $this->User->select2(); ?>
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",

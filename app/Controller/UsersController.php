@@ -64,4 +64,24 @@
         return $this->redirect(array('action' => 'index'));
     }
   }
+
+
+  public function json(){
+    $this->layout = null;
+    //$this->set('users', $this->User->find('all'));
+    $this->User->recursive = 0;
+    $this->User->Behaviors->load('Containable');
+
+    $users = $this->User->find('all', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.nome LIKE '%" . $this->params['url']['q'] . "%'"),
+      'contain' => array()
+    ));
+    //debug($users);
+   $users = str_replace("{\"User\":", "", json_encode($users));
+    $users = str_replace("}}", "}", $users);
+    $users = str_replace("nome", "text", $users);
+
+    $this->set("users",   $users);
+  }
 }?>

@@ -68,7 +68,7 @@
                  'class' => 'form-control'));
 
       echo $this->BootstrapForm->input('user_id', array(
-             'class' => 'select2',
+             'class' => 'select2user',
              'label' => array('text' => 'Responsável: '),
              'empty' => "Responsável"));
 
@@ -111,6 +111,7 @@
       language: "pt-BR",
       theme: "bootstrap"
     });
+    <?php echo $this->User->select2(); ?>
 
     $('#ServicoServico').select2({
       language: "pt-BR",

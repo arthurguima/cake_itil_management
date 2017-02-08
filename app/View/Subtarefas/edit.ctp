@@ -49,7 +49,7 @@
       echo $this->BootstrapForm->create('Subtarefa');
 
       echo $this->BootstrapForm->input('user_id', array(
-              'class' => 'select2',
+              'class' => 'select2user',
               'label' => array('text' => 'Responsável: '),
               'empty' => "Responsável"));
 
@@ -135,6 +135,8 @@
       language: "pt-BR",
       theme: "bootstrap"
     });
+    
+    <?php echo $this->User->select2(); ?>
   });
 </script>
 

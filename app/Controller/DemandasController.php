@@ -211,7 +211,10 @@ class DemandasController extends AppController {
     }
 
     /* Relacionamentos */
-      $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
+      $users = $this->Demanda->User->find('list', array(
+        'fields' => array('User.id', 'User.nome'),
+        'conditions' => array("User.id = " . $_SESSION['User']['uid'])
+      ));
       $this->set(compact('users'));
 
       $servicos = $this->Demanda->Servico->find('list', array(
@@ -250,12 +253,16 @@ class DemandasController extends AppController {
     }
 
     /* Relacionamentos */
-      $this->set('demandas',
-                $this->Demanda->find('list', array(
-                  'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
-                  'conditions' => array('Demanda.servico_id' => $this->data['Demanda']['servico_id']))));
+      $demandas = $this->Demanda->find('list', array(
+                    'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
+                    'conditions' => array('Demanda.id' => $this->data['Demanda']['demanda_id'])));
+      $this->set(compact('demandas'));
 
-      $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
+
+      $users = $this->Demanda->User->find('list', array(
+        'fields' => array('User.id', 'User.nome'),
+        'conditions' => array("User.id = " . $this->request->data['User']['id'])
+      ));
       $this->set(compact('users'));
 
       $servicos = $this->Demanda->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
@@ -337,5 +344,23 @@ class DemandasController extends AppController {
                 $this->Demanda->find('list', array(
                   'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
                   'conditions' => array('Demanda.servico_id' => $this->params['url']['servico']))));
+  }
+
+  public function json(){
+    $this->layout = null;
+    $this->Demanda->recursive = 0;
+    $this->Demanda->Behaviors->load('Containable');
+
+    $dem = $this->Demanda->find('all', array(
+      'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
+      'conditions' => array("Demanda.clarity_dm_id LIKE '%" . $this->params['url']['q'] . "%'"),
+      'contain' => array()
+    ));
+    //debug($users);
+    $dem = str_replace("{\"Demanda\":", "", json_encode($dem));
+    $dem = str_replace("}}", "}", $dem);
+    $dem = str_replace("clarity_dm_id", "text", $dem);
+
+    $this->set("dem",   $dem);
   }
 }

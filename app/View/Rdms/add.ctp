@@ -33,7 +33,7 @@
                 'label' => array('text' => 'Nome: ')));
 
       echo $this->BootstrapForm->input('user_id', array(
-                 'class' => 'select2',
+                 'class' => 'select2user',
                  'label' => array('text' => 'Responsável: '),
                  'selected' => $this->Session->read('User.uid'),
                  'empty' => "Responsável"));
@@ -104,10 +104,22 @@
         echo $this->BootstrapForm->input('observacao', array(
                     'label' => array('text' => 'Observação: '),
                     'type' => 'textarea'));
+
+        echo $this->BootstrapForm->input('Demanda', array(
+                   'class' => 'select2demanda',
+                   'label' => array('text' => 'Demandas: '),
+                   'multiple' => "multiple",
+                   'empty' => "Demandas"));
+
+        echo $this->BootstrapForm->input('Chamado', array(
+                  'class' => 'select2chamado',
+                  'label' => array('text' => 'Chamados: '),
+                  'multiple' => "multiple",
+                  'empty' => "Chamados"));
       ?>
 
-    <div id="demandaList"></div>
-    <div id="chamadoList"></div>
+    <!--div id="demandaList"></div>
+    <div id="chamadoList"></div-->
 
   </div>
 
@@ -124,10 +136,15 @@
 
 <script>
   $(document).ready(function() {
-    $('.select2').select2({
+    $('select.select2').select2({
       language: "pt-BR",
       theme: "bootstrap"
     });
+    <?php echo $this->User->select2(); ?>
+    <?php echo $this->Demanda->select2(); ?>
+    <?php echo $this->Chamado->select2(); ?>
+
+
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
@@ -147,9 +164,9 @@
         language: 'pt-BR'
     });
 
-    function getDemandas(servico){
+    /*function getDemandas(servico){
       $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "demandas/optionlist?servico=" + servico,
+        url: <?php //echo "'" . Router::url('/', true) . "'"; ?> + "demandas/optionlist?servico=" + servico,
         cache: false,
         success: function(html){
           $("#demandaList").html(html);
@@ -160,7 +177,7 @@
 
     function getChamados(servico){
       $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "chamados/optionlist?servico=" + servico,
+        url: <?php //echo "'" . Router::url('/', true) . "'"; ?> + "chamados/optionlist?servico=" + servico,
         cache: false,
         success: function(html){
           $("#chamadoList").html(html);
@@ -171,10 +188,10 @@
     $( "select#RdmServicoId" ).change(function () {
       var str = "";
       $( "select#RdmServicoId option:selected" ).each(function() {
-         getDemandas($(this).val());
-         getChamados($(this).val());
+        // getDemandas($(this).val());
+        // getChamados($(this).val());
       })
-    }).change();
+    }).change();*/
 
   });
 </script>

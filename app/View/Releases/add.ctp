@@ -40,14 +40,19 @@
                 'id' => 'dp'));
 
       echo $this->BootstrapForm->input('user_id', array(
-             'class' => 'select2',
+             'class' => 'select2user',
              'label' => array('text' => 'Responsável: '),
              'selected' => $this->Session->read('User.uid'),
              'empty' => "Responsável"));
 
+       echo $this->BootstrapForm->input('rdm_id', array(
+              'class' => 'select2rdm',
+              'label' => array('text' => 'RDM: '),
+              'empty' => "RDM"));
+
     ?>
 
-    <div id="rdmList"></div>
+    <!--div id="rdmList"></div-->
 
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
@@ -65,6 +70,8 @@
       language: "pt-BR",
       theme: "bootstrap"
     });
+    <?php echo $this->User->select2(); ?>
+    <?php echo $this->Rdm->select2(); ?>
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
@@ -74,9 +81,9 @@
         language: 'pt-BR'
     });
 
-    function getRdms(servico){
+    /*function getRdms(servico){
       $.ajax({
-        url: <?php echo "'" . Router::url('/', true) . "'"; ?> + "rdms/optionlist?servico=" + servico,
+        url: <?php //echo "'" . Router::url('/', true) . "'"; ?> + "rdms/optionlist?servico=" + servico,
         cache: false,
         success: function(html){
           $("#rdmList").html(html);
@@ -89,7 +96,7 @@
       $( "select#ReleaseServicoId option:selected" ).each(function() {
          getRdms($(this).val());
       })
-    }).change();
+    }).change();*/
 
   });
 </script>

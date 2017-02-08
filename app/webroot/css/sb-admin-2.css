@@ -1049,7 +1049,7 @@ div.required label:after {
   /*DATATABLE*/
 
 .dataTables_paginate.paging_simple_numbers{
-  margin-top: -20px;
+  /*margin-top: -20px;*/
 }
 
 .dataTables_filter input {  /*Filtro datatable*/

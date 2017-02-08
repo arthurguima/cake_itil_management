@@ -255,11 +255,16 @@
 		}
 
 		/* Relacionamentos */
-			$servicos = $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome', 'Servico.tecnologia')));
+			$servicos = $this->Chamado->Servico->find('list', array(
+				'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+				'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']) ));
 			$this->set(compact('servicos'));
 
-			$users = $this->Chamado->User->find('list', array('fields' => array('User.id', 'User.nome')));
-			$this->set(compact('users'));
+			$users = $this->Chamado->User->find('list', array(
+        'fields' => array('User.id', 'User.nome'),
+        'conditions' => array("User.id = " . $_SESSION['User']['uid'])
+      ));
+      $this->set(compact('users'));
 
 			$statuses = $this->Chamado->Status->find('list', array('conditions' => array('Status.tipo' => 5), 'fields' => array('Status.id', 'Status.nome')));
 			$this->set(compact('statuses'));
@@ -295,22 +300,29 @@
 		} else {
 			$options = array('conditions' => array('Chamado.' . $this->Chamado->primaryKey => $id));
 			$this->request->data = $this->Chamado->find('first', $options);
+
+			/* Relacionamentos */
+				$users = $this->Chamado->User->find('list', array(
+					'fields' => array('User.id', 'User.nome'),
+					'conditions' => array("User.id = " . $this->request->data['Chamado']['user_id'])
+				));
+				$this->set(compact('users'));
+
+
+				$servicos = $this->Chamado->Servico->find('list', array(
+					'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+					'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']) ));
+				$this->set(compact('servicos'));
+
+				$statuses = $this->Chamado->Status->find('list', array('conditions' => array('Status.tipo' => 5), 'fields' => array('Status.id', 'Status.nome')));
+				$this->set(compact('statuses'));
+
+				$demandas = $this->Chamado->Demanda->find('list', array(
+											'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
+											'conditions' => array('Demanda.id' => $this->data['Chamado']['demanda_id'])));
+				$this->set(compact('demandas'));
+
 		}
-
-		/* Relacionamentos */
-			$users = $this->Chamado->User->find('list', array('fields' => array('User.id', 'User.nome')));
-			$this->set(compact('users'));
-
-			$servicos = $this->Chamado->Servico->find('list', array('fields' => array('Servico.id', 'Servico.nome')));
-			$this->set(compact('servicos'));
-
-			$statuses = $this->Chamado->Status->find('list', array('conditions' => array('Status.tipo' => 5), 'fields' => array('Status.id', 'Status.nome')));
-			$this->set(compact('statuses'));
-
-			$this->set('demandas',
-									$this->Chamado->Demanda->find('list', array(
-										'fields' => array('Demanda.id', 'Demanda.clarity_dm_id'),
-										'conditions' => array('Demanda.servico_id' => $this->data['Chamado']['servico_id']))));
 	}
 
 /**
@@ -369,5 +381,23 @@
                 $this->Chamado->find('list', array(
                   'fields' => array('Chamado.id', 'Chamado.numero'),
                   'conditions' => array('Chamado.servico_id' => $this->params['url']['servico']))));
+  }
+
+	public function json(){
+    $this->layout = null;
+    $this->Chamado->recursive = 0;
+    $this->Chamado->Behaviors->load('Containable');
+
+    $ch = $this->Chamado->find('all', array(
+      'fields' => array('Chamado.id', 'Chamado.numero'),
+      'conditions' => array("Chamado.numero LIKE '%" . $this->params['url']['q'] . "%'"),
+      'contain' => array()
+    ));
+    //debug($users);
+    $ch = str_replace("{\"Chamado\":", "", json_encode($ch));
+    $ch = str_replace("}}", "}", $ch);
+    $ch = str_replace("numero", "text", $ch);
+
+    $this->set("ch",   $ch);
   }
 }

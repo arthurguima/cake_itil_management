@@ -102,11 +102,16 @@
       }
     }
     /* Relacionamentos */
-      $users = $this->Release->User->find('list', array('fields' => array('User.id', 'User.nome')));
-      $this->set(compact('users'));
+    $users = $this->Release->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.id = " . $_SESSION['User']['uid'])
+    ));
+    $this->set(compact('users'));
 
-      $servicos = $this->Release->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
-      $this->set(compact('servicos'));
+    $servicos = $this->Release->Servico->find('list', array(
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+      'conditions' => ("Servico.cliente_id" . $_SESSION['User']['clientes'])));
+    $this->set(compact('servicos'));
   }
 
 /**
@@ -132,16 +137,21 @@
     }
 
     /* Relacionamentos */
-      $users = $this->Release->User->find('list', array('fields' => array('User.id', 'User.nome')));
-      $this->set(compact('users'));
+    $users = $this->Release->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.id = " . $this->request->data['User']['id'])
+    ));
+    $this->set(compact('users'));
 
-      $servicos = $this->Release->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
-      $this->set(compact('servicos'));
+    $servicos = $this->Release->Servico->find('list', array(
+      'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'),
+      'conditions' => ("Servico.cliente_id" . $_SESSION['User']['clientes'])));
+    $this->set(compact('servicos'));
 
       $this->set('rdms',
                   $this->Release->Rdm->find('list', array(
                     'fields' => array('Rdm.id', 'Rdm.numero'),
-                    'conditions' => array('Rdm.dt_executada IS NULL and Rdm.servico_id = ' . $this->data['Release']['servico_id']))));
+                    'conditions' => array('Rdm.id = ' . $this->data['Release']['rdm_id']))));
   }
 
 /**

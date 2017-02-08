@@ -1,5 +1,7 @@
 <?php class Rdm extends AppModel {
 
+  public $order = array("Rdm.numero" => "ASC");
+
   public $hasAndBelongsToMany = array(
     'Demanda' => array(
       'className' => 'Demanda',
@@ -49,7 +51,15 @@
         'message' => 'Campo deve ser preenchido!'),
       'between' => array(
                 'rule'    => array('between', 3, 300),
-                'message' => 'O campo deve conter de 3 a 110 caracteres!'
+                'message' => 'O campo deve conter de 3 a 300 caracteres!'
+    )),
+    'observacao' => array(
+      'NotEmpty' => array(
+        'rule'   => 'notempty',
+        'message' => 'Campo deve ser preenchido!'),
+      'between' => array(
+                'rule'    => array('between', 3, 350),
+                'message' => 'O campo deve conter de 3 a 350 caracteres!'
     )),
     'solicitante' => array(
       'NotEmpty' => array(

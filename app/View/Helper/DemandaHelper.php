@@ -292,4 +292,29 @@
     return $statustipos . $status . $tipos . $atrasos . $servic;
   }
 
+  public function select2(){
+    return "
+      $(\".select2demanda\").select2({
+        minimumInputLength: 4,
+        width: \"100%\",
+        ajax: {
+            url: \"" . Router::url('/', true) . "\" + 'demandas/json',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+              return {
+                q: params.term, // search term
+              };
+            },
+            processResults: function (data, params) {
+              return {
+                results: data,
+              };
+            },
+            cache: true
+        },
+      });
+    ";
+  }
+
 }?>

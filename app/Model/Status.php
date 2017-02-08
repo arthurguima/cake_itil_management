@@ -1,5 +1,7 @@
 <?php class Status extends AppModel {
 
+  public $order = array("Status.nome" => "ASC");
+
   public $hasMany = array(
     'Demanda' => array(
       'className' => 'Demanda'

@@ -15,8 +15,8 @@
 		</div>
 </div>
 
-<div class="row">
 <?php if($this->Session->read('User.uid') != 0): ?>
+<div class="row">
 	<div class="col-lg-12  row-nav-tabs">
 		<ul class="nav nav-tabs nav-tabs-black nav-tabs-pages" role="tablist">
 		  <li role="presentation" <?php if($this->Session->read('User.workspace') == 1 || $this->Session->read('User.workspace') == 0) echo 'class="active"'; ?>><a href="#demandas" aria-controls="demandas" role="tab" data-toggle="tab">
@@ -569,7 +569,7 @@
 	    </div>
 	  </div>
 
-		<!-- Subtarefas de Demanda -->
+		<!-- Subtarefas -->
 		<div role="tabpanel" class="tab-pane <?php if($this->Session->read('User.workspace') == 2) echo "active"; ?>" id="subtarefas">
 			<div class="col-lg-12">
 				<div class="panel panel-workspace">
@@ -737,12 +737,6 @@
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->script('plugins/timepicker/locales/bootstrap-datetimepicker.pt-BR');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
-
-  //Select2
-  echo $this->Html->script('plugins/select2/select2.min');
-  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-  echo $this->Html->css('plugins/select2');
-  echo $this->Html->css('plugins/select2-bootstrap');
 ?>
 
 <script>

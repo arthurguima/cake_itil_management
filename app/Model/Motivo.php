@@ -1,5 +1,7 @@
 <?php class Motivo extends AppModel {
 
+    public $order = array("Motivo.nome" => "ASC");
+
     public $hasMany = array(
     'Indisponibilidade' => array(
       'className' => 'Indisponibilidade',

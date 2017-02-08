@@ -147,7 +147,10 @@
       }
     }
     /* Relacionamentos */
-    $users = $this->Indisponibilidade->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $users = $this->Indisponibilidade->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.id = " . $_SESSION['User']['uid'])
+    ));
     $this->set(compact('users'));
 
     $servicos = $this->Indisponibilidade->Servico->find('list', array(
@@ -182,8 +185,12 @@
     }
 
     /* Relacionamentos */
-    $users = $this->Indisponibilidade->User->find('list', array('fields' => array('User.id', 'User.nome')));
+    $users = $this->Indisponibilidade->User->find('list', array(
+      'fields' => array('User.id', 'User.nome'),
+      'conditions' => array("User.id = " . $this->request->data['User']['id'])
+    ));
     $this->set(compact('users'));
+
     $servicos = $this->Indisponibilidade->Servico->find('list', array('fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia')));
     $this->set(compact('servicos'));
     $motivos = $this->Indisponibilidade->Motivo->find('list', array('fields' => array('Motivo.id', 'Motivo.nome')));

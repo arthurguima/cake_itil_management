@@ -166,7 +166,7 @@
       $servicos[$key] = $serv['Status']['total'];
       $servicos['total'] += $serv['Status']['total'];
     }
-    
+
     foreach($servicos as $key => $servicototal):
       if($key != 'total'){
         $colors[$key] = substr(md5($key), 0, 6);
@@ -207,6 +207,31 @@
     </div>";
 
     return $status . $servic;
+  }
+
+  public function select2(){
+    return "
+      $(\".select2chamado\").select2({
+        minimumInputLength: 4,
+        width: \"100%\",
+        ajax: {
+            url: \"" . Router::url('/', true) . "\" + 'chamados/json',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+              return {
+                q: params.term, // search term
+              };
+            },
+            processResults: function (data, params) {
+              return {
+                results: data,
+              };
+            },
+            cache: true
+        },
+      });
+    ";
   }
 
 }?>

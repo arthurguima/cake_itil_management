@@ -1,5 +1,7 @@
 <?php class Chamado extends AppModel {
 
+	public $order = array("Chamado.numero" => "ASC");
+
 	public $belongsTo = array(
 		'Demanda' => array(
 			'className' => 'Demanda',

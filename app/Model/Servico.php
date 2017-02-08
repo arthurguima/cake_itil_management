@@ -1,5 +1,7 @@
 <?php class Servico extends AppModel {
 
+  public $order = array("Servico.sigla" => "ASC");
+
   public $hasAndBelongsToMany = array(
     'Area' => array('className' => 'Area'),
     'Indisponibilidade' => array('className' => 'Indisponibilidade'),

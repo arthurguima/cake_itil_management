@@ -16,8 +16,8 @@
   </div>
 </div>
 
-<div class="row error">
-  <div class="col-lg-6 well">
+<div class="row">
+  <div class="col-lg-6">
     <?php
       echo $this->BootstrapForm->create('Chamado');
 
@@ -28,7 +28,7 @@
         'label' => array('text' => 'Número: ')));
 
       if(!isset($this->params['url']['servico'])){
-        echo $this->BootstrapForm->input('servico_id', array('label' => array('text' => 'Serviço: ')));
+        echo $this->BootstrapForm->input('servico_id', array('class' => 'select2', 'label' => array('text' => 'Serviço: ')));
       }
 
       echo $this->BootstrapForm->input('ano', array(
@@ -37,9 +37,8 @@
                  'id' => 'dpdecade'));
 
       echo $this->BootstrapForm->input('user_id', array(
-                'class' => 'select2',
-                'label' => array('text' => 'Responsável: '),
-                'empty' => "Responsável"));
+                'class' => 'select2user',
+                'label' => array('text' => 'Responsável: ')));
 
       echo $this->BootstrapForm->input('dt_prev_resolv', array(
                 'label' => array('text' => 'Previsão de Atendimento: '),
@@ -78,11 +77,11 @@
            'class' => 'control-label col-sm-2')));
 
      echo $this->BootstrapForm->input('demanda_id', array(
-                 'label' => array('text' => 'Demanda: '),
-                 'input' => 'text',
-                // 'multiple' => "false",
-                 'empty' => 'Demanda',
-                 'options' => $demandas));
+                'class' => 'select2demanda',
+                'label' => array('text' => 'Demanda: '),
+                'empty' => "Demanda",
+                'options' => $demandas));
+
 
       echo $this->BootstrapForm->input('id');
     ?>
@@ -99,10 +98,14 @@
 
 <script>
   $(document).ready(function() {
-    $('.select2').select2({
+    $('select.select2').select2({
       language: "pt-BR",
       theme: "bootstrap"
     });
+
+    <?php echo $this->User->select2(); ?>
+
+    <?php echo $this->Demanda->select2(); ?>
 
     $("[id*='dpdecade']").datetimepicker({
       format: "yyyy",
@@ -138,8 +141,6 @@
          getChamadoTipos($(this).val());
       })
     }).change();
-
-    $('#ChamadoDemandaId').select2();
 
   });
 </script>

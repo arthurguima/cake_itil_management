@@ -152,4 +152,29 @@
       return $value . "</span>";
 
   }
+
+  public function select2(){
+    return "
+      $(\".select2rdm\").select2({
+        minimumInputLength: 4,
+        width: \"100%\",
+        ajax: {
+            url: \"" . Router::url('/', true) . "\" + 'rdms/json',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+              return {
+                q: params.term, // search term
+              };
+            },
+            processResults: function (data, params) {
+              return {
+                results: data,
+              };
+            },
+            cache: true
+        },
+      });
+    ";
+  }
 }?>

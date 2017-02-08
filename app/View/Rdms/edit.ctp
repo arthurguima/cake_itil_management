@@ -31,12 +31,17 @@
                   'label' => array('text' => 'Nome: ')));
 
       echo $this->BootstrapForm->input('user_id', array(
-                 'class' => 'select2',
+                 'class' => 'select2user',
                  'label' => array('text' => 'Responsável: '),
                  'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('solicitante', array(
                'label' => array('text' => 'Solicitante: ')));
+
+      echo $this->BootstrapForm->input('servico_id', array(
+                 'class' => 'select2',
+                 'empty'=>'Serviço',
+                 'label' => array('text' => 'Serviço: ')));
 
       echo $this->BootstrapForm->input('versao', array(
                  'label' => array('text' => 'Versão/Fase/TAG: ')));
@@ -90,26 +95,26 @@
 
        <?php
 
-        echo $this->BootstrapForm->input('Demanda', array(
-                    'label' => array('text' => 'Demanda(s): '),
-                    'input' => 'text',
-                    'multiple' => "true",
-                    'options' => $demandas));
+       echo $this->BootstrapForm->input('Demanda', array(
+                  'class' => 'select2demanda',
+                  'label' => array('text' => 'Demandas: '),
+                  'multiple' => "multiple",
+                  'empty' => "Demandas"));
 
         echo $this->BootstrapForm->input('Chamado', array(
+                    'class' => 'select2chamado',
                     'label' => array('text' => 'Chamado(s): '),
-                    'input' => 'text',
-                    'multiple' => "true",
-                    'options' => $chamados));
+                    'multiple' => "multiple",
+                    'empty' => "Chamados"));
 
         echo $this->BootstrapForm->input('observacao', array(
                     'label' => array('text' => 'Observação: '),
                     'type' => 'textarea'));
 
+
         echo $this->BootstrapForm->input('id');
       ?>
 
-    <div id="demandaList"></div>
 
     <div class="form-footer col-lg-10 col-md-6 pull-right">
       <?php
@@ -119,14 +124,20 @@
       ?>
     </div>
   </div>
+
+
+
 </div>
 
 <script>
   $(document).ready(function() {
-    $('.select2').select2({
+    $('select.select2').select2({
       language: "pt-BR",
       theme: "bootstrap"
     });
+    <?php echo $this->User->select2(); ?>
+    <?php echo $this->Demanda->select2(); ?>
+    <?php echo $this->Chamado->select2(); ?>
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
@@ -146,14 +157,15 @@
         language: 'pt-BR'
     });
 
-    $('#DemandaDemanda').select2({
+    /*$('#DemandaDemanda').select2({
       language: "pt-BR",
       theme: "bootstrap"}
     );
+
     $('#ChamadoChamado').select2({
       language: "pt-BR",
       theme: "bootstrap"
-    });
+    });*/
   });
 </script>
 
@@ -164,8 +176,8 @@
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');
 
   //-- Select2 --
-  echo $this->Html->script('plugins/select2/select2.min');
-  echo $this->Html->css('plugins/select2');
-  echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-  echo $this->Html->css('plugins/select2-bootstrap');
+  echo $this->Html->script('plugins/select2/select2.full.min');
+  echo $this->Html->css('plugins/select2.min');
+  echo $this->Html->css('plugins/select2-bootstrap.min');
+  echo $this->Html->script('plugins/select2/pt-BR');
 ?>

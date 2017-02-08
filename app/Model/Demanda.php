@@ -1,5 +1,7 @@
 <?php class Demanda extends AppModel {
 
+	public $order = array("Demanda.clarity_dm_id" => "ASC");
+
 	public $belongsTo = array(
 		'Servico' => array(
 			'className' => 'Servico'

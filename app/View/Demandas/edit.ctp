@@ -58,7 +58,7 @@
 
 
          echo $this->BootstrapForm->input('user_id', array(
-               'class' => 'select2',
+               'class' => 'select2user',
                'label' => array('text' => 'Responsável: '),
                'empty' => "Responsável"));
 
@@ -85,10 +85,11 @@
         echo $this->BootstrapForm->input('status_id', array(
                    'label' => array('text' => 'Status: ')));
 
-        echo $this->BootstrapForm->input('demanda_id', array(
-                    'label' => array('text' => 'Demanda Pai: '),
-                    'empty' => 'Demanda Pai',
-                    'class'=> "select2"));
+       echo $this->BootstrapForm->input('demanda_id', array(
+                  'class' => 'select2demanda',
+                  'label' => array('text' => 'Demanda: '),
+                  'empty' => "Demanda",
+                  'options' => $demandas));
 
         echo $this->BootstrapForm->input('data_cadastro', array(
                   'label' => array('text' => 'Data de Cadastro: '),
@@ -141,10 +142,14 @@
 
 <script>
   $(document).ready(function() {
-    $('.select2').select2({
+    $('select.select2').select2({
       language: "pt-BR",
       theme: "bootstrap"
     });
+
+    <?php echo $this->User->select2(); ?>
+
+    <?php echo $this->Demanda->select2(); ?>
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",

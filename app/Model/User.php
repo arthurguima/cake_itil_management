@@ -1,5 +1,7 @@
 <?php class User extends AppModel {
 
+  public $order = array("User.nome" => "ASC");
+
   public $hasAndBelongsToMany = array(
     'Cliente' => array()
   );
