@@ -1245,6 +1245,110 @@ td.fc-day{
   background-color: #FFF785 !important;
 }
 
+/* Subtarefas */
+.tarefas-numero{
+  min-height: 60px;
+  display: inline-block;
+  border-width: 0;
+  font-size: 13px;
+  text-align: left;
+  line-height: 21px;
+  min-width: 130px;
+  padding-left: 8px;
+  position: relative;
+  top: 0;
+}
+.tarefas-numero-valor{
+  display: block;
+  font-size: 22px;
+  margin: 2px 0 4px;
+  position: relative;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.15);
+}
+.tarefas-check{
+  max-width: 140px;
+}
+.tarefas-row{
+  margin-left: auto;
+}
+.tarefas-icon{
+  display: inline-block;
+  vertical-align: top;
+  width: 44px;
+}
+.tarefas-box {
+  display: inline-block;
+  width: 210px;
+  height: 66px;
+  color: #555;
+  background-color: #FFF;
+  box-shadow: none;
+  margin: -1px 0 0 -1px;
+  padding: 8px 3px 6px 9px;
+  border: 1px dotted;
+  border-color: #D8D8D8!important;
+  vertical-align: middle;
+  text-align: left;
+  position: relative;
+}
+
+.tarefas-aguardando{
+    background-color: #5bc0de;
+    display: inline-block;
+    height: 49px;
+    margin: 0;
+    padding: 11px 13px 28px 13px;
+    border-width: 0;
+    text-align: center;
+    position: relative;
+    border-radius: 100%;
+    -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    font-size: 28px !important;
+    color: #fff !important;
+    text-rendering: auto;
+}
+
+.tarefas-finalizado{
+  background-color: #777;
+  display: inline-block;
+  height: 49px;
+  margin: 0;
+  padding: 11px 13px 28px 13px;
+  border-width: 0;
+  text-align: center;
+  position: relative;
+  border-radius: 100%;
+  -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+  box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+  font-size: 28px !important;
+  color: #fff !important;
+  text-rendering: auto;
+}
+
+.tarefas-andamento{
+  background-color: #5cb85c;
+  display: inline-block;
+  height: 49px;
+  margin: 0;
+  padding: 11px 13px 28px 13px;
+  border-width: 0;
+  text-align: center;
+  position: relative;
+  border-radius: 100%;
+  -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+  box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+  font-size: 28px !important;
+  color: #fff !important;
+  text-rendering: auto;
+}
+
+.list-group-item-title{
+  font-weight: bold;
+  font-size: 15px;
+}
+
+
 /*CanvasJs*/
 .chart-container{
   margin-right: 5px;

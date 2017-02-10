@@ -237,7 +237,16 @@
 																	$release['Rdm']['created'] . " - " . $release['Rdm']['dt_prevista'], null);
 												?>
 		                  </td>
-											<td></td>
+											<td>
+	                      <ul style="overflow: auto;">
+	                        <?php
+	                          foreach ($release['Historico'] as $h):
+	                            echo  '<li>(' . $h['data'] . ') - ' .$this->Historicos->findLinks($h['descricao']) . '</li>';
+	                          endforeach;
+	                          unset($dem);
+	                        ?>
+	                      </ul>
+	                    </td>
 											<td>
 												<?php
 													echo $this->Tables->getMenu('releases', $release['Release']['id'], 14);
@@ -649,6 +658,47 @@
 							</table>
 						</div>
 					</div>
+
+					<ul class="list-group">
+						<li class="list-group-item">
+							<p class="list-group-item-title">
+								Tarefas com data prevista para
+								<?php
+									setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+									echo strftime('%B de %Y', strtotime('today'));
+								?>
+							</p>
+							<div class="row tarefas-row">
+								<div class="tarefas-box">
+									<div class="tarefas-icon">
+										<i class="tarefas-aguardando fa fa-hourglass-start"></i>
+									</div>
+									<div class="tarefas-numero pull-right">
+										<span class="tarefas-numero-valor"><?php echo $subtarefas_mes['aguardando']; ?></span>
+										<div class="tarefas-check">Aguardando início!</div>
+									</div>
+								</div>
+								<div class="tarefas-box">
+									<div class="tarefas-icon">
+										<i class="tarefas-andamento fa fa-hourglass-half"></i>
+									</div>
+									<div class="tarefas-numero pull-right">
+										<span class="tarefas-numero-valor"><?php echo $subtarefas_mes['em_andamento'];?></span>
+										<div class="tarefas-check">Em andamento!</div>
+									</div>
+								</div>
+								<div class="tarefas-box">
+									<div class="tarefas-icon">
+										<i class="tarefas-finalizado fa fa-hourglass-end"></i>
+									</div>
+									<div class="tarefas-numero pull-right">
+										<span class="tarefas-numero-valor"><?php echo $subtarefas_mes['finalizada'];?></span>
+										<div class="tarefas-check">Finalizadas!</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>

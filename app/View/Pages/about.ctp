@@ -123,6 +123,7 @@
                         <li>Ordenação dos itens nos campos de select.</li>
                         <li>Substituídos as associações entre Rdms,Chamados, Releases,etc por chamados AJAX. (Performance e Usabilidade).</li>
                         <li>Atualizada a versão do Plugin Select2.</li>
+                        <li>Informação visual das tarefas dos mês no workspace.</li>
                       </ul>
                     </div>
                 </li>

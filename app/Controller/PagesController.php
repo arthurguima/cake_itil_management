@@ -272,6 +272,10 @@ class PagesController extends AppController {
 		    'Servico' => array(),
 				'Rdm' => array(),
 				'User' => array(),
+				'Historico' => array(
+          'order' => 'Historico.created DESC',
+          'limit' => 2
+        )
 		  ),
 			'conditions' => array('Release.dt_fim IS NULL && Release.user_id = ' . $this->Session->read('User.uid'))
 		));
@@ -332,12 +336,24 @@ class PagesController extends AppController {
 		$this->set('subtarefas', $subtarefas);
 
 		/* Tarefas do Mês */
-		/*Lista de Subtarefas*/
-		/*$this->loadModel('Subtarefa');
-		$subtarefas = $this->Subtarefa->find('all', array(
-			'conditions' => array('Subtarefa.check = 0 && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
+		$this->loadModel('Subtarefa');
+		$this->Subtarefa->Behaviors->attach('Containable');
+		$subtarefas_mes = $this->Subtarefa->find('all', array(
+			'contain' => array(),
+			'conditions' => array('(DATE_FORMAT(Subtarefa.dt_prevista, "%m%") = ' . date("m") . ') && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
-		$this->set('subtarefaMs', $subtarefasM);*/
+		$subtarefas_mesAUX = array();
+		$subtarefas_mesAUX['total'] = sizeof($subtarefas_mes);
+		$subtarefas_mesAUX['finalizada'] = 0;
+		$subtarefas_mesAUX['em_andamento'] = 0;
+		$subtarefas_mesAUX['aguardando'] = 0;
+
+		foreach($subtarefas_mes as $sub){
+				if($sub['Subtarefa']['check'] == 1) {$subtarefas_mesAUX['finalizada'] += 1; }
+				if($sub['Subtarefa']['check'] == 0) {$subtarefas_mesAUX['em_andamento'] += 1; }
+				if($sub['Subtarefa']['check'] == 2) {$subtarefas_mesAUX['aguardando'] += 1; }
+		}
+		$this->set('subtarefas_mes', $subtarefas_mesAUX);
 	}
 
 
