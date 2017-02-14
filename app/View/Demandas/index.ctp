@@ -29,14 +29,14 @@
             </div>
           </div>
           <div class="col-lg-12 filters-item">
+            <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('nomef', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control select2', 'placeholder' => "Solicitante")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control select2')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'form-control')); ?></div>
+            <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>            
             <div class="form-group"><?php echo $this->Search->input('finalizada', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">

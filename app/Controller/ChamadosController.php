@@ -6,6 +6,9 @@
  * @return void
  */
 	public function index() {
+		$this->loadModel('Cliente');
+    $this->Cliente->Behaviors->attach('Containable');
+
 		$this->Filter->addFilters(
 			array(
 				'semDemanda' => array(
@@ -47,6 +50,13 @@
 										'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
 					)
 				),
+				'cliente' => array(
+          'Servico.cliente_id' => array(
+            'select' => $this->Filter->select('Cliente', $this->Cliente->find('list', array(
+                        'conditions'=> array("Cliente.id" . $_SESSION['User']['clientes']),
+                        'fields' => array('Cliente.id', 'Cliente.sigla'))))
+          )
+        ),
 				'status' => array(
 					'Chamado.status_id' => array(
 						'select' => $this->Filter->select('Status', $this->Chamado->Status->find('list',
@@ -109,6 +119,9 @@
 * @return void
 */
 	public function demandas() {
+		$this->loadModel('Cliente');
+		$this->Cliente->Behaviors->attach('Containable');
+		
 		$this->Filter->addFilters(
 			array(
 			'numerof' => array(
@@ -147,6 +160,13 @@
 							'fields' => array('Servico.id', 'Servico.sigla'))))
 					)
 				),
+				'cliente' => array(
+          'Servico.cliente_id' => array(
+            'select' => $this->Filter->select('Cliente', $this->Cliente->find('list', array(
+                        'conditions'=> array("Cliente.id" . $_SESSION['User']['clientes']),
+                        'fields' => array('Cliente.id', 'Cliente.sigla'))))
+          )
+        ),
 				'status' => array(
 					'Chamado.status_id' => array(
 						'select' => $this->Filter->select('Status', $this->Chamado->Status->find('list',

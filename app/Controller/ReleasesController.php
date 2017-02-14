@@ -1,6 +1,8 @@
 <?php class ReleasesController extends AppController {
 
   public function index(){
+    $this->loadModel('Cliente');
+    $this->Cliente->Behaviors->attach('Containable');
     // Add filter
     $this->Filter->addFilters(
       array(
@@ -10,6 +12,13 @@
                         'contain' => array('_IndisponibilidadesServico', '_Servico'), //'Hack' para HABTM
                         'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
                         'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+          )
+        ),
+        'cliente' => array(
+          'Servico.cliente_id' => array(
+            'select' => $this->Filter->select('Cliente', $this->Cliente->find('list', array(
+                        'conditions'=> array("Cliente.id" . $_SESSION['User']['clientes']),
+                        'fields' => array('Cliente.id', 'Cliente.sigla'))))
           )
         ),
         'dt_executada' => array(

@@ -31,6 +31,7 @@
             </div>
           </div>
           <div class="col-lg-12 filters-item">
+            <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('nomef', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('responsavelf', array('class' => 'form-control select2', 'placeholder' => "Responsável")); ?></div>
             <div class="form-group"><?php echo $this->Search->input('solicitantef', array('class' => 'form-control', 'placeholder' => "Solicitante")); ?></div>

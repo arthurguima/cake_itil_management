@@ -13,6 +13,9 @@ class DemandasController extends AppController {
  * @return void
  */
   public function index() {
+    $this->loadModel('Cliente');
+    $this->Cliente->Behaviors->attach('Containable');
+
     // Add filter
     $this->Filter->addFilters(
       array(
@@ -35,6 +38,13 @@ class DemandasController extends AppController {
             'select' => $this->Filter->select('Serviço', $this->Demanda->Servico->find('list',
                     array('conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
                           'fields' => array('Servico.id', 'Servico.sigla', 'Servico.tecnologia'))))
+          )
+        ),
+        'cliente' => array(
+          'Servico.cliente_id' => array(
+            'select' => $this->Filter->select('Cliente', $this->Cliente->find('list', array(
+                        'conditions'=> array("Cliente.id" . $_SESSION['User']['clientes']),
+                        'fields' => array('Cliente.id', 'Cliente.sigla'))))
           )
         ),
         'status' => array(

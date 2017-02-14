@@ -26,6 +26,7 @@
           <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
           <div class="col-lg-12 filters-item">
             <div class="form-group">
+              <?php echo $this->Search->input('cliente', array('class' => 'select2 form-control')); ?>
               <?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?>
               <?php echo $this->Search->input('concluida_', array('class' => 'select2 form-control')); ?>
             </div>
