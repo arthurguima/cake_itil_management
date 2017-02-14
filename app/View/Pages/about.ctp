@@ -100,6 +100,23 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li>
+            <div class="timeline-badge info">
+              <i class="fa fa-bolt fa-fw"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 3.1 </h4>
+                    <div class="personal-info">
+                      <ul>
+                        <li>Criados grupos de tarefas.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li class="timeline-inverted">
             <div class="timeline-badge success">
               <i class="fa fa-envelope-o fa-fw"></i>

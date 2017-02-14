@@ -111,6 +111,7 @@
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Chamados", '/chamadotipos', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de RDM", '/rdmtipos', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Tipos de Demandas", '/demandatipos', array('escape' => false)); ?></li>
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Grupos de Tarefas", '/grupotarefas', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Usuários", '/users', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços", '/servicos', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Status", '/status', array('escape' => false)); ?></li>

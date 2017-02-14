@@ -272,20 +272,48 @@
                 array('controller' => 'subtarefas', 'action' => 'add','?' => array('servico' => $demanda['Servico']['id'], 'controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
                 array('escape' => false));
               }
+
+              if($this->Ldap->autorizado(2)){
+                echo $this->Html->link("<i class='fa fa-th-large pull-right'></i>",
+                array('controller' => 'grupotarefas', 'action' => 'assign','?' => array('tipo' => 1, 'attribute' => 'demanda_id', 'servico' => $demanda['Servico']['id'], 'controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
+                array('escape' => false));
+              }
             ?>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.subtarefa-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
+            <?php
+              echo $this->Tables->popupBox2(
+                "<h4>Como funcionam as Tarefas?</h4>",
+                "<ul>
+                  <li>Lista as tarefas relacionadas a essa atividade sob a sua responsabilidade.</li>
+                  <li>As tarefas estão sempre associadas ao usuário definido e um sistema.</li>
+                  <li>Elas também podem ser associadas as Demandas, RDMs, Chamados e Releases.</li>
+                  <li>Caso não exista uma <b>Data Prevista de Início</b> o sistema considera a <b>Data de criação da Tarefa</b>.</li>
+                  <li>Caso não exista uma <b>Data de Finalização</b> o sistema considera a <b>Data Prevista de Fim</b>.</li>
+                  <li>Existem apenas 3 status para as Demandas: Aguardando Início, Em andamento, Finalizada.</li>
+                  <li>
+                    <b>Grupos de tarefas</b>
+                    <ul>
+                      <li>Os grupos são criados no Menu Admin > Grupos de Tarefas.</li>
+                      <li>São um conjunto de atividades pré-definidas que visam facilitar a gestão sobre uma atividade.</li>
+                      <li>Você poderá adicionar tarefas apenas dos grupos definidos para a atividade atual (Chamados, Releases, Rdms, Demandas, etc).</li>
+                      <li>Você pode alterar as datas, o responsável ou qualquer outro atributo da tarefas assim como faria com qualquer tarefa criada por você.</li>
+                    </ul>
+                  </li>
+                </ul>", "10");
+            ?>
           </h3>
         </p>
       </div>
       <div class="panel-body subtarefa-body">
         <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-tarefas">
             <thead>
               <tr>
                 <th>Data prevista</th>
                 <th>Tarefa</th>
                 <th>Responsável</th>
                 <th><span class="editable">Status</span></th>
+                <th>Marcador</th>
                 <th></th>
               </tr>
             </thead>
@@ -298,7 +326,7 @@
                       ?>
                     </td>
                     <td><?php echo $sub['descricao']; ?></td>
-                    <td><?php echo $sub['User']['nome']; ?></td>
+                    <td><div class="sub-17 small"><?php echo $sub['User']['nome']; ?></div></td>
                     <td id="<?php echo "sub-" . $sub['id']?>">
                       <?php
                         echo $this->Subtarefas->status($sub['check']);
@@ -307,6 +335,7 @@
                     <?php
                       echo $this->Tables->SubtarefaStatusEditable($sub['id'], "subtarefas");
                     ?>
+                    <td class="small"><?php echo $sub['marcador']; ?></td>
                     <td>
                        <?php
                          if($this->Ldap->autorizado(2)){
@@ -347,7 +376,7 @@
       </div>
       <div class="panel-body historico-body">
         <div class="table-responsive">
-          <table class="table table-striped table-bordered table-hover" id="dataTables-contrato">
+          <table class="table table-striped table-bordered table-hover" id="dataTables">
             <thead>
               <tr>
                 <th>Data</th>
@@ -359,9 +388,9 @@
             <tbody>
               <?php foreach($demanda['Historico'] as $hist): ?>
                   <tr>
-                    <td><?php echo $hist['data']; ?></td>
+                    <td><div class="small"><?php echo $hist['data']; ?></div></td>
                     <td><?php echo $this->Historicos->findLinks($hist['descricao']); ?></td>
-                    <td><?php echo $hist['analista']; ?></td>
+                    <td><div class="small sub-17"><?php echo $hist['analista']; ?></div></td>
                     <td>
                        <?php
                          if($this->Ldap->autorizado(2)){
@@ -416,6 +445,15 @@
 
   //-- Jeditable
   echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+
+  //-- DataTables JavaScript -->
+    echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+    echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+    echo $this->Html->css('plugins/dataTables.bootstrap.css');
+
+    //-- DataTables --> TableTools
+  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
 ?>
 
 <script>
@@ -429,5 +467,44 @@
     });
 
     getClarityInfoOnView('<?php echo $demanda['Demanda']['clarity_dm_id']?>', 'demandas');
+
+    $('[data-toggle="popover2"]').popover({trigger: 'hover','placement': 'left', html: 'true'});
+
+    $('#dataTables-tarefas').dataTable({
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+          language: {
+            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
+          },
+          "dom": 'T<"clear">lfrtip',
+          "tableTools": {
+              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+              "aButtons": [
+                {
+                    "sExtends": "copy",
+                    "sButtonText": "Copiar",
+                    "mColumns": [ 0,1,2,3,4 ]
+                },
+                {
+                    "sExtends": "print",
+                    "sButtonText": "Imprimir"
+                },
+                {
+                    "sExtends": "csv",
+                    "sButtonText": "CSV",
+                    "sFileName": "Tarefas.csv",
+                    "mColumns": [ 0,1,2,3,4 ]
+                },
+                {
+                    "sExtends": "pdf",
+                    "sButtonText": "PDF",
+                    "sFileName": "Tarefas.pdf",
+                    "sPdfOrientation": "landscape",
+                    "sTitle": "Tarefas da Demanda: "  + <?php echo "'" .$demanda['Demanda']['clarity_dm_id'] . "'"; ?>,
+                    "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
+                    "mColumns": [ 0,1,2,3,4 ]
+                },
+              ]
+          }
+      });
   });
 </script>

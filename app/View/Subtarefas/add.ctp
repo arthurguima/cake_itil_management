@@ -100,9 +100,9 @@
           <label for="SubtarefaCheck" class="col-lg-3 control-label">Status: </label>
           <div class="col-lg-9">
             <select name="data[Subtarefa][check]" class="form-control" id="filtercheck">
+              <option value="2">Aguardando Início</option>
               <option value="0">Em andamento</option>
               <option value="1">Finalizada</option>
-              <option value="2">Aguardando Início</option>
             </select>
           </div>
       </div>
