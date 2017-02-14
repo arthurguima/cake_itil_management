@@ -81,6 +81,13 @@
 
         echo $this->BootstrapForm->input('id');
 
+        $options = array( 1 => 'Sim', 0 => 'Não');
+        echo $this->BootstrapForm->input('notificar', array(
+                                'label' => array('text' => 'Notificar responsável por e-mail? '),
+                                'type' => 'select',
+                                'options' => $options,
+                                'selected' => 0,
+                                'checked' => ''));
       ?>
       <div class="form-group">
         <label for="SubtarefaCheck" class="col-lg-3 control-label">Status: </label>
@@ -135,7 +142,7 @@
       language: "pt-BR",
       theme: "bootstrap"
     });
-    
+
     <?php echo $this->User->select2(); ?>
   });
 </script>

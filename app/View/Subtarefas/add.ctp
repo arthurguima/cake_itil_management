@@ -85,6 +85,14 @@
                     'label' => array('text' => 'Tarefa: '),
                     'type' => 'textarea'));
 
+        $options = array( 1 => 'Sim', 0 => 'Não');
+        echo $this->BootstrapForm->input('notificar', array(
+                                'label' => array('text' => 'Notificar responsável por e-mail? '),
+                                'type' => 'select',
+                                'options' => $options,
+                                'selected' => 0,
+                                'checked' => ''));
+
        if(!isset($this->params['url']['controller']))
          echo $this->BootstrapForm->input('servico_id', array(
                'class' => 'select2',

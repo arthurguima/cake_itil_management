@@ -43,16 +43,17 @@ class SubtarefasController extends AppController {
       if ($this->Subtarefa->save($this->request->data)) {
         $this->Session->setFlash('Subtarefa Criado com Sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
 
-        $this->mail(array(
-          'auth_pass' => $converter->decode($_SESSION['User']['auth_pass']),
-          'from' => explode('@', $_SESSION['email']),
-          'to' => $this->request->data['Subtarefa']['user_id'],
-          'servico_id' => $this->request->data['Subtarefa']['servico_id'],
-          'subject' => "[SGS] Uma nova tarefa foi atribuída para o dia '" . $this->request->data['Subtarefa']['dt_prevista']. "'!",
-          'tipo' => "Concluir Tarefa",
-          'data' => $this->request->data['Subtarefa']['dt_prevista'],
-          'mensagem' => $this->request->data['Subtarefa']['descricao'],
-        ));
+        if($this->request->data['Subtarefa']['notificar'] != 0)
+          $this->mail(array(
+            'auth_pass' => $converter->decode($_SESSION['User']['auth_pass']),
+            'from' => explode('@', $_SESSION['email']),
+            'to' => $this->request->data['Subtarefa']['user_id'],
+            'servico_id' => $this->request->data['Subtarefa']['servico_id'],
+            'subject' => "[SGS] Uma nova tarefa foi atribuída para o dia '" . $this->request->data['Subtarefa']['dt_prevista']. "'!",
+            'tipo' => "Concluir Tarefa",
+            'data' => $this->request->data['Subtarefa']['dt_prevista'],
+            'mensagem' => $this->request->data['Subtarefa']['descricao'],
+          ));
 
         if(isset($this->params['url']['popup']) && $this->params['url']['popup'] == 'true'){
           return $this->redirect(array('controller' =>  "subtarefas", 'action' => 'popup',
@@ -92,11 +93,25 @@ class SubtarefasController extends AppController {
  */
   public function edit($id = null) {
     if($this->params['url']['popup'] == 'true'){  $this->layout = false; }
+    $converter = new Encryption;
     if (!$id) { throw new NotFoundException(__('Subtarefa de Contrato Inválida'));}
 
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Subtarefa->save($this->request->data)) {
         $this->Session->setFlash('Subtarefa atualizada com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+
+        if($this->request->data['Subtarefa']['notificar'] != 0)
+          $this->mail(array(
+            'auth_pass' => $converter->decode($_SESSION['User']['auth_pass']),
+            'from' => explode('@', $_SESSION['email']),
+            'to' => $this->request->data['Subtarefa']['user_id'],
+            'servico_id' => $this->request->data['Subtarefa']['servico_id'],
+            'subject' => "[SGS] Uma nova tarefa foi atribuída/editada para o dia '" . $this->request->data['Subtarefa']['dt_prevista']. "'!",
+            'tipo' => "Concluir Tarefa",
+            'data' => $this->request->data['Subtarefa']['dt_prevista'],
+            'mensagem' => $this->request->data['Subtarefa']['descricao'],
+          ));
+
         if(isset($this->params['url']['popup']) && $this->params['url']['popup'] == 'true'){
           return $this->redirect(array('controller' =>  "subtarefas", 'action' => 'popup',
            '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id']) ));
