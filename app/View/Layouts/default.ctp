@@ -168,15 +168,22 @@
 									</li>
 								</ul>
 							<li>
+							<li>
+								<a href="#"><i class="fa fa-user-secret fa-fw"></i> Sobre <span class="fa arrow"></span></a>
+								<ul class="notes hidden-xs hidden-sm" style="top: 90%;">
+									Sistema de gestão de Serviço - V 3.0
+									<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
+									<br /> <span style="margin-left: 13px;">arthur.doliveira@dataprev.gov.br</span>
+									<br />
+								</ul>
+							</li>
+
 					</ul>
 						<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 			</div>
-			<span class="notes hidden-xs hidden-sm">
-				Sistema de gestão de Serviço - V 3.0
-				<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
-				<br /> <span style="margin-left: 13px;">arthur.doliveira@dataprev.gov.br</span>
-				<br /><br /><a href="/painel.php" style="padding-left: 38px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
-			</span>
+				<span class="notes hidden-xs hidden-sm">
+					<br /><br /><a href="/painel.php" style="padding-left: 38px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
+				</span>
 		</div>
 		<!-- Fim sidebar -->
 		<div id="page-wrapper">

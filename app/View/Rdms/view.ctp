@@ -289,6 +289,8 @@
           <table class="table table-striped table-bordered table-hover" id="dataTables-tarefas">
             <thead>
               <tr>
+                <th>Data de Início</th>
+                <th>Data de Finalização</th>
                 <th>Data prevista</th>
                 <th>Tarefa</th>
                 <th>Responsável</th>
@@ -300,6 +302,22 @@
             <tbody>
               <?php foreach($rdm['Subtarefa'] as $sub): ?>
                   <tr>
+                    <td>
+                      <?php  echo ($sub['dt_inicio'] == null) ? str_replace('-', '/', date("d-m-Y", strtotime($sub['created']))) :  $sub['dt_inicio']; ?>
+                    </td>
+                    <td>
+                      <?php
+                        if ( ($sub['dt_fim'] == null && $sub['check'] != 1))
+                          echo "Previsão: " . $sub['dt_prevista'];
+                        else {
+                          if($sub['dt_fim'] == null && $sub['check'] == 1)
+                            echo $sub['dt_prevista'];
+                          else {
+                            echo $sub['dt_fim'];
+                          }
+                        }
+                      ?>
+                    </td>
                     <td class="text-center">
                       <?php
                         echo $this->Subtarefas->timeLeftTo($sub['created'], $sub['dt_prevista'], $sub['check'], $sub['dt_inicio'], $sub['dt_fim']);
@@ -392,6 +410,11 @@
     //-- DataTables --> TableTools
   echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
   echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
 ?>
 
 <?php
@@ -418,14 +441,19 @@
           language: {
             url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
           },
-          "dom": 'T<"clear">lfrtip',
+          "columnDefs": [  { "visible": false, "targets": [0, 1] } ],
+          "dom": 'TC<"clear">lfrtip',
+          "colVis": {
+            "buttonText": "Esconder Colunas"
+          },
           "tableTools": {
               "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
               "aButtons": [
                 {
                     "sExtends": "copy",
                     "sButtonText": "Copiar",
-                    "mColumns": [ 0,1,2,3,4 ]
+                    //"mColumns": [ 0,1,2,3,4 ]
+                    "mColumns":  "visible"
                 },
                 {
                     "sExtends": "print",
@@ -435,7 +463,8 @@
                     "sExtends": "csv",
                     "sButtonText": "CSV",
                     "sFileName": "Tarefas.csv",
-                    "mColumns": [ 0,1,2,3,4 ]
+                    //"mColumns": [ 0,1,2,3,4 ]
+                    "mColumns":  "visible"
                 },
                 {
                     "sExtends": "pdf",
@@ -444,7 +473,8 @@
                     "sPdfOrientation": "landscape",
                     "sTitle": "Tarefas da Rdm: "  + <?php echo "'" .$rdm['Rdm']['numero'] . "'"; ?>,
                     "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
-                    "mColumns": [ 0,1,2,3,4 ]
+                    //"mColumns": [ 0,1,2,3,4 ]
+                    "mColumns":  "visible"
                 },
               ]
           }

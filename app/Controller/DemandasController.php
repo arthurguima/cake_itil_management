@@ -131,12 +131,11 @@ class DemandasController extends AppController {
     }
     else{
       $this->set('conditions', true);
-
-      if(isset($conditions[14])){
-        if ($conditions[14]['Demanda.status ='] == 0)
-          $conditions[14] = array('Status.fim IS NULL');
+      if(isset($conditions[15]) && sizeof($conditions[15]) >=1){
+        if ($conditions[15]['Demanda.status ='] == 0)
+          $conditions[15] = array('Status.fim IS NULL');
         else
-          $conditions[14] = array('Status.fim IS NOT NULL');
+          $conditions[15] = array('Status.fim IS NOT NULL');
       }
       $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 
@@ -283,6 +282,20 @@ class DemandasController extends AppController {
 
       $statuses = $this->Demanda->Status->find('list', array('conditions' => array('Status.tipo' => 1), 'fields' => array('Status.id', 'Status.nome')));
       $this->set(compact('statuses'));
+
+      $this->set('rdms',
+                  $this->Demanda->Rdm->find('list', array(
+                    'fields' => array('Rdm.id', 'Rdm.numero'),
+                    'joins' => array(
+                      array(
+                        'table'=>'demandas_rdms',
+                        'alias' => 'DemandasRdm',
+                        'type'=>'inner',
+                        'conditions'=> array(
+                          'DemandasRdm.rdm_id = Rdm.id',
+                          'DemandasRdm.demanda_id =' => $this->request->data['Demanda']['id'],
+                        ),
+                      )))));
   }
 
 /**

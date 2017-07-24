@@ -611,8 +611,11 @@
 										<th>Servico</th>
 										<th>Atividade</th>
 										<th>Tarefa</th>
+										<th>Data de Início</th>
+		                <th>Data de Finalização</th>
 										<th>Prazo</th>
 										<th><span class="editable">Status</span></th>
+										<th>Marcador</th>
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -635,6 +638,22 @@
 												?>
 											</td>
 											<td><?php echo $sub['Subtarefa']['descricao']; ?></td>
+											<td>
+	                      <?php  echo ($sub['Subtarefa']['dt_inicio'] == null) ? str_replace('-', '/', date("d-m-Y", strtotime($sub['Subtarefa']['created']))) :  $sub['Subtarefa']['dt_inicio']; ?>
+	                    </td>
+	                    <td>
+	                      <?php
+	                        if ( ($sub['Subtarefa']['dt_fim'] == null && $sub['Subtarefa']['check'] != 1))
+	                          echo "Previsão: " . $sub['Subtarefa']['dt_prevista'];
+	                        else {
+	                          if($sub['Subtarefa']['dt_fim'] == null && $sub['Subtarefa']['check'] == 1)
+	                            echo $sub['Subtarefa']['dt_prevista'];
+	                          else {
+	                            echo $sub['Subtarefa']['dt_fim'];
+	                          }
+	                        }
+	                      ?>
+	                    </td>
 											<td class="text-center">
 												<?php
                           echo $this->Subtarefas->timeLeftTo($sub['Subtarefa']['created'], $sub['Subtarefa']['dt_prevista'], $sub['Subtarefa']['check'],  $sub['Subtarefa']['dt_inicio'], $sub['Subtarefa']['dt_fim']);
@@ -648,6 +667,7 @@
 											<?php
 												echo $this->Tables->SubtarefaStatusEditable($sub['Subtarefa']['id'], "subtarefas");
 											?>
+											<td class="small"><?php echo $sub['Subtarefa']['marcador'] ?></td>
 											<td>
 												<?php echo $this->Tables->getMenu('Subtarefas', $sub['Subtarefa']['id'],12); ?>
 											</td>

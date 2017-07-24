@@ -56,6 +56,36 @@ public function dataTable($table){
                 language: {
                   url: '" . Router::url('/', true) . "js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
                 },
+                'columnDefs': [  { 'visible': false, 'targets': [3, 4] } ],
+                'dom': 'TC<\"clear\">lfrtip',
+                'colVis': {
+                  'buttonText': \"Esconder Colunas\"
+                },
+                'tableTools': {
+                    'sSwfPath': \"" . Router::url('/', true) . "/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf\",
+                    'aButtons': [
+                      {
+                          'sExtends': 'copy',
+                          'sButtonText': 'Copiar',
+                          'mColumns':  'visible'
+                      },
+                      {
+                          'sExtends': 'csv',
+                          'sButtonText': 'CSV',
+                          'sFileName': 'Tarefas.csv',
+                          'mColumns':  'visible'
+                      },
+                      {
+                          'sExtends': 'pdf',
+                          'sButtonText': 'PDF',
+                          'sFileName': 'Tarefas.pdf',
+                          'sPdfOrientation': 'landscape',
+                          'sTitle': 'Lista de Tarefas',
+                          'sPdfMessage': \"Extraído em: " . date('d/m/y') . "\",
+                          'mColumns':  'visible'
+                      },
+                    ]
+                }
               });";
         break;
     case 3:

@@ -73,9 +73,10 @@
 
 <script>
   $(document).ready(function() {
-    /*$('.select2').select2({
-      containerCssClass: 'select2'
-    });*/
+    $('.select2').select2({
+      language: "pt-BR",
+      theme: "bootstrap"
+    });
 
     $('#calendar').fullCalendar({
       header: {

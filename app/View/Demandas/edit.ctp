@@ -91,6 +91,12 @@
                   'empty' => "Demanda",
                   'options' => $demandas));
 
+        echo $this->BootstrapForm->input('Rdm', array(
+                   'class' => 'select2rdm',
+                   'label' => array('text' => 'RDMs: '),
+                   'multiple' => "multiple",
+                   'empty' => "RDMs"));
+
         echo $this->BootstrapForm->input('data_cadastro', array(
                   'label' => array('text' => 'Data de Cadastro: '),
                   'type' => 'text',
@@ -150,6 +156,8 @@
     <?php echo $this->User->select2(); ?>
 
     <?php echo $this->Demanda->select2(); ?>
+
+    <?php echo $this->Rdm->select2(); ?>
 
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",

@@ -43,7 +43,7 @@
 
       echo $this->BootstrapForm->input('rdm_id', array(
             'class' => 'select2rdm',
-            'label' => array('text' => 'Responsável: '),
+            'label' => array('text' => 'Rdm: '),
             'empty' => "Responsável"));
 
       echo $this->BootstrapForm->input('user_id', array(

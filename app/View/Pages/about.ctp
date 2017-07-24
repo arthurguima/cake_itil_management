@@ -111,6 +111,7 @@
                     <div class="personal-info">
                       <ul>
                         <li>Criados grupos de tarefas.</li>
+                        <li>Notificações automáticas por e-mail das RDMs a serem executadas</li>
                       </ul>
                     </div>
                 </li>

@@ -51,9 +51,9 @@
       $conditions = $conditions + array(998 => array('Release.dt_fim IS NULL'));
     }
     else{
-      if(!empty($conditions[3])){
+      if(!empty($conditions[4])){
         $conditions = $conditions + array(998 => array('Release.dt_fim IS NOT NULL'));
-        unset($conditions[3]);
+        unset($conditions[4]);
       }else {
         $conditions = $conditions + array(998 => array('Release.dt_fim IS NULL'));
       }

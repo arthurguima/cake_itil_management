@@ -1,7 +1,7 @@
 //Resgata informações de Demandas Cadastradas no Clarity
 function getSDMInfo(sdmid, control){
-//  $.getJSON( "http://bsad225949/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
-  $.getJSON( "http://www-apps/_projects/dite/wsdl-sdm/sgdGetSDMdoSelect.php?numero=" + sdmid, function( data ) {
+//  $.getJSON( "http://localhost/rotinas/getRdm.php?numero=" + sdmid, function( data ) {
+  $.getJSON( "http://www-apps/_projects/dite/rotinas/getRdm.php?numero=" + sdmid, function( data ) {
     $.each( data, function( key, val ) {
       /*if(key == 'dt_prevista')
       {
@@ -17,9 +17,11 @@ function getSDMInfo(sdmid, control){
         $('#filterambiente').css('border', '1px solid #4cae4c');
       }
       $('#' + control + toCamelCase(key)).val(val);
+      $('#' + control + toCamelCase(key)).val(val).change();
       $('.' + control + toCamelCase(key)).val(val);
 
       $('#' + control + toCamelCase(key)).css('border', '1px solid #4cae4c');
+      $('#' + control + toCamelCase(key)).css('border', '1px solid #4cae4c').change();
       $('.' + control + toCamelCase(key)).css('border', '1px solid #4cae4c');
       //console.log('#' + control + toCamelCase(key) + " - " + val);
     });

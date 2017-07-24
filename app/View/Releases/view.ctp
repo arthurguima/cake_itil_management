@@ -378,6 +378,8 @@
             }
         });
 
+        $('[data-toggle="popover2"]').popover({trigger: 'hover','placement': 'left', html: 'true'});
+
         $('#dataTables-tarefas').dataTable({
             "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
               language: {
@@ -407,7 +409,7 @@
                         "sButtonText": "PDF",
                         "sFileName": "Tarefas.pdf",
                         "sPdfOrientation": "landscape",
-                        "sTitle": "Tarefas da Demanda: "  + <?php echo "'" .$demanda['Demanda']['clarity_dm_id'] . "'"; ?>,
+                        "sTitle": "Tarefas da Release: "  + <?php echo "'" .$release['Release']['versao'] . "'"; ?>,
                         "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
                         "mColumns": [ 0,1,2,3,4 ]
                     },
@@ -443,48 +445,3 @@
   echo $this->Html->script('getSDMInfoReleases.js');
   ?>
 </dvi>
-
-
-<script>
-  $(document).ready(function() {
-
-    $('[data-toggle="popover2"]').popover({trigger: 'hover','placement': 'left', html: 'true'});
-
-    $('#dataTables-tarefas').dataTable({
-        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
-          language: {
-            url: '<?php echo Router::url('/', true);?>/js/plugins/dataTables/media/locale/Portuguese-Brasil.json'
-          },
-          "dom": 'T<"clear">lfrtip',
-          "tableTools": {
-              "sSwfPath": "<?php echo Router::url('/', true);?>/js/plugins/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-              "aButtons": [
-                {
-                    "sExtends": "copy",
-                    "sButtonText": "Copiar",
-                    "mColumns": [ 0,1,2,3,4 ]
-                },
-                {
-                    "sExtends": "print",
-                    "sButtonText": "Imprimir"
-                },
-                {
-                    "sExtends": "csv",
-                    "sButtonText": "CSV",
-                    "sFileName": "Tarefas.csv",
-                    "mColumns": [ 0,1,2,3,4 ]
-                },
-                {
-                    "sExtends": "pdf",
-                    "sButtonText": "PDF",
-                    "sFileName": "Tarefas.pdf",
-                    "sPdfOrientation": "landscape",
-                    "sTitle": "Tarefas da Release: "  + <?php echo "'" .$release['Release']['versao'] . "'"; ?>,
-                    "sPdfMessage": "Extraído em: <?php echo date('d/m/y')?>",
-                    "mColumns": [ 0,1,2,3,4 ]
-                },
-              ]
-          }
-      });
-  });
-</script>

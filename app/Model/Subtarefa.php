@@ -1,6 +1,6 @@
 <?php class Subtarefa extends AppModel {
 
-  public $order = array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.id" => "ASC");
+  public $order = array("Subtarefa.dt_inicio" => "ASC", "Subtarefa.dt_fim" => "ASC", "Subtarefa.dt_prevista" => "ASC", "Subtarefa.id" => "ASC");
 
   public $belongsTo = array(
     'Demanda' => array(

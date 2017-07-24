@@ -121,6 +121,8 @@
 </script>
 
 <?php
+  echo $this->Html->script('getSDMInfoIndisponibilidades.js');
+  
   //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');

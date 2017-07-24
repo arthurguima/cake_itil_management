@@ -36,7 +36,7 @@
             <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control select2')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>            
+            <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
             <div class="form-group"><?php echo $this->Search->input('finalizada', array('class' => 'form-control')); ?></div>
           </div>
           <div class="col-lg-12">

@@ -20,6 +20,12 @@
       echo $this->BootstrapForm->input('mail', array(
                   'label' => array('text' => 'E-mail: ')));
 
+      $options = array( 1 => 'Sim', 0 => 'Não');
+      echo $this->BootstrapForm->input('email_rdms', array(
+                  'label' => array('text' => 'Receber E-mail sobre RDMs? '),
+                  'options' => $options,
+                  'type' => 'select'));
+
       echo $this->BootstrapForm->input('Cliente', array(
                   'label' => array('text' => 'Clientes: '),
                   'input' => 'text',

@@ -53,7 +53,7 @@
 		),
 		'Subtarefa' => array(
 			'className' => 'Subtarefa',
-			'order' => array("Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC")
+			'order' => array("Subtarefa.dt_inicio" => "ASC", "Subtarefa.dt_fim" => "ASC",  "Subtarefa.dt_prevista" => "ASC", "Subtarefa.created" => "ASC")
 		)
 	);
 
