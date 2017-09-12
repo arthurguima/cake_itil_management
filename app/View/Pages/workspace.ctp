@@ -1,17 +1,5 @@
 <div class="row">
 		<div class="col-lg-12">
-			<h3 class="page-header">
-				Bem-vindo, <?php echo $this->Session->read('User.nome'); ?>! <?php echo $this->Tables->popupBox2(
-					"<h4>Como funciona o Dashboard?</h4>",
-					"<ul>
-						<li>Na tela do Dashboard são mostrados os itens cujo usuário é o responsável.</li>
-						<li>O botão <i class=\"fa fa-plus\" style=\"font-size: 15px !important;\"></i>  é um atalho para o cadastro de novos itens.</li>
-						<li>O Dashboard é divido em Abas. Cada aba possui em seu nome a quantidade de itens que estão abertos e sob a sua responsabilidade no momento.</li>
-						<li>Itens marcados com <span class=\"editable\">Sublinhado</span> podem ser editados com 1 clique.</li>
-						<li>Itens marcados com <i class=\"fa fa-comment-o\" style=\"font-size: 15px !important;\"></i> abrem um popup quando o mouse está em cima.</li>
-						<li>Itens marcados com <i class=\"fa-external-link-square fa\" style=\"font-size: 15px !important;\"></i> são links para outros sistemas.</li>
-					</ul>") ?>
-			</h3>
 		</div>
 </div>
 
@@ -37,6 +25,17 @@
 			<li role="presentation" <?php if($this->Session->read('User.workspace') == 5) echo 'class="active"'; ?>><a href="#indisponibilidades" aria-controls="indisponibilidades" role="tab" data-toggle="tab">
 				Indisponibilidades <span class="badge"><?php echo sizeof($indisponibilidades) ?></span></a>
 			</li>
+			<?php echo $this->Tables->popupBox2(
+				"<h4>Como funciona o Dashboard?</h4>",
+				"<ul>
+					<li>Na tela do Dashboard são mostrados os itens cujo usuário é o responsável.</li>
+					<li>O botão <i class=\"fa fa-plus\" style=\"font-size: 15px !important;\"></i>  é um atalho para o cadastro de novos itens.</li>
+					<li>O Dashboard é divido em Abas. Cada aba possui em seu nome a quantidade de itens que estão abertos e sob a sua responsabilidade no momento.</li>
+					<li>Itens marcados com <span class=\"editable\">Sublinhado</span> podem ser editados com 1 clique.</li>
+					<li>Itens marcados com <i class=\"fa fa-comment-o\" style=\"font-size: 15px !important;\"></i> abrem um popup quando o mouse está em cima.</li>
+					<li>Itens marcados com <i class=\"fa-external-link-square fa\" style=\"font-size: 15px !important;\"></i> são links para outros sistemas.</li>
+				</ul>")
+			?>
 		</ul>
 	</div>
 
@@ -193,7 +192,7 @@
 							}
 						?>
 						<?php echo $this->Tables->popupBox2(
-							"<h4>Como funcionam as RDMs no Dashboard?</h4>",
+							"<h4>Como funcionam as Releases no Dashboard?</h4>",
 							"<ul>
 								<li>Os releases foram criados no SGS como uma forma de unificar a visão do planejamento de mudanças, juntado em apenas um lugar informações da  RMD de implantação, Planejamento da entrega, versão do sistema e demandas associadas.</li>
 								<li>Para criar um release é necessário ter a RDM pai da versão criada.</li>

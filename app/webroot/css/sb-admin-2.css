@@ -32,8 +32,8 @@ body, html {
     min-height: 100%;
     /*background-color: #EBF1F2;*/
     border-left: 1px solid #333;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
+    /*border-top: 1px solid #333;
+    border-bottom: 1px solid #333;*/
     background-image: url('../img/bg.jpg');
 }
 
@@ -44,16 +44,16 @@ body, html {
       padding: 0 20px;
   }
   #side-menu{
-    width: 220px;
+    width: 231px;
     float: left;
   }
 }
 
 i.hide-sidebar{
   color: white;
-  position: fixed;
+  /*position: fixed;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%);*/
   font-size: 22px;
 }
 
@@ -154,7 +154,7 @@ i.hide-sidebar{
         z-index: 1;
         position: absolute;
         width: 230px;
-        margin-top: 35px;
+        //margin-top: 5px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -209,27 +209,12 @@ i.hide-sidebar{
 .nav-tabs-black > li > a {
   border: 1px solid #ddd;
 }
+.nav-tabs-pages i.fa.fa-question-circle {
+    font-size: 31px;
+}
 
 .row-nav-tabs{
   height: 39px;
-}
-
-.chat li {
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #999;
-}
-
-.chat li.left .chat-body {
-    margin-left: 60px;
-}
-
-.chat li.right .chat-body {
-    margin-right: 60px;
-}
-
-.chat li .chat-body p {
-    margin: 0;
 }
 
 .panel .slidedown .glyphicon,
@@ -242,25 +227,6 @@ i.hide-sidebar{
 
 .panel-heading i.fa.fa-question-circle {
   font-size: 19px !important;
-}
-
-.chat-panel .panel-body {
-    height: 350px;
-    overflow-y: scroll;
-}
-
-.login-panel {
-    margin-top: 25%;
-}
-
-.flot-chart {
-    display: block;
-    height: 400px;
-}
-
-.flot-chart-content {
-    width: 100%;
-    height: 100%;
 }
 
 table.dataTable thead .sorting,
@@ -521,30 +487,48 @@ ul.cliente li a {
   }
 
 .navbar-brand{
-  padding: 0;
-  height: 133px;
+  height: 200px;
 }
 
-.navbar-brand > span{
-  /*margin-left: 15px;*/
-  font-size: 14px;
+#bars-side-menu{
+  margin-top: 5px;
+  position: absolute;
+  margin-left: 6px;
+}
+
+.sgd{
+  font-size: 27px;
   font-weight: bold;
+  text-align: center;
+  display: block;
+  margin-top: 2px;
+}
+#sgs-brand{
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  min-height: 31px;
+}
+
+#user-side{
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background: #eee no-repeat center;
+  background-size: cover;
+  margin: auto;
+  margin-bottom: 10px;
+}
+.user-side-name{
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  display: block;
 }
 
 .navbar-header{
   height: 10px;
 }
 
-.navbar-brand a > img{
-  margin-left: 66px;
-  margin-bottom: 15px;
-}
-
-span.sgd {
-  width: 220px;
-  text-align: center;
-  display: block;
-}
 
 /* Links das áreas no index de Contratos*/
 .area-list a{
@@ -597,6 +581,7 @@ input#s2id_autogen1_search{
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
   color: #E7E7E8;
+  background-color: #272c35;
 }
 .breadcrumb{
   padding: 5px 15px;

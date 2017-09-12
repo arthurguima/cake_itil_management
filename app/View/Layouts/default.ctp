@@ -37,12 +37,19 @@
 <body>
 	<div id="wrapper">
 		<!-- Início Sidebar -->
+		<i id="bars-side-menu" class="fa fa-bars center hide-sidebar hidden-xs" style="display: none; cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="navbar-brand hidden-xs hiden-sm">
-				<a> <!-- TODO Alterar -->
-						<?php echo $this->Html->image("logo-icon.svg", array('height' => '45px', 'class' => 'hidden-xs hidden-sm')); ?>
-				</a>
-				<span class="sgd">SGS - Sistema de Gestão de Serviço</span>
+				<div class="row">
+					<div id="sgs-brand">
+						<div class="col-lg-2"><i class="fa fa-bars center hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i></div>
+						<div class="col-lg-10"><span class="sgd">SGS</span></div>
+					</div>
+				</div>
+				<div id="user">
+					<div id="user-side" style="background-image: url('http://www-sicaprod/mdc4web_arqs/FOTOSFunc/f00000000<?php echo $this->Session->read('User.matricula');  ?>.jpg')"></div>
+					<span class="user-side-name">Bem-vindo, <?php echo $this->Session->read('User.nome'); ?>!</span>
+				</div>
 			</div>
 			<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
@@ -177,9 +184,7 @@
 									<br />
 								</ul>
 							</li>
-
 					</ul>
-						<i class="fa fa-caret-left hide-sidebar hidden-xs" style="cursor:pointer;" onclick="javascript:sidebarClick();"></i>
 			</div>
 				<span class="notes hidden-xs hidden-sm">
 					<br /><br /><a href="/painel.php" style="padding-left: 38px;"><i class="fa fa-reply"></i> Retornar ao APPS</a>
