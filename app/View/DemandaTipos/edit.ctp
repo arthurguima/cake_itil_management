@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Tipos de Demandas', '/demandatipos');
   $this->Html->addCrumb($this->data['DemandaTipo']['nome'], array('controller' => 'demandaTipos', 'action' => 'edit', $this->data['DemandaTipo']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Editar Tipo de Demanda</h3></div>
 </div>
 

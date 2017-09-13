@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Sistemas Internos', '/internos');
   $this->Html->addCrumb("Novo", array('controller' => 'internos', 'action' => 'add'));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Novo Sistema Interno</h3></div>
 </div>
 

@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Grupotarefas', '/grupotarefas');
   $this->Html->addCrumb($grupotarefa['Grupotarefa']['marcador'], array('controller' => 'grupotarefas', 'action' => 'view', $grupotarefa['Grupotarefa']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Grupotarefa: <?php echo $grupotarefa['Grupotarefa']['marcador']; ?></h3></div>
 </div>
 

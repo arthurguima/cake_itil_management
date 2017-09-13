@@ -2,7 +2,7 @@
   $this->Html->addCrumb('RDM', '/rdms');
   $this->Html->addCrumb("Nova RDM", "");
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Nova RDM</h3></div>
 </div>
 

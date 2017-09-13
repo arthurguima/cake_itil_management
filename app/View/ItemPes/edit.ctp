@@ -3,7 +3,7 @@
   $this->Html->addCrumb('Itens de contrato da PA', '');
   $this->Html->addCrumb($this->data['ItemPe']['id'], array('controller' => 'itempes', 'action' => 'edit', $this->data['ItemPe']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Editar Item de Contrato

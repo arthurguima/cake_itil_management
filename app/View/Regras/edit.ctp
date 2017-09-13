@@ -3,7 +3,7 @@
   $this->Html->addCrumb('Regras de ANS', "");
   $this->Html->addCrumb("Nova", '');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Editar Regra de ANS</h3></div>
 </div>
 

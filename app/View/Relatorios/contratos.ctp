@@ -1,9 +1,12 @@
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
         Contrato
       </h3>
     </div>
+</div>
+
+<div class="row">
   <div class="col-lg-12 pull-left filters">
     <div class="">
       <div class="row"><span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span></div>

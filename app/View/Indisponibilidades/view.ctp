@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Indisponibilidades', '/indisponibilidades');
   $this->Html->addCrumb($Indisponibilidade['Indisponibilidade']['id'], array('controller' => 'indisponibilidades', 'action' => 'view', $Indisponibilidade['Indisponibilidade']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Indisponibilidade: </h3></div>
 </div>
 

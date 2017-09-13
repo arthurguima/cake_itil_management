@@ -3,13 +3,16 @@
   $this->Html->addCrumb("Demandas Não Finalizadas do Cliente", '/relatorios/demandas_cliente');
 ?>
 
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Demandas Não Finalizadas do Cliente
       <span style="cursor:pointer;" onclick="javascript:$('div.panel-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
     </h3>
   </div>
+</div>
+
+<div>
   <div class="col-lg-12 pull-left filters">
     <div class="">
       <div class="row">

@@ -3,7 +3,7 @@
   $this->Html->addCrumb($this->data['Contrato']['numero'], array('controller' => 'contratos', 'action' => 'view', $this->data['Contrato']['id']));
   $this->Html->addCrumb('Itens de contrato', '');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
         Itens de Contrato

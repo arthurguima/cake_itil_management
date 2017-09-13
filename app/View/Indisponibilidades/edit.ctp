@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Indisponibilidades', '/indisponibilidades');
   $this->Html->addCrumb("Nova", array('controller' => 'indisponibilidades', 'action' => 'add'));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Editar Indisponibilidade
@@ -122,7 +122,7 @@
 
 <?php
   echo $this->Html->script('getSDMInfoIndisponibilidades.js');
-  
+
   //-- TimePicker --
   echo $this->Html->script('plugins/timepicker/bootstrap-datetimepicker');
   echo $this->Html->css('plugins/bootstrap-datetimepicker.min');

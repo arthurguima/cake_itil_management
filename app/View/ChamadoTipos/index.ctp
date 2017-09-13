@@ -1,13 +1,12 @@
 <?php
   $this->Html->addCrumb('Tipos de Chamados', '/chamadotipos');
 ?>
-<div class="row">
-    <div class="col-lg-12">
-      <h3 class="page-header">
-        Tipos de Chamados
-      </h3>
-    </div>
-</div>
+
+  <div class="col-lg-12 page-header-box">
+    <h3 class="page-header">
+      Tipos de Chamados
+    </h3>
+  </div>
 
 <div class="row">
   <div class="col-lg-12">

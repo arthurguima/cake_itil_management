@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Serviços', '/servicos');
   $this->Html->addCrumb($this->data['Servico']['sigla'], array('controller' => 'servicos', 'action' => 'edit', $this->data['Servico']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Editar Serviço <?php //echo ": " . $this->data['Servico']['sigla']; ?>

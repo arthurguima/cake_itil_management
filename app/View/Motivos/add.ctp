@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Motivos', '/motivos');
   $this->Html->addCrumb("Novo", array('controller' => 'motivos', 'action' => 'add'));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Novo Motivo de Indisponibilidade</h3></div>
 </div>
 

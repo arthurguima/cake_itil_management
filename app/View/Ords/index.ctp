@@ -1,87 +1,90 @@
 <?php
   $this->Html->addCrumb('OS', '/ords');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
          OS - Ordens de Serviço
       </h3>
     </div>
-    <div class="col-lg-12 pull-left filters">
-      <div class="">
-        <div class="row">
-          <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 pull-left filters">
+    <div class="">
+      <div class="row">
+        <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span>
+      </div>
+      <div class="row inner" style="display: none;">
+        <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
+        <div class="col-lg-12 filters-item">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <b>Data de Recebimento: </b>
+              <?php echo $this->Search->input('dtrecebimento',
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+              ?>
+            </div>
+            <div class="form-group">
+              <b>Data de Emissão: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+              <?php echo $this->Search->input('dtemissao',
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+              ?>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <b>Data de Deploy Homologação: </b>
+              <?php echo $this->Search->input('dtdhomologacao',
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+              ?>
+
+            </div>
+            <div class="form-group">
+              <b>Data de Deploy Produção: </b>
+              <?php echo $this->Search->input('dtdproducao',
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+              ?>
+
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <b>Data de Homologação: </b>
+              <?php echo $this->Search->input('dthomologacao',
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+              ?>
+
+            </div>
+          </div>
         </div>
-        <div class="row inner" style="display: none;">
-          <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
-          <div class="col-lg-12 filters-item">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <b>Data de Recebimento: </b>
-                <?php echo $this->Search->input('dtrecebimento',
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-                ?>
-              </div>
-              <div class="form-group">
-                <b>Data de Emissão: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
-                <?php echo $this->Search->input('dtemissao',
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-                ?>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <b>Data de Deploy Homologação: </b>
-                <?php echo $this->Search->input('dtdhomologacao',
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-                ?>
-
-              </div>
-              <div class="form-group">
-                <b>Data de Deploy Produção: </b>
-                <?php echo $this->Search->input('dtdproducao',
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-                ?>
-
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <b>Data de Homologação: </b>
-                <?php echo $this->Search->input('dthomologacao',
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                            array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-                ?>
-
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-12 filters-item">
-            <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
-          </div>
-          <div class="col-lg-12">
-            <div class="form-group"><?php echo $this->Search->input('ss_associada', array('class' => 'form-control', 'placeholder' => "Nº da SS Associada")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('pe_associada', array('class' => 'form-control', 'placeholder' => "Nº da PA Associada")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'form-control')); ?></div>
-          </div>
-
-          <?php
-            echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
-                              'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
-            echo $this->Search->end();
-          ?>
+        <div class="col-lg-12 filters-item">
+          <div class="form-group"><?php echo $this->Search->input('responsavel_', array('class' => 'form-control', 'placeholder' => "Responsável")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('nome_', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('numero_', array('class' => 'form-control', 'placeholder' => "Número")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'form-control')); ?></div>
         </div>
-    </div>
+        <div class="col-lg-12">
+          <div class="form-group"><?php echo $this->Search->input('ss_associada', array('class' => 'form-control', 'placeholder' => "Nº da SS Associada")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('pe_associada', array('class' => 'form-control', 'placeholder' => "Nº da PA Associada")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'form-control')); ?></div>
+        </div>
+
+        <?php
+          echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
+                            'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+          echo $this->Search->end();
+        ?>
+      </div>
   </div>
+</div>
 </div>
 
 <div class="row">

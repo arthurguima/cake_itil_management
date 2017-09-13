@@ -4,7 +4,7 @@
   $this->Html->addCrumb('Itens de contrato', '');
   $this->Html->addCrumb($this->data['Item']['id'], array('controller' => 'items', 'action' => 'edit', $this->data['Item']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Editar Item de Contrato <?php //echo $thisto['Servico']['id']; ?>

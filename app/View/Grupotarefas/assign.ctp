@@ -1,7 +1,7 @@
 <?php
   $this->Html->addCrumb('Atribuir Grupo de Tarefas', '');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Atribuir Grupo de tarefas</h3></div>
 </div>
 

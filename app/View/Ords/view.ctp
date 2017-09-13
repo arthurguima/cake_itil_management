@@ -2,7 +2,7 @@
   $this->Html->addCrumb('OS', '');
   $this->Html->addCrumb($ord['Ord']['numero'] . "/" . $ord['Ord']['ano'], array('controller' => 'items', 'action' => 'view', $ord['Ord']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">OS: <?php echo $ord['Ord']['numero'] . "/" . $ord['Ord']['ano'] . " - " . $ord['Servico']['nome']; ?></h3></div>
 </div>
 

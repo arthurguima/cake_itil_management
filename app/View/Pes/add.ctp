@@ -2,7 +2,7 @@
   $this->Html->addCrumb('PAs', '/Pees');
   $this->Html->addCrumb("Nova PA", "");
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Nova PA</h3></div>
 </div>
 

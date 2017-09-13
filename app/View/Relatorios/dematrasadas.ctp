@@ -3,55 +3,58 @@
   $this->Html->addCrumb("Demandas Atrasadas", '/relatorios/dematrasadas');
 ?>
 
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Demandas Internas Atrasadas
       <span style="cursor:pointer;" onclick="javascript:$('div.panel-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
     </h3>
-    <div class="col-lg-12 pull-left filters">
-      <div class="">
-        <div class="row">
-          <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">
-            Filtros <i class="fa fa-plus-square"></i>
-          </span>
-        </div>
-        <div class="row inner">
-          <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
-          <div class="col-lg-12">
-            <div class="form-group">
-              <?php
-                  echo $this->BootstrapForm->input('cliente_id', array(
-                              'label' => array('text' => 'Cliente: '),
-                              'class' => 'select2 form-control',
-                              'empty' => 'Cliente'));
+</div>
 
-                  $options = array( 1 => 'Sim', 0 => 'Não');
-                  echo $this->BootstrapForm->input('origem_cliente', array(
-                              'label' => array('text' => 'Solicitada pelo Cliente?: '),
-                              'empty' => 'Solicitada pelo Cliente',
-                              'options' => $options));
+<div class="row">
+  <div class="col-lg-12 pull-left filters">
+    <div class="">
+      <div class="row">
+        <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">
+          Filtros <i class="fa fa-plus-square"></i>
+        </span>
+      </div>
+      <div class="row inner">
+        <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
+        <div class="col-lg-12">
+          <div class="form-group">
+            <?php
+                echo $this->BootstrapForm->input('cliente_id', array(
+                            'label' => array('text' => 'Cliente: '),
+                            'class' => 'select2 form-control',
+                            'empty' => 'Cliente'));
 
-                  echo $this->BootstrapForm->input('demanda_tipo_id', array(
-                              'label' => array('text' => 'Tipo da Demanda: '),
-                              'empty' =>  'Tipo'));
+                $options = array( 1 => 'Sim', 0 => 'Não');
+                echo $this->BootstrapForm->input('origem_cliente', array(
+                            'label' => array('text' => 'Solicitada pelo Cliente?: '),
+                            'empty' => 'Solicitada pelo Cliente',
+                            'options' => $options));
 
-                  echo $this->BootstrapForm->input('user_id', array(
-                         'class' => 'select2',
-                         'label' => array('text' => 'Responsável: '),
-                         'selected' => $this->Session->read('User.uid'),
-                         'empty' => "Responsável"));
-              ?>
-            </div>
+                echo $this->BootstrapForm->input('demanda_tipo_id', array(
+                            'label' => array('text' => 'Tipo da Demanda: '),
+                            'empty' =>  'Tipo'));
+
+                echo $this->BootstrapForm->input('user_id', array(
+                       'class' => 'select2',
+                       'label' => array('text' => 'Responsável: '),
+                       'selected' => $this->Session->read('User.uid'),
+                       'empty' => "Responsável"));
+            ?>
           </div>
-          <?php
-            echo $this->BootstrapForm->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit', 'class' => 'control-label btn btn-default pull-right'));
-            echo $this->BootstrapForm->end();
-          ?>
         </div>
+        <?php
+          echo $this->BootstrapForm->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit', 'class' => 'control-label btn btn-default pull-right'));
+          echo $this->BootstrapForm->end();
+        ?>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <?php

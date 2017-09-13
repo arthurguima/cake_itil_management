@@ -88,8 +88,11 @@
     $this->loadModel('Rdm');
     $this->Rdm->Behaviors->load('Containable');
     $this->Rdm->contain('Servico');
-    $rdms = $this->Rdm->find('all', array('conditions'=>
-              array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Rdm.dt_prevista >= "' . $params['url']['start'] . '" && Rdm.dt_prevista <= "' . $params['url']['end'] . '"')));
+    $rdms = $this->Rdm->find('all', array(
+      'conditions'=>
+              array($p_servico . "Servico.cliente_id" . $_SESSION['User']['clientes'] . '&& Rdm.dt_prevista >= "' .
+               $params['url']['start'] . '" && Rdm.dt_prevista <= "' . $params['url']['end'] . '"'),
+      'order' => array("Rdm.servico_id", "Rdm.numero" => "ASC") ));
     //debug($rdms);
 
     $data = array();
@@ -397,7 +400,9 @@
 
     $indisponibilidades = $this->Indisponibilidade->find('all', array(
       'conditions'=>
-                  array($p_servico . 'Indisponibilidade.dt_inicio >= "' . $params['url']['start'] . '" && Indisponibilidade.dt_inicio <= "' . $params['url']['end'] .'"'),
+                  array($p_servico . 'Indisponibilidade.dt_inicio >= "' . $params['url']['start'] .
+                  '" && Indisponibilidade.dt_inicio <= "' . $params['url']['end'] .'"'),
+      'order' => array("Indisponibilidade.num_evento" => "ASC")
     ));
 
     $data = array();

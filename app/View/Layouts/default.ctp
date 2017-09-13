@@ -178,7 +178,7 @@
 							<li>
 								<a href="#"><i class="fa fa-user-secret fa-fw"></i> Sobre <span class="fa arrow"></span></a>
 								<ul class="notes hidden-xs hidden-sm" style="top: 90%;">
-									Sistema de gestão de Serviço - V 3.0
+									Sistema de gestão de Serviço - V 3.1
 									<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
 									<br /> <span style="margin-left: 13px;">arthur.doliveira@dataprev.gov.br</span>
 									<br />

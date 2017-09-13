@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Tipos de RDM', '/rdmtipos');
   $this->Html->addCrumb("Nova", array('controller' => 'rdmtipos', 'action' => 'add'));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Novo Tipo de RDM</h3></div>
 </div>
 

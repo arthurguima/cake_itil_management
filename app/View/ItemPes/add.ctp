@@ -3,7 +3,7 @@
   $this->Html->addCrumb('Itens de contrato da PA', array('controller' => 'contratos', 'action' => 'view', $this->params['url']['id']));
   $this->Html->addCrumb("Novo", '');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Novo Item de Contrato</h3></div>
 </div>
 

@@ -4,7 +4,7 @@
   $this->Html->addCrumb('Gestão de Ss', '/gsses');
 ?>
 
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
          SS - Gestão de Ideias

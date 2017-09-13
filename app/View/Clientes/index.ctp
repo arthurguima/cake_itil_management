@@ -1,13 +1,13 @@
 <?php
   $this->Html->addCrumb('Clientes', '/clientes');
 ?>
-<div class="row">
-    <div class="col-lg-12">
-      <h3 class="page-header">
-        Clientes
-      </h3>
-    </div>
+
+<div class="col-lg-12 page-header-box">
+  <div class="col-lg-12"><h3 class="page-header">
+    Clientes
+  </h3></div>
 </div>
+
 
 <div class="row">
   <div class="col-lg-12">

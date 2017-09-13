@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Sistemas Internos', '/internos');
   $this->Html->addCrumb('Visualizar', '');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Sistema Interno</h3></div>
 </div>
 

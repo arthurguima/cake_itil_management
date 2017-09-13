@@ -2,7 +2,7 @@
   $this->Html->addCrumb('PAs', '');
   $this->Html->addCrumb($pe['Pe']['id'], array('controller' => 'items', 'action' => 'edit', $pe['Pe']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">PA: <?php echo $pe['Pe']['numero'] . "/" . $pe['Pe']['ano'] . " - " . $pe['Servico']['nome']; ?></h3></div>
 </div>
 

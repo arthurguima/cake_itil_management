@@ -1,7 +1,7 @@
 <?php
   $this->Html->addCrumb('Sistemas Internos', '/internos');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
          Sistemas Internos

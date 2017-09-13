@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Contrato', '');
   $this->Html->addCrumb("Regras de ANS", "");
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Regra de ANS - <?php echo $regra['Servico']['nome']; ?></h3></div>
 </div>
 

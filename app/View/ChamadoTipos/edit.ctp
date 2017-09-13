@@ -2,12 +2,11 @@
   $this->Html->addCrumb('Tipos de Chamados', '/chamadotipos');
   $this->Html->addCrumb($this->data['ChamadoTipo']['nome'], array('controller' => 'chamadoTipos', 'action' => 'edit', $this->data['ChamadoTipo']['id']));
 ?>
-<div class="row">
-  <div class="col-lg-12">
-    <h3 class="page-header">
-      Editar Tipo de Chamado
-    </h3>
-  </div>
+
+<div class="col-lg-12 page-header-box">
+  <h3 class="page-header">
+    Editar Tipo de Chamado
+  </h3>
 </div>
 
 <div class="row">

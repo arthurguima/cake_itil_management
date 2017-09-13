@@ -2,54 +2,57 @@
   $this->Html->addCrumb("Calendário", '/calendarios/show');
 ?>
 
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12"><h3 class="page-header"><i class="fa fa-calendar fa-fw"></i> Calendário </h3></div>
-    <div class="col-lg-12 pull-left filters">
-      <div class="">
-        <div class="row">
-          <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">
-            Filtros <i class="fa fa-plus-square"></i>
-          </span>
-        </div>
-        <div class="row inner" style="display: none;">
-          <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
-          <div class="col-lg-12">
-            <div class="form-group">
-              <?php
-                  echo $this->BootstrapForm->input('servico_id', array(
-                              'label' => array('text' => 'Serviço: '),
+</div>
+
+<div class="row">
+  <div class="col-lg-12 pull-left filters">
+    <div class="">
+      <div class="row">
+        <span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">
+          Filtros <i class="fa fa-plus-square"></i>
+        </span>
+      </div>
+      <div class="row inner" style="display: none;">
+        <?php  echo $this->BootstrapForm->create(false, array('class' => 'form-inline')); ?>
+        <div class="col-lg-12">
+          <div class="form-group">
+            <?php
+                echo $this->BootstrapForm->input('servico_id', array(
+                            'label' => array('text' => 'Serviço: '),
+                            'class' => 'select2 form-control',
+                            'selected' => $this->params['url']['servico'],
+                            'options' => $servicos,
+                            'empty' => 'Serviço'));
+
+                if( ($id % 13 == 0) || ($id % 2 == 0)){
+                  $ambientes = array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento', 4 => 'Sustentação', 5 => 'Desenvolvimento', 6 => 'Testes');
+                  echo $this->BootstrapForm->input('ambiente', array(
+                              'label' => array('text' => 'Ambiente: '),
                               'class' => 'select2 form-control',
-                              'selected' => $this->params['url']['servico'],
-                              'options' => $servicos,
-                              'empty' => 'Serviço'));
+                              'selected' => $this->params['url']['ambiente'],
+                              'options' => $ambientes,
+                              'empty' => 'Ambiente'));
+                }
+                if( ($id % 13 != 0)){
+                  echo $this->BootstrapForm->input('cliente_id', array(
+                              'label' => array('text' => 'Cliente: '),
+                              'class' => 'select2 form-control',
+                              'selected' => $this->params['url']['cliente'],
+                              'options' => $clientes,
+                              'empty' => 'Cliente'));
+                }
 
-                  if( ($id % 13 == 0) || ($id % 2 == 0)){
-                    $ambientes = array(1 => 'Homologação', 2 => 'Produção', 3 => 'Treinamento', 4 => 'Sustentação', 5 => 'Desenvolvimento', 6 => 'Testes');
-                    echo $this->BootstrapForm->input('ambiente', array(
-                                'label' => array('text' => 'Ambiente: '),
-                                'class' => 'select2 form-control',
-                                'selected' => $this->params['url']['ambiente'],
-                                'options' => $ambientes,
-                                'empty' => 'Ambiente'));
-                  }
-                  if( ($id % 13 != 0)){
-                    echo $this->BootstrapForm->input('cliente_id', array(
-                                'label' => array('text' => 'Cliente: '),
-                                'class' => 'select2 form-control',
-                                'selected' => $this->params['url']['cliente'],
-                                'options' => $clientes,
-                                'empty' => 'Cliente'));
-                  }
-
-                  echo $this->BootstrapForm->end();
-              ?>
-              <div class="small" style="float: right;">
-              </div>
+                echo $this->BootstrapForm->end();
+            ?>
+            <div class="small" style="float: right;">
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 <div class="row">

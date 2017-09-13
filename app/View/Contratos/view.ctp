@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Contratos', '/contratos');
   $this->Html->addCrumb($contrato['Contrato']['numero'], array('controller' => 'contratos', 'action' => 'view', $contrato['Contrato']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Contrato: nº<?php echo $contrato['Contrato']['numero']; ?></h3></div>
 </div>
 

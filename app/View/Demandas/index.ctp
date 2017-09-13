@@ -1,61 +1,64 @@
 <?php
   $this->Html->addCrumb('Demandas', '/demandas');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
         Demandas
       </h3>
     </div>
-    <div class="col-lg-12 pull-left filters">
-      <div class="">
-        <div class="row"><span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span></div>
-        <div class="row inner" style="display: none;">
-          <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
-          <div class="col-lg-12 filters-item">
-            <div class="form-group">
-              <b>Data de Cadastro: </b>
-              <?php echo $this->Search->input('dtcadastro',
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-              ?>
-            </div>
-            <div class="form-group">
-              <b>Previsão de Término: </b>
-              <?php echo $this->Search->input('dtprevisao',
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
-                          array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
-              ?>
-            </div>
-          </div>
-          <div class="col-lg-12 filters-item">
-            <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('nomef', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control select2', 'placeholder' => "Solicitante")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control select2')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('finalizada', array('class' => 'form-control')); ?></div>
-          </div>
-          <div class="col-lg-12">
-            <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente3', array('class' => 'select2 form-control')); ?></div>
-            <div class="form-group"><?php echo $this->Search->input('status_diferente4', array('class' => 'select2 form-control')); ?></div>
-          </div>
-          <?php
-      		  echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
-                            'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+</div>
 
-            if(sizeof($filtro) > 0) $id = $filtro['Filtro']['id']; else $id = "'null'";
-            echo $this->Filtros->btnSave("demandas_index", $this->Session->read('User.uid'), $id);
-      			echo $this->Search->end();
-          ?>
+<div class="row">
+  <div class="col-lg-12 pull-left filters">
+    <div class="">
+      <div class="row"><span class="filter-show col-lg-2" style="cursor:pointer;" onclick="javascript:$('.filters > div > .inner').toggle();">Filtros <i class="fa fa-plus-square"></i></span></div>
+      <div class="row inner" style="display: none;">
+        <?php echo $this->Search->create("", array('class' => 'form-inline')); ?>
+        <div class="col-lg-12 filters-item">
+          <div class="form-group">
+            <b>Data de Cadastro: </b>
+            <?php echo $this->Search->input('dtcadastro',
+                        array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                        array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+            ?>
+          </div>
+          <div class="form-group">
+            <b>Previsão de Término: </b>
+            <?php echo $this->Search->input('dtprevisao',
+                        array('class' => 'form-control', 'type' => 'text','placeholder' => "Início do período"),
+                        array('class' => 'form-control', 'type' => 'text','placeholder' => "Fim"));
+            ?>
+          </div>
         </div>
-    </div>
+        <div class="col-lg-12 filters-item">
+          <div class="form-group"><?php echo $this->Search->input('cliente', array('class' => 'select2 form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('nomef', array('class' => 'form-control', 'placeholder' => "Nome")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('responsavel', array('class' => 'form-control select2', 'placeholder' => "Solicitante")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('clarity_dm', array('class' => 'form-control', 'placeholder' => "Clarity DM")); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('tipo', array('class' => 'form-control select2')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('servico', array('class' => 'select2 form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('status', array('class' => 'select2 form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('origem_cliente', array('class' => 'form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('finalizada', array('class' => 'form-control')); ?></div>
+        </div>
+        <div class="col-lg-12">
+          <div class="form-group"><?php echo $this->Search->input('status_diferente', array('class' => 'select2 form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('status_diferente2', array('class' => 'select2 form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('status_diferente3', array('class' => 'select2 form-control')); ?></div>
+          <div class="form-group"><?php echo $this->Search->input('status_diferente4', array('class' => 'select2 form-control')); ?></div>
+        </div>
+        <?php
+          echo $this->Form->button("Filtrar <i class='fa fa-search'></i>", array('type' => 'submit',
+                          'onclick' => 'javascript:if(oTable != null)oTable.fnDestroy();', 'class' => 'control-label btn btn-default pull-right'));
+
+          if(sizeof($filtro) > 0) $id = $filtro['Filtro']['id']; else $id = "'null'";
+          echo $this->Filtros->btnSave("demandas_index", $this->Session->read('User.uid'), $id);
+          echo $this->Search->end();
+        ?>
+      </div>
   </div>
+</div>
 </div>
 
 <?php if ($conditions):  ?>

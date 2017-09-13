@@ -112,6 +112,8 @@
                       <ul>
                         <li>Criados grupos de tarefas.</li>
                         <li>Notificações automáticas por e-mail das RDMs a serem executadas</li>
+                        <li>Refatoração de layout</li>
+                        <li>Melhorias nos Calendários</li>
                       </ul>
                     </div>
                 </li>

@@ -3,11 +3,15 @@
   $this->Html->addCrumb("Tarefas", '/relatorios/tarefasusuario');
 ?>
 
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Tarefas do Usuário
     </h3>
+  </div>
+</div>
+
+<div class="row">
     <div class="col-lg-12 pull-left filters">
       <div class="">
         <div class="row">
@@ -65,7 +69,6 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 
 <?php if($pesquisa): ?>
@@ -73,8 +76,7 @@
     <div class="col-lg-12">
       <div role="tabpanel" class="tab-pane" id="versoes">
         <div class="error">
-          <div class="well">
-            <h3 class="page-header"><i class="fa fa-list-alt"></i> Tarefas:</h3>
+          <div class="well">            
             <div class="panel-body">
               <div class="table-responsive">
   							<table class="table table-striped table-bordered table-hover" id="dataTables-subtarefas">

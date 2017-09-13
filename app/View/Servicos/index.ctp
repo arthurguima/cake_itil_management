@@ -1,7 +1,7 @@
 <?php
   $this->Html->addCrumb('Serviços', '/servicos');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
         Serviços
@@ -22,6 +22,7 @@
           </div>
       </div>
     </div>
+  </div>
 </div>
 
 <div class="row">

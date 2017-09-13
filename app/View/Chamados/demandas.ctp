@@ -1,12 +1,12 @@
 <?php
   $this->Html->addCrumb('Chamados X Demandas', '/chamados/demandas');
 ?>
+
+<div class="col-lg-12 page-header-box">
+    <div class="col-lg-12"><h3 class="page-header">Chamados X Demandas</h3></div>
+</div>
+
 <div class="row">
-    <div class="col-lg-12">
-      <h3 class="page-header">
-         Chamados X Demandas
-      </h3>
-    </div>
     <div class="col-lg-12 pull-left filters">
       <div class="">
         <div class="row">
@@ -164,11 +164,11 @@
   //-- Jeditable
     echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
 
-  //Select2
-    echo $this->Html->script('plugins/select2/select2.min');
-    echo $this->Html->script('plugins/select2/select2_locale_pt-BR');
-    echo $this->Html->css('plugins/select2');
-    echo $this->Html->css('plugins/select2-bootstrap');
+      //-- Select2 --
+      echo $this->Html->script('plugins/select2/select2.full.min');
+      echo $this->Html->css('plugins/select2.min');
+      echo $this->Html->css('plugins/select2-bootstrap.min');
+      echo $this->Html->script('plugins/select2/pt-BR');
 ?>
 
 

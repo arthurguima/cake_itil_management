@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Releases', '/releases');
   $this->Html->addCrumb("Visualizar","");
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header"><?php echo $release['Servico']['sigla'] . ": " . $release['Release']['versao']; ?></h3></div>
 </div>
 

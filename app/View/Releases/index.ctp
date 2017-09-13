@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Serviços', '');
   $this->Html->addCrumb('Release', '/releases');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
         Releases
@@ -17,6 +17,8 @@
         </div>
       </h3>
     </div>
+</div>
+<div class="row">
     <div class="col-lg-12 pull-left filters">
       <div class="">
         <div class="row">

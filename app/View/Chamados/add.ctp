@@ -6,7 +6,8 @@
   $this->Html->addCrumb('Chamado', '');
   $this->Html->addCrumb("Novo", array('controller' => 'chamados', 'action' => 'add'));
 ?>
-<div class="row">
+
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Novo Chamado</h3></div>
 </div>
 

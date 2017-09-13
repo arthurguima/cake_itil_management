@@ -25,6 +25,12 @@ body, html {
   border-bottom: 3px solid rgba(78, 87, 88, 0.15);
   color: #4e5758;
   font-weight: bold;
+  width: fit-content;
+}
+
+.page-header-box{
+  margin-left: -30px;
+  margin-top: -25px !important;
 }
 
 #page-wrapper {
@@ -505,7 +511,7 @@ ul.cliente li a {
 }
 #sgs-brand{
   margin-bottom: 15px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
   min-height: 31px;
 }
 

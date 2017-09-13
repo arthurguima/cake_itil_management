@@ -3,7 +3,7 @@
   $this->Html->addCrumb('Editar', array('controller' => 'dependencias', 'action' => 'edit', $this->data['Dependencia']['id']));
 ?>
 
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Editar Dependência</h3></div>
 </div>
 

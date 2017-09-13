@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Status', '/status');
   $this->Html->addCrumb("Editar Status", array('controller' => 'status', 'action' => 'edit', $this->data['Status']['id']));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Editar Status</h3></div>
 </div>
 

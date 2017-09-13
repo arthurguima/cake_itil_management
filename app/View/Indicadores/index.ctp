@@ -1,7 +1,7 @@
 <?php
   $this->Html->addCrumb('Indicadores', '/indicadores');
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12">
     <h3 class="page-header">
       Indicadores das regras de ANS

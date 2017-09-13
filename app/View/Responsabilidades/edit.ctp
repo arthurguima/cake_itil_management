@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Mapeamento DTP', '/responsabilidades');
   $this->Html->addCrumb("Editar", "");
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Editar Mapeamento</h3></div>
 </div>
 

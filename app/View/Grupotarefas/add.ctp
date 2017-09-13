@@ -2,7 +2,7 @@
   $this->Html->addCrumb('Grupo de Tarefas', '/grupotarefas');
   $this->Html->addCrumb("Novo", array('controller' => 'grupotarefas', 'action' => 'add'));
 ?>
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Novo Grupo de tarefas</h3></div>
 </div>
 
@@ -23,7 +23,7 @@
       <label for="GrupotarefaTipo" class="col-lg-3 control-label">Tipo: </label>
       <div class="col-lg-9">
         <select name="data[Grupotarefa][tipo]" class="form-control" id="filtertipo">
-          <option value="1">Demandas</option>          
+          <option value="1">Demandas</option>
           <option value="3">RDMs</option>
           <option value="4">Chamados</option>
           <option value="6">Relases</option>

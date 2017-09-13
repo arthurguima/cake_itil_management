@@ -34,7 +34,7 @@
     }
 </style>
 
-<div class="row">
+<div class="col-lg-12 page-header-box">
   <div class="col-lg-12"><h3 class="page-header">Editar Tarefa</h3></div>
 </div>
 <style media="screen">
