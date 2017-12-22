@@ -1,7 +1,7 @@
 //Resgata informações de Demandas Cadastradas no Clarity
 function getSDMInfo(sdmid, control){
 //  $.getJSON( "http://localhost/rotinas/getRdm.php?numero=" + sdmid, function( data ) {
-  $.getJSON( "http://www-apps/_projects/dite/rotinas/getRdm.php?numero=" + sdmid, function( data ) {
+  $.getJSON( "https://www-apps/_projects/dite/rotinas/getRdm.php?numero=" + sdmid, function( data ) {
     $.each( data, function( key, val ) {
       /*if(key == 'dt_prevista')
       {

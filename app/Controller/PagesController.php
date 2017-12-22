@@ -49,7 +49,7 @@ class PagesController extends AppController {
 		  foreach ($_SESSION['Clientes']['indisponibilidades'] as $key => $value) {
 		    if(date("d") < $value+1){
 		      $servicos = $this->Servico->find('all', array(
-		        'conditions'=> array("Servico.cliente_id = " . $key),
+		        'conditions'=> array("Servico.cliente_id = " . $key . " and Servico.status = 1"),
 		        'contain' => array(
 		          'Indisponibilidade' => array(
 		            'Motivo' => array(),
@@ -66,7 +66,7 @@ class PagesController extends AppController {
 		    }
 		    else{
 		      $servicos = $this->Servico->find('all', array(
-		        'conditions'=> array("Servico.cliente_id = " . $key),
+		        'conditions'=> array("Servico.cliente_id = " . $key . " and Servico.status = 1"),
 		        'contain' => array(
 		          'Indisponibilidade' => array(
 		            'Motivo' => array(),
@@ -319,6 +319,15 @@ class PagesController extends AppController {
       )
     ));
 		$this->set('demandas', $demandas);
+		$atrasadas = 0;
+		$now = new DateTime();
+		foreach($demandas as $d){
+			$prevista = $d['Demanda']['dt_prevista'];
+			//$prevista = new DateTime($prevista);
+			if( ($now > $prevista) AND $d['Demanda']['dt_prevista'] != null)
+				$atrasadas++;
+		}
+		$this->set('atrasadas', $atrasadas);
 
 		/*Lista de Subtarefas*/
 		$this->loadModel('Subtarefa');
@@ -340,7 +349,7 @@ class PagesController extends AppController {
 		$this->Subtarefa->Behaviors->attach('Containable');
 		$subtarefas_mes = $this->Subtarefa->find('all', array(
 			'contain' => array(),
-			'conditions' => array('(DATE_FORMAT(Subtarefa.dt_prevista, "%m%") = ' . date("m") . ') && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
+			'conditions' => array('(DATE_FORMAT(Subtarefa.dt_prevista, "%m%Y") = ' . date("mY") . ') && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
 		$subtarefas_mesAUX = array();
 		$subtarefas_mesAUX['total'] = sizeof($subtarefas_mes);

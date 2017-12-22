@@ -84,16 +84,8 @@
     unset($ind);
 
     if($total > 0){
-      if(date("d") < 21){
-        $dt_inicio = "21/" . date("m/Y",strtotime("-1 month"));
-        $dt_fim =  "20/" . date('m/Y');
-      }
-      else{
-        $dt_inicio = "21/" . date('m/Y');
-        $dt_fim = "20/" . date("m/Y",strtotime("+1 month"));
-      }
       $percent = ($total / $this->Times->diffInSec(
-            $this->Times->AmericanDate($dt_inicio), $this->Times->AmericanDate($dt_fim)))*100;
+          $this->Times->AmericanDate($dt_inicio), $this->Times->AmericanDate($dt_fim)))*100;
     }
     else{
       $percent = 0;

@@ -573,6 +573,33 @@
 	            </table>
 	          </div>
 	        </div>
+					<ul class="list-group">
+						<li class="list-group-item">
+							<p class="list-group-item-title">
+								Demandas abertas
+							</p>
+							<div class="row tarefas-row">
+								<div class="tarefas-box">
+									<div class="tarefas-icon">
+										<i class="tarefas-aguardando fa fa-user"></i>
+									</div>
+									<div class="tarefas-numero pull-right">
+										<span class="tarefas-numero-valor"><?php echo sizeof($demandas); ?></span>
+										<div class="tarefas-check">Demandas Atribuidas</div>
+									</div>
+								</div>
+								<div class="tarefas-box">
+									<div class="tarefas-icon">
+										<i class="demandas-atrasadas fa fa-hourglass-half"></i>
+									</div>
+									<div class="tarefas-numero pull-right">
+										<span class="tarefas-numero-valor"><?php echo $atrasadas;?></span>
+										<div class="tarefas-check">Demandas Atrasadas</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
 	      </div>
 	    </div>
 	  </div>

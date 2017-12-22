@@ -21,8 +21,9 @@ body, html {
 }
 
 .page-header {
-  margin: 0 0 20px;
-  border-bottom: 3px solid rgba(78, 87, 88, 0.15);
+  margin: 0 0 5px;
+  /*border-bottom: 3px solid rgba(78, 87, 88, 0.15);*/
+  border-bottom: 0;
   color: #4e5758;
   font-weight: bold;
   width: fit-content;
@@ -801,22 +802,26 @@ form#form-filter-results .submit {
 .filters > div {
   border: 2px solid rgba(78, 87, 88, 0.15);
   padding-top: 10px;
-  padding-bottom: 5px;
+  padding: 5px;
   padding-left: 12px;
   padding-right: 21px;
+  background-color: #fbfcfc;
 }
+
 #form-filter-results button {
   /*margin-top: 8px;*/
 }
 
 span.filter-show.col-lg-2 {
   font-weight: bold;
+  padding-top: 5px;
 }
 
 .filters-item{
   margin-bottom: 4px;
   border-bottom: 2px dotted rgba(78, 87, 88, 0.15);
   padding-bottom: 5px;
+  margin-left: 4px;
 }
 
 .filters-item .form-group {
@@ -1319,6 +1324,23 @@ td.fc-day{
 
 .tarefas-andamento{
   background-color: #5cb85c;
+  display: inline-block;
+  height: 49px;
+  margin: 0;
+  padding: 11px 13px 28px 13px;
+  border-width: 0;
+  text-align: center;
+  position: relative;
+  border-radius: 100%;
+  -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+  box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+  font-size: 28px !important;
+  color: #fff !important;
+  text-rendering: auto;
+}
+
+.demandas-atrasadas{
+  background-color: #D9534F;
   display: inline-block;
   height: 49px;
   margin: 0;
