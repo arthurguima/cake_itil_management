@@ -27,9 +27,11 @@
         <ul class="nav nav-pills nav-stacked">
           <li><a><b>Nome: </b><?php echo $demanda['Demanda']['nome']; ?></a></li>
           <li>
-            <?php echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+            <?php
+            echo '<a id="viewClarity" href="https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id='. $demanda['Demanda']['clarity_id'] .'" target="_blank"><b>Clarity DM: </b>' . $demanda['Demanda']['clarity_dm_id'] . '<i class="fa-expand fa" style="cursor:pointer; float:right;" title="Clique aqui para testar a integração da demanda com o sistema Clarity!"></i></a>';
+            /*echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
                      $demanda['Demanda']['clarity_id'] .")'><b>Clarity DM: </b>" . $demanda['Demanda']['clarity_dm_id']  .
-                     "<i class='fa-expand fa' style='cursor:pointer; float:right;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></i></a></span>" ?>
+                     "<i class='fa-expand fa' style='cursor:pointer; float:right;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></i></a></span>"*/ ?>
           </li>
           <li><a><b>Mantis: </b><?php echo $demanda['Demanda']['mantis_id']; ?></a></li>
           <li>

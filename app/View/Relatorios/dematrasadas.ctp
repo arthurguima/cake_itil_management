@@ -94,8 +94,9 @@
                     <td><?php echo $dem['Servico']['sigla']; ?></td>
                     <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php
-                        echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
-                              $dem['Demanda']['clarity_id'] .")'>" . $dem['Demanda']['clarity_dm_id'] ."</a></span>"
+                        echo '<a id="viewClarity" href="https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id='. $dem['Demanda']['clarity_id'] .'" target="_blank">' . $dem['Demanda']['clarity_dm_id'] . '</a>'
+                        /*echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                              $dem['Demanda']['clarity_id'] .")'>" . $dem['Demanda']['clarity_dm_id'] ."</a></span>"*/
                       ?>
                     </td>
                     <td><?php echo $this->html->link($dem['Demanda']['nome'], array('controller'=> 'demandas', 'action' => 'view', $dem['Demanda']['id'])); ?></td>

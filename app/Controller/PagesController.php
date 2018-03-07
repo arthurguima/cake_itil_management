@@ -320,12 +320,14 @@ class PagesController extends AppController {
     ));
 		$this->set('demandas', $demandas);
 		$atrasadas = 0;
-		$now = new DateTime();
+		$now = date("d/m/Y");
 		foreach($demandas as $d){
 			$prevista = $d['Demanda']['dt_prevista'];
 			//$prevista = new DateTime($prevista);
-			if( ($now > $prevista) AND $d['Demanda']['dt_prevista'] != null)
-				$atrasadas++;
+			if($d['Demanda']['dt_prevista'] != null)
+				if( strtotime($this->AmericanDate($prevista)) < strtotime($this->AmericanDate($now)) ){
+						$atrasadas++;
+				}
 		}
 		$this->set('atrasadas', $atrasadas);
 
@@ -803,6 +805,18 @@ class PagesController extends AppController {
 				throw $e;
 			}
 			throw new NotFoundException();
+		}
+	}
+
+	/*
+	* Coloca as datas no formato americano
+	*/
+	public function AmericanDate($time){
+		if($time != null){
+			return date("Y-m-d", strtotime(str_replace('/', '-', $time)));
+		}
+		else{
+			return $time;
 		}
 	}
 }

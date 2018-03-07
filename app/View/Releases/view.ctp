@@ -311,7 +311,7 @@
                 </td>
                 <?php echo $this->Tables->DemandaStatusEditable($d['id'], "demandas") ?>
                 <td><?php echo $this->Times->yesOrNo($d['origem_cliente']); ?></td>
-                <td><?php echo $d['clarity_dm_id']; ?></td>
+                <td><?php echo '<a href="https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id='. $d['clarity_id'] .'" target="_blank">' . $d['clarity_dm_id'] . '</a>'; ?></td>
                 <td><?php echo $d['mantis_id']; ?></td>
                 <td><?php echo $this->Tables->popupBox($d['nome'], $d['descricao']) ?></td>
                 <td><?php echo $d['nome']; ?></td>

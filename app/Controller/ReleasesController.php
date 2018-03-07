@@ -39,7 +39,7 @@
         ),
         'concluida_' => array(
           'Release.dt_fim' => array(
-            'select' => $this->Filter->select('Concluida', array("0" => 'Sim') ),
+            'select' => $this->Filter->select('Concluída?', array("0" => 'Sim') ),
           )
         )
       )

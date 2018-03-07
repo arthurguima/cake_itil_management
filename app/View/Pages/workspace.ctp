@@ -116,7 +116,7 @@
 		                  <td>
 		                    <?php
 		                      echo $this->Html->link($rdm['Rdm']['numero'],
-		                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
+		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+SKIPLIST=1+FACTORY=chg+QBE.EQ.chg_ref_num=" . $rdm['Rdm']['numero'],
 		                            array('target' => '_blank'));
 		                    ?>
 		                  </td>
@@ -324,7 +324,7 @@
 		                  <td data-order=<?php echo $chamado['Chamado']['ano'] . $chamado['Chamado']['numero']; ?>>
 		                    <?php
 		                      echo $this->Html->link($chamado['Chamado']['numero'] . "/". $chamado['Chamado']['ano'],
-		                      "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $chamado['Chamado']['numero'] . "%25",
+		                      "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $chamado['Chamado']['numero'] . "%25",
 		                      array('target' => '_blank'));
 		                    ?>
 		                  </td>
@@ -425,14 +425,14 @@
 		                  <td>
 		                    <?php
 		                      echo $this->Html->link($indisponibilidade['Indisponibilidade']['num_evento'],
-		                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_evento'] . "%25",
+		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_evento'] . "%25",
 		                            array('target' => '_blank'));
 		                    ?>
 		                  </td>
 		                  <td>
 		                    <?php
 		                      echo $this->Html->link($indisponibilidade['Indisponibilidade']['num_incidente'],
-		                            "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_incidente'] . "%25",
+		                            "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $indisponibilidade['Indisponibilidade']['num_incidente'] . "%25",
 		                            array('target' => '_blank'));
 		                    ?>
 		                  </td>
@@ -535,8 +535,9 @@
 	                    <?php echo $this->Tables->PrioridadeEditable($demanda['Demanda']['id'], "demandas") ?>
 	                    <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
 	                      <?php
-	                        echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
-	                              $demanda['Demanda']['clarity_id'] .")'>" . $demanda['Demanda']['clarity_dm_id'] ."</a></span>"
+													echo '<a href="https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id='. $demanda['Demanda']['clarity_id'] .'" target="_blank">' . $demanda['Demanda']['clarity_dm_id'] . '</a>';
+	                        //echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+	                          //    $demanda['Demanda']['clarity_id'] .")'>" . $demanda['Demanda']['clarity_dm_id'] ."</a></span>"
 	                      ?>
 	                    </td>
 	                    <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">

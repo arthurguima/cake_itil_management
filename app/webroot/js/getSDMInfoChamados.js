@@ -1,7 +1,7 @@
 //Resgata informações de Demandas Cadastradas no Clarity
 function getSDMInfoChamados(sdmid, sdmano, control){
-  $.getJSON( "http://localhost/rotinas/getChamado.php?numero=" + sdmid + "/" + sdmano, function( data ) {
-//  $.getJSON( "http://www-apps/_projects/dite/wsdl-sdm/sgdGetChamadoSDM.php?numero=" + sdmid + "/" + sdmano, function( data ) {
+//  $.getJSON( "http://localhost/rotinas/getChamado.php?numero=" + sdmid + "/" + sdmano, function( data ) {
+  $.getJSON( "http://www-apps/_projects/dite/wsdl-sdm/sgdGetChamadoSDM.php?numero=" + sdmid + "/" + sdmano, function( data ) {
     $.each( data, function( key, val ) {
       if(key == 'dt_prevista')
       {

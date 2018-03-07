@@ -60,7 +60,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <?php if(isset($demandas)): ?>
   <div class="row">
@@ -97,8 +96,9 @@
                     <?php echo $this->Tables->PrioridadeEditable($dem['Demanda']['id'], "demandas") ?>
                     <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php
-                        echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
-                              $dem['Demanda']['clarity_id'] .")'>" . $dem['Demanda']['clarity_dm_id'] ."</a></span>"
+                        echo '<a id="viewClarity" href="https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id='. $dem['Demanda']['clarity_id'] .'" target="_blank">' . $dem['Demanda']['clarity_dm_id'] . '</a>'
+                        /*echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                              $dem['Demanda']['clarity_id'] .")'>" . $dem['Demanda']['clarity_dm_id'] ."</a></span>"*/
                       ?>
                     </td>
                     <td class="hidden-xs hidden-sm" style="cursor:pointer;" title="Clique para abrir a demanda no Mantis!">
@@ -177,31 +177,32 @@
     </div>
   </div>
 <?php endif; ?>
-  <?php
-    //-- ClarityID
-    echo $this->Html->script('getIdClarity.js');
 
-    //-- Jeditable
-    echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
+<?php
+  //-- ClarityID
+  echo $this->Html->script('getIdClarity.js');
 
-    //-- DataTables JavaScript --
-    echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
-    echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
-    echo $this->Html->css('plugins/dataTables.bootstrap.css');
-    //-- DataTables --> TableTools
-    echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
-    echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
-    //-- DataTables --> ColVis
-      echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
-      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
-      echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+  //-- Jeditable
+  echo $this->Html->script('plugins/jeditable/jquery.jeditable.js');
 
-      //-- Select2 --
-      echo $this->Html->script('plugins/select2/select2.full.min');
-      echo $this->Html->css('plugins/select2.min');
-      echo $this->Html->css('plugins/select2-bootstrap.min');
-      echo $this->Html->script('plugins/select2/pt-BR');
-  ?>
+  //-- DataTables JavaScript --
+  echo $this->Html->script('plugins/dataTables/media/js/jquery.dataTables.js');
+  echo $this->Html->script('plugins/dataTables/dataTables.bootstrap.js');
+  echo $this->Html->css('plugins/dataTables.bootstrap.css');
+  //-- DataTables --> TableTools
+  echo $this->Html->script('plugins/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js');
+  echo $this->Html->css('plugins/dataTablesExtensions/TableTools/css/dataTables.tableTools.min.css');
+  //-- DataTables --> ColVis
+    echo $this->Html->script('plugins/dataTables/extensions/ColVis/js/dataTables.colVis.min.js');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colVis.min.css');
+    echo $this->Html->css('plugins/dataTablesExtensions/ColVis/css/dataTables.colvis.jqueryui.css');
+
+    //-- Select2 --
+    echo $this->Html->script('plugins/select2/select2.full.min');
+    echo $this->Html->css('plugins/select2.min');
+    echo $this->Html->css('plugins/select2-bootstrap.min');
+    echo $this->Html->script('plugins/select2/pt-BR');
+?>
 
   <script>
     <?php

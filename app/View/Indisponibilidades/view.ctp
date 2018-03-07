@@ -26,14 +26,14 @@
         <ul class="nav nav-pills nav-stacked">
           <li>
             <a href="<?php
-              echo "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_evento'] . "%25"?>" target='_blank'>
+              echo "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_evento'] . "%25"?>" target='_blank'>
               <b>Número do Evento: </b>
               <?php  echo $Indisponibilidade['Indisponibilidade']['num_evento'] . "<i class='fa fa-external-link-square pull-right'></i>"; ?>
             </a>
           </li>
           <li>
             <a href="<?php
-              echo "http://www-sdm14/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_incidente'] . "%25"?>" target='_blank'>
+              echo "http://www-sdm/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=in+SKIPLIST=1+QBE.IN.ref_num=" . $Indisponibilidade['Indisponibilidade']['num_incidente'] . "%25"?>" target='_blank'>
               <b>Número do Incidente: </b>
               <?php  echo $Indisponibilidade['Indisponibilidade']['num_incidente'] . "<i class='fa fa-external-link-square pull-right'></i>"; ?>
             </a>

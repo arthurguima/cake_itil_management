@@ -316,7 +316,11 @@
         'Historico' => array(
           'order' => 'Historico.created DESC',
           'limit' => 2
-        )
+        ),
+    		'DemandaPai' => array(
+    			'className' => 'Demanda',
+    			'foreignKey' => 'demanda_id'
+    		)
       ),
       'conditions' => array($conditions),
       'joins' => array(

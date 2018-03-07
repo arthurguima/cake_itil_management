@@ -34,7 +34,7 @@
               $options = array( 1 => 'Sim', 0 => 'Não');
               echo $this->BootstrapForm->input('origem_cliente', array(
                           'label' => array('text' => 'Solicitada pelo Cliente?: '),
-                          'empty' => 'Solicitada pelo Cliente',
+                          'empty' => 'Solicitada pelo Cliente?',
                           'options' => $options));
 
               echo $this->BootstrapForm->input('demanda_tipo_id', array(
@@ -98,8 +98,9 @@
                   <tr>
                     <td style="cursor:pointer;" title="Clique para abrir a demanda no Clarity!">
                       <?php
-                        echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
-                              $dem['Demanda']['clarity_id'] .")'>" . $dem['Demanda']['clarity_dm_id'] ."</a></span>"
+                        echo '<a id="viewClarity" href="https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id='. $dem['Demanda']['clarity_id'] .'" target="_blank">' . $dem['Demanda']['clarity_dm_id'] . '</a>'
+                        /*echo "<a id='viewClarity' data-toggle='modal' data-target='#myModal' onclick='javascript:indexClarity(" .
+                              $dem['Demanda']['clarity_id'] .")'>" . $dem['Demanda']['clarity_dm_id'] ."</a></span>"*/
                       ?>
                     </td>
                     <td><?php echo $this->html->link($dem['Demanda']['nome'], array('controller'=> 'demandas', 'action' => 'view', $dem['Demanda']['id'])); ?></td>
@@ -115,6 +116,7 @@
                     <td>
                       <ul style="overflow: auto;">
                         <?php
+                          if(isset($dem['DemandaPai']['id'])) echo "<li><b>Demanda Pai: </b>" . $dem['DemandaPai']['clarity_dm_id'] . "</li>";
                           foreach ($dem['Historico'] as $h):
                             echo  '<li>(' . $h['data'] . ') - ' .$this->Historicos->findLinks($h['descricao']) . '</li>';
                           endforeach;

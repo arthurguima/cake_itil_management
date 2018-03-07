@@ -84,7 +84,7 @@ class AppController extends Controller {
     App::import('Vendor', 'ldapInclude', array('file' => 'ldapInclude.php'));
     //DEBUG
       $this->Session->write('cdUsuario', '354996');
-    //DEBUG 
+    //DEBUG
 
     if (isset($_SESSION['cdUsuario'])) {
       $this->loadModel('User');
