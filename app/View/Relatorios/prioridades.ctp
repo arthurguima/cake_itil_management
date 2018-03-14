@@ -34,7 +34,7 @@
                   $options = array( 1 => 'Sim', 0 => 'Não');
                   echo $this->BootstrapForm->input('origem_cliente', array(
                               'label' => array('text' => 'Solicitada pelo Cliente?: '),
-                              'empty' => 'Solicitada pelo Cliente',
+                              'empty' => 'Solicitada pelo Cliente?',
                               'options' => $options));
 
                   echo $this->BootstrapForm->input('demanda_tipo_id', array(

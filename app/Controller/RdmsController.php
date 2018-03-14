@@ -4,7 +4,7 @@
   public function index(){
     $this->loadModel('Cliente');
     $this->Cliente->Behaviors->attach('Containable');
-    
+
     // Add filter
     $this->Filter->addFilters(
       array(
@@ -44,7 +44,7 @@
         ),
         'concluidaf' => array(
           'Rdm.sucesso' => array(
-            'select' => $this->Filter->select('Concluida', array(0 => 'Não', 1 => 'Sim', 2 => 'Cancelada', -1 => "Não preenchido") )
+            'select' => $this->Filter->select('Concluida?', array(0 => 'Não', 1 => 'Sim', 2 => 'Cancelada', -1 => "Não preenchido") )
           )
         ),
         'tipo' => array(

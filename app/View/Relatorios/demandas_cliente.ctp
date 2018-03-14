@@ -31,6 +31,11 @@
                           'class' => 'select2 form-control',
                           'empty' => 'Cliente'));
 
+              echo $this->BootstrapForm->input('servico_id', array(
+                          'label' => array('text' => 'Serviço: '),
+                          'class' => 'select2 form-control',
+                          'empty' => 'servico'));
+
               $options = array( 1 => 'Sim', 0 => 'Não');
               echo $this->BootstrapForm->input('origem_cliente', array(
                           'label' => array('text' => 'Solicitada pelo Cliente?: '),

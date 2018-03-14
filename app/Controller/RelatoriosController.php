@@ -290,6 +290,10 @@
 
     $conditions = "";
     $and = false;
+    if(isset($this->request->data['servico_id']) && $this->request->data['servico_id'] != ''){
+      $conditions = $conditions . 'Demanda.servico_id = ' . $this->request->data['servico_id'];
+      $and = true;
+    }
     if(isset($this->request->data['origem_cliente']) && $this->request->data['origem_cliente'] != ''){
       $conditions = $conditions . 'Demanda.origem_cliente = ' . $this->request->data['origem_cliente'];
       $and = true;
@@ -362,6 +366,14 @@
 
     $users = $this->Demanda->User->find('list', array('fields' => array('User.id', 'User.nome')));
     $this->set(compact('users'));
+
+    $this->loadModel('Servico');
+    $this->Servico->Behaviors->attach('Containable');
+
+    $this->set('servicos', $this->Servico->find('list', array(
+      'conditions' => array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+      'fields' => array('Servico.id', 'Servico.sigla'))));
+    $this->set(compact('servicos'));
   }
 
   public function dematrasadas(){
