@@ -169,14 +169,14 @@
     if($this->Ldap->autorizado(2)){
       $menu = $menu .
            ( (($actions == 4) || ($actions == 6) || ($actions == 12) || ($actions == 14)) ?
-            $this->Html->link("<i class='fa fa-pencil' title='Editar'></i>",
+            $this->Html->link("<i class='fas fa-pencil-alt' title='Editar'></i>",
             array('controller' => $controller, 'action' => 'edit', $id),
             array('escape' => false)) : "");
     }
 
     if($this->Ldap->autorizado(1)){
         if (($actions == 8) || ($actions == 10) || ($actions == 12) || ($actions == 14)){
-            $menu =  $menu . $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;' title='Excluir " . $controller . ".'></i>",
+            $menu =  $menu . $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;' title='Excluir " . $controller . ".'></i>",
                     array('controller'=> $controller, 'action' => 'delete', $id),
                     array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
         }

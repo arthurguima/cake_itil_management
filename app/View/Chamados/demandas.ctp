@@ -102,12 +102,12 @@
                       <?php
                         echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 2);
                         if($this->Ldap->autorizado(2)){
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                          echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                     array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'demandas' )),
                                     array('escape' => false));
 
 
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;' title='Excluir'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;' title='Excluir'></i>",
                                      array('controller'=> 'chamados', 'action' => 'delete', $chamado['Chamado']['id'], '?' => array('controller' => 'chamados', 'action' => 'demandas' )),
                                      array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                         }

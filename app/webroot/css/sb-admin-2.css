@@ -216,7 +216,7 @@ i.hide-sidebar{
 .nav-tabs-black > li > a {
   border: 1px solid #ddd;
 }
-.nav-tabs-pages i.fa.fa-question-circle {
+.nav-tabs-pages i.fa-question-circle {
     font-size: 31px;
 }
 
@@ -228,11 +228,11 @@ i.hide-sidebar{
 .chat .glyphicon {
     margin-right: 5px;
 }
-.panel-heading .fa-plus {
+.panel-heading .fa-times {
   font-size: 18px !important;
 }
 
-.panel-heading i.fa.fa-question-circle {
+.panel-heading i.fa-question-circle {
   font-size: 19px !important;
 }
 
@@ -253,19 +253,19 @@ table.dataTable thead .sorting_desc_disabled {
 table.dataTable thead .sorting_asc:after {
     content: "\f0de";
     float: right;
-    font-family: fontawesome;
+    font-family: "Font Awesome 5 Free";
 }
 
 table.dataTable thead .sorting_desc:after {
     content: "\f0dd";
     float: right;
-    font-family: fontawesome;
+    font-family: "Font Awesome 5 Free";
 }
 
 table.dataTable thead .sorting:after {
     content: "\f0dc";
     float: right;
-    font-family: fontawesome;
+    font-family: "Font Awesome 5 Free";
     color: rgba(50,50,50,.5);
 }
 
@@ -377,19 +377,25 @@ table.dataTable thead .sorting:after {
 }
 
 /* Botão preto nas tables*/
-.table .fa {
-  font-size: 18px;
+.table .fa,
+.table .fas,
+.table .far  {
+  font-size: 15px;
   color: black;
 }
-.panel-title .fa, .table .fa{
+.panel-title .fa, .table .fa,
+.panel-title .far, .table .far,
+.panel-title .fas, .table .fas{
   /*text-shadow: 0 1px 0 black;*/
   filter: alpha(opacity=100);
   opacity: 1;
 }
 
-.table .fa:hover {
+.table .fa:hover,
+.table .fas:hover,
+.table .far:hover  {
   font-weight: bolder;
-  color: #0F0F0F;
+  color: #494a4c;
 }
 
 .fa-undone {
@@ -400,7 +406,9 @@ table.dataTable thead .sorting:after {
   color: #69aa46 !important;
 }
 /* Botão branco em view */
-.panel-primary > .panel-heading >  p > a > i.fa{
+.panel-primary > .panel-heading >  p > a > i.fa,
+.panel-primary > .panel-heading >  p > a > i.fas,
+.panel-primary > .panel-heading >  p > a > i.far{
   color: white;
   font-size: 21px;
 }
@@ -661,9 +669,17 @@ li.list-group-item.red {
 .panel-title{
   font-size: 18px;
 }
-.panel  i.fa{
+.panel  i.fa,
+.panel  i.fas.
+.panel  i.far{
   font-size: 14px;
   color: #4e5758;
+}
+
+.panel-heading .fa{
+  font-size: 18px;
+  color: #4e5758;
+  margin: 0px 2px 0px 2px;
 }
 
 .panel{
@@ -872,7 +888,7 @@ td.checklist a{
 }
 
 td.checklist a,
-i.fa.checklist {
+i.checklist {
   font-size: 13px;
 }
 
@@ -1109,7 +1125,7 @@ p.legend{
   font-size: 12px;
 }
 
-#viewClarity i.fa.fa-expand {
+#viewClarity i.fa-expand-arrows-alt {
   color: #4e5758;
 }
 
@@ -1437,4 +1453,85 @@ td.fc-day{
 }
 .bs-callout-actions a{
   color: #4e5758;
+}
+
+
+/* KANBAN */
+
+.kanban-title {
+  text-align: center;
+  padding: 5px;
+}
+
+.kanban-step:nth-child(odd) .kanban-title,
+.kanban-step:nth-child(odd) .kanban-itens-box {
+    background-color: #fbfcfc;
+    border: 2px solid rgba(78, 87, 88, 0.15);
+    color: #4e5758;
+}
+.kanban-step:nth-child(even) .kanban-title,
+.kanban-step:nth-child(even) .kanban-itens-box {
+    background-color: #39404c;
+    color: #fff;
+    border: 2px solid black;
+}
+
+.kanban-step:nth-child(odd) h3.kanban-item-title a {
+    color: #4e5758;
+}
+.kanban-step:nth-child(even) h3.kanban-item-title a {
+    color: #fff;
+}
+
+.kanban-itens-box{
+  min-height: 500px;
+}
+
+.kanban-step:nth-child(odd) .kaban-item{
+  border: 1px solid rgba(78, 87, 88, 0.15);
+  background-color: #f1f1f1;
+}
+
+.kanban-step:nth-child(even) .kaban-item{
+  border: 1px solid #fff;
+  background-color: #414348;
+}
+
+.kaban-item {
+    min-height: 113px;
+    padding: 2px 5px 0px 5px;
+    margin: 5px;
+}
+
+h3.kanban-item-title {
+    margin-top: 5px;
+    border-bottom: 1px dotted;
+    font-size: 18px;
+}
+
+.kanban-item-title i {
+    color: #4e5758;
+}
+
+.kanban-step:nth-child(even) .kanban-item-title i{
+  color: #fff;
+}
+
+.kanban-item-box li {
+    text-align: justify;
+    list-style: none;
+    margin: 7px;
+}
+
+.kanban-item-box .finished {
+    display: inline-flex;
+}
+
+.kanban-item-box-title{
+  font-size: 12px;
+  margin-bottom: -5px;
+}
+
+.kanban-item-title i.fa.fa-search-plus {
+    font-size: 15px;
 }

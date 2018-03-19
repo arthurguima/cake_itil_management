@@ -99,7 +99,7 @@ class PagesController extends AppController {
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Demanda.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         )
       )
@@ -125,7 +125,7 @@ class PagesController extends AppController {
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Chamado.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         )
       )
@@ -171,7 +171,7 @@ class PagesController extends AppController {
 					'type'=>'inner',
 					'conditions'=> array(
 						'Status_.id = Pe.status_id',
-						'Status_.fim =' => null,
+						'Status_.fim !=' => 1,
 					),
 				)
 			)
@@ -195,7 +195,7 @@ class PagesController extends AppController {
 					'type'=>'inner',
 					'conditions'=> array(
 						'Status_.id = Ord.status_id',
-						'Status_.fim =' => null,
+						'Status_.fim !=' => 1,
 					),
 				)
 			)
@@ -218,7 +218,7 @@ class PagesController extends AppController {
 					'type'=>'inner',
 					'conditions'=> array(
 						'Status_.id = Ss.status_id',
-						'Status_.fim =' => null,
+						'Status_.fim !=' => 1,
 					),
 				)
 			)
@@ -245,7 +245,7 @@ class PagesController extends AppController {
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Chamado.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         )
       )
@@ -313,7 +313,7 @@ class PagesController extends AppController {
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Demanda.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         )
       )
@@ -334,7 +334,7 @@ class PagesController extends AppController {
 		/*Lista de Subtarefas*/
 		$this->loadModel('Subtarefa');
 		$this->Subtarefa->Behaviors->attach('Containable');
-		$subtarefas = $this->Subtarefa->find('all', array(
+		$dtarefas = $this->Subtarefa->find('all', array(
 			'contain' => array(
 				'Servico' => array(),
 				'Demanda' => array(),
@@ -344,31 +344,242 @@ class PagesController extends AppController {
 			),
 			'conditions' => array('Subtarefa.check IN (0,2) && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
-		$this->set('subtarefas', $subtarefas);
+		$this->set('subtarefas', $dtarefas);
 
 		/* Tarefas do Mês */
 		$this->loadModel('Subtarefa');
 		$this->Subtarefa->Behaviors->attach('Containable');
-		$subtarefas_mes = $this->Subtarefa->find('all', array(
+		$dtarefas_mes = $this->Subtarefa->find('all', array(
 			'contain' => array(),
 			'conditions' => array('(DATE_FORMAT(Subtarefa.dt_prevista, "%m%Y") = ' . date("mY") . ') && Subtarefa.user_id = ' . $this->Session->read('User.uid'))
 		));
-		$subtarefas_mesAUX = array();
-		$subtarefas_mesAUX['total'] = sizeof($subtarefas_mes);
-		$subtarefas_mesAUX['finalizada'] = 0;
-		$subtarefas_mesAUX['em_andamento'] = 0;
-		$subtarefas_mesAUX['aguardando'] = 0;
+		$dtarefas_mesAUX = array();
+		$dtarefas_mesAUX['total'] = sizeof($dtarefas_mes);
+		$dtarefas_mesAUX['finalizada'] = 0;
+		$dtarefas_mesAUX['em_andamento'] = 0;
+		$dtarefas_mesAUX['aguardando'] = 0;
 
-		foreach($subtarefas_mes as $sub){
-				if($sub['Subtarefa']['check'] == 1) {$subtarefas_mesAUX['finalizada'] += 1; }
-				if($sub['Subtarefa']['check'] == 0) {$subtarefas_mesAUX['em_andamento'] += 1; }
-				if($sub['Subtarefa']['check'] == 2) {$subtarefas_mesAUX['aguardando'] += 1; }
+		foreach($dtarefas_mes as $d){
+				if($d['Subtarefa']['check'] == 1) {$dtarefas_mesAUX['finalizada'] += 1; }
+				if($d['Subtarefa']['check'] == 0) {$dtarefas_mesAUX['em_andamento'] += 1; }
+				if($d['Subtarefa']['check'] == 2) {$dtarefas_mesAUX['aguardando'] += 1; }
 		}
-		$this->set('subtarefas_mes', $subtarefas_mesAUX);
+		$this->set('subtarefas_mes', $dtarefas_mesAUX);
+	}
+
+	public function kanban(){
+
+		if(!isset($this->request->data['tipo_atividade']) || $this->request->data['tipo_atividade'] != 1 ){
+				$this->loadModel('Subtarefa');
+				$this->Subtarefa->Behaviors->attach('Containable');
+
+				$recebidas = $this->Subtarefa->find('all', array(
+					'contain' => array(
+						'Servico' => array(),
+						'Demanda' => array(),
+						'Rdm' => array(),
+						'Chamado' => array(),
+						'Release' => array()
+					),
+					'conditions' => array('Subtarefa.check = 2 AND Subtarefa.user_id = ' . $this->Session->read('User.uid'))
+				));
+				$this->set('recebidas', $this->tarefasAtividades($recebidas));
+
+				$andamento = $this->Subtarefa->find('all', array(
+					'contain' => array(
+						'Servico' => array(),
+						'Demanda' => array(),
+						'Rdm' => array(),
+						'Chamado' => array(),
+						'Release' => array()
+					),
+					'conditions' => array('Subtarefa.check = 0 AND Subtarefa.user_id = ' . $this->Session->read('User.uid'))
+				));
+				$this->set('andamento', $this->tarefasAtividades($andamento));
+
+				$finalizado = $this->Subtarefa->find('all', array(
+					'contain' => array(
+						'Servico' => array(),
+						'Demanda' => array(),
+						'Rdm' => array(),
+						'Chamado' => array(),
+						'Release' => array()
+					),
+					'conditions' => array(
+						'Subtarefa.check = 1 AND ' .
+						'Subtarefa.user_id = ' . $this->Session->read('User.uid') .
+						" AND (Subtarefa.dt_fim >= '" . date("Y-m-d", strtotime('-10 day', strtotime('00:00:00'))) . "' OR (Subtarefa.dt_fim IS NULL AND Subtarefa.dt_prevista >= '" . date("Y-m-d", strtotime('-10 day', strtotime('00:00:00'))) . "'))"
+					)
+				));
+				$this->set('finalizado', $this->tarefasAtividades($finalizado));
+
+		}
+		else{
+			$this->loadModel('Demanda');
+			$this->Demanda->Behaviors->attach('Containable');
+
+			$recebidas = $this->Demanda->find('all', array(
+				//'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+				'conditions'=> array("Demanda.user_id = " . $this->Session->read('User.uid')),
+	      'contain' => array(
+	        'Servico' => array('Cliente'=> array()),
+	        'DemandaTipo' => array(),
+	        'Status' => array(),
+	      ),
+	      'joins' => array(
+	        array(
+	          'table'=>'statuses',
+	          'alias' => 'Status_',
+	          'type'=>'inner',
+	          'conditions'=> array(
+	            'Status_.id = Demanda.status_id',
+	            'Status_.fim =' => 3,
+	          ),
+	        )
+	      )
+	    ));
+			$this->set('recebidas', $this->demandasAtividades($recebidas));
+
+
+			$andamento = $this->Demanda->find('all', array(
+				//'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+				'conditions'=> array("Demanda.user_id = " . $this->Session->read('User.uid')),
+	      'contain' => array(
+	        'Servico' => array('Cliente'=> array()),
+	        'DemandaTipo' => array(),
+	        'Status' => array(),
+	      ),
+	      'joins' => array(
+	        array(
+	          'table'=>'statuses',
+	          'alias' => 'Status_',
+	          'type'=>'inner',
+	          'conditions'=> array(
+	            '(Status_.id = Demanda.status_id) AND ' .
+	            '(Status_.fim = 2 OR (Status_.fim = 3 AND Demanda.data_homologacao IS NULL ))' ,
+	          ),
+	        )
+	      )
+	    ));
+			$this->set('andamento', $this->demandasAtividades($andamento));
+
+			$finalizado = $this->Demanda->find('all', array(
+				//'conditions'=> array("Servico.cliente_id" . $_SESSION['User']['clientes']),
+				'conditions'=> array("Demanda.user_id = " . $this->Session->read('User.uid')),
+	      'contain' => array(
+	        'Servico' => array('Cliente'=> array()),
+	        'DemandaTipo' => array(),
+	        'Status' => array(),
+	      ),
+	      'joins' => array(
+	        array(
+	          'table'=>'statuses',
+	          'alias' => 'Status_',
+	          'type'=>'inner',
+	          'conditions'=> array(
+	            'Status_.id = Demanda.status_id',
+	            'Status_.fim =' => 1,
+							'Demanda.data_homologacao > ' =>  date("Y-m-d", strtotime('-60 day', strtotime('00:00:00')))
+	          ),
+	        )
+	      )
+	    ));
+			$this->set('finalizado', $this->demandasAtividades($finalizado));
+
+		}
 	}
 
 
 /* Funções de Apoio */
+
+/* Traduz os campos da demanda para serem usadas como atividades no Kanban */
+private function demandasAtividades($demandas){
+		$atividades = array();
+		foreach ($demandas as $d){
+			$atividade['Servico'] = $d['Servico']['sigla'];
+			$atividade['Demanda'] = $d['Demanda']['clarity_dm_id'];
+			$atividade['Demanda_clarity'] = $d['Demanda']['clarity_id'];
+			$atividade['Atividade_id'] = $d['Demanda']['id'];
+			$atividade['Atividade_desc'] = $d['Demanda']['nome'];
+			$atividade['Status'] = $d['Status']['nome'];
+			$atividade['Data_inicio'] = $d['Demanda']['data_cadastro'];
+			$atividade['Data_prevista'] = $d['Demanda']['dt_prevista'];
+			$atividade['Data_homologacao'] = $d['Demanda']['data_homologacao'];
+			$atividade['Atividade'] = "Demanda";
+			$atividade['TipoTarefa'] = "";
+
+			array_push($atividades,$atividade);
+		}
+		return $atividades;
+}
+
+/* Traduz os campos da tarefa para serem usadas como atividades no Kanban */
+private function tarefasAtividades($tarefas){
+		$atividades = array();
+		foreach ($tarefas as $d){
+			$atividade['Servico'] = $d['Servico']['sigla'];
+			$atividade['Atividade'] = "Tarefa";
+
+			$atividade['Atividade_desc'] = $d['Subtarefa']['descricao'];
+			switch ($d['Subtarefa']['check']) {
+				case 0:
+					$atividade['Status'] = "Em andamento";
+					break;
+				case 1:
+					$atividade['Status'] = "Finalizada";
+					break;
+				case 2:
+					$atividade['Status'] = "Aguardando Início";
+					break;
+			}
+
+			$atividade['Data_inicio'] = ($d['Subtarefa']['dt_inicio'] == null) ? str_replace('-', '/', date("d-m-Y", strtotime($d['Subtarefa']['created']))) :  $d['Subtarefa']['dt_inicio'];
+
+			if ( ($d['Subtarefa']['dt_fim'] == null && $d['Subtarefa']['check'] != 1))
+				$atividade['Data_prevista'] = $d['Subtarefa']['dt_prevista'];
+			else {
+				if($d['Subtarefa']['dt_fim'] == null && $d['Subtarefa']['check'] == 1)
+					$atividade['Data_prevista'] = $d['Subtarefa']['dt_prevista'];
+				else {
+					$atividade['Data_prevista'] = $d['Subtarefa']['dt_fim'];
+				}
+			}
+
+			$atividade['Data_homologacao'] = $d['Subtarefa']['dt_fim'];
+
+			if(isset($d['Subtarefa']['demanda_id'])){
+				$atividade['Demanda'] = $d['Demanda']['clarity_dm_id'];
+				$atividade['Demanda_clarity'] = $d['Demanda']['clarity_id'];
+				$atividade['Atividade_id'] = $d['Demanda']['id'];
+				$atividade['TipoTarefa'] = "Demandas";
+			}
+			elseif(isset($d['Subtarefa']['chamado_id'])){
+				$atividade['Demanda'] = "Chamado: " . $d['Chamado']['numero'] . "/" . $d['Chamado']['ano'];
+				$atividade['Atividade_id'] = $d['Chamado']['id'];
+				$atividade['TipoTarefa'] = "Chamados";
+			}
+			elseif(isset($d['Subtarefa']['rdm_id'])){
+				$atividade['Demanda'] = "RDM: " . $d['Rdm']['numero'] . "/" . $d['Rdm']['ano'];
+				$atividade['Atividade_id'] = $d['Rdm']['id'];
+				$atividade['TipoTarefa'] = "Rdms";
+			}
+			elseif(isset($d['Subtarefa']['release_id'])){
+				$atividade['Demanda'] = "Release: " . $d['Release']['versao'];
+				$atividade['Atividade_id'] = $d['Release']['id'];
+				$atividade['TipoTarefa'] = "Releases";
+			}
+			else{
+				$atividade['Demanda'] = "";
+				$atividade['Atividade_id'] = $d['Subtarefa']['id'];
+				$atividade['TipoTarefa'] = "Tarefas";
+			}
+
+			array_push($atividades,$atividade);
+			unset($atividade);
+		}
+		return $atividades;
+}
+
 
 	/*
 	* Cria um array que separa os serviços por cliente.
@@ -770,6 +981,7 @@ class PagesController extends AppController {
 		return $chamadosAUX;
 	}
 
+
 /**
  * Displays a view
  *
@@ -785,13 +997,13 @@ class PagesController extends AppController {
 		if (!$count) {
 			return $this->redirect('/');
 		}
-		$page = $subpage = $title_for_layout = null;
+		$page = $dpage = $title_for_layout = null;
 
 		if (!empty($path[0])) {
 			$page = $path[0];
 		}
 		if (!empty($path[1])) {
-			$subpage = $path[1];
+			$dpage = $path[1];
 		}
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);

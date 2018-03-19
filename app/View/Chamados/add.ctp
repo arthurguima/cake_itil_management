@@ -21,7 +21,7 @@
 
       echo $this->BootstrapForm->input('ano', array(
                    'label' => array('text' => 'Ano: ' .
-                          $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                          $this->Html->link('<i class="fas fa-eye-dropper pull-right"></i>', "#",
                               array(
                                 'escape' => false, 'title' => "Resgata Informações Básicas do SDM",
                                 'class' => 'btn btn-default',

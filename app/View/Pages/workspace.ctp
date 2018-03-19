@@ -32,8 +32,8 @@
 					<li>O botão <i class=\"fa fa-plus\" style=\"font-size: 15px !important;\"></i>  é um atalho para o cadastro de novos itens.</li>
 					<li>O Dashboard é divido em Abas. Cada aba possui em seu nome a quantidade de itens que estão abertos e sob a sua responsabilidade no momento.</li>
 					<li>Itens marcados com <span class=\"editable\">Sublinhado</span> podem ser editados com 1 clique.</li>
-					<li>Itens marcados com <i class=\"fa fa-comment-o\" style=\"font-size: 15px !important;\"></i> abrem um popup quando o mouse está em cima.</li>
-					<li>Itens marcados com <i class=\"fa-external-link-square fa\" style=\"font-size: 15px !important;\"></i> são links para outros sistemas.</li>
+					<li>Itens marcados com <i class=\"far fa-comment\" style=\"font-size: 15px !important;\"></i> abrem um popup quando o mouse está em cima.</li>
+					<li>Itens marcados com <i class=\"fa-external-link-square-alt fas\" style=\"font-size: 15px !important;\"></i> são links para outros sistemas.</li>
 				</ul>")
 			?>
 		</ul>
@@ -87,9 +87,9 @@
 		                <th>Ambiente</th>
 		                <th>Tipo</th>
 		                <th>Concluída?</th>
-		                <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></th>
+		                <th>Nome <i class="far fa-comment" style="font-size: 15px !important;"></th>
 		                <th>Nome</th>
-		                <th>Número  <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
+		                <th>Número  <i class='fa-external-link-square-alt fas' style="font-size: 15px !important;"></th>
 		                <th>Data Prevista</th>
 		                <th>Execução</th>
 										<th>CheckList</th>
@@ -163,7 +163,7 @@
 		                    <?php
 		                      echo $this->Tables->getMenu('rdms', $rdm['Rdm']['id'], 14);
 		                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $rdm['Rdm']['id'] . ",\"rdms\")'>
-		                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+		                        <i class='fa fa-history' title='Visualizar histórico'></i></a></span>";
 		                    ?>
 		                  </td>
 		                </tr>
@@ -250,7 +250,7 @@
 												<?php
 													echo $this->Tables->getMenu('releases', $release['Release']['id'], 14);
 													echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $release['Release']['id'] . ",\"releases\")'>
-														<i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+														<i class='fa fa-history' 5px;' title='Visualizar histórico'></i></a></span>";
 												?>
 											</td>
 										</tr>
@@ -307,8 +307,8 @@
 		          <table class="table table-striped table-bordered table-hover" id="dataTables-chamado">
 		            <thead>
 		              <tr>
-		                <th>Número <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
-		                <th>Nome <i class="fa fa-comment-o" style="font-size: 15px !important;"></th>
+		                <th>Número <i class='fa-external-link-square-alt fas' style="font-size: 15px !important;"></th>
+		                <th>Nome <i class="far fa-comment" style="font-size: 15px !important;"></th>
 		                <th>Tipo</th>
 		                <th>Serviço</th>
 		                <th>Aberto?</th>
@@ -352,12 +352,12 @@
 		                    <?php
 		                      echo $this->Tables->getMenu('chamados', $chamado['Chamado']['id'], 10);
 		                      if($this->Ldap->autorizado(2)){
-		                        echo $this->Html->link(" <i class='fa fa-pencil'></i>",
+		                        echo $this->Html->link(" <i class='fas fa-pencil-alt'></i>",
 		                                  array('controller' => 'chamados', 'action' => 'edit', $chamado['Chamado']['id'], '?' => array('controller' => '', 'action' => 'workspace' )),
 		                                  array('escape' => false));
 		                      }
 		                      echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $chamado['Chamado']['id'] . ",\"chamados\")'>
-		                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+		                        <i class='fa fa-history' title='Visualizar histórico'></i></a></span>";
 		                    ?>
 		                  </td>
 		                </tr>
@@ -401,8 +401,8 @@
 		            <thead>
 		              <tr>
 		                <th>Serviço</th>
-		                <th>Nº Evento   <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
-		                <th>Nº Incidente   <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
+		                <th>Nº Evento   <i class='fa-external-link-square-alt fas' style="font-size: 15px !important;"></th>
+		                <th>Nº Incidente   <i class='fa-external-link-square-alt fas' style="font-size: 15px !important;"></th>
 		                <th>Início</th>
 		        				<th>Motivo/Ambiente</th>
 		                <th>Observação</th>
@@ -463,7 +463,7 @@
 												<?php
 													echo $this->Tables->getMenu('Indisponibilidades', $indisponibilidade['Indisponibilidade']['id'], 14);
 													echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $indisponibilidade['Indisponibilidade']['id'] . ",\"indisponibilidades\")'>
-		                        <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+		                        <i class='fa fa-history' title='Visualizar histórico'></i></a></span>";
 												?>
 											</td>
 		                </tr>
@@ -513,9 +513,9 @@
 	                <tr>
 	                  <th>Serviço</th>
 	                  <th class="hidden-xs hidden-sm"><span class="editable">Prioridade</span></th>
-	                  <th class="hidden-xs hidden-sm">Clarity DM <i class='fa-expand fa' style="font-size: 15px !important;"></i></th>
-	                  <th class="hidden-xs hidden-sm">Mantis <i class='fa-external-link-square fa' style="font-size: 15px !important;"></th>
-	                  <th>Título <i class="fa fa-comment-o" style="font-size: 15px !important;"></i></th>
+	                  <th class="hidden-xs hidden-sm">Clarity DM <i class='fa-expand-arrows-alt fas' style="font-size: 15px !important;"></i></th>
+	                  <th class="hidden-xs hidden-sm">Mantis <i class='fa-external-link-square-alt fas' style="font-size: 15px !important;"></th>
+	                  <th>Título <i class="far fa-comment" style="font-size: 15px !important;"></i></th>
 	                  <th>Nome</th>
 
 	  				        <th>Tipo da Demanda</th>
@@ -564,7 +564,7 @@
 	                      <?php
 	                        echo $this->Tables->getMenu('demandas', $demanda['Demanda']['id'], 14);
 	                        echo "<a id='viewHistorico' data-toggle='modal' data-target='#Historico' onclick='javascript:historico(" . $demanda['Demanda']['id'] . ",\"demandas\")'>
-	                          <i class='fa fa-history' style='margin-left: 5px;' title='Visualizar histórico'></i></a></span>";
+	                          <i class='fa fa-history' title='Visualizar histórico'></i></a></span>";
 	                      ?>
 	                    </td>
 	                  </tr>

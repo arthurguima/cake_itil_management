@@ -28,6 +28,7 @@
 	Router::connect('/ajaxServico', array('controller' => 'pages', 'action' => 'ajaxServico', 'ajaxServico'));
 	Router::connect('/dashboard', array('controller' => 'pages', 'action' => 'dashboard', 'dashboard'));
 	Router::connect('/workspace', array('controller' => 'pages', 'action' => 'workspace', 'workspace'));
+	Router::connect('/kanban', array('controller' => 'pages', 'action' => 'kanban', 'kanban'));
 	Router::connect('/workspace_old', array('controller' => 'pages', 'action' => 'workspace_old', 'workspace_old'));
 /**
  * ...and connect the rest of 'Pages' controller's URLs.

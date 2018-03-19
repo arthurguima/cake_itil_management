@@ -140,7 +140,7 @@
     </div>";
   }
 
-  private function colorAsArray($color){
+  public function colorAsArray($color){
     $string = "[";
     foreach($color as $co):
       $string = $string . "'#" . $co ."',";

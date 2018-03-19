@@ -18,7 +18,7 @@
     }
     else{
       $btn = '<span class="btn btn-default pull-right" onclick="javascript:btnDelete(' . $id .')">
-                Excluir Favorito <i class="fa fa-remove filter-fa-remove" aria-hidden="true"></i>
+                Excluir Favorito <i class="fas fa-times filter-fa-remove" aria-hidden="true"></i>
               </span>
               <span class="btn btn-default pull-right" onclick="javascript:btnSave(\''.$page.'\','.$user.', ' . $id .')">
                 Favoritar <i class="fa fa-star filter-fa-star" aria-hidden="true"></i>

@@ -77,7 +77,7 @@
                                 array('controller' => 'aditivos', 'action' => 'view', $aditivo['id'], '?' => array('action' => 'view','contrato' =>  $contrato['Contrato']['id'])),
                                 array('escape' => false));
 
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                 array('controller' => 'aditivos', 'action' => 'delete', $aditivo['id']),
                                 array('escape' => false), "Você tem certeza");
                         }
@@ -134,7 +134,7 @@
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'items', 'action' => 'edit', $item['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
                                 array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                 array('controller' => 'items', 'action' => 'delete', $item['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
                                 array('escape' => false), "Você tem certeza");
                         }
@@ -191,7 +191,7 @@
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'regras', 'action' => 'edit', $regra['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
                                 array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                 array('controller' => 'regras', 'action' => 'delete', $regra['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
                                 array('escape' => false), "Você tem certeza");
                         }
@@ -250,7 +250,7 @@
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'indicadores', 'action' => 'edit', $in['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
                                 array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                 array('controller' => 'indicadores', 'action' => 'delete', $in['id'], '?' => array('controller' => 'contratos', 'id' =>  $contrato['Contrato']['id'], 'action' => 'view' )),
                                 array('escape' => false), "Você tem certeza");
                         }

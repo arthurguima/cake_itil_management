@@ -133,9 +133,9 @@ class DemandasController extends AppController {
       $this->set('conditions', true);
       if(isset($conditions[15]) && sizeof($conditions[15]) >=1){
         if ($conditions[15]['Demanda.status ='] == 0)
-          $conditions[15] = array('Status.fim IS NULL');
+          $conditions[15] = array('Status.fim != 1');
         else
-          $conditions[15] = array('Status.fim IS NOT NULL');
+          $conditions[15] = array('Status.fim  = 1');
       }
       $conditions = $conditions + array(999 => array("Servico.cliente_id" . $_SESSION['User']['clientes']));
 

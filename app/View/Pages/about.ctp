@@ -9,10 +9,19 @@
 </style>
 <?php echo $this->Html->css('plugins/timeline.css'); ?>
 
+<div class="col-lg-12 page-header-box">
+    <div class="col-lg-12">
+      <h3 class="page-header">
+        Sistema de Gestão de Serviços
+      </h3>
+    </div>
+</div>
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs nav-tabs-black nav-tabs-pages" role="tablist">
   <li role="presentation" class="active"><a href="#dev" aria-controls="dev" role="tab" data-toggle="tab">Desenvolvimento</a></li>
   <li role="presentation"><a href="#versoes" aria-controls="versoes" role="tab" data-toggle="tab">Versões</a></li>
+  <li role="presentation"><a href="#descontinuado" aria-controls="descontinuado" role="tab" data-toggle="tab">Funções Descontinuadas</a></li>
 </ul>
 
 <div class="tab-content">
@@ -24,7 +33,7 @@
         <div class="well">
           <ul class="list-unstyled spaced">
             <li>
-              <h4> <i class="ace-icon fa fa-hand-o-right"></i> Arthur Henrique Guimarães de Oliveira</h4>
+              <h4> <i class="ace-icon far fa-hand-point-right"></i> Arthur Henrique Guimarães de Oliveira</h4>
                 <div class="personal-info">
                   <b>Email:</b><a href="mailto:arthur.doliveira@dataprev.gov.br"> arthur.doliveira@dataprev.gov.br</a><br/>
                 </div>
@@ -39,17 +48,18 @@
         <div class="well">
           <ul class="list-unstyled spaced">
             <li>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> CakePhp</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Bootstrap 3</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> SBAdmin</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Jquery</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> DataTables</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Circliful</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> CanvasJs</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Fulcalendar</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Jeditable</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> TinyMce</h5>
-              <h5> <i class="ace-icon fa fa-hand-o-right"></i> Vis</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> CakePhp</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> Bootstrap 3</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> SBAdmin</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> Font Awesome</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> Jquery</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> DataTables</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> Circliful</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> CanvasJs</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> Fulcalendar</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> Jeditable</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> TinyMce</h5>
+              <h5> <i class="ace-icon far fa-hand-point-right"></i> Vis</h5>
             </li>
           </ul>
         </div>
@@ -76,7 +86,7 @@
         <br />
         <div class="well">
           <ul class="spaced">
-            <li>Eliminar o uso de planilhas.</li>
+            <li>Eliminar o uso de planilhas locais.</li>
             <li>Manter a informação em um ambiente compartilhado pela equipe.</li>
             <li>Manter um histórico das atividades da equipe.</li>
             <li>Permitir o atendimento de uma atividade por pessoas diferentes em épocas diferentes.</li>
@@ -87,6 +97,8 @@
                 <li>Quantas RDMs foram necessárias para implantar a versão X do sistema?</li>
                 <li>Qual RDM resolveu o incidente Y e qual a versão do sistema que foi implantada?</li>
                 <li>Qual a média de incidentes relacionados à Extrato CNIS o Seguro Desemprego apresenta?</li>
+                <li>Quantas demandas tenho sob minha responsabilidade?</li>
+                <li>Quais as tarefas minha equipe realizou?</li>
               </ul>
             </li>
           </ul>
@@ -100,6 +112,28 @@
       <div class="well">
         <h3 class="page-header"><i class="fa fa-tags"></i> Notas:</h3>
         <ul class="timeline">
+          <li class="timeline-inverted">
+            <div class="timeline-badge success">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <div class="timeline-panel">
+              <ul class="list-unstyled spaced">
+                <li>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 3.5</h4>
+                    <div class="personal-info">
+
+                      <ul>
+                        <li>Alterado o campo 'Finaliza Processo do Status' para 'Etapa'</li>
+                        <li>Criada a Visualização Kanban para o Workspace</li>
+                        <li>Removido o Menu Funções descontinuadas que agora estão no menu 'Sobre'</li>
+                        <li>Removidas o Menu Dashboard que agora está em relatórios.</li>
+                        <li>Atualizado Para fontawesome-5.</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li>
             <div class="timeline-badge info">
               <i class="fa fa-bolt fa-fw"></i>
@@ -107,7 +141,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 3.1 </h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 3.1 </h4>
                     <div class="personal-info">
                       <ul>
                         <li>Criados grupos de tarefas.</li>
@@ -122,12 +156,12 @@
           </li>
           <li class="timeline-inverted">
             <div class="timeline-badge success">
-              <i class="fa fa-envelope-o fa-fw"></i>
+              <i class="far fa-envelope fa-fw"></i>
             </div>
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 3.0</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 3.0</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -157,7 +191,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.8 </h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 2.8 </h4>
                     <div class="personal-info">
                       <ul>
                         <li>Criado o controle do período de disponibilidade por cliente (Dashboard).</li>
@@ -177,7 +211,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.6</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 2.6</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -207,7 +241,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.5 - SGS</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 2.5 - SGS</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -228,7 +262,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.1</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 2.1</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -252,7 +286,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 2.0</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 2.0</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -273,12 +307,12 @@
           </li>
           <li class="timeline-inverted">
             <div class="timeline-badge danger">
-              <i class="fa fa-eyedropper fa-fw"></i>
+              <i class="fas fa-eye-dropper fa-fw"></i>
             </div>
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.9.X</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 1.9.X</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -302,7 +336,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.8.8</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 1.8.8</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -324,7 +358,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.6</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 1.6</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -343,7 +377,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.5</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 1.5</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -360,7 +394,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4.2</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 1.4.2</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -382,7 +416,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.4</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 1.4</h4>
                     <div class="personal-info">
 
                       <ul>
@@ -405,7 +439,7 @@
             <div class="timeline-panel">
               <ul class="list-unstyled spaced">
                 <li>
-                  <h4 class="page-header"> <i class="ace-icon fa fa-hand-o-right"></i> Versão 1.0 -  SGD</h4>
+                  <h4 class="page-header"> <i class="ace-icon far fa-hand-point-right"></i> Versão 1.0 -  SGD</h4>
                     <div class="personal-info">
                       Esse é um novo mundo de gestão da DITE!<br/><br/> Agora você pode:<br/><br/>
                       <ul>
@@ -419,6 +453,62 @@
                 </li>
               </ul>
             </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="descontinuado">
+    <div class="error">
+      <div class="well">
+        <h3 class="page-header"><i class="fa fa-exclamation-circle"></i> Funções Descontinuadas:</h3>
+        <ul>
+          <li>
+              <?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Workspace',
+                                      Router::url('/', true) . "workspace_old", array('escape' => false)); ?>
+          </li>
+          <li><!-- Calendário -->
+              <a href="#"><i class="fa fa-calendar fa-fw"></i> Calendários <span class="fa arrow"></span></a>
+              <ul>
+                <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Previsões de Término", '/calendarios/show/1155', array('escape' => false)); ?></li>
+              </ul>
+          </li>
+          <li> <!-- Negócio -->
+              <a href="#"><i class="fa fa-briefcase fa-fw"></i> Negócio <span class="fa arrow"></span></a>
+              <ul>
+                <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
+                <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PA", '/pes', array('escape' => false)); ?></li>
+                <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
+              </ul>
+          </li>
+          <li> <!-- Relatórios -->
+              <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
+              <ul>
+                <li>
+                  <a href="#"><i class='fa fa-angle-double-right'></i> Ss <span class="fa arrow"></span></a>
+                  <ul class="nav nav-third-level collapse">
+                    <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Gestão de Ideias", '/relatorios/gsses', array('escape' => false)); ?></li>
+                  </ul>
+                </li>
+                <li>
+                  <li>
+                    <a href="#"><i class='fa fa-angle-double-right'></i> Contrato <span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level collapse">
+                      <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consumo", '/relatorios/contratos', array('escape' => false)); ?></li>
+                      <!--li><?php //echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li -->
+                    </ul>
+                  </li>
+                </li>
+              </ul>
+          </li>
+          <li> <!-- Base de Conhecimenton -->
+              <a href="#"><i class="fa fa-institution fa-fw"></i> Base de Conhecimento <span class="fa arrow"></span></a>
+              <ul>
+                <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Sistemas Internos", '/internos', array('escape' => false)); ?></li>
+                <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Procedimentos", '/procedimentos', array('escape' => false)); ?></li>
+                <li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mapeamento DTP", '/responsabilidades', array('escape' => false)); ?></li>
+              </ul>
           </li>
         </ul>
       </div>

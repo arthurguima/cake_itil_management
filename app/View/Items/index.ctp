@@ -50,7 +50,7 @@
                               array('escape' => false));
                       }
                       if($this->Ldap->autorizado(1)){
-                        echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                        echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                               array('action' => 'delete', $item['Item']['id']),
                               array('escape' => false), "Você tem certeza");
                       }

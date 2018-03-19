@@ -188,10 +188,10 @@
                              array('controller' => 'chamados', 'action' => 'view', $chamado['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
                              array('escape' => false));
                         if($this->Ldap->autorizado(2)){
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                          echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                 array('controller' => 'chamados', 'action' => 'edit', $chamado['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
                                 array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                 array('controller' => 'chamados', 'action' => 'delete', $chamado['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
                                 array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                         }
@@ -359,10 +359,10 @@
                     <td>
                        <?php
                          if($this->Ldap->autorizado(2)){
-                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                            echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                   array('controller' => 'subtarefas', 'action' => 'edit', $sub['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
                                   array('escape' => false));
-                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                            echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                   array('controller' => 'subtarefas', 'action' => 'delete', $sub['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
                                   array('escape' => false), "Você tem certeza");
                          }
@@ -414,10 +414,10 @@
                     <td>
                        <?php
                          if($this->Ldap->autorizado(2)){
-                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                            echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                   array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'demandas', 'id' =>  $demanda['Demanda']['id'], 'action' => 'view' )),
                                   array('escape' => false));
-                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                            echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                   array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'demandas', 'id' => $demanda['Demanda']['id'], 'action' => 'view' )),
                                   array('escape' => false), "Você tem certeza");
                          }

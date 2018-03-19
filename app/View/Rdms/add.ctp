@@ -15,7 +15,7 @@
       echo $this->BootstrapForm->input('numero', array(
                'label' => array(
                  'text' => 'Número: ' .
-                  $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                  $this->Html->link('<i class="fas fa-eye-dropper pull-right"></i>', "#",
                              array(
                                'escape' => false, 'title' => "Resgata Informações Básicas do Clarity",
                                'class' => 'btn btn-default',

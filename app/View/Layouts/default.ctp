@@ -28,7 +28,7 @@
 		//-- Timeline CSS --
 		//echo $this->Html->css('plugins/timeline.css');
 		//-- Custom Fonts
-		echo $this->Html->css('font-awesome-4.6.3/css/font-awesome.min.css');
+		echo $this->Html->css('fontawesome/web-fonts-with-css/css/fontawesome-all.css');
 		//-- Custom admin CSS --
 		echo $this->Html->css('sb-admin-2.css');
 	?>
@@ -55,12 +55,11 @@
 					<ul class="nav" id="side-menu">
 							<!--li class="sidebar-search"> Busca </li -->
 							<li>
-									<?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Workspace',
-																					Router::url('/', true) . "index.php", array('escape' => false)); ?>
-							</li>
-							<li>
-									<?php echo $this->Html->link("<i class='fa fa-folder fa-fw'></i> Dashboard",
-																					Router::url('/', true) . "dashboard", array('escape' => false)); ?>
+									<a href="#"><i class="fa fa-home fa-fw"></i> Workspace <span class="fa arrow"></span></a>
+									<ul class="nav nav-second-level">
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Planilhas", Router::url('/', true) . "index.php", array('escape' => false)); ?></li>
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Kanban", Router::url('/', true) . "kanban", array('escape' => false)); ?></li>
+									</ul>
 							</li>
 							<li><!-- Calendário -->
 									<a href="#"><i class="fa fa-calendar fa-fw"></i> Calendários <span class="fa arrow"></span></a>
@@ -73,7 +72,7 @@
 									</ul>
 							</li>
 							<li> <!-- Gestão do serviço -->
-									<a href="#"><i class="fa fa-wrench fa-fw"></i> Gestão do Serviço <span class="fa arrow"></span></a>
+									<a href="#"><i class="fas fa-wrench fa-fw"></i> Gestão do Serviço <span class="fa arrow"></span></a>
 									<ul class="nav nav-second-level">
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados", '/chamados', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Chamados com Demandas", '/chamados/demandas', array('escape' => false)); ?></li>
@@ -86,8 +85,9 @@
 									</ul>
 							</li>
 							<li> <!-- Relatórios -->
-									<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
+									<a href="#"><i class="far fa-chart-bar fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
 									<ul class="nav nav-second-level">
+										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Dashboard", Router::url('/', true) . "dashboard", array('escape' => false)); ?></li>
 										<li>
 											<a href="#"><i class='fa fa-angle-double-right'></i> Disponibilidade <span class="fa arrow"></span></a>
 											<ul class="nav nav-third-level collapse">
@@ -108,7 +108,7 @@
 									</ul>
 							</li>
 							<li> <!-- Admin -->
-									<a href="#"><i class="fa fa-gears fa-fw"></i> Admin <span class="fa arrow"></span></a>
+									<a href="#"><i class="fas fa-cogs fa-fw"></i> Admin <span class="fa arrow"></span></a>
 									<ul class="nav nav-second-level">
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Áreas", '/areas', array('escape' => false)); ?></li>
 										<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Clientes", '/clientes', array('escape' => false)); ?></li>
@@ -125,60 +125,9 @@
 									</ul>
 							</li>
 							<li>
-								<a href="#"><i class="fa fa-exclamation-circle fa-fw"></i> Funções Descontinuadas <span class="fa arrow"></span></a>
-								<ul class="nav nav-second-level">
-									<li>
-											<?php echo $this->Html->link('<i class="fa fa-home fa-fw"></i> Workspace',
-																							Router::url('/', true) . "workspace_old", array('escape' => false)); ?>
-									</li>
-									<li><!-- Calendário -->
-											<a href="#"><i class="fa fa-calendar fa-fw"></i> Calendários <span class="fa arrow"></span></a>
-											<ul class="nav nav-second-level">
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Previsões de Término", '/calendarios/show/1155', array('escape' => false)); ?></li>
-											</ul>
-									</li>
-									<li> <!-- Negócio -->
-											<a href="#"><i class="fa fa-briefcase fa-fw"></i> Negócio <span class="fa arrow"></span></a>
-											<ul class="nav nav-second-level">
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> SS", '/sses', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> PA", '/pes', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> OS", '/ords', array('escape' => false)); ?></li>
-											</ul>
-									</li>
-									<li> <!-- Relatórios -->
-											<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatórios <span class="fa arrow"></span></a>
-											<ul class="nav nav-second-level">
-												<li>
-													<a href="#"><i class='fa fa-angle-double-right'></i> Ss <span class="fa arrow"></span></a>
-													<ul class="nav nav-third-level collapse">
-														<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Gestão de Ideias", '/relatorios/gsses', array('escape' => false)); ?></li>
-													</ul>
-												</li>
-												<li>
-													<li>
-														<a href="#"><i class='fa fa-angle-double-right'></i> Contrato <span class="fa arrow"></span></a>
-														<ul class="nav nav-third-level collapse">
-															<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Consumo", '/relatorios/contratos', array('escape' => false)); ?></li>
-															<!--li><?php //echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Serviços (Em Breve)", '/relatorios/servicos', array('escape' => false)); ?></li -->
-														</ul>
-													</li>
-												</li>
-											</ul>
-									</li>
-									<li> <!-- Base de Conhecimenton -->
-											<a href="#"><i class="fa fa-institution fa-fw"></i> Base de Conhecimento <span class="fa arrow"></span></a>
-											<ul class="nav nav-second-level">
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Sistemas Internos", '/internos', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Procedimentos", '/procedimentos', array('escape' => false)); ?></li>
-												<li><?php echo $this->Html->link("<i class='fa fa-angle-double-right'></i> Mapeamento DTP", '/responsabilidades', array('escape' => false)); ?></li>
-											</ul>
-									</li>
-								</ul>
-							<li>
-							<li>
 								<a href="#"><i class="fa fa-user-secret fa-fw"></i> Sobre <span class="fa arrow"></span></a>
 								<ul class="notes hidden-xs hidden-sm" style="top: 90%;">
-									Sistema de gestão de Serviço - V 3.1
+									Sistema de gestão de Serviço - V 3.5
 									<br /> <?php echo $this->Html->link("Mais Informações", '/pages/about'); ?>
 									<br /> <span style="margin-left: 13px;">arthur.doliveira@dataprev.gov.br</span>
 									<br />
@@ -205,6 +154,8 @@
 		</div>
 		<!-- hr style="margin-top:50px;" --><?php  //echo $this->element('sql_dump'); ?>
 	</div>
-	<script>$(function() {setTimeout(function(){$('.alert').toggle();}, 4200);});</script>
+	<script>
+		$(function() {setTimeout(function(){$('.alert').toggle();}, 4200);});
+	</script>
 </body>
 </html>

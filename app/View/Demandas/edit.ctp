@@ -110,7 +110,7 @@
 
         echo "<br />";
         echo $this->BootstrapForm->input('data_homologacao', array(
-                  'label' => array('text' => 'Data de Homologação: '),
+                  'label' => array('text' => 'Data de Homologação/Término: '),
                   'type' => 'text',
                   'id' => 'dp '));
 

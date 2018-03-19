@@ -55,7 +55,7 @@
     <div class="panel panel-default panel-default">
       <div class="panel-heading">
         <p>
-          <h3 class="panel-title">Rdms
+          <h3 class="panel-title"><b>Rdms</b>
             <span style="cursor:pointer;" onclick="javascript:$('div.panel-body.rdm-body').toggle();"><i class="fa fa-eye-slash pull-right"></i></span>
           </h3>
         </p>
@@ -130,10 +130,10 @@
                        <?php
                         if($this->Ldap->autorizado(2)){
 
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                          echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                 array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
                                 array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                 array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'chamados', 'id' => $chamado['Chamado']['id'], 'action' => 'view' )),
                                 array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                         }
@@ -245,10 +245,10 @@
                     <td>
                        <?php
                          if($this->Ldap->autorizado(2)){
-                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                            echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                   array('controller' => 'subtarefas', 'action' => 'edit', $sub['id'], '?' => array('controller' => 'chamados', 'id' =>  $chamado['Chamado']['id'], 'action' => 'view' )),
                                   array('escape' => false));
-                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                            echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                   array('controller' => 'subtarefas', 'action' => 'delete', $sub['id'], '?' => array('controller' => 'chamados', 'id' => $chamado['Chamado']['id'], 'action' => 'view' )),
                                   array('escape' => false), "Você tem certeza");
                          }

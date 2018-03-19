@@ -55,7 +55,7 @@
                   <td><?php echo $area['nome']; ?></td>
                   <td>
                      <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                        echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                               array('controller' => 'areas', 'action' => 'edit', $area['id'], '?' => array('controller' => 'servicos', 'action' => 'view', 'id' => $Servico['Servico']['id'] )),
                               array('escape' => false));
                      ?>
@@ -108,10 +108,10 @@
                     <td>
                        <?php
                          if($this->Ldap->autorizado(2)){
-                            echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                            echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                   array('controller' => 'containers', 'action' => 'edit', $container['id'], '?' => array('controller' => 'servicos', 'id' =>  $Servico['Servico']['id'], 'action' => 'view' )),
                                   array('escape' => false));
-                            echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                            echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                   array('controller' => 'containers', 'action' => 'delete', $container['id'], '?' => array('controller' => 'servicos', 'id' => $Servico['Servico']['id'], 'action' => 'view' )),
                                   array('escape' => false), "Você tem certeza");
                          }
@@ -147,7 +147,7 @@
                   </td>
                   <td>
                      <?php
-                        echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                        echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                               array('controller' => 'dependencias', 'action' => 'edit', $dep['id'], '?' => array('controller' => 'servicos', 'action' => 'view', 'id' => $Servico['Servico']['id'] )),
                               array('escape' => false));
                      ?>

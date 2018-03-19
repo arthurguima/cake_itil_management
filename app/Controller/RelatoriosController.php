@@ -239,7 +239,7 @@
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Demanda.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         ),
         array(
@@ -334,7 +334,7 @@
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Demanda.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         ),
         array(
@@ -413,7 +413,7 @@
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Demanda.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         ),
         array(
@@ -485,7 +485,7 @@
             'type'=>'inner',
             'conditions'=> array(
               'Status_.id = Demanda.status_id',
-              'Status_.fim =' => null,
+              'Status_.fim !=' => 1,
             ),
           )
         )
@@ -533,7 +533,7 @@
           'type'=>'inner',
           'conditions'=> array(
             'Status_.id = Ss.status_id',
-            'Status_.fim =' => null,
+            'Status_.fim !=' => 1,
           ),
         )
       )

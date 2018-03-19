@@ -13,15 +13,19 @@
 
       echo $this->BootstrapForm->input('nome', array(
                 'label' => array('text' => 'Nome: ')));
-
-      echo $this->BootstrapForm->input('fim', array(
-           'class' => 'col-sm-3 pull-left col-sm-offset-3',
-           'type' => "checkbox",
-           'label' => array(
-             'text' => 'Finaliza o Processo? ',
-             'class' => 'control-label col-sm-2')));
-
     ?>
+
+    <div class="form-group">
+      <label for="StatusFim" class="col-lg-3 control-label">Etapa: </label>
+      <div class="col-lg-9">
+        <select name="data[Status][fim]" class="form-control" id="filterFim">
+          <option value="2">Processo em andamento</option>
+          <option value="1">Finaliza o processo</option>
+          <option value="3">Inicia/Recebe o processo</option>
+        </select>
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="StatusTipo" class="col-lg-3 control-label">Tipo: </label>
       <div class="col-lg-9">

@@ -88,7 +88,7 @@
                         echo $this->Html->link("<i class='fa fa-pencil'></i>",
                               array('controller' => 'items', 'action' => 'edit', $item['id'], '?' => array('action' => 'edit', 'controller' => 'contratos', 'id' => $this->data['Contrato']['id'])),
                               array('escape' => false));
-                        echo $this->BootstrapForm->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                        echo $this->BootstrapForm->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                               array('controller' => 'items', 'action' => 'delete', $item['id']),
                               array('escape' => false), "Você tem certeza");
                      ?>

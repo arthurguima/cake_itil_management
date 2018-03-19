@@ -142,7 +142,7 @@
                           echo $this->Html->link("<i class='fa fa-pencil'></i>",
                                 array('controller' => 'historicos', 'action' => 'edit', $hist['id'], '?' => array('controller' => 'indisponibilidades', 'id' =>  $Indisponibilidade['Indisponibilidade']['id'], 'action' => 'view' )),
                                 array('escape' => false));
-                          echo $this->Form->postLink("<i class='fa fa-remove' style='margin-left: 5px;'></i>",
+                          echo $this->Form->postLink("<i class='fas fa-times' style='margin-left: 5px;'></i>",
                                 array('controller' => 'historicos', 'action' => 'delete', $hist['id'], '?' => array('controller' => 'indisponibilidades', 'id' => $Indisponibilidade['Indisponibilidade']['id'], 'action' => 'view' )),
                                 array('escape' => false), "O registro será excluído, você tem certeza dessa ação?");
                         }

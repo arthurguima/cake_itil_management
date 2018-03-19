@@ -36,7 +36,7 @@
         echo $this->BootstrapForm->input('clarity_dm_id', array(
                  'label' => array(
                    'text' => 'DM Clarity: ' .
-                    $this->Html->link('<i class="fa fa-eyedropper pull-right"></i>', "#",
+                    $this->Html->link('<i class="fas fa-eye-dropper pull-right"></i>', "#",
                                array(
                                  'escape' => false, 'title' => "Resgata Informações Básicas do Clarity",
                                  'class' => 'btn btn-default',
@@ -103,7 +103,7 @@
                    'id' => 'dp '));
         echo "<br />";
         echo $this->BootstrapForm->input('data_homologacao', array(
-                   'label' => array('text' => 'Data de Homologação: '),
+                   'label' => array('text' => 'Data de Homologação/Término: '),
                    'type' => 'text',
                    'id' => 'dp '));
 

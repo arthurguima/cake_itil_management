@@ -57,7 +57,7 @@
                   <td>
                      <?php
                         if($this->Ldap->autorizado(2)){
-                          echo $this->Html->link("<i class='fa fa-pencil'></i>",
+                          echo $this->Html->link("<i class='fas fa-pencil-alt'></i>",
                                 array('controller' => 'servicos', 'action' => 'edit',
                                        $ser['id'], '?' => array('area' =>  $area['Area']['id'])),
                                 array('escape' => false));
