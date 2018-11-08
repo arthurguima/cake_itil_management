@@ -1,4 +1,4 @@
-<?php class HistoricosController extends AppController {
+<?php class HistoricosController extends AppController {  
 
 /**
  * index method
@@ -58,11 +58,11 @@
  */
   public function edit($id = null) {
     if($this->params['url']['popup'] == 'true'){  $this->layout = false; }
-    if (!$id) { throw new NotFoundException(__('Historico de Contrato Inválido'));}
+    if (!$id) { throw new NotFoundException(__('Historico Inválido'));}
 
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Historico->save($this->request->data)) {
-        $this->Session->setFlash('Historico de Contrato atualizado com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
+        $this->Session->setFlash('Historico atualizado com sucesso!', 'alert-box', array ('class' => 'alert alert-success'));
         if(isset($this->params['url']['popup']) && $this->params['url']['popup'] == 'true'){
           return $this->redirect(array('controller' =>  "historicos", 'action' => 'popup',
            '?' => array('controller' => $this->params['url']['controller'], 'id' => $this->params['url']['id']) ));

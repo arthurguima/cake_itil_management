@@ -373,17 +373,24 @@ class PagesController extends AppController {
 				$this->loadModel('Subtarefa');
 				$this->Subtarefa->Behaviors->attach('Containable');
 
-				$recebidas = $this->Subtarefa->find('all', array(
-					'contain' => array(
-						'Servico' => array(),
-						'Demanda' => array(),
-						'Rdm' => array(),
-						'Chamado' => array(),
-						'Release' => array()
-					),
-					'conditions' => array('Subtarefa.check = 2 AND Subtarefa.user_id = ' . $this->Session->read('User.uid'))
-				));
-				$this->set('recebidas', $this->tarefasAtividades($recebidas));
+				//$recebidas['id'] = 'recebidas';
+				//$recebidas['title'] = 'Recebidas';
+				$recebidas = $this->tarefasAtividades(
+					$this->Subtarefa->find('all', array(
+						'contain' => array(
+							'Servico' => array(),
+							'Demanda' => array(),
+							'Rdm' => array(),
+							'Chamado' => array(),
+							'Release' => array()
+						),
+						'conditions' => array('Subtarefa.check = 2 AND Subtarefa.user_id = ' . $this->Session->read('User.uid'))
+					))
+				);
+				//$this->set('recebidas', $recebidas['item']);
+				$this->set('recebidas', $recebidas);
+				//$this->set('recebidas2', json_encode($recebidas));
+				//debug(json_encode($recebidas));
 
 				$andamento = $this->Subtarefa->find('all', array(
 					'contain' => array(
@@ -519,6 +526,8 @@ private function tarefasAtividades($tarefas){
 		foreach ($tarefas as $d){
 			$atividade['Servico'] = $d['Servico']['sigla'];
 			$atividade['Atividade'] = "Tarefa";
+			//$atividade['id'] = $d['Subtarefa']['id'];
+			//$atividade['title'] = $d['Subtarefa']['descricao'];
 
 			$atividade['Atividade_desc'] = $d['Subtarefa']['descricao'];
 			switch ($d['Subtarefa']['check']) {
@@ -571,7 +580,7 @@ private function tarefasAtividades($tarefas){
 			else{
 				$atividade['Demanda'] = "";
 				$atividade['Atividade_id'] = $d['Subtarefa']['id'];
-				$atividade['TipoTarefa'] = "Tarefas";
+				$atividade['TipoTarefa'] = "subtarefas";
 			}
 
 			array_push($atividades,$atividade);

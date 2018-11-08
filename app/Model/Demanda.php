@@ -67,7 +67,7 @@
 		'data_homologacao' => array(
 			'MaiorQueDataInicial' => array(
 					"allowEmpty"=> true,
-					'rule' => array('compareFields', '>', 'data_cadastro'),
+					'rule' => array('compareFields', '>=', 'data_cadastro'),
 					'message' => 'Data de homologação deve ser posterior a data de Cadastro!'
 			)
 		),

@@ -93,12 +93,25 @@
                                 'selected' => 0,
                                 'checked' => ''));
 
-       if(!isset($this->params['url']['controller']))
-         echo $this->BootstrapForm->input('servico_id', array(
-               'class' => 'select2',
-               'label' => array('text' => 'Serviço: '),
-               'selected' => $this->params['url']['servico'],
-               'empty' => "Serviço"));
+        if(!isset($this->params['url']['controller'])){
+          echo $this->BootstrapForm->input('servico_id', array(
+           'class' => 'select2',
+           'label' => array('text' => 'Serviço: '),
+           'selected' => $this->params['url']['servico'],
+           'empty' => "Serviço"));
+
+          $options = array(0 => 'Demanda', 1 => 'RDM', 2 => "Release", 3 => "Chamado", 4 => "Somente o Serviço");
+          echo $this->BootstrapForm->input('associar', array(
+               'label' => array('text' => 'Associar com: '),
+               'type' => 'select',
+               'options' => $options,
+               'selected' => 4));
+
+           echo $this->BootstrapForm->input('Rdm', array(
+                      'class' => 'select2rdm',
+                      'label' => array('text' => 'RDMs: '),
+                      'empty' => "RDMs"));
+        }
         else
           echo  $this->BootstrapForm->hidden('servico_id', array('value' => $this->params['url']['servico'], 'type'=> "hidden"));
 
@@ -144,6 +157,8 @@
 
 <script>
   $(document).ready(function() {
+    <?php echo $this->Rdm->select2(); ?>
+
     $("[id*='dp']").datetimepicker({
       format: "dd/mm/yyyy",
       minView: 2,
@@ -157,6 +172,7 @@
       theme: "bootstrap"
     });
     <?php echo $this->User->select2(); ?>
+
   });
 </script>
 

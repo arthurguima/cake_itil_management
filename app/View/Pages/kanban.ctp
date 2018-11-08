@@ -5,7 +5,7 @@
 <div class="col-lg-12 page-header-box">
     <div class="col-lg-12">
       <h3 class="page-header">
-        Funcionalidade em versão Beta - β 
+        Funcionalidade em versão Beta - β
       </h3>
     </div>
 </div>
@@ -69,8 +69,8 @@
         <div class="kaban-item">
           <h3 class="kanban-item-title">
             <?php
-              if(($r['TipoTarefa'] == "Tarefas")){
-                echo $this->Html->link($r['Servico'] . ' <i class="fa fa-search-plus fa-sm"  title="Visualizar detalhes"></i>', array('controller' => $r['TipoTarefa'], 'action' => 'view', $r['Atividade_id']), array('escape' => false));
+              if(($r['TipoTarefa'] == "subtarefas")){
+                echo $this->Html->link($r['Servico'] . ' <i class="fa fa-search-plus fa-sm"  title="Visualizar detalhes"></i>', array('controller' => $r['TipoTarefa'], 'action' => 'edit', $r['Atividade_id']), array('escape' => false));
               }
               else{
                 $tarefa = $r['Servico'] . " - " . $r['Demanda'];
@@ -212,6 +212,12 @@
   </div>
 </div>
 
+
+
+<?php
+	
+?>
+
 <script>
-    $('[data-toggle="popover2"]').popover({trigger: 'hover','placement': 'bottom', html: 'true'});
+
 </script>

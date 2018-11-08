@@ -132,6 +132,26 @@
     )));
   }
 
+  public function online(){
+    $this->layout = "ajax";
+    /* Lista de Servicos */
+    $this->loadModel('Servico');
+    $this->Servico->Behaviors->load('Containable');
+
+    //debug($this->params['url']['servicos']);
+
+    if(isset($this->params['url']['servicos'])){
+      $conditions = 'Servico.id IN (' . $this->params['url']['servicos'] . ')';
+
+      $this->set('clientes', $this->ServicoPorCliente(
+        $this->Servico->find('all',array(
+          'contain' => array('Cliente'=> array()),
+          'conditions'=> $conditions
+        )
+      )));
+    }
+  }
+
   /* Funções de Apoio */
   private function ServicoPorCliente($servicos){
     $clientes = array();

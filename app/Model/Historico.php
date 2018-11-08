@@ -1,4 +1,5 @@
 <?php class Historico extends AppModel {
+  public $session_id;
 
   public $order = array("Historico.data" => "ASC", "Historico.id" => "ASC");
 

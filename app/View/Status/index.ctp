@@ -40,7 +40,14 @@
                 <tr>
                    <td><?php echo $stat['Status']['nome']; ?></td>
                    <td><?php echo $this->Status->tipo($stat['Status']['tipo']); ?></td>
-                   <td><?php echo $this->Times->yesOrNo($stat['Status']['fim']); ?></td>
+                   <td>
+                     <?php
+                      if($stat['Status']['fim'] == 1)
+                        echo $this->Times->yesOrNo(1);
+                      else
+                        echo $this->Times->yesOrNo(0);
+                     ?>
+                    </td>
                    <td><?php echo $this->Tables->getMenu('status',  $stat['Status']['id'], 12); ?></td>
                 </tr>
               <?php endforeach; ?>

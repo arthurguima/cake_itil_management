@@ -144,9 +144,9 @@
       $value = "<span>";
 
       if($check == 1){
-          $value = $value . " <i class='fa fa-check-square-o fa-done checklist'><span>(OK)</span></i>";
+          $value = $value . " <i class='far fa-check-square fa-done checklist'><span>(OK)</span></i>";
       }else{
-          $value = $value . " <i class='fa fa-square-o fa-undone checklist'><span>(  )</span></i>";
+          $value = $value . " <i class='far fa-square fa-undone checklist'><span>(  )</span></i>";
       }
 
       return $value . "</span>";
