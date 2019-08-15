@@ -1,6 +1,8 @@
 # User specific & automatically generated files #
 #################################################
 /app/Config/database.php
+/app/Config/email.php
+/app/Vendor/ldapInclude.php
 /app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins

@@ -30,12 +30,12 @@ function getIDOnEdit(idClarity){
 }
 
 function indexClarity(idClarity){
-  document.getElementById('demandaFrame').src = "https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id=" + idClarity;
+  document.getElementById('demandaFrame').src = "https://urlClarity#action:pma.ideaProperties&id=" + idClarity;
 }
 
 function showViewClarity(idClarity){
   document.getElementById("viewClarity").innerHTML = "<i class='fa fa-expand' style='cursor:pointer;' title='Clique aqui para testar a integração da demanda com o sistema Clarity!'></i>";
-  document.getElementById('demandaFrame').src = "https://projetos.dataprev.gov.br/niku/nu#action:pma.ideaProperties&id=" + idClarity;
+  document.getElementById('demandaFrame').src = "https://urlClarity#action:pma.ideaProperties&id=" + idClarity;
 }
 
 function clearViewClarity(){
